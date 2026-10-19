@@ -10,8 +10,8 @@ controls; [provenance](../PROVENANCE.json) records their origins.
 | Official source, configuration, header, and technical metadata requirements | PASS: 3,940 Lean files; exactly twelve intentional Challenge placeholders; no proof holes elsewhere | [Source report](source-checks.json) |
 | Default `lake build` | PASS: 12,871 jobs, with cached dependencies and build objects | [Dated build receipt](build-result.json) |
 | Strict `Audit.lean` check | PASS: twelve exports and 248 source-interface declarations; zero warnings or errors | [Dated audit receipt](axiom-audit-result.json), [audit log](axiom-audit.log) |
-| Official Comparator statement, reachable-helper, and axiom comparison | PASS in the current protected run | Final replay receipt pending |
-| Independent kernel replay | **Pending**: con-ron is running; NanoDa and Lean default have not yet returned verdicts | No kernel acceptance is claimed |
+| Official Comparator statement, reachable-helper, and axiom comparison | PASS | [Accepted replay receipt](comparator/result.json) |
+| Independent kernel replay | PASS: con-ron, NanoDa, and Lean default accepted the full Solution export | [Accepted transcript](comparator/comparator.log) |
 
 The audit permits only `propext`, `Classical.choice`, and `Quot.sound`. It also
 checks that Chen's finite-mixture Parisi formula is an explicit premise in the
@@ -36,11 +36,11 @@ declarations. No definition-hole exemptions are configured. It then runs
 con-ron, NanoDa, and Lean default on the Solution export inside its own
 sandbox.
 
-The runner writes an accepted `comparator/result.json` and `comparator.log`
-only after exit zero, all three kernel acceptance markers, and the final
-Comparator success marker. That accepted record does not yet exist for this
-checkpoint. Large exports, compilation logs, and failed attempts remain in
-external scratch storage.
+The [accepted record](comparator/result.json) confirms exit zero, all three
+kernel acceptance markers, and the final Comparator success marker. con-ron
+reports 109,582 verified declarations. The proof inputs, verifier binaries,
+and runner scripts remained unchanged throughout the replay. Large exports,
+compilation logs, and failed attempts remain in external scratch storage.
 
 ## Reproduction and scope
 
@@ -57,6 +57,6 @@ summaries. Its exit status and current logs describe the new run. Use a fresh
 checkout if preserving the saved evidence unchanged.
 
 These checks use locally cached dependency objects and existing build
-artifacts. They are distinct from a clean Palomar registry intake, public
-submission, registration, editorial review, or acceptance. The independent
-kernel replay remains pending at this checkpoint.
+artifacts. The successful local three-kernel replay is distinct from a clean
+Palomar registry intake, public submission, registration, editorial review,
+or acceptance.
