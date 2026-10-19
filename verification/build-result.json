@@ -1,0 +1,22 @@
+{
+  "recorded_at": "2026-10-19T02:11:16.313747+00:00",
+  "status": "PASS",
+  "command": [
+    "lake",
+    "build"
+  ],
+  "environment": {
+    "ELAN_TOOLCHAIN": "leanprover/lean4:v4.35.0-rc2",
+    "LEAN_NUM_THREADS": "1"
+  },
+  "exit_code": 0,
+  "jobs": 12871,
+  "elapsed_seconds": 65.805,
+  "source_manifest": {
+    "path": "verification/source-checks.json",
+    "sha256": "2b720e644f4b56d198b49f2eb9a4c7e0cb79b075d3d1ca0c5d876fcdd4f4ec43"
+  },
+  "external_log": "/workspace/scratch/slowequilibration-default-build-final.log",
+  "log_sha256": "ac22ec7553f9c315b1b5462169e6392d7a9b174bc85b97c8a5c78af04f33f73f",
+  "scope": "Ordinary default-target build (Solution and Audit), using local cached dependencies and build objects. Existing infrastructure warnings are permitted; strict Audit is recorded separately."
+}

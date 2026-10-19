@@ -1,0 +1,17 @@
+.lake/
+__pycache__/
+*.pyc
+*.olean
+*.olean.private
+*.olean.server
+*.ilean
+*.ir
+*.trace
+.DS_Store
+/manuscript/*.aux
+/manuscript/*.blg
+/manuscript/*.fdb_latexmk
+/manuscript/*.fls
+/manuscript/*.log
+/manuscript/*.out
+/manuscript/*.toc

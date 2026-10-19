@@ -1,0 +1,3881 @@
+{
+  "schema_version": 1,
+  "repository_original_material": {
+    "license": "MIT",
+    "license_file": "LICENSE",
+    "copyright": "Copyright (c) 2026 P. M. Aronow and Patrick Lopatto",
+    "scope": "Original repository code and documentation outside vendor/. Dependency material downloaded into .lake/ keeps its upstream license and is excluded from distributable sources."
+  },
+  "vendor_components": {
+    "brownian-foundations": {
+      "license": "Apache-2.0",
+      "repositories": [
+        {
+          "url": "https://github.com/RemyDegenne/brownian-motion",
+          "commit": "0d5b6eb928e616d3b1f774ad7d233c167d9f42c9",
+          "license_file": "vendor/brownian-foundations/LICENSE.BrownianMotion"
+        },
+        {
+          "url": "https://github.com/RemyDegenne/kolmogorov_extension4",
+          "commit": "7d76e184c3d2138a2741baf923b57e9a01b9cf25",
+          "license_file": "vendor/brownian-foundations/LICENSE.KolmogorovExtension4"
+        }
+      ]
+    },
+    "lean-stochastic-calculus": {
+      "license": "Apache-2.0",
+      "repositories": [
+        {
+          "url": "https://github.com/savarin/lean-stochastic-calculus",
+          "commit": "bde839683ba3cf1bf149355a40e9de9522babe92",
+          "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+        }
+      ]
+    },
+    "cole-hopf-foundations": {
+      "license": "Apache-2.0",
+      "repositories": [
+        {
+          "url": "https://github.com/or4nge19/SpinGlass",
+          "commit": "dc1d3820af6e443c09bd1177ec3e409cf0640d5c",
+          "license_file": "vendor/cole-hopf-foundations/LICENSE"
+        }
+      ]
+    },
+    "spin-glass-foundations": {
+      "license": "Apache-2.0",
+      "repositories": [
+        {
+          "url": "https://github.com/qiangwu2/ParisiFormula",
+          "commit": "9fd12231429de72fa524b471c43f4a237553a711",
+          "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+        },
+        {
+          "url": "https://github.com/njimaMath/research_public",
+          "commit": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+          "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+        }
+      ]
+    }
+  },
+  "vendor_files": [
+    {
+      "file": "vendor/brownian-foundations/BrownianMotion/Auxiliary/Algebra.lean",
+      "license": "Apache-2.0",
+      "module": "BrownianMotion.Auxiliary.Algebra",
+      "repository": "https://github.com/RemyDegenne/brownian-motion",
+      "revision": "0d5b6eb928e616d3b1f774ad7d233c167d9f42c9",
+      "license_file": "vendor/brownian-foundations/LICENSE.BrownianMotion"
+    },
+    {
+      "file": "vendor/brownian-foundations/BrownianMotion/Auxiliary/ContinuousBilinForm.lean",
+      "license": "Apache-2.0",
+      "module": "BrownianMotion.Auxiliary.ContinuousBilinForm",
+      "repository": "https://github.com/RemyDegenne/brownian-motion",
+      "revision": "0d5b6eb928e616d3b1f774ad7d233c167d9f42c9",
+      "license_file": "vendor/brownian-foundations/LICENSE.BrownianMotion"
+    },
+    {
+      "file": "vendor/brownian-foundations/BrownianMotion/Auxiliary/DenseCountable.lean",
+      "license": "Apache-2.0",
+      "module": "BrownianMotion.Auxiliary.DenseCountable",
+      "repository": "https://github.com/RemyDegenne/brownian-motion",
+      "revision": "0d5b6eb928e616d3b1f774ad7d233c167d9f42c9",
+      "license_file": "vendor/brownian-foundations/LICENSE.BrownianMotion"
+    },
+    {
+      "file": "vendor/brownian-foundations/BrownianMotion/Auxiliary/ENNReal.lean",
+      "license": "Apache-2.0",
+      "module": "BrownianMotion.Auxiliary.ENNReal",
+      "repository": "https://github.com/RemyDegenne/brownian-motion",
+      "revision": "0d5b6eb928e616d3b1f774ad7d233c167d9f42c9",
+      "license_file": "vendor/brownian-foundations/LICENSE.BrownianMotion"
+    },
+    {
+      "file": "vendor/brownian-foundations/BrownianMotion/Auxiliary/FiniteInf.lean",
+      "license": "Apache-2.0",
+      "module": "BrownianMotion.Auxiliary.FiniteInf",
+      "repository": "https://github.com/RemyDegenne/brownian-motion",
+      "revision": "0d5b6eb928e616d3b1f774ad7d233c167d9f42c9",
+      "license_file": "vendor/brownian-foundations/LICENSE.BrownianMotion"
+    },
+    {
+      "file": "vendor/brownian-foundations/BrownianMotion/Auxiliary/HasLaw.lean",
+      "license": "Apache-2.0",
+      "module": "BrownianMotion.Auxiliary.HasLaw",
+      "repository": "https://github.com/RemyDegenne/brownian-motion",
+      "revision": "0d5b6eb928e616d3b1f774ad7d233c167d9f42c9",
+      "license_file": "vendor/brownian-foundations/LICENSE.BrownianMotion"
+    },
+    {
+      "file": "vendor/brownian-foundations/BrownianMotion/Auxiliary/LinearAlgebra.lean",
+      "license": "Apache-2.0",
+      "module": "BrownianMotion.Auxiliary.LinearAlgebra",
+      "repository": "https://github.com/RemyDegenne/brownian-motion",
+      "revision": "0d5b6eb928e616d3b1f774ad7d233c167d9f42c9",
+      "license_file": "vendor/brownian-foundations/LICENSE.BrownianMotion"
+    },
+    {
+      "file": "vendor/brownian-foundations/BrownianMotion/Auxiliary/MeanInequalities.lean",
+      "license": "Apache-2.0",
+      "module": "BrownianMotion.Auxiliary.MeanInequalities",
+      "repository": "https://github.com/RemyDegenne/brownian-motion",
+      "revision": "0d5b6eb928e616d3b1f774ad7d233c167d9f42c9",
+      "license_file": "vendor/brownian-foundations/LICENSE.BrownianMotion"
+    },
+    {
+      "file": "vendor/brownian-foundations/BrownianMotion/Auxiliary/MeasureTheory.lean",
+      "license": "Apache-2.0",
+      "module": "BrownianMotion.Auxiliary.MeasureTheory",
+      "repository": "https://github.com/RemyDegenne/brownian-motion",
+      "revision": "0d5b6eb928e616d3b1f774ad7d233c167d9f42c9",
+      "license_file": "vendor/brownian-foundations/LICENSE.BrownianMotion"
+    },
+    {
+      "file": "vendor/brownian-foundations/BrownianMotion/Auxiliary/Metric.lean",
+      "license": "Apache-2.0",
+      "module": "BrownianMotion.Auxiliary.Metric",
+      "repository": "https://github.com/RemyDegenne/brownian-motion",
+      "revision": "0d5b6eb928e616d3b1f774ad7d233c167d9f42c9",
+      "license_file": "vendor/brownian-foundations/LICENSE.BrownianMotion"
+    },
+    {
+      "file": "vendor/brownian-foundations/BrownianMotion/Auxiliary/NNReal.lean",
+      "license": "Apache-2.0",
+      "module": "BrownianMotion.Auxiliary.NNReal",
+      "repository": "https://github.com/RemyDegenne/brownian-motion",
+      "revision": "0d5b6eb928e616d3b1f774ad7d233c167d9f42c9",
+      "license_file": "vendor/brownian-foundations/LICENSE.BrownianMotion"
+    },
+    {
+      "file": "vendor/brownian-foundations/BrownianMotion/Auxiliary/Nat.lean",
+      "license": "Apache-2.0",
+      "module": "BrownianMotion.Auxiliary.Nat",
+      "repository": "https://github.com/RemyDegenne/brownian-motion",
+      "revision": "0d5b6eb928e616d3b1f774ad7d233c167d9f42c9",
+      "license_file": "vendor/brownian-foundations/LICENSE.BrownianMotion"
+    },
+    {
+      "file": "vendor/brownian-foundations/BrownianMotion/Auxiliary/Topology.lean",
+      "license": "Apache-2.0",
+      "module": "BrownianMotion.Auxiliary.Topology",
+      "repository": "https://github.com/RemyDegenne/brownian-motion",
+      "revision": "0d5b6eb928e616d3b1f774ad7d233c167d9f42c9",
+      "license_file": "vendor/brownian-foundations/LICENSE.BrownianMotion"
+    },
+    {
+      "file": "vendor/brownian-foundations/BrownianMotion/Continuity/Chaining.lean",
+      "license": "Apache-2.0",
+      "module": "BrownianMotion.Continuity.Chaining",
+      "repository": "https://github.com/RemyDegenne/brownian-motion",
+      "revision": "0d5b6eb928e616d3b1f774ad7d233c167d9f42c9",
+      "license_file": "vendor/brownian-foundations/LICENSE.BrownianMotion"
+    },
+    {
+      "file": "vendor/brownian-foundations/BrownianMotion/Continuity/CoveringNumber.lean",
+      "license": "Apache-2.0",
+      "module": "BrownianMotion.Continuity.CoveringNumber",
+      "repository": "https://github.com/RemyDegenne/brownian-motion",
+      "revision": "0d5b6eb928e616d3b1f774ad7d233c167d9f42c9",
+      "license_file": "vendor/brownian-foundations/LICENSE.BrownianMotion"
+    },
+    {
+      "file": "vendor/brownian-foundations/BrownianMotion/Continuity/HasBoundedInternalCoveringNumber.lean",
+      "license": "Apache-2.0",
+      "module": "BrownianMotion.Continuity.HasBoundedInternalCoveringNumber",
+      "repository": "https://github.com/RemyDegenne/brownian-motion",
+      "revision": "0d5b6eb928e616d3b1f774ad7d233c167d9f42c9",
+      "license_file": "vendor/brownian-foundations/LICENSE.BrownianMotion"
+    },
+    {
+      "file": "vendor/brownian-foundations/BrownianMotion/Continuity/IsKolmogorovProcess.lean",
+      "license": "Apache-2.0",
+      "module": "BrownianMotion.Continuity.IsKolmogorovProcess",
+      "repository": "https://github.com/RemyDegenne/brownian-motion",
+      "revision": "0d5b6eb928e616d3b1f774ad7d233c167d9f42c9",
+      "license_file": "vendor/brownian-foundations/LICENSE.BrownianMotion"
+    },
+    {
+      "file": "vendor/brownian-foundations/BrownianMotion/Continuity/KolmogorovChentsov.lean",
+      "license": "Apache-2.0",
+      "module": "BrownianMotion.Continuity.KolmogorovChentsov",
+      "repository": "https://github.com/RemyDegenne/brownian-motion",
+      "revision": "0d5b6eb928e616d3b1f774ad7d233c167d9f42c9",
+      "license_file": "vendor/brownian-foundations/LICENSE.BrownianMotion"
+    },
+    {
+      "file": "vendor/brownian-foundations/BrownianMotion/Continuity/KolmogorovChentsovInequality.lean",
+      "license": "Apache-2.0",
+      "module": "BrownianMotion.Continuity.KolmogorovChentsovInequality",
+      "repository": "https://github.com/RemyDegenne/brownian-motion",
+      "revision": "0d5b6eb928e616d3b1f774ad7d233c167d9f42c9",
+      "license_file": "vendor/brownian-foundations/LICENSE.BrownianMotion"
+    },
+    {
+      "file": "vendor/brownian-foundations/BrownianMotion/Continuity/LimitModification.lean",
+      "license": "Apache-2.0",
+      "module": "BrownianMotion.Continuity.LimitModification",
+      "repository": "https://github.com/RemyDegenne/brownian-motion",
+      "revision": "0d5b6eb928e616d3b1f774ad7d233c167d9f42c9",
+      "license_file": "vendor/brownian-foundations/LICENSE.BrownianMotion"
+    },
+    {
+      "file": "vendor/brownian-foundations/BrownianMotion/Gaussian/BrownianMotion.lean",
+      "license": "Apache-2.0",
+      "module": "BrownianMotion.Gaussian.BrownianMotion",
+      "repository": "https://github.com/RemyDegenne/brownian-motion",
+      "revision": "0d5b6eb928e616d3b1f774ad7d233c167d9f42c9",
+      "license_file": "vendor/brownian-foundations/LICENSE.BrownianMotion"
+    },
+    {
+      "file": "vendor/brownian-foundations/BrownianMotion/Gaussian/CovMatrix.lean",
+      "license": "Apache-2.0",
+      "module": "BrownianMotion.Gaussian.CovMatrix",
+      "repository": "https://github.com/RemyDegenne/brownian-motion",
+      "revision": "0d5b6eb928e616d3b1f774ad7d233c167d9f42c9",
+      "license_file": "vendor/brownian-foundations/LICENSE.BrownianMotion"
+    },
+    {
+      "file": "vendor/brownian-foundations/BrownianMotion/Gaussian/Gaussian.lean",
+      "license": "Apache-2.0",
+      "module": "BrownianMotion.Gaussian.Gaussian",
+      "repository": "https://github.com/RemyDegenne/brownian-motion",
+      "revision": "0d5b6eb928e616d3b1f774ad7d233c167d9f42c9",
+      "license_file": "vendor/brownian-foundations/LICENSE.BrownianMotion"
+    },
+    {
+      "file": "vendor/brownian-foundations/BrownianMotion/Gaussian/GaussianProcess.lean",
+      "license": "Apache-2.0",
+      "module": "BrownianMotion.Gaussian.GaussianProcess",
+      "repository": "https://github.com/RemyDegenne/brownian-motion",
+      "revision": "0d5b6eb928e616d3b1f774ad7d233c167d9f42c9",
+      "license_file": "vendor/brownian-foundations/LICENSE.BrownianMotion"
+    },
+    {
+      "file": "vendor/brownian-foundations/BrownianMotion/Gaussian/Moment.lean",
+      "license": "Apache-2.0",
+      "module": "BrownianMotion.Gaussian.Moment",
+      "repository": "https://github.com/RemyDegenne/brownian-motion",
+      "revision": "0d5b6eb928e616d3b1f774ad7d233c167d9f42c9",
+      "license_file": "vendor/brownian-foundations/LICENSE.BrownianMotion"
+    },
+    {
+      "file": "vendor/brownian-foundations/BrownianMotion/Gaussian/ProjectiveLimit.lean",
+      "license": "Apache-2.0",
+      "module": "BrownianMotion.Gaussian.ProjectiveLimit",
+      "repository": "https://github.com/RemyDegenne/brownian-motion",
+      "revision": "0d5b6eb928e616d3b1f774ad7d233c167d9f42c9",
+      "license_file": "vendor/brownian-foundations/LICENSE.BrownianMotion"
+    },
+    {
+      "file": "vendor/brownian-foundations/BrownianMotion/Gaussian/StochasticProcesses.lean",
+      "license": "Apache-2.0",
+      "module": "BrownianMotion.Gaussian.StochasticProcesses",
+      "repository": "https://github.com/RemyDegenne/brownian-motion",
+      "revision": "0d5b6eb928e616d3b1f774ad7d233c167d9f42c9",
+      "license_file": "vendor/brownian-foundations/LICENSE.BrownianMotion"
+    },
+    {
+      "file": "vendor/brownian-foundations/KolmogorovExtension4/CompactSystem.lean",
+      "license": "Apache-2.0",
+      "module": "KolmogorovExtension4.CompactSystem",
+      "repository": "https://github.com/RemyDegenne/kolmogorov_extension4",
+      "revision": "7d76e184c3d2138a2741baf923b57e9a01b9cf25",
+      "license_file": "vendor/brownian-foundations/LICENSE.KolmogorovExtension4"
+    },
+    {
+      "file": "vendor/brownian-foundations/KolmogorovExtension4/KolmogorovExtension.lean",
+      "license": "Apache-2.0",
+      "module": "KolmogorovExtension4.KolmogorovExtension",
+      "repository": "https://github.com/RemyDegenne/kolmogorov_extension4",
+      "revision": "7d76e184c3d2138a2741baf923b57e9a01b9cf25",
+      "license_file": "vendor/brownian-foundations/LICENSE.KolmogorovExtension4"
+    },
+    {
+      "file": "vendor/brownian-foundations/KolmogorovExtension4/RegularContent.lean",
+      "license": "Apache-2.0",
+      "module": "KolmogorovExtension4.RegularContent",
+      "repository": "https://github.com/RemyDegenne/kolmogorov_extension4",
+      "revision": "7d76e184c3d2138a2741baf923b57e9a01b9cf25",
+      "license_file": "vendor/brownian-foundations/LICENSE.KolmogorovExtension4"
+    },
+    {
+      "file": "vendor/brownian-foundations/LICENSE.BrownianMotion",
+      "license": "Apache-2.0",
+      "license_files": [
+        "vendor/brownian-foundations/LICENSE.BrownianMotion",
+        "vendor/brownian-foundations/LICENSE.KolmogorovExtension4"
+      ]
+    },
+    {
+      "file": "vendor/brownian-foundations/LICENSE.KolmogorovExtension4",
+      "license": "Apache-2.0",
+      "license_files": [
+        "vendor/brownian-foundations/LICENSE.BrownianMotion",
+        "vendor/brownian-foundations/LICENSE.KolmogorovExtension4"
+      ]
+    },
+    {
+      "file": "vendor/brownian-foundations/PROVENANCE.md",
+      "license": "Apache-2.0",
+      "license_files": [
+        "vendor/brownian-foundations/LICENSE.BrownianMotion",
+        "vendor/brownian-foundations/LICENSE.KolmogorovExtension4"
+      ]
+    },
+    {
+      "file": "vendor/brownian-foundations/compatibility.patch",
+      "license": "Apache-2.0",
+      "license_files": [
+        "vendor/brownian-foundations/LICENSE.BrownianMotion",
+        "vendor/brownian-foundations/LICENSE.KolmogorovExtension4"
+      ]
+    },
+    {
+      "file": "vendor/brownian-foundations/included-modules.json",
+      "license": "Apache-2.0",
+      "license_files": [
+        "vendor/brownian-foundations/LICENSE.BrownianMotion",
+        "vendor/brownian-foundations/LICENSE.KolmogorovExtension4"
+      ]
+    },
+    {
+      "file": "vendor/cole-hopf-foundations/Common/Mathlib/Analysis/Calculus/MeasurableParamDeriv.lean",
+      "license": "Apache-2.0",
+      "module": "Common.Mathlib.Analysis.Calculus.MeasurableParamDeriv",
+      "repository": "https://github.com/or4nge19/SpinGlass",
+      "revision": "dc1d3820af6e443c09bd1177ec3e409cf0640d5c",
+      "license_file": "vendor/cole-hopf-foundations/LICENSE"
+    },
+    {
+      "file": "vendor/cole-hopf-foundations/Common/Mathlib/Probability/Distributions/Gaussian/CameronMartin.lean",
+      "license": "Apache-2.0",
+      "module": "Common.Mathlib.Probability.Distributions.Gaussian.CameronMartin",
+      "repository": "https://github.com/or4nge19/SpinGlass",
+      "revision": "dc1d3820af6e443c09bd1177ec3e409cf0640d5c",
+      "license_file": "vendor/cole-hopf-foundations/LICENSE"
+    },
+    {
+      "file": "vendor/cole-hopf-foundations/Common/Mathlib/Probability/Distributions/Gaussian/CameronMartinFernique.lean",
+      "license": "Apache-2.0",
+      "module": "Common.Mathlib.Probability.Distributions.Gaussian.CameronMartinFernique",
+      "repository": "https://github.com/or4nge19/SpinGlass",
+      "revision": "dc1d3820af6e443c09bd1177ec3e409cf0640d5c",
+      "license_file": "vendor/cole-hopf-foundations/LICENSE"
+    },
+    {
+      "file": "vendor/cole-hopf-foundations/Common/Mathlib/Probability/Distributions/Gaussian/CameronMartinIBP.lean",
+      "license": "Apache-2.0",
+      "module": "Common.Mathlib.Probability.Distributions.Gaussian.CameronMartinIBP",
+      "repository": "https://github.com/or4nge19/SpinGlass",
+      "revision": "dc1d3820af6e443c09bd1177ec3e409cf0640d5c",
+      "license_file": "vendor/cole-hopf-foundations/LICENSE"
+    },
+    {
+      "file": "vendor/cole-hopf-foundations/Common/Mathlib/Probability/Distributions/Gaussian/CameronMartinIBPAnalytic.lean",
+      "license": "Apache-2.0",
+      "module": "Common.Mathlib.Probability.Distributions.Gaussian.CameronMartinIBPAnalytic",
+      "repository": "https://github.com/or4nge19/SpinGlass",
+      "revision": "dc1d3820af6e443c09bd1177ec3e409cf0640d5c",
+      "license_file": "vendor/cole-hopf-foundations/LICENSE"
+    },
+    {
+      "file": "vendor/cole-hopf-foundations/Common/Mathlib/Probability/Distributions/Gaussian/CameronMartinIBPDeriv.lean",
+      "license": "Apache-2.0",
+      "module": "Common.Mathlib.Probability.Distributions.Gaussian.CameronMartinIBPDeriv",
+      "repository": "https://github.com/or4nge19/SpinGlass",
+      "revision": "dc1d3820af6e443c09bd1177ec3e409cf0640d5c",
+      "license_file": "vendor/cole-hopf-foundations/LICENSE"
+    },
+    {
+      "file": "vendor/cole-hopf-foundations/Common/Mathlib/Probability/Distributions/Gaussian/CameronMartinThm.lean",
+      "license": "Apache-2.0",
+      "module": "Common.Mathlib.Probability.Distributions.Gaussian.CameronMartinThm",
+      "repository": "https://github.com/or4nge19/SpinGlass",
+      "revision": "dc1d3820af6e443c09bd1177ec3e409cf0640d5c",
+      "license_file": "vendor/cole-hopf-foundations/LICENSE"
+    },
+    {
+      "file": "vendor/cole-hopf-foundations/Common/Mathlib/Probability/Distributions/Gaussian/CameronMartinTilt.lean",
+      "license": "Apache-2.0",
+      "module": "Common.Mathlib.Probability.Distributions.Gaussian.CameronMartinTilt",
+      "repository": "https://github.com/or4nge19/SpinGlass",
+      "revision": "dc1d3820af6e443c09bd1177ec3e409cf0640d5c",
+      "license_file": "vendor/cole-hopf-foundations/LICENSE"
+    },
+    {
+      "file": "vendor/cole-hopf-foundations/Common/Mathlib/Probability/Distributions/Gaussian/ColeHopf.lean",
+      "license": "Apache-2.0",
+      "module": "Common.Mathlib.Probability.Distributions.Gaussian.ColeHopf",
+      "repository": "https://github.com/or4nge19/SpinGlass",
+      "revision": "dc1d3820af6e443c09bd1177ec3e409cf0640d5c",
+      "license_file": "vendor/cole-hopf-foundations/LICENSE"
+    },
+    {
+      "file": "vendor/cole-hopf-foundations/Common/Mathlib/Probability/Distributions/Gaussian/CompletionResultsToBeMoved.lean",
+      "license": "Apache-2.0",
+      "module": "Common.Mathlib.Probability.Distributions.Gaussian.CompletionResultsToBeMoved",
+      "repository": "https://github.com/or4nge19/SpinGlass",
+      "revision": "dc1d3820af6e443c09bd1177ec3e409cf0640d5c",
+      "license_file": "vendor/cole-hopf-foundations/LICENSE"
+    },
+    {
+      "file": "vendor/cole-hopf-foundations/Common/Mathlib/Probability/Distributions/Gaussian/ExpGrowth.lean",
+      "license": "Apache-2.0",
+      "module": "Common.Mathlib.Probability.Distributions.Gaussian.ExpGrowth",
+      "repository": "https://github.com/or4nge19/SpinGlass",
+      "revision": "dc1d3820af6e443c09bd1177ec3e409cf0640d5c",
+      "license_file": "vendor/cole-hopf-foundations/LICENSE"
+    },
+    {
+      "file": "vendor/cole-hopf-foundations/Common/Mathlib/Probability/Distributions/Gaussian/HeatSemigroup.lean",
+      "license": "Apache-2.0",
+      "module": "Common.Mathlib.Probability.Distributions.Gaussian.HeatSemigroup",
+      "repository": "https://github.com/or4nge19/SpinGlass",
+      "revision": "dc1d3820af6e443c09bd1177ec3e409cf0640d5c",
+      "license_file": "vendor/cole-hopf-foundations/LICENSE"
+    },
+    {
+      "file": "vendor/cole-hopf-foundations/Common/Mathlib/Probability/Distributions/Gaussian/IntegrationByParts.lean",
+      "license": "Apache-2.0",
+      "module": "Common.Mathlib.Probability.Distributions.Gaussian.IntegrationByParts",
+      "repository": "https://github.com/or4nge19/SpinGlass",
+      "revision": "dc1d3820af6e443c09bd1177ec3e409cf0640d5c",
+      "license_file": "vendor/cole-hopf-foundations/LICENSE"
+    },
+    {
+      "file": "vendor/cole-hopf-foundations/Common/Mathlib/Probability/Distributions/Gaussian/TiltKernel.lean",
+      "license": "Apache-2.0",
+      "module": "Common.Mathlib.Probability.Distributions.Gaussian.TiltKernel",
+      "repository": "https://github.com/or4nge19/SpinGlass",
+      "revision": "dc1d3820af6e443c09bd1177ec3e409cf0640d5c",
+      "license_file": "vendor/cole-hopf-foundations/LICENSE"
+    },
+    {
+      "file": "vendor/cole-hopf-foundations/Common/Mathlib/Probability/Distributions/GaussianIntegrationByParts.lean",
+      "license": "Apache-2.0",
+      "module": "Common.Mathlib.Probability.Distributions.GaussianIntegrationByParts",
+      "repository": "https://github.com/or4nge19/SpinGlass",
+      "revision": "dc1d3820af6e443c09bd1177ec3e409cf0640d5c",
+      "license_file": "vendor/cole-hopf-foundations/LICENSE"
+    },
+    {
+      "file": "vendor/cole-hopf-foundations/LICENSE",
+      "license": "Apache-2.0",
+      "license_files": [
+        "vendor/cole-hopf-foundations/LICENSE"
+      ]
+    },
+    {
+      "file": "vendor/cole-hopf-foundations/PROVENANCE.json",
+      "license": "Apache-2.0",
+      "license_files": [
+        "vendor/cole-hopf-foundations/LICENSE"
+      ]
+    },
+    {
+      "file": "vendor/cole-hopf-foundations/README.md",
+      "license": "Apache-2.0",
+      "license_files": [
+        "vendor/cole-hopf-foundations/LICENSE"
+      ]
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/LICENSE",
+      "license": "Apache-2.0",
+      "license_files": [
+        "vendor/lean-stochastic-calculus/LICENSE"
+      ]
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/PROVENANCE.md",
+      "license": "Apache-2.0",
+      "license_files": [
+        "vendor/lean-stochastic-calculus/LICENSE"
+      ]
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/CameronMartin.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.CameronMartin",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/CameronMartinTheorem.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.CameronMartinTheorem",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/ContinuousExitTime.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.ContinuousExitTime",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/CrossVariationProcess.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.CrossVariationProcess",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/DoleansDade.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.DoleansDade",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/DoleansDadeExponential.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.DoleansDadeExponential",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/DoleansDadeMartingale.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.DoleansDadeMartingale",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/ElementaryIto.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.ElementaryIto",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/ElementaryMartingaleIntegral.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.ElementaryMartingaleIntegral",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/FubiniLift.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.FubiniLift",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/Girsanov.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.Girsanov",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/GirsanovBounded.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.GirsanovBounded",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/GirsanovClosure.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.GirsanovClosure",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/GirsanovCommonRefinement.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.GirsanovCommonRefinement",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/GirsanovComplexEuler.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.GirsanovComplexEuler",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/GirsanovCrossVariation.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.GirsanovCrossVariation",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/GirsanovExits.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.GirsanovExits",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/GirsanovFourierIncrement.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.GirsanovFourierIncrement",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/GirsanovLocalization.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.GirsanovLocalization",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/GirsanovMartingaleTransform.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.GirsanovMartingaleTransform",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/GirsanovMeasure.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.GirsanovMeasure",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/GirsanovMeshControl.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.GirsanovMeshControl",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/GirsanovMoments.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.GirsanovMoments",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/GirsanovStoppedControl.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.GirsanovStoppedControl",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/GirsanovTheorem.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.GirsanovTheorem",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/IteratedIntegral.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.IteratedIntegral",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/ItoConstruction.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.ItoConstruction",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/ItoFormula.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.ItoFormula",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/ItoFormulaGeneral.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.ItoFormulaGeneral",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/ItoFormulaPartition.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.ItoFormulaPartition",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/ItoMaximal.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.ItoMaximal",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/ItoProcess.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.ItoProcess",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/LocalMartingaleContract.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.LocalMartingaleContract",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/LocalizingStoppedProcess.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.LocalizingStoppedProcess",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/MartingaleFourthMoment.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.MartingaleFourthMoment",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/MartingaleLeftSum.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.MartingaleLeftSum",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/Novikov.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.Novikov",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/NovikovCondition.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.NovikovCondition",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/PartitionStoppingTime.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.PartitionStoppingTime",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/PredictableDensity.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.PredictableDensity",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/PredictableProcess.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.PredictableProcess",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/QuadraticVariation.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.QuadraticVariation",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/QuadraticVariationContract.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.QuadraticVariationContract",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/QuadraticVariationDensity.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.QuadraticVariationDensity",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/QuadraticVariationElementary.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.QuadraticVariationElementary",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/QuadraticVariationGrid.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.QuadraticVariationGrid",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/QuadraticVariationTightness.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.QuadraticVariationTightness",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/Simplex.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.Simplex",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/StoppedCrossVariation.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.StoppedCrossVariation",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/StoppedVariation.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.StoppedVariation",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/Symmetrization.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.Symmetrization",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/TendstoInMeasureAlgebra.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.TendstoInMeasureAlgebra",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/TightProduct.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.TightProduct",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/UniformPartitionSums.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.UniformPartitionSums",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/WeightedBracketRiemann.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.WeightedBracketRiemann",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/WienerIntegral.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.WienerIntegral",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/StochasticCalculus/ZeroBracket.lean",
+      "license": "Apache-2.0",
+      "module": "StochasticCalculus.ZeroBracket",
+      "repository": "https://github.com/savarin/lean-stochastic-calculus",
+      "revision": "bde839683ba3cf1bf149355a40e9de9522babe92",
+      "license_file": "vendor/lean-stochastic-calculus/LICENSE"
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/generality.patch",
+      "license": "Apache-2.0",
+      "license_files": [
+        "vendor/lean-stochastic-calculus/LICENSE"
+      ]
+    },
+    {
+      "file": "vendor/lean-stochastic-calculus/included-modules.json",
+      "license": "Apache-2.0",
+      "license_files": [
+        "vendor/lean-stochastic-calculus/LICENSE"
+      ]
+    },
+    {
+      "file": "vendor/spin-glass-foundations/COMPATIBILITY.patch",
+      "license": "Apache-2.0",
+      "license_files": [
+        "vendor/spin-glass-foundations/LICENSE-ParisiFormula",
+        "vendor/spin-glass-foundations/LICENSE-RSAT"
+      ]
+    },
+    {
+      "file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula",
+      "license": "Apache-2.0",
+      "license_files": [
+        "vendor/spin-glass-foundations/LICENSE-ParisiFormula",
+        "vendor/spin-glass-foundations/LICENSE-RSAT"
+      ]
+    },
+    {
+      "file": "vendor/spin-glass-foundations/LICENSE-RSAT",
+      "license": "Apache-2.0",
+      "license_files": [
+        "vendor/spin-glass-foundations/LICENSE-ParisiFormula",
+        "vendor/spin-glass-foundations/LICENSE-RSAT"
+      ]
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/AT/Definitions.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.AT.Definitions",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/AT/FixedPoint.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.AT.FixedPoint",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/AT/Interpolation.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.AT.Interpolation",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/AT/PropertyOfG.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.AT.PropertyOfG",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/AT/PsiContinuity.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.AT.PsiContinuity",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/Cavity/Estimates.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.Cavity.Estimates",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/Cavity/Interpolation.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.Cavity.Interpolation",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/Cavity/TalagrandCavity.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.Cavity.TalagrandCavity",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/Concentration/Coupled.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.Concentration.Coupled",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/Concentration/Transport.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.Concentration.Transport",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/Concentration/Weak.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.Concentration.Weak",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/Gaussian/CanonicalModel.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.Gaussian.CanonicalModel",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/Gaussian/Max.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.Gaussian.Max",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/GuerraTalagrand/Bound/Basic.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.GuerraTalagrand.Bound.Basic",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/GuerraTalagrand/Bound/Comparison.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.GuerraTalagrand.Bound.Comparison",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/GuerraTalagrand/Bound/Endpoint.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.GuerraTalagrand.Bound.Endpoint",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/GuerraTalagrand/Bound/FiniteState.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.GuerraTalagrand.Bound.FiniteState",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/GuerraTalagrand/Bound/FiniteStep.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.GuerraTalagrand.Bound.FiniteStep",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/GuerraTalagrand/Bound/HalfCalculus.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.GuerraTalagrand.Bound.HalfCalculus",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/GuerraTalagrand/Bound/HalfComparison.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.GuerraTalagrand.Bound.HalfComparison",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/GuerraTalagrand/Bound/HalfEndpoint.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.GuerraTalagrand.Bound.HalfEndpoint",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/GuerraTalagrand/Bound/HalfStep.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.GuerraTalagrand.Bound.HalfStep",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/GuerraTalagrand/Bound/Interpolation.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.GuerraTalagrand.Bound.Interpolation",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/GuerraTalagrand/Bound/Transport.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.GuerraTalagrand.Bound.Transport",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/GuerraTalagrand/Bound.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.GuerraTalagrand.Bound",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/GuerraTalagrand/Flatness/Cases/Endpoints.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.GuerraTalagrand.Flatness.Cases.Endpoints",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/GuerraTalagrand/Flatness/Cases/LargeNegative.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.GuerraTalagrand.Flatness.Cases.LargeNegative",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/GuerraTalagrand/Flatness/Cases/LargePositive.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.GuerraTalagrand.Flatness.Cases.LargePositive",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/GuerraTalagrand/Flatness/Cases/SmallNegative.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.GuerraTalagrand.Flatness.Cases.SmallNegative",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/GuerraTalagrand/Flatness/Cases/SmallPositive.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.GuerraTalagrand.Flatness.Cases.SmallPositive",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/GuerraTalagrand/Flatness/Cases.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.GuerraTalagrand.Flatness.Cases",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/GuerraTalagrand/Flatness/Core.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.GuerraTalagrand.Flatness.Core",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/GuerraTalagrand/Flatness.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.GuerraTalagrand.Flatness",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/GuerraTalagrand/Gaussian.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.GuerraTalagrand.Gaussian",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/GuerraTalagrand/LatalaGuerra.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.GuerraTalagrand.LatalaGuerra",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/MainResult.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.MainResult",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/Price/Cosh.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.Price.Cosh",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/Price/Deriv.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.Price.Deriv",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/Price/Gaussian.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.Price.Gaussian",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/Price/Key.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.Price.Key",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/Price/Moments.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.Price.Moments",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/Price/Price.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.Price.Price",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/Price/Sqrt.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.Price.Sqrt",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/Price/Taylor.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.Price.Taylor",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/SmartPath/IndependentEndpoint.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.SmartPath.IndependentEndpoint",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/SmartPath/IndependentGaussianAffineIBP.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.SmartPath.IndependentGaussianAffineIBP",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/SmartPath/Interpolation.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.SmartPath.Interpolation",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/SmartPath/KSInequality.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.SmartPath.KSInequality",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/SpinGlass/Calculus.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.SpinGlass.Calculus",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/SpinGlass/Defs.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.SpinGlass.Defs",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/SpinGlass/GaussianIntegrationByParts.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.SpinGlass.GaussianIntegrationByParts",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/SpinGlass/Gaussian_IBP_Hilbert.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.SpinGlass.Gaussian_IBP_Hilbert",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/SpinGlass/GuerraBound.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.SpinGlass.GuerraBound",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/SpinGlass/Replicas.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.SpinGlass.Replicas",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/SpinGlass/SKModel.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.SpinGlass.SKModel",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Lemmas/SpinGlass/gaussian_concentration.lean",
+      "license": "Apache-2.0",
+      "module": "Lemmas.SpinGlass.gaussian_concentration",
+      "repository": "https://github.com/njimaMath/research_public",
+      "revision": "f3b34d2071d9cde5262c6672b6ebab132d4a7b43",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-RSAT"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/PROVENANCE.json",
+      "license": "Apache-2.0",
+      "license_files": [
+        "vendor/spin-glass-foundations/LICENSE-ParisiFormula",
+        "vendor/spin-glass-foundations/LICENSE-RSAT"
+      ]
+    },
+    {
+      "file": "vendor/spin-glass-foundations/ParisiFormula/AnnealedBound.lean",
+      "license": "Apache-2.0",
+      "module": "ParisiFormula.AnnealedBound",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/ParisiFormula/CoordStein.lean",
+      "license": "Apache-2.0",
+      "module": "ParisiFormula.CoordStein",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/ParisiFormula/GaussianConcentration1D.lean",
+      "license": "Apache-2.0",
+      "module": "ParisiFormula.GaussianConcentration1D",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/ParisiFormula/GaussianCosh.lean",
+      "license": "Apache-2.0",
+      "module": "ParisiFormula.GaussianCosh",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/ParisiFormula/GaussianExpCompare.lean",
+      "license": "Apache-2.0",
+      "module": "ParisiFormula.GaussianExpCompare",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/ParisiFormula/GaussianStein.lean",
+      "license": "Apache-2.0",
+      "module": "ParisiFormula.GaussianStein",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/ParisiFormula/GuerraToninelli.lean",
+      "license": "Apache-2.0",
+      "module": "ParisiFormula.GuerraToninelli",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/ParisiFormula/ParisiOperator.lean",
+      "license": "Apache-2.0",
+      "module": "ParisiFormula.ParisiOperator",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/ParisiFormula/ParisiOperatorGrowth.lean",
+      "license": "Apache-2.0",
+      "module": "ParisiFormula.ParisiOperatorGrowth",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/ParisiFormula/PiStein.lean",
+      "license": "Apache-2.0",
+      "module": "ParisiFormula.PiStein",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/README.md",
+      "license": "Apache-2.0",
+      "license_files": [
+        "vendor/spin-glass-foundations/LICENSE-ParisiFormula",
+        "vendor/spin-glass-foundations/LICENSE-RSAT"
+      ]
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CascadeContinuityPi.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CascadeContinuityPi",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CascadeDeriv.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CascadeDeriv",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CascadeDerivPi.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CascadeDerivPi",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CascadeEndpoint.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CascadeEndpoint",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CascadeEventBound.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CascadeEventBound",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CascadeFieldPi.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CascadeFieldPi",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CascadeSecondPi.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CascadeSecondPi",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/ConstrainedCascade.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.ConstrainedCascade",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/ConstrainedFiniteState.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.ConstrainedFiniteState",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/ConstrainedJointTerminal.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.ConstrainedJointTerminal",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/ConstrainedPathContinuity.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.ConstrainedPathContinuity",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledCascade.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledCascade",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledCascadeDeriv.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledCascadeDeriv",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledCascadeField.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledCascadeField",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledCascadeSecond.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledCascadeSecond",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledCascadeVariance.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledCascadeVariance",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledConcentration.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledConcentration",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledCovariance.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledCovariance",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledCovarianceTelescope.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledCovarianceTelescope",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledDisorderInterpolation.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledDisorderInterpolation",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledEndpoint.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledEndpoint",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledFiniteStep.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledFiniteStep",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledGaussianLaw.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledGaussianLaw",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledGrowth.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledGrowth",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledJointInterpolation.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledJointInterpolation",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledLambda.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledLambda",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledLambdaCurvature.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledLambdaCurvature",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledLipschitz.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledLipschitz",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledMeasurability.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledMeasurability",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledNestedVariance.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledNestedVariance",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledOuterExpectation.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledOuterExpectation",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledPathContinuity.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledPathContinuity",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledPathDecomposition.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledPathDecomposition",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledPathPressure.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledPathPressure",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledPathPressureFormula.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledPathPressureFormula",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledReindex.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledReindex",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledReplicaAverage.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledReplicaAverage",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledReplicaField.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledReplicaField",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledReplicaHeat.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledReplicaHeat",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledReplicaHessian.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledReplicaHessian",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledReplicaTrace.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledReplicaTrace",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledReplicaWeights.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledReplicaWeights",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledSharedInsertion.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledSharedInsertion",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/CoupledVariancePressure.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.CoupledVariancePressure",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/GaussianCauchySchwarzEquality.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.GaussianCauchySchwarzEquality",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Milestones.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Milestones",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/MixedCascadeContinuity.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.MixedCascadeContinuity",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/MixedCascadeDeriv.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.MixedCascadeDeriv",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/MixedCascadeGrowth.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.MixedCascadeGrowth",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/MixedCascadeSecond.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.MixedCascadeSecond",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/MixedCascadeVariance.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.MixedCascadeVariance",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/MixedCovarianceTelescope.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.MixedCovarianceTelescope",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/MixedDisorderInterpolation.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.MixedDisorderInterpolation",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/MixedJointInterpolation.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.MixedJointInterpolation",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/MixedNestedVariance.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.MixedNestedVariance",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/MixedPathDecomposition.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.MixedPathDecomposition",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/MixedPathPressure.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.MixedPathPressure",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/MixedPathPressureFormula.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.MixedPathPressureFormula",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/MixedReplicaAverage.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.MixedReplicaAverage",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/MixedReplicaField.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.MixedReplicaField",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/MixedReplicaHeat.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.MixedReplicaHeat",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/MixedReplicaHessian.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.MixedReplicaHessian",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/MixedReplicaMoments.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.MixedReplicaMoments",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/MixedReplicaPressure.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.MixedReplicaPressure",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/MixedReplicaTrace.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.MixedReplicaTrace",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/MixedReplicaWeights.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.MixedReplicaWeights",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/MixedVariancePressure.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.MixedVariancePressure",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/OneSidedCurvature.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.OneSidedCurvature",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/ParisiCascadeIdentification.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.ParisiCascadeIdentification",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/ParisiCascadeSorting.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.ParisiCascadeSorting",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/ParisiCascadeStrictSorting.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.ParisiCascadeStrictSorting",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/ParisiFourthUniform.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.ParisiFourthUniform",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/ParisiHessianSquareFlow.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.ParisiHessianSquareFlow",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/ParisiHessianVariance.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.ParisiHessianVariance",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/ParisiHessianVarianceBound.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.ParisiHessianVarianceBound",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/ParisiJointMassContinuity.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.ParisiJointMassContinuity",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/ParisiListRegularity.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.ParisiListRegularity",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/ParisiMassDerivative.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.ParisiMassDerivative",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/ParisiMassLocal.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.ParisiMassLocal",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/ParisiMassUniform.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.ParisiMassUniform",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/ParisiMassZero.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.ParisiMassZero",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/ParisiSlopeVariance.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.ParisiSlopeVariance",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/ParisiStepInterchange.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.ParisiStepInterchange",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/ParisiStepSemigroup.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.ParisiStepSemigroup",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/ParisiStepStrictInterchange.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.ParisiStepStrictInterchange",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/ParisiStrictConvexity.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.ParisiStrictConvexity",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/ParisiStrictVariance.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.ParisiStrictVariance",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/ParisiThirdSpatial.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.ParisiThirdSpatial",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/ParisiThirdUniform.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.ParisiThirdUniform",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/ParisiVarianceDerivative.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.ParisiVarianceDerivative",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/ParisiZeroOverlapDerivative.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.ParisiZeroOverlapDerivative",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/RSBMassPiSemigroup.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.RSBMassPiSemigroup",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/RSBSchemeMassReduction.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.RSBSchemeMassReduction",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/RSBSchemeOverlapReduction.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.RSBSchemeOverlapReduction",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/RSBSchemeReduction.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.RSBSchemeReduction",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/RSBSchemeTerminalPadding.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.RSBSchemeTerminalPadding",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/RSBZeroMassPiSemigroup.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.RSBZeroMassPiSemigroup",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/ReplicaMeasure.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.ReplicaMeasure",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/RightInterpolationAlgebra.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.RightInterpolationAlgebra",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/SKSpinFlip.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.SKSpinFlip",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/SecondInterpolationAlgebra.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.SecondInterpolationAlgebra",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4Concavity.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4Concavity",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4CubicTaylor.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4CubicTaylor",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4Curvature.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4Curvature",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4CurvatureRegularity.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4CurvatureRegularity",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4CurvatureUniform.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4CurvatureUniform",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4EndpointOptimality.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4EndpointOptimality",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4FirstVariation.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4FirstVariation",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4HessianDerivative.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4HessianDerivative",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4HessianLipschitz.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4HessianLipschitz",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4HessianRegularity.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4HessianRegularity",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4HessianUniform.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4HessianUniform",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4InitialCurvature.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4InitialCurvature",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4InitialHessian.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4InitialHessian",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4InsertedScheme.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4InsertedScheme",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4MassDerivative.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4MassDerivative",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4MassSecond.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4MassSecond",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4MassSecondInvariant.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4MassSecondInvariant",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4MassSecondLocal.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4MassSecondLocal",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4MassTaylor.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4MassTaylor",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4MassUniform.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4MassUniform",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4NeighborFactors.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4NeighborFactors",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4NestedDerivative.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4NestedDerivative",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4NestedMonotone.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4NestedMonotone",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4QuantitativeOptimality.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4QuantitativeOptimality",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4RightConvexity.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4RightConvexity",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4RightDerivative.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4RightDerivative",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4RightFactor.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4RightFactor",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4RightInsertedScheme.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4RightInsertedScheme",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4RightMassDerivative.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4RightMassDerivative",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4RightMassSecond.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4RightMassSecond",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4RightOptimality.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4RightOptimality",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4RightUPrime.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4RightUPrime",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4RightVarianceBaseline.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4RightVarianceBaseline",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4RightVarianceFactor.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4RightVarianceFactor",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4RightVariation.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4RightVariation",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4SignedGaussianFactor.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4SignedGaussianFactor",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4SignedHessianBound.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4SignedHessianBound",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4SignedSlopeBound.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4SignedSlopeBound",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4SplitDerivative.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4SplitDerivative",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4SplitMonotone.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4SplitMonotone",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4SquaredSlopeDerivative.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4SquaredSlopeDerivative",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4Stationarity.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4Stationarity",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4StationarityInterior.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4StationarityInterior",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4StationarityReduction.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4StationarityReduction",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4StationarityTerminal.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4StationarityTerminal",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4TerminalFactors.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4TerminalFactors",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4ThirdVariation.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4ThirdVariation",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4UBounds.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4UBounds",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4UEndpoints.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4UEndpoints",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4UPrime.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4UPrime",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4USecond.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4USecond",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4Variance.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4Variance",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4VarianceFactor.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4VarianceFactor",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4VarianceFactorContinuity.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4VarianceFactorContinuity",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4ZeroOverlap.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4ZeroOverlap",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4ZeroOverlapCurvature.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4ZeroOverlapCurvature",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section4ZeroOverlapVariation.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section4ZeroOverlapVariation",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5AdjacentBoundary.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5AdjacentBoundary",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5AdjacentCompact.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5AdjacentCompact",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5AdjacentDeficit.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5AdjacentDeficit",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5AdjacentScalar.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5AdjacentScalar",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5AdjacentScalarFamily.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5AdjacentScalarFamily",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5AdjacentStationaryCompact.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5AdjacentStationaryCompact",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5AdjacentStrict.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5AdjacentStrict",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5AdjacentStrictCompact.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5AdjacentStrictCompact",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5CompactTube.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5CompactTube",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5CompactWitness.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5CompactWitness",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5ConcreteNegativeAway.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5ConcreteNegativeAway",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5ConditionedInitialInterpolation.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5ConditionedInitialInterpolation",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5CovarianceIdentity.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5CovarianceIdentity",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5FarCompact.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5FarCompact",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5FarLeft.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5FarLeft",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5FarRight.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5FarRight",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5FiniteCompactCover.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5FiniteCompactCover",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5FiniteGapCover.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5FiniteGapCover",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5InitialLeft.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5InitialLeft",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5InitialSigned.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5InitialSigned",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5InterleavedBound.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5InterleavedBound",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5InterleavedCompact.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5InterleavedCompact",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5InterleavedContinuity.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5InterleavedContinuity",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5InterleavedCovariance.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5InterleavedCovariance",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5InterleavedEndpoint.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5InterleavedEndpoint",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5InterleavedMajorant.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5InterleavedMajorant",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5InterleavedMassPair.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5InterleavedMassPair",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5InterleavedNegative.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5InterleavedNegative",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5InterleavedOffDiagonal.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5InterleavedOffDiagonal",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5InterleavedOffDiagonalBound.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5InterleavedOffDiagonalBound",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5InterleavedOverlaps.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5InterleavedOverlaps",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5InterleavedPressure.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5InterleavedPressure",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5InterleavedRightCompact.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5InterleavedRightCompact",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5InterleavedScalarContinuity.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5InterleavedScalarContinuity",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5InterleavedScalarCore.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5InterleavedScalarCore",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5InterleavedStrict.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5InterleavedStrict",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5InterleavedTimeZero.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5InterleavedTimeZero",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5InterleavedZero.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5InterleavedZero",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5Interleaving.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5Interleaving",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5InterleavingFilter.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5InterleavingFilter",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5InterpolationBound.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5InterpolationBound",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5InterpolationContinuity.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5InterpolationContinuity",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5InterpolationPath.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5InterpolationPath",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5LambdaUPrime.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5LambdaUPrime",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5LeftOffDiagonalInterpolation.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5LeftOffDiagonalInterpolation",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5LeftOffDiagonalTube.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5LeftOffDiagonalTube",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5LeftUniform.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5LeftUniform",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5LocalCompactCover.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5LocalCompactCover",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5LocalLeft.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5LocalLeft",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5LocalReducedAssembly.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5LocalReducedAssembly",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5LocalRight.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5LocalRight",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5MixedCascade.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5MixedCascade",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5MixedReflection.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5MixedReflection",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5NegativeAwayAssembly.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5NegativeAwayAssembly",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5NegativeCompact.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5NegativeCompact",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5NegativeInitialAssembly.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5NegativeInitialAssembly",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5NegativeInitialBeyondCompact.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5NegativeInitialBeyondCompact",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5NegativeInitialCompact.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5NegativeInitialCompact",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5NegativeInitialTerminalCompact.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5NegativeInitialTerminalCompact",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5NegativeTerminal.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5NegativeTerminal",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5NegativeTerminalCompact.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5NegativeTerminalCompact",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5OffDiagonalAlgebra.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5OffDiagonalAlgebra",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5OutsideIntervals.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5OutsideIntervals",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5PairScalarComparison.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5PairScalarComparison",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5PhysicalAwayCompact.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5PhysicalAwayCompact",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5PhysicalNeighborOffDiagonalTube.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5PhysicalNeighborOffDiagonalTube",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5PhysicalNeighborWitness.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5PhysicalNeighborWitness",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5PositiveAwayAssembly.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5PositiveAwayAssembly",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5PositiveAwayComplete.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5PositiveAwayComplete",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5PositiveAwayCompleteCases.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5PositiveAwayCompleteCases",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5PositiveAwayConcreteAdapter.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5PositiveAwayConcreteAdapter",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5PositiveAwayImmediateLeft.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5PositiveAwayImmediateLeft",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5PositiveAwayInitialRight.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5PositiveAwayInitialRight",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5PositiveAwayLeftAssembly.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5PositiveAwayLeftAssembly",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5PositiveAwayNearLast.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5PositiveAwayNearLast",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5PositiveAwayOuterPieces.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5PositiveAwayOuterPieces",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5PositiveAwayPhysicalCore.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5PositiveAwayPhysicalCore",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5PositiveAwayRightAssembly.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5PositiveAwayRightAssembly",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5PositiveAwayTerminalTube.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5PositiveAwayTerminalTube",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5PressureDerivative.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5PressureDerivative",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5PressureGain.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5PressureGain",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5QuadraticAssembly.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5QuadraticAssembly",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5RegionalAssembly.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5RegionalAssembly",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5ReplicaDerivative.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5ReplicaDerivative",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5RetainedSignedInitialLambda.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5RetainedSignedInitialLambda",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5RetainedSignedSlope.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5RetainedSignedSlope",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5RightBoundary.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5RightBoundary",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5RightLambdaFactor.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5RightLambdaFactor",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5RightMassGain.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5RightMassGain",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5RightOffDiagonal.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5RightOffDiagonal",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5RightOffDiagonalInterpolation.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5RightOffDiagonalInterpolation",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5RightPhysicalNeighborTube.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5RightPhysicalNeighborTube",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5RightPhysicalNeighborWitness.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5RightPhysicalNeighborWitness",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5RightPressureGain.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5RightPressureGain",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5RightScalarGain.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5RightScalarGain",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5RightUniform.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5RightUniform",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5ScalarComparisonCompact.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5ScalarComparisonCompact",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5ScalarComparisonContinuity.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5ScalarComparisonContinuity",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5ScalarComparisonWitness.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5ScalarComparisonWitness",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5ScalarEqualityOrder.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5ScalarEqualityOrder",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5ScalarIdentification.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5ScalarIdentification",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5SignCrossing.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5SignCrossing",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5SignedAwayAssembly.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5SignedAwayAssembly",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5SignedCascadeFlip.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5SignedCascadeFlip",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5SignedInitialConditioning.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5SignedInitialConditioning",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5SignedInitialEndpoint.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5SignedInitialEndpoint",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5SignedInitialInterpolation.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5SignedInitialInterpolation",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5SignedInitialLambda.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5SignedInitialLambda",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5SignedInitialOffDiagonal.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5SignedInitialOffDiagonal",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5SignedInitialOffDiagonalEndpoint.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5SignedInitialOffDiagonalEndpoint",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5Smallness.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5Smallness",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5StableSortFilter.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5StableSortFilter",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5TaggedVelocity.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5TaggedVelocity",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5TerminalCompact.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5TerminalCompact",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5TerminalLambda.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5TerminalLambda",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5TerminalPadding.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5TerminalPadding",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5Theorem24Assembly.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5Theorem24Assembly",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5Theorem24FinalAssembly.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5Theorem24FinalAssembly",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5UniformLocalRadius.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5UniformLocalRadius",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5VarianceFaces.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5VarianceFaces",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5ZeroInitialNegative.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5ZeroInitialNegative",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/Section5ZeroInitialReflection.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.Section5ZeroInitialReflection",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/TalagrandConvergence.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.TalagrandConvergence",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/TalagrandCore.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.TalagrandCore",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/TalagrandFinal.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.TalagrandFinal",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/TalagrandLambdaGain.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.TalagrandLambdaGain",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/TalagrandOverlapTail.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.TalagrandOverlapTail",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/TalagrandProposition25.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.TalagrandProposition25",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/TalagrandRightInterpolation.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.TalagrandRightInterpolation",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/TalagrandRightZero.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.TalagrandRightZero",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/TalagrandSecondInterpolation.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.TalagrandSecondInterpolation",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/TalagrandSection5.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.TalagrandSection5",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/TalagrandSection5Zero.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.TalagrandSection5Zero",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/TalagrandTheorem22Integration.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.TalagrandTheorem22Integration",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    },
+    {
+      "file": "vendor/spin-glass-foundations/Targets/TalagrandTheorem24.lean",
+      "license": "Apache-2.0",
+      "module": "Targets.TalagrandTheorem24",
+      "repository": "https://github.com/qiangwu2/ParisiFormula",
+      "revision": "9fd12231429de72fa524b471c43f4a237553a711",
+      "license_file": "vendor/spin-glass-foundations/LICENSE-ParisiFormula"
+    }
+  ],
+  "note": "Per-file attribution for retained vendored materials. Original copyright and author notices remain in Lean sources. Historical adaptation hashes are provenance, not current verification hashes."
+}

@@ -1,0 +1,15 @@
+Comparator export SlowEquilibrationCondensedSource.theorem_1_2: [propext, Classical.choice, Quot.sound]
+Comparator export SlowEquilibrationCondensedSource.corollary_1_3_a: [propext, Classical.choice, Quot.sound]
+Comparator export SlowEquilibrationCondensedSource.corollary_1_3_b: [propext, Classical.choice, Quot.sound]
+Comparator export SlowEquilibrationCondensedSource.corollary_1_3_b_degree_window: [propext,
+ Classical.choice,
+ Quot.sound]
+Comparator export SlowEquilibrationCondensedSource.corollary_1_3_b_support: [propext, Classical.choice, Quot.sound]
+Comparator export SlowEquilibrationCondensedSource.corollary_1_3_c: [propext, Classical.choice, Quot.sound]
+Comparator export SlowEquilibrationCondensedSource.corollary_1_3_d: [propext, Classical.choice, Quot.sound]
+Comparator export SlowEquilibrationCondensedSource.theorem_1_4: [propext, Classical.choice, Quot.sound]
+Comparator export SlowEquilibrationCondensedSource.theorem_1_4_haar: [propext, Classical.choice, Quot.sound]
+Comparator export SlowEquilibrationCondensedSource.theorem_1_5: [propext, Classical.choice, Quot.sound]
+Comparator export SlowEquilibrationCondensedSource.theorem_1_6: [propext, Classical.choice, Quot.sound]
+Comparator export SlowEquilibrationCuspSource.theorem_1_7: [propext, Classical.choice, Quot.sound]
+Audited 12 Comparator theorem exports and 248 source-interface declarations; only the three standard axioms.

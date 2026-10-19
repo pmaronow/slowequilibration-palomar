@@ -1,0 +1,195 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/99c678e569c7c4c0772db297c5ddd5e4c9b6322e/schema/formalization.schema.json
+version: v0.4
+
+project:
+  name: Finite-size mean bias of the Sherrington-Kirkpatrick free energy
+  description: >-
+    Formalization of a fixed-temperature N^(-7/10) bound for the finite-size
+    mean bias of the zero-field Sherrington-Kirkpatrick model with independent
+    standard Gaussian couplings and the unnormalized partition function. For
+    every beta > 1, a positive constant depending on beta bounds the nonnegative
+    pressure gap for every integer N >= 2. The selected results also establish
+    the thermodynamic limit for beta > 0, the corresponding free-energy-density
+    and expected log-partition corrections, a positive exponent saving over
+    2/3, and a full-sequence little-o improvement. The independently readable
+    interface defines the limiting pressure by a thermodynamic limit; Solution
+    identifies it with the all-probability-profile Parisi variational value.
+  authors:
+    - P. M. Aronow
+    - Patrick Lopatto
+  responsible_maintainers:
+    - P. M. Aronow
+    - Patrick Lopatto
+  license: MIT
+
+classification:
+  arxiv: [math.PR, cond-mat.dis-nn]
+  msc2020: [82B44, 60K35, 60G15]
+
+sources:
+  - title: An N^(-7/10) Bound for the Finite-Size Bias of the Sherrington-Kirkpatrick Free Energy
+    authors:
+      - P. M. Aronow
+      - Patrick Lopatto
+    id: paper/main.tex
+    type: paper
+    location: Theorem 1.1 and its consequences; repository-local manuscript
+    relationship: formalizes
+    note: >-
+      The manuscript supplied for this preparation is retained under paper/.
+      Bibliographic authorship is taken from its title page. The repository is
+      the substantive proof development, including its earlier foundations;
+      it is not a thin Comparator wrapper. Authorship and responsibility do
+      not establish human mathematical review or source-author endorsement.
+  - title: Quantitative Parisi formulas and fluctuations in the Sherrington-Kirkpatrick model
+    authors:
+      - P. M. Aronow
+      - Patrick Lopatto
+    id: https://arxiv.org/abs/2609.09103v1
+    type: paper
+    location: Earlier quantitative development used by the supplied proof foundations
+    relationship: background
+    note: >-
+      Included as mathematical provenance for the earlier development, rather
+      than as a claim that every cited theorem has been independently reviewed.
+
+related_formalizations: []
+
+status:
+  scope: >-
+    Comparator selects six unconditional results for the concrete zero-field
+    Gaussian SK model. The finite-size bounds apply to fixed beta > 1 and
+    N >= 2, with no uniform temperature constant or nonzero-field claim.
+    The rate is an upper bound, not an asymptotic equivalent or a matching
+    positive leading coefficient. No ground-state or beta-to-infinity result
+    is selected. Thermodynamic convergence is stated for beta > 0. The standalone value
+    uses limUnder and is identified in Solution with the Parisi infimum over
+    all probability measures on [0,1]. Conditional lower-bound infrastructure,
+    variance or completed-moment premises, proposition-valued definitions,
+    packaged proof certificates, and cited background are documented separately
+    and are not additional unconditional Comparator results. The numbered-claim
+    checker distinguishes declarations that prove exact targets from definitions,
+    remarks, and adapted or supporting results. Proof-hole counts below are
+    source-scan counts excluding the six intentional Challenge placeholders;
+    they are not a substitute for completed compiler and kernel verification.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  main_results:
+    - declaration: SKMeanBias.main_mean_bias
+      file: Solution.lean
+      sorry_count: 0
+      comparator_config: comparator.json
+    - declaration: SKMeanBias.mean_bias_little_o_two_thirds
+      file: Solution.lean
+      sorry_count: 0
+      comparator_config: comparator.json
+
+fidelity:
+  divergences: >-
+    Challenge uses the thermodynamic limit of expected pressure in place of
+    spelling out the Parisi PDE variational infimum; Solution contains an
+    explicit equality to that variational value for beta > 0. The Hamiltonian
+    in the interface includes beta, whereas the manuscript places beta in the
+    Boltzmann exponential; the partition functions are the same. Spins are
+    encoded as Bool with signs +/-1, and edges are indexed once by i < j. The
+    native Parisi PDE terminal value uses log(cosh x) with an explicit log(2)
+    contribution to the functional, equivalent to the paper's log(2 cosh x).
+    The finite-size conclusions retain the paper's beta > 1, N >= 2,
+    normalization, quantifiers, and constants depending on beta. No assertion
+    is made about a variational meaning at beta <= 0. Formal proof routes and
+    numbered-statement limitations are described in the mathematical coverage
+    documentation; a proof of an abstract or proposition-valued supporting
+    object is not reported as a proof of an additional paper headline. See
+    docs/mathematical-scope.md and the numbered coverage ledger.
+
+automation:
+  methods:
+    - method: autonomous
+      models: [Sol 6.1]
+      framework: Original autoformalization development
+      tool_setup: >-
+        Sol 6.1 autoformalized the original development, as attributed by the
+        responsible maintainers. Historical prompt, cost, and runtime details
+        were not reconstructed for this repository preparation.
+    - method: agent
+      models: [Codex]
+      framework: Codex
+      tool_setup: >-
+        Subsequent local manuscript and repository preparation, independently readable
+        Challenge/Solution interface, Lean compiler compatibility work,
+        metadata, licensing, documentation, and reproducible verification tools.
+    - method: agent
+      models: [Codex]
+      framework: Codex automated review
+      tool_setup: >-
+        Separate automated mathematical fidelity, numbered-target and bibliographic review,
+        source scans, dependency-pin and structure validation, and attempted
+        compiler and independent-kernel checks. This is automated review,
+        not human peer review or a Palomar review.
+  notes: >-
+    Human formalization authors and responsible maintainers are P. M. Aronow
+    and Patrick Lopatto. Original Sol 6.1 autoformalization, subsequent Codex
+    preparation and compatibility work, and Codex automated review are distinct
+    roles. No human mathematical review is inferred from authorship or
+    responsibility. Verification claims must be read with their exact recorded
+    source revision and completion state, as recorded in docs/verification.md.
+
+review:
+  status: agent-reviewed
+  reviewers: [Codex automated review]
+  notes: >-
+    The manuscript and formal declarations were compared by automated agents.
+    Mechanical verification, source-only findings, mathematical scope limits,
+    and unresolved blockers are recorded separately in project documentation.
+    No independent human mathematical review, human peer review, or Palomar
+    review is claimed. Hexagon and Palomar submission and registration have
+    not been performed.
+
+alignment:
+  namespace: SKMeanBias
+  statements:
+    - source: Introduction, Parisi formula and thermodynamic pressure
+      lean: SKMeanBias.thermodynamic_limit
+      module: Solution
+      status: proof-declaration-present
+      note: beta > 0; the value is identified with the variational value in Solution.
+    - source: Theorem 1.1
+      lean: SKMeanBias.main_mean_bias
+      module: Solution
+      status: proof-declaration-present
+      note: Fixed beta > 1; every N >= 2; positive constant and nonnegative bias.
+    - source: Introduction, free-energy density normalization
+      lean: SKMeanBias.free_energy_density_correction
+      module: Solution
+      status: proof-declaration-present
+      note: Pressure bias divided by beta; same N^(-7/10) bound.
+    - source: Introduction, expected log-partition correction
+      lean: SKMeanBias.log_partition_mean_correction
+      module: Solution
+      status: proof-declaration-present
+      note: Nonnegative N times the pressure bias is O(N^(3/10)).
+    - source: Introduction, saving relative to exponent 2/3
+      lean: SKMeanBias.strictly_better_than_two_thirds
+      module: Solution
+      status: proof-declaration-present
+      note: >-
+        An existential positive saving; the proof supplies delta = 1/30 from
+        the N^(-7/10) upper bound, an alternative to an external comparison route.
+    - source: Introduction, full-sequence little-o consequence
+      lean: SKMeanBias.mean_bias_little_o_two_thirds
+      module: Solution
+      status: proof-declaration-present
+      note: N^(2/3) times the bias tends to zero along the full natural-number sequence.
+
+licensing:
+  original_code_and_documentation: MIT
+  third_party_terms: >-
+    The root license covers original work. Vendored foundations and reused
+    sources retain their own license notices, including Apache-2.0 where marked;
+    the preserved terms are listed in THIRD_PARTY_NOTICES.md and LICENSES/.
+
+acknowledgements: >-
+  Lean, Mathlib, and the bundled Comparator and independent kernel checkers.
+  Earlier formalization foundations retain their supplied licenses and notices.
+  Original code and documentation are MIT licensed; cited works and vendored
+  dependencies retain their own terms.

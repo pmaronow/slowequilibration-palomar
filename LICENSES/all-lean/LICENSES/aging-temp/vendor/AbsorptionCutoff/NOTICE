@@ -1,0 +1,13 @@
+AbsorptionCutoff
+Copyright 2026 Benny Avelin
+
+Portions of blueprint/src/ are derived from the leanblueprint project templates
+and were modified for AbsorptionCutoff.
+
+Copyright 2020-2024, Patrick Massot
+https://github.com/PatrickMassot/leanblueprint
+Licensed under the Apache License, Version 2.0.
+
+The files under manuscript/ are Copyright 2026 Benny Avelin, all rights
+reserved. They are distributed as the source snapshot for this formalization
+and are not licensed under the Apache License, Version 2.0.

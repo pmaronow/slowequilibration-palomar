@@ -1,0 +1,7 @@
+RSAT
+
+Portions of Lemmas/SpinGlass/ are derived from or adapted from the
+or4nge19/SpinGlass project (https://github.com/or4nge19/SpinGlass), licensed
+under the Apache License, Version 2.0.
+
+Existing copyright and license headers in the derived files are retained.

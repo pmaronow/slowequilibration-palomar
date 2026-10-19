@@ -1,0 +1,161 @@
+\chapter{Proofs of the condensed-phase theorems}\label{sec:condproof}
+
+In this section, we prove \cref{thm:main-condensed}, \cref{cor:main-classes}, and \cref{thm:main-initial}. The proofs combine the reduction of \cref{sec:reduction} with the inputs proved in \cref{sec:thermal,sec:directing,sec:kacrice,sec:entrance,sec:purecover,sec:mixone,sec:mixpair,sec:mixbands}. The one new estimate is \cref{prop:cp-transfer}. It states that, for the critical points of the center field in any fixed energy window, the expected probability that the diffusion started from $\nu_N$ reaches $C_a(u)$ for one of them before the time $e^{\gamma N}$ is at most a negative power of $N$, where $\gamma$ is chosen before the window. \Cref{tab:cp-inputs} lists the section that supplies each input, and \cref{tab:cp-parameters} lists the parameters and the order in which they are fixed.
+
+We use the notation of \cref{sec:red-setting}, in particular \cref{def:red-centers}. Recall that $a_Q=Q\xi'(Q)$ and $b_Q=Q^2\xi''(Q)$. Throughout, $\xi$ is a nonzero finite mixture with $c_p\ge0$ and minimum degree $d\ge4$, and we set
+\begin{equation*}
+\alpha=\frac{d-2}{2}.
+\end{equation*}
+
+\section{A common time horizon for all fixed energy windows}\label{sec:cp-transfer}
+
+The next proposition combines the hitting estimate for the caps under critical-point conditioning of \cref{thm:ent-main}, in the uniform form of \cref{cor:ent-rectangle}, which concerns the ordinary Gaussian conditioning, with the transfer from Gaussian conditioning to the Palm law in \cref{thm:kr-transfer}. Its point is the order of the parameters: the set $C_a(u)$ and the time $e^{\gamma N}$ are chosen once, from a compact set of marks that contains every fixed window, and only the constants depend on the window half-width $M$.
+
+\begin{proposition}[A common time horizon for all fixed energy windows]\label{prop:cp-transfer}
+Let $\xi$ be a finite mixture with $c_p\ge0$ and minimum degree $d\ge4$, let $\beta>0$ and $Q\in(0,1)$. Let $U$ be a compact interval with $\min U>2\sqrt{b_Q}$, let $E_0\in\R$, let $(m_N)$ be a deterministic sequence with $m_N/N\to E_0$, and let $b\in(0,\sqrt Q)$. Define $\cC_{N,M}$ and $B_{N,M}$ by \cref{def:red-centers}, and suppose that
+\begin{equation*}
+A_M=\limsup_{N\to\infty}\E_H|\cC_{N,M}(H)|<\infty\qquad\text{for every fixed }M>0.
+\end{equation*}
+Then there exist $a\in(0,\sqrt Q-b)$ and $\gamma>0$, depending only on $\xi$, $\beta$, $Q$, $U$, $E_0$, and $b$, such that the following holds with $T_N=e^{\gamma N}$ and with $\theta_N$ as in \cref{prop:red-consumer}. For every fixed $M>0$ and $r>1$, there exists $C_{M,r}<\infty$ such that, for all sufficiently large $N$,
+\begin{equation}\label{eq:cp-transfer}
+\E_H\sup_{0\le t\le T_N}(\nu_NP^H_t)\bigl(B_{N,M}(H)\bigr)\le\E_H\sum_{u\in\cC_{N,M}(H)}\theta_N(H,u)\le C_{M,r}N^{-\alpha(1-1/r)}.
+\end{equation}
+If, in addition, the bands carry almost all of the Gibbs mass in the sense of \eqref{eq:red-capture}, then
+\begin{equation*}
+\inf_{0\le t\le T_N}\norm{\nu_NP^H_t-\pi^H}_{\TV}\longrightarrow1\qquad\text{in }\Pp_H\text{-probability}.
+\end{equation*}
+\end{proposition}
+
+Note that \eqref{eq:cp-transfer} bounds the endpoint mass $q_{N,M}=\E_H(\nu_NP^H_{T_N})(B_{N,M}(H))$ of \cref{sec:red-initial}, and the hitting probability $\E_H\Pp^H_{\nu_N}\{X_t\in C_a(u)\text{ for some }t\le T_N\text{ and }u\in\cC_{N,M}(H)\}$, which lies between the two sides of \eqref{eq:cp-transfer} by \eqref{eq:red-union-bound}. The supremum over $t$ in \eqref{eq:cp-transfer} is a Borel function of $H$: by reversibility, the density of $\nu_NP^H_t$ with respect to $\pi^H$ is $P^H_t(\dd\nu_N/\dd\pi^H)$, which is continuous in $t$ in $L^2(\pi^H)$, so the supremum may be taken over rational $t$.
+
+\begin{proof}
+We fix a compact set of marks that contains every fixed window, choose $a$ and $\gamma$ from the conditioned hitting estimate on this set, and then insert the determinant weight using \cref{thm:kr-transfer}.
+
+\paragraph{The compact set of marks.}
+Let $g=\min U-2\sqrt{b_Q}>0$. In a pure model $\xi(r)=cr^p$ we have $K_Q=pH_Q$ identically, and only marks on the line $\{k=ph\}$ occur. We therefore set $\mathcal L_\xi=\R^2$ if $\xi$ is not pure and $\mathcal L_\xi=\{(h,k):k=ph\}$ if $\xi(r)=cr^p$, and define
+\begin{equation*}
+\mathcal K=\bigl([E_0-1,E_0+1]\times U\bigr)\cap\mathcal L_\xi,\qquad\mathcal W_{N,M}=\bigl([(m_N-M)/N,(m_N+M)/N]\times U\bigr)\cap\mathcal L_\xi.
+\end{equation*}
+The set $\mathcal K$ is compact and is fixed before $M$, and $\cC_{N,M}(H)$ is exactly the set of critical points of $H_Q$ whose normalized marks $(H_Q(u)/N,K_Q(u)/N)$ lie in $\mathcal W_{N,M}$. Fix $M>0$. Since $m_N/N\to E_0$, there exists $N_1(M)$ such that $\mathcal W_{N,M}\subset\mathcal K$ for $N\ge N_1(M)$. If $\mathcal K=\varnothing$, then $\cC_{N,M}(H)=\varnothing$ for every fixed $M$ and all $N\ge N_1(M)$, so \eqref{eq:cp-transfer} holds with, for example, $a=(\sqrt Q-b)/2$ and $\gamma=1$; then \eqref{eq:red-capture} cannot hold, and the last assertion is vacuous. We may therefore assume that $\mathcal K\ne\varnothing$. Every point $(h,k)\in\mathcal K$ satisfies $k\ge2\sqrt{b_Q}+g$, which is the strict gap required in \cref{prop:kr-determinant,thm:kr-transfer}, and in the pure case these results and \cref{cor:ent-rectangle} use conditioning on the value and the gradient only.
+
+\paragraph{The time scale.}
+\Cref{cor:ent-rectangle}, applied at the radius $\sqrt Q$ to the compact set $\mathcal K$, provides $a_*>0$. We fix $a\in(0,\min\{a_*,\sqrt Q-b\})$. For this $a$, by \cref{cor:ent-rectangle} there exist $\gamma,c,C>0$ and $N_0$, depending only on $\xi$, $\beta$, $Q$, $\mathcal K$, and $a$, such that, for $N\ge N_0$, every $u\in S_N$ and every $(h,k)\in\mathcal K$,
+\begin{equation}\label{eq:cp-entrance}
+\E_{h,k,u}\,\theta_N(H,u)\le C\bigl(N^{1-d/2}+N^{3-d}\bigr)+e^{-cN},\qquad T_N=e^{\gamma N}.
+\end{equation}
+Here $\E_{h,k,u}$ is the expectation with respect to the law of the whole field conditioned on $H_Q(u)=Nh$, $K_Q(u)=Nk$, and $\nabla_{S_N}H_Q(u)=0$, as in \cref{thm:ent-main}, and the event in $\theta_N$ is $\{\sup_{t\le T_N}|R(X_t,u)|\ge a\}$. Since $d\ge4$, we have $3-d\le1-d/2=-\alpha$, and the right side of \eqref{eq:cp-entrance} is at most $C_1N^{-\alpha}$, where $C_1=2C+\sup_{N\ge1}N^\alpha e^{-cN}$.
+
+\paragraph{The determinant weight.}
+Recall from \cref{lem:red-unions}(b) that $\theta_N$ is a Borel function on $\mathcal H_N\times S_N$ with values in $[0,1]$. Fix $r>1$. For $N\ge\max\{N_0,N_1(M)\}$, \cref{thm:kr-transfer}, applied to the Borel window $\mathcal W_{N,M}\subset\mathcal K$ with the bound \eqref{eq:cp-entrance}, implies that
+\begin{equation*}
+\E_H\sum_{u\in\cC_{N,M}(H)}\theta_N(H,u)\le\mathsf K_r^{1/r}\bigl(C_1N^{-\alpha}\bigr)^{1-1/r}\,\E_H|\cC_{N,M}(H)|,
+\end{equation*}
+where $\mathsf K_r$ is the bound on the $r$th moment of the normalized determinant over $\mathcal K$ from \cref{prop:kr-determinant}; it does not depend on $N$ or $M$. This is the argument of \cref{cor:kr-window}. Since $\E_H|\cC_{N,M}|\le A_M+1$ for all sufficiently large $N$, we obtain the second inequality in \eqref{eq:cp-transfer} with
+\begin{equation*}
+C_{M,r}=\mathsf K_r^{1/r}C_1^{1-1/r}(A_M+1).
+\end{equation*}
+The first inequality in \eqref{eq:cp-transfer} follows from \eqref{eq:red-union-bound}, since $B_{N,M}(H)\subset\bigcup_{u\in\cC_{N,M}(H)}C_a(u)$ for $a<\sqrt Q-b$.
+
+\paragraph{Separation.}
+The bound just proved, with any fixed $r>1$, is hypothesis (iii) of \cref{prop:red-consumer} with $q_{N,M}=\mathsf K_r^{1/r}(C_1N^{-\alpha})^{1-1/r}$. Hypothesis (ii) is assumed, and hypothesis (i) is the assumption \eqref{eq:red-capture}. We conclude the last assertion from \cref{prop:red-consumer}. The constants $C_{M,r}$ and the threshold for $N$ depend on $M$ and $r$, but $a$ and $\gamma$ do not.
+\end{proof}
+
+\section{Proof of the main condensed-phase theorem}\label{sec:cp-main}
+
+\Cref{tab:cp-inputs} lists the inputs to the proofs below. The estimates for the concentration of the Gibbs measure on bands are proved by different arguments for pure models and for non-pure mixtures, and the table has a column for each.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.33\textwidth}>{\raggedright\arraybackslash}p{0.29\textwidth}>{\raggedright\arraybackslash}p{0.29\textwidth}@{}}
+\toprule
+Input & Pure models & Non-pure mixtures\\
+\midrule
+Static consequences of the 1RSB assumptions: $Q$, $E_0$, $K_0>2\sqrt{b_Q}$; $\beta>\bs(\xi)$ & \cref{prop:th-structure,lem:th-superstatic} (\cref{sec:thermal}) & \cref{prop:th-structure,lem:th-superstatic} (\cref{sec:thermal})\\
+Directing measure carried by vectors of squared norm $Q$ (used inside the proofs of concentration on bands) & \cref{thm:dir-norm} (\cref{sec:directing}) & \cref{thm:dir-norm} (\cref{sec:directing})\\
+Determinant moments, marked Kac--Rice formula, determinant-weighted transfer & \cref{prop:kr-determinant,thm:kr-marked,thm:kr-transfer} (\cref{sec:kacrice}) & \cref{prop:kr-determinant,thm:kr-marked,thm:kr-transfer} (\cref{sec:kacrice})\\
+Conditioned hitting estimate for the caps & \cref{thm:ent-main,cor:ent-rectangle} (\cref{sec:entrance}) & \cref{thm:ent-main,cor:ent-rectangle} (\cref{sec:entrance})\\
+Bounded expected counts and tightness of the maximum & \cref{prop:pc-counts} (\cref{sec:purecover}) & \cref{thm:mc-counts} (\cref{sec:mixone,sec:mixpair})\\
+Gibbs concentration on the bands & \cref{thm:pc-capture} (\cref{sec:purecover}) & \cref{thm:mb-capture} (\cref{sec:mixbands})\\
+Separation, rotations, initial laws & \cref{sec:reduction} & \cref{sec:reduction}\\
+\bottomrule
+\end{tabular}
+\caption{The inputs to the proofs of \cref{thm:main-condensed,thm:main-initial}. The membership statements \cref{prop:th-pure,prop:th-convex,prop:th-degree-window,prop:th-perturbative,prop:th-example} enter only \cref{cor:main-classes}.}
+\label{tab:cp-inputs}
+\end{table}
+
+\begin{proof}[Proof of \cref{thm:main-condensed}]
+Let $(\xi,\beta)$ be strictly 1RSB with parameters $x,Q\in(0,1)$ and a nondegenerate contact at $Q$ (\cref{def:intro-certificate}), and let $d\ge4$ be the minimum degree of $\xi$.
+
+\paragraph{Pure models.}
+Suppose first that $\xi(r)=cr^p$ with $c>0$ and $p\ge4$, and set $\beta'=\beta\sqrt c$. Then $H_N=\sqrt c\,H_N^{(p)}$, where $H_N^{(p)}$ has covariance $NR(x,y)^p$, and $\beta H_N=\beta'H_N^{(p)}$. Hence the Gibbs measure $\pi^{H_N}_{N,\beta}$ and the generator $L_{\beta,H_N}$ are those of the model $r^p$ at inverse temperature $\beta'$, and so is the distance $\norm{\nu_NP^{H_N}_t-\pi^{H_N}}_{\TV}$ for every $t$. The function $V$ of \cref{def:intro-certificate} depends on $\xi$ and $\beta$ only through $\beta^2\xi=(\beta')^2r^p$, so $(r^p,\beta')$ satisfies the 1RSB assumptions with the same $x$ and $Q$. \Cref{lem:th-superstatic} implies that $\beta>\bs(cr^p)=\bs(p)/\sqrt c$, that is, $\beta'>\bs(p)$. It therefore suffices to prove the theorem for the model $r^p$ at the inverse temperature $\beta'>\bs(p)$, and in the pure case we work with $(r^p,\beta')$ in the rest of the proof. This is the setting of \cref{sec:purecover}, whose results are stated for $\xi(r)=r^p$ and $\beta>\bs(p)$; we apply them with $\beta'$ in place of $\beta$.
+
+\paragraph{The 1RSB parameters.}
+By \cref{prop:th-structure}, applied to $(\xi,\beta)$ for a non-pure mixture and to $(r^p,\beta')$ in the pure case, $x\delta_0+(1-x)\delta_Q$ is the unique minimizer of the Crisanti--Sommers functional. In particular, $x$ and $Q$ are determined by the model, and in the pure case $Q$ is the overlap used in \cref{sec:purecover}. We also obtain from \cref{prop:th-structure} the ground-state parameters $E_0$ and $K_0$, with $K_0>2\sqrt{b_Q}$.
+
+\paragraph{Counts and concentration on bands.}
+In the pure case, we fix a compact interval $U$ with $K_0$ in its interior and $\min U>2\sqrt{b_Q}$ and let $m_N=NE_0+O(\log N)$ be the centering of \cref{sec:purecover}. By \cref{prop:pc-counts,thm:pc-capture}, applied to $r^p$ at inverse temperature $\beta'$, the critical sets $\cC_{N,M}$ of \cref{def:red-centers} satisfy $\limsup_N\E_H|\cC_{N,M}|<\infty$ for each fixed $M$, and there exists $b_0\in(0,\sqrt Q)$ such that the bands of every width $b\in(0,b_0]$ carry almost all of the Gibbs mass in the sense of \eqref{eq:red-capture}. If $\xi$ is not pure, let $m_N=NE_0-\log N/(2c_0)+O(1)$ be the centering of \cref{thm:mc-counts}. Then \cref{thm:mb-capture} provides a closed interval $U\subset(2\sqrt{b_Q},\infty)$ with $K_0$ in its interior and $b_0\in(0,\sqrt Q)$ with the same two properties, at the radius $Q$ of \cref{prop:th-structure}. In both cases we fix $b=b_0$. When the concentration is stated for antipodal classes of an even model, with the bands $\{x:||R(x,u)|-\sqrt Q|\le b\}$, the union of these bands is $B_{N,M}(H)$, since $\cC_{N,M}(H)=-\cC_{N,M}(H)$ and $B_{-u}=-B_u$; the expected counts differ by a factor of two.
+
+\paragraph{Conclusion.}
+The hypotheses of \cref{prop:cp-transfer} hold for these $Q$, $U$, $E_0$, $(m_N)$, and $b$, since $m_N/N\to E_0$; in the pure case we apply that proposition to $r^p$ at inverse temperature $\beta'$. From that proposition, we obtain $a$ and $\gamma>0$ such that $\inf_{0\le t\le e^{\gamma N}}\norm{\nu_NP^H_t-\pi^H}_{\TV}\to1$ in $\Pp_H$-probability, and by the first paragraph this is the conclusion for $(\xi,\beta)$. The objects $Q$, $U$, $(m_N)$, and $b$ are determined by $(\xi,\beta)$ through the results cited above, and therefore $\gamma=\gamma(\xi,\beta)$. The argument uses no restriction on the number of supported degrees, on their parity, or on the sizes of the coefficients.
+\end{proof}
+
+The parameters in this proof, and the moment order $r$ optimized for \cref{thm:main-initial}(ii), are fixed in the order of \cref{tab:cp-parameters}. Every entry is fixed before $N\to\infty$.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{0.38\textwidth}>{\raggedright\arraybackslash}p{0.2\textwidth}>{\raggedright\arraybackslash}p{0.26\textwidth}@{}}
+\toprule
+Step & Parameter & Depends on & Source\\
+\midrule
+1 & $x$, $Q$; ground-state parameters $E_0$, $K_0$ & $\xi$, $\beta$ & \cref{prop:th-structure}\\
+2 & compact interval $U\ni K_0$, $\min U>2\sqrt{b_Q}$ & $\xi$, $\beta$ & \cref{prop:pc-counts}, or \cref{thm:mc-counts,thm:mb-capture}\\
+3 & centering $m_N=NE_0+O(\log N)$ & $\xi$, $\beta$, $U$ & same\\
+4 & band width $b\in(0,b_0]$ & $\xi$, $\beta$, $U$ & \cref{thm:pc-capture} or \cref{thm:mb-capture}\\
+5 & compact set $\mathcal K=([E_0-1,E_0+1]\times U)\cap\mathcal L_\xi$ & $E_0$, $U$ & \cref{prop:cp-transfer}\\
+6 & $a\in(0,\min\{a_*,\sqrt Q-b\})$ & steps 1--5 & \cref{cor:ent-rectangle}\\
+7 & time scale $T_N=e^{\gamma N}$ & steps 1--6 & \cref{cor:ent-rectangle}\\
+8 & moment order $r>1$ ($r=2$ for separation; optimized for prescribed-law selection) & $d$, $\kappa$ & \cref{prop:cp-transfer}\\
+9 & tolerances $\eps,\delta$; window half-width $M$ & steps 1--8 & \cref{lem:red-test}\\
+10 & $N\ge N_0(M,r)$, then $N\to\infty$ & steps 1--9 & \\
+\bottomrule
+\end{tabular}
+\caption{The parameters in the proofs of \cref{thm:main-condensed,thm:main-initial}, in the order in which they are fixed. Only the constants and the threshold $N_0$ depend on the window half-width $M$; the time scale does not.}
+\label{tab:cp-parameters}
+\end{table}
+
+\section{Proofs of the corollary and of the theorem on initial laws}\label{sec:cp-initial}
+
+\begin{proof}[Proof of \cref{cor:main-classes}]
+In each case, we check that $(\xi,\beta)$ is strictly 1RSB with a nondegenerate contact at $Q$ and that the minimum degree is at least four. Then \cref{thm:main-condensed} implies the conclusion.
+
+For (a), let $\xi(r)=r^p$ with $p\ge4$ and $\beta>\bs(p)$. By \cref{prop:th-pure}, the pair $(\xi,\beta)$ satisfies the 1RSB assumptions, for $p$ of either parity.
+
+For (b), let $\xi$ have minimum degree $d\ge4$, let $r\mapsto\xi''(r)^{-1/2}$ be strictly convex on $(0,1]$, and let $\beta>\bs(\xi)$. \Cref{prop:th-convex} implies that $(\xi,\beta)$ satisfies the 1RSB assumptions. If the smallest and largest supported degrees $d\ge4$ and $P$ satisfy $6(d-2)(P-2)>(d+P-5)^2$, then by \cref{prop:th-degree-window} the function $\xi''^{-1/2}$ is strictly convex on $(0,1]$, and the same proposition shows that this inequality holds whenever all supported degrees lie in $\{4,\dots,11\}$.
+
+For (c), let $d\ge4$ be even, let $\beta>\bs(d)$, and let $\eps_0=\eps_0(d,P,\beta)$ be given by \cref{prop:th-perturbative}. For every fixed $\eps\in(0,\eps_0)$ and every nonnegative vector $(b_p)$, indexed by the even $p$ with $d<p\le P$ and with sum one, that proposition shows that $\xi(r)=r^d+\eps\sum_pb_pr^p$ satisfies the 1RSB assumptions at $\beta$. Its minimum degree is $d$.
+
+For (d), \cref{prop:th-example} shows that the explicit covariance $r^4+b r^{12}$ satisfies the 1RSB assumptions at its temperature, and that $\xi''^{-1/2}$ is not convex on $(0,1]$; this case is not contained in (b).
+\end{proof}
+
+For the proof of \cref{thm:main-initial}, let $(\xi,\beta)$ be covered by \cref{thm:main-condensed}. We keep the objects $Q$, $U$, $(m_N)$, $b$, $a$, and $\gamma$ chosen in its proof, and set $T_N=e^{\gamma N}$. That proof shows that the band unions $B_{N,M}(H)$ carry almost all of the Gibbs mass, and they have Borel graphs and satisfy $B_{N,M}(H^g)=gB_{N,M}(H)$ by \cref{lem:red-unions}(a). Further, \cref{prop:cp-transfer} implies that, for each fixed $M>0$ and $r>1$,
+\begin{equation}\label{eq:cp-endpoint}
+q_{N,M}=\E_H(\nu_NP^H_{T_N})\bigl(B_{N,M}(H)\bigr)\le C_{M,r}N^{-\alpha(1-1/r)}\qquad\text{for all sufficiently large }N.
+\end{equation}
+
+\begin{proof}[Proof of \cref{thm:main-initial}]
+For (i), the inequality between the expected deficits, for every deterministic $\mu$ and $T\ge0$, is \eqref{eq:red-haar} of \cref{thm:red-haar}. \Cref{thm:main-condensed} shows that $\inf_{0\le t\le T_N}\norm{\nu_NP^H_t-\pi^H}_{\TV}\to1$ in probability, and the last part of \cref{thm:red-haar} now yields the conclusion at the same time $T_N$, uniformly over deterministic initial laws, and for every random initial law independent of $H_N$.
+
+For (ii), let $K_N\le C_0N^\kappa$ with $0\le\kappa<\alpha$. We choose a fixed $r>\alpha/(\alpha-\kappa)$, so that $\kappa<\alpha(1-1/r)$. Using \eqref{eq:cp-endpoint}, we find that, for each fixed $M$,
+\begin{equation*}
+K_Nq_{N,M}\le C_0C_{M,r}N^{\kappa-\alpha(1-1/r)}\longrightarrow0.
+\end{equation*}
+Then \cref{cor:red-selection} implies that the conclusion holds simultaneously for all convex mixtures of the prescribed laws, with weights that may depend on the field. The order $r$ is fixed before $N$, depending only on $d$ and $\kappa$, and the time $T_N$ does not depend on it.
+
+For (iii), we take $r=2$ in \eqref{eq:cp-endpoint} and find that \eqref{eq:red-polynomial} holds with $\zeta=\alpha/2=(d-2)/4$. By \cref{cor:red-entropy}, the conclusion holds for every Borel kernel $H\mapsto\mu^H_N$ with $\KL(\mu^H_N\Vert\nu_N)/\log N\to0$ in probability.
+\end{proof}
+
+\begin{remark}[What the theorems do not assert]\label{rem:cp-scope}
+The conclusion of \cref{thm:main-condensed} is convergence in $\Pp_H$-probability; we do not show that the probability of failure is exponentially small in $N$. The covariance and the temperature are fixed before $N\to\infty$. We do not claim that $\gamma$ stays bounded below as $\beta$ decreases to $\bs(\xi)$. The minimum degree is at least four throughout. For a component of degree two or three, the error term $N^{3-d}$ in the estimate of \cref{thm:ent-main} would not tend to zero, and our proof does not cover models with quadratic or cubic components, including the pure cubic model. In \cref{thm:main-initial}(ii), the restriction $\kappa<(d-2)/2$ is strict: the transfer in \cref{prop:cp-transfer} loses the factor $1-1/r$, and the endpoint $\kappa=(d-2)/2$ is not covered.
+\end{remark}

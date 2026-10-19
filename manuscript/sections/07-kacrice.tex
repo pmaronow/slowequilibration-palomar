@@ -1,0 +1,730 @@
+\chapter{Determinant moments and the Kac--Rice formula}\label{sec:kacrice}
+
+This section relates the critical points of the center field $H_Q$ to estimates under ordinary Gaussian conditioning at a single deterministic point. \Cref{lem:kr-one-point} records the joint law of the value, the radial derivative, the tangent gradient, and the Hessian of $H_Q$ at a point, and \cref{def:kr-conditioned} fixes the version of the conditional law given these quantities that is used throughout \cref{part:condensed}; \cref{cor:kr-hessian} states the resulting law of the Hessian at a conditioned critical point. \Cref{prop:kr-determinant} bounds every fixed moment of the normalized absolute Hessian determinant when the normalized radial derivative lies a fixed distance above the edge of the semicircle law. \Cref{sec:kr-border} adds a normalization of the expected determinant by the semicircle law, bounds for bordered determinants, and the same moment bound under conditioning at two points with small overlap. \Cref{thm:kr-marked} is the Kac--Rice formula with bounded Borel weights that may depend on the whole field, and \cref{cor:kr-count} records the resulting exact integrals for expected numbers of critical points. \Cref{lem:kr-hitting} shows that hitting probabilities of the Langevin diffusion are such weights. Finally, \cref{thm:kr-transfer} combines these results with H\"older's inequality (\cref{lem:kr-holder}): a bound on a hitting probability under ordinary conditioning becomes a bound on the expected sum of the hitting probabilities over critical points. \Cref{cor:kr-window} specializes it to the critical points in a fixed window.
+
+The section uses only the definition of the model (\cref{def:pre-model}), the construction of the Langevin dynamics (\cref{def:pre-dynamics,lem:pre-dynamics}), and the measurability of its path laws (\cref{lem:red-kernels}). \Cref{cor:kr-window} takes as hypotheses a hitting estimate for the caps under critical-point conditioning, which is proved in \cref{sec:entrance}, and a bound on expected counts, which is proved in \cref{sec:purecover,sec:mixpair}. The results are used as follows: \cref{def:kr-conditioned,cor:kr-hessian} in \cref{sec:entrance}; \cref{thm:kr-marked} in the criteria of \cref{sec:reduction} for separation and for the concentration of the Gibbs measure on bands; \cref{thm:kr-transfer} and the argument of \cref{cor:kr-window} in \cref{prop:cp-transfer}; \cref{prop:kr-determinant,thm:kr-marked,cor:kr-count} in the estimates for counts and for the concentration on bands of \cref{sec:purecover,sec:mixone,sec:mixpair,sec:mixbands}; and \cref{prop:kr-coefficient,lem:kr-border,lem:kr-two-point} in the two-point estimates of \cref{sec:mixpair}. No asymptotics of expected counts are proved here.
+
+The Kac--Rice formula is classical \cite[Theorems~11.2.1 and~12.1.1]{AdlerTaylor2007}, \cite[Theorems~6.2 and~6.4]{AzaisWschebor2009}.
+Its use for spherical spin glasses goes back to Auffinger, Ben Arous, and \v{C}ern\'y \cite{AuffingerBenArousCerny2013} and Auffinger and Ben Arous \cite{AuffingerBenArous2013}. The one-point law of a mixed model at a point of a sphere of smaller radius is computed in \cite[Section~4.1]{BenArousSubagZeitouni2020}. The determinant-weighted H\"older argument of \cref{lem:kr-holder} is a form of the conditional Cauchy--Schwarz argument of Huang and Sellke \cite[Corollary~3.16]{HuangSellke2024}.
+Two points require more care than in these references. First, the weights to which we apply the formula are probabilities of trajectory events of the diffusion in the given field. They are bounded Borel functions of the whole field, but they need not be continuous and they are not functions of finitely many derivatives at the point. The particular textbook and spin-glass statements cited above assume that these weights, which are called marks there, are continuous \cite[Theorem~6.4]{AzaisWschebor2009}, or that they are given by a tame auxiliary field \cite[Lemma~36]{Subag2017geometry}. General Kac--Rice formulas allowing Borel weights that depend on the whole random field were subsequently established by Stecconi \cite[Theorem~29]{Stecconi2022}; see also \cite[Proposition~6.1]{MathisStecconi2024}. We retain a direct proof in coefficient space to specify the conditioning version and the observables used here. Second, the event that the gradient vanishes at a given point has probability zero, and a conditional law given this event is defined only up to a choice of version. We therefore fix an explicit version in \cref{def:kr-conditioned} and prove the formula in the coefficient space of the polynomial field (\cref{prop:kr-coefficient}). The determinant bounds are proved directly from Gaussian concentration, and this yields all fixed moments uniformly in the dimension.
+
+\section{Standing notation}\label{sec:kr-notation}
+
+Throughout this section, $\xi(r)=\sum_{p\in\cP}c_pr^p$ is a finite mixture as in \cref{def:pre-model}, where $\cP=\{p\ge2:c_p>0\}$ is finite and nonempty, and $d=\min\cP$. Recall from \cref{def:pre-model} that $\xi$ is \emph{pure} if $\cP=\{p\}$ for a single degree $p$, and \emph{non-pure} otherwise. \Cref{part:condensed} assumes $d\ge4$; in this section the assumption is used only in \cref{lem:kr-two-point,cor:kr-window}. We fix $Q\in(0,1]$. The mixture and $Q$ do not depend on $N$. We assume $N\ge2$ unless stated otherwise and write $n=N-1$. Constants $C,c>0$ depend only on the quantities indicated and may change from line to line.
+
+\paragraph{The field and its coefficients.}
+Let $Z=(Z_{p,i_1,\dots,i_p})$, indexed by $p\in\cP$ and $i_1,\dots,i_p\in\{1,\dots,N\}$, be a standard Gaussian vector in $\R^{\ell_N}$, where $\ell_N=\sum_{p\in\cP}N^p$. For $z\in\R^{\ell_N}$ and $x\in\R^N$, we set
+\begin{equation}\label{eq:kr-coefficients}
+H_z(x)=\sum_{p\in\cP}\sqrt{c_p}\,N^{-(p-1)/2}\sum_{i_1,\dots,i_p=1}^N z_{p,i_1,\dots,i_p}\,x_{i_1}\cdots x_{i_p}.
+\end{equation}
+Then $\E H_Z(x)H_Z(y)=\sum_pc_pN^{1-p}(x\cdot y)^p=N\xi(x\cdot y/N)$ for all $x,y\in\R^N$. In particular, the restriction of $H_Z$ to $S_N$ has the law of $H_N$. We take $H_N=H_Z$ and always use the polynomial extension \eqref{eq:kr-coefficients} of $H_N$ to $\R^N$. We write $H_{N,p}$ for the homogeneous part of degree $p$ of $H_N$. As in \cref{sec:reduction}, let $\mathcal H_N$ be the finite-dimensional space of real polynomials on $\R^N$ that are sums of homogeneous polynomials with degrees in $\cP$, with the topology of any norm. The map $z\mapsto H_z$ is linear from $\R^{\ell_N}$ into $\mathcal H_N$.
+
+A \emph{field-dependent weight} is a Borel function $\varphi\colon\mathcal H_N\times S_N\to\R$. Its value $\varphi(H_N,u)$ may depend on the whole field, not only on finitely many derivatives at $u$. In the literature on marked point processes, such a function is called a mark; we reserve this word for the value and the radial derivative of a critical point, defined below. The function $(z,u)\mapsto\varphi(H_z,u)$ is Borel, because $(z,u)\mapsto(H_z,u)$ is continuous.
+
+\paragraph{The center field.}
+For $u\in\R^N$ we write
+\[
+H_Q(u)=H_N(\sqrt Q\,u),\qquad K_Q(u)=\frac{\dd}{\dd t}H_N(t\sqrt Q\,u)\Big|_{t=1}=u\cdot\nabla H_Q(u),
+\]
+and $H_{z,Q}$, $K_{z,Q}$ for the same objects built from $H_z$. By homogeneity, $H_Q=\sum_pQ^{p/2}H_{N,p}$ and $K_Q=\sum_ppQ^{p/2}H_{N,p}$. For $u\in S_N$ we have $K_Q(u)=\sqrt{QN}\,\partial_RH_N(\sqrt Q\,u)$, where $\partial_R$ is the derivative in the unit outward normal direction. In other words, $K_Q$ is the Euler radial derivative. We call $K_Q(u)$ the \emph{radial derivative} of $H_Q$ at $u$. We normalize the radial derivatives of critical points by $N$; at a deterministic point, $\Var K_Q(u)=N(a_Q+b_Q)$ by \cref{lem:kr-one-point}. The covariance of $H_Q$ is $\E H_Q(x)H_Q(y)=N\xi_Q(x\cdot y/N)$, where $\xi_Q(t)=\xi(Qt)$. Recall the center covariance parameters
+\[
+\xi_Q(1)=\xi(Q),\qquad a_Q=\xi_Q'(1)=Q\xi'(Q),\qquad b_Q=\xi_Q''(1)=Q^2\xi''(Q),
+\]
+and $\Sigma_Q$ is the $2\times2$ matrix with rows $(\xi(Q),a_Q)$ and $(a_Q,a_Q+b_Q)$.
+
+For $u\in S_N$, the tangent space is $u^\perp=\{v\in\R^N:v\cdot u=0\}$. We write $\nabla_{S_N}H_Q(u)\in u^\perp$ for the spherical gradient, which is the orthogonal projection of $\nabla H_Q(u)$ onto $u^\perp$, and $\nabla^2_{S_N}H_Q(u)$ for the Riemannian Hessian, a symmetric operator on $u^\perp$. We also write $\nabla^2_\perp H_Q(u)$ for the compression of the Euclidean Hessian to $u^\perp$, that is, the operator $v\mapsto P_u\nabla^2H_Q(u)v$ on $u^\perp$, where $P_u=\mathrm{Id}-uu^{\mathsf T}/N$. A critical point of $H_Q$ is a point $u\in S_N$ with $\nabla_{S_N}H_Q(u)=0$. Its \emph{marks} are the normalized value $h=H_Q(u)/N$ and the normalized radial derivative $k=K_Q(u)/N$. The surface measure of $S_N$ is
+\[
+|S_N|=\frac{2\pi^{N/2}}{\Gamma(N/2)}N^{(N-1)/2},
+\]
+and $\nu_N$ is the normalized surface measure.
+
+\paragraph{Random matrices.}
+For $m\ge1$, a standard GOE matrix $G_m$ is a random real symmetric $m\times m$ matrix whose entries on and above the diagonal are independent centered Gaussians, with variance $1/m$ off the diagonal and $2/m$ on it. We set
+\[
+W_{n,N}=\sqrt{b_Qn/N}\,G_n,\qquad \mu_{n,N}(k)=\E\big|\det(W_{n,N}-k\,\mathrm{Id}_n)\big|\qquad(k\in\R).
+\]
+The entries of $W_{n,N}$ have variance $b_Q/N$ off the diagonal and $2b_Q/N$ on it. Note the normalization by $N$, not by $n$. For every symmetric $M$ we have $\Tr(W_{n,N}M)=\sum_iW_{ii}M_{ii}+2\sum_{i<j}W_{ij}M_{ij}$, so that
+\begin{equation}\label{eq:kr-goe-covariance}
+\Var\Tr(W_{n,N}M)=\frac{2b_Q}N\sum_iM_{ii}^2+\frac{4b_Q}N\sum_{i<j}M_{ij}^2=\frac{2b_Q}N\Tr(M^2).
+\end{equation}
+A symmetric operator on an $n$-dimensional Euclidean space \emph{has the law of} $W_{n,N}$ if its matrix in one orthonormal basis does. By the orthogonal invariance of the GOE, its matrix in every orthonormal basis then has this law. The matrix $W_{n,N}$ has a density on the space of symmetric matrices, so $\det(W_{n,N}-k\,\mathrm{Id}_n)\neq0$ almost surely and $\mu_{n,N}(k)>0$ for every $k$.
+
+\section{The one-point law and the conditioned laws}\label{sec:kr-one-point}
+
+\begin{lemma}[One-point law]\label{lem:kr-one-point}
+Let $u\in S_N$. The three Gaussian objects
+\[
+\big(H_Q(u),K_Q(u)\big),\qquad \nabla_{S_N}H_Q(u),\qquad \nabla^2_\perp H_Q(u)
+\]
+are centered and independent. The pair $(H_Q(u),K_Q(u))$ has covariance matrix $N\Sigma_Q$, the gradient $\nabla_{S_N}H_Q(u)$ is $\sqrt{a_Q}$ times a standard Gaussian vector in $u^\perp$, and $\nabla^2_\perp H_Q(u)$ has the law of $W_{n,N}$. Moreover,
+\begin{equation}\label{eq:kr-intrinsic}
+\nabla^2_{S_N}H_Q(u)=\nabla^2_\perp H_Q(u)-\frac{K_Q(u)}N\,\mathrm{Id}_{u^\perp}.
+\end{equation}
+If $\xi$ is a non-pure mixture, then $\det\Sigma_Q>0$. If $\xi$ is pure of degree $p$, then $K_Q=pH_Q$ on $\R^N$, and $H_Q(u)$, $\nabla_{S_N}H_Q(u)$, and $\nabla^2_\perp H_Q(u)$ are independent, with $\Var H_Q(u)=N\xi(Q)$.
+\end{lemma}
+
+\begin{proof}
+The coefficients of the polynomial $H_Q$ are linear in $Z$. Hence its derivatives at fixed points are jointly Gaussian and centered, and their covariances are derivatives of
+\[
+\kappa(x,y)=\E H_Q(x)H_Q(y)=N\xi_Q(t),\qquad t=\frac{x\cdot y}N.
+\]
+The function $\kappa$ is invariant under orthogonal transformations of $\R^N$, hence so is the law of $H_Q$, and we may assume that $u=\sqrt N e_N$. Then $u^\perp$ is spanned by $e_1,\dots,e_n$, and $u_a=0$ for $a\le n$. In this proof, the indices $a,b,i,j$ range over $\{1,\dots,n\}$, and all derivatives are evaluated at $x=y=u$, where $t=1$.
+
+Using $\partial_{x_a}t=y_a/N$ and $\partial_{y_a}t=x_a/N$, we have
+\[
+\partial_{x_a}\partial_{y_b}\kappa=\xi_Q''(t)\frac{y_ax_b}N+\xi_Q'(t)\delta_{ab}=a_Q\delta_{ab},\qquad
+\partial_{x_i}\partial_{x_j}\partial_{y_a}\partial_{y_b}\kappa=\frac{b_Q}N\big(\delta_{ia}\delta_{jb}+\delta_{ib}\delta_{ja}\big).
+\]
+In the second identity, every other term of the derivative contains a factor $x_c$ or $y_c$ with $c\le n$, and vanishes. From the first identity, we see that $\nabla_{S_N}H_Q(u)$ has covariance $a_Q\,\mathrm{Id}_{u^\perp}$. From the second, we see that the entries of $\nabla^2_\perp H_Q(u)$ on and above the diagonal are uncorrelated, with variance $b_Q/N$ off the diagonal and $2b_Q/N$ on it, which is the law of $W_{n,N}$.
+
+Since $K_Q(y)=y\cdot\nabla H_Q(y)$ and $y\cdot\nabla_yt=t$, we have $\E H_Q(x)K_Q(y)=y\cdot\nabla_y\kappa=Nf(t)$ with $f(t)=t\xi_Q'(t)$, and $\E K_Q(x)K_Q(y)=x\cdot\nabla_x(Nf(t))=Ntf'(t)$. At $t=1$ we obtain
+\[
+\E H_Q(u)^2=N\xi(Q),\qquad \E H_Q(u)K_Q(u)=Na_Q,\qquad \E K_Q(u)^2=N(a_Q+b_Q),
+\]
+so $(H_Q(u),K_Q(u))$ has covariance $N\Sigma_Q$. For the cross covariances, we compute
+\[
+\begin{aligned}
+&\E H_Q(x)\,\partial_{y_a}H_Q(y)=\xi_Q'(t)\,x_a,\qquad \E K_Q(x)\,\partial_{y_a}H_Q(y)=f'(t)\,x_a,\\
+&\E \partial_{x_i}\partial_{x_j}H_Q(x)\,H_Q(y)=\xi_Q''(t)\frac{y_iy_j}N,\qquad \E\partial_{x_i}\partial_{x_j}H_Q(x)\,K_Q(y)=f''(t)\frac{y_iy_j}N,\\
+&\E\partial_{x_i}\partial_{x_j}H_Q(x)\,\partial_{y_a}H_Q(y)=\xi_Q'''(t)\frac{y_iy_jx_a}{N^2}+\xi_Q''(t)\frac{\delta_{ia}y_j+\delta_{ja}y_i}N.
+\end{aligned}
+\]
+All of these vanish at $x=y=u$. Since the three objects are jointly Gaussian with vanishing cross covariances, they are independent.
+
+For \eqref{eq:kr-intrinsic}, let $e\in u^\perp$ be a unit vector and let $\gamma(s)=\cos(s/\sqrt N)\,u+\sqrt N\sin(s/\sqrt N)\,e$ be the unit-speed geodesic of $S_N$ with $\gamma(0)=u$ and $\gamma'(0)=e$. Then $\gamma''(0)=-u/N$, and
+\[
+\begin{aligned}
+\nabla^2_{S_N}H_Q(u)(e,e)&=\frac{\dd^2}{\dd s^2}H_Q(\gamma(s))\Big|_{s=0}=e\cdot\nabla^2H_Q(u)\,e-\frac{u\cdot\nabla H_Q(u)}N\\
+&=e\cdot\nabla^2_\perp H_Q(u)\,e-\frac{K_Q(u)}N.
+\end{aligned}
+\]
+Polarization gives \eqref{eq:kr-intrinsic}.
+
+The weights $w_p=c_pQ^p/\xi(Q)$, $p\in\cP$, form a probability vector. We have $\xi(Q)=\sum_pc_pQ^p$, $a_Q=\sum_ppc_pQ^p$, and $a_Q+b_Q=\sum_pp^2c_pQ^p$, and therefore
+\[
+\det\Sigma_Q=\xi(Q)(a_Q+b_Q)-a_Q^2=\xi(Q)^2\Big(\sum_pw_pp^2-\Big(\sum_pw_pp\Big)^2\Big),
+\]
+which is $\xi(Q)^2$ times the variance of $p$ under the weights $w$. It is positive exactly when $\cP$ has at least two elements. If $\cP=\{p\}$, then $H_Q$ is homogeneous of degree $p$, and Euler's identity implies that $K_Q=pH_Q$. The independence assertion in the pure case is contained in the computation above.
+\end{proof}
+
+\begin{remark}[Comparison with the literature]\label{rem:kr-one-point}
+\Cref{lem:kr-one-point} is the one-point structure of \cite[Section~4.1, (4.1)]{BenArousSubagZeitouni2020}.
+There the field lives on a sphere of radius $q\sqrt N$ and the radial derivative is the unit normal derivative. With $q=\sqrt Q$, their radial variable is $K_Q(u)/\sqrt{QN}$, and their derivatives are taken in the variable $\sqrt Q\,u$. Moreover, \cite{BenArousSubagZeitouni2020} normalizes the mixture so that its value at $1$ is $1$. To compare, we set $\alpha=\xi(1)$, $\nu=\xi/\alpha$, and $\hat H_N=H_N/\sqrt\alpha$. Then values, radial derivatives, gradients, and Hessians of $H_N$ are $\sqrt\alpha$ times those of $\hat H_N$, and gradients and Hessians in the variable $u$ carry the additional factors $\sqrt Q$ and $Q$ from the homothety $u\mapsto\sqrt Q\,u$. We have included the computation to fix these normalizations, and it holds for every $\xi(1)>0$.
+\end{remark}
+
+We now fix the conditional laws given the value, the radial derivative, and the tangent gradient at a point. For a non-pure mixture and $u\in S_N$, let $\Lambda_u\colon\R^{\ell_N}\to\R^2\times u^\perp$ be the linear map
+\[
+\Lambda_uz=\big(H_{z,Q}(u),\,K_{z,Q}(u),\,\nabla_{S_N}H_{z,Q}(u)\big),
+\]
+and in the pure case let $\Lambda_uz=(H_{z,Q}(u),\nabla_{S_N}H_{z,Q}(u))\in\R\times u^\perp$. We write $\mathcal T_u$ for the target space of $\Lambda_u$ and $\Lambda_u^{*}$ for the adjoint of $\Lambda_u$ with respect to the Euclidean inner products. By \cref{lem:kr-one-point}, the covariance operator $\mathcal C_u=\Lambda_u\Lambda_u^{*}$ of $\Lambda_uZ$ is $N\Sigma_Q\oplus a_Q\,\mathrm{Id}_{u^\perp}$ for a non-pure mixture and $N\xi(Q)\oplus a_Q\,\mathrm{Id}_{u^\perp}$ in the pure case, and it is invertible on $\mathcal T_u$.
+
+\begin{definition}[Conditioned laws]\label{def:kr-conditioned}
+For $u\in S_N$ and $a\in \mathcal T_u$, let
+\begin{equation}\label{eq:kr-regression}
+Z^{u,a}=\Lambda_u^{*}\mathcal C_u^{-1}a+\big(\mathrm{Id}-\Lambda_u^{*}\mathcal C_u^{-1}\Lambda_u\big)Z.
+\end{equation}
+For a non-pure mixture and $(h,k)\in\R^2$, we write $\Pp_{h,k,u}$ and $\E_{h,k,u}$ for probability and expectation under which the field is $H_{Z^{u,a}}$ with $a=(Nh,Nk,0)$; thus $\E_{h,k,u}[\Phi(H_N)]=\E[\Phi(H_{Z^{u,(Nh,Nk,0)}})]$ for every Borel function $\Phi\ge0$ on $\mathcal H_N$. In the pure case, $\Pp_{h,u}$ and $\E_{h,u}$ are defined in the same way with $a=(Nh,0)$, and for $k=ph$ we also write $\E_{h,k,u}=\E_{h,u}$. We call these the \emph{conditioned laws} at $u$ with marks $(h,k)$. Similarly, with $\Gamma_uz=\nabla_{S_N}H_{z,Q}(u)$, we write $\E^{\nabla}_u$ for expectation under which the field is $H_{Z^u_0}$, where $Z^u_0=(\mathrm{Id}-a_Q^{-1}\Gamma_u^{*}\Gamma_u)Z$.
+\end{definition}
+
+\begin{lemma}[Properties of the conditioned laws]\label{lem:kr-conditioned}
+Let $u\in S_N$.
+\begin{enumerate}
+\item For every $a\in \mathcal T_u$, we have $\Lambda_uZ^{u,a}=a$. The vector $(\mathrm{Id}-\Lambda_u^{*}\mathcal C_u^{-1}\Lambda_u)Z$ is independent of $\Lambda_uZ$, and $Z=Z^{u,\Lambda_uZ}$. In particular, $a\mapsto\mathrm{Law}(Z^{u,a})$ is a regular version of the conditional law of $Z$ given $\Lambda_uZ=a$, and it is continuous in $a$. In the same way, $\mathrm{Law}(Z^u_0)$ is a version of the conditional law of $Z$ given $\nabla_{S_N}H_Q(u)=0$.
+\item Under $\Pp_{h,k,u}$, we have $H_Q(u)=Nh$, $K_Q(u)=Nk$, and $\nabla_{S_N}H_Q(u)=0$ surely, and $\nabla^2_{S_N}H_Q(u)$ has the law of $W_{n,N}-k\,\mathrm{Id}_n$; in the pure case this holds with $k=ph$. In particular, $\E_{h,k,u}|\det\nabla^2_{S_N}H_Q(u)|=\mu_{n,N}(k)>0$.
+\item For a non-pure mixture and every field-dependent weight $\varphi\ge0$, the function $(u,h,k)\mapsto\E_{h,k,u}\varphi(H_N,u)$ is Borel on $S_N\times\R^2$. In the pure case the function $(u,h)\mapsto\E_{h,u}\varphi(H_N,u)$ is Borel on $S_N\times\R$; equivalently, $(u,h,k)\mapsto\E_{h,k,u}\varphi(H_N,u)$ is Borel on $S_N\times\{(h,k):k=ph\}$. In both cases, $u\mapsto\E^\nabla_u\varphi(H_N,u)$ is Borel on $S_N$.
+\item For a non-pure mixture and every field-dependent weight $\varphi\ge0$,
+\begin{equation}\label{eq:kr-disintegration}
+\E^{\nabla}_u\varphi(H_N,u)=\int_{\R^2}p_N(h,k)\,\E_{h,k,u}\varphi(H_N,u)\dd h\dd k,
+\end{equation}
+where $p_N(h,k)=N(2\pi)^{-1}(\det\Sigma_Q)^{-1/2}\exp(-N(h,k)\Sigma_Q^{-1}(h,k)^{\mathsf T}/2)$ is the density of the centered Gaussian law with covariance $\Sigma_Q/N$,
+and in the pure case the same identity holds with $\int_\R p_N^{\rm pure}(h)\,\E_{h,u}\varphi(H_N,u)\dd h$ on the right, where $p^{\rm pure}_N(h)=(N/(2\pi\xi(Q)))^{1/2}e^{-Nh^2/(2\xi(Q))}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For (1), write $\Pi_u=\Lambda_u^{*}\mathcal C_u^{-1}\Lambda_u$. We have $\Lambda_u\Pi_u=\Lambda_u$ because $\Lambda_u\Lambda_u^{*}=\mathcal C_u$, which implies that $\Lambda_uZ^{u,a}=a$. The covariance between $(\mathrm{Id}-\Pi_u)Z$ and $\Lambda_uZ$ is $(\mathrm{Id}-\Pi_u)\Lambda_u^{*}=\Lambda_u^{*}-\Lambda_u^{*}\mathcal C_u^{-1}\mathcal C_u=0$, and jointly Gaussian vectors with zero covariance are independent. The identity $Z=\Lambda_u^{*}\mathcal C_u^{-1}\Lambda_uZ+(\mathrm{Id}-\Pi_u)Z$ is $Z=Z^{u,\Lambda_uZ}$. These facts imply that $\mathrm{Law}(Z^{u,a})$ is a regular version of the conditional law, and it is continuous in $a$ because $a$ enters \eqref{eq:kr-regression} linearly. The same argument applies to $\Gamma_u$, whose covariance is $a_Q\,\mathrm{Id}_{u^\perp}$.
+
+For (2), the first assertion follows from $\Lambda_uZ^{u,a}=a$. The operator $\nabla^2_\perp H_{z,Q}(u)$ is linear in $z$, and by \cref{lem:kr-one-point} it is uncorrelated with $\Lambda_uZ$. In other words, $\nabla^2_\perp H_{\Lambda_u^{*}b,Q}(u)=0$ for every $b\in \mathcal T_u$. Applying this with $b=\mathcal C_u^{-1}a$ and $b=\mathcal C_u^{-1}\Lambda_uZ$, we find that $\nabla^2_\perp H_{Z^{u,a},Q}(u)=\nabla^2_\perp H_{Z,Q}(u)$, which has the law of $W_{n,N}$. Combining this with \eqref{eq:kr-intrinsic} and $K_Q(u)=Nk$, we obtain the law of the intrinsic Hessian, and the last assertion follows from the definition of $\mu_{n,N}$.
+
+For (3), regard $\Lambda_u$ as a map into $\R^2\times\R^N$, which depends smoothly on $u\in\R^N$. On $\R^2\times\R^N$, the operator $\mathcal C_u^{+}=(N\Sigma_Q)^{-1}\oplus a_Q^{-1}P_u$ is smooth in $u$ and agrees with $\mathcal C_u^{-1}$ on $\mathcal T_u$. Then the map $(z,u,h,k)\mapsto Z^{u,(Nh,Nk,0)}$, computed from $z$ in place of $Z$, is continuous, and $(z,u,h,k)\mapsto\varphi(H_{Z^{u,(Nh,Nk,0)}},u)$ is Borel. Integrating out $z$ against the standard Gaussian measure, we find by Tonelli's theorem that $(u,h,k)\mapsto\E_{h,k,u}\varphi(H_N,u)$ is Borel. The pure case and $\E^\nabla_u$ are identical.
+
+For (4), write $\Lambda_uz=(\Lambda'_uz,\Gamma_uz)$ with $\Lambda'_uz=(H_{z,Q}(u),K_{z,Q}(u))$. We have $\Lambda'_u\Gamma_u^{*}=0$ by \cref{lem:kr-one-point}. Then $\mathcal C_u^{-1}$ is block diagonal, $\Pi_u=\Lambda_u'^{*}(N\Sigma_Q)^{-1}\Lambda'_u+a_Q^{-1}\Gamma_u^{*}\Gamma_u$, and we have
+\[
+Z^u_0=\Lambda_u'^{*}(N\Sigma_Q)^{-1}\Lambda'_uZ+(\mathrm{Id}-\Pi_u)Z=Z^{u,(\Lambda'_uZ,0)}.
+\]
+By (1), $\Lambda'_uZ$ is independent of $(\mathrm{Id}-\Pi_u)Z$, and it has the law $N(0,N\Sigma_Q)$. Conditioning on $\Lambda'_uZ=(Nh,Nk)$ and changing variables, the density of $(h,k)$ is $p_N$, since $\Sigma_Q/N$ has determinant $\det\Sigma_Q/N^2$. This proves \eqref{eq:kr-disintegration}. The pure case is the same with $\Lambda'_uz=H_{z,Q}(u)$.
+\end{proof}
+
+The conditioned laws depend on no choice of frame on $S_N$, and they are defined for every value of the marks. Any regular version of the conditional law of $Z$ given $\Lambda_uZ$ agrees with $\mathrm{Law}(Z^{u,a})$ only for almost every $a$. This says nothing at the single target value $0$ of the gradient, which is the value that enters the Kac--Rice formula. All conditioned expectations in \cref{part:condensed} refer to the laws of \cref{def:kr-conditioned}. Since $z\mapsto H_z(x)$ is linear, \eqref{eq:kr-regression} says that the field under $\Pp_{h,k,u}$ is
+\[
+H_N(x)+\Cov\big(H_N(x),\Lambda_uZ\big)\,\mathcal C_u^{-1}\big(a-\Lambda_uZ\big),\qquad a=(Nh,Nk,0),
+\]
+which is the explicit Gaussian regression used in \cref{def:ent-conditioned}. The conditioned hitting estimate of \cref{sec:entrance} is therefore stated under the same laws.
+
+\section{Gaussian concentration and determinant moments}\label{sec:kr-determinants}
+
+We first record two Gaussian estimates. Part (1) of the next lemma is the Gaussian concentration inequality in the form \cite[Proposition~4.1 and (4.1)]{LedouxSemigroup1994}, which also underlies \cref{lem:pre-concentration}; we include its proof through Gross's logarithmic Sobolev inequality \cite{Gross1975} and Herbst's argument (see \cite{Ledoux2001,BakryGentilLedoux2014}); part (2) bounds the extreme eigenvalues of a Gaussian matrix whose covariance is dominated by that of the GOE. We give the short proofs because we need dimension-free constants and degenerate covariances.
+
+\begin{lemma}[Gaussian concentration and an edge bound]\label{lem:kr-gaussian}
+\begin{enumerate}
+\item Let $Y$ be a standard Gaussian vector in $\R^m$ and let $f\colon\R^m\to\R$ be $L$-Lipschitz. Then for every $t\in\R$,
+\begin{equation}\label{eq:kr-mgf}
+\E\exp\big(t(f(Y)-\E f(Y))\big)\le\exp(t^2L^2/2),
+\end{equation}
+and, if $L>0$, $\Pp(f(Y)\ge\E f(Y)+s)\le\exp(-s^2/(2L^2))$ for every $s>0$. If $L=0$, then $f$ is constant and this probability is zero.
+\item Let $b>0$ and $1\le n\le N$, and let $W$ be a centered Gaussian random symmetric $n\times n$ matrix such that $\Var\Tr(WM)\le(2b/N)\Tr(M^2)$ for every symmetric $M$. Then
+\begin{equation}\label{eq:kr-edge}
+\E\lambda_{\max}(W)\le2\sqrt{bn/N},\qquad \Pp\big(\norm{W}_{\rm op}>2\sqrt b+s\big)\le2\exp\big(-Ns^2/(4b)\big)\quad(s>0).
+\end{equation}
+The covariance of $W$ may be degenerate.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+We begin with (1). Let $\gamma$ be the standard Gaussian measure on $\R^m$ and let $Q_sg(y)=\E g(e^{-s}y+\sqrt{1-e^{-2s}}\,Y)$ be the Mehler semigroup, with generator $\mathcal L=\Delta-y\cdot\nabla$. We use three standard facts: the invariance of $\gamma$ under $Q_s$, the Gaussian integration by parts formula $\int(\mathcal L\psi)\chi\dd\gamma=-\int\nabla\psi\cdot\nabla\chi\dd\gamma$, and the relation $\nabla Q_sg=e^{-s}Q_s\nabla g$. Let $g$ be smooth and bounded, with bounded derivatives and $\inf g>0$. Then
+\[
+\frac{\dd}{\dd s}\int Q_sg\log Q_sg\dd\gamma=\int(\mathcal LQ_sg)(1+\log Q_sg)\dd\gamma=-\int\frac{|\nabla Q_sg|^2}{Q_sg}\dd\gamma.
+\]
+Since $Q_sg\to\int g\dd\gamma$ as $s\to\infty$, integrating in $s$ gives
+\[
+\int g\log g\dd\gamma-\int g\dd\gamma\,\log\int g\dd\gamma=\int_0^\infty\int\frac{|\nabla Q_sg|^2}{Q_sg}\dd\gamma\dd s.
+\]
+By the Cauchy--Schwarz inequality, $|Q_s\nabla g|^2\le Q_s(|\nabla g|^2/g)\,Q_sg$. Together with $\nabla Q_sg=e^{-s}Q_s\nabla g$, this implies that $|\nabla Q_sg|^2/Q_sg\le e^{-2s}Q_s(|\nabla g|^2/g)$. Inserting this and using the invariance of $\gamma$, we obtain the logarithmic Sobolev inequality
+\[
+\int g\log g\dd\gamma-\int g\dd\gamma\,\log\int g\dd\gamma\le\frac12\int\frac{|\nabla g|^2}g\dd\gamma.
+\]
+Now let $f$ be smooth and bounded with $|\nabla f|\le L$, and set $\psi(t)=\log\E e^{tf(Y)}$. Applying the last inequality to $g=e^{tf}$ with $t>0$, we obtain $t\psi'(t)-\psi(t)\le t^2L^2/2$, which means that $(\psi(t)/t)'\le L^2/2$. As $\psi(t)/t\to\E f(Y)$ when $t\downarrow0$, we have $\psi(t)\le t\E f(Y)+t^2L^2/2$, which is \eqref{eq:kr-mgf}. Applying this to $-f$ covers $t<0$. A general $L$-Lipschitz $f$ is the pointwise limit of smooth bounded functions with $|\nabla f|\le L$, obtained by truncation and mollification. We extend \eqref{eq:kr-mgf} to $f$ by dominated convergence, using $|f(y)|\le|f(0)|+L|y|$ and the integrability of $e^{c|Y|}$. The tail bound follows from Markov's inequality with $t=s/L^2$.
+
+For (2), let $\Gamma$ be the covariance operator of $W$ on the space of symmetric matrices with the inner product $\Tr(AB)$. Then $W$ has the law of $\Gamma^{1/2}\zeta$, where $\zeta$ is a standard Gaussian vector in that space, and the hypothesis says that $\norm{\Gamma^{1/2}}_{\rm op}\le\sqrt{2b/N}$. For unit vectors $v,w\in\R^n$, let $X_v=v\cdot Wv=\Tr(Wvv^{\mathsf T})$ and $Y_v=2\sqrt{b/N}\,g\cdot v$, where $g$ is a standard Gaussian vector in $\R^n$. Then
+\[
+\E(X_v-X_w)^2\le\frac{2b}N\norm{vv^{\mathsf T}-ww^{\mathsf T}}_F^2=\frac{4b}N\big(1-(v\cdot w)^2\big)\le\frac{8b}N(1-v\cdot w)=\E(Y_v-Y_w)^2,
+\]
+where we used $1-(v\cdot w)^2=(1-v\cdot w)(1+v\cdot w)$ and $|v\cdot w|\le1$. Both processes are continuous on the unit sphere. By the Sudakov--Fernique inequality \cite[Theorem~2.2.3]{AdlerTaylor2007},
+we have $\E\lambda_{\max}(W)=\E\sup_vX_v\le\E\sup_vY_v=2\sqrt{b/N}\,\E|g|\le2\sqrt{bn/N}$. The function $\zeta\mapsto\lambda_{\max}(\Gamma^{1/2}\zeta)$ is $\sqrt{2b/N}$-Lipschitz, since $\lambda_{\max}$ is $1$-Lipschitz for the Frobenius norm. By part (1) and $\E\lambda_{\max}(W)\le2\sqrt b$, we have $\Pp(\lambda_{\max}(W)>2\sqrt b+s)\le\exp(-Ns^2/(4b))$. The matrix $-W$ satisfies the same hypothesis, and a union bound gives \eqref{eq:kr-edge}.
+\end{proof}
+
+Combining \cref{lem:kr-conditioned}(2) with \cref{lem:kr-gaussian}, we record the law of the Hessian at a conditioned critical point and the meaning of a strict gap.
+
+\begin{corollary}[The Hessian at a conditioned critical point]\label{cor:kr-hessian}
+Let $u\in S_N$ and $(h,k)\in\R^2$, with $k=ph$ in the pure case. Under $\Pp_{h,k,u}$, the matrix of $\nabla^2_{S_N}H_Q(u)$ in any orthonormal basis of $u^\perp$ has the law of
+\[
+\sqrt{b_Q(N-1)/N}\;G_{N-1}-k\,\mathrm{Id}_{N-1}=W_{n,N}-k\,\mathrm{Id}_n.
+\]
+In other words, its entries on and above the diagonal are independent Gaussians with mean $-k\delta_{ij}$, variance $b_Q/N$ off the diagonal, and variance $2b_Q/N$ on it. If $k\ge2\sqrt{b_Q}+g$ for some $g>0$, then
+\[
+\Pp_{h,k,u}\Big(\nabla^2_{S_N}H_Q(u)\le-\frac g2\,\mathrm{Id}_{u^\perp}\Big)\ge1-2e^{-Ng^2/(16b_Q)}.
+\]
+\end{corollary}
+
+\begin{proof}
+The first assertion is \cref{lem:kr-conditioned}(2); it is the law of \cref{lem:th-hessian}(1), stated for the conditioned laws of \cref{def:kr-conditioned}. The shift $-k\,\mathrm{Id}$ comes from \eqref{eq:kr-intrinsic} and $K_Q(u)=Nk$, and the variances are those of \cref{lem:kr-one-point}. By \eqref{eq:kr-goe-covariance}, $W_{n,N}$ satisfies the hypothesis of \cref{lem:kr-gaussian}(2) with $b=b_Q$, and with $s=g/2$ we obtain $\Pp(\norm{W_{n,N}}_{\rm op}>2\sqrt{b_Q}+g/2)\le2e^{-Ng^2/(16b_Q)}$. On the complementary event, $W_{n,N}-k\,\mathrm{Id}\le(2\sqrt{b_Q}+g/2-k)\mathrm{Id}\le-(g/2)\mathrm{Id}$.
+\end{proof}
+
+We say that a set of marks has a \emph{strict gap} if $k\ge2\sqrt{b_Q}+g$ on it for a fixed $g>0$. \Cref{cor:kr-hessian} implies that the conditioned critical points with such marks are nondegenerate local maxima with probability $1-O(e^{-cN})$. The conditioned hitting estimate of \cref{sec:entrance} does not use this gap, while the determinant bounds below do.
+
+\begin{proposition}[Normalized determinant moments]\label{prop:kr-determinant}
+Let $b,g>0$ and $k_+<\infty$. Let $1\le n\le N$, let $W$ be a centered Gaussian random symmetric $n\times n$ matrix such that $\Var\Tr(WM)\le(2b/N)\Tr(M^2)$ for every symmetric $M$, let $C$ be a deterministic symmetric $n\times n$ matrix with $\norm C_{\rm op}\le g/4$, and let $2\sqrt b+g\le k\le k_+$. Set
+\[
+D=\big|\det(k\,\mathrm{Id}_n-C-W)\big|,\qquad \mu=\E D,\qquad Y=\sum_{j=1}^n\log\max\big\{|k-\lambda_j(C+W)|,\,g/2\big\}.
+\]
+Then $\mu>0$, and for every real $r\ge1$ there exists $\mathsf K_r=\mathsf K_r(b,g,k_+)<\infty$ such that
+\begin{equation}\label{eq:kr-det-moments}
+\E(D/\mu)^r\le\E(e^Y/\mu)^r\le\mathsf K_r.
+\end{equation}
+The constant $\mathsf K_r$ does not depend on $n$, $N$, $k$, $C$, or the covariance of $W$. There exists $N_0(b,g)$ such that for $N\ge N_0$ one may take $\mathsf K_r=2^r\exp(4r^2b/g^2)$. In particular, if $u\in S_N$ and $2\sqrt{b_Q}+g\le k\le k_+$, then under $\Pp_{h,k,u}$ the determinant $D=|\det\nabla^2_{S_N}H_Q(u)|$ satisfies $\E_{h,k,u}(D/\mu_{n,N}(k))^r\le\mathsf K_r(b_Q,g,k_+)$; in the pure case this holds for $k=ph$.
+\end{proposition}
+
+For $0<r<1$, we have $\E(D/\mu)^r\le1$ by Jensen's inequality. The proposition asserts nothing about the dependence between $D$ and other functions of the field, and none is needed below. Both hypotheses on $C$ and $W$ matter: if $C$ were allowed to be random, or $W$ to have a nonzero mean, the determinant could be close to zero with probability close to one.
+
+\begin{proof}
+The scalar function $x\mapsto\log\max\{|k-x|,g/2\}$ is $(2/g)$-Lipschitz on $\R$. By the Hoffman--Wielandt inequality \cite{HoffmanWielandt1953}, the ordered eigenvalues of symmetric matrices $U,V$ satisfy $\sum_j(\lambda_j(U)-\lambda_j(V))^2\le\norm{U-V}_F^2$. (To verify it, expand $\norm{U-V}_F^2=\Tr U^2+\Tr V^2-2\Tr(UV)$ and diagonalize: $\Tr(UV)=\sum_{i,j}\lambda_i(U)\lambda_j(V)|e_i\cdot f_j|^2$ for orthonormal eigenbases $(e_i)$, $(f_j)$; the matrix $(|e_i\cdot f_j|^2)$ is doubly stochastic, and by Birkhoff's theorem and the rearrangement inequality this sum is at most $\sum_j\lambda_j(U)\lambda_j(V)$.) By the Cauchy--Schwarz inequality, $Y$ is a $(2\sqrt n/g)$-Lipschitz function of $W$ in the Frobenius norm. Writing $W=\Gamma^{1/2}\zeta$ as in the proof of \cref{lem:kr-gaussian}, we find that $Y$ is a Lipschitz function of $\zeta$ with constant
+\begin{equation}\label{eq:kr-log-lipschitz}
+L=\frac2g\sqrt{\frac{2bn}N}\le\frac{2\sqrt{2b}}g.
+\end{equation}
+We note that this concerns the clipped function $Y$, which is defined and Lipschitz on all matrices.
+
+Let $\mathcal E=\{\norm W_{\rm op}\le2\sqrt b+g/4\}$. We have $\Pp(\mathcal E^c)\le2e^{-Ng^2/(64b)}$ by \eqref{eq:kr-edge}. On $\mathcal E$, every eigenvalue of $C+W$ is at most $2\sqrt b+g/2\le k-g/2$. This implies that $D=e^Y$ on $\mathcal E$. Further, $D\le e^Y$ everywhere, since $\max\{|k-x|,g/2\}\ge|k-x|$. By \eqref{eq:kr-mgf} and the Cauchy--Schwarz inequality,
+\[
+\E e^{tY}\le e^{t\E Y+t^2L^2/2}\quad(t\ge0),\qquad \E\big[e^Y\ind_{\mathcal E^c}\big]\le\big(\E e^{2Y}\big)^{1/2}\Pp(\mathcal E^c)^{1/2}\le e^{\E Y+L^2}\Pp(\mathcal E^c)^{1/2}.
+\]
+Since $\E e^Y\ge e^{\E Y}$ by Jensen's inequality, we obtain
+\begin{equation}\label{eq:kr-det-lower}
+\mu\ge\E\big[e^Y\ind_{\mathcal E}\big]\ge e^{\E Y}\Big(1-e^{L^2}\Pp(\mathcal E^c)^{1/2}\Big).
+\end{equation}
+By \eqref{eq:kr-log-lipschitz}, there exists $N_0(b,g)$ such that the parenthesis is at least $1/2$ for $N\ge N_0$. For such $N$, we have $\mu^r\ge2^{-r}e^{r\E Y}$, and dividing the bound on $\E e^{rY}$ by $\mu^r$ yields $\E(e^Y/\mu)^r\le2^re^{r^2L^2/2}\le2^r\exp(4r^2b/g^2)$, where we used $L^2\le8b/g^2$. As $D\le e^Y$, this proves \eqref{eq:kr-det-moments} for $N\ge N_0$.
+
+It remains to treat the finitely many pairs $(n,N)$ with $n\le N<N_0$. For each such pair, the admissible covariance operators $\Gamma$ (those with $0\le\Gamma\le(2b/N)\mathrm{Id}$), the admissible $C$, and the admissible $k$ form a compact set. The quantities $\E D^r$, $\E e^{rY}$, and $\mu$ are continuous on this set: $\Gamma\mapsto\Gamma^{1/2}$ is continuous, and $D^r$ and $e^{rY}$ are bounded by a polynomial in $|\zeta|$ uniformly on the set, and dominated convergence applies. Moreover $\mu>0$ on the set: at $\zeta=0$ the matrix $k\,\mathrm{Id}-C\ge(k-g/4)\mathrm{Id}$ is positive definite, and $D>0$ on a neighborhood of $0$ in the support of $\zeta\mapsto\Gamma^{1/2}\zeta$, which has positive probability. By continuity and compactness, $\E e^{rY}/\mu^r$ is bounded on each of these finitely many sets. This proves \eqref{eq:kr-det-moments} for all $N$, and also $\mu>0$.
+
+For the last assertion, recall from \cref{lem:kr-conditioned}(2) that under $\Pp_{h,k,u}$ the matrix of $-\nabla^2_{S_N}H_Q(u)$ in an orthonormal basis of $u^\perp$ has the law of $k\,\mathrm{Id}_n-W_{n,N}$, and $-W_{n,N}$ has the law of $W_{n,N}$. Since $W_{n,N}$ satisfies the hypothesis with $b=b_Q$ by \eqref{eq:kr-goe-covariance}, we take $C=0$.
+\end{proof}
+
+\begin{corollary}[Removal of exceptional events]\label{cor:kr-bad-event}
+Under the hypotheses of \cref{prop:kr-determinant}, let $\mathcal A$ be an event on the same probability space; it may depend on $W$ and on any other randomness. Then for every $r>1$ and $s\ge1$,
+\begin{equation}\label{eq:kr-bad-event}
+\frac{\E[D\ind_{\mathcal A}]}\mu\le\mathsf K_r^{1/r}\Pp(\mathcal A)^{1-1/r},\qquad \frac{\E[D^s\ind_{\mathcal A}]}{\mu^s}\le\mathsf K_{2s}^{1/2}\Pp(\mathcal A)^{1/2}.
+\end{equation}
+If moreover $\mathsf K_r^{1/r}\Pp(\mathcal A)^{1-1/r}\le1/2$ for some $r>1$, then $\mu_{\rm good}=\E[D\ind_{\mathcal A^c}]\ge\mu/2$ and $\E(D\ind_{\mathcal A^c}/\mu_{\rm good})^s\le2^s\mathsf K_s$ for every $s\ge1$.
+\end{corollary}
+
+\begin{proof}
+The first bound in \eqref{eq:kr-bad-event} is H\"older's inequality with exponents $r$ and $r/(r-1)$ together with \eqref{eq:kr-det-moments}, and the second is the Cauchy--Schwarz inequality applied to $D^s\ind_{\mathcal A}$. Under the additional hypothesis, the first bound implies that $\mu_{\rm good}=\mu-\E[D\ind_{\mathcal A}]\ge\mu/2$, and then $\E(D\ind_{\mathcal A^c}/\mu_{\rm good})^s\le2^s\E(D/\mu)^s\le2^s\mathsf K_s$.
+\end{proof}
+
+We note that if $\Pp(\mathcal A)\le C_0e^{-c_0N}$, then discarding $\mathcal A$ changes the expected determinant by a relative amount that is exponentially small, with constants depending only on $b,g,k_+,C_0,c_0$. In applications $\mathcal A$ is a conditional event, such as the failure of a Hessian or derivative bound, and $\Pp(\mathcal A)\le C_0e^{-c_0N}$ must hold under the same conditioned law. An unconditional bound on $\Pp(\mathcal A)$ is not enough, and a bound $\Pp(\mathcal A)\to0$ without a rate bounds the relative loss only by $\Pp(\mathcal A)^{1-1/r}$. The corollary transfers such a conditional bound once it is established, but it does not prove it.
+
+\section{The semicircle law and bordered determinants}\label{sec:kr-border}
+
+\Cref{prop:kr-determinant} needs no information about the size of $\mu$. The next proposition identifies $\mu$ up to bounded factors in terms of the semicircle law. It also makes explicit the comparison between expected determinants in dimensions that differ by a fixed integer. Let
+\[
+\sigma_{\rm sc}(\dd x)=\frac1{2\pi}\sqrt{4-x^2}\,\ind_{[-2,2]}(x)\dd x,\qquad \Omega(z)=\int\log(z-x)\,\sigma_{\rm sc}(\dd x),
+\]
+and
+\[
+g_{\rm sc}(z)=\int\frac{\sigma_{\rm sc}(\dd x)}{z-x}=\frac{z-\sqrt{z^2-4}}2
+\]
+for $z>2$, so that $\Omega'=g_{\rm sc}$. (The formula for $g_{\rm sc}$ follows by setting $x=2\cos\theta$ and using $\int_0^\pi(z-2\cos\theta)^{-1}\dd\theta=\pi/\sqrt{z^2-4}$.)
+
+\begin{proposition}[Determinants and the semicircle law]\label{prop:kr-prefactors}
+Let $d_0>0$ and $Z_+<\infty$. For every $m\ge1$ and $2+d_0\le z\le Z_+$,
+\begin{equation}\label{eq:kr-prefactors}
+e^{m\Omega(z)}\le\E|\det(z\,\mathrm{Id}_m-G_m)|\le C\,e^{m\Omega(z)},\qquad \E|\det(z\,\mathrm{Id}_m-G_m)|^r\le C_r\,e^{rm\Omega(z)}\quad(r\ge1).
+\end{equation}
+The same bound as the second holds for $\E e^{rY_z}$, where $Y_z=\sum_j\log\max\{|z-\lambda_j(G_m)|,d_0/2\}$. The constants depend only on $d_0$, $Z_+$, and $r$.
+\end{proposition}
+
+\begin{proof}
+The proof has four steps: we compute the signed expectation $P_m(z)=\E\det(z\,\mathrm{Id}_m-G_m)$, locate its roots, compare it with $e^{m\Omega(z)}$ through a Riccati equation, and finally pass to absolute moments by concentration.
+
+\paragraph{The expected characteristic polynomial.}
+We expand the determinant as a sum over permutations $\sigma$ of $\{1,\dots,m\}$. The term of $\sigma$ is $\operatorname{sgn}(\sigma)\prod_i(z\delta_{i\sigma(i)}-(G_m)_{i\sigma(i)})$. A diagonal entry occurs at most once in each term, is centered, and is independent of the other factors, and it contributes only through $z$. An off-diagonal entry $(G_m)_{ab}$ occurs at most twice, and exactly twice when $\sigma$ exchanges $a$ and $b$. If $\sigma$ has a cycle of length at least three, then some off-diagonal entry occurs exactly once and the term has mean zero. Only involutions contribute. An involution with $j$ transpositions has sign $(-1)^j$, each transposition contributes $\E(G_m)_{ab}^2=1/m$, and there are $m!/(2^jj!(m-2j)!)$ such involutions. We conclude that
+\begin{equation}\label{eq:kr-hermite}
+P_m(z)=\sum_{j=0}^{\lfloor m/2\rfloor}\frac{(-1)^jm!}{2^jj!(m-2j)!\,m^j}\,z^{m-2j}=m^{-m/2}\operatorname{He}_m(\sqrt m\,z),
+\end{equation}
+where $\operatorname{He}_m$ is the monic probabilists' Hermite polynomial.
+
+\paragraph{Location of the roots.}
+The recurrence $\operatorname{He}_{j+1}(x)=x\operatorname{He}_j(x)-j\operatorname{He}_{j-1}(x)$ coincides with the recurrence obtained by expanding the characteristic polynomial of the tridiagonal matrix with zero diagonal and off-diagonal entries $\sqrt1,\dots,\sqrt{m-1}$ along its last row. It follows that the roots $\lambda_1,\dots,\lambda_m$ of $P_m$ are the eigenvalues of the tridiagonal matrix $J_m$ with zero diagonal and off-diagonal entries $\sqrt{j/m}$, $1\le j\le m-1$. Each absolute row sum of the symmetric matrix $J_m$ is at most $2\sqrt{(m-1)/m}<2$, and by Gershgorin's theorem all roots are real and lie in $(-2,2)$. In particular $P_m(z)>0$ for $z\ge2$.
+
+\paragraph{Comparison with the semicircle law.}
+The Hermite equation $\operatorname{He}_m''-x\operatorname{He}_m'+m\operatorname{He}_m=0$ and \eqref{eq:kr-hermite} imply that $P_m''-mzP_m'+m^2P_m=0$. For $z>2$, set $g_m=P_m'/(mP_m)=m^{-1}\sum_j(z-\lambda_j)^{-1}$. Dividing the differential equation by $m^2P_m$, we find
+\begin{equation}\label{eq:kr-riccati}
+\frac{g_m'}m+g_m^2-zg_m+1=0,\qquad g_m'=-\frac1m\sum_j(z-\lambda_j)^{-2}<0.
+\end{equation}
+The roots of the quadratic $q(y)=y^2-zy+1$ are $g_{\rm sc}(z)$ and $g_+(z)=(z+\sqrt{z^2-4})/2$, and \eqref{eq:kr-riccati} implies that $q(g_m)=-g_m'/m>0$, that is, $g_m(z)$ lies outside $[g_{\rm sc}(z),g_+(z)]$ for every $z>2$. The sets where $g_m<g_{\rm sc}$ and where $g_m>g_+$ are open, disjoint, and cover the connected set $(2,\infty)$. Since $g_m(z)\to0$ and $g_+(z)\to\infty$ as $z\to\infty$, the first set is all of $(2,\infty)$. Using $q(g_m)=(g_{\rm sc}-g_m)(g_+-g_m)$, $g_+-g_m\ge g_+-g_{\rm sc}=\sqrt{z^2-4}$, and $z-\lambda_j>z-2$, we obtain
+\[
+0\le g_{\rm sc}(z)-g_m(z)=\frac{q(g_m)}{g_+-g_m}\le\frac1{m(z-2)^2\sqrt{z^2-4}}.
+\]
+Since $(\log P_m)'=mg_m$ and $(m\Omega)'=mg_{\rm sc}$, and since $\log P_m(z)$ and $m\Omega(z)$ both equal $m\log z+O(z^{-2})$ as $z\to\infty$ for fixed $m$, integrating from $z$ to $\infty$ yields
+\begin{equation}\label{eq:kr-hermite-bound}
+0\le\log P_m(z)-m\Omega(z)\le\int_z^\infty\frac{\dd t}{(t-2)^2\sqrt{t^2-4}}\le C_{d_0}\qquad(z\ge2+d_0).
+\end{equation}
+
+\paragraph{Absolute moments.}
+Let $\mathcal E_m=\{\norm{G_m}_{\rm op}\le2+d_0/2\}$. By \cref{lem:kr-gaussian}(2) with $N=n=m$ and $b=1$, we have $\Pp(\mathcal E_m^c)\le2e^{-md_0^2/16}$. On $\mathcal E_m$, the signed determinant is positive and equals $e^{Y_z}$, and its absolute value is at most $e^{Y_z}$ everywhere. As in the proof of \cref{prop:kr-determinant}, $Y_z$ is a Lipschitz function of the Gaussian coordinates with constant at most $2\sqrt2/d_0$. Using the Cauchy--Schwarz inequality in the numerator and Jensen's inequality in the denominator, we find
+\[
+\frac{\E[e^{Y_z}\ind_{\mathcal E_m^c}]}{\E e^{Y_z}}\le\exp(8/d_0^2)\Pp(\mathcal E_m^c)^{1/2}.
+\]
+We have $P_m\ge\E e^{Y_z}-2\E[e^{Y_z}\ind_{\mathcal E_m^c}]$, and therefore $\E e^{Y_z}\le2P_m(z)$ once $m\ge m_0(d_0)$. Then \eqref{eq:kr-mgf} gives $\E e^{rY_z}\le e^{4r^2/d_0^2}(\E e^{Y_z})^r$. Combining these bounds with \eqref{eq:kr-hermite-bound} and $|\det|\le e^{Y_z}$ proves the upper bounds in \eqref{eq:kr-prefactors} for $m\ge m_0$, and the lower bound follows from $\E|\det(z\,\mathrm{Id}_m-G_m)|\ge P_m(z)\ge e^{m\Omega(z)}$. For the finitely many $m<m_0$, the moments are continuous in $z$ on the compact interval $[2+d_0,Z_+]$ and $e^{m\Omega(z)}\ge d_0^m$, and they are absorbed in the constants.
+\end{proof}
+
+\begin{corollary}[Fixed changes of dimension]\label{cor:kr-dimension}
+Let $b,g>0$, $k_+<\infty$, and $2\sqrt b+g\le k\le k_+$. Let $m=N-j$, where $j$ ranges over a fixed finite set of nonnegative integers and $m\ge1$. Set $b_m=bm/N$ and
+\[
+\Lambda_{m,N}(k)=m\Big(\frac12\log b_m+\Omega\big(k/\sqrt{b_m}\big)\Big).
+\]
+Then the first and every fixed higher moment of $|\det(k\,\mathrm{Id}_m-\sqrt{b_m}\,G_m)|$ satisfy \eqref{eq:kr-prefactors} with $e^{m\Omega}$ replaced by $e^{\Lambda_{m,N}(k)}$. For two such dimensions, the difference of the two values of $\Lambda_{m,N}(k)$ is bounded uniformly in $N$ and $k$. In particular, the corresponding expected determinants are comparable up to constants independent of $N$ and $k$.
+\end{corollary}
+
+\begin{proof}
+We have $|\det(k\,\mathrm{Id}_m-\sqrt{b_m}G_m)|=b_m^{m/2}|\det(z\,\mathrm{Id}_m-G_m)|$ with $z=k/\sqrt{b_m}\ge2+g/\sqrt b$. For large $N$ the shifts $z$ lie in a fixed compact interval, and \cref{prop:kr-prefactors} applies. The finitely many remaining dimensions have $b_m>0$ and are absorbed in the constants. For the comparison, consider $F(t)=t\big(\log(bt/N)/2+\Omega(z_t)\big)$ with $z_t=k\sqrt{N/(bt)}$, for real $t$ between the two dimensions. Since $\Omega'=g_{\rm sc}$ and $\dd z_t/\dd t=-z_t/(2t)$,
+\[
+F'(t)=\frac12\log\frac{bt}N+\Omega(z_t)+\frac12\big(1-z_tg_{\rm sc}(z_t)\big),
+\]
+which is bounded uniformly for $t=N-O(1)$ and $z_t$ in the compact interval. The mean value theorem completes the proof.
+\end{proof}
+
+The next lemma bounds determinants of matrices obtained by adding a border of fixed size to a matrix of the form $k\,\mathrm{Id}-W$. It is used in \cref{sec:mixpair}, where the Hessian at one of two nearby points is compared with a bulk minor.
+
+\begin{lemma}[Bordered determinants]\label{lem:kr-border}
+Let $b,g>0$, $k_+<\infty$, and $2\sqrt b+g\le k\le k_+$. Let $1\le m\le N$, let $W$ have the law of $\sqrt{bm/N}\,G_m$, and set $T=k\,\mathrm{Id}_m-W$. Let $j\ge1$ be a fixed integer, and let $U$ be a random $m\times j$ matrix and $C_\partial$ a random symmetric $j\times j$ matrix on the same probability space; no independence from $W$ is assumed. Set
+\[
+M=\begin{pmatrix}T&U\\U^{\mathsf T}&C_\partial\end{pmatrix},\qquad \mu_T=\E|\det T|,\qquad Y_T=\sum_{i=1}^m\log\max\big\{|k-\lambda_i(W)|,\,g/2\big\}.
+\]
+\begin{enumerate}
+\item There exists $C_j$ depending only on $j$, with $C_1=1$, such that surely
+\begin{equation}\label{eq:kr-cofactor}
+|\det M|\le C_j\,e^{Y_T}\Big(\norm{C_\partial}_{\rm op}+\frac2g\norm U_F^2\Big)^j.
+\end{equation}
+\item Suppose that $\E(\norm{C_\partial}_{\rm op}+\norm U_F^2)^q\le L_q$ for every $q\ge1$. Then for every $r\ge1$,
+\begin{equation}\label{eq:kr-border-upper}
+\E|\det M|^r\le C_r\,\mu_T^r,
+\end{equation}
+where $C_r$ depends only on $b,g,k_+,j,r$ and $L_{2jr}$.
+\item Suppose in addition that there exist $s_0>0$ and an event $\mathcal G$ such that on $\mathcal G$ the matrix $T$ is invertible and $|\det(C_\partial-U^{\mathsf T}T^{-1}U)|\ge s_0$, and that $\mathsf K_2^{1/2}\Pp(\mathcal G^c)^{1/2}\le1/2$, where $\mathsf K_2=\mathsf K_2(b,g,k_+)$. Then $\E|\det M|\ge s_0\mu_T/2$, and for every $r\ge1$,
+\begin{equation}\label{eq:kr-border-normalized}
+\E\Big(\frac{|\det M|}{\E|\det M|}\Big)^r\le\frac{2^rC_r}{s_0^r}.
+\end{equation}
+\item If instead $M=k\,\mathrm{Id}_{m+j}-C-W'$, where $m+j\le N$, $C$ is deterministic with $\norm C_{\rm op}\le g/4$, and $W'$ is a centered Gaussian matrix with $\Var\Tr(W'A)\le(2b/N)\Tr(A^2)$ for every symmetric $A$, then the normalized moments of $|\det M|$ are bounded by \cref{prop:kr-determinant} in dimension $m+j$, with no Schur complement hypothesis.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For (1), conjugate $M$ by $\mathrm{diag}(O,\mathrm{Id}_j)$, where $O$ is orthogonal and $O^{\mathsf T}TO=\mathrm{diag}(t_1,\dots,t_m)$. This replaces $U$ by $O^{\mathsf T}U$ and does not change $\det M$, $\norm U_F$, or $Y_T$. The determinant is affine in each $t_i$, and expanding in the $t_i$ gives
+\[
+\det M=\sum_{I\subset\{1,\dots,m\}}\Big(\prod_{i\notin I}t_i\Big)\det\begin{pmatrix}0_{|I|}&U_I\\U_I^{\mathsf T}&C_\partial\end{pmatrix},
+\]
+where $U_I$ consists of the rows of $U$ with indices in $I$. If $|I|>j$, the last matrix has rank at most $2j<|I|+j$ and its determinant vanishes. For $|I|\le j$, Laplace expansion along the first $|I|$ rows and then along the first $|I|$ columns writes this determinant as a signed sum, over pairs of sets $J,J'\subset\{1,\dots,j\}$ of size $|I|$, of $\det U_{I,J}\det U_{I,J'}$ times a minor of $C_\partial$ of order $j-|I|$. Each such minor has absolute value at most $\norm{C_\partial}_{\rm op}^{j-|I|}$. By the Cauchy--Schwarz inequality and the Cauchy--Binet formula,
+\[
+\sum_{|I|=\ell}|\det U_{I,J}\det U_{I,J'}|\le\Big(\sum_{|I|=\ell}\det(U_{I,J})^2\sum_{|I|=\ell}\det(U_{I,J'})^2\Big)^{1/2}\le\norm U_F^{2\ell},
+\]
+since each sum is the Gram determinant of $\ell$ columns of $U$, which is at most the product of their squared norms. Finally, $\prod_{i\notin I}|t_i|\le e^{Y_T}(g/2)^{-|I|}$. Summing over $\ell=|I|\le j$ and over $J,J'$, we find
+\[
+|\det M|\le e^{Y_T}\sum_{\ell=0}^j\binom j\ell^2\norm{C_\partial}_{\rm op}^{j-\ell}\Big(\frac2g\norm U_F^2\Big)^\ell,
+\]
+which implies \eqref{eq:kr-cofactor} with $C_j=\max_\ell\binom j\ell$. For $j=1$, the sum is $e^{Y_T}(|C_\partial|+(2/g)|U|^2)$. The bound holds also when $T$ is singular.
+
+For (2), we apply the Cauchy--Schwarz inequality to \eqref{eq:kr-cofactor}. Using \eqref{eq:kr-det-moments} with $C=0$, we find that $\E e^{2rY_T}\le\mathsf K_{2r}\mu_T^{2r}$. Here we used that $W$ satisfies the covariance hypothesis, by \eqref{eq:kr-goe-covariance}. The border factor has $2r$-th moment at most $\max\{1,2/g\}^{2jr}L_{2jr}$. This proves \eqref{eq:kr-border-upper}.
+
+For (3), the Schur complement formula implies that $|\det M|=|\det T|\,|\det(C_\partial-U^{\mathsf T}T^{-1}U)|\ge s_0|\det T|$ on $\mathcal G$. By \cref{cor:kr-bad-event} with $r=2$,
+\[
+\E|\det M|\ge s_0\E\big[|\det T|\ind_{\mathcal G}\big]\ge s_0\mu_T\big(1-\mathsf K_2^{1/2}\Pp(\mathcal G^c)^{1/2}\big)\ge\frac{s_0\mu_T}2.
+\]
+Combining this with \eqref{eq:kr-border-upper}, we obtain \eqref{eq:kr-border-normalized}. Part (4) is \cref{prop:kr-determinant} in dimension $m+j\le N$.
+\end{proof}
+
+\begin{remark}[The hypothesis in part (3) is needed]\label{rem:kr-border}
+Bounded moments of the border give upper bounds relative to $\mu_T$, but they do not bound $\E|\det M|$ from below. For example, let $j=1$, $U=0$, and $C_\partial=\ind_{\mathcal A_N}$, where $\mathcal A_N$ is independent of $W$ and $\Pp(\mathcal A_N)=e^{-N}$. All border moments are at most one, but $\E|\det M|=e^{-N}\mu_T$ and $\E|\det M|^r\ge e^{-N}\mu_T^r$, while the normalized $r$-th moment is at least $e^{(r-1)N}$. The Hessian at a single critical point has no border of this kind, and the Hessians under two-point conditioning are covered by part (4), as the next lemma shows.
+\end{remark}
+
+We turn to two points. Let $u_1,u_2\in S_N$ and $\rho=R(u_1,u_2)$ with $|\rho|<1$. For a non-pure mixture, the \emph{two-point conditioned law} with marks $(h_i,k_i)_{i=1,2}$ is defined as in \cref{def:kr-conditioned}, with $\Lambda_u$ replaced by the joint map $z\mapsto(\Lambda_{u_1}z,\Lambda_{u_2}z)$ and the target $(Nh_1,Nk_1,0,Nh_2,Nk_2,0)$, whenever the covariance of this joint vector is invertible on its target space. In the pure case the redundant radial derivatives are omitted, both zero gradients are retained, and the law is the conditional law given
+\[
+\big(H_Q(u_1),H_Q(u_2),\nabla_{S_N}H_Q(u_1),\nabla_{S_N}H_Q(u_2)\big)=(Nh_1,Nh_2,0,0),
+\]
+with $k_i=ph_i$. Only the spherical gradients enter: the radial component of the Euclidean gradient is $K_Q/\sqrt N$, which is determined by the value in the pure case.
+
+\begin{lemma}[Hessian determinants under two-point conditioning]\label{lem:kr-two-point}
+Assume that $d\ge4$. Let $g>0$ and let $\mathcal K_2\subset\R^4$ be compact, with $2\sqrt{b_Q}+g\le k_i\le k_+$ for $(h_1,k_1,h_2,k_2)\in\mathcal K_2$; in the pure case assume $k_i=ph_i$ on $\mathcal K_2$. There exists $\rho_0\in(0,1)$, depending only on $\xi$, $Q$, $g$, and $\mathcal K_2$, with the following properties for all $N\ge2$ and all $u_1,u_2\in S_N$ with $|R(u_1,u_2)|\le\rho_0$.
+\begin{enumerate}
+\item The covariance of $(\Lambda_{u_1}Z,\Lambda_{u_2}Z)$ is invertible on its target space.
+\item Under the two-point conditioned law with marks in $\mathcal K_2$, for $i=1,2$ and every $r\ge1$, the determinant $D_i=|\det\nabla^2_{S_N}H_Q(u_i)|$ satisfies $\E(D_i/\E D_i)^r\le\mathsf K_r(b_Q,g,k_+)$.
+\end{enumerate}
+The determinants $D_1$ and $D_2$ may be dependent.
+\end{lemma}
+
+\begin{proof}
+We first set up coordinates and record the covariances, then prove (1), and finally show that the conditional Hessian at $u_1$ has the form required by \cref{prop:kr-determinant}.
+
+\paragraph{Coordinates and covariances.}
+We write $\rho=R(u_1,u_2)$ and $\bar\rho=\sqrt{1-\rho^2}$. By rotation invariance we may assume $u_1=\sqrt Ne_N$ and $u_2=\sqrt N(\bar\rho e_{N-1}+\rho e_N)$. The unit vectors $\tau_1=e_{N-1}\in u_1^\perp$ and $\tau_2=\rho e_{N-1}-\bar\rho e_N\in u_2^\perp$ span the tangent directions in the plane of $u_1$ and $u_2$, and $e_1,\dots,e_{N-2}$ are tangent at both points. Let $Y_i=(H_Q(u_i),K_Q(u_i))/\sqrt N$, let $\eta_i=\tau_i\cdot\nabla H_Q(u_i)$, and call $\partial_cH_Q(u_i)$, $c\le N-2$, the common gradient components. Differentiating $\kappa(x,y)=N\xi_Q(x\cdot y/N)$ as in the proof of \cref{lem:kr-one-point}, at $x=u_1$, $y=u_2$, and using $u_1\cdot u_2=N\rho$, $u_2\cdot\tau_1=\sqrt N\bar\rho$, $u_1\cdot\tau_2=-\sqrt N\bar\rho$, and $\tau_1\cdot\tau_2=\rho$, we find
+\begin{equation}\label{eq:kr-two-point-cov}
+\begin{gathered}
+\Cov(Y_1,Y_2)=\begin{pmatrix}\xi_Q(\rho)&\rho\xi_Q'(\rho)\\\rho\xi_Q'(\rho)&\rho\xi_Q'(\rho)+\rho^2\xi_Q''(\rho)\end{pmatrix},\qquad \Cov(\eta_1,\eta_2)=\rho\xi_Q'(\rho)-\bar\rho^2\xi_Q''(\rho),\\
+\Cov(\eta_1,Y_2)=-\Cov(\eta_2,Y_1)=\bar\rho\big(\xi_Q'(\rho),\,\xi_Q'(\rho)+\rho\xi_Q''(\rho)\big),\\
+\Cov\big(\partial_cH_Q(u_1),\partial_{c'}H_Q(u_2)\big)=\xi_Q'(\rho)\delta_{cc'}.
+\end{gathered}
+\end{equation}
+For instance, $\Cov(\eta_1,K_Q(u_2))=\tau_1\cdot\nabla_x\big(Nf(t)\big)=f'(\rho)\,u_2\cdot\tau_1$ with $f(t)=t\xi_Q'(t)$. The common gradient components are uncorrelated with $Y_1,Y_2,\eta_1,\eta_2$, and the one-point covariances are those of \cref{lem:kr-one-point}.
+
+\paragraph{Invertibility.}
+By the preceding paragraph, the covariance of all the observations is block diagonal. One block is the covariance $S(\rho)$ of $(Y_1,Y_2,\eta_1,\eta_2)$, a $6\times6$ matrix (a $4\times4$ matrix in the pure case) whose entries are polynomials in $\rho$ and $\bar\rho$ that do not depend on $N$. The other blocks are $N-2$ copies of the $2\times2$ matrix with diagonal $a_Q$ and off-diagonal $\xi_Q'(\rho)$. All degrees of $\xi$ are at least $d$, so $|\xi_Q^{(j)}(\rho)|\le C|\rho|^{d-j}$ for $|\rho|\le1$ and $j\le3$. In particular $S(0)=\mathrm{diag}(\Sigma_Q,\Sigma_Q,a_Q,a_Q)$ (with $\xi(Q)$ in place of $\Sigma_Q$ in the pure case), which is positive definite by \cref{lem:kr-one-point}, and $|\xi_Q'(\rho)|\le C|\rho|^{d-1}$. Fix $\rho_1>0$ such that for $|\rho|\le\rho_1$ the smallest eigenvalue of $S(\rho)$ is at least half that of $S(0)$ and $|\xi_Q'(\rho)|\le a_Q/2$. Then all blocks are invertible, with inverses bounded independently of $N$. This proves (1) for $\rho_0\le\rho_1$.
+
+\paragraph{The conditional Hessian.}
+Consider $\nabla^2_\perp H_Q(u_1)$ in the orthonormal basis $e_1,\dots,e_{N-2},\tau_1$ of $u_1^\perp$. We describe the covariances of its entries with the observations. Those with the observations at $u_1$ vanish by \cref{lem:kr-one-point}.
+\begin{itemize}
+\item The entries $\partial_a\partial_bH_Q(u_1)$ with $a,b\le N-2$ are uncorrelated with all the observations at $u_2$, since every term of the corresponding derivative of $\kappa$ contains $(u_2)_a$, $(u_2)_b$, $(u_1)_c$, or $(\tau_2)_a$, all of which vanish.
+\item The entry $\partial_a\partial_{\tau_1}H_Q(u_1)$ with $a\le N-2$ is uncorrelated with $Y_2$ and $\eta_2$ and with all common gradient components except $\partial_aH_Q(u_2)$.
+\item The corner $v_1=\tau_1\cdot\nabla^2H_Q(u_1)\tau_1$ is uncorrelated with the common gradient components, and
+\[
+\begin{aligned}
+\Cov(v_1,Y_2)&=\frac{\bar\rho^2}{\sqrt N}\big(\xi_Q''(\rho),\,2\xi_Q''(\rho)+\rho\xi_Q'''(\rho)\big),\\
+\Cov(v_1,\eta_2)&=\frac1{\sqrt N}\big(2\rho\bar\rho\,\xi_Q''(\rho)-\bar\rho^3\xi_Q'''(\rho)\big).
+\end{aligned}
+\]
+\end{itemize}
+The conditional mean of an entry is its covariance row with the observations, multiplied by the inverse covariance of the observations and by the target vector. The target vanishes on all gradient components. Since the covariance of the observations is block diagonal and the common gradient components form separate blocks with zero target, the first two items show that the conditional mean vanishes on the common block and on the cross row. Only the corner can have a nonzero conditional mean $m_1$.
+
+To bound $m_1$, write the $6\times6$ block in terms of $Y=(Y_1,Y_2)$ and $\eta=(\eta_1,\eta_2)$ and let $c_Y=\Cov(v_1,Y)$ and $c_\eta=\Cov(v_1,\eta)$. The target is $y^*=\sqrt N(h_1,k_1,h_2,k_2)$ on $Y$ and $0$ on $\eta$, and block inversion gives
+\[
+m_1=\big(c_Y-c_\eta S_{\eta\eta}^{-1}S_{\eta Y}\big)\big(S_{YY}-S_{Y\eta}S_{\eta\eta}^{-1}S_{\eta Y}\big)^{-1}y^*.
+\]
+By the bounds on $\xi_Q^{(j)}$, we have $|c_Y|\le C|\rho|^{d-2}/\sqrt N$, $|c_\eta|\le C|\rho|^{d-3}/\sqrt N$, and $|S_{\eta Y}|\le C|\rho|^{d-1}$, and $S_{\eta\eta}^{-1}$ is bounded. Then the first factor is at most $C(|\rho|^{d-2}+|\rho|^{2d-4})/\sqrt N\le C|\rho|^{d-2}/\sqrt N$. The middle factor is the inverse of the conditional covariance of $Y$ given $\eta$, which equals the $YY$ block of $S(\rho)^{-1}$ and is bounded. Finally, we have $|y^*|\le C\sqrt N$ on $\mathcal K_2$. We conclude that $|m_1|\le C_1|\rho|^{d-2}$, with $C_1$ depending only on $\xi$, $Q$, and $\mathcal K_2$. This bound includes the extensive size of the targets, and the conditional mean need not be zero.
+
+Gaussian conditioning subtracts a positive semidefinite operator from the covariance. Then the centered part $W$ of the conditional law of $\nabla^2_\perp H_Q(u_1)$ satisfies $\Var\Tr(WA)\le(2b_Q/N)\Tr(A^2)$, by \eqref{eq:kr-goe-covariance} applied to the unconditional law. Its mean is $C=m_1\tau_1\tau_1^{\mathsf T}$, with $\norm C_{\rm op}\le C_1|\rho|^{d-2}$. We now choose $\rho_0\le\rho_1$ such that $C_1\rho_0^{d-2}\le g/4$. Since $K_Q(u_1)=Nk_1$ under the conditioned law, \eqref{eq:kr-intrinsic} implies that $-\nabla^2_{S_N}H_Q(u_1)=k_1\mathrm{Id}-C-W$ in law, and (2) for $i=1$ follows from \cref{prop:kr-determinant}. The case $i=2$ follows by exchanging the roles of $u_1$ and $u_2$, and the pure case is the same with $Y_i=H_Q(u_i)/\sqrt N$ and $k_i=ph_i$. When $N=2$, there are no common directions: the common gradient components, the blocks of the observation covariance that they form, and the common Hessian block are empty, $u_1^\perp$ is spanned by $\tau_1$, and the argument applies verbatim.
+\end{proof}
+
+\begin{remark}[Related determinant estimates]\label{rem:kr-det-lit}
+Subag \cite[Lemma~21]{Subag2017complexity} proves exponentially small determinant-weighted edge tails for a fixed number of possibly dependent matrices with GOE marginals and shifts in a compact interval outside $[-2,2]$. After rescaling and replacing $G$ by $-G$, this is the kind of estimate that \cref{cor:kr-bad-event} provides. In \cite[Lemma~38, (12.25)]{Subag2017geometry}, he records the normalized second moment of the determinant at a critical point in windows of sublinear width in the pure model. The proofs above use the clipped logarithmic determinant and concentration approach of \cite[proof of Lemma~21, (8.13)--(8.18)]{Subag2017complexity}. \Cref{prop:kr-determinant,prop:kr-prefactors} give all fixed moments directly, including the covariance-dominated Gaussian matrices and deterministic perturbations in \cref{prop:kr-determinant}. The two-point block structure in the proof of \cref{lem:kr-two-point} agrees with \cite[Lemma~15]{BenArousSubagZeitouni2020}.
+\end{remark}
+
+\section{The Kac--Rice formula with field-dependent weights}\label{sec:kr-formula}
+
+We prove the Kac--Rice formula in the coefficient space of the field. The first ingredient is the equal-dimensional area formula \cite{Federer1969}, together with the corresponding elementary case of Sard's theorem \cite{Sard1942}; we include the short proof.
+
+\begin{lemma}[Equal-dimensional area formula]\label{lem:kr-area}
+Let $V\subset\R^n$ be open and let $\alpha\colon V\to\R^n$ be $C^1$. Then the image under $\alpha$ of $\{t\in V:\det D\alpha(t)=0\}$ has Lebesgue measure zero, and for every Borel function $w\ge0$ on $V$,
+\begin{equation}\label{eq:kr-area}
+\int_{\R^n}\sum_{t\in V:\,\alpha(t)=y}w(t)\dd y=\int_Vw(t)\,|\det D\alpha(t)|\dd t.
+\end{equation}
+The sum may be defined arbitrarily for $y$ in the image of the critical set.
+\end{lemma}
+
+\begin{proof}
+Let $K\subset V$ be compact, let $\epsilon>0$, and let $L$ bound $\norm{D\alpha}$ on a compact neighborhood of $K$. By uniform continuity of $D\alpha$, there exists $\delta_0>0$ such that for every cube $\mathsf Q$ of side $\delta\le\delta_0$ that meets $K$ and contains a critical point $t_0$, we have $|\alpha(t)-\alpha(t_0)-D\alpha(t_0)(t-t_0)|\le\epsilon\sqrt n\,\delta$ for $t\in\mathsf Q$. The image of $\mathsf Q$ under the affine map $t\mapsto\alpha(t_0)+D\alpha(t_0)(t-t_0)$ lies in an affine subspace of dimension at most $n-1$, within a ball of radius $L\sqrt n\,\delta$. Then $\alpha(\mathsf Q)$ lies in a box with $n-1$ sides of length at most $C_n(L+1)\delta$ and one side of length at most $C_n\epsilon\delta$, whose volume is at most $C_n(L+1)^{n-1}\epsilon\delta^n$. A grid of cubes of side $\delta$ covering $K$ has at most $C_K\delta^{-n}$ cubes meeting $K$. We conclude that the image of the critical points in $K$ has outer measure at most $C_{K,n}(L+1)^{n-1}\epsilon$. Letting $\epsilon\to0$ and exhausting $V$ by compact sets proves the first assertion.
+
+Every regular point has an open neighborhood on which $\alpha$ is a $C^1$ diffeomorphism onto an open set. The regular set is covered by countably many such neighborhoods $V_i$, and the sets $P_i=V_i\setminus\bigcup_{i'<i}V_{i'}$ form a Borel partition of it. For each $i$, by the change of variables formula for nonnegative Borel functions, we have $\int\ind_{\alpha(P_i)}(y)\,w((\alpha|_{V_i})^{-1}(y))\dd y=\int_{P_i}w(t)|\det D\alpha(t)|\dd t$. Summing over $i$ with Tonelli's theorem proves \eqref{eq:kr-area}: the critical set contributes zero to the right side and only a null set of values $y$ to the left side.
+\end{proof}
+
+Next we state the Kac--Rice formula for a general Gaussian field that depends linearly on finitely many coefficients. Let $\mathsf M$ be a compact smooth Riemannian manifold of dimension $n$ without boundary, let $\phi_1,\dots,\phi_\ell$ be smooth functions on $\mathsf M$, and set $f_z=\sum_iz_i\phi_i$ for $z\in\R^\ell$. Let $Z$ be a standard Gaussian vector in $\R^\ell$. For $u\in\mathsf M$, let $\Gamma_u\colon\R^\ell\to T_u\mathsf M$ be the linear map $z\mapsto\nabla f_z(u)$. If $\Gamma_u\Gamma_u^{*}$ is positive definite, we write $Z^u_0=(\mathrm{Id}-\Gamma_u^{*}(\Gamma_u\Gamma_u^{*})^{-1}\Gamma_u)Z$, which is a standard Gaussian vector in the subspace $\ker\Gamma_u=\{z:\nabla f_z(u)=0\}$, and $p_u(0)=(2\pi)^{-n/2}\det(\Gamma_u\Gamma_u^{*})^{-1/2}$, which is the density of $\nabla f_Z(u)$ at $0$ in any orthonormal basis of $T_u\mathsf M$. As in \cref{lem:kr-conditioned}(1), the law of $Z^u_0$ is a version of the conditional law of $Z$ given $\nabla f_Z(u)=0$.
+
+\begin{proposition}[Kac--Rice formula in coefficient space]\label{prop:kr-coefficient}
+Assume that $\Gamma_u\Gamma_u^{*}$ is positive definite for every $u\in\mathsf M$. Then the set of $z$ for which $f_z$ has a degenerate critical point is closed and Lebesgue null. In particular, almost surely $f_Z$ is a Morse function and has finitely many critical points. For every Borel function $\varphi\ge0$ on $\R^\ell\times\mathsf M$, the function $z\mapsto\sum_{u:\nabla f_z(u)=0}\varphi(z,u)$ is Borel on the set of Morse coefficients, and
+\begin{equation}\label{eq:kr-general}
+\E\sum_{u:\,\nabla f_Z(u)=0}\varphi(Z,u)=\int_{\mathsf M}p_u(0)\,\E\Big[\big|\det\nabla^2f_{Z^u_0}(u)\big|\,\varphi(Z^u_0,u)\Big]\mathrm{vol}(\dd u).
+\end{equation}
+The same identity holds for a Borel function $\varphi$ of either sign whenever $\E\sum_{u:\nabla f_Z(u)=0}|\varphi(Z,u)|<\infty$; by \eqref{eq:kr-general} applied to $|\varphi|$, this is equivalent to the finiteness of the right side of \eqref{eq:kr-general} with $|\varphi|$ in place of $\varphi$.
+\end{proposition}
+
+\begin{proof}
+The proof works in local coordinates on $\mathsf M$. We split the coefficients so that the zeros of the gradient become the graph of a function of the remaining coefficients. The area formula then gives the identity in each chart, and a change of variables identifies the result with \eqref{eq:kr-general}.
+
+\paragraph{Local coordinates.}
+Let $t\in V\subset\R^n$ be local coordinates on an open subset of $\mathsf M$, and let $\gamma(z,t)=(\partial_{t_1}f_z,\dots,\partial_{t_n}f_z)(t)=\Gamma(t)z$ be the coordinate gradient, where $\Gamma(t)$ is an $n\times\ell$ matrix of rank $n$ depending smoothly on $t$. Near each point of $V$ we may choose $n$ coefficient indices such that the corresponding $n\times n$ submatrix $\Gamma_1(t)$ of $\Gamma(t)$ is invertible, and by shrinking $V$ we may assume that it is invertible on $V$. After permuting coordinates, we write $z=(z',z'')\in\R^n\times\R^{\ell-n}$ and $\Gamma(t)=(\Gamma_1(t),\Gamma_2(t))$, so that
+\[
+\gamma(z,t)=0\quad\Longleftrightarrow\quad z'=\alpha_{z''}(t),\qquad \alpha_{z''}(t)=-\Gamma_1(t)^{-1}\Gamma_2(t)z''.
+\]
+Differentiating $\Gamma_1(t)\alpha_{z''}(t)+\Gamma_2(t)z''=0$ in $t$ gives
+\begin{equation}\label{eq:kr-incidence-jacobian}
+D\alpha_{z''}(t)=-\Gamma_1(t)^{-1}D_t\gamma\big((\alpha_{z''}(t),z''),t\big).
+\end{equation}
+At a zero of the gradient, $D_t\gamma$ is the coordinate Hessian. By \eqref{eq:kr-incidence-jacobian}, $\det D\alpha_{z''}(t)=0$ exactly when the critical point $t$ of $f_{(\alpha_{z''}(t),z'')}$ is degenerate. By compactness, $\mathsf M$ is covered by finitely many such charts $V_1,\dots,V_J$.
+
+\paragraph{Nondegeneracy.}
+The set of pairs $(z,u)$ with $\nabla f_z(u)=0$ and $\det\nabla^2f_z(u)=0$ is closed in $\R^\ell\times\mathsf M$, because the Hessian operator depends continuously on $(z,u)$. Its projection to $\R^\ell$ is closed, since $\mathsf M$ is compact. This is the set $\mathcal D$ of coefficients with a degenerate critical point. For a chart $V_i$ and fixed $z''$, a coefficient $(z',z'')$ has a degenerate critical point in $V_i$ exactly when $z'$ is a critical value of $\alpha_{z''}$, which happens only for a null set of $z'$ by \cref{lem:kr-area}. Fubini's theorem then implies that $\mathcal D$ is Lebesgue null. The law of $Z$ is absolutely continuous, so $f_Z$ is almost surely a Morse function. Its critical points are then isolated, and since they form a closed subset of the compact manifold $\mathsf M$, there are finitely many of them.
+
+\paragraph{Measurability of the sum.}
+At a pair $(z_0,u_0)$ with $\nabla f_{z_0}(u_0)=0$ and $\det\nabla^2f_{z_0}(u_0)\ne0$, the implicit function theorem provides an open set $O\ni z_0$ and a continuous map $u(\cdot)$ on $O$ such that near $(z_0,u_0)$ the critical pairs are exactly the points of the graph $\{(z,u(z)):z\in O\}$. Countably many such graphs $\mathsf G_i=\{(z,u_i(z)):z\in O_i\}$ cover the set of nondegenerate critical pairs. Let $\mathsf P_i=\mathsf G_i\setminus\bigcup_{i'<i}\mathsf G_{i'}$. Since the projection to $z$ is a homeomorphism from $\mathsf G_i$ onto $O_i$, the set $\pi(\mathsf P_i)$ is Borel, and
+\[
+\sum_{u:\nabla f_z(u)=0}\varphi(z,u)=\sum_i\ind_{\pi(\mathsf P_i)}(z)\,\varphi\big(z,u_i(z)\big)\qquad(z\notin\mathcal D)
+\]
+is Borel. The same enumeration shows that events defined in terms of the critical points, such as unions over critical points of Borel events, are Borel.
+
+\paragraph{The identity in a chart.}
+Let $(\chi_i)$ be a smooth partition of unity subordinate to $(V_i)$, fix $i$, and write $V=V_i$, $\chi=\chi_i$. Let $\phi_\ell$ denote the standard Gaussian density on $\R^\ell$. For fixed $z''$, apply \cref{lem:kr-area} to $\alpha_{z''}$ with the weight $w(t)=\phi_\ell(\alpha_{z''}(t),z'')\chi(t)\varphi((\alpha_{z''}(t),z''),t)$. Using \eqref{eq:kr-incidence-jacobian}, integrating over $z''$, and using Tonelli's theorem, we obtain
+\begin{multline}\label{eq:kr-local-incidence}
+\E\sum_{t\in V:\gamma(Z,t)=0}\chi(t)\varphi(Z,t)\\
+=\int_V\int_{\R^{\ell-n}}\frac{\phi_\ell(\alpha_{z''}(t),z'')}{|\det\Gamma_1(t)|}\big|\det D_t\gamma(\bar z,t)\big|\,\chi(t)\varphi(\bar z,t)\dd z''\dd t,\qquad \bar z=(\alpha_{z''}(t),z'').
+\end{multline}
+When $\ell=n$, the inner integral is absent.
+
+\paragraph{Identification of the conditional law.}
+Fix $t\in V$. Since the map $(z',z'')\mapsto(\Gamma(t)z,z'')$ is linear with Jacobian $|\det\Gamma_1(t)|$, the density of $\gamma(Z,t)$ at $0$ is $p^{\rm co}_t(0)=\int\phi_\ell(\alpha_{z''}(t),z'')\dd z''/|\det\Gamma_1(t)|$. The map $z''\mapsto(\alpha_{z''}(t),z'')$ is a linear bijection onto $\ker\Gamma(t)$, and it carries Lebesgue measure to a constant multiple of Lebesgue measure on $\ker\Gamma(t)$. Further, $\phi_\ell$ restricted to $\ker\Gamma(t)$ is proportional to the standard Gaussian density of that subspace. We conclude that, for every Borel $\psi\ge0$,
+\[
+\int\frac{\phi_\ell(\alpha_{z''}(t),z'')}{|\det\Gamma_1(t)|}\,\psi(\alpha_{z''}(t),z'')\dd z''=p^{\rm co}_t(0)\,\E\psi(Z^u_0),
+\]
+where $u$ is the point with coordinates $t$. The constant is identified by taking $\psi=1$. Here we used that $\ker\Gamma(t)=\ker\Gamma_u$, since the coordinate gradient and the gradient determine each other. This identification holds at the single value $0$ of the gradient, for every Borel integrand.
+
+\paragraph{From coordinates to orthonormal frames.}
+Let $E(t)$ be the matrix expressing the coordinate vectors $\partial_{t_i}$ in an orthonormal frame of $T_u\mathsf M$, so that the metric is $G(t)=E(t)^{\mathsf T}E(t)$ and $\gamma(z,t)$ is $E(t)^{\mathsf T}$ applied to the frame components of $\nabla f_z(u)$. Then $p^{\rm co}_t(0)=p_u(0)/\sqrt{\det G(t)}$. At a critical point the Christoffel terms vanish, and $D_t\gamma=E^{\mathsf T}\nabla^2f_z(u)E$ and $|\det D_t\gamma|=\det G(t)\,|\det\nabla^2f_z(u)|$. Inserting these facts into \eqref{eq:kr-local-incidence}, the integrand becomes $p_u(0)\,\E[|\det\nabla^2f_{Z^u_0}(u)|\chi(u)\varphi(Z^u_0,u)]\sqrt{\det G(t)}$, and $\sqrt{\det G(t)}\dd t$ is the Riemannian volume. Summing over the charts proves \eqref{eq:kr-general}. For $\varphi$ of either sign with $\E\sum|\varphi(Z,u)|<\infty$, we apply \eqref{eq:kr-general} to the positive and negative parts of $\varphi$. Both resulting identities are between finite quantities, and we subtract them. Integrability of the signed sum alone would not suffice, since cancellations between the critical points can make the signed sum integrable while the right side of \eqref{eq:kr-general} is undefined.
+\end{proof}
+
+We now specialize to the center field on $S_N$.
+
+\begin{theorem}[Kac--Rice formula with field-dependent weights]\label{thm:kr-marked}
+Let $\mathcal K\subset\R^2$ be a Borel set and let $\varphi$ be a field-dependent weight that is either nonnegative or bounded. Almost surely, $H_Q$ restricted to $S_N$ is a Morse function and has finitely many critical points. If $\xi$ is a non-pure mixture, then
+\begin{equation}\label{eq:kr-marked-mixed}
+\begin{aligned}
+&\E\sum_{\substack{u\in S_N:\ \nabla_{S_N}H_Q(u)=0\\ (H_Q(u),K_Q(u))/N\in\mathcal K}}\varphi(H_N,u)\\
+&\qquad=\frac{|S_N|}{(2\pi a_Q)^{n/2}}\int_{S_N}\int_{\mathcal K}p_N(h,k)\,\E_{h,k,u}\Big[\big|\det\nabla^2_{S_N}H_Q(u)\big|\,\varphi(H_N,u)\Big]\dd h\dd k\,\nu_N(\dd u),
+\end{aligned}
+\end{equation}
+with $p_N$ as in \eqref{eq:kr-disintegration}. If $\xi$ is pure of degree $p$, let $\mathcal K_p=\{h\in\R:(h,ph)\in\mathcal K\}$; then
+\begin{equation}\label{eq:kr-marked-pure}
+\begin{aligned}
+&\E\sum_{\substack{u\in S_N:\ \nabla_{S_N}H_Q(u)=0\\ H_Q(u)/N\in\mathcal K_p}}\varphi(H_N,u)\\
+&\qquad=\frac{|S_N|}{(2\pi a_Q)^{n/2}}\int_{S_N}\int_{\mathcal K_p}p^{\rm pure}_N(h)\,\E_{h,u}\Big[\big|\det\nabla^2_{S_N}H_Q(u)\big|\,\varphi(H_N,u)\Big]\dd h\,\nu_N(\dd u).
+\end{aligned}
+\end{equation}
+For nonnegative $\varphi$ both sides may be infinite; for bounded $\varphi$ both sides are finite. In the pure case there is no two-dimensional density, since $\Sigma_Q$ is singular.
+\end{theorem}
+
+\begin{proof}
+We apply \cref{prop:kr-coefficient} with $\mathsf M=S_N$, $\ell=\ell_N$, and $f_z$ the restriction of $H_{z,Q}$ to $S_N$, which is linear in $z$. By \cref{lem:kr-one-point}, the covariance of $\nabla_{S_N}H_Q(u)$ is $a_Q\,\mathrm{Id}_{u^\perp}$, which is positive definite, and $p_u(0)=(2\pi a_Q)^{-n/2}$. The vector $Z^u_0$ of \cref{prop:kr-coefficient} is the vector of \cref{def:kr-conditioned}, and the conditional expectation in \eqref{eq:kr-general} is $\E^\nabla_u$. The Riemannian volume of $S_N$ is $|S_N|\,\nu_N$.
+
+Let $\varphi\ge0$, and apply \eqref{eq:kr-general} to the Borel function
+\[
+(z,u)\mapsto\varphi(H_z,u)\,\ind\big\{(H_{z,Q}(u),K_{z,Q}(u))/N\in\mathcal K\big\}.
+\]
+By \cref{lem:kr-conditioned}(4) and (2), the inner expectation equals
+\[
+\int_{\R^2}p_N(h,k)\,\E_{h,k,u}\Big[\big|\det\nabla^2_{S_N}H_Q(u)\big|\,\varphi(H_N,u)\Big]\ind_{\mathcal K}(h,k)\dd h\dd k,
+\]
+since $(H_Q(u),K_Q(u))=(Nh,Nk)$ surely under $\Pp_{h,k,u}$. This proves \eqref{eq:kr-marked-mixed}. The joint measurability needed for the integral is \cref{lem:kr-conditioned}(3). No continuity of $\varphi$ is used, because the incidence argument of \cref{prop:kr-coefficient} applies to every Borel integrand. In the pure case, $K_Q=pH_Q$ and $(H_Q(u),K_Q(u))/N\in\mathcal K$ exactly when $H_Q(u)/N\in\mathcal K_p$. Then \eqref{eq:kr-marked-pure} follows from the pure part of \cref{lem:kr-conditioned}(4).
+
+For bounded $\varphi$, take $\varphi=1$ and $\mathcal K=\R^2$. By \cref{lem:kr-conditioned}(2), the right side of \eqref{eq:kr-marked-mixed} becomes $|S_N|(2\pi a_Q)^{-n/2}\int p_N(h,k)\mu_{n,N}(k)\dd h\dd k$. This is finite, as $\mu_{n,N}(k)\le\E(\norm{W_{n,N}}_{\rm op}+|k|)^n\le C_N(1+|k|)^n$. This shows that the expected number of critical points is finite. For bounded $\varphi$, the hypothesis of the last assertion of \cref{prop:kr-coefficient} then holds, and the formula follows from the positive and negative parts of $\varphi$. The pure case is identical.
+\end{proof}
+
+\begin{corollary}[Expected numbers of critical points]\label{cor:kr-count}
+Let $I,U\subset\R$ be Borel sets and set
+\[
+\cC_N(I,U)=\big\{u\in S_N:\nabla_{S_N}H_Q(u)=0,\ H_Q(u)/N\in I,\ K_Q(u)/N\in U\big\}.
+\]
+If $\xi$ is a non-pure mixture, then
+\begin{equation}\label{eq:kr-count-mixed}
+\E|\cC_N(I,U)|=\frac{|S_N|}{(2\pi a_Q)^{n/2}}\,\frac N{2\pi\sqrt{\det\Sigma_Q}}\int_I\int_Ue^{-\frac N2(h,k)\Sigma_Q^{-1}(h,k)^{\mathsf T}}\mu_{n,N}(k)\dd k\dd h.
+\end{equation}
+If $\xi$ is pure of degree $p$, then
+\begin{equation}\label{eq:kr-count-pure}
+\E|\cC_N(I,U)|=\frac{|S_N|}{(2\pi a_Q)^{n/2}}\Big(\frac N{2\pi\xi(Q)}\Big)^{1/2}\int_I\ind\{ph\in U\}\,e^{-Nh^2/(2\xi(Q))}\mu_{n,N}(ph)\dd h.
+\end{equation}
+Both quantities are finite. With $I=[(m_N-M)/N,(m_N+M)/N]$, these formulas give the expected size of the set $\cC_{N,M}$ of critical points in a fixed window.
+\end{corollary}
+
+\begin{proof}
+We take $\varphi=1$ and $\mathcal K=I\times U$ in \cref{thm:kr-marked}. By \cref{lem:kr-conditioned}(2), the conditioned expectation of the determinant is $\mu_{n,N}(k)$, which depends neither on $u$ nor on $h$, and the integral over $\nu_N$ equals one. Finiteness was shown in the proof of \cref{thm:kr-marked}.
+\end{proof}
+
+No asymptotic estimate of these integrals is part of the statement. The counts in fixed windows are estimated in \cref{sec:purecover,sec:mixone,sec:mixpair}. We record two reformulations that are used there.
+
+\begin{remark}[Palm form]\label{rem:kr-palm}
+For a non-pure mixture, let
+\[
+\Lambda_N(\dd u\,\dd h\,\dd k)=\frac{|S_N|}{(2\pi a_Q)^{n/2}}\,p_N(h,k)\,\mu_{n,N}(k)\,\nu_N(\dd u)\dd h\dd k
+\]
+be the intensity measure of the marked critical points, so that $\Lambda_N(S_N\times I\times U)=\E|\cC_N(I,U)|$. For $u\in S_N$ and $(h,k)\in\R^2$, the \emph{Palm law} at $u$ with marks $(h,k)$ is the determinant-weighted law
+\[
+\E^{\rm Palm}_{h,k,u}[\Phi]=\frac{\E_{h,k,u}\big[|\det\nabla^2_{S_N}H_Q(u)|\,\Phi\big]}{\mu_{n,N}(k)}.
+\]
+With this notation, \eqref{eq:kr-marked-mixed} reads
+\[
+\E\sum_{\substack{u:\nabla_{S_N}H_Q(u)=0\\(H_Q(u),K_Q(u))/N\in\mathcal K}}\varphi(H_N,u)=\int_{S_N\times\mathcal K}\E^{\rm Palm}_{h,k,u}\big[\varphi(H_N,u)\big]\,\Lambda_N(\dd u\,\dd h\,\dd k).
+\]
+In the pure case, $\Lambda_N$ has density $|S_N|(2\pi a_Q)^{-n/2}p^{\rm pure}_N(h)\mu_{n,N}(ph)$ with respect to $\nu_N(\dd u)\dd h$, and the Palm law is $\E_{h,u}[|\det\nabla^2_{S_N}H_Q(u)|\,\Phi]/\mu_{n,N}(ph)$. The Palm law and the conditioned law are different laws, and an estimate under one does not transfer to the other without an argument such as \cref{lem:kr-holder}.
+\end{remark}
+
+\begin{remark}[Antipodal points and Subag's tameness condition]\label{rem:kr-quotient}
+The formulas above count points of $S_N$. In an even model, the critical points come in antipodal pairs, and for a selection invariant under $u\mapsto-u$ the number of pairs is half of \eqref{eq:kr-count-mixed} or \eqref{eq:kr-count-pure}. For a general weight one must instead specify a representative of each pair, or average the two values. A weighted sum cannot be divided by two without such a convention. For pure models of degree $p\ge3$, Subag \cite[Lemma~36]{Subag2017geometry} proves a marked Kac--Rice formula under a tameness condition on an auxiliary field.
+\Cref{thm:kr-marked} requires only Borel measurability of the weight. This matters for weights given by probabilities of trajectory events, for which the tameness hypotheses of \cite[Lemma~36]{Subag2017geometry} have not been verified.
+\end{remark}
+
+\section{Hitting probabilities as weights}\label{sec:kr-hitting}
+
+We now show that hitting probabilities of the Langevin diffusion are field-dependent weights. For $H\in\mathcal H_N$, $\beta\ge0$, and $x\in S_N$, let $\Pp^H_x$ be the law on $C([0,T],S_N)$ of the diffusion of \cref{def:pre-dynamics} started at $x$. Recall from \cref{lem:pre-dynamics} that it is the law of the solution of the It\^o equation \eqref{eq:pre-sde}, which has noise coefficient $\sqrt2$ and stays on $S_N$. We write $\Pp^H_{\nu_N}=\int\Pp^H_x\,\nu_N(\dd x)$ for the law of the diffusion started from $\nu_N$, independently of the field and of the noise.
+
+\begin{lemma}[Hitting probabilities are field-dependent weights]\label{lem:kr-hitting}
+Let $N\ge2$, $\beta\ge0$, and $T\in(0,\infty)$. For every Borel set $A\subset C([0,T],S_N)$, the map $H\mapsto\Pp^H_{\nu_N}(A)$ is Borel on $\mathcal H_N$. For every Borel set $\mathcal A\subset C([0,T],S_N)\times S_N$, the function
+\[
+\varphi_{\mathcal A}(H,u)=\Pp^H_{\nu_N}\big(\{\omega:(\omega,u)\in\mathcal A\}\big)
+\]
+is a field-dependent weight with values in $[0,1]$. In particular, for $a\in[0,1]$,
+\begin{equation}\label{eq:kr-hit-mark}
+\varphi_{T,a}(H,u)=\Pp^H_{\nu_N}\Big(\sup_{0\le t\le T}|R(X_t,u)|\ge a\Big)
+\end{equation}
+is a field-dependent weight. This applies to $T=e^{\gamma N}$ for each fixed $N$.
+\end{lemma}
+
+\begin{proof}
+By \cref{lem:red-kernels}(a), $(H,x)\mapsto\Pp^H_x$ is a Borel probability kernel from $\mathcal H_N\times S_N$ to $C([0,T],S_N)$. Its proof realizes all these laws through the same Brownian motion and shows that they depend continuously on $(H,x)$. For a bounded Borel function $F$ on $C([0,T],S_N)$, the function $(H,x)\mapsto\int F\dd\Pp^H_x$ is Borel, and Tonelli's theorem shows that $H\mapsto\int F\dd\Pp^H_{\nu_N}$ is Borel. This proves the first assertion. For a Borel set $\mathcal A$, the function $(H,u)\mapsto\int\ind_{\mathcal A}(\omega,u)\,\Pp^H_{\nu_N}(\dd\omega)$ is Borel when $\mathcal A=A\times E$ is a product of Borel sets, by the first assertion. The sets $\mathcal A$ for which it is Borel form a Dynkin system, and the $\pi$--$\lambda$ theorem extends this to all Borel sets $\mathcal A$. Finally, $(\omega,u)\mapsto\sup_{t\le T}|R(\omega(t),u)|$ is continuous for the uniform topology, since $|R(x,u)-R(x',u')|\le(|x-x'|+|u-u'|)/\sqrt N$ on $S_N$. It follows that the event in \eqref{eq:kr-hit-mark} is a Borel subset of $C([0,T],S_N)\times S_N$. No bound uniform in $T$ is needed, since $N$ and $T$ are fixed.
+\end{proof}
+
+\Cref{lem:red-unions}(b) states the special case of \cref{lem:kr-hitting} that is used in \cref{sec:reduction,sec:condproof}.
+
+\section{Determinant-weighted transfer}\label{sec:kr-transfer}
+
+The estimate of \cref{sec:entrance} bounds a hitting probability under the conditioned law $\Pp_{h,k,u}$. The Kac--Rice formula weights this law by the absolute determinant, that is, it averages under the Palm law of \cref{rem:kr-palm}. The following elementary lemma bounds the cost of this change of law.
+
+\begin{lemma}[H\"older bound for determinant-weighted expectations]\label{lem:kr-holder}
+Let $D\ge0$ be a random variable with $0<\mu=\E D<\infty$, and suppose that $\E(D/\mu)^r\le\mathsf K$ for some $r>1$. Let $\varphi$ be a random variable with $0\le\varphi\le1$ and $\E\varphi\le q$. Then
+\begin{equation}\label{eq:kr-holder}
+\frac{\E[D\varphi]}\mu\le\mathsf K^{1/r}q^{1-1/r}.
+\end{equation}
+No assumption on the dependence between $\varphi$ and $D$ is made.
+\end{lemma}
+
+\begin{proof}
+Let $r'=r/(r-1)$. By H\"older's inequality, $\E[(D/\mu)\varphi]\le(\E(D/\mu)^r)^{1/r}(\E\varphi^{r'})^{1/r'}$. Since $0\le\varphi\le1$, we have $\varphi^{r'}\le\varphi$, and the last factor is at most $q^{1/r'}=q^{1-1/r}$.
+\end{proof}
+
+For $r=2$ the loss is $\mathsf K_2^{1/2}q^{1/2}$. If an estimate is already available under the Palm law, there is no loss, and \cref{lem:kr-holder} is not needed. The lemma is not a perturbation statement: $\varphi$ may be strongly correlated with $D$, and the bound uses only the moment of $D/\mu$ and the mean of $\varphi$.
+
+\begin{theorem}[Determinant-weighted transfer]\label{thm:kr-transfer}
+Let $g>0$ and let $\mathcal K\subset\R^2$ be compact, with $k\ge2\sqrt{b_Q}+g$ for every $(h,k)\in\mathcal K$; in the pure case assume that $k=ph$ for every $(h,k)\in\mathcal K$. If $\mathcal K\ne\varnothing$, let $k_+=\max\{k:(h,k)\in\mathcal K\}$; if $\mathcal K=\varnothing$, set $k_+=2\sqrt{b_Q}+g$. For each $N$, let $\mathcal W_N\subset\mathcal K$ be a Borel set, let
+\[
+\cC_N=\big\{u\in S_N:\nabla_{S_N}H_Q(u)=0,\ (H_Q(u),K_Q(u))/N\in\mathcal W_N\big\},
+\]
+and let $\varphi_N$ be a field-dependent weight with values in $[0,1]$. Suppose that $q_N\ge0$ satisfies
+\begin{equation}\label{eq:kr-transfer-hyp}
+\E_{h,k,u}\varphi_N(H_N,u)\le q_N\qquad\text{for all }u\in S_N\text{ and }(h,k)\in\mathcal W_N.
+\end{equation}
+Then for every $r>1$ and $N\ge2$,
+\begin{equation}\label{eq:kr-transfer}
+\E\sum_{u\in\cC_N}\varphi_N(H_N,u)\le\mathsf K_r^{1/r}q_N^{1-1/r}\,\E|\cC_N|,
+\end{equation}
+where $\mathsf K_r=\mathsf K_r(b_Q,g,k_+)$ is the constant of \cref{prop:kr-determinant}. The same bound holds with $\varphi_N$ replaced by $\theta\varphi_N$, for every field-dependent weight $\theta$ with values in $[0,1]$.
+\end{theorem}
+
+\begin{proof}
+If $\mathcal K=\varnothing$, then $\mathcal W_N=\cC_N=\varnothing$, so both claims are immediate. Otherwise, fix $u\in S_N$ and $(h,k)\in\mathcal W_N$, and let $D=|\det\nabla^2_{S_N}H_Q(u)|$ under $\Pp_{h,k,u}$. Recall from \cref{lem:kr-conditioned}(2) that $\E_{h,k,u}D=\mu_{n,N}(k)$. By \cref{prop:kr-determinant}, $\E_{h,k,u}(D/\mu_{n,N}(k))^r\le\mathsf K_r$. Combining \cref{lem:kr-holder} with \eqref{eq:kr-transfer-hyp}, we obtain
+\[
+\E_{h,k,u}\big[D\,\varphi_N(H_N,u)\big]\le\mathsf K_r^{1/r}q_N^{1-1/r}\,\mu_{n,N}(k).
+\]
+We insert this bound into \eqref{eq:kr-marked-mixed} with $\mathcal K$ replaced by $\mathcal W_N$ (or into \eqref{eq:kr-marked-pure} in the pure case). The remaining integral is the right side of \eqref{eq:kr-marked-mixed} with $\varphi=1$, which equals $\E|\cC_N|$ by \cref{thm:kr-marked} with $\varphi=1$. This proves \eqref{eq:kr-transfer}. For the last assertion, $D\theta\varphi_N\le D\varphi_N$ pointwise, and the same integral bounds the left side. Note that the normalizer on the right side of \eqref{eq:kr-transfer} remains the expected number of all critical points in $\cC_N$, and no lower bound on the Palm law weighted by $\theta$ is needed.
+\end{proof}
+
+We now apply \cref{thm:kr-transfer} to hitting probabilities and to the critical points in a fixed window. For a deterministic sequence $(m_N)$, a Borel set $U\subset\R$, and $M>0$, let
+\begin{equation}\label{eq:kr-window}
+\cC_{N,M}=\big\{u\in S_N:\nabla_{S_N}H_Q(u)=0,\ |H_Q(u)-m_N|\le M,\ K_Q(u)/N\in U\big\}.
+\end{equation}
+We call this set the critical points in a \emph{fixed window}, since its half-width $M$ does not depend on $N$. The marks of its points lie in $\mathcal W_{N,M}=[(m_N-M)/N,(m_N+M)/N]\times U$, intersected with the line $\{k=ph\}$ in the pure case. In an even model, both points of each antipodal pair are counted.
+
+\begin{corollary}[Critical points in a fixed window]\label{cor:kr-window}
+Assume that $d\ge4$ and $\beta\ge0$, and let $g$, $\mathcal K$, and $k_+$ be as in \cref{thm:kr-transfer}. Suppose the following.
+\begin{enumerate}
+\item There exist $a\in(0,1]$, $\gamma>0$, and numbers $q_N$ with $q_N\to0$ such that, for all $N$, all $u\in S_N$, and all $(h,k)\in\mathcal K$,
+\[
+\E_{h,k,u}\Pp^{H_N}_{\nu_N}\Big(\sup_{0\le t\le e^{\gamma N}}|R(X_t,u)|\ge a\Big)\le q_N.
+\]
+\item For every $M>0$ there exists $N_M$ such that $\mathcal W_{N,M}\subset\mathcal K$ for all $N\ge N_M$.
+\item For every $M>0$, $C_M=\sup_N\E|\cC_{N,M}|<\infty$.
+\end{enumerate}
+Then for every $r>1$, $M>0$, and $N\ge N_M$,
+\begin{equation}\label{eq:kr-union-entrance}
+\E\,\Pp^{H_N}_{\nu_N}\Big(\exists u\in\cC_{N,M},\ \exists t\le e^{\gamma N}:\ |R(X_t,u)|\ge a\Big)\le C_M\mathsf K_r^{1/r}q_N^{1-1/r}.
+\end{equation}
+The same bound holds for every subfamily of $\cC_{N,M}$ selected by a field-dependent weight with values in $\{0,1\}$. The exponent $\gamma$ does not depend on $M$.
+\end{corollary}
+
+\begin{proof}
+Let $T_N=e^{\gamma N}$ and $\varphi_N=\varphi_{T_N,a}$. By \cref{lem:kr-hitting}, $\varphi_N$ is a field-dependent weight with values in $[0,1]$. Fix $M$ and $N\ge N_M$. By hypothesis (1), \eqref{eq:kr-transfer-hyp} holds on $\mathcal W_N=\mathcal W_{N,M}\subset\mathcal K$, and \cref{thm:kr-transfer} implies that
+\[
+\E\sum_{u\in\cC_{N,M}}\varphi_N(H_N,u)\le\mathsf K_r^{1/r}q_N^{1-1/r}\,\E|\cC_{N,M}|\le C_M\mathsf K_r^{1/r}q_N^{1-1/r}.
+\]
+By \cref{thm:kr-marked}, $\cC_{N,M}$ is almost surely finite, and for each such field the union bound under $\Pp^{H_N}_{\nu_N}$ bounds the probability on the left of \eqref{eq:kr-union-entrance} by $\sum_{u\in\cC_{N,M}}\varphi_N(H_N,u)$. On the Borel set of Morse fields this probability is Borel, by the enumeration of critical points in the proof of \cref{prop:kr-coefficient} together with \cref{lem:kr-hitting}. Defining it to be zero on the null set of non-Morse fields gives a Borel representative, which is sufficient for its expectation. Taking expectations proves \eqref{eq:kr-union-entrance}. For a subfamily selected by a weight $\theta$, use the last assertion of \cref{thm:kr-transfer}. The constant $\mathsf K_r$ depends only on $b_Q$, $g$, $k_+$, and $r$, the numbers $q_N$ depend on $\mathcal K$, $a$, and $\gamma$, and neither depends on $M$; the half-width $M$ enters only through $C_M$ and $N_M$.
+\end{proof}
+
+Note that $\E|\cC_{N,M}|<\infty$ for each $N$ by \cref{cor:kr-count}, and hypothesis (3) is equivalent to $\limsup_N\E|\cC_{N,M}|<\infty$. For a non-pure mixture, hypothesis (2) holds, for instance, when $\mathcal K=[h_-,h_+]\times[k_-,k_+]$, $U\subset[k_-,k_+]$, and $m_N/N$ converges to a point of $(h_-,h_+)$. In the pure case, replace this rectangle by its intersection with $\{(h,k):k=ph\}$, as in the definition of $\mathcal W_{N,M}$. By Markov's inequality, \eqref{eq:kr-union-entrance} implies that for each fixed $M$ the probability, for the fixed field, that the diffusion started from $\nu_N$ enters the cap $C_a(u)=\{x\in S_N:|R(x,u)|\ge a\}$ of \cref{def:red-centers} for some $u\in\cC_{N,M}$ before time $e^{\gamma N}$ tends to zero in probability.
+
+\begin{remark}[Polynomial rates]\label{rem:kr-rates}
+Let $a_*>0$ be given by \cref{cor:ent-rectangle} for the fixed $\xi$, $Q$, $\beta$, and $\mathcal K$. Fix $a\in(0,\min\{1,a_*\}]$, and let $\gamma$, $c$, $C$, and $N_0$ be given by that corollary. After increasing $C$ to cover the finitely many dimensions $2\le N<N_0$, for which the left side of hypothesis (1) is at most one, hypothesis (1) of \cref{cor:kr-window} holds with $q_N=C(N^{1-d/2}+N^{3-d})+e^{-cN}$. Since $d\ge4$, we have $N^{3-d}\le N^{1-d/2}$ and $q_N\le C'N^{-(d-2)/2}$. Then, for every fixed $M>0$ and $r>1$, the left side of \eqref{eq:kr-union-entrance} is at most $C_{M,r}N^{-(d-2)(1-1/r)/2}$ for $N\ge N_M$. For $r=2$ the exponent is $(d-2)/4$. As \cref{prop:kr-determinant} holds for every fixed $r$, every exponent below $(d-2)/2$ is available. The time exponent $\gamma$, chosen from \cref{cor:ent-rectangle}, does not depend on $M$ or $r$. These rates are used in \cref{prop:cp-transfer} and in the selection and entropy statements of \cref{sec:reduction}.
+\end{remark}
+
+\begin{remark}[Order of the parameters]\label{rem:kr-order}
+\Cref{tab:kr-order} lists the parameters of \cref{thm:kr-transfer,cor:kr-window} in the order in which they are fixed. All of them are fixed before $N\to\infty$. Only the count bound $C_M$ and the threshold $N_M$ depend on the window half-width $M$; in particular, the time exponent $\gamma$ is chosen before $M$.
+\end{remark}
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Parameters in the determinant-weighted transfer, in the order in which they are fixed.}\label{tab:kr-order}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Step & Parameter & Depends on\\
+\midrule
+1 & mixture $\xi$, radius $Q$, temperature $\beta$ & ---\\
+2 & rectangle of marks $\mathcal K$, gap $g$, bound $k_+$ & $\xi$, $Q$\\
+3 & moment order $r>1$; constant $\mathsf K_r$ & $b_Q$, $g$, $k_+$, $r$\\
+4 & cap parameter $a$, time exponent $\gamma$, rate $q_N$ & $\xi$, $Q$, $\beta$, $\mathcal K$, $a$\\
+5 & window half-width $M$; count bound $C_M$, threshold $N_M$ & all of the above, $(m_N)$, $U$, $M$\\
+6 & dimension $N\to\infty$ & \\
+\bottomrule
+\end{tabular}
+\end{table}

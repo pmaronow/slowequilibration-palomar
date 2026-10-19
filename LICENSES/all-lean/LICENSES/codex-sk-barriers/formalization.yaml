@@ -1,0 +1,98 @@
+# Local research metadata; NOT a Palomar intake-ready submission.
+# Human authors and maintainers are unknown and are deliberately unassigned.
+version: v0.4
+project:
+  name: Optimized SK barrier components
+  description: >-
+    Partial formalization of an optimized typical-start Gaussian SK barrier
+    argument. Proved components include the actual Gaussian SK probability
+    model, arbitrary-threshold total-variation bridges, finite overshoot
+    matrix algebra, an exact logarithm/cube-root certificate exceeding 0.0797,
+    critical scale arithmetic, finite successor anchors and predictable
+    profile bounds, and single-good-disorder-event integral reductions.
+    The unconditional optimized exponent 2/9 barrier is not proved in Lean.
+  authors: []
+  responsible_maintainers: []
+  license: Apache-2.0
+classification:
+  arxiv: [math.PR]
+  msc2020: [82B44, 60K35]
+sources:
+  - title: Stretched exponential barriers for typical SK initial states
+    authors: [OpenAI]
+    type: paper
+    relationship: adapts
+    location: https://github.com/openai/math/blob/fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb/preprints/Stretched-exponential-barriers-for-typical-SK-initial-states-September-24-2026/paper.pdf
+    author_endorsement: not-contacted
+    note: Actual-model foundations are adapted; the optimized endpoint is outside formal coverage.
+  - title: Optimized stretched exponential barriers for typical SK initial states
+    type: other
+    relationship: formalizes
+    location: tex/SKOptimized.tex
+    author_endorsement: n/a
+    note: Only the explicitly listed finite and conditional components are formalized.
+  - title: Quantitative Parisi formula and finite temperature full support inputs
+    type: other
+    relationship: background
+    location: tex/SKOptimized.tex
+    note: See the manuscript source provenance for arXiv 2609.09103v1 and 2607.11756v3; these analytic inputs are not formalized here.
+related_formalizations:
+  - id: https://github.com/openai/math/tree/fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb/lean/OAI/Probability/SKBarriers
+    relationship: adapts
+    note: Minimal actual-model and finite-probability foundations are adapted under Apache-2.0. The full 574-module upstream closure is not imported or reverified here.
+status:
+  scope: >-
+    Ten supporting proof modules and the independently stated Challenge
+    cover partial components of the optimized argument. The complete
+    quantitative Parisi, higher-order vector-flow, fractional interpolation,
+    and adaptive-bank path estimates remain pending. The optimized actual
+    SK proposition is defined, and a conditional selected-reference endpoint
+    reduction is proved; the unconditional theorem remains pending.
+  # Counts exclude the deliberately incomplete statement surface Challenge.lean.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: [propext, Classical.choice, Quot.sound]
+automation:
+  methods:
+    - method: autonomous
+      models: [GPT-6]
+      framework: Codex
+      tool_setup: Parallel proof agents, Lean tactics, kernel builds, exact arithmetic, independent statement and scope audits.
+      prompting_notes: User requested autonomous constant optimization, TeX writeup and Palomar-standard Lean formalization.
+  spend_usd: not tracked
+  notes: AI systems are credited here, not assigned human authorship or maintenance roles.
+fidelity:
+  divergences: >-
+    The manuscript states the optimized 2/9 theorem, but the Lean result is
+    partial. Conditional reductions expose their analytic hypotheses. No
+    external theorem is turned into a custom axiom. The original source
+    theorem at exponent 1/10000 remains separate.
+review:
+  status: agent-reviewed
+  reviewers: [Separate Codex proof and scope audit agents]
+  notes: No human peer review or Palomar editorial review has occurred. Mechanical checks apply to explicitly compared component statements only.
+alignment:
+  namespace: SKOptimized
+  statements:
+    - source: Exact rational prefactor certificate
+      lean: SKOptimized.Prefactor.objective_gt_coefficient
+      module: SKOptimized.Prefactor
+      status: proved
+      note: Actual Real.log and Real.rpow comparison; no assumed numerical log/root bound.
+    - source: Optimized typical-start barrier endpoint
+      lean: SKOptimized.Model.OptimizedBarrierStatement
+      module: SKOptimized.Model
+      status: partial
+      note: Defined target; a separate explicit analytic-input reduction is proved, but the unconditional theorem remains pending.
+    - source: Conditional actual-model endpoint from selected-reference sign estimates
+      lean: SKOptimized.Model.optimizedBarrierStatement_of_signExpectations
+      module: SKOptimized.EndpointReduction
+      status: proved
+      note: Explicit measurable reference and two vanishing annealed sign-expectation inputs; those inputs are not proved here.
+acknowledgements: Mathlib community, Lean project, and the attributed openai/math source development.
+registration_readiness:
+  ready: false
+  reasons:
+    - Full optimized SK theorem remains unproved in Lean.
+    - Required human authors and responsible maintainers are unassigned.
+    - No Palomar editorial review or registration has occurred.

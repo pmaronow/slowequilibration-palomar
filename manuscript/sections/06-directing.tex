@@ -1,0 +1,249 @@
+\chapter{The directing measure}\label{sec:directing}
+
+In this section, we prove \cref{thm:dir-norm}. It concerns the overlaps of independent samples $\sigma^1,\sigma^2,\dots$ from the Gibbs measure in the condensed phase. By the theorem of Dovbysh and Sudakov, every limit in distribution of the overlap array $(R(\sigma^i,\sigma^j))_{i,j\ge1}$, averaged over the disorder, can be generated in two stages. One first draws a random probability measure $G$ on the unit ball of a Hilbert space and then independent vectors $v_1,v_2,\dots$ with law $G$, and one sets $R_{ij}=v_i\cdot v_j$ for $i\ne j$. We call $G$ a directing measure of the limit. Two samples whose directing vectors are close have overlap close to the squared norm of either vector. In this way, the squared norms of the vectors in the support of $G$ are overlap values that many independent samples realize simultaneously. \Cref{thm:dir-norm} states that if $(\xi,\beta)$ is strictly 1RSB with parameters $x$ and $Q$ and a nondegenerate contact at $Q$, then every directing measure of every limit is carried by the vectors of squared norm $Q$.
+
+This is the property of the Gibbs measure that the coarse cover by bands around critical points needs in \cref{sec:purecover,sec:mixbands} (see \cref{prop:mb-coarse}). There, a Gibbs sample is placed in a band around a critical point of the center field $H_Q$ as follows. Among a fixed finite number of additional independent replicas, we find $n$ replicas whose overlaps with each other and with the given sample are all close to $Q$. The replicated estimates of Subag \cite{Subag2024} show that the normalized average of these replicas has nearly maximal energy, and a localization argument then places it near a critical point of $H_Q$ (\cref{prop:pc-relocation,lem:mb-localization}). In the limit, such replicas exist with probability close to one if the directing vector $v_1$ of the given sample lies in the support of $G$ and $\norm{v_1}^2$ is close to $Q$. Indeed, the vectors in a small ball around $v_1$ then have inner products close to $Q$ with each other and with $v_1$. An atom of $G$ at the origin would describe a positive fraction of samples that are asymptotically orthogonal to all other samples, and such a sample has overlap close to $Q$ with no additional replica. For a sample whose directing vector has another squared norm $q$, the additional replicas found in this way would have overlaps close to $q$ instead of $Q$. \Cref{thm:dir-norm} excludes both possibilities.
+
+We use the following results of \cref{sec:thermal}. Under the 1RSB assumptions of \cref{def:th-certificate}, the first-variation function $V$ is positive on $(0,1)\setminus\{Q\}$, and \cref{thm:th-contact,prop:th-structure} show that $0$ and $Q$ are the only multisamplable overlaps. \Cref{lem:th-replica-exclusion} expresses the failure of multisamplability at every other $q\in(0,1)$ as an exponential bound, valid for all large $N$, on the probability that a fixed number of samples have pairwise overlaps near $q$. Finally, $F$ is differentiable at $\beta$ (\cref{cor:th-pressure}). From \cref{sec:prelim}, we use the tensor representation of $H_N$ (\cref{lem:pre-field}), the concentration of free energies (\cref{lem:pre-concentration}), and the Parisi formula (\cref{thm:pre-parisi}).
+
+The proof has three steps. In \cref{sec:dir-exclusion}, we show that replica exclusion at an overlap $q$, that is, the convergence to zero of the probability that a fixed number of samples have pairwise overlaps near $q$, forbids directing vectors of squared norm near $q$ (\cref{lem:dir-exclusion}). We exclude vectors of norm one separately, by the entropy estimate of \cref{lem:dir-cap}, since multisamplability concerns overlaps below one. After this step, the squared norms lie in $\{0,Q\}$. In \cref{sec:dir-GG}, we derive one identity of Ghirlanda--Guerra type, with test function $\xi(R)$, from Gaussian integration by parts and the self-averaging of the energy at the point $\beta$ where $F$ is differentiable (\cref{lem:dir-GG}). In \cref{sec:dir-proof}, we show that this identity leaves no mass at the origin. The argument uses a single identity of this type, for the original Hamiltonian without a perturbation. It uses no ultrametricity, no atomicity of the directing measure, and no Poisson--Dirichlet structure. Odd degrees are allowed throughout: $\xi(R)$ may be negative at negative overlaps, and the last step uses only the upper bound $\xi(R)\le\xi(Q)$ for $\abs R\le Q$.
+
+\paragraph{Notation.} Throughout this section, $\xi$ is a finite mixture and $\beta>0$. Conditionally on $H_N$, let $\sigma^1,\sigma^2,\dots$ be independent samples from $\pi$. We write $R_{ij}=R(\sigma^i,\sigma^j)$, so that $R_{ii}=1$, and $\langle\cdot\rangle$ for the average over the samples; thus $\langle f\rangle=\int f\dd\pi^{\otimes n}$ for a bounded Borel function $f$ of $\sigma^1,\dots,\sigma^n$. Recall that $F_N(\beta)=N^{-1}\E\log Z_{N,\beta}$ and $F(\beta)=\lim_NF_N(\beta)$. We set
+\begin{equation}\label{eq:dir-energy}
+e_N=\E\Big\langle\frac{H_N(\sigma^1)}N\Big\rangle,\qquad\eps_N=\E\Big\langle\Big|\frac{H_N(\sigma^1)}N-e_N\Big|\Big\rangle.
+\end{equation}
+Recall from \cref{def:th-certificate} that $(\xi,\beta)$ is strictly 1RSB with parameters $x,Q\in(0,1)$ and a nondegenerate contact at $Q$ if $\xi$ has minimum degree at least four and the function
+\[
+V(r)=\int_0^r\frac{r-v}{\hat x(v)^2}\dd v-\beta^2\xi(r),\qquad\hat x(v)=\begin{cases}1-Q+x(Q-v),&0\le v\le Q,\\1-v,&Q\le v<1,\end{cases}
+\]
+satisfies $V(Q)=V'(Q)=0$, $V''(Q)>0$, and $V(r)>0$ for every $r\in(0,1)\setminus\{Q\}$.
+
+\section{Overlap arrays and directing measures}\label{sec:dir-arrays}
+
+Let $\mathcal M=[-1,1]^{\N\times\N}$ be the space of arrays $(r_{ij})_{i,j\ge1}$ with entries in $[-1,1]$, with the product topology. It is compact and metrizable. We also write $R_{ij}$ for the coordinate maps on $\mathcal M$. For each $N$, let $\mathcal L_N$ be the annealed law of the overlap array, that is,
+\[
+\mathcal L_N(A)=\E\,\pi^{\otimes\infty}\big(\{(R(\sigma^i,\sigma^j))_{i,j\ge1}\in A\}\big)
+\]
+for Borel sets $A\subset\mathcal M$. By the compactness of $\mathcal M$, every subsequence of $(\mathcal L_N)$ has a further subsequence that converges weakly. We call the limits \emph{limiting overlap laws}. Weak convergence on $\mathcal M$ is the convergence of the joint laws of all finite collections of entries. For a limiting overlap law $\mathcal L$, we write $\E_{\mathcal L}$ for the expectation with respect to $\mathcal L$.
+
+Each $\mathcal L_N$ is carried by the set of symmetric arrays with diagonal entries one whose finite principal submatrices are positive semidefinite, since $R(\sigma^i,\sigma^j)=U(\sigma^i)\cdot U(\sigma^j)$ is a Gram matrix. This set is closed. Further, $\mathcal L_N$ is invariant under the maps of $\mathcal M$ that permute finitely many indices, because the samples are exchangeable. Both properties pass to weak limits: the first by the portmanteau theorem, since the set is closed, and the second because the permutation maps are continuous. Every limiting overlap law $\mathcal L$ is the law of a symmetric, nonnegative definite, weakly exchangeable array with diagonal entries one. We use two further consequences of weak convergence along a subsequence $(N_m)$ with limit $\mathcal L$. If $E\subset\mathcal M$ is open, then $\mathcal L(E)\le\liminf_m\mathcal L_{N_m}(E)$. If $f$ is a bounded continuous function on $\mathcal M$ that depends on finitely many coordinates, then $\E_{\mathcal L}f=\lim_m\E\langle f\rangle$, where on the right $f$ is evaluated at the overlaps of the samples.
+
+Let $\mathsf B$ be the closed unit ball of the Hilbert space $\ell^2$, and let $B(v,r)$ be the open ball of radius $r$ around $v\in\ell^2$. For a Borel probability measure $G$ on $\mathsf B$, let $\mathcal L^G$ be the law of the array with entries $v_i\cdot v_j$ for $i\ne j$ and $1$ on the diagonal, where $v_1,v_2,\dots$ are independent with law $G$.
+
+\begin{definition}[Directing measure]\label{def:dir-directing}
+Let $\mathcal L$ be a Borel probability measure on $\mathcal M$. A \emph{directing measure} of $\mathcal L$ is a family $(G_\omega)_{\omega\in\Omega}$ of Borel probability measures on $\mathsf B$, indexed by a probability space $(\Omega,\mathcal F,\Pr)$, such that for every Borel set $A\subset\mathcal M$, the map $\omega\mapsto\mathcal L^{G_\omega}(A)$ is measurable and
+\[
+\mathcal L(A)=\int_\Omega\mathcal L^{G_\omega}(A)\,\Pr(\dd\omega).
+\]
+\end{definition}
+
+For each fixed $\omega$, the array law $\mathcal L^{G_\omega}$ is generated by independent vectors with law $G_\omega$, and $\mathcal L$ is the mixture of these array laws. If $\omega\mapsto G_\omega(A)$ is measurable for every Borel set $A\subset\mathsf B$, this also gives a joint construction, in which one draws $\omega$ with law $\Pr$ and then independent vectors $v_1,v_2,\dots$ with law $G_\omega$, and sets $R_{ij}=v_i\cdot v_j$ for $i\ne j$. The definition does not require this measurability, and the proofs below use only the measurable functions $\omega\mapsto\mathcal L^{G_\omega}(A)$.
+
+\begin{theorem}[Dovbysh--Sudakov; {\cite[Proposition~1]{Panchenko2010DS}}]\label{thm:dir-DS}
+Every limiting overlap law has a directing measure.
+\end{theorem}
+
+This is the representation theorem of Dovbysh and Sudakov \cite{DovbyshSudakov1982}, in the form proved by Panchenko \cite[Proposition~1]{Panchenko2010DS}. That proposition applies to the law of every symmetric, nonnegative definite, weakly exchangeable array, and we checked above that limiting overlap laws are of this kind. It states that such a law is a mixture, over a probability space $(\Omega,\mathcal F,\Pr)$, of laws $\mathcal Q_\omega$ on $\mathcal M$ such that $\omega\mapsto\mathcal Q_\omega(A)$ is measurable for every Borel set $A$, and such that each $\mathcal Q_\omega$ is the law of the array $(h_i\cdot h_j+a_i\ind\{i=j\})_{i,j\ge1}$ for an independent sequence of pairs $(h_i,a_i)$ with a common law $\eta_\omega$ on $\ell^2\times[0,\infty)$ \cite[(1.1)--(1.2)]{Panchenko2010DS}. Since the diagonal entries equal one $\mathcal L$-almost surely, we have $\int\mathcal Q_\omega(\{R_{11}=1\})\Pr(\dd\omega)=1$, and the measurable set $\Omega_0$ of those $\omega$ with $\mathcal Q_\omega(\{R_{11}=1\})=1$ has $\Pr(\Omega_0)=1$. For $\omega\in\Omega_0$, the measure $\eta_\omega$ is carried by $\{\norm h^2+a=1\}$, hence by $\{\norm h\le1\}$. We let $G_\omega$ be the image of $\eta_\omega$ under $(h,a)\mapsto h$. Then $\mathcal L^{G_\omega}=\mathcal Q_\omega$. For $\omega\notin\Omega_0$, we let $G_\omega=\delta_0$. This defines a directing measure of $\mathcal L$. A directing measure is not unique; for example, it may be composed with any linear isometry of $\ell^2$. The following theorem applies to every directing measure.
+
+\begin{theorem}[Directing vectors have squared norm $Q$]\label{thm:dir-norm}
+Let $(\xi,\beta)$ be strictly 1RSB with parameters $x$ and $Q$ and a nondegenerate contact at $Q$ (\cref{def:th-certificate}). Let $\mathcal L$ be a limiting overlap law, and let $(G_\omega)_{\omega\in\Omega}$ be a directing measure of $\mathcal L$. Then, for $\Pr$-almost every $\omega$,
+\[
+G_\omega\big(\{v\in\mathsf B:\norm v^2=Q\}\big)=1.
+\]
+\end{theorem}
+
+Equivalently, for $\Pr$-almost every $\omega$, if $v_1,v_2,\dots$ are independent with law $G_\omega$, then almost surely $\norm{v_i}^2=Q$ for every $i$. Then $\norm{v_i-v_j}^2=2(Q-v_i\cdot v_j)$ for $i\ne j$, so that distances between directing vectors are functions of the array. In particular, $\abs{R_{ij}}\le Q$ for all $i\ne j$, $\mathcal L$-almost surely. When the directing measure is a random measure $G$, that is, when $\omega\mapsto G_\omega(A)$ is measurable for every Borel set $A\subset\mathsf B$, the conclusion reads $G(\{\norm v^2=Q\})=1$ almost surely.
+
+\section{Pairs of samples near overlap one}\label{sec:dir-cap}
+
+The results of \cref{sec:thermal} concern overlaps in $[0,1)$, and they do not exclude directing vectors of norm one. We exclude them with an entropy estimate. On an event of probability close to one, the density of $\pi$ with respect to $\nu_N$ is at most $e^{2\beta KN}$, while a spherical cap $\{R(\cdot,u)>1-\delta\}$ has $\nu_N$-mass at most $\sqrt N(2\delta)^{(N-3)/2}$; for small $\delta$, the second factor wins.
+
+\begin{lemma}[A field bound and a cap estimate]\label{lem:dir-cap}
+Let $\cP=\{p:c_p>0\}$, and set
+\[
+a_p=\big(2p\log(1+4p)+2\big)^{1/2},\qquad K=2\sum_{p\in\cP}\sqrt{c_p}\,a_p.
+\]
+\begin{enumerate}
+\item For every $N\ge2$,
+\begin{equation}\label{eq:dir-field}
+\Pp\Big(\sup_{x\in S_N}\abs{H_N(x)}>KN\Big)\le2\abs{\cP}e^{-N}.
+\end{equation}
+\item For every $N\ge3$, every $u\in S_N$, and every $\delta\in(0,1/2)$,
+\begin{equation}\label{eq:dir-cap}
+\nu_N\big(\{x\in S_N:R(x,u)>1-\delta\}\big)\le\sqrt N\,(2\delta)^{(N-3)/2}.
+\end{equation}
+\item Let $\delta=e^{-4\beta K-4}/2$. For every $N\ge3$,
+\begin{equation}\label{eq:dir-pair}
+\E\,\pi^{\otimes2}\big(\{R_{12}>1-\delta\}\big)\le2\abs{\cP}e^{-N}+e^{6\beta K+6}\sqrt N\,e^{-2N}.
+\end{equation}
+\end{enumerate}
+\end{lemma}
+
+Part (1) is an explicit version of the bound on $\sup\abs{H_N}$ in \cref{lem:pre-field}(3). We include its short proof, since it gives a value of $K$ and holds for every $N$.
+
+\begin{proof}
+For (1), let $v\in\R^N$ be a unit vector. By \eqref{eq:pre-tensor}, we have
+\[
+H_N(\sqrt N v)=\sqrt N\sum_{p\in\cP}\sqrt{c_p}\,T_p(v,\dots,v),\qquad T_p(v_1,\dots,v_p)=\sum_{i_1,\dots,i_p=1}^Ng^{(p)}_{i_1\dots i_p}v_{1,i_1}\cdots v_{p,i_p},
+\]
+where $v_{k,i}$ is the $i$-th coordinate of $v_k$. For unit vectors $v_1,\dots,v_p$, the variable $T_p(v_1,\dots,v_p)$ is centered Gaussian with variance $\prod_k\abs{v_k}^2=1$. Let $\norm{T_p}$ be the supremum of $\abs{T_p(v_1,\dots,v_p)}$ over unit vectors $v_1,\dots,v_p$. Fix $p\in\cP$ and let $\eps=1/(2p)$. A maximal $\eps$-separated subset $\mathcal N$ of the unit sphere of $\R^N$ is an $\eps$-net. The balls of radius $\eps/2$ around its points are disjoint and contained in the ball of radius $1+\eps/2$, and comparing volumes, as in \cite[Appendix~A.8, Proposition~A.8.1]{Talagrand2011Volume1}, we find $\abs{\mathcal N}\le(1+2/\eps)^N=(1+4p)^N$. Given unit vectors $v_1,\dots,v_p$, choose $w_k\in\mathcal N$ with $\abs{v_k-w_k}\le\eps$. By multilinearity,
+\[
+T_p(v_1,\dots,v_p)-T_p(w_1,\dots,w_p)=\sum_{k=1}^pT_p(w_1,\dots,w_{k-1},v_k-w_k,v_{k+1},\dots,v_p),
+\]
+and each term on the right has absolute value at most $\eps\norm{T_p}$. Let $M_p$ be the maximum of $\abs{T_p}$ over $\mathcal N^p$. Taking the supremum over $v_1,\dots,v_p$, we obtain $\norm{T_p}\le M_p+p\eps\norm{T_p}=M_p+\norm{T_p}/2$, that is, $\norm{T_p}\le2M_p$. The set $\mathcal N^p$ has at most $(1+4p)^{pN}$ elements. Using a union bound and the Gaussian tail bound $\Pp(\abs\gamma>t)\le2e^{-t^2/2}$ for a standard Gaussian variable $\gamma$, we obtain
+\[
+\Pp\big(\norm{T_p}>2a_p\sqrt N\big)\le\Pp\big(M_p>a_p\sqrt N\big)\le2(1+4p)^{pN}e^{-a_p^2N/2}=2e^{-N},
+\]
+where we used $a_p^2/2=p\log(1+4p)+1$. On the intersection of the events $\{\norm{T_p}\le2a_p\sqrt N\}$, $p\in\cP$, we have $\abs{H_N(x)}\le\sqrt N\sum_p\sqrt{c_p}\norm{T_p}\le KN$ for every $x\in S_N$. This proves (1).
+
+For (2), recall that for $N\ge3$ and $u\in S_N$, the law of $R(x,u)$ under $\nu_N(\dd x)$ has the density $d_N(1-r^2)^{(N-3)/2}$ on $[-1,1]$, where $d_N^{-1}=\int_{-1}^1(1-r^2)^{(N-3)/2}\dd r$. Restricting this integral to $\abs r\le N^{-1/2}$, we find
+\[
+d_N^{-1}\ge2N^{-1/2}\Big(1-\frac1N\Big)^{(N-3)/2}\ge2N^{-1/2}e^{-1/2},
+\]
+where we used $\log(1-1/N)\ge-1/(N-1)$, which follows from $\log(1-t)\ge-t/(1-t)$, and $(N-3)/(N-1)\le1$. We conclude that $d_N\le e^{1/2}\sqrt N/2<\sqrt N$. For $r\in(1-\delta,1]$, we have $1-r^2=(1-r)(1+r)\le2\delta$. Integrating over this interval, whose length is $\delta<1$, we obtain $\nu_N(\{R(\cdot,u)>1-\delta\})\le d_N\delta(2\delta)^{(N-3)/2}\le\sqrt N(2\delta)^{(N-3)/2}$.
+
+For (3), let $\mathcal K$ be the event $\{\sup_{S_N}\abs{H_N}\le KN\}$. On $\mathcal K$, we have $Z_{N,\beta}\ge e^{-\beta KN}$, and the density of $\pi$ with respect to $\nu_N$ is at most $e^{2\beta KN}$. By (2), on $\mathcal K$,
+\[
+\pi^{\otimes2}\big(\{R_{12}>1-\delta\}\big)=\int\pi\big(\{x:R(x,y)>1-\delta\}\big)\,\pi(\dd y)\le e^{2\beta KN}\sqrt N\,(2\delta)^{(N-3)/2}.
+\]
+The integration in $y$ does not produce a second density factor, since $\pi$ is a probability measure. Inserting $\log(2\delta)=-4\beta K-4$, we find that the right side equals $\sqrt N\exp(2\beta KN-(N-3)(2\beta K+2))=e^{6\beta K+6}\sqrt N\,e^{-2N}$. Off $\mathcal K$, we bound $\pi^{\otimes2}(\{R_{12}>1-\delta\})$ by one. Taking expectations and using (1), we obtain \eqref{eq:dir-pair}.
+\end{proof}
+
+\section{Replica exclusion and the norms of directing vectors}\label{sec:dir-exclusion}
+
+Recall from \eqref{eq:th-p} the annealed probability $p_{N,k,\rho}(q)$ that $k$ samples have all their pairwise overlaps within $\rho$ of $q$, and recall that $q$ is multisamplable if $N^{-1}\log p_{N,k,\rho}(q)\to0$ for every $k$ and $\rho$ (\cref{def:th-multisamplable}, following Subag \cite[Definition~2]{Subag2024}). \Cref{thm:th-subag}(2), which is \cite[footnote~4 and Remark~25]{Subag2024}, shows that the definition does not change if the limit is replaced by the limit superior. This form matters here. If $q$ is not multisamplable, there exist $k$ and $\rho$ with $\limsup_NN^{-1}\log p_{N,k,\rho}(q)<0$. Then $p_{N,k,\rho}(q)$ tends to zero along the full sequence of dimensions, and hence along the subsequence that defines any given limiting overlap law. With the limit alone, the failure of multisamplability would give decay only along some subsequence, which need not be related to the limiting overlap law at hand. Under the 1RSB assumptions, we have $V_\beta=V$ by \cref{prop:th-structure}(1), and every $q\in(0,1)\setminus\{Q\}$ has $V(q)>0$. For such $q$, \cref{lem:th-replica-exclusion} implies that there exist $k\ge2$, $\rho\in(0,1)$, and $c>0$ such that $p_{N,k,\rho}(q)\le e^{-cN}$ for all sufficiently large $N$.
+
+The next lemma converts replica exclusion into a restriction on the directing measure. Its mechanism is the standard support argument for Dovbysh--Sudakov representations: vectors in a small ball around a point $v$ of the support have mutual inner products close to $\norm v^2$.
+
+\begin{lemma}[Replica exclusion restricts the directing norms]\label{lem:dir-exclusion}
+Let $\cA\subset[0,1)$ be closed relative to $[0,1)$, with $0\in\cA$. Suppose that for every $q\in(0,1)\setminus\cA$, there exist an integer $k_q\ge2$ and $\rho_q>0$ such that $p_{N,k_q,\rho_q}(q)\to0$ as $N\to\infty$. Let $\mathcal L$ be a limiting overlap law and $(G_\omega)_{\omega\in\Omega}$ a directing measure of $\mathcal L$. Then, for $\Pr$-almost every $\omega$,
+\[
+G_\omega\big(\{v\in\mathsf B:\norm v^2\in\cA\}\big)=1.
+\]
+\end{lemma}
+
+\begin{proof}
+Since $\cA$ is closed relative to $[0,1)$, it is a Borel subset of $[0,1]$, and the set $\{v\in\mathsf B:\norm v^2\in\cA\}$ is a Borel subset of $\mathsf B$, as the preimage of $\cA$ under a continuous map. The same holds for $(0,1)\setminus\cA$. We next recall a fact about supports. For a Borel probability measure $G$ on $\mathsf B$, its support $\supp G$ is the set of $v\in\mathsf B$ with $G(B(v,r))>0$ for every $r>0$. The complement of $\supp G$ in $\mathsf B$ is a union of relatively open balls of $G$-measure zero. As $\ell^2$ is separable, countably many of these balls cover it. This implies that $G(\supp G)=1$.
+
+Fix a subsequence $(N_m)$ along which $\mathcal L_{N_m}$ converges to $\mathcal L$. Let $q\in(0,1)\setminus\cA$, and write $k=k_q$ and $\rho=\rho_q$. The set
+\[
+E_q=\Big\{\max_{1\le i<j\le k}\abs{R_{ij}-q}<\rho\Big\}\subset\mathcal M
+\]
+is open, since it is defined by strict inequalities between finitely many coordinates. By the portmanteau theorem and the hypothesis, we have $\mathcal L(E_q)\le\liminf_mp_{N_m,k,\rho}(q)=0$. By \cref{def:dir-directing}, there exists a $\Pr$-null set $\Omega_q$ such that for $\omega\notin\Omega_q$,
+\begin{equation}\label{eq:dir-excluded}
+G_\omega^{\otimes k}\Big(\Big\{(v_1,\dots,v_k):\max_{1\le i<j\le k}\abs{v_i\cdot v_j-q}<\rho\Big\}\Big)=\mathcal L^{G_\omega}(E_q)=0.
+\end{equation}
+Let $\omega\notin\Omega_q$, and suppose that some $v\in\supp G_\omega$ satisfies $\abs{\norm v^2-q}<\rho/2$. Let $r=\rho/4$. For $v_i,v_j\in B(v,r)$, since all vectors in $\mathsf B$ have norm at most one, we have
+\[
+\abs{v_i\cdot v_j-\norm v^2}\le\abs{(v_i-v)\cdot v_j}+\abs{v\cdot(v_j-v)}<2r=\rho/2,
+\]
+and therefore $\abs{v_i\cdot v_j-q}<\rho$. The left side of \eqref{eq:dir-excluded} is then at least $G_\omega(B(v,r))^k>0$, which is a contradiction. We conclude that for $\omega\notin\Omega_q$, no point of $\supp G_\omega$ has squared norm in the interval $I_q=(q-\rho_q/2,q+\rho_q/2)$.
+
+The intervals $I_q$, $q\in(0,1)\setminus\cA$, cover $(0,1)\setminus\cA$. Every subset of $\R$ has the Lindel\"of property, which means here that countably many of these intervals, say $I_{q_1},I_{q_2},\dots$, already cover $(0,1)\setminus\cA$. For $\omega$ outside the null set $\bigcup_l\Omega_{q_l}$, no point of $\supp G_\omega$ has squared norm in $(0,1)\setminus\cA$. Together with $G_\omega(\supp G_\omega)=1$, this implies that $G_\omega(\{\norm v^2\in(0,1)\setminus\cA\})=0$.
+
+It remains to exclude norm one. Let $\delta$ be as in \cref{lem:dir-cap}(3). The set $\{R_{12}>1-\delta\}\subset\mathcal M$ is open, and by \eqref{eq:dir-pair} and the portmanteau theorem, we have $\mathcal L(\{R_{12}>1-\delta\})=0$. As above, there exists a $\Pr$-null set $\Omega_1$ such that $G_\omega^{\otimes2}(\{v_1\cdot v_2>1-\delta\})=0$ for $\omega\notin\Omega_1$. Let $\omega\notin\Omega_1$, and suppose that $v\in\supp G_\omega$ has $\norm v=1$. For $v_1,v_2\in B(v,\delta/2)$, the estimate displayed above, with $r=\delta/2$, shows that $v_1\cdot v_2>\norm v^2-\delta=1-\delta$. Then $G_\omega^{\otimes2}(\{v_1\cdot v_2>1-\delta\})\ge G_\omega(B(v,\delta/2))^2>0$, which is a contradiction. Hence $\supp G_\omega$ contains no vector of norm one, and $G_\omega(\{\norm v=1\})=0$.
+
+The interval $[0,1]$ is the union of $\cA$, $(0,1)\setminus\cA$, and $\{1\}$, because $0\in\cA\subset[0,1)$. For $\omega$ outside the null set $\Omega_1\cup\bigcup_l\Omega_{q_l}$, the last two sets have $G_\omega$-measure zero, which proves the lemma.
+\end{proof}
+
+\section{A Ghirlanda--Guerra identity for the covariance}\label{sec:dir-GG}
+
+The Ghirlanda--Guerra identities were discovered by Ghirlanda and Guerra \cite{GhirlandaGuerra1998}, and they are closely related to the stochastic stability of Aizenman and Contucci \cite{AizenmanContucci1998}. In their full form, they hold for Hamiltonians with a small generic perturbation. We need only the single identity whose test function is the covariance $\xi(R)$, for the original Hamiltonian at a fixed $\beta$ where $F$ is differentiable. It follows from Gaussian integration by parts once the energy $H_N/N$ is known to concentrate under the annealed Gibbs measure. This self-averaging at a point of differentiability is the mechanism of Panchenko \cite{Panchenko2010GG}. The main theorem of \cite{Panchenko2010GG}, Theorem~1.1 there, is stated for Ising mixed $p$-spin models, but the remark that follows it proves the self-averaging for general Gibbs measures. We use it in that form.
+
+\begin{proposition}[Self-averaging of the energy; {\cite[Remark following Theorem~1.1]{Panchenko2010GG}}]\label{prop:dir-selfaveraging}
+Let $\xi$ be a finite mixture and $\beta>0$, and suppose that $F$ is differentiable at $\beta$. Then $\eps_N\to0$ as $N\to\infty$.
+\end{proposition}
+
+\begin{proof}
+The remark following \cite[Theorem~1.1]{Panchenko2010GG} concerns probability measures $\nu_N$ on a common measurable space, random measurable functions $A_N$ on that space, and the Gibbs averages $\langle\cdot\rangle_t$ with density proportional to $e^{tA_N}$ with respect to $\nu_N$. Let $\psi_N(t)=N^{-1}\log\int e^{tA_N}\dd\nu_N$. The remark states that if $\E\abs{\psi_N(t)-\E\psi_N(t)}\to0$ and $\E\psi_N(t)$ converges to a limit $P(t)$ for every $t$ in a neighborhood of $t_0$, and if $P$ is differentiable at $t_0$, then
+\[
+\lim_{N\to\infty}\frac1N\E\big\langle\abs{A_N-\E\langle A_N\rangle_{t_0}}\big\rangle_{t_0}=0,
+\]
+under measurability and integrability conditions that are implicit in its proof \cite[(7), p.~190]{Panchenko2010GG}.
+We take the disjoint union of the spheres $S_N$ as the common space, with $\nu_N$ the uniform law on $S_N$, $A_N=H_N$ on $S_N$, $t_0=\beta$, and $P=F$; the conclusion is then $\eps_N\to0$.
+
+We verify the hypotheses. For every $t>0$, we have $\psi_N(t)=N^{-1}\log Z_{N,t}$, and using \cref{lem:pre-concentration} with $B=S_N$ and $h=0$, we find
+\[
+\begin{split}
+\E\abs{\psi_N(t)-\E\psi_N(t)}&=\int_0^\infty\Pp\big(\abs{\psi_N(t)-\E\psi_N(t)}\ge s\big)\dd s\\
+&\le\int_0^\infty2e^{-s^2N/(2t^2\xi(1))}\dd s=t\Big(\frac{2\pi\xi(1)}N\Big)^{1/2}.
+\end{split}
+\]
+By \cref{thm:pre-parisi}, we have $\E\psi_N(t)=F_N(t)\to F(t)$ for every $t\ge0$, and $F$ is differentiable at $\beta$ by assumption. For the integrability conditions, we write $H_N(x)=g\cdot\Psi(x)$ as in the proof of \cref{lem:pre-concentration}, where $g$ is a standard Gaussian vector of finite dimension and $\abs{\Psi(x)}^2=N\xi(1)$ for $x\in S_N$. Then $H_N$ is continuous on $S_N$ and $\sup_{S_N}\abs{H_N}\le\abs g(N\xi(1))^{1/2}$, which has finite moments of all orders. This justifies the differentiations in $t$ under the Gibbs average and the expectation that occur in the proof of \cite[(7)]{Panchenko2010GG}.
+\end{proof}
+
+Recall from \cref{cor:th-pressure} that, under the 1RSB assumptions with parameters $x$ and $Q$, the free energy $F$ is differentiable at $\beta$, with $F'(\beta)=\beta(\xi(1)-(1-x)\xi(Q))$ by \eqref{eq:th-Fprime}, and that $e_N=F_N'(\beta)\to F'(\beta)$ as $N\to\infty$.
+
+\begin{lemma}[The Ghirlanda--Guerra identity for $\xi(R)$]\label{lem:dir-GG}
+Let $(\xi,\beta)$ be strictly 1RSB with parameters $x$ and $Q$ and a nondegenerate contact at $Q$.
+\begin{enumerate}
+\item For every $N\ge2$, every $n\ge1$, and every bounded Borel function $f$ on $S_N^n$, evaluated at $(\sigma^1,\dots,\sigma^n)$,
+\begin{multline}\label{eq:dir-GG-defect}
+\bigg|\E\langle f\xi(R_{1,n+1})\rangle-\frac{(1-x)\xi(Q)}n\E\langle f\rangle-\frac1n\sum_{j=2}^n\E\langle f\xi(R_{1j})\rangle\bigg|\\
+\le\frac{\norm f_\infty}{\beta n}\big(\eps_N+\abs{e_N-F'(\beta)}\big).
+\end{multline}
+Moreover, $\eps_N+\abs{e_N-F'(\beta)}\to0$ as $N\to\infty$.
+\item Let $\mathcal L$ be a limiting overlap law. For every $n\ge1$ and every bounded Borel function $f$ of the coordinates $(R_{ij})_{1\le i<j\le n}$,
+\begin{equation}\label{eq:dir-GG}
+\E_{\mathcal L}\big[f\xi(R_{1,n+1})\big]=\frac{(1-x)\xi(Q)}n\E_{\mathcal L}f+\frac1n\sum_{j=2}^n\E_{\mathcal L}\big[f\xi(R_{1j})\big].
+\end{equation}
+In particular, $\E_{\mathcal L}\xi(R_{12})=(1-x)\xi(Q)$.
+\end{enumerate}
+For $n=1$, the sums over $j$ are empty, and in (2) the function $f$ is a constant.
+\end{lemma}
+
+\begin{proof}
+We begin with the last assertion of (1). By \cref{cor:th-pressure}, we have $e_N=F_N'(\beta)\to F'(\beta)$, and $F$ is differentiable at $\beta$. Then \cref{prop:dir-selfaveraging} implies that $\eps_N\to0$.
+
+Next, we derive an exact identity at finite $N$ by Gaussian integration by parts. We write $H_N(x)=g\cdot\Psi(x)=\sum_\alpha g_\alpha\Psi_\alpha(x)$ as in the proof of \cref{prop:dir-selfaveraging}. By the computation in the proof of \cref{lem:pre-field}(1), we have $\sum_\alpha\Psi_\alpha(x)\Psi_\alpha(y)=N\xi(R(x,y))$. Fix $n\ge1$ and a bounded Borel function $f$ on $S_N^n$, and for each index $\alpha$, let $\Phi_\alpha(g)=\langle f\Psi_\alpha(\sigma^1)\rangle$; this Gibbs average depends on $g$ through $\pi$. Differentiating the $n$ Gibbs densities and the normalization $Z_{N,\beta}^{-n}$, we find
+\[
+\partial_{g_\alpha}\Phi_\alpha(g)=\beta\Big\langle f\Psi_\alpha(\sigma^1)\Big(\sum_{l=1}^n\Psi_\alpha(\sigma^l)-n\Psi_\alpha(\sigma^{n+1})\Big)\Big\rangle.
+\]
+The function $f$ is not differentiated, since it depends on the samples and not on $g$. The bound $\abs{\Psi_\alpha}\le(N\xi(1))^{1/2}$ on $S_N$ implies that $\Phi_\alpha$ is bounded and smooth with bounded first derivatives. Then Gaussian integration by parts gives $\E[g_\alpha\Phi_\alpha(g)]=\E[\partial_{g_\alpha}\Phi_\alpha(g)]$. Summing over $\alpha$ and dividing by $N$, we obtain
+\begin{equation}\label{eq:dir-IBP}
+\E\Big\langle f\frac{H_N(\sigma^1)}N\Big\rangle=\beta\,\E\Big\langle f\Big(\xi(1)+\sum_{j=2}^n\xi(R_{1j})-n\xi(R_{1,n+1})\Big)\Big\rangle,
+\end{equation}
+where the term $l=1$ contributed $\xi(R_{11})=\xi(1)$.
+
+Taking $n=1$ and $f=1$ in \eqref{eq:dir-IBP}, we have $e_N=\beta(\xi(1)-\E\langle\xi(R_{12})\rangle)$. Inserting this into \eqref{eq:dir-IBP} and rearranging, we find
+\[
+n\E\langle f\xi(R_{1,n+1})\rangle-\sum_{j=2}^n\E\langle f\xi(R_{1j})\rangle-\E\langle\xi(R_{12})\rangle\E\langle f\rangle=-\frac1\beta\E\Big\langle f\Big(\frac{H_N(\sigma^1)}N-e_N\Big)\Big\rangle.
+\]
+The right side has absolute value at most $\norm f_\infty\eps_N/\beta$. By \eqref{eq:th-Fprime} and the formula for $e_N$, we have $\abs{\E\langle\xi(R_{12})\rangle-(1-x)\xi(Q)}=\abs{e_N-F'(\beta)}/\beta$, and $\abs{\E\langle f\rangle}\le\norm f_\infty$. Combining these bounds and dividing by $n$, we obtain \eqref{eq:dir-GG-defect}.
+
+For (2), let $(N_m)$ be a subsequence along which $\mathcal L_{N_m}$ converges to $\mathcal L$, and write $R^{(n)}=(R_{ij})_{1\le i<j\le n}$. Suppose first that $f$ is continuous. Then $f(R^{(n)})$ and $f(R^{(n)})\xi(R_{1j})$, $2\le j\le n+1$, are bounded continuous functions on $\mathcal M$ that depend on finitely many coordinates. We apply \eqref{eq:dir-GG-defect} to the bounded Borel function $(\sigma^1,\dots,\sigma^n)\mapsto f((R(\sigma^i,\sigma^j))_{1\le i<j\le n})$ and let $m\to\infty$. Using the last assertion of (1), we find that the right side of \eqref{eq:dir-GG-defect} tends to zero, which proves \eqref{eq:dir-GG} for continuous $f$. For general $f$, both sides of \eqref{eq:dir-GG} have the form $\int f\dd\mu$ for a finite signed Borel measure $\mu$ on $[-1,1]^{n(n-1)/2}$, since $\xi$ is bounded on $[-1,1]$; for the left side, $\mu(A)=\E_{\mathcal L}[\ind_A(R^{(n)})\xi(R_{1,n+1})]$. Two finite signed Borel measures on a compact metric space that agree on continuous functions are equal, and \eqref{eq:dir-GG} extends to every bounded Borel $f$. For $n=1$ and $f=1$, it reads $\E_{\mathcal L}\xi(R_{12})=(1-x)\xi(Q)$.
+\end{proof}
+
+\section{Proof of \texorpdfstring{\cref{thm:dir-norm}}{the theorem on directing norms}}\label{sec:dir-proof}
+
+Let $\mathcal L$ be a limiting overlap law and $(G_\omega)_{\omega\in\Omega}$ a directing measure of $\mathcal L$. The proof has three steps: we restrict the squared norms to $\{0,Q\}$, derive a recursion from \cref{lem:dir-GG}, and use it to remove the mass at the origin.
+
+\paragraph{Squared norms in $\{0,Q\}$.} Under the 1RSB assumptions, $V_\beta=V$ by \cref{prop:th-structure}(1), and $V(q)>0$ for every $q\in(0,1)\setminus\{Q\}$. For each such $q$, by \cref{lem:th-replica-exclusion}, there exist $k_q\ge2$ and $\rho_q>0$ such that $p_{N,k_q,\rho_q}(q)\to0$. Applying \cref{lem:dir-exclusion} with $\cA=\{0,Q\}$, we find that for $\Pr$-almost every $\omega$, the measure $G_\omega$ is carried by the vectors of squared norm $0$ or $Q$. For such $\omega$ and independent $v_1,v_2$ with law $G_\omega$, we have $\abs{v_1\cdot v_2}\le\norm{v_1}\norm{v_2}\le Q$ almost surely. Integrating over $\omega$ and using the weak exchangeability of $\mathcal L$, we conclude that $\abs{R_{ij}}\le Q$ for all $i\ne j$, $\mathcal L$-almost surely. Since the coefficients of $\xi$ are nonnegative, we have, $\mathcal L$-almost surely,
+\begin{equation}\label{eq:dir-xi-bound}
+\xi(R_{ij})\le\sum_pc_p\abs{R_{ij}}^p\le\xi(Q)\qquad(i\ne j).
+\end{equation}
+Note that \eqref{eq:dir-xi-bound} holds also when $\xi$ has odd degrees, in which case $\xi(R_{ij})$ may be negative.
+
+\paragraph{A recursion.} For $n\ge1$, let
+\[
+A_n=\big\{\xi(R_{1j})=0\text{ for }2\le j\le n\big\}\subset\mathcal M,\qquad a_n=\mathcal L(A_n),
+\]
+so that $A_1=\mathcal M$ and $a_1=1$. The indicator $\ind_{A_n}$ is a bounded Borel function of $(R_{ij})_{1\le i<j\le n}$. On $A_n$, we have $\xi(R_{1j})=0$ for $2\le j\le n$, so the sum in \eqref{eq:dir-GG} vanishes for $f=\ind_{A_n}$, and \cref{lem:dir-GG}(2) gives
+\[
+\E_{\mathcal L}\big[\ind_{A_n}\xi(R_{1,n+1})\big]=\frac{(1-x)\xi(Q)}n\,a_n.
+\]
+On the other hand, $A_{n+1}=A_n\cap\{\xi(R_{1,n+1})=0\}$. The integrand on the left vanishes on $A_{n+1}$, and on $A_n\setminus A_{n+1}$ it is at most $\xi(Q)$ by \eqref{eq:dir-xi-bound}. The left side is therefore at most $\xi(Q)(a_n-a_{n+1})$. Comparing the two bounds and dividing by $\xi(Q)>0$ yields
+\[
+a_{n+1}\le\Big(1-\frac{1-x}n\Big)a_n.
+\]
+Every factor lies in $(0,1)$, because $0<1-x<1$. Iterating from $a_1=1$, we obtain
+\begin{equation}\label{eq:dir-recursion}
+a_n\le\prod_{j=1}^{n-1}\Big(1-\frac{1-x}j\Big)\le\exp\Big(-(1-x)\sum_{j=1}^{n-1}\frac1j\Big)\le n^{-(1-x)},
+\end{equation}
+where we used $\log(1-t)\le-t$ and $\sum_{j=1}^{n-1}j^{-1}\ge\int_1^n\dd t/t=\log n$.
+
+\paragraph{No mass at the origin.} Fix $\omega\in\Omega$, and let $v_1,v_2,\dots$ be independent with law $G_\omega$. If $v_1=0$, then $R_{1j}=v_1\cdot v_j=0$ and $\xi(R_{1j})=0$ for every $j\ge2$, and the array belongs to $A_n$ for every $n$. This implies that $G_\omega(\{0\})\le\mathcal L^{G_\omega}(A_n)$ for every $n$. The numbers $\mathcal L^{G_\omega}(A_n)$ are nonincreasing in $n$, and by \cref{def:dir-directing} and \eqref{eq:dir-recursion},
+\[
+\int_\Omega\mathcal L^{G_\omega}(A_n)\,\Pr(\dd\omega)=a_n\le n^{-(1-x)}.
+\]
+By dominated convergence, $\lim_n\mathcal L^{G_\omega}(A_n)=0$ for $\Pr$-almost every $\omega$, and therefore $G_\omega(\{0\})=0$ for $\Pr$-almost every $\omega$. Together with the first step, this shows that $G_\omega$ is carried by $\{\norm v^2=Q\}$ for $\Pr$-almost every $\omega$, which completes the proof of \cref{thm:dir-norm}.

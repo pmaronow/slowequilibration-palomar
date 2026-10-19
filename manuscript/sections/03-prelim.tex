@@ -1,0 +1,484 @@
+\chapter{Preliminaries}\label{sec:prelim}
+
+This section collects the definitions and general facts that are used in both halves of the paper. \Cref{sec:pre-conventions} fixes our conventions for constants, probabilities, and the order in which parameters are chosen. \Cref{sec:pre-model} defines the model and records two standard Gaussian facts: the regularity of the field and of its derivatives (\cref{lem:pre-field}) and the concentration of free energies over deterministic domains (\cref{lem:pre-concentration}). \Cref{sec:pre-dynamics} introduces the Langevin dynamics on the sphere (\cref{def:pre-dynamics,lem:pre-dynamics}) and the spectral calculus of its generator (\cref{lem:pre-spectral}). \Cref{sec:pre-entropy} contains facts that hold for every Markov semigroup with an invariant law. These are the contraction of total variation and relative entropy (\cref{lem:pre-contraction}), binary data processing (\cref{lem:pre-binary}), an endpoint criterion for separation in total variation (\cref{prop:pre-endpoint}), and the chain identity for the mutual information between the two endpoints (\cref{lem:pre-MI}). \Cref{sec:pre-statics} recalls the Crisanti--Sommers functional, the Parisi formula, and the first-variation characterization of the minimizer (\cref{def:pre-CS,thm:pre-parisi,lem:pre-support}), and it defines the thresholds $\bd$ and $\bs$ (\cref{def:pre-thresholds,lem:pre-RS}). Finally, \cref{sec:pre-HMP} states two results of Huang, Montanari, and Pham in our notation (\cref{lem:pre-HMP-Z,lem:pre-HMP-overlap}).
+
+The facts in \cref{sec:pre-dynamics,sec:pre-entropy} concern a fixed field, and no randomness enters. They are used in \cref{sec:reduction,sec:condproof} for the condensed phase and in \cref{sec:spectral,sec:memory} below the static threshold. The field estimates of \cref{sec:pre-model} are used in \cref{part:condensed}, in the Kac--Rice formula and in the proof that the Gibbs measure concentrates on bands, and in \cref{sec:pressure}. The static facts of \cref{sec:pre-statics} enter \cref{sec:thermal,sec:pressure,sec:infinite}. \Cref{lem:pre-HMP-Z} is used in \cref{sec:mixbands,sec:plateau}, and \cref{lem:pre-HMP-overlap} in \cref{sec:pressure}. We prove the elementary statements and give precise citations for the others. Facts that are used in a single section are stated there.
+
+\section{Conventions}\label{sec:pre-conventions}
+
+Throughout, $N\ge2$ is the dimension. The covariance $\xi$ and the inverse temperature $\beta$ are fixed at the start of every statement, and all limits are taken as $N\to\infty$ with them fixed. We write $C$ for a large positive constant and $c$ and $a$ for small positive constants. In estimates taken as $N\to\infty$, these constants depend only on $\xi$, $\beta$, and the other parameters fixed in the statement at hand, never on $N$ or on the realization of the field. Their values may change from line to line, and the same convention applies to the constants implicit in the notation $O(\cdot)$ and $o(\cdot)$. Constants used only in deterministic analytic arguments for a fixed $N$ and a fixed field $H$ may depend on $N$ and $H$; we then indicate this dependence, as in $C_{r,N,H}$. Logarithms are natural.
+
+\paragraph{Probabilities.} We refer to the randomness of the field as the disorder and write $\Pp$ and $\E$ for its law and expectation. We say that a statement holds \emph{for all sufficiently large $N$} if there exists $N_0$, depending only on the fixed parameters, such that it holds for all $N\ge N_0$. We say that an event, defined for each $N$ in terms of the field, holds \emph{with probability at least $1-Ce^{-aN}$} if there exist constants $C,a>0$ such that its probability is at least $1-Ce^{-aN}$ for all sufficiently large $N$. It holds \emph{with probability tending to one} if its probability tends to one as $N\to\infty$. A statement of the form ``with probability at least $1-Ce^{-aN}$, the following holds'' is quenched. This means that on the event, every listed property holds for the realized field, simultaneously for all times, starting points, and other variables quantified inside the statement, unless the statement says otherwise.
+
+\paragraph{Order of parameters.} When a statement or proof involves several parameters, they are chosen in a fixed order. First $\xi$ and $\beta$ are fixed. Then the accuracy parameters of the statement (for example a plateau level, a tolerance, or the half-width of an energy window) are chosen in the order given in the proof. Then the constants $C$, $c$, $a$, $\gamma$, $\kappa$ are chosen, and they may depend on all of the above. Last, $N_0$ is chosen. No statement is uniform as $\beta$ approaches $\bd$ or $\bs$ unless this is said explicitly. Each proof with more than two parameters states their order.
+
+\paragraph{Measures and information.} For a fixed field, we write $\Pp_\mu$ and $\E_\mu$ for the law and expectation of the diffusion of \cref{def:pre-dynamics} with initial law $\mu$, and $\Pp_x$, $\E_x$ when $\mu=\delta_x$. For probability measures $\mu$ and $\nu$ on a measurable space, the total variation distance is $\norm{\mu-\nu}_{\TV}=\sup_A\abs{\mu(A)-\nu(A)}$. The relative entropy is $\KL(\mu\|\nu)=\int\log(\dd\mu/\dd\nu)\dd\mu$ if $\mu\ll\nu$, and $\KL(\mu\|\nu)=\infty$ otherwise. The mutual information of two random variables $X$ and $Y$ is the relative entropy of their joint law with respect to the product of the marginal laws. For $p,a\in[0,1]$, the binary relative entropy and the binary entropy are
+\[
+d(p\|a)=p\log\frac pa+(1-p)\log\frac{1-p}{1-a},\qquad h(p)=-p\log p-(1-p)\log(1-p),
+\]
+with $0\log0=0$ and $d(p\|a)=\infty$ if $a\in\{0,1\}$ and $p\ne a$. We also use $0\log(0/a)=0$ for $a\in[0,1]$ and $0\cdot\infty=0$, while $p\log(p/0)=\infty$ for $p>0$. All state spaces are standard Borel spaces.
+
+\section{The model}\label{sec:pre-model}
+
+\begin{definition}[Model]\label{def:pre-model}
+Let $S_N=\{x\in\R^N:\abs x^2=N\}$, let $\nu_N$ be the uniform probability measure on $S_N$, and for $x,y\in\R^N$ let $R(x,y)=x\cdot y/N$ and $U(x)=x/\sqrt N$. A \emph{finite mixture} is a nonzero polynomial
+\[
+\xi(r)=\sum_{p=2}^Pc_pr^p,\qquad c_p\ge0\quad(2\le p\le P).
+\]
+Its \emph{minimum degree} is $d=\min\{p:c_p>0\}$, and $\xi$ is \emph{pure} if exactly one coefficient is nonzero and \emph{non-pure} if at least two coefficients are nonzero. The \emph{field} $H_N$ is the centered Gaussian process on $S_N$ with covariance $\E H_N(x)H_N(y)=N\xi(R(x,y))$, realized as in \cref{lem:pre-field}. For $\beta\ge0$, the \emph{Gibbs measure} $\pi=\pi^H_{N,\beta}$ and the \emph{partition function} $Z_{N,\beta}$ are
+\[
+\pi(\dd x)=\frac{e^{\beta H_N(x)}}{Z_{N,\beta}}\,\nu_N(\dd x),\qquad Z_{N,\beta}=\int_{S_N}e^{\beta H_N}\dd\nu_N.
+\]
+The \emph{free energy} is $F_N(\beta)=N^{-1}\E\log Z_{N,\beta}$, and $F(\beta)=\lim_{N\to\infty}F_N(\beta)$. The limit exists by \cref{thm:pre-parisi}.
+\end{definition}
+
+We allow odd degrees and a quadratic term. Note that the Gibbs measure favors large values of $H_N$. For a function $f$ on $S_N$, we write $\pi(f)=\int f\dd\pi$; in particular, $\pi(U)\in\R^N$ is the Gibbs mean of the normalized spin. For $x,y\in S_N$, we have $\abs{U(x)}=1$, $R(x,x)=1$, and $\abs{R(x,y)}\le1$. For each $x\in S_N$, the variable $H_N(x)$ is centered Gaussian with variance $N\xi(1)$. By Fubini's theorem, we have
+\begin{equation}\label{eq:pre-EZ}
+\E Z_{N,\beta}=\int_{S_N}\E e^{\beta H_N(x)}\,\nu_N(\dd x)=e^{N\beta^2\xi(1)/2}.
+\end{equation}
+
+\begin{lemma}[Representation, rotation invariance, and regularity of the field]\label{lem:pre-field}
+Let $\xi$ be a finite mixture. Let $g^{(p)}_{i_1\dots i_p}$, for $2\le p\le P$ and $1\le i_1,\dots,i_p\le N$, be independent standard Gaussian variables, and define the random polynomial
+\begin{equation}\label{eq:pre-tensor}
+H_N(x)=\sum_{p=2}^P\sqrt{c_p}\,N^{-(p-1)/2}\sum_{i_1,\dots,i_p=1}^Ng^{(p)}_{i_1\dots i_p}\,x_{i_1}\cdots x_{i_p},\qquad x\in\R^N.
+\end{equation}
+\begin{enumerate}
+\item For all $x,y\in\R^N$, we have $\E H_N(x)H_N(y)=N\xi(R(x,y))$. In particular, the restriction of $H_N$ to $S_N$ is the field of \cref{def:pre-model}.
+\item For every $g\in O(N)$, the random polynomials $H_N\circ g^{-1}$ and $H_N$ have the same law.
+\item There exist $K,c>0$, depending only on $\xi$, such that for every $N\ge2$, with probability at least $1-e^{-cN}$,
+\begin{equation}\label{eq:pre-field-ball}
+\begin{aligned}
+&\sup_{\abs x\le\sqrt N}\abs{H_N(x)}\le KN,&&\sup_{\abs x\le\sqrt N}\abs{\nabla H_N(x)}\le K\sqrt N,\\
+&\sup_{\abs x\le\sqrt N}\norm{\nabla^2H_N(x)}_{\rm op}\le K,&&\sup_{\abs x\le\sqrt N}\norm{\nabla^3H_N(x)}_{\rm op}\le K/\sqrt N,
+\end{aligned}
+\end{equation}
+and, on the same event,
+\begin{equation}\label{eq:pre-field-sphere}
+\sup_{x\in S_N}\abs{\nabla_{S_N}H_N(x)}\le K\sqrt N,\qquad\sup_{x\in S_N}\norm{\nabla^2_{S_N}H_N(x)}_{\rm op}\le2K.
+\end{equation}
+\end{enumerate}
+Here $\nabla^k$ is the $k$-th Euclidean derivative, $\norm{T}_{\rm op}=\sup\{\abs{T[v_1,\dots,v_k]}:\abs{v_1},\dots,\abs{v_k}\le1\}$ for a $k$-linear form $T$, and $\nabla_{S_N}$ and $\nabla^2_{S_N}$ are the Riemannian gradient and Hessian on $S_N$.
+\end{lemma}
+
+\begin{proof}
+For (1), since the variables $g^{(p)}_{i_1\dots i_p}$ are independent and centered, we have
+\[
+\begin{split}
+\E H_N(x)H_N(y)&=\sum_{p=2}^Pc_pN^{-(p-1)}\sum_{i_1,\dots,i_p=1}^Nx_{i_1}y_{i_1}\cdots x_{i_p}y_{i_p}\\
+&=\sum_{p=2}^Pc_pN^{1-p}(x\cdot y)^p=N\xi(R(x,y)).
+\end{split}
+\]
+
+For (2), note that $g^{-1}$ preserves inner products. By (1), the process $H_N\circ g^{-1}$ is then a centered Gaussian process on $\R^N$ with the same covariance as $H_N$. Both are random elements of the finite-dimensional space of polynomials of degree at most $P$ on $\R^N$. Recall that such a polynomial is determined by its values on the finite set of points of $\{0,1,\dots,P\}^N$ whose coordinates sum to at most $P$. The law of a random polynomial of degree at most $P$ is therefore determined by the joint law of its values at these points. For $H_N\circ g^{-1}$ and $H_N$, these joint laws are centered Gaussian with the same covariance, which proves (2).
+
+For (3), we use \cite[Proposition~3.6]{HuangMontanariPham2024}, which is quoted there from \cite{HuangSellke2025}. Their Hamiltonian \cite[(1.1)]{HuangMontanariPham2024} is \eqref{eq:pre-tensor} with $\gamma_p^2=c_p$, and their summability hypothesis $\sum_p2^p\gamma_p^2<\infty$ holds because only finitely many $c_p$ are nonzero. For a $k$-tensor $A$, their normalized operator norm is $\norm A_{{\rm op},N}=N^{(k-2)/2}\norm A_{\rm op}$, and their supremum runs over $\abs x\le\sqrt N$. In our notation, the proposition states that there exist constants $C_k$ and $c>0$ such that, with probability at least $1-e^{-cN}$, we have $\sup_{\abs x\le\sqrt N}N^{(k-2)/2}\norm{\nabla^kH_N(x)}_{\rm op}\le C_k$ for all $k\ge0$. Taking $k=0,1,2,3$, we obtain \eqref{eq:pre-field-ball} with $K=\max(C_0,C_1,C_2,C_3)$.
+
+For \eqref{eq:pre-field-sphere}, let $x\in S_N$, and let $P_x=I-xx^{\mathsf T}/N$ be the orthogonal projection onto the tangent space at $x$. Then $\nabla_{S_N}H_N(x)=P_x\nabla H_N(x)$. Differentiating twice along the great circle through $x$ in the direction of a tangent vector, we find that
+\[
+\nabla^2_{S_N}H_N(x)[v,w]=\nabla^2H_N(x)[v,w]-N^{-1}\big(x\cdot\nabla H_N(x)\big)\,v\cdot w
+\]
+for tangent vectors $v$ and $w$. On the event in \eqref{eq:pre-field-ball}, it follows that $\abs{\nabla_{S_N}H_N(x)}\le K\sqrt N$ and $\norm{\nabla^2_{S_N}H_N(x)}_{\rm op}\le K+N^{-1}\abs x\abs{\nabla H_N(x)}\le2K$.
+\end{proof}
+
+We always use the extension \eqref{eq:pre-tensor} when Euclidean derivatives of $H_N$ are taken. The next lemma is the classical Gaussian concentration inequality for Lipschitz functions, due to Tsirelson, Ibragimov, and Sudakov, applied to free energies. We use it in the form \cite[Proposition~4.1 and (4.1)]{LedouxSemigroup1994}; see also \cite{Ledoux2001}.
+
+\begin{lemma}[Concentration of free energies]\label{lem:pre-concentration}
+Let $\xi$ be a finite mixture and $\beta>0$. Let $B\subset S_N$ be a Borel set with $\nu_N(B)>0$ and let $h\colon S_N\to\R$ be a bounded Borel function, both deterministic. Then
+\[
+Y=\log\int_Be^{\beta H_N+h}\dd\nu_N
+\]
+is integrable and, for every $t>0$,
+\begin{equation}\label{eq:pre-concentration}
+\Pp\big(\abs{Y-\E Y}\ge tN\big)\le2\exp\Big(-\frac{t^2N}{2\beta^2\xi(1)}\Big).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Let $g$ be the vector of all the variables $g^{(p)}_{i_1\dots i_p}$ in \eqref{eq:pre-tensor}. Then $H_N(x)=g\cdot\Psi(x)$, where $\Psi(x)$ is the vector with entries $\sqrt{c_p}\,N^{-(p-1)/2}x_{i_1}\cdots x_{i_p}$. By the computation in the proof of \cref{lem:pre-field}, we have $\abs{\Psi(x)}^2=N\xi(1)$ for $x\in S_N$. The function $g\mapsto Y$ is smooth, and its gradient is $\beta$ times the average of $\Psi$ under the probability measure on $B$ with density proportional to $e^{\beta H_N+h}$. Since this average has norm at most $\sqrt{N\xi(1)}$, the function $Y$ is $\beta\sqrt{N\xi(1)}$-Lipschitz in the standard Gaussian vector $g$. The bound $\abs{Y-\log\nu_N(B)}\le\norm h_\infty+\beta\abs g\sqrt{N\xi(1)}$ shows that $Y$ is integrable. Recall that an $L$-Lipschitz function $Y$ of a standard Gaussian vector satisfies $\Pp(\abs{Y-\E Y}\ge s)\le2e^{-s^2/(2L^2)}$. Taking $s=tN$ and $L^2=\beta^2N\xi(1)$ gives \eqref{eq:pre-concentration}.
+\end{proof}
+
+The bounded function $h$ accommodates a deterministic shift of the field, such as the one that appears under the planted law in \cref{sec:pressure}. The same proof applies to a centered Gaussian field with covariance $N\eta(R(x,y))$ for any nonzero polynomial $\eta$ with nonnegative coefficients, including a term of degree one, with $\xi(1)$ replaced by $\eta(1)$. If $\eta\equiv0$, the free energy is deterministic and its deviation probability is zero. The lemma does not apply to domains $B$ that depend on the field.
+
+\section{Langevin dynamics on the sphere}\label{sec:pre-dynamics}
+
+We equip $S_N$ with the Riemannian metric induced by $\R^N$ and write $\nabla_{S_N}$ and $\Delta_{S_N}$ for its gradient and Laplace--Beltrami operator. For $y\in\R^N$, let $P_y=I-yy^{\mathsf T}/N$. For $y\in S_N$, this is the orthogonal projection onto the tangent space at $y$.
+
+\begin{definition}[Langevin dynamics]\label{def:pre-dynamics}
+Let $\beta\ge0$ and let $H$ be a smooth function on $S_N$; in our applications, $H$ is a realization of the field $H_N$. Let $\pi$ be the probability measure with density proportional to $e^{\beta H}$ with respect to $\nu_N$. The \emph{generator} $L=L_{\beta,H}$ and the \emph{Dirichlet form} $\cE$ act on smooth functions $f,g$ on $S_N$ by
+\[
+Lf=\Delta_{S_N}f+\beta\nabla_{S_N}H\cdot\nabla_{S_N}f,\qquad \cE(f,g)=\int_{S_N}\nabla_{S_N}f\cdot\nabla_{S_N}g\dd\pi,
+\]
+and we write $\cE(f)=\cE(f,f)$. We use the same letters for the closed form, with domain $\mathcal D(\cE)$, and for the self-adjoint operator constructed in \cref{lem:pre-dynamics}. The \emph{semigroup} is $P_t=e^{tL}$, $t\ge0$. We list the eigenvalues of $-L$ in nondecreasing order with multiplicity as $\lambda_0\le\lambda_1\le\lambda_2\le\cdots$. For a vector-valued function $B=(B_1,\dots,B_m)$ with components in $\mathcal D(\cE)$, its Dirichlet energy, which we call the \emph{vector energy}, is $\cE_{\rm vec}(B)=\sum_{i=1}^m\cE(B_i)$. The \emph{Langevin diffusion} $(X_t)_{t\ge0}$ is the diffusion process on $S_N$ described in \cref{lem:pre-dynamics}(5).
+\end{definition}
+
+We work in the real Hilbert space $L^2(\pi)$ of real-valued square-integrable functions, with inner product $\ip fg=\int fg\dd\pi$ and norm $\norm f_2$. For vector-valued functions, inner products, norms, and operators are taken componentwise and summed. For example, $\norm B_2^2=\int\abs B^2\dd\pi$. We write $H^1(S_N)$ for the Sobolev space of functions on $S_N$ with one weak derivative in $L^2(\nu_N)$.
+
+\begin{lemma}[Basic properties of the dynamics]\label{lem:pre-dynamics}
+Let $\beta\ge0$ and let $H$ be a smooth function on $S_N$, with $\pi$, $L$, and $\cE$ as in \cref{def:pre-dynamics}.
+\begin{enumerate}
+\item \emph{Integration by parts.} For smooth $f$ and $g$, we have $\int fLg\dd\pi=-\cE(f,g)=\int gLf\dd\pi$.
+\item \emph{Self-adjoint generator.} The form $\cE$ on smooth functions is closable in $L^2(\pi)$, and its closure has domain $\mathcal D(\cE)=H^1(S_N)$. The associated nonnegative self-adjoint operator $A$ on $L^2(\pi)$ satisfies $\mathcal D(A^{1/2})=\mathcal D(\cE)$ and $\cE(f)=\norm{A^{1/2}f}_2^2$. The operator $-L$ on smooth functions is essentially self-adjoint, and its closure is $A$.
+\item \emph{Discrete spectrum.} The operator $A$ has compact resolvent. There exist an orthonormal basis $(\phi_j)_{j\ge0}$ of $L^2(\pi)$ consisting of real smooth functions and numbers $0=\lambda_0<\lambda_1\le\lambda_2\le\cdots$ with $\lambda_j\to\infty$ such that $A\phi_j=\lambda_j\phi_j$ for all $j$. The kernel of $A$ consists of the constant functions, and $\phi_0=1$. For $f\in L^2(\pi)$, let $\hat f_j=\ip f{\phi_j}$. Then $\norm f_2^2=\sum_j\hat f_j^2$. Moreover, $f\in\mathcal D(\cE)$ if and only if $\sum_j\lambda_j\hat f_j^2<\infty$, and in that case $\cE(f)=\sum_j\lambda_j\hat f_j^2$.
+\item \emph{Semigroup.} The semigroup $P_t=e^{-tA}$ is given by a transition kernel with a smooth density. Precisely, there exists a smooth function $(t,x,y)\mapsto p_t(x,y)$ on $(0,\infty)\times S_N\times S_N$, with $p_t\ge0$, $p_t(x,y)=p_t(y,x)$, and $\int p_t(x,y)\,\pi(\dd y)=1$, with the following property. The kernels $P_t(x,\dd y)=p_t(x,y)\,\pi(\dd y)$ for $t>0$ and $P_0(x,\cdot)=\delta_x$ satisfy $P_tf(x)=\int f(y)P_t(x,\dd y)$ for every $f\in L^2(\pi)$, every $x\in S_N$, and every $t>0$. These kernels form a Markov semigroup that maps continuous functions to continuous functions, and $\pi$ is invariant and reversible: $\pi(\dd x)P_t(x,\dd y)=\pi(\dd y)P_t(y,\dd x)$.
+\item \emph{The diffusion.} Let $(W_t)_{t\ge0}$ be a standard Brownian motion in $\R^N$. For every $x\in S_N$, the equation
+\begin{equation}\label{eq:pre-sde}
+\dd X_t=\sqrt2\,P_{X_t}\dd W_t+\beta\nabla_{S_N}H(X_t)\dd t-\frac{N-1}{N}X_t\dd t,\qquad X_0=x,
+\end{equation}
+with coefficients extended smoothly and with compact support off a neighborhood of $S_N$, has a unique strong solution. It stays on $S_N$, its law does not depend on the extension, and $\Pp_x(X_t\in\cdot)=P_t(x,\cdot)$ for all $t\ge0$. For every smooth $f$ on $S_N$, the process $f(X_t)-f(x)-\int_0^tLf(X_s)\dd s$ is a martingale.
+\end{enumerate}
+\end{lemma}
+
+All of these facts are standard for a smooth elliptic operator on a compact connected manifold that is symmetric with respect to a smooth positive density. We refer to \cite[Section~1.7]{BakryGentilLedoux2014} for the correspondence between closed forms, self-adjoint operators, and spectral decompositions. We give the short arguments below. The diffusion is the spherical Langevin dynamics studied, up to normalization, in \cite{GheissariJagannath2019,BenArousJagannath2018,ElAlaouiMontanariSellke2025}. The factor $\sqrt2$ in front of the noise makes $L$, without a factor $1/2$, its generator.
+
+\begin{proof}
+In this proof, $\nabla=\nabla_{S_N}$ and $\Delta=\Delta_{S_N}$. We prove (1)--(3) with the standard correspondence between closed forms and self-adjoint operators. For (4) and (5), we expand in eigenfunctions and identify the resulting semigroup with the transition function of \eqref{eq:pre-sde}. We use three classical facts. The first is the Rellich--Kondrachov theorem: the inclusion $H^1(S_N)\subset L^2(\nu_N)$ is compact \cite[Theorem~15.10]{Dyatlov2026Notes}. The second is elliptic regularity for the second-order elliptic operator $1-L$. A weak solution of the eigenvalue equation is smooth \cite[Theorem~15.1]{Dyatlov2026Notes}, and iterating the elliptic estimate \cite[Theorem~15.7]{Dyatlov2026Notes}, we find that for every integer $r\ge0$ and every eigenfunction $\phi$ of $A$ with eigenvalue $\lambda$ and $\norm\phi_2=1$,
+\[
+\norm{\phi}_{H^{2r}(S_N)}\le C_{r,N,H}(1+\lambda)^r.
+\]
+Together with Sobolev embedding in local charts \cite[Theorem~12.16]{Dyatlov2026Notes}, applied with $2r>k+(N-1)/2$, this gives $\norm\phi_{C^k}\le C_{k,N,H}(1+\lambda)^{m_k}$ for some integer $m_k$. The third is strong existence and uniqueness for stochastic differential equations with bounded Lipschitz coefficients \cite[Theorem~4.1]{VaradhanSDENotes}.
+Note that the density $\rho=\dd\pi/\dd\nu_N$ is smooth, that $\nabla\rho=\beta\rho\nabla H$, and that $e^{-\beta\osc H}\le\rho\le e^{\beta\osc H}$, where $\osc H=\max H-\min H$.
+
+\paragraph{Integration by parts.} By the divergence theorem on the closed manifold $S_N$, we have
+\[
+\int f\Delta g\,\rho\dd\nu_N=-\int\nabla(f\rho)\cdot\nabla g\dd\nu_N=-\int\nabla f\cdot\nabla g\,\rho\dd\nu_N-\beta\int f\,\nabla H\cdot\nabla g\,\rho\dd\nu_N,
+\]
+where in the last step we used $\nabla\rho=\beta\rho\nabla H$. Rearranging, we have $\int fLg\dd\pi=-\cE(f,g)$. The second identity in (1) follows from the symmetry of $\cE$.
+
+\paragraph{The form and the operator.} By the bounds on $\rho$, the norm $(\cE(f)+\norm f_2^2)^{1/2}$ on smooth functions is equivalent to the norm of $H^1(S_N)$. Since $H^1(S_N)$ is the completion of the smooth functions in that norm, $\cE$ is closable and $\mathcal D(\cE)=H^1(S_N)$. Let $A$ be the nonnegative self-adjoint operator associated with the closed form. Recall that $g\in\mathcal D(A)$ and $Ag=k$ if and only if $g\in\mathcal D(\cE)$ and $\cE(f,g)=\ip fk$ for all $f\in\mathcal D(\cE)$, and that $\mathcal D(A^{1/2})=\mathcal D(\cE)$ and $\cE(f)=\norm{A^{1/2}f}_2^2$. Using (1) and the density of smooth functions in $\mathcal D(\cE)$, we find that every smooth $g$ belongs to $\mathcal D(A)$ and that $Ag=-Lg$. We prove the essential self-adjointness after (3).
+
+\paragraph{The spectrum.} If $Ag+g=k$, then $\cE(g)+\norm g_2^2=\ip gk\le\norm g_2\norm k_2$. This shows that $(A+1)^{-1}$ maps bounded subsets of $L^2(\pi)$ to bounded subsets of $H^1(S_N)$. The Rellich--Kondrachov theorem and the equivalence of $L^2(\pi)$ and $L^2(\nu_N)$ then imply that the operator $(A+1)^{-1}$ is compact. The spectral theorem for compact self-adjoint operators on a real Hilbert space now provides an orthonormal basis of eigenfunctions of $A$. The eigenvalues $\lambda_j\ge0$ have finite multiplicity and tend to infinity, and by elliptic regularity the eigenfunctions are smooth. Suppose that $Af=0$. Then $\cE(f)=\ip f{Af}=0$, and the weak gradient of $f$ vanishes almost everywhere. As $S_N$ is connected, $f$ is almost everywhere constant. We conclude that the kernel of $A$ consists of the constants, that $\lambda_0=0$ is simple, and that $\phi_0=1$ and $\lambda_1>0$. The identities for $\norm f_2^2$ and $\cE(f)$ follow from the expansion $A^{1/2}f=\sum_j\lambda_j^{1/2}\hat f_j\phi_j$ for $f\in\mathcal D(A^{1/2})$. Finally, the finite linear combinations of eigenfunctions are smooth. They form a core for $A$, since the truncations of the expansion of $f\in\mathcal D(A)$ converge to $f$ in the graph norm. As $-L$ on smooth functions is a restriction of the closed operator $A$, its closure is $A$. This proves the essential self-adjointness claimed in (2).
+
+\paragraph{The semigroup.} We define $p_t(x,y)=\sum_je^{-\lambda_jt}\phi_j(x)\phi_j(y)$. We first show that the series converges in $C^\infty((0,\infty)\times S_N\times S_N)$. Since $\rho$ is bounded above and below, the min--max principle for $-L$ and for $-\Delta$ implies that $\lambda_j\ge e^{-2\beta\osc H}\lambda_j(-\Delta)$; see \cref{lem:pre-spectral}(5), whose proof uses only (3). The eigenvalues of $-\Delta$ are $k(k+N-2)/N$, $k\ge0$, with multiplicities bounded by a polynomial in $k$. Hence $\sum_j(1+\lambda_j)^{-m}<\infty$ for some $m$, and together with the bounds on $\norm{\phi_j}_{C^k}$ this gives the convergence. For $f\in L^2(\pi)$ and $t>0$, we have $P_tf=\sum_je^{-\lambda_jt}\hat f_j\phi_j$. The series $\sum_je^{-\lambda_jt}\hat f_j\phi_j(x)=\int f(y)p_t(x,y)\,\pi(\dd y)$ converges uniformly in $x$, which identifies $P_tf$ with a continuous function. The symmetry of $p_t$ is evident, and $\int p_t(x,y)\,\pi(\dd y)=P_t1(x)=1$. The Chapman--Kolmogorov equations follow from $e^{-(s+t)A}=e^{-sA}e^{-tA}$ and the continuity of the kernels. Reversibility follows from the symmetry of $p_t$, and it implies invariance. We prove that $p_t\ge0$ below.
+
+\paragraph{The diffusion.} We extend $\sigma(y)=\sqrt2P_y$ and $b(y)=\beta\nabla H(y)-(N-1)y/N$ from a neighborhood of $S_N$ to smooth compactly supported functions on $\R^N$. With these Lipschitz coefficients, \eqref{eq:pre-sde} has a unique strong solution. Let $u(y)=\abs y^2-N$. By It\^o's formula, the drift and diffusion coefficients of $u(X_t)$ are $2y\cdot b(y)+\Tr(\sigma\sigma^{\mathsf T})(y)$ and $2y^{\mathsf T}\sigma(y)$, evaluated at $y=X_t$. Both are smooth and vanish on $S_N$, because $y^{\mathsf T}P_y=0$, $y\cdot\nabla H(y)=0$, and $\Tr(2P_y^2)=2(N-1)$ for $y\in S_N$. As $S_N$ is a regular level set of $u$, near $S_N$ these coefficients have the form $u(y)\alpha(y)$ and $u(y)\gamma(y)$ with $\alpha$ and $\gamma$ smooth. Then $u(X_t)$ solves a linear equation with zero initial value up to the exit time from a neighborhood of $S_N$, which implies that $u(X_t)=0$ for all $t$. In particular, the law of $X$ does not depend on the extension.
+
+Next, let $F$ be a smooth function on $\R^N$. For $y\in S_N$, the Laplace--Beltrami operator of the sphere of radius $\sqrt N$ satisfies $\Delta(F|_{S_N})(y)=\Tr(P_y\nabla^2F(y)P_y)-(N-1)y\cdot\nabla F(y)/N$, where $\nabla$ and $\nabla^2$ on the right are Euclidean. By It\^o's formula, we have
+\begin{equation}\label{eq:pre-ito}
+\dd F(X_t)=LF(X_t)\dd t+\sqrt2\,\nabla F(X_t)\cdot P_{X_t}\dd W_t,
+\end{equation}
+which proves the martingale property. We now apply \eqref{eq:pre-ito} to $e^{\lambda_jt}\phi_j(X_t)$, with $\phi_j$ extended to a smooth function on $\R^N$. Since $L\phi_j=-\lambda_j\phi_j$, the process $e^{\lambda_jt}\phi_j(X_t)$ is a martingale; here the stochastic integral is a martingale because its integrand is bounded. Taking expectations, we find $\E_x\phi_j(X_t)=e^{-\lambda_jt}\phi_j(x)=P_t\phi_j(x)$ for every $x$. The law of $X_t$ under $\Pp_x$ and the finite signed measure $p_t(x,y)\,\pi(\dd y)$ therefore agree on finite linear combinations of eigenfunctions. These combinations are dense in the continuous functions on $S_N$ in the uniform norm. Indeed, smooth functions are dense, and for smooth $f$ we have $\hat f_j=\lambda_j^{-k}\ip{(-L)^kf}{\phi_j}$ for $j\ge1$ and every $k$, and the bounds above then show that the expansion of $f$ converges uniformly. We conclude that the two measures coincide, which proves that $\Pp_x(X_t\in\cdot)=P_t(x,\cdot)$ and that $p_t\ge0$.
+\end{proof}
+
+\begin{lemma}[Spectral calculus]\label{lem:pre-spectral}
+In the setting of \cref{lem:pre-dynamics}, let $f\in L^2(\pi)$ and $t\ge0$.
+\begin{enumerate}
+\item We have $P_tf=\sum_je^{-t\lambda_j}\hat f_j\phi_j$ and $\ip f{P_tf}=\sum_je^{-t\lambda_j}\hat f_j^2$.
+\item If $f\in\mathcal D(\cE)$, then $\norm{f-P_tf}_2^2\le t\cE(f)$ and $\ip f{(1-P_t)f}\le t\cE(f)$.
+\item If $X_0$ has law $\pi$, then $\E_\pi[f(X_0)g(X_t)]=\ip f{P_tg}$ for every $g\in L^2(\pi)$, and
+\[
+\E_\pi\abs{f(X_t)-f(X_0)}^2=2\ip f{(1-P_t)f}\le2t\cE(f)\qquad\text{if }f\in\mathcal D(\cE).
+\]
+\item For $\Lambda>0$, let $\Pi_\Lambda=\ind_{(0,\Lambda]}(A)$, so that $\Pi_\Lambda f=\sum_{j:0<\lambda_j\le\Lambda}\hat f_j\phi_j$. Then $\rank\Pi_\Lambda=\#\{j\ge1:\lambda_j\le\Lambda\}$, and for every integer $k\ge0$ we have $\lambda_k\le\Lambda$ if and only if $\rank\Pi_\Lambda\ge k$. If $\pi(f)=0$, then $\ip f{P_tf}\ge e^{-t\Lambda}\norm{\Pi_\Lambda f}_2^2$. If $f\in\mathcal D(\cE)$, then $\norm{f-\pi(f)-\Pi_\Lambda f}_2^2\le\cE(f)/\Lambda$.
+\item \emph{Min--max principle.} For every $k\ge0$,
+\[
+\lambda_k=\min_V\max_{f\in V\setminus\{0\}}\frac{\cE(f)}{\norm f_2^2},
+\]
+where $V$ ranges over the $(k+1)$-dimensional subspaces of $\mathcal D(\cE)$. The minimum is attained at the span of $\phi_0,\dots,\phi_k$, which consists of smooth functions, so $V$ may equally range over subspaces of smooth functions.
+\end{enumerate}
+Items (1)--(3) and the two estimates for functions in item (4) extend to vector-valued functions, by applying the operators componentwise and summing over components, with $\cE_{\rm vec}$ in place of $\cE$. The rank identity and the min--max principle concern the scalar operator $A$. For example, $\E_\pi\abs{B(X_t)-B(X_0)}^2\le2t\cE_{\rm vec}(B)$.
+\end{lemma}
+
+\begin{proof}
+Item (1) is the spectral theorem for $P_t=e^{-tA}$, together with \cref{lem:pre-dynamics}(3). For (2), we have
+\[
+\norm{f-P_tf}_2^2=\sum_j\big(1-e^{-t\lambda_j}\big)^2\hat f_j^2\le\sum_jt\lambda_j\hat f_j^2=t\cE(f),
+\]
+where we used $(1-e^{-u})^2\le u$ for $u\ge0$. For $u\le1$, this follows from $1-e^{-u}\le u$, and for $u\ge1$, the left side is at most $1$. The second bound in (2) follows in the same way from $1-e^{-u}\le u$.
+
+For (3), recall from \cref{lem:pre-dynamics}(4)--(5) that the joint law of $(X_0,X_t)$ under $\Pp_\pi$ is $\pi(\dd x)P_t(x,\dd y)$. Then $\E_\pi[f(X_0)g(X_t)]=\int f(x)P_tg(x)\,\pi(\dd x)=\ip f{P_tg}$. Both endpoints have law $\pi$, and therefore
+\[
+\E_\pi\abs{f(X_t)-f(X_0)}^2=2\norm f_2^2-2\ip f{P_tf}=2\ip f{(1-P_t)f},
+\]
+and the bound follows from (2).
+
+For (4), note that the range of $\Pi_\Lambda$ is spanned by the $\phi_j$ with $j\ge1$ and $\lambda_j\le\Lambda$, which gives the rank. Since $\lambda_0=0$ and the eigenvalues are nondecreasing, $\lambda_k\le\Lambda$ holds if and only if at least $k+1$ indices $j\ge0$ satisfy $\lambda_j\le\Lambda$, that is, if and only if $\rank\Pi_\Lambda\ge k$. If $\pi(f)=0$, then $\hat f_0=0$, and every term of the series for $\ip f{P_tf}$ in (1) is nonnegative. Keeping only the terms with $0<\lambda_j\le\Lambda$, we find $\ip f{P_tf}\ge e^{-t\Lambda}\norm{\Pi_\Lambda f}_2^2$. Finally, since $\hat f_0=\pi(f)$, we have $f-\pi(f)-\Pi_\Lambda f=\sum_{j:\lambda_j>\Lambda}\hat f_j\phi_j$, and the squared norm of this function is at most $\Lambda^{-1}\sum_j\lambda_j\hat f_j^2=\cE(f)/\Lambda$.
+
+For (5), let $V$ be a $(k+1)$-dimensional subspace of $\mathcal D(\cE)$. It contains a nonzero $f$ orthogonal to $\phi_0,\dots,\phi_{k-1}$ (no condition if $k=0$), and by \cref{lem:pre-dynamics}(3) this $f$ satisfies $\cE(f)=\sum_{j\ge k}\lambda_j\hat f_j^2\ge\lambda_k\norm f_2^2$. On the other hand, every $f$ in the span of $\phi_0,\dots,\phi_k$ satisfies $\cE(f)=\sum_{j\le k}\lambda_j\hat f_j^2\le\lambda_k\norm f_2^2$. This proves (5), including the attainment of the minimum by smooth functions. This is the classical min--max principle; compare \cite[equation~(2)]{ElSoufiHarrellIliasStubbe2017} for the equivalent weighted formulation. The vector-valued estimates follow by summing over components.
+\end{proof}
+
+\begin{remark}[Fields of class $C^2$]\label{rem:pre-C2}
+\Cref{sec:infinite} applies these facts to fields that are only twice continuously differentiable. The proofs of \cref{lem:pre-dynamics}(1)--(3), except for the smoothness of the eigenfunctions and the essential self-adjointness, use only that $H$ is continuously differentiable. The proofs of \cref{lem:pre-spectral}(1), (2), and (4), and of the min--max principle over $\mathcal D(\cE)$, use only \cref{lem:pre-dynamics}(3). These statements hold for every $H$ of class $C^2$, with $P_t=e^{-tA}$ defined by the spectral theorem. The last sentence of \cref{lem:pre-spectral}(5), on subspaces of smooth functions, uses the smoothness of the eigenfunctions; for fields of class $C^2$, it is replaced by the corresponding statement of \cref{lem:inf-dynamics}.
+\end{remark}
+
+\section{Markov semigroups and relative entropy}\label{sec:pre-entropy}
+
+In this section, $E$ and $F$ are standard Borel spaces. A Markov kernel $K$ from $E$ to $F$ acts on probability measures on $E$ by $\mu K(\cdot)=\int K(x,\cdot)\,\mu(\dd x)$ and on bounded measurable functions on $F$ by $Kf(x)=\int f(y)K(x,\dd y)$. A Markov kernel on $E$ is a Markov kernel from $E$ to $E$. A \emph{Markov semigroup} is a family $(P_t)_{t\ge0}$ of Markov kernels on $E$ such that $P_0(x,\cdot)=\delta_x$ and $P_{s+t}=P_sP_t$ for all $s,t\ge0$. A probability measure $\pi$ is \emph{invariant} if $\pi P_t=\pi$ for all $t$. Recall from \cref{lem:pre-dynamics}(4) that the Langevin semigroup is a Markov semigroup on $S_N$ with invariant law $\pi$. Nothing in this section uses reversibility.
+
+The following facts are classical. For data processing, we refer to \cite{Csiszar1967} and \cite[Theorem~2.17 and Corollary~2.18]{PolyanskiyWu2025}. We include the short proofs.
+
+\begin{lemma}[Contraction]\label{lem:pre-contraction}
+Let $K$ be a Markov kernel from $E$ to $F$, and let $\mu$, $\nu$ be probability measures on $E$. Then
+\[
+\norm{\mu K-\nu K}_{\TV}\le\norm{\mu-\nu}_{\TV},\qquad \KL(\mu K\|\nu K)\le\KL(\mu\|\nu).
+\]
+Let $(P_t)$ be a Markov semigroup with invariant law $\pi$. Then for every probability measure $\mu$, the functions $t\mapsto\norm{\mu P_t-\pi}_{\TV}$ and $t\mapsto\KL(\mu P_t\|\pi)$ are nonincreasing on $[0,\infty)$.
+\end{lemma}
+
+\begin{proof}
+Let $E_+$ be a positive set of a Hahn decomposition of the signed measure $\mu-\nu$. Then $\norm{\mu-\nu}_{\TV}=(\mu-\nu)(E_+)=-(\mu-\nu)(E_+^c)$. For every measurable function $u$ with $0\le u\le1$, we have $(\mu-\nu)(E_+^c)\le\int u\dd(\mu-\nu)\le(\mu-\nu)(E_+)$, which gives $\abs{\int u\dd(\mu-\nu)}\le\norm{\mu-\nu}_{\TV}$. Choosing $u=K(\cdot,A)$, we obtain $\abs{\mu K(A)-\nu K(A)}\le\norm{\mu-\nu}_{\TV}$ for every measurable $A\subset F$.
+
+For relative entropy, we use the Donsker--Varadhan formula $\KL(\mu\|\nu)=\sup_u\{\int u\dd\mu-\log\int e^u\dd\nu\}$, where the supremum is over bounded measurable functions \cite[Theorem~4.6]{PolyanskiyWu2025}. Let $u$ be a bounded measurable function on $F$. By Jensen's inequality, we have $K(e^u)\ge e^{Ku}$ pointwise. This implies that
+\[
+\int u\dd(\mu K)-\log\int e^u\dd(\nu K)\le\int Ku\dd\mu-\log\int e^{Ku}\dd\nu\le\KL(\mu\|\nu).
+\]
+In the last inequality, we used that $Ku$ is a bounded measurable function on $E$. Taking the supremum over $u$ proves that $\KL(\mu K\|\nu K)\le\KL(\mu\|\nu)$.
+
+For the last assertion, let $s,t\ge0$. Since $\mu P_{t+s}=(\mu P_t)P_s$ and $\pi=\pi P_s$, the two inequalities with $K=P_s$ imply that $\norm{\mu P_{t+s}-\pi}_{\TV}\le\norm{\mu P_t-\pi}_{\TV}$ and $\KL(\mu P_{t+s}\|\pi)\le\KL(\mu P_t\|\pi)$.
+\end{proof}
+
+\begin{lemma}[Binary data processing]\label{lem:pre-binary}
+Let $\mu$ and $\nu$ be probability measures on a measurable space, let $B$ be a measurable set, and let $p=\mu(B)$ and $a=\nu(B)$. Then
+\begin{equation}\label{eq:pre-binary}
+\KL(\mu\|\nu)\ge d(p\|a)\ge p\log\frac1a-\log2.
+\end{equation}
+In particular, if $0<a<1$, then $p\le(\KL(\mu\|\nu)+\log2)/\log(1/a)$. If $a=0$ and $\KL(\mu\|\nu)<\infty$, then $p=0$.
+\end{lemma}
+
+\begin{proof}
+Let $K$ be the kernel that sends $x$ to the point mass at $\ind_B(x)\in\{0,1\}$. Then $\mu K$ and $\nu K$ are the Bernoulli laws with parameters $p$ and $a$, and \cref{lem:pre-contraction}, applied to this kernel into $\{0,1\}$, implies that $\KL(\mu\|\nu)\ge\KL(\mu K\|\nu K)=d(p\|a)$. For $0<a<1$, expanding the definition, we find
+\[
+d(p\|a)=p\log\frac1a+(1-p)\log\frac1{1-a}-h(p)\ge p\log\frac1a-\log2,
+\]
+since the middle term is nonnegative and $h(p)\le\log2$. If $a=0<p$, then $d(p\|a)=\infty=p\log(1/a)$. If $a=p=0$, the right side of \eqref{eq:pre-binary} is $-\log2$ by the convention $0\cdot\infty=0$. If $a=1$, the right side is $-\log2$ as well. In these cases, \eqref{eq:pre-binary} holds because $d(p\|a)\ge0$. The two final assertions follow by rearranging \eqref{eq:pre-binary}.
+\end{proof}
+
+The next proposition starts from a bound on the mass that the law at a single time $T$ gives to a set $B$ of almost full Gibbs measure. It converts this bound into separation in total variation on the whole interval $[0,T]$, and it transfers the separation to initial laws of finite relative entropy.
+
+\begin{proposition}[Separation in total variation and transfer by relative entropy]\label{prop:pre-endpoint}
+Let $(P_t)$ be a Markov semigroup on $E$ with invariant law $\pi$. Let $\nu$ be a probability measure on $E$, let $T\ge0$, let $B\subset E$ be measurable, and let $a=(\nu P_T)(B)$ and $\eta=\pi(B^c)$. Then
+\begin{equation}\label{eq:pre-endpoint-tv}
+\inf_{0\le t\le T}\norm{\nu P_t-\pi}_{\TV}\ge1-\eta-a.
+\end{equation}
+Let $\mu$ be another probability measure with $\KL(\mu\|\nu)<\infty$. If $0<a<1$, then
+\begin{equation}\label{eq:pre-endpoint-entropy}
+\inf_{0\le t\le T}\norm{\mu P_t-\pi}_{\TV}\ge1-\eta-\min\Big\{1,\frac{\KL(\mu\|\nu)+\log2}{\log(1/a)}\Big\}.
+\end{equation}
+If $a=0$, then $(\mu P_T)(B)=0$ and $\inf_{0\le t\le T}\norm{\mu P_t-\pi}_{\TV}\ge1-\eta$.
+\end{proposition}
+
+\begin{proof}
+Let $\rho$ be a probability measure on $E$. \Cref{lem:pre-contraction} implies that the function $t\mapsto\norm{\rho P_t-\pi}_{\TV}$ is nonincreasing. Testing the set $B$ at time $T$, we obtain
+\begin{equation}\label{eq:pre-endpoint-test}
+\inf_{0\le t\le T}\norm{\rho P_t-\pi}_{\TV}=\norm{\rho P_T-\pi}_{\TV}\ge\pi(B)-(\rho P_T)(B)=1-\eta-(\rho P_T)(B).
+\end{equation}
+With $\rho=\nu$, this is \eqref{eq:pre-endpoint-tv}.
+
+Now let $\rho=\mu$ and $p=(\mu P_T)(B)$. By \cref{lem:pre-contraction} with $K=P_T$, we have $\KL(\mu P_T\|\nu P_T)\le\KL(\mu\|\nu)$. If $0<a<1$, then \cref{lem:pre-binary}, applied to $\mu P_T$, $\nu P_T$, and $B$, implies that $p\le(\KL(\mu\|\nu)+\log2)/\log(1/a)$. Together with $p\le1$ and \eqref{eq:pre-endpoint-test}, this proves \eqref{eq:pre-endpoint-entropy}. If $a=0$, then $\KL(\mu P_T\|\nu P_T)<\infty$ and \cref{lem:pre-binary} gives $p=0$. The last assertion then follows from \eqref{eq:pre-endpoint-test}.
+\end{proof}
+
+\begin{remark}[Polynomial endpoint bounds]\label{rem:pre-endpoint}
+In our applications, the semigroup, the invariant law, the set $B$, and the initial laws depend on the realization of the field, and \cref{prop:pre-endpoint} is applied for each fixed realization. For example, suppose that $(\nu P_T)(B)\le N^{-\zeta}$ for some $\zeta>0$. The proof of \cref{prop:pre-endpoint} shows that
+\[
+(\mu P_T)(B)\le\frac{\KL(\mu\|\nu)+\log2}{\zeta\log N}.
+\]
+In particular, a field-dependent initial law $\mu$ has vanishing mass in $B$ at time $T$ as soon as its relative entropy $\KL(\mu\|\nu)$ with respect to $\nu$, computed in the realized field, is $o(\log N)$ on the event, or in the probability mode, used in the statement at hand. The proposition concerns only the law at time $T$, and it gives no information about the path before time $T$.
+\end{remark}
+
+The last lemma of this section is the chain identity for mutual information, known as the golden formula \cite[Theorem~4.1]{PolyanskiyWu2025}, with the reference law $\pi$ in the role of the output law.
+
+\begin{lemma}[Endpoint mutual information]\label{lem:pre-MI}
+Let $K$ be a Markov kernel on $E$, let $\pi$ and $\mu$ be probability measures on $E$, and let $(X_0,X_1)$ have joint law $\mu(\dd x)K(x,\dd y)$. Then, in $[0,\infty]$,
+\begin{equation}\label{eq:pre-golden}
+\int\KL\big(K(x,\cdot)\,\big\|\,\pi\big)\,\mu(\dd x)=I(X_0;X_1)+\KL(\mu K\|\pi).
+\end{equation}
+In particular, if $\KL(\mu K\|\pi)<\infty$, then $I(X_0;X_1)=\int\KL(K(x,\cdot)\|\pi)\,\mu(\dd x)-\KL(\mu K\|\pi)$. If $\pi K=\pi$, then the stationary pair, with $\mu=\pi$, satisfies
+\begin{equation}\label{eq:pre-golden-stationary}
+I(X_0;X_1)=\int\KL\big(K(x,\cdot)\,\big\|\,\pi\big)\,\pi(\dd x).
+\end{equation}
+\end{lemma}
+
+For a Markov semigroup, we write $I_\mu(X_0;X_t)$ for the mutual information of $(X_0,X_t)$ when $X_0$ has law $\mu$ and $K=P_t$, and $I(X_0;X_t)=I_\pi(X_0;X_t)$ in the stationary case.
+
+\begin{proof}
+Let $\Gamma(\dd x,\dd y)=\mu(\dd x)K(x,\dd y)$ and $\mu_1=\mu K$, and recall that $I(X_0;X_1)=\KL(\Gamma\|\mu\otimes\mu_1)$. The identity \eqref{eq:pre-golden} follows from the two identities
+\begin{align}
+\KL(\Gamma\|\mu\otimes\pi)&=\int\KL\big(K(x,\cdot)\,\big\|\,\pi\big)\,\mu(\dd x),\label{eq:pre-chain}\\
+\KL(\Gamma\|\mu\otimes\pi)&=\KL(\Gamma\|\mu\otimes\mu_1)+\KL(\mu_1\|\pi).\label{eq:pre-chain-2}
+\end{align}
+
+We begin with \eqref{eq:pre-chain}. Suppose that $\Gamma\ll\mu\otimes\pi$ with density $k$. By Fubini's theorem, for $\mu$-almost every $x$ we have $K(x,A)=\int_Ak(x,y)\,\pi(\dd y)$ for all sets $A$ in a countable generating algebra, and then for all measurable $A$ by the monotone class theorem. It follows that $K(x,\cdot)\ll\pi$ with density $k(x,\cdot)$ for $\mu$-almost every $x$, and Tonelli's theorem, applied to $k\log k+e^{-1}\ge0$, gives \eqref{eq:pre-chain}. If $\Gamma$ is not absolutely continuous with respect to $\mu\otimes\pi$, the left side of \eqref{eq:pre-chain} is infinite, and so is the right side. Indeed, if the right side were finite, then $K(x,\cdot)\ll\pi$ for $\mu$-almost every $x$, and a jointly measurable choice of the densities, which exists on standard Borel spaces, would be a density of $\Gamma$ with respect to $\mu\otimes\pi$.
+
+For \eqref{eq:pre-chain-2}, suppose first that $\mu_1\not\ll\pi$. Since $\mu_1$ is the second marginal of $\Gamma$, \cref{lem:pre-contraction}, applied to the projection kernel from $E\times E$ to $E$, implies that $\KL(\Gamma\|\mu\otimes\pi)\ge\KL(\mu_1\|\pi)=\infty$, and both sides are infinite. Suppose next that $\mu_1\ll\pi$ with density $r$. Then $\mu\otimes\mu_1$ has density $r(y)$ with respect to $\mu\otimes\pi$, so $\Gamma\ll\mu\otimes\mu_1$ implies $\Gamma\ll\mu\otimes\pi$. Conversely, suppose that $\Gamma\ll\mu\otimes\pi$ and that $(\mu\otimes\mu_1)(E')=0$ for a measurable set $E'\subset E\times E$. Then $r(y)=0$ for $(\mu\otimes\pi)$-almost every $(x,y)\in E'$, so the set $E'\cap\{(x,y):r(y)>0\}$ is $(\mu\otimes\pi)$-null and hence $\Gamma$-null. Together with $\Gamma(\{(x,y):r(y)=0\})=\mu_1(\{r=0\})=0$, this gives $\Gamma(E')=0$. We conclude that $\Gamma\ll\mu\otimes\pi$ if and only if $\Gamma\ll\mu\otimes\mu_1$, and if neither holds, both sides of \eqref{eq:pre-chain-2} are infinite. Otherwise, let $k$ be the density of $\Gamma$ with respect to $\mu\otimes\mu_1$. Then $\Gamma$ has density $k(x,y)r(y)$ with respect to $\mu\otimes\pi$, and we have
+\[
+\KL(\Gamma\|\mu\otimes\pi)=\int\log k\dd \Gamma+\int\log r(y)\,\Gamma(\dd x,\dd y)=\KL(\Gamma\|\mu\otimes\mu_1)+\KL(\mu_1\|\pi).
+\]
+The splitting of the integral is legitimate because the negative parts of $\log k$ and $\log r$ are $\Gamma$-integrable. For instance, $\int(\log k)^-\dd \Gamma=\int k(\log k)^-\dd(\mu\otimes\mu_1)\le e^{-1}$.
+
+The remaining assertions follow from \eqref{eq:pre-golden}. If $\KL(\mu K\|\pi)<\infty$, we may subtract it, and if $\pi K=\pi$ and $\mu=\pi$, then $\KL(\mu K\|\pi)=0$.
+\end{proof}
+
+For the Langevin semigroup, $P_t(x,\cdot)$ has the continuous density $p_t(x,\cdot)$ for $t>0$ by \cref{lem:pre-dynamics}(4), and the measure-theoretic points in the proof are immediate there. At $t=0$, the stationary pair lies on the diagonal, which has $\pi\otimes\pi$-measure zero, and $I(X_0;X_0)=\infty$.
+
+\section{The Crisanti--Sommers functional and the static thresholds}\label{sec:pre-statics}
+
+The free energy of a spherical spin glass is given by a variational formula over probability measures on $[0,1)$. This formula was derived by Crisanti and Sommers \cite{CrisantiSommers1992} with the replica method, in a form equivalent to Parisi's formula. It was proved by Talagrand for even mixtures \cite{Talagrand2006} and by Chen for general mixtures \cite{Chen2013}, and Huang and Sellke gave a constructive proof of the lower bound \cite{HuangSellke2024}. We need the formula for covariances with a term of degree one, which appear in \cref{sec:pressure}.
+
+\begin{definition}[Crisanti--Sommers functional]\label{def:pre-CS}
+Let $\mathscr M$ be the set of Borel probability measures $\zeta$ on $[0,1)$ such that $\zeta([0,\hat q])=1$ for some $\hat q<1$. For $\zeta\in\mathscr M$ define
+\[
+\hat x_\zeta(t)=\int_t^1\zeta([0,s])\dd s=\int\big(1-\max(t,s)\big)\,\zeta(\dd s),\qquad0\le t\le1.
+\]
+A \emph{covariance polynomial} is a polynomial $\eta(t)=\sum_{p=1}^Pa_pt^p$ with $a_p\ge0$; a term of degree one is allowed. For a covariance polynomial $\eta$ and $\beta\ge0$, the \emph{Crisanti--Sommers functional} is
+\begin{equation}\label{eq:pre-CS}
+\cP_\beta(\zeta;\eta)=\frac12\bigg[\beta^2\Big(\eta(1)-\int\eta\dd\zeta\Big)+\int_0^{\hat q}\frac{\dd t}{\hat x_\zeta(t)}+\log(1-\hat q)\bigg],
+\end{equation}
+where $\hat q<1$ is any number with $\zeta([0,\hat q])=1$, and we set $\cP_\beta(\eta)=\inf_{\zeta\in\mathscr M}\cP_\beta(\zeta;\eta)$.
+\end{definition}
+
+The second expression for $\hat x_\zeta$ follows from Fubini's theorem. The function $\hat x_\zeta$ is Lipschitz, with derivative $-\zeta([0,t])$ almost everywhere, and $\hat x_\zeta(t)=1-t$ for $t\ge\hat q$. Since $\zeta$ is carried by $[0,\hat q]$, the second expression gives $\hat x_\zeta(t)\ge1-\max(t,\hat q)>0$ for $t<1$. Further, \eqref{eq:pre-CS} does not depend on the choice of $\hat q$, because $\int_{\hat q}^{\hat q'}\dd t/(1-t)=\log(1-\hat q)-\log(1-\hat q')$. Using $\eta(0)=0$, we also have
+\begin{equation}\label{eq:pre-CS-HS}
+\eta(1)-\int\eta\dd\zeta=\int_0^1\eta'(t)\,\zeta([0,t])\dd t=\eta'(0)\hat x_\zeta(0)+\int_0^1\eta''(t)\hat x_\zeta(t)\dd t.
+\end{equation}
+For the first equality, we wrote $\eta(1)-\eta(s)=\int_s^1\eta'(t)\dd t$ and used Fubini's theorem. For the second, we integrated by parts, using $\hat x_\zeta'(t)=-\zeta([0,t])$ and $\hat x_\zeta(1)=0$. By \eqref{eq:pre-CS-HS}, $\cP_\beta(\zeta;\eta)$ coincides with the functional $\mathcal P(x;\xi)$ of \cite[(1.4)]{HuangSellke2024} for $\xi=\beta^2\eta$ and $x(t)=\zeta([0,t])$.
+
+Two choices of $\zeta$ appear repeatedly. For $\zeta=\delta_0$, we have $\hat x_{\delta_0}(t)=1-t$ and $\cP_\beta(\delta_0;\eta)=\beta^2\eta(1)/2$. For $\zeta=x\delta_0+(1-x)\delta_Q$ with $0<x<1$ and $0<Q<1$, we have $\hat x_\zeta(t)=1-Q+x(Q-t)$ for $t\le Q$ and $\hat x_\zeta(t)=1-t$ for $t\ge Q$. This is the function $\hat x$ used in \cref{sec:thermal}.
+
+\begin{theorem}[Parisi formula; \cite{Talagrand2006,Chen2013}]\label{thm:pre-parisi}
+Let $\eta$ be a covariance polynomial, let $\beta\ge0$, and let $G_N$ be a centered Gaussian process on $S_N$ with continuous sample paths and covariance $\E G_N(x)G_N(y)=N\eta(R(x,y))$. Then
+\[
+\lim_{N\to\infty}\frac1N\E\log\int_{S_N}e^{\beta G_N}\dd\nu_N=\cP_\beta(\eta).
+\]
+In particular, $F(\beta)=\cP_\beta(\xi)$ for every finite mixture $\xi$ and every $\beta\ge0$.
+\end{theorem}
+
+For even $\eta$, this is \cite[Theorem~1.1]{Talagrand2006}. For general covariance polynomials, including odd degrees and a term of degree one, it is \cite[Theorem~1]{Chen2013}. The summability hypothesis there holds trivially, because the coefficients $\beta_p=\beta\sqrt{a_p}$ in the notation of \cite[(1.2)]{Chen2013} are nonnegative and only finitely many are nonzero. Chen states the formula in Parisi's form, and its equality with the Crisanti--Sommers form is \cite[Theorem~4.1]{Talagrand2006}. In exactly the form \eqref{eq:pre-CS}, the statement is \cite[Theorem~1.1]{HuangSellke2024}, which also gives convergence in probability of $N^{-1}\log\int e^{\beta G_N}\dd\nu_N$. The value of $\int e^{\beta G_N}\dd\nu_N$ depends only on the law of $G_N$, and any realization may be used, for example the analog of \eqref{eq:pre-tensor} with $p$ ranging over the degrees of $\eta$.
+
+The minimizer of the Crisanti--Sommers functional is characterized by its first variation. For $\zeta\in\mathscr M$, let
+\begin{equation}\label{eq:pre-first-variation}
+f_\zeta(s)=\beta^2\eta(s)-\int_0^s\frac{s-t}{\hat x_\zeta(t)^2}\dd t,\qquad 0\le s<1,
+\end{equation}
+and let $S_\zeta=\{s\in[0,1):f_\zeta(s)=\sup_{[0,1)}f_\zeta\}$. With $\eta=\xi$ and $\zeta=x\delta_0+(1-x)\delta_Q$, the function $-f_\zeta$ is the function $V$ of \cref{sec:thermal}.
+
+\begin{lemma}[First variation and the optimality criterion]\label{lem:pre-support}
+Let $\eta$ be a covariance polynomial and $\beta\ge0$.
+\begin{enumerate}
+\item For every $\zeta\in\mathscr M$, the function $f_\zeta$ is continuous on $[0,1)$ and tends to $-\infty$ at $1$. In particular, $S_\zeta$ is a nonempty compact subset of $[0,1)$.
+\item For $\zeta,\mu\in\mathscr M$, the function $\varepsilon\mapsto\cP_\beta((1-\varepsilon)\zeta+\varepsilon\mu;\eta)$ is convex and differentiable on $[0,1]$, and its derivative at $\varepsilon=0$ is $-\int f_\zeta\dd(\mu-\zeta)/2$. In particular,
+\begin{equation}\label{eq:pre-variation-inequality}
+\cP_\beta(\mu;\eta)-\cP_\beta(\zeta;\eta)\ge\frac12\Big(\int f_\zeta\dd\zeta-\int f_\zeta\dd\mu\Big).
+\end{equation}
+\item The functional $\cP_\beta(\cdot\,;\eta)$ has a unique minimizer on $\mathscr M$, and $\zeta\in\mathscr M$ is this minimizer if and only if $\zeta(S_\zeta)=1$.
+\end{enumerate}
+\end{lemma}
+
+We call the characterization in (3) the \emph{Crisanti--Sommers optimality criterion}. Together with existence and uniqueness, it is due to Talagrand \cite[Proposition~2.1]{Talagrand2006}. In the present normalization it is \cite[Lemma~1.2]{HuangSellke2024}; see also \cite[Proposition~9]{Subag2024}. For $\eta=\xi$, we call the minimizer the \emph{Parisi measure} of $(\xi,\beta)$. We include the short proof of the characterization, since its first-variation formula is used in \cref{sec:thermal,sec:pressure}.
+
+\begin{proof}
+For (1), continuity is clear. Fix $\hat q<1$ with $\zeta([0,\hat q])=1$. For $\hat q<s<1$, using $\hat x_\zeta(t)=1-t$ on $[\hat q,s]$, we find
+\[
+f_\zeta(s)\le\beta^2\eta(1)-\int_{\hat q}^s\frac{s-t}{(1-t)^2}\dd t=\beta^2\eta(1)-\log\frac{1-\hat q}{1-s}+1-\frac{1-s}{1-\hat q}.
+\]
+The right side tends to $-\infty$ as $s\to1$. Hence the supremum of $f_\zeta$ is attained, and $S_\zeta$ is a nonempty closed subset of an interval $[0,s_0]$ with $s_0<1$.
+
+For (2), let $\zeta_\varepsilon=(1-\varepsilon)\zeta+\varepsilon\mu$ and choose $\hat q<1$ such that $\zeta([0,\hat q])=\mu([0,\hat q])=1$. The map $\varepsilon\mapsto\hat x_{\zeta_\varepsilon}=\hat x_\zeta+\varepsilon(\hat x_\mu-\hat x_\zeta)$ is affine, and $\hat x_{\zeta_\varepsilon}\ge1-\hat q$ on $[0,\hat q]$ for $\varepsilon\in[0,1]$. The energy term in \eqref{eq:pre-CS} is affine in $\varepsilon$, and the entropy term is convex in $\varepsilon$ because $u\mapsto1/u$ is convex on $(0,\infty)$. Differentiating under the integral, which is justified by the lower bound $1-\hat q$ on the denominators, we find that the derivative at $\varepsilon=0$ is
+\[
+-\frac12\bigg[\beta^2\int\eta\dd(\mu-\zeta)+\int_0^{\hat q}\frac{\hat x_\mu(t)-\hat x_\zeta(t)}{\hat x_\zeta(t)^2}\dd t\bigg]=-\frac12\int G(s)\,(\mu-\zeta)(\dd s),
+\]
+where $G(s)=\beta^2\eta(s)+\int_0^{\hat q}(1-\max(t,s))\hat x_\zeta(t)^{-2}\dd t$. Here we used the second expression for $\hat x_\zeta$ in \cref{def:pre-CS} and Fubini's theorem. For $s\le\hat q$, the identity $1-\max(t,s)=(1-t)-(s-t)_+$ gives $G(s)=f_\zeta(s)+\int_0^{\hat q}(1-t)\hat x_\zeta(t)^{-2}\dd t$. The last term does not depend on $s$, and $\mu-\zeta$ has total mass zero and is carried by $[0,\hat q]$. It follows that the derivative equals $-\int f_\zeta\dd(\mu-\zeta)/2$. A convex differentiable function on $[0,1]$ lies above its tangent line at $0$, and evaluating at $\varepsilon=1$ gives \eqref{eq:pre-variation-inequality}.
+
+For (3), suppose first that $\zeta(S_\zeta)=1$. Then $\int f_\zeta\dd\zeta=\max f_\zeta\ge\int f_\zeta\dd\mu$ for every $\mu\in\mathscr M$, and \eqref{eq:pre-variation-inequality} implies that $\zeta$ is a minimizer. Conversely, let $\zeta$ be a minimizer and $r\in[0,1)$. With $\mu=\delta_r$ in (2), the derivative at $\varepsilon=0$ is nonnegative, which means that $f_\zeta(r)\le\int f_\zeta\dd\zeta$. Taking the supremum over $r$, we find $\max f_\zeta\le\int f_\zeta\dd\zeta\le\max f_\zeta$. This shows that $f_\zeta=\max f_\zeta$ holds $\zeta$-almost surely, that is, $\zeta(S_\zeta)=1$. For uniqueness, let $\zeta\ne\mu$ be two minimizers. Since $\hat x_\zeta'(t)=-\zeta([0,t])$ almost everywhere and distribution functions are right-continuous, the continuous functions $\hat x_\zeta$ and $\hat x_\mu$ differ on an interval contained in $[0,\hat q]$. By the strict convexity of $u\mapsto1/u$, the entropy term is then strictly convex along the segment from $\zeta$ to $\mu$. The midpoint of the segment then has a strictly smaller value, which is a contradiction. The existence of a minimizer is part of \cite[Proposition~2.1]{Talagrand2006} and \cite[Lemma~1.2]{HuangSellke2024}.
+\end{proof}
+
+\begin{definition}[Static and dynamical thresholds]\label{def:pre-thresholds}
+Let $\xi$ be a finite mixture and $\beta\ge0$. For $0<r<1$, let
+\[
+A(r)=\frac{(1-r)\xi'(r)}{r},\qquad \Phi_\beta(r)=\beta^2\xi(r)+r+\log(1-r).
+\]
+The \emph{dynamical threshold} $\bd=\bd(\xi)$ and the \emph{static threshold} $\bs=\bs(\xi)$ are defined by
+\[
+\bd^{-2}=\sup_{0<r<1}A(r),\qquad \bs^2=\inf_{0<r<1}\frac{-r-\log(1-r)}{\xi(r)}.
+\]
+The pair $(\xi,\beta)$ is \emph{strictly replica symmetric} if $\Phi_\beta(r)<0$ for all $r\in(0,1)$.
+\end{definition}
+
+In the proof of \cref{lem:pre-RS} below, we show that $\Phi_\beta$ is the first-variation function $f_{\delta_0}$ of \eqref{eq:pre-first-variation} for $\eta=\xi$. By \cref{lem:pre-support}(3), $(\xi,\beta)$ is strictly replica symmetric if and only if $\delta_0$ is its Parisi measure and $S_{\delta_0}=\{0\}$. This is the definition of Huang and Sellke \cite[Definition~3]{HuangSellke2024}, with the temperature absorbed into the covariance. Several results below require in addition that $\beta^2\xi''(0)<1$, and we then say that $(\xi,\beta)$ is strictly replica symmetric with $\beta^2\xi''(0)<1$.
+
+\begin{remark}[Elementary properties of the thresholds]\label{rem:pre-thresholds}
+Both thresholds lie in $(0,\infty)$. Indeed, $\xi$ and $\xi'$ are positive on $(0,1)$. The function $A$ is positive and continuous on $(0,1)$, and it tends to $\xi''(0)$ at $0$ and to $0$ at $1$. The static ratio $(-r-\log(1-r))/\xi(r)$ is positive and continuous on $(0,1)$, and it tends to $\infty$ at $1$ and to $1/\xi''(0)$ at $0$, which is $\infty$ if $\xi''(0)=0$. Further, $\Phi_\beta(r)\to0$ as $r\to0$, and
+\begin{equation}\label{eq:pre-Phi-derivative}
+\Phi_\beta'(r)=\beta^2\xi'(r)-\frac r{1-r}=\frac r{1-r}\big(\beta^2A(r)-1\big),\qquad 0<r<1.
+\end{equation}
+If $\beta\le\bd$, then $\beta^2A\le1$, and \eqref{eq:pre-Phi-derivative} implies that $\Phi_\beta$ is nonincreasing and hence nonpositive on $(0,1)$. This means that $\beta^2\le(-r-\log(1-r))/\xi(r)$ for every $r$, that is, $\beta\le\bs$. We conclude that $\bd\le\bs$. \Cref{part:condensed} concerns $\beta>\bs$, and \cref{part:prestatic} concerns $\bd<\beta<\bs$.
+\end{remark}
+
+\begin{lemma}[The replica-symmetric regime]\label{lem:pre-RS}
+Let $\xi$ be a finite mixture and $\beta\ge0$.
+\begin{enumerate}
+\item We have $F(\beta)\le\beta^2\xi(1)/2$. Moreover, $F(\beta)=\beta^2\xi(1)/2$ if and only if $\Phi_\beta(r)\le0$ for all $r\in(0,1)$, if and only if $\beta\le\bs$. In this case, $\delta_0$ is the Parisi measure of $(\xi,\beta)$.
+\item If $\beta<\bs$, then $(\xi,\beta)$ is strictly replica symmetric with $\beta^2\xi''(0)<1$.
+\item If $0<\beta\le\bs$, then for every $\varepsilon>0$, for all sufficiently large $N$,
+\begin{equation}\label{eq:pre-RS-concentration}
+\Pp\Big(\Big|\frac1N\log Z_{N,\beta}-\frac{\beta^2\xi(1)}2\Big|>\varepsilon\Big)\le2\exp\Big(-\frac{\varepsilon^2N}{8\beta^2\xi(1)}\Big).
+\end{equation}
+\end{enumerate}
+\end{lemma}
+
+For even mixtures, Talagrand proved that the strict form of the criterion in (1) is sufficient and that the non-strict form is necessary \cite[Proposition~2.3]{Talagrand2006}; see also \cite[(5.2)]{AuffingerElAlaouiSellke2025} for the formula for $\bs$. The proof of the equivalence below uses only \cref{thm:pre-parisi,lem:pre-support}, and so it applies to all finite mixtures, including those with odd degrees.
+
+\begin{proof}
+For (1), by Jensen's inequality and \eqref{eq:pre-EZ}, we have $F_N(\beta)\le N^{-1}\log\E Z_{N,\beta}=\beta^2\xi(1)/2$ for all $N$, and $F(\beta)\le\beta^2\xi(1)/2$ follows. For $\zeta=\delta_0$, we have $\hat x_{\delta_0}(t)=1-t$ and
+\[
+\int_0^s\frac{s-t}{(1-t)^2}\dd t=\int_0^s\Big(\frac1{1-t}-\frac{1-s}{(1-t)^2}\Big)\dd t=-\log(1-s)-s.
+\]
+Comparing with \eqref{eq:pre-first-variation} for $\eta=\xi$, we find that $f_{\delta_0}=\Phi_\beta$ and $f_{\delta_0}(0)=0$. By \cref{lem:pre-support}(3), $\delta_0$ is the Parisi measure if and only if $0\in S_{\delta_0}$, that is, if and only if $\Phi_\beta\le0$ on $(0,1)$. Recall that $\cP_\beta(\delta_0;\xi)=\beta^2\xi(1)/2$. By \cref{thm:pre-parisi} and the uniqueness of the minimizer, we find that $F(\beta)=\beta^2\xi(1)/2$ if and only if $\delta_0$ is the Parisi measure. Finally, since $\xi(r)>0$ for $0<r<1$, the inequality $\Phi_\beta(r)\le0$ is equivalent to $\beta^2\le(-r-\log(1-r))/\xi(r)$. This holds for all $r\in(0,1)$ if and only if $\beta\le\bs$.
+
+For (2), let $\beta<\bs$. For each $r\in(0,1)$, we have $\beta^2<\bs^2\le(-r-\log(1-r))/\xi(r)$, which gives $\Phi_\beta(r)<0$. If $\xi''(0)=2c_2>0$, then $(-r-\log(1-r))/\xi(r)\to1/\xi''(0)$ as $r\to0$ by \cref{rem:pre-thresholds}. This implies $\bs^2\le1/\xi''(0)$, and therefore $\beta^2\xi''(0)<1$. If $\xi''(0)=0$, the inequality $\beta^2\xi''(0)<1$ is trivial.
+
+For (3), note that $F_N(\beta)\to\beta^2\xi(1)/2$ by (1) and \cref{thm:pre-parisi}. Then $\abs{F_N(\beta)-\beta^2\xi(1)/2}\le\varepsilon/2$ for all sufficiently large $N$, and for such $N$ the event in \eqref{eq:pre-RS-concentration} is contained in the event $\abs{\log Z_{N,\beta}-\E\log Z_{N,\beta}}>\varepsilon N/2$. Using \cref{lem:pre-concentration} with $B=S_N$, $h=0$, and $t=\varepsilon/2$, we obtain \eqref{eq:pre-RS-concentration}.
+\end{proof}
+
+\section{Two inputs from Huang, Montanari, and Pham}\label{sec:pre-HMP}
+
+We state two results of \cite{HuangMontanariPham2024} in our notation. Both hold when $(\xi,\beta)$ is strictly replica symmetric with $\beta^2\xi''(0)<1$, which by \cref{lem:pre-RS}(2) is the case for every $\beta<\bs$. In \cite{HuangMontanariPham2024}, the temperature is absorbed into the covariance. The field has covariance $N\eta(R(x,y))$, where $\eta(t)=\sum_{p\ge2}\gamma_p^2t^p$ and $\sum_p2^p\gamma_p^2<\infty$, and the Gibbs measure has density proportional to $e^{G}$ with respect to the uniform measure on the sphere of radius $\sqrt N$ \cite[(1.1)--(1.2)]{HuangMontanariPham2024}. For our model at inverse temperature $\beta$, this means that $\eta=\beta^2\xi$ and $G=\beta H_N$, and the summability condition holds for finite mixtures. Their condition \cite[(2.21)]{HuangMontanariPham2024}, reproduced as \cite[(7.9)]{HuangMontanariPham2024}, reads
+\begin{equation}\label{eq:pre-HMP-condition}
+\eta''(0)<1,\qquad \eta(t)+t+\log(1-t)<0\quad\text{for all }t\in(0,1).
+\end{equation}
+For $\eta=\beta^2\xi$, this says exactly that $(\xi,\beta)$ is strictly replica symmetric with $\beta^2\xi''(0)<1$.
+
+\begin{lemma}[Normalized partition function; {\cite[Lemma~3.2 and Remark~3.3]{HuangMontanariPham2024}}]\label{lem:pre-HMP-Z}
+Let $\eta(t)=\sum_{p=2}^Pa_pt^p$ be a polynomial with nonnegative coefficients satisfying \eqref{eq:pre-HMP-condition}. For $n\ge2$, let $G_n$ be a centered Gaussian process on $S_n$ with continuous sample paths and covariance $n\eta(R(x,y))$, and let
+\[
+W_n=e^{-n\eta(1)/2}\int_{S_n}e^{G_n}\dd\nu_n,
+\]
+so that $\E W_n=1$. Then $W_n$ converges in distribution to $e^{\sigma g-\sigma^2/2}$, where $g$ is a standard Gaussian variable and $\sigma^2=-\log(1-\eta''(0))/2$. Moreover, the following hold.
+\begin{enumerate}
+\item The lower tail of $W_n$ is tight: $\lim_{t\downarrow0}\limsup_{n\to\infty}\Pp(W_n<t)=0$.
+\item For each $n$, let $\mathsf Q_n$ be a probability measure under which $G_n$ has the law above, and let $\mathsf P_n$ be the probability measure with $\dd\mathsf P_n/\dd\mathsf Q_n=W_n$. Then for all events $A_n$ and all $t>0$,
+\[
+\mathsf Q_n(A_n)\le t^{-1}\mathsf P_n(A_n)+\mathsf Q_n(W_n<t).
+\]
+In particular, $\mathsf P_n(A_n)\to0$ implies $\mathsf Q_n(A_n)\to0$.
+\end{enumerate}
+If $(\xi,\beta)$ is strictly replica symmetric with $\beta^2\xi''(0)<1$, then $Z_{N,\beta}/\E Z_{N,\beta}$ converges in distribution to $e^{\sigma g-\sigma^2/2}$ with $\sigma^2=-\log(1-\beta^2\xi''(0))/2$.
+\end{lemma}
+
+\begin{proof}
+The convergence in distribution is \cite[Lemma~3.2]{HuangMontanariPham2024}, applied with their mixture equal to $\eta$, that is, with $\gamma_p^2=a_p$. As noted in \cite[Remark~3.3]{HuangMontanariPham2024}, it is proved there under \eqref{eq:pre-HMP-condition} alone. The law of $W_n$ depends only on the covariance of $G_n$, and the realization in \cite[(1.1)]{HuangMontanariPham2024} may be replaced by any other. As in \eqref{eq:pre-EZ}, Fubini's theorem gives $\E W_n=1$. For (1), note that the set $\{w\le t\}$ is closed. By the portmanteau theorem, we have $\limsup_n\Pp(W_n<t)\le\Pp(e^{\sigma g-\sigma^2/2}\le t)$, which tends to zero as $t\downarrow0$ because $e^{\sigma g-\sigma^2/2}>0$ almost surely. For (2), we have
+\[
+\mathsf Q_n(A_n)\le\mathsf Q_n(A_n\cap\{W_n\ge t\})+\mathsf Q_n(W_n<t)\le t^{-1}\int_{A_n}W_n\dd\mathsf Q_n+\mathsf Q_n(W_n<t),
+\]
+and the integral equals $\mathsf P_n(A_n)$. The last assertion of (2) follows by letting $n\to\infty$ and then $t\downarrow0$, and using (1). The final statement is the case $n=N$, $\eta=\beta^2\xi$, and $G_N=\beta H_N$, with $\E Z_{N,\beta}$ given by \eqref{eq:pre-EZ}.
+\end{proof}
+
+Item (2) is the one-sided contiguity of \cite[Corollary~3.5]{HuangMontanariPham2024}, which deduces it from \cite[Lemma~3.2]{HuangMontanariPham2024} by Le Cam's first lemma. In \cref{sec:mixbands}, the lemma is applied in dimension $n=N-1$.
+
+\begin{lemma}[Replica concentration; {\cite[Section~7.1 and Lemma~7.7]{HuangMontanariPham2024}}]\label{lem:pre-HMP-overlap}
+Let $\xi$ be a finite mixture and let $\beta>0$ be such that $(\xi,\beta)$ is strictly replica symmetric with $\beta^2\xi''(0)<1$. For every $s\in(0,1)$, there exists $c_s>0$ such that for all sufficiently large $N$, with probability at least $1-e^{-c_sN}$, there exists a Borel set $\mathcal T_s\subset S_N$ with
+\begin{equation}\label{eq:pre-typical}
+\pi(\mathcal T_s^c)\le e^{-c_sN}\quad\text{and}\quad\pi\big(\{y:\abs{R(x,y)}>s\}\big)\le e^{-c_sN}\quad\text{for every }x\in\mathcal T_s.
+\end{equation}
+On the same event,
+\begin{equation}\label{eq:pre-replica}
+(\pi\otimes\pi)\big(\{(x,y):\abs{R(x,y)}>s\}\big)\le2e^{-c_sN}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+We apply the results of \cite[Section~7.1]{HuangMontanariPham2024} to the model \cite[(7.7)--(7.8)]{HuangMontanariPham2024} with mixture $\eta=\beta^2\xi$ and external field $u=0$. Quadratic terms and odd degrees are allowed there, and the standing assumption \cite[(7.9)]{HuangMontanariPham2024} is \eqref{eq:pre-HMP-condition}, which holds by hypothesis. For $u=0$, the smallness condition $\norm u\le u(\delta)\sqrt N$ of \cite[Lemma~7.7]{HuangMontanariPham2024} holds for every $\delta$. Fix $s\in(0,1)$ and take $\delta=s$. The typical set $T(s)$ of \cite[(7.31)]{HuangMontanariPham2024} consists of the points $x\in S_N$ such that
+\[
+\int_{\{y:\abs{R(x,y)}>s\}}e^{\beta H_N(y)}\,\nu_N(\dd y)<e^{-c_1(s)N}\min\big\{Z_{N,\beta},\,e^{N\beta^2\xi(1)/2}\big\},
+\]
+for a constant $c_1(s)>0$. Dividing by $Z_{N,\beta}$, we find that every $x\in T(s)$ satisfies $\pi(\{y:\abs{R(x,y)}>s\})<e^{-c_1(s)N}$. By \cite[(7.34)]{HuangMontanariPham2024}, with probability at least $1-e^{-c_2(s)N}$, we have $\pi(T(s))\ge1-e^{-c_2(s)N}$. The set $T(s)$ is Borel, since the function $x\mapsto\int_{\{\abs{R(x,y)}>s\}}e^{\beta H_N(y)}\nu_N(\dd y)$ is lower semicontinuous by Fatou's lemma. We conclude that \eqref{eq:pre-typical} holds with $\mathcal T_s=T(s)$ and $c_s=\min(c_1(s),c_2(s))$. Integrating the second bound in \eqref{eq:pre-typical} over $x\in\mathcal T_s$, and bounding the contribution of $\mathcal T_s^c$ by its mass, we obtain \eqref{eq:pre-replica}.
+\end{proof}
+
+The proof of \cite[Lemma~7.7]{HuangMontanariPham2024} uses that $N^{-1}\log Z_{N,\beta}\to\beta^2\xi(1)/2$ in probability, together with the concentration of $\log Z_{N,\beta}$. Under the hypothesis of the lemma, we have $\Phi_\beta<0$ on $(0,1)$, hence $\beta\le\bs$ by \cref{lem:pre-RS}(1), and this input is \cref{lem:pre-RS}(3); it holds for all finite mixtures, including those with odd degrees. The lemma holds for each fixed $s$, or for finitely many values of $s$ at once, and it gives no rate that is uniform as $s\downarrow0$.

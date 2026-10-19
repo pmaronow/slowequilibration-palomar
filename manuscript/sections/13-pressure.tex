@@ -1,0 +1,568 @@
+\chapter{Constrained pressures}\label{sec:pressure}
+
+In this section, we prove the static estimates on which \cref{part:prestatic} rests. Throughout the section, $\xi$ is a finite mixture and $0<\beta<\bs$; in \cref{sec:pr-certificate,sec:pr-good}, we also assume that $\beta>\bd$. The central object is the constrained pressure $F_{\mathrm{FP}}(r)$, the free energy per site of the configurations whose overlap with a reference point drawn from the Gibbs measure is close to $r$ (\cref{def:pr-FP}). It is the Franz--Parisi potential \cite{FranzParisi1995}, written as a pressure instead of a free-energy cost.
+
+The section has five main statements. In \cref{prop:pr-cross}, we express $F_{\mathrm{FP}}(r)$ through the Parisi formula for an auxiliary mixture. In \cref{prop:pr-certificate}, we show that $F_{\mathrm{FP}}$ lies below an explicit trial pressure $\Psi$, with equality at $q_*$; this identifies the maximum of $F_{\mathrm{FP}}$ on the cap and gives a strict gap on the collar. \Cref{prop:pr-good} turns these limits into quenched estimates, which hold with probability exponentially close to one and simultaneously for all reference points in a set whose Gibbs measure is nearly one. Finally, we record in \cref{prop:pr-replica} and \cref{lem:pr-cap} that the Gibbs mass of every cap of fixed positive latitude is exponentially small, uniformly over its axis (\cref{cor:pr-cap}).
+
+From \cref{sec:prelim}, we use the representation and regularity of the field (\cref{lem:pre-field}), the concentration of free energies (\cref{lem:pre-concentration}), the Crisanti--Sommers functional, the Parisi formula, and the Crisanti--Sommers optimality criterion (\cref{def:pre-CS}, \cref{thm:pre-parisi}, and \cref{lem:pre-support}), the thresholds and the replica-symmetric regime (\cref{def:pre-thresholds} and \cref{lem:pre-RS}), and the overlap estimate of Huang, Montanari, and Pham (\cref{lem:pre-HMP-overlap}). The results of this section are used as follows. The proof of \cref{thm:main-memory} in \cref{sec:spectral,sec:memory} uses \cref{prop:pr-certificate} to choose an admissible collar with positive exponents, and then \cref{prop:pr-good} and \cref{cor:pr-cap} for the estimates on the Gibbs measure; the corollary follows from \cref{prop:pr-replica} and \cref{lem:pr-cap}. The proof of \cref{thm:main-plateau} in \cref{sec:plateau} also uses the planted law of \cref{sec:pr-planted}, the cross-section formula, and the equality at $q_*$. \Cref{sec:infinite} develops the infinite-mixture inputs for \cref{thm:main-cusp}.
+
+We follow the route of El Alaoui, Montanari, and Sellke, who computed the constrained pressure of pure spherical models through a planted model \cite[Propositions~3.7 and~3.8]{ElAlaouiMontanariSellke2025} and bounded it by the trial value of \cref{lem:pr-trial} below \cite[Proposition~3.9]{ElAlaouiMontanariSellke2025}. Exponential transfer from the planted law to the Gibbs-reference law was proved in \cite[Lemma~3.5]{ElAlaouiMontanariSellke2025} and, for general mixtures, in \cite[Lemma~2.3]{AuffingerElAlaouiSellke2025}. Planted models have a longer history in the study of random constraint satisfaction \cite{AchlioptasCojaOghlan2008,KrzakalaZdeborova2009}. For general finite mixtures, we derive the cross-section formula from these ingredients and the Parisi formula of \cite{Chen2013}. The mixed-model cross-section formula is also covered by the Gaussian-conditioning approach of Dembo and Subag \cite[Section~2.2, Corollary~2.1]{DemboSubag2026}. The equality $F_{\mathrm{FP}}(q_*)=\Psi(q_*)$ requires an additional argument, based on the monotonicity of the ratio $r\xi''(r)/\xi'(r)$, the logarithmic derivative of $\xi'$ with respect to $\log r$.
+
+\paragraph{Notation.}
+We write $\Pp$ and $\E$ for the law of the field $H=H_N$ and its expectation, $\pi=\pi^H$ for the Gibbs measure, and $Z_{N,\beta}=Z_{N,\beta}(H)=\int e^{\beta H}\dd\nu_N$ for the partition function, as in \cref{def:pre-model}. We set
+\begin{equation}\label{eq:pr-F}
+F=\frac{\beta^2\xi(1)}{2}.
+\end{equation}
+Then $\E Z_{N,\beta}=e^{NF}$ by \eqref{eq:pre-EZ}, and $F=F(\beta)$ for $\beta<\bs$ by \cref{lem:pre-RS}(1). We realize the field by the Gaussian tensors of \eqref{eq:pre-tensor}, and write $g$ for the vector of their coefficients, which has $\sum_{p=2}^PN^p$ entries. As in the proof of \cref{lem:pre-concentration}, for every nonzero finite deterministic Borel measure $\mu$ on $S_N$ and every bounded deterministic Borel function $\varphi$, the function $g\mapsto\log\int e^{\beta H+\varphi}\dd\mu$ is Lipschitz with constant $\beta(N\xi(1))^{1/2}=(2FN)^{1/2}$, because its gradient is $\beta$ times an average of vectors of norm $(N\xi(1))^{1/2}$. We use this observation together with the Gaussian concentration inequality in the form \cite[Proposition~4.1 and (4.1)]{LedouxSemigroup1994}, which also underlies \cref{lem:pre-concentration}: if $\Theta$ is a Lipschitz function of $g$ with constant $\ell$, then
+\begin{equation}\label{eq:pr-gaussconc}
+\Pp\bigl(|\Theta-\E\Theta|>s\bigr)\le 2e^{-s^2/(2\ell^2)},\qquad s>0.
+\end{equation}
+Finally, let $K$ and $c_0$ be the constants $K$ and $c$ of \cref{lem:pre-field}, so that, for every $N\ge2$,
+\begin{equation}\label{eq:pr-fieldK}
+\Pp\Bigl(\sup_{S_N}|H|\le KN,\ \sup_{S_N}|\nabla_{S_N}H|\le K\sqrt N\Bigr)\ge1-e^{-c_0N}.
+\end{equation}
+
+
+\section{The planted and Gibbs-reference laws}\label{sec:pr-planted}
+
+\begin{definition}[Planted and Gibbs-reference laws]\label{def:pr-planted}
+The \emph{Gibbs-reference law} $\mathsf Q_N$ is the joint law of a field $H$ with law $\Pp$ and a reference point $u\in S_N$ which, conditionally on $H$, has law $\pi^H$:
+\[
+\mathsf Q_N(dH,du)=\Pp(dH)\,\pi^H(du).
+\]
+The \emph{planted law} $\mathsf P_N$ is
+\[
+\mathsf P_N(dH,du)=e^{\beta H(u)-NF}\,\Pp(dH)\,\nu_N(du).
+\]
+For every $u\in S_N$, we write $\mathsf P_N(\cdot\mid u)$ for the conditional law of $H$ given $u$ defined by the kernel
+\[
+\mathsf P_N(dH\mid u)=e^{\beta H(u)-NF}\,\Pp(dH).
+\]
+We call
+\[
+L_N(H)=\frac{Z_{N,\beta}(H)}{\E Z_{N,\beta}}=Z_{N,\beta}(H)e^{-NF}
+\]
+the \emph{likelihood ratio}.
+\end{definition}
+
+The following lemma collects the basic properties of the planted law. They are standard (see \cite[Eq.~(2.4)]{AuffingerElAlaouiSellke2025} and \cite[Proposition~3.7]{ElAlaouiMontanariSellke2025}).
+
+\begin{lemma}[The planted law]\label{lem:pr-planted}
+The measure $\mathsf P_N$ is a probability measure, and the law of $u$ under $\mathsf P_N$ is $\nu_N$. For every $u\in S_N$, under $\mathsf P_N(\cdot\mid u)$,
+\begin{equation}\label{eq:pr-tilt}
+H(x)=\widetilde H(x)+\beta N\xi(R(x,u)),\qquad x\in\R^N,
+\end{equation}
+where $\widetilde H$ has law $\Pp$. Finally, $\mathsf P_N$ and $\mathsf Q_N$ are mutually absolutely continuous, and
+\begin{equation}\label{eq:pr-likelihood}
+\frac{d\mathsf P_N}{d\mathsf Q_N}(H,u)=L_N(H).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Fix $u\in S_N$ and let $X=\beta H(u)$, a centered Gaussian variable with variance $2NF$. Then $\E e^{X}=e^{NF}$, which implies that $\mathsf P_N$ is a probability measure whose $u$-marginal is $\nu_N$, and that the kernel $\mathsf P_N(\cdot\mid u)$ of \cref{def:pr-planted} is a version of the conditional law of $H$ given $u$. By definition, $\mathsf P_N(\cdot\mid u)$ has density $e^{X-NF}$ with respect to $\Pp$. For points $x_1,\dots,x_k\in\R^N$ and real numbers $\lambda_1,\dots,\lambda_k$, let $Y=\sum_i\lambda_iH(x_i)$. Because $(X,Y)$ is a centered Gaussian vector, we have
+\[
+\E\bigl[e^{X-NF}e^{Y}\bigr]=\exp\Bigl(\frac12\Var Y+\Cov(X,Y)\Bigr)=\exp\Bigl(\frac12\Var Y+\sum_i\lambda_i\beta N\xi(R(x_i,u))\Bigr),
+\]
+where we used $\Var X=2NF$ and $\E H(x)H(u)=N\xi(R(x,u))$ from \cref{lem:pre-field}. The right side is the Laplace transform of $(H(x_i))_{i\le k}$ shifted by $(\beta N\xi(R(x_i,u)))_{i\le k}$. Hence the finite-dimensional distributions of $H$ under $\mathsf P_N(\cdot\mid u)$ are those of $\widetilde H+\beta N\xi(R(\cdot,u))$, where $\widetilde H$ has law $\Pp$. As $H$ is a random polynomial of bounded degree, these finite-dimensional distributions determine its law (see the proof of \cref{lem:pre-field}(2)), which proves \eqref{eq:pr-tilt}. Finally, $\mathsf Q_N(dH,du)=\Pp(dH)\,Z_{N,\beta}(H)^{-1}e^{\beta H(u)}\nu_N(du)$. Comparing this with the definition of $\mathsf P_N$, we see that \eqref{eq:pr-likelihood} holds. The two laws are mutually absolutely continuous because $0<L_N<\infty$.
+\end{proof}
+
+Note that \eqref{eq:pr-tilt} describes an exponential tilt of the field in the direction of $u$, and that the value $H(u)$ is not conditioned. The likelihood ratio depends on $H$ only, and its logarithm concentrates at exponential scale by \cref{lem:pre-RS}(3). As a consequence, events that are exponentially rare under the planted law are also exponentially rare under the Gibbs-reference law. The next lemma is the quantitative form of \cite[Lemma~3.5]{ElAlaouiMontanariSellke2025} and \cite[Lemma~2.3]{AuffingerElAlaouiSellke2025}. We include the short proof to record the rate.
+
+\begin{lemma}[Exponential likelihood transfer]\label{lem:pr-transfer}
+Let $\xi$ be a finite mixture and $0<\beta<\bs$.
+\begin{enumerate}
+\item[(a)] For every $\eps>0$, for all sufficiently large $N$,
+\begin{equation}\label{eq:pr-Zconc}
+\Pp\bigl(|N^{-1}\log Z_{N,\beta}-F|>\eps\bigr)\le 2e^{-\eps^2N/(16F)}.
+\end{equation}
+\item[(b)] Let $c>0$, and let $E_N$ be Borel sets of pairs $(H,u)$ such that $\mathsf P_N(E_N)\le e^{-cN}$ for all sufficiently large $N$. Then, for all sufficiently large $N$,
+\begin{equation}\label{eq:pr-transfer}
+\mathsf Q_N(E_N)\le 3e^{-c'N},\qquad c'=\min\Bigl\{\frac c2,\frac{c^2}{64F}\Bigr\}.
+\end{equation}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Part (a) is \eqref{eq:pre-RS-concentration} in \cref{lem:pre-RS}(3), since $2F=\beta^2\xi(1)$. For (b), fix $\tau=c/2$. Since $d\mathsf Q_N/d\mathsf P_N=L_N^{-1}$ by \eqref{eq:pr-likelihood}, we have
+\begin{align*}
+\mathsf Q_N(E_N)
+&\le\mathsf Q_N\bigl(L_N<e^{-\tau N}\bigr)+\int_{E_N\cap\{L_N\ge e^{-\tau N}\}}L_N^{-1}\dd\mathsf P_N\\
+&\le\Pp\bigl(N^{-1}\log Z_{N,\beta}<F-\tau\bigr)+e^{\tau N}\mathsf P_N(E_N).
+\end{align*}
+In the second line, we used that the law of $H$ under $\mathsf Q_N$ is $\Pp$. By (a) with $\eps=\tau$, the first term is at most $2e^{-\tau^2N/(16F)}=2e^{-c^2N/(64F)}$ for large $N$, and the second is at most $e^{-cN/2}$. Their sum is at most $3e^{-c'N}$.
+\end{proof}
+
+
+\section{The cross-section formula}\label{sec:pr-cross}
+
+For a Borel set $\cA\subset[-1,1]$ and a pair $(H,u)$, we define the restricted partition function
+\[
+Z_{N,\beta}(\cA;H,u)=\int_{\{x\in S_N\colon R(x,u)\in\cA\}}e^{\beta H(x)}\,\nu_N(dx),
+\]
+so that $\pi\{x\colon R(x,u)\in\cA\}=Z_{N,\beta}(\cA;H,u)/Z_{N,\beta}(H)$. When $\cA$ is an interval, the boundary of $\{x\colon R(x,u)\in\cA\}$ is $\nu_N$-null, and $(H,u)\mapsto Z_{N,\beta}(\cA;H,u)$ is continuous by dominated convergence.
+
+\begin{definition}[Constrained pressure]\label{def:pr-FP}
+For $r\in(-1,1)$, the \emph{constrained pressure} is
+\[
+F_{\mathrm{FP}}(r)=\lim_{w\downarrow0}\,\lim_{N\to\infty}\frac1N\,\E_{\mathsf Q_N}\log Z_{N,\beta}\bigl([r-w,r+w];H,u\bigr),
+\]
+whenever both limits exist.
+\end{definition}
+
+We take the limit in $N$ first, with a fixed band width $2w$. We do not normalize the restricted partition function. Since $N^{-1}\log Z_{N,\beta}\to F$, the difference $F_{\mathrm{FP}}(r)-F$ is the exponential rate of the Gibbs mass of the band around a typical reference point. In the convention of Franz and Parisi \cite[Section~3, Eqs.~(12)--(14)]{FranzParisi1995}, the potential corresponds to the free-energy cost $(F-F_{\mathrm{FP}}(r))/\beta$.
+
+\paragraph{Sections of the sphere.}
+Fix $u\in S_N$ and let $n=N-1$. We identify the orthogonal complement $u^\perp$ with $\R^n$, and write $S_n\subset u^\perp$ for the sphere of radius $\sqrt n$, $\nu_n$ for its uniform probability measure, and $R_n(y,z)=y\cdot z/n$. For $r\in(-1,1)$ and $y\in S_n$, we set
+\begin{equation}\label{eq:pr-xr}
+x_r(y)=ru+\Bigl(\frac{N(1-r^2)}{n}\Bigr)^{1/2}y .
+\end{equation}
+Because $y\perp u$, $|u|^2=N$, and $|y|^2=n$, we have
+\begin{equation}\label{eq:pr-section-overlaps}
+|x_r(y)|^2=N,\qquad R(x_r(y),u)=r,\qquad R(x_r(y),x_r(z))=r^2+(1-r^2)R_n(y,z).
+\end{equation}
+For $N\ge3$, we define the section partition function and the section pressure
+\begin{align*}
+\mathcal Z_N(r;H,u)&=\int_{S_n}e^{\beta H(x_r(y))}\,\nu_n(dy),\\
+f_N(r;H,u)&=\frac1N\log\mathcal Z_N(r;H,u)+\frac{N-3}{2N}\log(1-r^2).
+\end{align*}
+
+\paragraph{Auxiliary mixtures.}
+For a covariance polynomial $\eta$ in the sense of \cref{def:pre-CS}, not identically zero, we write $H_n^{\eta}$ for the centered Gaussian process on $S_n$ with covariance $\E H_n^\eta(y)H_n^\eta(z)=n\eta(R_n(y,z))$, and set
+\[
+p_n(\eta)=\frac1n\,\E\log\int_{S_n}e^{\beta H_n^\eta}\dd\nu_n .
+\]
+Recall that a covariance polynomial may have a term of degree one. By the Parisi formula \cref{thm:pre-parisi}, which covers this case through \cite[Theorem~1]{Chen2013}, we have $p_n(\eta)\to\cP_\beta(\eta)$, where $\cP_\beta(\eta)$ is the infimum of the Crisanti--Sommers functional in \cref{def:pre-CS}. For $r\in(-1,1)$, the auxiliary mixture of the section at latitude $r$ is
+\begin{equation}\label{eq:pr-etar}
+\eta_r(t)=\xi\bigl(r^2+(1-r^2)t\bigr)-\xi(r^2)=\sum_{k\ge1}\frac{(1-r^2)^k\xi^{(k)}(r^2)}{k!}\,t^k .
+\end{equation}
+
+\begin{lemma}[Spherical sections]\label{lem:pr-section}
+Fix $N\ge3$ and $u\in S_N$.
+\begin{enumerate}
+\item[(a)] For every field $H$ and every Borel set $\cA\subset(-1,1)$,
+\begin{equation}\label{eq:pr-coarea}
+Z_{N,\beta}(\cA;H,u)=C_N\int_{\cA}e^{Nf_N(r;H,u)}\dd r,\qquad C_N=\frac{\Gamma(N/2)}{\sqrt\pi\,\Gamma((N-1)/2)},
+\end{equation}
+and $N^{-1}\log C_N\to0$.
+\item[(b)] For every $r\in(-1,1)$, the polynomial $\eta_r$ is a covariance polynomial, and its coefficient of $t$ is $(1-r^2)\xi'(r^2)$.
+\item[(c)] For every $r\in(-1,1)$, under $\mathsf P_N(\cdot\mid u)$, the process $(H(x_r(y)))_{y\in S_n}$ has the law of $(\beta N\xi(r)+W+Y(y))_{y\in S_n}$, where $W$ is a centered Gaussian variable with variance $N\xi(r^2)$ and $Y$ is independent of $W$ and has the law of $H_n^{(N/n)\eta_r}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For (a), recall that if $\omega$ is uniform on the unit sphere of $\R^N$ and $e$ is a unit vector, then $\omega\cdot e$ has density $C_N(1-t^2)^{(N-3)/2}$ on $(-1,1)$, and, conditionally on $\omega\cdot e=t$, the vector $\omega-te$ is uniform on the sphere of radius $(1-t^2)^{1/2}$ in $e^\perp$. Applying this to $x=\sqrt N\,\omega$ and $e=u/\sqrt N$, we see that $R(x,u)$ has density $C_N(1-r^2)^{(N-3)/2}$ under $\nu_N$ and that, conditionally on $R(x,u)=r$, the point $x$ has the law of $x_r(y)$ with $y\sim\nu_n$. It follows that
+\[
+Z_{N,\beta}(\cA;H,u)=C_N\int_{\cA}(1-r^2)^{(N-3)/2}\,\mathcal Z_N(r;H,u)\dd r,
+\]
+which is \eqref{eq:pr-coarea}. By Stirling's formula, $C_N\sim(N/2\pi)^{1/2}$.
+
+For (b), the second expression in \eqref{eq:pr-etar} is the Taylor expansion of the polynomial $\xi$ at $r^2\ge0$. Every derivative of $\xi$ is nonnegative on $[0,1]$, because the coefficients of $\xi$ are.
+
+For (c), we have $H(x_r(y))=\widetilde H(x_r(y))+\beta N\xi(r)$ by \eqref{eq:pr-tilt} and \eqref{eq:pr-section-overlaps}. We use \cref{lem:pre-field}(1) and \eqref{eq:pr-section-overlaps} to compute the covariance of the centered process $\widetilde H(x_r(\cdot))$:
+\[
+N\xi\bigl(r^2+(1-r^2)R_n(y,z)\bigr)=N\xi(r^2)+n\cdot\frac Nn\,\eta_r(R_n(y,z)),
+\]
+which is the covariance of $W+Y$. Note that $Y$ is well defined, since $(N/n)\eta_r$ is a covariance polynomial by (b). Centered Gaussian processes with continuous paths and the same covariance have the same law.
+\end{proof}
+
+We see that, under planting, the section at latitude $r$ is a spherical spin glass in dimension $n$ with mixture close to $\eta_r$, shifted by the constant $\beta N\xi(r)+W$. In the next lemma, we make the resulting convergence of $f_N$ uniform in $r$, using a fixed finite net of latitudes. The lemma holds at every temperature.
+
+\begin{lemma}[Uniform latitude concentration]\label{lem:pr-latitude}
+Let $\xi$ be a finite mixture and $\beta>0$. For $r\in(-1,1)$, we define
+\begin{equation}\label{eq:pr-f}
+f(r)=\beta^2\xi(r)+\frac12\log(1-r^2)+\cP_\beta(\eta_r).
+\end{equation}
+\begin{enumerate}
+\item[(a)] For every $n$ and all covariance polynomials $\eta,\theta$, not identically zero,
+\[
+|p_n(\eta)-p_n(\theta)|\le\beta^2\sup_{|t|\le1}|\eta(t)-\theta(t)|,
+\]
+and the same bound holds for $\cP_\beta$.
+\item[(b)] For every $\rho\in(0,1)$, the function $f$ is Lipschitz on $[-\rho,\rho]$ with constant
+\[
+L_f(\rho)=7\beta^2\xi'(1)+\frac{\rho}{1-\rho^2}.
+\]
+\item[(c)] Let $K_1=K+\beta\xi'(1)$. For every $\rho\in(0,1)$ and $\eps>0$, there exists $N_0$ such that, for all $N\ge N_0$ and $u\in S_N$,
+\[
+\mathsf P_N\bigl(\Omega_N(\rho,\eps)^c\bigm| u\bigr)\le e^{-cN},\qquad c=\frac12\min\Bigl\{c_0,\frac{\eps^2}{64F}\Bigr\},
+\]
+where $\Omega_N(\rho,\eps)$ is the event that
+\[
+\sup_{S_N}|H|\le K_1N\qquad\text{and}\qquad\sup_{|r|\le\rho}\bigl|f_N(r;H,u)-f(r)\bigr|\le\eps .
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For (a), we use Gaussian covariance interpolation \cite[Section~1.3, Lemma~1.3.1, and Eqs.~(1.55)--(1.60)]{Talagrand2011Volume1}. Let $H_n^\eta$ and $H_n^\theta$ be independent, and for $s\in[0,1]$ let $\phi(s)=n^{-1}\E\log\int e^{\beta H_s}\dd\nu_n$, where $H_s=\sqrt s\,H_n^\eta+\sqrt{1-s}\,H_n^\theta$. By Gaussian integration by parts, we have
+\[
+\phi'(s)=\frac{\beta^2}{2}\,\E\Bigl\langle(\eta-\theta)(1)-(\eta-\theta)\bigl(R_n(y^1,y^2)\bigr)\Bigr\rangle_s ,
+\]
+where $\langle\cdot\rangle_s$ is the average over two independent samples $y^1,y^2$ from the Gibbs measure of $H_s$. Because $|R_n|\le1$, this implies that $|\phi'(s)|\le\beta^2\sup_{|t|\le1}|\eta(t)-\theta(t)|$. Integrating over $s\in[0,1]$ proves the bound for $p_n$, and letting $n\to\infty$ proves it for $\cP_\beta$.
+
+For (b), note that $|\xi'(v)|\le\xi'(1)$ for $|v|\le1$. For $|t|\le1$, the point $r^2+(1-r^2)t$ lies in $[-1,1]$, and
+\[
+\bigl|\partial_r\eta_r(t)\bigr|=2|r|\,\bigl|(1-t)\xi'\bigl(r^2+(1-r^2)t\bigr)-\xi'(r^2)\bigr|\le 6\xi'(1).
+\]
+Using (a) and the mean value theorem, we find that $r\mapsto\cP_\beta(\eta_r)$ is Lipschitz with constant $6\beta^2\xi'(1)$. The derivatives of $\beta^2\xi(r)$ and $\frac12\log(1-r^2)$ are bounded on $[-\rho,\rho]$ by $\beta^2\xi'(1)$ and $\rho/(1-\rho^2)$, respectively.
+
+For (c), fix $\rho$ and $\eps$, and fix $u\in S_N$. The proof has four steps.
+
+\emph{Field bounds.} Under $\mathsf P_N(\cdot\mid u)$, the field $\widetilde H$ in \eqref{eq:pr-tilt} has law $\Pp$. The function $x\mapsto\beta N\xi(R(x,u))$ is bounded on $S_N$ by $\beta N\xi(1)\le\beta N\xi'(1)$, and its Euclidean gradient $\beta\xi'(R(x,u))u$ has norm at most $\beta\xi'(1)\sqrt N$. By \eqref{eq:pr-fieldK}, with probability at least $1-e^{-c_0N}$ under $\mathsf P_N(\cdot\mid u)$, we have
+\begin{equation}\label{eq:pr-fieldK1}
+\sup_{S_N}|H|\le K_1N,\qquad\sup_{S_N}|\nabla_{S_N}H|\le K_1\sqrt N .
+\end{equation}
+On this event, $f_N(\cdot\,;H,u)$ is Lipschitz on $[-\rho,\rho]$. Indeed, the vector $\partial_rx_r(y)=u-r(1-r^2)^{-1/2}(N/n)^{1/2}y$ is tangent to $S_N$ and has norm $\sqrt N(1-r^2)^{-1/2}$. Together with \eqref{eq:pr-fieldK1}, this gives $|\partial_rH(x_r(y))|\le K_1N(1-\rho^2)^{-1/2}$. Differentiating under the integral, we find
+\begin{equation}\label{eq:pr-LH}
+\bigl|\partial_rf_N(r;H,u)\bigr|\le L_H(\rho)=\frac{\beta K_1}{(1-\rho^2)^{1/2}}+\frac{\rho}{1-\rho^2},\qquad|r|\le\rho .
+\end{equation}
+The second term bounds the derivative of $\frac{N-3}{2N}\log(1-r^2)$.
+
+\emph{Means.} Fix $r\in(-1,1)$. Using \cref{lem:pr-section}(c) and $\E W=0$, we find
+\[
+\E_{\mathsf P_N(\cdot\mid u)}f_N(r;H,u)=\beta^2\xi(r)+\frac{N-3}{2N}\log(1-r^2)+\frac nN\,p_n\Bigl(\frac Nn\,\eta_r\Bigr).
+\]
+This does not depend on $u$. Part (a) gives $|p_n((N/n)\eta_r)-p_n(\eta_r)|\le\beta^2n^{-1}\sup_{|t|\le1}|\eta_r(t)|\le 2\beta^2\xi(1)/n$, and $p_n(\eta_r)\to\cP_\beta(\eta_r)$. We conclude that $\E_{\mathsf P_N(\cdot\mid u)}f_N(r;H,u)\to f(r)$ for each fixed $r$.
+
+\emph{Fluctuations.} For fixed $r$, the variable $f_N(r;H,u)$ is, up to a deterministic constant, $N^{-1}\log\int e^{\beta\widetilde H}\dd\mu_r$, where $\mu_r$ is the image of $\nu_n$ under $x_r$. As noted before \eqref{eq:pr-gaussconc}, this is a Lipschitz function of the Gaussian coordinates of $\widetilde H$ with constant $(2F/N)^{1/2}$. By \eqref{eq:pr-gaussconc}, we have
+\[
+\mathsf P_N\Bigl(\bigl|f_N(r;H,u)-\E_{\mathsf P_N(\cdot\mid u)}f_N(r;H,u)\bigr|>\frac\eps4\Bigm| u\Bigr)\le 2e^{-\eps^2N/(64F)} .
+\]
+
+\emph{A finite net.} Let $\kappa=\eps/(2(L_H(\rho)+L_f(\rho)))$, which does not depend on $N$, and let $r_1,\dots,r_m\in[-\rho,\rho]$ be points such that every $r\in[-\rho,\rho]$ is within $\kappa$ of some $r_i$; we may take $m\le 2\rho/\kappa+1$. Let $N_0$ be such that $|\E_{\mathsf P_N(\cdot\mid u)}f_N(r_i;H,u)-f(r_i)|\le\eps/4$ for $i\le m$ and $N\ge N_0$. On the intersection of the event \eqref{eq:pr-fieldK1} with the $m$ fluctuation events, for $r\in[-\rho,\rho]$ and $r_i$ within $\kappa$ of $r$, we have
+\begin{align*}
+|f_N(r)-f(r)|&\le|f_N(r)-f_N(r_i)|+|f_N(r_i)-\E f_N(r_i)|\\
+&\qquad+|\E f_N(r_i)-f(r_i)|+|f(r_i)-f(r)|\le\eps,
+\end{align*}
+where $\E$ is the expectation under $\mathsf P_N(\cdot\mid u)$; for the first and last terms, we used \eqref{eq:pr-LH} and (b). The failure probability of this intersection is at most $e^{-c_0N}+2me^{-\eps^2N/(64F)}\le(2m+1)e^{-2cN}$, which is at most $e^{-cN}$ after enlarging $N_0$.
+\end{proof}
+
+The net $r_1,\dots,r_m$ and its size are fixed before $N\to\infty$, so that no estimate with a width shrinking in $N$ is used. We can now identify the constrained pressure.
+
+\begin{proposition}[Cross-section formula]\label{prop:pr-cross}
+Let $\xi$ be a finite mixture and $0<\beta<\bs$. For every $r\in(-1,1)$, the limits in \cref{def:pr-FP} exist, and
+\begin{equation}\label{eq:pr-cross}
+F_{\mathrm{FP}}(r)=\beta^2\xi(r)+\frac12\log(1-r^2)+\cP_\beta(\eta_r).
+\end{equation}
+In particular, $F_{\mathrm{FP}}=f$ is Lipschitz on $[-\rho,\rho]$ with constant $L_f(\rho)$ for every $\rho\in(0,1)$. Moreover, for every $r\in(-1,1)$ and $\eps>0$, there exists $w_0>0$ such that, for every $w\in(0,w_0)$, there exist $c>0$ and $N_0$ with
+\begin{equation}\label{eq:pr-cross-conc}
+\mathsf Q_N\Bigl(\Bigl|\frac1N\log Z_{N,\beta}\bigl([r-w,r+w];H,u\bigr)-F_{\mathrm{FP}}(r)\Bigr|>\eps\Bigr)\le e^{-cN},\qquad N\ge N_0 .
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Fix $r\in(-1,1)$ and $w>0$ with $[r-w,r+w]\subset(-1,1)$, and let $\rho<1$ satisfy $[r-w,r+w]\subset[-\rho,\rho]$. Let $m_w=\max_{[r-w,r+w]}f$ and $X_N=N^{-1}\log Z_{N,\beta}([r-w,r+w];H,u)$. Fix $\eps'>0$, and let $\ell>0$ be the length of an interval inside $[r-w,r+w]$ on which $f\ge m_w-\eps'$; such an interval exists because $f$ is continuous. On the event $\Omega_N(\rho,\eps')$ of \cref{lem:pr-latitude}, \eqref{eq:pr-coarea} implies that
+\[
+C_N\,\ell\,e^{N(m_w-2\eps')}\le Z_{N,\beta}\bigl([r-w,r+w];H,u\bigr)\le C_N\,2w\,e^{N(m_w+\eps')} .
+\]
+Then $|X_N-m_w|\le3\eps'$ on $\Omega_N(\rho,\eps')$ for all large $N$, because $N^{-1}\log C_N\to0$. We have $\mathsf P_N(|X_N-m_w|>3\eps')\le e^{-c_1N}$ for some $c_1>0$ by \cref{lem:pr-latitude}(c), and \cref{lem:pr-transfer}(b) yields
+\begin{equation}\label{eq:pr-cross-Q}
+\mathsf Q_N\bigl(|X_N-m_w|>3\eps'\bigr)\le 3e^{-c_2N}
+\end{equation}
+for some $c_2>0$ and all large $N$.
+
+To pass to expectations, note that
+\[
+|X_N|\le\frac\beta N\sup_{S_N}|H|+\Bigl|\frac1N\log\nu_N\{x\colon R(x,u)\in[r-w,r+w]\}\Bigr| .
+\]
+The second term does not depend on $u$ and is bounded in $N$ by \eqref{eq:pr-coarea}. The law of $H$ under $\mathsf Q_N$ is $\Pp$. By the Cauchy--Schwarz inequality in the representation \eqref{eq:pre-tensor}, $\sup_{S_N}|H|\le|g|\,(N\xi(1))^{1/2}$, and therefore $\E(\sup_{S_N}|H|)^2\le N\xi(1)\sum_{p=2}^PN^p$. We find that $\E_{\mathsf Q_N}|X_N-m_w|^2\le C N^{k}$ for some $C$ and $k$ independent of $N$. By the Cauchy--Schwarz inequality and \eqref{eq:pr-cross-Q},
+\[
+\bigl|\E_{\mathsf Q_N}X_N-m_w\bigr|\le3\eps'+\bigl(\E_{\mathsf Q_N}|X_N-m_w|^2\bigr)^{1/2}\bigl(3e^{-c_2N}\bigr)^{1/2},
+\]
+and the last term tends to zero. As $\eps'$ is arbitrary, we conclude that $N^{-1}\E_{\mathsf Q_N}\log Z_{N,\beta}([r-w,r+w];H,u)\to m_w$. Letting $w\downarrow0$ and using the continuity of $f$, we obtain \eqref{eq:pr-cross}. The Lipschitz bound is \cref{lem:pr-latitude}(b).
+
+For \eqref{eq:pr-cross-conc}, let $\rho=(1+|r|)/2$ and $w_0=\min\{(1-|r|)/4,\eps/(2L_f(\rho))\}$; then $[r-w_0,r+w_0]\subset[-\rho,\rho]$. For $w<w_0$, we have $|m_w-F_{\mathrm{FP}}(r)|\le L_f(\rho)w\le\eps/2$, and \eqref{eq:pr-cross-Q} with $\eps'=\eps/6$ gives \eqref{eq:pr-cross-conc} after decreasing $c$ and enlarging $N_0$.
+\end{proof}
+
+\begin{remark}\label{rem:pr-cross}
+For the pure $p$-spin model, $\eta_r(t)=(r^2+(1-r^2)t)^p-r^{2p}$, \cref{lem:pr-section}(c) is \cite[Proposition~3.7]{ElAlaouiMontanariSellke2025} and \eqref{eq:pr-cross} is \cite[Proposition~3.8]{ElAlaouiMontanariSellke2025}. By \cref{lem:pr-section}(b), the coefficient of $t$ in $\eta_r$ is positive for $r\ne0$, even when $\xi$ has no degree-one term. This is why we use the Parisi formula for covariance polynomials with a degree-one term. The planted computation in \cref{lem:pr-latitude} holds for every $\beta>0$. Only the identification with the Gibbs-reference law uses $\beta<\bs$, through \cref{lem:pr-transfer}. For an alternative derivation of the mixed-model formula, including different temperatures for the reference point and the constrained measure, see \cite[Corollary~2.1 and Eqs.~(2.4)--(2.7)]{DemboSubag2026}.
+\end{remark}
+
+
+\section{The trial pressure and the equality at \texorpdfstring{$q_*$}{q*}}\label{sec:pr-certificate}
+
+In this section, we assume $\bd<\beta<\bs$. We define the trial pressure
+\begin{equation}\label{eq:pr-Psi}
+\Psi(r)=F+\frac12\Phi_\beta(r)=\frac12\Bigl(\beta^2\xi(1)+\beta^2\xi(r)+r+\log(1-r)\Bigr),\qquad r\in[0,1).
+\end{equation}
+We first evaluate the Crisanti--Sommers functional of the auxiliary mixture $\eta_r$ at a one-atom measure, which gives the trial bound $F_{\mathrm{FP}}\le\Psi$ (\cref{lem:pr-trial}). We then show, using the Crisanti--Sommers optimality criterion of \cref{lem:pre-support}(3), that this measure is the minimizer at $r=q_*$ (\cref{prop:pr-certificate}).
+
+We use the notation of \cref{def:pre-CS}: $\mathscr M$ is the set of admissible measures, $\cP_\beta(\zeta;\eta)$ is the Crisanti--Sommers functional, and $\hat x_\zeta(t)=\int(1-\max(t,s))\,\zeta(ds)$. We call the first term in the brackets of \eqref{eq:pre-CS} the energy term and the sum of the other two the entropy term. We also use the first variation $f_\zeta$ of \eqref{eq:pre-first-variation}, its maximizing set $S_\zeta$, and its derivative
+\begin{equation}\label{eq:pr-fprime}
+f_\zeta'(s)=\beta^2\eta'(s)-\int_0^s\frac{dt}{\hat x_\zeta(t)^2},\qquad s\in[0,1).
+\end{equation}
+
+\begin{lemma}[Trial bound]\label{lem:pr-trial}
+Let $\xi$ be a finite mixture and $0<\beta<\bs$. For $r\in[0,1)$, let $r_0=r/(1+r)$. Then
+\begin{equation}\label{eq:pr-trial-value}
+\cP_\beta(\delta_{r_0};\eta_r)=\frac12\Bigl\{\beta^2\bigl[\xi(1)-\xi(r)\bigr]+r-\log(1+r)\Bigr\}
+\end{equation}
+and
+\begin{equation}\label{eq:pr-trial}
+F_{\mathrm{FP}}(r)\le\Psi(r),
+\end{equation}
+with equality if and only if $\cP_\beta(\eta_r)=\cP_\beta(\delta_{r_0};\eta_r)$.
+\end{lemma}
+
+For the pure $p$-spin model, \eqref{eq:pr-trial} is \cite[Proposition~3.9]{ElAlaouiMontanariSellke2025}, with the same choice $r_0=r/(1+r)$.
+
+\begin{proof}
+Note that $1-r_0=1/(1+r)$ and $r^2+(1-r^2)r_0=r$. We find from \eqref{eq:pr-etar} that the energy term of $\cP_\beta(\delta_{r_0};\eta_r)$ is
+\[
+\beta^2\bigl[\eta_r(1)-\eta_r(r_0)\bigr]=\beta^2\bigl[\xi(1)-\xi(r)\bigr].
+\]
+Since $\hat x_{\delta_{r_0}}(t)=1-r_0$ for $t\le r_0$ and $1-t$ for $t\ge r_0$, the entropy term with any $\hat q\in(r_0,1)$ is
+\[
+\frac{r_0}{1-r_0}+\log(1-r_0)-\log(1-\hat q)+\log(1-\hat q)=r-\log(1+r).
+\]
+This proves \eqref{eq:pr-trial-value}. By \cref{prop:pr-cross} and the definition of $\cP_\beta(\eta_r)$ as an infimum,
+\[
+F_{\mathrm{FP}}(r)\le\beta^2\xi(r)+\frac12\log(1-r^2)+\frac12\Bigl\{\beta^2\bigl[\xi(1)-\xi(r)\bigr]+r-\log(1+r)\Bigr\}=\Psi(r),
+\]
+where we used $\log(1-r^2)=\log(1-r)+\log(1+r)$. Equality holds exactly when the infimum defining $\cP_\beta(\eta_r)$ is attained at $\delta_{r_0}$.
+\end{proof}
+
+\paragraph{The endpoint and the collar.}
+Recall from \cref{def:pre-thresholds} that $A(r)=(1-r)\xi'(r)/r$, and that $q_*=\sup\{r\in(0,1)\colon\beta^2A(r)>1\}$. As $\xi$ has no terms of degree below two, $A(r)=(1-r)\sum_pp\,c_pr^{p-2}$ is a polynomial. By \eqref{eq:pre-Phi-derivative}, we have
+\begin{equation}\label{eq:pr-Psi-prime}
+\Psi'(r)=\frac12\Phi_\beta'(r)=\frac{r}{2(1-r)}\bigl[\beta^2A(r)-1\bigr],\qquad r\in(0,1).
+\end{equation}
+
+\begin{definition}[Admissible collars, caps, and core bands]\label{def:pr-collar}
+An \emph{admissible collar} is a pair $(q_1,q_2)$ with $0<q_1<q_2<q_*$ such that $\beta^2A(r)>1$ for every $r\in(q_1,q_*)$. For $u\in S_N$, $s\in(-1,1)$, and $w>0$, we call $\{x\in S_N\colon R(x,u)\ge s\}$ the \emph{cap} of latitude $s$ around $u$, $\{x\in S_N\colon q_1\le R(x,u)\le q_2\}$ the \emph{collar} around $u$, and $\{x\in S_N\colon|R(x,u)-q_*|\le w\}$ the \emph{core band} of half-width $w$ around $u$. We define the core exponent $J$ and the collar gap $G$ by
+\begin{equation}\label{eq:pr-JG}
+J=-\frac12\Phi_\beta(q_*),\qquad G=\frac12\bigl[\Phi_\beta(q_*)-\Phi_\beta(q_2)\bigr].
+\end{equation}
+\end{definition}
+
+The core exponent depends only on $\xi$ and $\beta$, while the collar gap also depends on $q_2$. Note that $\Psi(q_*)=F-J$ and $\Psi(q_2)=F-J-G$.
+
+\begin{proposition}[Optimality of the replica-symmetric trial at $q_*$]\label{prop:pr-certificate}
+Let $\xi$ be a finite mixture and $\bd<\beta<\bs$.
+\begin{enumerate}
+\item[(a)] We have $q_*\in(0,1)$, $\beta^2A(q_*)=1$, $\beta^2A(r)\le1$ for every $r\in[q_*,1)$, and $A'(q_*)\le0$. There exists $\eps_0>0$ such that $\beta^2A(r)>1$ for every $r\in(q_*-\eps_0,q_*)$. In particular, for every $b\in(0,q_*^2)$, there exists an admissible collar with $q_1>\sqrt b$.
+\item[(b)] For every $r\in[0,1)$, we have $F_{\mathrm{FP}}(r)\le\Psi(r)$, and
+\begin{equation}\label{eq:pr-touch}
+F_{\mathrm{FP}}(q_*)=\Psi(q_*)=F-J .
+\end{equation}
+\item[(c)] We have $J>0$. For every admissible collar $(q_1,q_2)$, we have $G>0$ and
+\begin{equation}\label{eq:pr-cap-collar}
+\sup_{q_1\le r<1}F_{\mathrm{FP}}(r)=F_{\mathrm{FP}}(q_*)=F-J,\qquad
+\sup_{q_1\le r\le q_2}F_{\mathrm{FP}}(r)\le\Psi(q_2)=F-J-G .
+\end{equation}
+\end{enumerate}
+\end{proposition}
+
+The proof of the equality in (b) has four steps. We first record the properties of $q_*$ in (a). Next, we show that $\xi'(v)/(v-q_*^2)$ is nonincreasing on $(q_*^2,q_*]$, using the monotonicity of $v\xi''(v)/\xi'(v)$. This determines the sign of $f'_\zeta$ below $r_0$, for $\zeta=\delta_{r_0}$ and the auxiliary mixture $\eta_{q_*}$. Above $r_0$, the sign of $f'_\zeta$ is that of $\beta^2A-1$ to the right of $q_*$. Then $f_\zeta$ is maximized at $r_0$, and \cref{lem:pre-support}(3) applies.
+
+\begin{proof}
+\emph{The endpoint $q_*$.} Because $\beta>\bd$ and $\bd^{-2}=\sup_{(0,1)}A$, the set $\{r\in(0,1)\colon\beta^2A(r)>1\}$ is nonempty, and $q_*>0$. As $A(1)=0$ and $A$ is continuous, this set is bounded away from $1$, which gives $q_*<1$. There exist points $r\uparrow q_*$ with $\beta^2A(r)>1$, while $\beta^2A(r)\le1$ for every $r\in(q_*,1)$. Then $\beta^2A(q_*)=1$ and $\beta^2A\le1$ on $[q_*,1)$, by continuity. It follows that the right difference quotients $(A(v)-A(q_*))/(v-q_*)$, $v>q_*$, are nonpositive, and $A'(q_*)\le0$. The polynomial $\beta^2A-1$ equals $-1$ at $r=1$. It is therefore not identically zero, and its zeros are isolated. Let $\eps_0>0$ be such that it has no zero in $(q_*-\eps_0,q_*)$. On this interval it has a constant sign, which is positive, because it is positive at points arbitrarily close to $q_*$ from the left. For $b\in(0,q_*^2)$, any $q_1<q_2$ in $(\max\{\sqrt b,q_*-\eps_0\},q_*)$ form an admissible collar. This proves (a).
+
+\emph{Monotonicity of $v\xi''(v)/\xi'(v)$.} For the rest of the proof, we write $q=q_*$, $d=1-q^2$, and $r_0=q/(1+q)$. For $v\in(0,1]$, let
+\[
+w_p(v)=\frac{p\,c_pv^{p-1}}{\xi'(v)},\qquad\chi(v)=\frac{v\xi''(v)}{\xi'(v)}=\sum_p(p-1)w_p(v).
+\]
+The weights $w_p(v)$ are nonnegative and sum to one, and $w_p'(v)=v^{-1}w_p(v)[(p-1)-\chi(v)]$. Multiplying by $p-1$ and summing over $p$, we obtain
+\begin{equation}\label{eq:pr-elasticity}
+\chi'(v)=\frac1v\Bigl[\sum_p(p-1)^2w_p(v)-\chi(v)^2\Bigr]=\frac1v\Var_{w(v)}(p-1)\ge0,
+\end{equation}
+where $\Var_{w(v)}$ is the variance of $p-1$ when $p$ is distributed according to the weights $w_p(v)$. This is the standard identity for the second derivative of a log-partition function, here of $s\mapsto\log\xi'(e^s)$ (see \cite[Proposition~3.1(a)]{WainwrightJordan2008}). For $v\in(q^2,q]$, the two factors in $(v-q^2)\xi''(v)/\xi'(v)=\chi(v)(1-q^2/v)$ are nonnegative and nondecreasing in $v$, which implies that
+\begin{equation}\label{eq:pr-elasticity-bound}
+(v-q^2)\frac{\xi''(v)}{\xi'(v)}\le q(1-q)\frac{\xi''(q)}{\xi'(q)}\le1,\qquad v\in(q^2,q].
+\end{equation}
+For the last inequality, we used
+\[
+\frac{A'(q)}{A(q)}=\frac{\xi''(q)}{\xi'(q)}-\frac1{q(1-q)}
+\]
+together with $A(q)>0$ and $A'(q)\le0$. Using \eqref{eq:pr-elasticity-bound}, we see that the derivative of $\log(\xi'(v)/(v-q^2))$, which equals $\xi''(v)/\xi'(v)-1/(v-q^2)$, is nonpositive on $(q^2,q]$. Comparing with the value at $v=q$, we obtain
+\begin{equation}\label{eq:pr-xi-ratio}
+\xi'(v)\ge\frac{v-q^2}{q(1-q)}\,\xi'(q),\qquad v\in(q^2,q].
+\end{equation}
+
+\emph{The first variation below $r_0$.} Let $\eta=\eta_q$ and $\zeta=\delta_{r_0}$. Then $\hat x_\zeta(t)=1-r_0=(1+q)^{-1}$ for $t\le r_0$, and $\hat x_\zeta(t)=1-t$ for $t\ge r_0$. For $t\in[0,1)$, we write $v=q^2+dt$; then $\eta_q'(t)=d\,\xi'(v)$, and $v=q$ at $t=r_0$. Since $\beta^2A(q)=1$, we have
+\begin{equation}\label{eq:pr-at-r0}
+\beta^2d\,\xi'(q)=(1+q)\cdot\beta^2(1-q)\xi'(q)=q(1+q).
+\end{equation}
+For $t\in(0,r_0]$, we have $f_\zeta'(t)=\beta^2d\,\xi'(v)-(1+q)^2t$ by \eqref{eq:pr-fprime}, and $v\in(q^2,q]$. Using \eqref{eq:pr-xi-ratio}, \eqref{eq:pr-at-r0}, and $v-q^2=dt$, we find
+\[
+\beta^2d\,\xi'(v)\ge\frac{dt}{q(1-q)}\,q(1+q)=(1+q)^2t .
+\]
+Then $f_\zeta'\ge0$ on $(0,r_0]$, and $f_\zeta'(0)=\beta^2d\,\xi'(q^2)>0$. Note that $f_\zeta'(r_0)=0$ by \eqref{eq:pr-at-r0}.
+
+\emph{The first variation above $r_0$.} For $t\in[r_0,1)$, we have $v\in[q,1)$, $1-v=d(1-t)$, and
+\[
+\int_0^t\frac{ds}{\hat x_\zeta(s)^2}=\frac{r_0}{(1-r_0)^2}+\frac1{1-t}-\frac1{1-r_0}=q(1+q)+\frac1{1-t}-(1+q)=\frac{d}{1-v}-d=\frac{dv}{1-v}.
+\]
+Inserting this into \eqref{eq:pr-fprime}, we obtain
+\[
+f_\zeta'(t)=\beta^2d\,\xi'(v)-\frac{dv}{1-v}=\frac{dv}{1-v}\bigl[\beta^2A(v)-1\bigr]\le0,
+\]
+where the inequality follows from (a).
+
+\emph{Conclusion.} The function $f_\zeta$ is nondecreasing on $[0,r_0]$ and nonincreasing on $[r_0,1)$. It therefore attains its maximum at $r_0$, so that $r_0\in S_\zeta$ and $\zeta(S_\zeta)=1$. Using \cref{lem:pre-support}(3), we find that $\delta_{r_0}$ is the unique minimizer of $\cP_\beta(\cdot\,;\eta_q)$, and that $\cP_\beta(\eta_q)=\cP_\beta(\delta_{r_0};\eta_q)$. The equality case of \cref{lem:pr-trial} then gives $F_{\mathrm{FP}}(q)=\Psi(q)$. Together with \eqref{eq:pr-trial}, this proves (b).
+
+\emph{The cap and the collar.} By \cref{lem:pre-RS}(2), the condition $\beta<\bs$ implies that $\Phi_\beta<0$ on $(0,1)$, and therefore $J>0$. Let $(q_1,q_2)$ be an admissible collar. By \eqref{eq:pr-Psi-prime}, $\Psi$ is strictly increasing on $[q_1,q_*]$ and nonincreasing on $[q_*,1)$. In particular, $G=\Psi(q_*)-\Psi(q_2)>0$, $\Psi\le\Psi(q_*)$ on $[q_1,1)$, and $\Psi\le\Psi(q_2)$ on $[q_1,q_2]$. Combining these facts with (b), we obtain \eqref{eq:pr-cap-collar}.
+\end{proof}
+
+\begin{remark}\label{rem:pr-certificate}
+The proof uses only $A'(q_*)\le0$, so it covers the marginal case $A'(q_*)=0$, in which $q_*$ is a multiple root of $\beta^2A=1$. The point $q_*$ need not be the largest root of $\beta^2A=1$, since $\beta^2A$ may touch $1$ from below to the right of $q_*$. The proof uses only $\beta^2A\le1$ on $[q_*,1)$. The equality \eqref{eq:pr-touch} is a statement about the global minimizer of the auxiliary Crisanti--Sommers problem at $r=q_*$, not a local stability statement. We never need monotonicity of $F_{\mathrm{FP}}$ itself: the trial bound and the equality at $q_*$ suffice for \eqref{eq:pr-cap-collar}.
+\end{remark}
+
+
+\section{Caps, core bands, and collars around reference points}\label{sec:pr-good}
+
+In this section, we fix a finite mixture $\xi$, $\bd<\beta<\bs$, and an admissible collar $(q_1,q_2)$, and write $q_*$, $J$, and $G$ as in \cref{def:pr-collar}. The next proposition converts \cref{prop:pr-certificate} into estimates for the Gibbs measure that hold simultaneously for all reference points in a set $\cG$ whose Gibbs measure is nearly one. \Cref{tab:pr-parameters} lists its parameters in the order in which they are chosen.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+Parameter & Depends on & Role\\
+\midrule
+$\xi$, $\beta$ & --- & model and temperature, $\bd<\beta<\bs$\\
+$q_*$, $F$, $J$ & $\xi,\beta$ & endpoint, annealed pressure, core exponent\\
+$K$, $c_0$ & $\xi$ & field bounds \eqref{eq:pr-fieldK}\\
+$q_1<q_2$ & $\xi,\beta$ & admissible collar\\
+$G$ & $\xi,\beta,q_2$ & collar gap\\
+$\delta$ & $J,G$ & pressure tolerance, $0<\delta<\min\{J,G\}/8$\\
+$w$ & $\xi,\beta,q_2,\delta$ & half-width of the core band\\
+$\rho$ & $\xi,\beta,K$ & cutoff near overlap one\\
+net $r_1,\dots,r_m$ & $\xi,\beta,K,\rho,\delta$ & latitudes in \cref{lem:pr-latitude}(c)\\
+$c_P$, $c_Q$, $a$ & $c_0,F,\delta$ & exponential rates\\
+$N_0$ & all of the above & threshold for $N$\\
+\bottomrule
+\end{tabular}
+\caption{The parameters in \cref{prop:pr-good}, in the order of choice. All are fixed before $N\to\infty$.}
+\label{tab:pr-parameters}
+\end{table}
+
+\begin{proposition}[Masses of caps, core bands, and collars]\label{prop:pr-good}
+Let $\xi$ be a finite mixture, $\bd<\beta<\bs$, and let $(q_1,q_2)$ be an admissible collar. Fix $\delta$ with $0<\delta<\min\{J,G\}/8$. There exist $w\in(0,(q_*-q_2)/4]$ with $q_*+w<1$, $a>0$, and $N_0$, depending only on $\xi$, $\beta$, $q_1$, $q_2$, and $\delta$, such that the following holds for every $N\ge N_0$. There exists an event $\Omega_N$ with $\Pp(\Omega_N)\ge1-5e^{-aN}$ on which $|N^{-1}\log Z_{N,\beta}-F|\le\delta$ and there exists a Borel set $\cG=\cG_N(H)\subset S_N$ with $\pi(\cG^c)\le e^{-aN}$ such that, for every $u\in\cG$,
+\begin{align}
+\pi\{x\colon R(x,u)\ge q_1\}&\le e^{-N(J-2\delta)},\label{eq:pr-good-cap}\\
+\pi\{x\colon|R(x,u)-q_*|\le w\}&\ge e^{-N(J+2\delta)},\label{eq:pr-good-core}\\
+\pi\{x\colon q_1\le R(x,u)\le q_2\}&\le e^{-N(J+G-2\delta)}.\label{eq:pr-good-collar}
+\end{align}
+\end{proposition}
+
+We call the points of $\cG$ \emph{good reference points}, and $\cG$ the \emph{good set}. In words, the proposition states that around every good reference point the cap of latitude $q_1$ has Gibbs mass at most $e^{-N(J-2\delta)}$, the core band has mass at least $e^{-N(J+2\delta)}$, and the collar is smaller than the core band by the factor $e^{-N(G-4\delta)}$. The core band lies inside the cap and is disjoint from the collar, because $w\le(q_*-q_2)/4$. The reference points are not restricted to a net: by rotational invariance, the planted estimates hold uniformly in $u$, and likelihood transfer and Markov's inequality turn them into the quenched statement.
+
+\begin{proof}
+The proof has four steps. We first choose the half-width $w$ and a cutoff $\rho$ near overlap one. We then prove the three estimates for the restricted partition functions under the planted law, transfer the failure event to the Gibbs-reference law, and finally divide by $Z_{N,\beta}$.
+
+\emph{Choice of the parameters.} Let $\rho_0=(1+q_*)/2$ and
+\[
+w=\min\Bigl\{\frac{q_*-q_2}{4},\,\frac{1-q_*}{4},\,\frac{\delta}{8L_f(\rho_0)}\Bigr\},
+\]
+where $L_f$ is the Lipschitz constant of \cref{lem:pr-latitude}(b). Then $[q_*-w,q_*+w]\subset(q_2,\rho_0)$. Since $F_{\mathrm{FP}}$ is Lipschitz on $[-\rho_0,\rho_0]$ with constant $L_f(\rho_0)$ by \cref{prop:pr-cross}, and $F_{\mathrm{FP}}(q_*)=F-J$ by \eqref{eq:pr-touch}, we have
+\begin{equation}\label{eq:pr-core-f}
+F_{\mathrm{FP}}(r)\ge F-J-\frac\delta8,\qquad|r-q_*|\le w .
+\end{equation}
+Let $K_1=K+\beta\xi'(1)$ as in \cref{lem:pr-latitude}(c), and let
+\[
+\rho=\max\Bigl\{\rho_0,\ \bigl(1-e^{-2(\beta K_1+|F-J|+2)}\bigr)^{1/2}\Bigr\}<1,
+\]
+so that
+\begin{equation}\label{eq:pr-rho}
+\beta K_1+\frac12\log(1-\rho^2)\le F-J-2 .
+\end{equation}
+By \cref{lem:pr-latitude}(c) with this $\rho$ and $\eps=\delta/4$, there exists $N_0$ such that $\mathsf P_N(\Omega_N(\rho,\delta/4)^c\mid u)\le e^{-c_PN}$ for $N\ge N_0$ and every $u\in S_N$, where
+\[
+c_P=\frac12\min\Bigl\{c_0,\frac{\delta^2}{1024F}\Bigr\}.
+\]
+
+\emph{Planted estimates.} Fix $u\in S_N$, and suppose that $\Omega_N(\rho,\delta/4)$ holds. Recall from \cref{prop:pr-cross} that $f=F_{\mathrm{FP}}$ in \cref{lem:pr-latitude}. We bound the cap in two parts. On $[q_1,\rho]\subset[-\rho,\rho]$, we have $f_N\le F_{\mathrm{FP}}+\delta/4\le F-J+\delta/4$ by \eqref{eq:pr-cap-collar}. Inserting this into \eqref{eq:pr-coarea}, we obtain
+\[
+Z_{N,\beta}\bigl([q_1,\rho];H,u\bigr)\le C_Ne^{N(F-J+\delta/4)} .
+\]
+Near overlap one, we use $\sup_{S_N}|H|\le K_1N$ and \eqref{eq:pr-coarea} with $H=0$:
+\[
+Z_{N,\beta}\bigl((\rho,1];H,u\bigr)\le e^{\beta K_1N}\,\nu_N\{x\colon R(x,u)>\rho\}\le e^{\beta K_1N}\,C_N(1-\rho^2)^{(N-3)/2}\le e^{N(F-J-1)}
+\]
+for all large $N$, where in the last step we used \eqref{eq:pr-rho} and $N^{-1}\log C_N\to0$. Adding the two bounds, we find, for all large $N$,
+\begin{equation}\label{eq:pr-planted-cap}
+Z_{N,\beta}\bigl([q_1,1];H,u\bigr)\le e^{N(F-J+\delta)} .
+\end{equation}
+For the core band, we use \eqref{eq:pr-coarea}, \eqref{eq:pr-core-f}, and $f_N\ge F_{\mathrm{FP}}-\delta/4$ on $[q_*-w,q_*+w]\subset[-\rho,\rho]$:
+\begin{equation}\label{eq:pr-planted-core}
+Z_{N,\beta}\bigl([q_*-w,q_*+w];H,u\bigr)\ge C_N\,2w\,e^{N(F-J-3\delta/8)}\ge e^{N(F-J-\delta)}
+\end{equation}
+for all large $N$, since $w$ does not depend on $N$. For the collar, \eqref{eq:pr-cap-collar} and $f_N\le F_{\mathrm{FP}}+\delta/4$ yield
+\begin{equation}\label{eq:pr-planted-collar}
+Z_{N,\beta}\bigl([q_1,q_2];H,u\bigr)\le C_Ne^{N(F-J-G+\delta/4)}\le e^{N(F-J-G+\delta)}
+\end{equation}
+for all large $N$. Let $E_N$ be the set of pairs $(H,u)$ for which at least one of \eqref{eq:pr-planted-cap}--\eqref{eq:pr-planted-collar} fails. It is a Borel set, because the restricted partition functions in these three bounds are continuous in $(H,u)$. After enlarging $N_0$, we have shown that $E_N\subset\Omega_N(\rho,\delta/4)^c$ for $N\ge N_0$. Integrating over $u\sim\nu_N$, we find
+\[
+\mathsf P_N(E_N)=\int\mathsf P_N(E_N\mid u)\,\nu_N(du)\le e^{-c_PN} .
+\]
+
+\emph{Transfer and disintegration.} By \cref{lem:pr-transfer}(b), for all large $N$,
+\[
+\mathsf Q_N(E_N)\le3e^{-c_QN},\qquad c_Q=\min\Bigl\{\frac{c_P}2,\frac{c_P^2}{64F}\Bigr\}.
+\]
+For each field $H$, let $\cG_N(H)=\{u\in S_N\colon(H,u)\notin E_N\}$. By the definition of $\mathsf Q_N$, we have $\E\,\pi^H(\cG_N(H)^c)=\mathsf Q_N(E_N)$, and Markov's inequality gives
+\[
+\Pp\bigl(\pi^H(\cG_N(H)^c)>e^{-c_QN/2}\bigr)\le3e^{-c_QN/2} .
+\]
+
+\emph{Normalization.} Let $a=\min\{c_Q/2,\delta^2/(16F)\}$, and let $\Omega_N$ be the event that $\pi^H(\cG_N(H)^c)\le e^{-c_QN/2}$ and $|N^{-1}\log Z_{N,\beta}-F|\le\delta$. Using the previous step and \cref{lem:pr-transfer}(a) with $\eps=\delta$, we have $\Pp(\Omega_N^c)\le3e^{-aN}+2e^{-aN}$ for all large $N$. On $\Omega_N$, we set $\cG=\cG_N(H)$ and note that $\pi(\cG^c)\le e^{-aN}$. For $u\in\cG$, we divide \eqref{eq:pr-planted-cap}--\eqref{eq:pr-planted-collar} by $Z_{N,\beta}\in[e^{N(F-\delta)},e^{N(F+\delta)}]$ and obtain \eqref{eq:pr-good-cap}--\eqref{eq:pr-good-collar}. This completes the proof.
+\end{proof}
+
+
+\section{Replica concentration and the Gibbs mass of caps}\label{sec:pr-replica}
+
+The last statements of this section concern the overlap of two independent samples from $\pi$. The first is the estimate of Huang, Montanari, and Pham recorded in \cref{lem:pre-HMP-overlap}, stated here for the temperatures of \cref{part:prestatic}.
+
+\begin{proposition}[Replica concentration]\label{prop:pr-replica}
+Let $\xi$ be a finite mixture and $0<\beta<\bs$. For every $s\in(0,1)$, there exist $c>0$ and $N_0$, depending on $\xi$, $\beta$, and $s$, such that, for every $N\ge N_0$, with probability at least $1-e^{-cN}$,
+\begin{equation}\label{eq:pr-replica}
+(\pi\otimes\pi)\bigl\{(x,y)\colon|R(x,y)|>s\bigr\}\le2e^{-cN}.
+\end{equation}
+\end{proposition}
+
+The rate $c$ depends on $s$, and the proposition gives no rate that is uniform as $s\downarrow0$. It applies to any fixed finite set of thresholds, by intersecting the corresponding events.
+
+\begin{proof}
+By \cref{lem:pre-RS}(2), the pair $(\xi,\beta)$ is strictly replica symmetric with $\beta^2\xi''(0)<1$, that is, $\Phi_\beta<0$ on $(0,1)$ and $\beta^2\xi''(0)<1$. These are the hypotheses \cite[Eq.~(7.9)]{HuangMontanariPham2024} for the mixture $\beta^2\xi$ with zero external field; see \eqref{eq:pre-HMP-condition}. Then \eqref{eq:pre-replica} in \cref{lem:pre-HMP-overlap} is \eqref{eq:pr-replica} with $c=c_s$.
+\end{proof}
+
+The next lemma is deterministic. It bounds the mass of a cap by the mass of a set of pairs, which converts replica concentration into an exponential bound on the Gibbs mass of every cap. The bound holds for every probability measure and every axis. In particular, the axis may depend on the field and on any other data, and no union bound over axes is needed. It is an elementary barycenter estimate, and we make no claim of novelty for it.
+
+\begin{lemma}[Masses of caps from overlaps of two replicas]\label{lem:pr-cap}
+Let $\pi$ be a Borel probability measure on $S_N$ and $s\in(0,1)$. Then
+\begin{equation}\label{eq:pr-cap}
+\sup_{v\in S_N}\pi\{x\colon R(x,v)\ge s\}\le\Bigl[\frac{2-s^2}{s^2}\,(\pi\otimes\pi)\Bigl\{(x,y)\colon R(x,y)>\frac{s^2}2\Bigr\}\Bigr]^{1/2}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Fix $v\in S_N$, let $B=\{x\colon R(x,v)\ge s\}$ and $\alpha=\pi(B)$. If $\alpha=0$, there is nothing to prove. Otherwise, let $\mu=\pi(\cdot\mid B)$ and $m=\int U\dd\mu$. Since $U(x)\cdot U(v)=R(x,v)\ge s$ on $B$ and $|U(v)|=1$, we have $|m|\ge m\cdot U(v)\ge s$. For independent $x,y\sim\mu$, we find
+\[
+\E_{\mu\otimes\mu}R(x,y)=\E_{\mu\otimes\mu}U(x)\cdot U(y)=|m|^2\ge s^2 .
+\]
+Let $t=s^2/2$ and $p=(\mu\otimes\mu)\{R>t\}$. As $R\le t$ on the complementary event and $R\le1$ everywhere, we have $s^2\le t(1-p)+p$. Rearranging, we find
+\[
+p\ge\frac{s^2-t}{1-t}=\frac{s^2}{2-s^2}.
+\]
+Then $(\pi\otimes\pi)\{R>t\}\ge(\pi\otimes\pi)\bigl(\{R>t\}\cap(B\times B)\bigr)=\alpha^2p\ge\alpha^2s^2/(2-s^2)$, which is \eqref{eq:pr-cap} for this $v$.
+\end{proof}
+
+Combining \cref{prop:pr-replica} at the threshold $s^2/2$ with \cref{lem:pr-cap}, we arrive at the uniform cap bound used in \cref{sec:spectral,sec:memory}.
+
+\begin{corollary}[Uniform bound on the Gibbs masses of caps]\label{cor:pr-cap}
+Let $\xi$ be a finite mixture and $0<\beta<\bs$. For every $s\in(0,1)$, there exist $c>0$ and $N_0$, depending on $\xi$, $\beta$, and $s$, such that, for every $N\ge N_0$, with probability at least $1-e^{-cN}$,
+\begin{equation}\label{eq:pr-uniform-cap}
+\sup_{v\in S_N}\pi\{x\colon R(x,v)\ge s\}\le\frac2s\,e^{-cN}
+\qquad\text{and}\qquad
+|\pi(U)|^2\le s+e^{-cN}.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Let $c_1>0$ be the smaller of the two rates given by \cref{prop:pr-replica} for the thresholds $s^2/2$ and $s$, and let $c=c_1/2$. For large $N$, the intersection of the two events has probability at least $1-2e^{-c_1N}\ge1-e^{-cN}$. On this intersection, we have by \cref{lem:pr-cap} that
+\[
+\sup_{v\in S_N}\pi\{x\colon R(x,v)\ge s\}\le\Bigl[\frac{2-s^2}{s^2}\cdot2e^{-c_1N}\Bigr]^{1/2}\le\frac2s\,e^{-cN}.
+\]
+For the second bound, recall that $|\pi(U)|^2=\E_{\pi\otimes\pi}R(x,y)$. As $R\le1$, we have $|\pi(U)|^2\le s+(\pi\otimes\pi)\{R>s\}\le s+2e^{-c_1N}\le s+e^{-cN}$ for large $N$.
+\end{proof}

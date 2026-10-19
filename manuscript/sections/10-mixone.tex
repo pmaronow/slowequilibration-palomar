@@ -1,0 +1,786 @@
+\chapter{Mixed models: one-point estimates and exclusion of high-energy points at positive overlap}\label{sec:mixone}
+
+In this section, we study the critical points of the center field $H_Q$ near its ground state, one point at a time. There are three main results. \Cref{thm:mo-microscopic} identifies the centering $m_N=NE_0-\log N/(2c_0)+O(1)$ and the limits of the expected numbers of critical points in fixed energy windows around it. The localization, \cref{prop:mo-all-high}, shows that with probability exponentially close to one every critical point of $H_Q$ above energy $N(E_0-\delta)$ is a local maximum with radial derivative close to $K_0$, and its Hessian is bounded above by a fixed negative multiple of the identity. \Cref{thm:mo-filter} shows that, conditionally on a critical point at $u$ whose energy and radial derivative are close to the ground-state parameters $(E_0,K_0)$, no other critical point of comparable energy has overlap with $u$ in $[\eps,1]$, for a prescribed $\eps>0$. We refer to this property as the exclusion of high-energy points at positive overlap, and to the event on which it holds as the selection event at $u$. \Cref{prop:mo-filter-loss} shows that restricting to the selection event removes an exponentially small fraction of the expected number of local maxima. \Cref{prop:mo-pure} records the same statements for pure models, and \cref{cor:mo-interface} collects what the later sections use.
+
+From \cref{sec:thermal}, we use the 1RSB assumptions (\cref{def:th-certificate}) and the identities of \cref{prop:th-structure} that relate the 1RSB parameters $x,Q$ to the ground-state energy $E_0$ and the radial derivative $K_0$. From \cref{sec:kacrice}, we use the Gaussian structure of the field at a point, the moments of the Hessian determinant (\cref{prop:kr-determinant}), and the marked Kac--Rice formula with its exact count integrals (\cref{thm:kr-marked,cor:kr-count}). The only other outside input is the one-step upper bound of Huang and Sellke for the ground state energy, stated below as \cref{thm:mo-HS}. \Cref{cor:mo-interface} is used in \cref{sec:mixpair}, where the second moment of the number of local maxima on the selection event is bounded, and in \cref{sec:mixbands}, which uses \cref{prop:mo-all-high} and the integral over the radial derivative in \cref{lem:mo-radial} to show that the bands carry almost all of the Gibbs mass.
+
+The expected number of critical points of a spherical spin glass was computed rigorously with the Kac--Rice formula by Auffinger, Ben Arous, and \v{C}ern\'y for pure models \cite{AuffingerBenArousCerny2013} and by Auffinger and Ben Arous for mixed models \cite{AuffingerBenArous2013}. Ben Arous, Subag, and Zeitouni computed the complexity with a prescribed radial derivative \cite[Theorem~5]{BenArousSubagZeitouni2020}. For pure models, Subag and Zeitouni identified the logarithmic correction to the centering and the extremal process of critical points \cite{SubagZeitouni2017}. The exclusion estimate of \cref{sec:mo-filter} follows the route of Huang and Sellke \cite[Section~3.3]{HuangSellke2024}, who bounded a conditional ground-state energy by explicit one-step trials to show that typical critical points near the ground state have no high-energy points at intermediate overlap.
+
+Counts in this section are ordinary counts of points of $S_N$. For even mixtures, both points of an antipodal pair are counted. No parity assumption is made, and no limit theorem for the extremal process is used or proved.
+
+\paragraph{Standing assumptions.}
+Throughout this section, $\xi$ is a finite mixture with minimum degree $d\ge4$, $\beta>0$, and $(\xi,\beta)$ is strictly 1RSB with parameters $0<x,Q<1$ and a nondegenerate contact at $Q$ (\cref{def:th-certificate}). We write $s=1-Q$ and $V$ for the first-variation function of \cref{def:th-certificate}, so that $V(0)=V(Q)=V'(Q)=0$, $V''(Q)>0$, and $V(r)>0$ for $r\in(0,1)\setminus\{Q\}$. The mixture, $\beta$, $x$, and $Q$ are fixed before $N$. Recall from \cref{def:pre-model} that $\xi$ is \emph{non-pure} if at least two coefficients $c_p$ are positive, and \emph{pure} otherwise. Until \cref{sec:mo-pure}, $\xi$ is a non-pure mixture. All radial intervals $U$ and the base interval $U_0$ in this section are bounded open intervals, so that their closures are compact.
+
+\paragraph{Notation.}
+As in \cref{sec:kacrice}, we set
+\begin{equation}\label{eq:mo-zeta}
+\xi_Q(r)=\xi(Qr)=\sum_{p}c_pQ^pr^p,
+\end{equation}
+so that $\E H_Q(u)H_Q(v)=N\xi_Q(R(u,v))$ for $u,v\in S_N$, and $\xi(Q)=\xi_Q(1)$, $a_Q=\xi_Q'(1)$, $b_Q=\xi_Q''(1)$. We extend $H_Q$ to $\R^N$ as a polynomial, so that $K_Q(u)=u\cdot\nabla H_Q(u)$ with the Euclidean gradient. Note that $K_Q(u)$ is the derivative of $t\mapsto H_N(t\sqrt Q\,u)$ at $t=1$; it is of order $N$, and it is not the derivative in a unit radial direction. For a point $u$, we use the unnormalized energy $h=H_Q(u)$, the normalized energy $e=h/N$, and the normalized radial derivative $k=K_Q(u)/N$, and we call $(e,k)$ the normalized marks of $u$. In \cref{sec:kacrice}, the letter $h$ denotes the normalized energy; it corresponds to $e$ here. We keep $h$ for the unnormalized energy because the fixed windows $[m_N+a,m_N+b]$ and the tail $T_N$ below are in unnormalized units. We write
+\begin{equation}\label{eq:mo-qell}
+q(e,k)=(e,k)\Sigma_Q^{-1}(e,k)^{\mathsf T},\qquad
+\ell(e,k)=\frac12\partial_eq(e,k)=\frac{(a_Q+b_Q)e-a_Qk}{\det\Sigma_Q}.
+\end{equation}
+Let $\mathrm{Crt}_N=\{u\in S_N:\nabla_{S_N}H_Q(u)=0\}$ be the set of critical points of $H_Q$, and $\mathrm{Crt}_N^{\max}$ the set of $u\in\mathrm{Crt}_N$ with $\nabla_{S_N}^2H_Q(u)\prec0$, the nondegenerate local maxima. Let $n=N-1$. We write $G_n$ for an $n\times n$ GOE matrix with off-diagonal entries of variance $1/n$ and diagonal entries of variance $2/n$, and set
+\begin{equation}\label{eq:mo-DN}
+b_N=\Bigl(\frac{b_Qn}{N}\Bigr)^{1/2},\qquad W_{n,N}=b_NG_n,\qquad D_N(k)=\bigl|\det(kI_n-W_{n,N})\bigr|,
+\end{equation}
+\begin{equation}\label{eq:mo-dN}
+d_N^{\rm all}(k)=\E D_N(k),\qquad d_N^{\max}(k)=\E\bigl[D_N(k)\ind\{\lambda_{\max}(W_{n,N})<k\}\bigr].
+\end{equation}
+Let $\sigma_{\rm sc}(\dd t)=(2\pi)^{-1}(4-t^2)^{1/2}\ind_{[-2,2]}(t)\dd t$ be the semicircle law and $\Omega(t)=\int\log|t-s|\,\sigma_{\rm sc}(\dd s)$ its logarithmic potential. Finally, $|S_N|=2\pi^{N/2}N^{(N-1)/2}/\Gamma(N/2)$ is the surface area of $S_N$.
+
+Throughout, $c$ and $C$ denote positive constants that depend only on $\xi$, $\beta$, and the fixed intervals and tolerances named in the statement. They never depend on $N$, and they may change from line to line. A statement holds \emph{for all large $N$} if it holds for $N\ge N_0$, where $N_0$ has the same dependence.
+
+
+\section{The inputs}\label{sec:mo-inputs}
+
+\paragraph{Identities from \cref{sec:thermal}.}
+We set
+\begin{equation}\label{eq:mo-zy}
+z=\frac{xQ}{s},\qquad y=\frac{Q}{\beta s}.
+\end{equation}
+We use the following consequences of the 1RSB assumptions, proved in \cref{prop:th-structure} by direct integration from $V(Q)=V'(Q)=0$ and $V''(Q)>0$. First,
+\begin{equation}\label{eq:mo-thermal}
+y^2=(1+z)a_Q,\qquad \frac{\xi(Q)}{a_Q}=\frac{(1+z)\log(1+z)-z}{z^2},\qquad b_Q<y^2,
+\end{equation}
+and the ground-state parameters are
+\begin{equation}\label{eq:mo-marks}
+E_0=\frac{a_Q+z\xi(Q)}{y},\qquad K_0=y+\frac{b_Q}{y},\qquad c_0=\frac zy=\beta x<\beta.
+\end{equation}
+Since $y>b_Q^{1/2}$, the value $K_0$ lies strictly above the edge of the spectrum: $K_0-2b_Q^{1/2}=(y-b_Q^{1/2})^2/y>0$. Second, the function
+\begin{equation}\label{eq:mo-g}
+g(r)=\xi(Q)-\xi_Q(r)-a_Q\Bigl[\frac{1+z}{z^2}\log\bigl(1+(1-r)z\bigr)-\frac{1-r}{z}\Bigr],\qquad0\le r\le1,
+\end{equation}
+equals $\beta^{-2}V(Qr)$. In particular, $g(0)=g(1)=0$ and $g(r)>0$ for $0<r<1$, since $V>0$ on $(0,Q)$. In the language of \cite{HuangSellke2024}, this says that the ground state of the covariance $\xi_Q$ is strictly one-step replica symmetry breaking: the inequality $g(r)>0$ on $(0,1)$ is (3.4) of \cite[Lemma~3.5]{HuangSellke2024} for $\xi_Q$, and the ground energy $(\xi_Q'(1)+z\xi_Q(1))/y$ of that lemma is $E_0$. Third, multiplying out and using $y^2=(1+z)a_Q$, we find (see also \cref{prop:th-scores})
+\begin{equation}\label{eq:mo-score}
+\Sigma_Q\binom{c_0}{1/y}=\binom{E_0}{K_0},\qquad\text{so that}\qquad \ell(E_0,K_0)=c_0.
+\end{equation}
+
+\paragraph{Results from \cref{sec:kacrice}.}
+We use the notation of \cref{sec:kacrice}. The field is realized through its Gaussian coefficient vector $Z$ as in \eqref{eq:kr-coefficients}, and every value and derivative of $H_Q$ at a point is a linear function of $Z$. Here $W_{n,N}$ is the matrix of \cref{sec:kacrice} and $d_N^{\rm all}(k)=\mu_{n,N}(k)$ in the notation there. We use the following facts.
+\begin{enumerate}
+\item[(1)] \emph{One-point law} (\cref{lem:kr-one-point}). At $u\in S_N$, the pair $(H_Q(u),K_Q(u))$, the gradient $\nabla_{S_N}H_Q(u)$, and the compression $\nabla^2_\perp H_Q(u)$ of the Euclidean Hessian to $u^\perp$ are independent. The first two have covariances $N\Sigma_Q$ and $a_QI_n$, the third has the law of $W_{n,N}$, and $\nabla_{S_N}^2H_Q(u)=\nabla^2_\perp H_Q(u)-(K_Q(u)/N)I_n$. For a non-pure mixture, $\Sigma_Q$ is positive definite.
+\item[(2)] \emph{Conditioned laws} (\cref{def:kr-conditioned,lem:kr-conditioned}). For $u\in S_N$ and $(e,k)\in\R^2$, we write $\Pp_{e,k,u}$ and $\E_{e,k,u}$ for the conditioned law of \cref{def:kr-conditioned} at $u$ with normalized marks $(e,k)$; it is the law denoted $\Pp_{h,k,u}$ there, with $h=e$. Under $\Pp_{e,k,u}$, the coefficient vector is the explicit Gaussian regression \eqref{eq:kr-regression}, so that $(H_Q(u),K_Q(u),\nabla_{S_N}H_Q(u))=(Ne,Nk,0)$ surely. This law is defined for every value of the marks. Its random part is the residual $(\mathrm{Id}-\Lambda_u^*\mathcal C_u^{-1}\Lambda_u)Z$, a centered Gaussian vector whose covariance is an orthogonal projection and whose law does not depend on $(e,k)$. The Riemannian Hessian $\nabla_{S_N}^2H_Q(u)$ has the law of $W_{n,N}-kI_n$. In a pure model, $K_Q=pH_Q$, and we write $\Pp_{e,u}$ and $\E_{e,u}$. The Hessian then has the law of $W_{n,N}-peI_n$. We write $D(u)=|\det\nabla_{S_N}^2H_Q(u)|$, so that
+\begin{equation}\label{eq:mo-Dlaw}
+\E_{e,k,u}D(u)=d_N^{\rm all}(k),\qquad \E_{e,k,u}\bigl[D(u)\ind\{\nabla_{S_N}^2H_Q(u)\prec0\}\bigr]=d_N^{\max}(k).
+\end{equation}
+\item[(3)] \emph{Gaussian estimates} (\cref{lem:kr-gaussian}). If $f$ is an $L$-Lipschitz function of a standard Gaussian vector $Y$, then \eqref{eq:kr-mgf} holds, and applying its tail bound to $\pm f$, we have
+\begin{equation}\label{eq:mo-gauss}
+\Pp\bigl(|f(Y)-\E f(Y)|>a\bigr)\le2e^{-a^2/(2L^2)},\qquad a>0.
+\end{equation}
+By \eqref{eq:kr-goe-covariance}, $W_{n,N}$ satisfies the hypothesis of \cref{lem:kr-gaussian}(2) with $b=b_Q$. Then \eqref{eq:kr-edge} reads
+\begin{equation}\label{eq:mo-edge}
+\Pp\bigl(\|W_{n,N}\|_{\rm op}>2b_Q^{1/2}+t\bigr)\le2e^{-Nt^2/(4b_Q)},\qquad t>0.
+\end{equation}
+\item[(4)] \emph{Determinant moments} (\cref{prop:kr-determinant,cor:kr-bad-event}). For $k$ in a compact subset of $(2b_Q^{1/2},\infty)$, every fixed moment of $D(u)/d_N^{\rm all}(k)$ under $\Pp_{e,k,u}$ is bounded uniformly in $N$, $u$, and $e$. By the Cauchy--Schwarz inequality, for every event $\mathcal A$, we have $\E_{e,k,u}[D(u)\ind_{\mathcal A}]\le\mathsf K_2^{1/2}\Pp_{e,k,u}(\mathcal A)^{1/2}d_N^{\rm all}(k)$, with no assumption on the dependence between $\mathcal A$ and the determinant.
+\item[(5)] \emph{Kac--Rice formula} (\cref{thm:kr-marked,cor:kr-count}). The restriction of $H_Q$ to $S_N$ is almost surely a Morse function with finitely many critical points, and \eqref{eq:kr-marked-mixed} and \eqref{eq:kr-marked-pure} hold for nonnegative or bounded field-dependent weights.
+\end{enumerate}
+The one-point law agrees with \cite[Section~4.1, Eq.~(4.1)]{BenArousSubagZeitouni2020}, after a change of radius and normalization (\cref{rem:kr-one-point}).
+
+
+\section{The one-point intensity}\label{sec:mo-intensity}
+
+\begin{lemma}[The marked one-point intensity]\label{lem:mo-intensity}
+Let $\xi$ be a non-pure mixture. Then $\Sigma_Q$ is positive definite. Let $f(H,u)\ge0$ be a Borel function of the field $H=H_N$ and the point $u\in S_N$, and let $A\subset\R^2$ be a Borel set. Then
+\begin{equation}\label{eq:mo-marked-count}
+\begin{aligned}
+&\E\sum_{\substack{u\in\mathrm{Crt}_N\\(H_Q(u),K_Q(u)/N)\in A}}f(H,u)\\
+&\qquad=\int_A\mathfrak c_Ne^{-Nq(h/N,k)/2}\int_{S_N}\E_{h/N,k,u}\bigl[D(u)f(H,u)\bigr]\nu_N(\dd u)\dd h\dd k,
+\end{aligned}
+\end{equation}
+where
+\begin{equation}\label{eq:mo-cN}
+\mathfrak c_N=\frac{|S_N|(2\pi a_Q)^{-n/2}}{2\pi(\det\Sigma_Q)^{1/2}}.
+\end{equation}
+In particular, the expected numbers of points of $\mathrm{Crt}_N$ and of $\mathrm{Crt}_N^{\max}$ with $(H_Q(u),K_Q(u)/N)\in A$ are $\int_A\lambda^{\rm all}_N$ and $\int_A\lambda^{\max}_N$, where
+\begin{equation}\label{eq:mo-intensity}
+\lambda^j_N(h,k)=\mathfrak c_Ne^{-Nq(h/N,k)/2}d^j_N(k),\qquad j\in\{{\rm all},\max\}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The matrix $\Sigma_Q$ is positive definite by \cref{lem:kr-one-point}. Identity \eqref{eq:mo-marked-count} is \eqref{eq:kr-marked-mixed} with $\mathcal K=\{(h/N,k):(h,k)\in A\}$, written in the unnormalized energy $h=Ne$. In \eqref{eq:kr-marked-mixed}, the density $p_N$ of the normalized marks carries a factor $N$, which is absorbed by $\dd h=N\dd e$, and this accounts for the constant \eqref{eq:mo-cN}. For \eqref{eq:mo-intensity}, we take $f=1$ and $f=\ind\{\nabla_{S_N}^2H_Q(u)\prec0\}$. By \eqref{eq:mo-Dlaw}, the inner expectation then depends neither on $u$ nor on $h$, and the integral over $S_N$ equals one.
+\end{proof}
+
+For $f=1$, \eqref{eq:mo-intensity} is the exact count integral of \cref{cor:kr-count}, and without the radial derivative it reduces to the formula of Auffinger and Ben Arous for the center field \cite[Proposition~3]{AuffingerBenArous2013}.
+
+\begin{lemma}[Determinant estimates]\label{lem:mo-goe}
+Let $\Lambda(k)=\frac12\log b_Q+\Omega(k/b_Q^{1/2})$.
+\begin{enumerate}
+\item[(a)] Let $J\subset(2b_Q^{1/2},\infty)$ be a compact interval. There exist $c,C>0$ such that, for all $k\in J$ and all large $N$,
+\begin{equation}\label{eq:mo-det-gap}
+c\,e^{N\Lambda(k)}\le d_N^{\max}(k)\le d_N^{\rm all}(k)\le Ce^{N\Lambda(k)},
+\qquad
+d_N^{\rm all}(k)\le\bigl(1+Ce^{-cN}\bigr)d_N^{\max}(k).
+\end{equation}
+\item[(b)] Let $J'\subset\R$ be a compact interval and $a>0$. There exist $C_a$ and $N_a$ such that $d_N^{\rm all}(k)\le C_ae^{N(\Lambda(k)+a)}$ for all $k\in J'$ and $N\ge N_a$.
+\item[(c)] There exists $C$ such that $d_N^{\rm all}(k)\le(|k|+C)^n$ for all $k\in\R$ and $N\ge2$.
+\end{enumerate}
+\end{lemma}
+
+Part (a) concerns shifts outside the spectrum and follows from \cref{sec:kr-border}. Parts (b) and (c) are weaker upper bounds, which we need for shifts inside or near the spectrum and for large shifts.
+
+\begin{proof}
+We begin with (a). Using \cref{cor:kr-dimension} with $b=b_Q$ and $m=n$, we have $c\,e^{\Lambda_{n,N}(k)}\le d_N^{\rm all}(k)\le Ce^{\Lambda_{n,N}(k)}$ uniformly for $k\in J$, and $\Lambda_{n,N}(k)$ differs by a bounded amount from $\Lambda_{N,N}(k)=N\Lambda(k)$. This proves the outer bounds in \eqref{eq:mo-det-gap}. For the comparison, let $\gamma=\min J-2b_Q^{1/2}$. The indicator in \eqref{eq:mo-dN} equals one on the event $\{\|W_{n,N}\|_{\rm op}\le2b_Q^{1/2}+\gamma/2\}$, whose complement has probability at most $2e^{-N\gamma^2/(16b_Q)}$ by \eqref{eq:mo-edge}. By fact (4) above (\cref{cor:kr-bad-event} with $r=2$), we have
+\[
+d_N^{\rm all}(k)-d_N^{\max}(k)\le\mathsf K_2^{1/2}\bigl(2e^{-N\gamma^2/(16b_Q)}\bigr)^{1/2}d_N^{\rm all}(k)\le Ce^{-cN}d_N^{\rm all}(k),
+\]
+and the second inequality in \eqref{eq:mo-det-gap} follows for all large $N$.
+
+Next, we prove (b). Let $\tau>0$ and $\varphi_{t,\tau}(s)=\frac12\log((t-s)^2+\tau^2)$. Then $\varphi_{t,\tau}(s)\ge\log|t-s|$, and $|\partial_s\varphi_{t,\tau}|\le1/(2\tau)$. For symmetric matrices, the Hoffman--Wielandt inequality \cite[Lemma~2.1.19]{AndersonGuionnetZeitouni2010}, $\sum_i|\lambda_i(X)-\lambda_i(Y)|^2\le\|X-Y\|_F^2$ and the Cauchy--Schwarz inequality show that $X\mapsto\Tr\varphi_{t,\tau}(X)$ is $n^{1/2}/(2\tau)$-Lipschitz in the Frobenius norm. Note that the map from the independent standard Gaussian coordinates to $G_n$ multiplies Frobenius distances by at most $(2/n)^{1/2}$. Then $\Tr\varphi_{t,\tau}(G_n)$ is a $(2^{1/2}\tau)^{-1}$-Lipschitz function of a standard Gaussian vector, and by \eqref{eq:kr-mgf} with $t=1$ we have
+\begin{equation}\label{eq:mo-smooth-mgf}
+\E|\det(t-G_n)|\le\E e^{\Tr\varphi_{t,\tau}(G_n)}\le\exp\bigl(\E\Tr\varphi_{t,\tau}(G_n)+(4\tau^2)^{-1}\bigr).
+\end{equation}
+By Wigner's semicircle law \cite[Theorem~2.1.1]{AndersonGuionnetZeitouni2010}, the expected empirical spectral measure $\bar\mu_n=\E n^{-1}\sum_i\delta_{\lambda_i(G_n)}$ converges weakly to $\sigma_{\rm sc}$. (For the GOE, this also follows from the moment method, since $n^{-1}\E\Tr G_n^{2l}$ converges to the Catalan number $\mathrm{Cat}_l$ and the odd moments vanish.) We have $\log\tau\le\varphi_{t,\tau}(s)\le C_t(1+|s|)$ and $\int s^2\bar\mu_n(\dd s)=1+n^{-1}$, which implies that the functions $\varphi_{t,\tau}$ are uniformly integrable with respect to the measures $\bar\mu_n$. Then $n^{-1}\E\Tr\varphi_{t,\tau}(G_n)\to\int\varphi_{t,\tau}\dd\sigma_{\rm sc}$ for each $t$. This convergence is uniform for $t$ in compact sets, because $t\mapsto\varphi_{t,\tau}$ is $(2\tau)^{-1}$-Lipschitz. Since the density of $\sigma_{\rm sc}$ is at most $1/\pi$ and $\int_\R\log(1+\tau^2/s^2)\dd s=2\pi\tau$, we have
+\[
+0\le\int\varphi_{t,\tau}\dd\sigma_{\rm sc}-\Omega(t)=\frac12\int\log\Bigl(1+\frac{\tau^2}{(t-s)^2}\Bigr)\sigma_{\rm sc}(\dd s)\le\tau.
+\]
+We now fix $\tau=a/4$, apply \eqref{eq:mo-smooth-mgf} with $t=k/b_N$, and multiply by $b_N^n$. For $N$ large enough depending on $a$ and $J'$, we find $d_N^{\rm all}(k)\le b_N^n\exp(n\Omega(k/b_N)+na/2+4a^{-2})$. Finally, $n\log b_N=\frac12N\log b_Q+O(1)$, and $|n\Omega(k/b_N)-N\Omega(k/b_Q^{1/2})|=O(1)$ uniformly for $k\in J'$, because $\Omega$ is bounded and Lipschitz on compact sets and $|k/b_N-k/b_Q^{1/2}|=O(N^{-1})$. This proves (b). We note that (b) is an upper bound with an arbitrarily small exponential error, not a bounded prefactor.
+
+Finally, we prove (c). We have $D_N(k)\le(|k|+b_N\|G_n\|_{\rm op})^n$. By Minkowski's inequality, $d_N^{\rm all}(k)^{1/n}\le|k|+b_N(\E\|G_n\|_{\rm op}^n)^{1/n}$. We write $\|G_n\|_{\rm op}\le2+X$ with $X=(\|G_n\|_{\rm op}-2)_+$. Applying \cref{lem:kr-gaussian}(2) to $G_n$, we have $\Pp(X>t)\le2e^{-nt^2/4}$, and then
+\[
+\E X^n=\int_0^\infty nt^{n-1}\Pp(X>t)\dd t\le n\Bigl(\frac4n\Bigr)^{n/2}\Gamma\Bigl(\frac n2\Bigr)\le C^n.
+\]
+Using Minkowski's inequality again, we find $(\E\|G_n\|_{\rm op}^n)^{1/n}\le2+C$, which proves (c).
+\end{proof}
+
+
+\section{The marked complexity}\label{sec:mo-complexity}
+
+We define the \emph{marked complexity}
+\begin{equation}\label{eq:mo-Theta}
+\Theta(e,k)=\frac12+\frac12\log\frac{b_Q}{a_Q}-\frac12q(e,k)+\Omega\bigl(k/b_Q^{1/2}\bigr),\qquad(e,k)\in\R^2.
+\end{equation}
+For $k\ge2b_Q^{1/2}$, this is the function $\Theta$ of \cref{prop:th-scores}, and for $k>2b_Q^{1/2}$ it is the complexity of critical points of $H_Q$ with normalized energy $e$ and normalized radial derivative $k$ computed in \cite[Theorem~5]{BenArousSubagZeitouni2020}. We use it on all of $\R^2$, with $\Omega$ defined on the whole line; \cref{lem:mo-intensity-bounds} below shows that $\lambda^{\rm all}_N(Ne,k)$ and $\lambda^{\max}_N(Ne,k)$ are comparable to $e^{N\Theta(e,k)}$, with bounded constants, for $k$ in a fixed interval above $2b_Q^{1/2}$.
+
+\begin{lemma}[Global strong concavity]\label{lem:mo-concavity}
+Let $\xi$ be a non-pure mixture. The matrix
+\begin{equation}\label{eq:mo-M}
+M=\Sigma_Q^{-1}-\begin{pmatrix}0&0\\0&(2b_Q)^{-1}\end{pmatrix}
+\end{equation}
+is positive definite. Let $\kappa_\Theta>0$ be its smallest eigenvalue. Then $\Theta(e,k)+\kappa_\Theta(e^2+k^2)/2$ is concave on $\R^2$, and
+\begin{equation}\label{eq:mo-saddle}
+\Theta(E_0,K_0)=0,\qquad\nabla\Theta(E_0,K_0)=(-c_0,0).
+\end{equation}
+Further, for all $(e,k)\in\R^2$,
+\begin{equation}\label{eq:mo-global-loss}
+\Theta(e,k)\le-c_0(e-E_0)-\frac{\kappa_\Theta}2\bigl[(e-E_0)^2+(k-K_0)^2\bigr].
+\end{equation}
+In particular, $K_0$ is the unique maximizer of $\Theta(E_0,\cdot)$ on $\R$.
+\end{lemma}
+
+\begin{proof}
+We recall the classical formulas for the logarithmic potential of the semicircle law:
+\begin{equation}\label{eq:mo-Omega}
+\Omega(t)=\begin{cases}\dfrac{t^2}4-\dfrac12,&|t|\le2,\\[2mm]
+\dfrac{t^2}4-\dfrac12-\dfrac{|t|(t^2-4)^{1/2}}4+\log\dfrac{|t|+(t^2-4)^{1/2}}2,&|t|>2,\end{cases}
+\end{equation}
+and $\Omega'(t)=t/2$ for $|t|\le2$, $\Omega'(t)=(t-\operatorname{sgn}(t)(t^2-4)^{1/2})/2$ for $|t|>2$. For $|t|>2$, $\Omega'(t)=\int\sigma_{\rm sc}(\dd s)/(t-s)$ is the Stieltjes transform of $\sigma_{\rm sc}$. The function $\Omega'(t)-t/2$ is continuous, vanishes on $[-2,2]$, and is nonincreasing. This implies that $\Omega(t)-t^2/4$ is concave on $\R$.
+
+We write
+\[
+\Theta(e,k)=\frac12+\frac12\log\frac{b_Q}{a_Q}+\Bigl[\Omega\bigl(k/b_Q^{1/2}\bigr)-\frac{k^2}{4b_Q}\Bigr]-\frac12(e,k)M(e,k)^{\mathsf T}.
+\]
+The bracket is concave by the previous paragraph, and it suffices to show that $M$ is positive definite. With $D=\det\Sigma_Q$, we have $M_{ee}=(a_Q+b_Q)/D>0$, and the Schur complement of this entry is
+\[
+M_{kk}-\frac{M_{ek}^2}{M_{ee}}=\frac{\xi(Q)}D-\frac1{2b_Q}-\frac{a_Q^2}{(a_Q+b_Q)D}=\frac1{a_Q+b_Q}-\frac1{2b_Q},
+\]
+where we used $\xi(Q)(a_Q+b_Q)-a_Q^2=D$. This is positive because $b_Q>a_Q$: indeed, $b_Q/a_Q=\sum_p(p-1)pc_pQ^p/\sum_ppc_pQ^p\ge d-1\ge3$. This proves the concavity.
+
+The identities \eqref{eq:mo-saddle} are \cref{prop:th-scores}(3). We recall the computation behind them, since it is used again below. With $w=y/b_Q^{1/2}>1$, we have $K_0/b_Q^{1/2}=w+w^{-1}$ and $(K_0^2/b_Q-4)^{1/2}=w-w^{-1}$, and \eqref{eq:mo-Omega} yields $\Omega(K_0/b_Q^{1/2})=b_Q/(2y^2)+\log(y/b_Q^{1/2})$ and $b_Q^{-1/2}\Omega'(K_0/b_Q^{1/2})=1/y$. By \eqref{eq:mo-score}, $q(E_0,K_0)=c_0E_0+K_0/y$, and inserting these values into \eqref{eq:mo-Theta}, together with the two identities in \eqref{eq:mo-thermal}, gives $\Theta(E_0,K_0)=0$. The gradient of $\Theta$ is $-\Sigma_Q^{-1}(e,k)^{\mathsf T}+(0,b_Q^{-1/2}\Omega'(k/b_Q^{1/2}))$, which equals $-(c_0,1/y)+(0,1/y)=(-c_0,0)$ at $(E_0,K_0)$.
+
+Finally, $\phi(e,k)=\Theta(e,k)+\kappa_\Theta(e^2+k^2)/2$ is concave and differentiable at $(E_0,K_0)$, and it lies below its tangent plane there. We have $\nabla\phi(E_0,K_0)=(-c_0+\kappa_\Theta E_0,\kappa_\Theta K_0)$, and the tangent-plane inequality is \eqref{eq:mo-global-loss}.
+\end{proof}
+
+The identities \eqref{eq:mo-saddle} are also the zero-complexity and radial stationarity identities of \cite[Lemma~3.18 and Lemma~5.2]{HuangSellke2024}. The point of \cref{lem:mo-concavity} is the global bound \eqref{eq:mo-global-loss}, which also covers values of the radial derivative inside the semicircle support.
+
+\begin{lemma}[Intensity bounds and excluded marks]\label{lem:mo-intensity-bounds}
+Let $\xi$ be a non-pure mixture, and let $U$ be a bounded open interval with $K_0\in U$ and $\overline U\subset(2b_Q^{1/2},\infty)$. Let $u_U=\operatorname{dist}(K_0,\R\setminus U)$.
+\begin{enumerate}
+\item[(a)] There exist $c,C>0$ such that, for all $e\in\R$, $k\in\overline U$, and all large $N$,
+\begin{equation}\label{eq:mo-bounded-intensity}
+c\,e^{N\Theta(e,k)}\le\lambda_N^{\max}(Ne,k)\le\lambda_N^{\rm all}(Ne,k)\le Ce^{N\Theta(e,k)}.
+\end{equation}
+\item[(b)] Let $0<\delta\le\kappa_\Theta u_U^2/(8c_0)$. There exist $c,C>0$ such that
+\begin{equation}\label{eq:mo-excluded}
+\E\#\bigl\{u\in\mathrm{Crt}_N:H_Q(u)\ge N(E_0-\delta),\ K_Q(u)/N\notin U\bigr\}\le Ce^{-cN}.
+\end{equation}
+\item[(c)] For every $t>0$, there exist $c_t,C_t>0$ such that
+\begin{equation}\label{eq:mo-coarse-upper}
+\E\#\bigl\{u\in\mathrm{Crt}_N:H_Q(u)\ge N(E_0+t)\bigr\}\le C_te^{-c_tN}.
+\end{equation}
+\item[(d)] There exists $C$ such that, for all $\delta'\ge0$ and all large $N$,
+\begin{equation}\label{eq:mo-coarse-count}
+\E\#\bigl\{u\in\mathrm{Crt}_N:H_Q(u)\ge N(E_0-\delta'),\ K_Q(u)/N\in U\bigr\}\le CNe^{c_0\delta'N}.
+\end{equation}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+By Stirling's formula, we have
+\begin{equation}\label{eq:mo-stirling}
+|S_N|(2\pi a_Q)^{-n/2}=(2a_Q)^{1/2}\bigl(1+O(N^{-1})\bigr)e^{N(1-\log a_Q)/2}.
+\end{equation}
+Combining this with \eqref{eq:mo-intensity} and \eqref{eq:mo-det-gap} for $J=\overline U$ gives (a). The constants do not depend on $e$, because the Gaussian factor in \eqref{eq:mo-intensity} is exact.
+
+For (b), let $e\ge E_0-\delta$ and $k\notin U$. By \eqref{eq:mo-global-loss}, we have $\Theta(e,k)\le c_0\delta-\kappa_\Theta u_U^2/2\le-3\kappa_\Theta u_U^2/8$. Fix $T>0$, to be chosen below, and consider first $(e,k)\in[-T,T]^2$. Using \eqref{eq:mo-intensity}, \eqref{eq:mo-stirling}, and \cref{lem:mo-goe}(b) with $a=\kappa_\Theta u_U^2/8$, we find $\lambda_N^{\rm all}(Ne,k)\le Ce^{N(\Theta(e,k)+a)}\le Ce^{-\kappa_\Theta u_U^2N/4}$ there. Integrating over this part of the region with $\dd h\dd k=N\dd e\dd k$, we find a contribution of at most $CNe^{-\kappa_\Theta u_U^2N/4}$. To discard the complement of $[-T,T]^2$, let $a_\Sigma>0$ be the smallest eigenvalue of $\Sigma_Q^{-1}$. Similarly, \eqref{eq:mo-intensity}, \eqref{eq:mo-stirling}, and \cref{lem:mo-goe}(c) give
+\[
+\lambda_N^{\rm all}(Ne,k)\le C\exp\Bigl(N\Bigl[C-\frac{a_\Sigma}2(e^2+k^2)+\log(|k|+C)\Bigr]\Bigr).
+\]
+For $T$ large enough, the bracket is at most $-a_\Sigma(e^2+k^2)/4$ outside $[-T,T]^2$, and the integral of the right side over this set, including the factor $N$, is at most $Ce^{-cN}$. This proves \eqref{eq:mo-excluded}. The same argument, with $\Theta(e,k)\le-c_0t$ on $\{e\ge E_0+t\}$ by \eqref{eq:mo-global-loss} and $a=c_0t/2$, proves \eqref{eq:mo-coarse-upper}.
+
+For (d), we use (a) for $k\in\overline U$ and \eqref{eq:mo-global-loss} in the form $\Theta(e,k)\le c_0\delta'-\kappa_\Theta(e-E_0)^2/2$ for $e\ge E_0-\delta'$. Integrating in $\dd h\dd k=N\dd e\dd k$ over $e\ge E_0-\delta'$ and $k\in U$, we have the bound $CN|U|e^{c_0\delta'N}\int_\R e^{-N\kappa_\Theta v^2/2}\dd v\le CNe^{c_0\delta'N}$.
+\end{proof}
+
+The bound \eqref{eq:mo-coarse-count} is deliberately loose. It is used only to absorb conditional failure probabilities that are exponentially small. The precise normalization is proved in the next section.
+
+
+\section{Centering and expected counts in fixed energy windows}\label{sec:mo-micro}
+
+\paragraph{Admissible neighborhoods.}
+For each $e\in\R$, the function $\Theta(e,\cdot)$ is strongly concave by \cref{lem:mo-concavity} and tends to $-\infty$ at $\pm\infty$ by \eqref{eq:mo-global-loss}. Let $k_*(e)$ be its unique maximizer and $\theta(e)=\Theta(e,k_*(e))$. Then $k_*(E_0)=K_0$. Fix
+\begin{equation}\label{eq:mo-cpm}
+c_-=\frac{c_0}2,\qquad c_+=\frac{c_0+\beta}2,\qquad\text{so that}\qquad 0<c_-<c_0<c_+<\beta.
+\end{equation}
+We call a pair $(U,\delta)$, with $U$ an open interval and $\delta>0$, \emph{admissible} if:
+\begin{enumerate}
+\item[(A1)] $U$ is bounded, $K_0\in U$, and $\overline U\subset(2b_Q^{1/2},\infty)$;
+\item[(A2)] $c_-\le\ell(e,k)\le c_+$ for all $(e,k)\in[E_0-\delta,E_0+\delta]\times\overline U$;
+\item[(A3)] $\delta\le\kappa_\Theta u_U^2/(8c_0)$, where $u_U=\operatorname{dist}(K_0,\R\setminus U)$;
+\item[(A4)] $\operatorname{dist}(k_*(e),\R\setminus U)\ge u_U/2$ for all $|e-E_0|\le\delta$.
+\end{enumerate}
+Recall that $\ell(E_0,K_0)=c_0$ by \eqref{eq:mo-score}. Since $\ell$ and $k_*$ are continuous, admissible pairs exist. If $(U,\delta)$ is admissible, then $(U,\delta')$ is admissible for $0<\delta'<\delta$, and for every open interval $U'\subset U$ containing $K_0$, there exists $\delta'>0$ such that $(U',\delta')$ is admissible. The coefficient of $e$ in $\ell$ is $(a_Q+b_Q)/\det\Sigma_Q>0$, and therefore (A2) implies
+\begin{equation}\label{eq:mo-lower-score}
+\ell(e,k)\ge c_-\qquad\text{for all }e\ge E_0-\delta,\ k\in\overline U.
+\end{equation}
+For an admissible pair, (A3) is the hypothesis of \cref{lem:mo-intensity-bounds}(b). We set
+\begin{equation}\label{eq:mo-tail-def}
+\lambda_N(h)=\int_U\lambda_N^{\max}(h,k)\dd k,\qquad T_N(h)=\int_h^\infty\lambda_N(v)\dd v.
+\end{equation}
+By \cref{lem:mo-intensity}, $T_N(h)$ is the expected number of points $u\in\mathrm{Crt}_N^{\max}$ with $H_Q(u)\ge h$ and $K_Q(u)/N\in U$.
+
+\begin{lemma}[Integral over the radial derivative and the slope in energy]\label{lem:mo-radial}
+Let $\xi$ be a non-pure mixture and $(U,\delta)$ admissible.
+\begin{enumerate}
+\item[(a)] The function $k_*$ is smooth on $[E_0-\delta,E_0+\delta]$, and $\theta(E_0)=0$, $\theta'(E_0)=-c_0$. In particular, $\theta(e)=-c_0(e-E_0)+O((e-E_0)^2)$.
+\item[(b)] Uniformly for $|e-E_0|\le\delta$,
+\begin{equation}\label{eq:mo-radial-normalization}
+cN^{-1/2}e^{N\theta(e)}\le\lambda_N(Ne)\le CN^{-1/2}e^{N\theta(e)}.
+\end{equation}
+\item[(c)] Let
+\begin{equation}\label{eq:mo-raw}
+\mathcal R_N(e)=\int_Ue^{-Nq(e,k)/2}d_N^{\max}(k)\dd k,\qquad\text{so that}\qquad\lambda_N(Ne)=\mathfrak c_N\mathcal R_N(e).
+\end{equation}
+Then $\mathcal R_N(e)\asymp N^{-1/2}\exp(N[\theta(e)-\frac12+\frac12\log a_Q])$ uniformly for $|e-E_0|\le\delta$.
+\item[(d)] For $e\in\R$, let $p_{N,e}(\dd k)=\mathcal R_N(e)^{-1}\ind_U(k)e^{-Nq(e,k)/2}d_N^{\max}(k)\dd k$ be the radial distribution of local maxima at energy $Ne$. Then, uniformly for $|e-E_0|\le\delta$,
+\begin{equation}\label{eq:mo-radial-concentration}
+p_{N,e}\bigl(\{k:|k-k_*(e)|\ge t\}\bigr)\le Ce^{-cNt^2},\qquad t\ge0.
+\end{equation}
+\item[(e)] For all $h\in\R$,
+\begin{equation}\label{eq:mo-exact-slope}
+\frac{\dd}{\dd h}\log\lambda_N(h)=-\int\ell(h/N,k)\,p_{N,h/N}(\dd k).
+\end{equation}
+In particular, $-(\log\lambda_N)'(h)\ge c_-$ for $h\ge N(E_0-\delta)$, and $-(\log\lambda_N)'(h)\le c_+$ for $|h-NE_0|\le N\delta$. Moreover, for every fixed $D>0$, uniformly for $|h-NE_0|\le D\log N$,
+\begin{equation}\label{eq:mo-micro-slope}
+\frac{\dd}{\dd h}\log\lambda_N(h)=-c_0+O_D(N^{-1/2}).
+\end{equation}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+On $\R\times(2b_Q^{1/2},\infty)$, $\Theta$ is smooth and $\partial_k^2\Theta\le-\kappa_\Theta$. We have $k_*(e)\in U$ for $|e-E_0|\le\delta$ by (A4). Then $\partial_k\Theta(e,k_*(e))=0$ there, and the implicit function theorem shows that $k_*$ is smooth. We have $\theta'(e)=\partial_e\Theta(e,k_*(e))$, and \eqref{eq:mo-saddle} implies that $\theta(E_0)=0$ and $\theta'(E_0)=-c_0$. This proves (a).
+
+For (b), we note that $\Theta(e,k)\le\theta(e)-\kappa_\Theta(k-k_*(e))^2/2$ for all $k$, by the strong concavity of $\Theta(e,\cdot)$. Integrating \eqref{eq:mo-bounded-intensity} over $k\in U$ gives the upper bound in \eqref{eq:mo-radial-normalization}. For the lower bound, let $C_2$ be a bound for $|\partial_k^2\Theta|/2$ on $[E_0-\delta,E_0+\delta]\times\overline U$. For $N^{-1/2}<u_U/2$, the interval $\{|k-k_*(e)|\le N^{-1/2}\}$ lies in $U$ by (A4), and on it $\Theta(e,k)\ge\theta(e)-C_2/N$. Integrating the lower bound in \eqref{eq:mo-bounded-intensity} over this interval, we find $\lambda_N(Ne)\ge2cN^{-1/2}e^{N\theta(e)-C_2}$. Part (c) follows from (b), the relation $\lambda_N(Ne)=\mathfrak c_N\mathcal R_N(e)$, and \eqref{eq:mo-stirling}.
+
+For (d), the same upper bound and $\int_{|v|\ge t}e^{-\kappa_\Theta Nv^2/2}\dd v\le CN^{-1/2}e^{-\kappa_\Theta Nt^2/4}$ show that $\mathcal R_N(e)\,p_{N,e}(\{|k-k_*(e)|\ge t\})$ is at most $CN^{-1/2}e^{N(\theta(e)-\frac12+\frac12\log a_Q)}e^{-\kappa_\Theta Nt^2/4}$. Dividing by the lower bound in (c), we have \eqref{eq:mo-radial-concentration} with $c=\kappa_\Theta/4$.
+
+For (e), note that $d_N^{\max}(k)$ depends on $k$ only. By \eqref{eq:mo-qell}, $\partial_h[Nq(h/N,k)/2]=\ell(h/N,k)$, and differentiation under the integral over the bounded interval $U$ is justified by dominated convergence. This proves \eqref{eq:mo-exact-slope}. The two inequalities that follow are \eqref{eq:mo-lower-score} and (A2), since $p_{N,h/N}$ is a probability measure on $U$. For \eqref{eq:mo-micro-slope}, let $e=h/N$, so that $|e-E_0|\le D(\log N)/N$. Since $\ell$ is linear and $\ell(E_0,K_0)=c_0$, and $|k_*(e)-K_0|\le C|e-E_0|$ by (a), we have
+\[
+\Bigl|\int\ell(e,k)\,p_{N,e}(\dd k)-c_0\Bigr|\le C\Bigl(|e-E_0|+\int|k-k_*(e)|\,p_{N,e}(\dd k)\Bigr)\le C\Bigl(\frac{D\log N}N+N^{-1/2}\Bigr),
+\]
+where in the last step we integrated the tail bound \eqref{eq:mo-radial-concentration} in $t$.
+\end{proof}
+
+A version of $p_{N,e}$ that acts on functions of the whole field is also needed in \cref{sec:mixbands}. For each fixed $u\in S_N$, we define the Palm kernel of local maxima at $u$ with energy $Ne$ by the following formula, valid for every nonnegative Borel function $f(H,k)$:
+\begin{equation}\label{eq:mo-full-palm}
+\E^{\mathrm{Palm},\max}_{N,Ne,u}f(H,k)=\frac1{\mathcal R_N(e)}\int_Ue^{-Nq(e,k)/2}\,\E_{e,k,u}\bigl[D(u)\ind\{\nabla_{S_N}^2H_Q(u)\prec0\}f(H,k)\bigr]\dd k.
+\end{equation}
+Integrating this kernel against $\nu_N(\dd u)$ gives the Palm law of local maxima at energy $Ne$. By \cref{lem:mo-intensity}, the expected sum of $f(H,K_Q(u)/N)$ over the points $u\in\mathrm{Crt}_N^{\max}$ with $K_Q(u)/N\in U$ and $H_Q(u)\in B$ is $\int_B\lambda_N(h)\int_{S_N}\E^{\mathrm{Palm},\max}_{N,h,u}f\,\nu_N(\dd u)\dd h$.
+Here $D(u)$ is the actual determinant of the conditioned field, which is correlated with $f$. Only its marginal law is that of $D_N(k)$. The normalization integral $\mathcal R_N(e)$ and the intensity $\lambda_N(Ne)=\mathfrak c_N\mathcal R_N(e)$ differ by the factor $\mathfrak c_N$, and the two must not be interchanged. By \eqref{eq:mo-cN} and \eqref{eq:mo-stirling}, we have $N^{-1}\log\mathfrak c_N\to(1-\log a_Q)/2$, so this factor grows exponentially if $\log a_Q<1$ and decays exponentially if $\log a_Q>1$.
+
+\begin{theorem}[Centering, expected counts, and tails in fixed energy windows]\label{thm:mo-microscopic}
+Let $\xi$ be a non-pure mixture and $(U,\delta)$ admissible.
+\begin{enumerate}
+\item[(a)] For all large $N$, there exists a unique $m_N\in\R$ with $T_N(m_N)=1$, and
+\begin{equation}\label{eq:mo-centering}
+m_N=NE_0-\frac{\log N}{2c_0}+O(1).
+\end{equation}
+For the finitely many remaining $N$, we set $m_N=NE_0$.
+\item[(b)] For every fixed $t\in\R$,
+\begin{equation}\label{eq:mo-tail-limit}
+\lambda_N(m_N+t)\longrightarrow c_0e^{-c_0t},\qquad T_N(m_N+t)\longrightarrow e^{-c_0t}.
+\end{equation}
+\item[(c)] For all fixed $a<b$,
+\begin{equation}\label{eq:mo-window-limit}
+\E\#\bigl\{u\in\mathrm{Crt}_N:K_Q(u)/N\in U,\ H_Q(u)-m_N\in[a,b]\bigr\}\longrightarrow e^{-c_0a}-e^{-c_0b},
+\end{equation}
+and the same limit holds with $\mathrm{Crt}_N$ replaced by $\mathrm{Crt}_N^{\max}$. In particular, the expected number of points in the window $[m_N-L,m_N+L]$ tends to $\mu_L=e^{c_0L}-e^{-c_0L}$, and every fixed window has expected count bounded uniformly in $N$.
+\item[(d)] For all large $N$ and all $v\ge0$, $T_N(m_N+v)\le e^{-c_-v}$.
+\item[(e)] For all large $N$ and $0\le v\le m_N-N(E_0-\delta)$, $\lambda_N(m_N-v)\le Ce^{c_+v}$, where $c_+<\beta$.
+\item[(f)] For every $L\ge0$,
+\begin{equation}\label{eq:mo-ground-upper}
+\limsup_{N\to\infty}\Pp\Bigl(\max_{S_N}H_Q>m_N+L\Bigr)\le e^{-c_0L}.
+\end{equation}
+More precisely, with probability at least $1-Ce^{-cN}$, every global maximizer $u$ of $H_Q$ with $H_Q(u)\ge N(E_0-\delta)$ belongs to $\mathrm{Crt}_N^{\max}$ and satisfies $K_Q(u)/N\in U$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+We begin with (a). By \cref{lem:mo-radial}(e), for $h\ge N(E_0-\delta)$ and $v\ge0$,
+\begin{equation}\label{eq:mo-envelope}
+\lambda_N(h+v)\le\lambda_N(h)e^{-c_-v}.
+\end{equation}
+Fix $D>1/(2c_0)+1$ and let $|h-NE_0|\le D\log N$. Integrating \eqref{eq:mo-envelope} in $v$, we have $T_N(h)\le\lambda_N(h)/c_-$. The upper bound on the slope in \cref{lem:mo-radial}(e) implies that $T_N(h)\ge\int_0^1\lambda_N(h+v)\dd v\ge e^{-c_+}\lambda_N(h)$. Combining these bounds with \eqref{eq:mo-radial-normalization} and \cref{lem:mo-radial}(a), we obtain
+\begin{equation}\label{eq:mo-log-window}
+T_N(h)\asymp\lambda_N(h)\asymp N^{-1/2}e^{-c_0(h-NE_0)},\qquad|h-NE_0|\le D\log N,
+\end{equation}
+where the omitted factor $\exp(O(D^2(\log N)^2/N))$ is bounded above and below. We have $c_0D>1/2$, and \eqref{eq:mo-log-window} shows that $T_N(NE_0-D\log N)>1>T_N(NE_0+D\log N)$ for all large $N$. The density $\lambda_N$ is positive and continuous on $\R$, because $d_N^{\max}>0$ on $\overline U$ by \eqref{eq:mo-det-gap}. Then $T_N$ is continuous and strictly decreasing, and by the intermediate value theorem it has a unique root $m_N$, with $|m_N-NE_0|<D\log N$. At $h=m_N$, \eqref{eq:mo-log-window} reads $1\asymp N^{-1/2}e^{-c_0(m_N-NE_0)}$, which is \eqref{eq:mo-centering}.
+
+Next, we prove (b). For every fixed $v\in\R$, the point $m_N+v$ lies within $(D+1)\log N$ of $NE_0$ for large $N$, and integrating \eqref{eq:mo-micro-slope}, with $D+1$ in place of $D$, between $m_N$ and $m_N+v$ yields
+\begin{equation}\label{eq:mo-ratio}
+\frac{\lambda_N(m_N+v)}{\lambda_N(m_N)}\longrightarrow e^{-c_0v},
+\end{equation}
+uniformly for $v$ in bounded sets. For $v\ge0$, the ratio is at most $e^{-c_-v}$ by \eqref{eq:mo-envelope}, since $m_N\ge N(E_0-\delta)$. By dominated convergence,
+\[
+1=T_N(m_N)=\lambda_N(m_N)\int_0^\infty\frac{\lambda_N(m_N+v)}{\lambda_N(m_N)}\dd v=\lambda_N(m_N)\bigl(c_0^{-1}+o(1)\bigr),
+\]
+so $\lambda_N(m_N)\to c_0$, and \eqref{eq:mo-ratio} then implies the first limit in \eqref{eq:mo-tail-limit}. Integrating the same ratios from $t$ to $\infty$, we find the second limit. If $t<0$, the additional interval $[t,0]$ is bounded and the convergence there is uniform.
+
+For (c), the expected number of local maxima in the window is $T_N(m_N+a)-T_N(m_N+b)$, which converges to $e^{-c_0a}-e^{-c_0b}$ by (b). For all critical points, the intensity $\lambda_N^{\rm all}$ differs from $\lambda_N^{\max}$ by the factor $d_N^{\rm all}(k)/d_N^{\max}(k)=1+O(e^{-cN})$ on $\overline U$, by \eqref{eq:mo-det-gap}, and the expected counts in the windows have the same limit. For the finitely many $N$ below the threshold, the expected number of critical points is finite by \cref{lem:mo-intensity}, which implies that every fixed window has bounded expected count.
+
+For (d), we integrate $\lambda_N(m_N+v+w)\le e^{-c_-v}\lambda_N(m_N+w)$, which is \eqref{eq:mo-envelope}, over $w\ge0$, and find $T_N(m_N+v)\le e^{-c_-v}T_N(m_N)=e^{-c_-v}$. For (e), integrating the upper slope bound $-(\log\lambda_N)'\le c_+$ of \cref{lem:mo-radial}(e) over $[m_N-v,m_N]$, we conclude that $\lambda_N(m_N-v)\le e^{c_+v}\lambda_N(m_N)$, and $\lambda_N(m_N)$ is bounded by (b).
+
+Finally, we prove (f). By \cref{lem:mo-intensity-bounds}(b) and Markov's inequality, with probability at least $1-Ce^{-cN}$ every critical point $u$ with $H_Q(u)\ge N(E_0-\delta)$ satisfies $K_Q(u)/N\in U$. Every global maximizer is a critical point, and since $H_Q$ is almost surely a Morse function, it belongs to $\mathrm{Crt}_N^{\max}$. This proves the second statement. For large $N$, $m_N+L\ge N(E_0-\delta)$, and the event $\{\max H_Q>m_N+L\}$ intersected with the previous one is contained in the event that some $u\in\mathrm{Crt}_N^{\max}$ has $H_Q(u)\ge m_N+L$ and $K_Q(u)/N\in U$. Using Markov's inequality and (b), we obtain
+\[
+\Pp\Bigl(\max_{S_N}H_Q>m_N+L\Bigr)\le T_N(m_N+L)+Ce^{-cN}\longrightarrow e^{-c_0L},
+\]
+which completes the proof.
+\end{proof}
+
+\begin{remark}[Dependence of the centering on $U$]\label{rem:mo-centering-U}
+Let $(U,\delta)$ and $(U',\delta')$ be admissible, with $U'\subset U$, and let $\delta_*=\min\{\delta,\delta'\}$. We write $T_N^U$, $T_N^{U'}$ and $m_N^U$, $m_N^{U'}$ for the corresponding tails and centerings. For $h\ge N(E_0-\delta_*)$, the difference $T_N^U(h)-T_N^{U'}(h)$ is the expected number of local maxima with $H_Q(u)\ge h$ and normalized radial derivative in $U\setminus U'$, and \cref{lem:mo-intensity-bounds}(b), applied to $U'$ with the width $\delta'$, gives
+\[
+0\le T_N^U(h)-T_N^{U'}(h)\le Ce^{-cN},\qquad h\ge N(E_0-\delta_*).
+\]
+Both centerings lie above $N(E_0-\delta_*)$ for all large $N$. Since $T_N^{U'}\le T_N^U$, we have $m_N^{U'}\le m_N^U$. Using the display, we find that $T_N^U(m_N^{U'})\le T_N^{U'}(m_N^{U'})+Ce^{-cN}=1+Ce^{-cN}$, while $T_N^U(m_N^U-1)\to e^{c_0}>1$ by \cref{thm:mo-microscopic}(b), so $m_N^{U'}>m_N^U-1$ for large $N$. On $[m_N^U-1,m_N^U]$, the density $\lambda_N^U$ is bounded below by $c_0/2$ for large $N$, by \eqref{eq:mo-tail-limit} and the uniformity of \eqref{eq:mo-ratio}. Integrating this lower bound, we find $1+c_0(m_N^U-m_N^{U'})/2\le T_N^U(m_N^{U'})\le1+Ce^{-cN}$, that is, $0\le m_N^U-m_N^{U'}\le Ce^{-cN}$. The common width $\delta_*$ is needed: the region of $U\setminus U'$ above a larger energy threshold may contain marks of positive complexity. In the pure case, the logarithmic correction in \eqref{eq:mo-centering} agrees with \cite[Eq.~(1.4)]{SubagZeitouni2017}, expressed there using minima and counting antipodal pairs once when $p$ is even.
+\end{remark}
+
+
+\section{Conditional regularity and localization}\label{sec:mo-localization}
+
+For a field $H=H_N$, we define the derivative norm
+\begin{equation}\label{eq:mo-regnorm}
+\mathcal D_N(H)=\frac1N\sup_{S_N}|H_Q|+\frac1{N^{1/2}}\sup_{S_N}|\nabla_{S_N}H_Q|+\sup_{S_N}\|\nabla_{S_N}^2H_Q\|_{\rm op}+N^{1/2}\sup_{S_N}\|\nabla_{S_N}^3H_Q\|_{\rm op},
+\end{equation}
+where $\nabla_{S_N}^3H_Q$ is the covariant derivative of the Riemannian Hessian and $\|\cdot\|_{\rm op}$ is the norm of a multilinear form on unit tangent vectors. The suprema may be taken over a countable dense set, and $\mathcal D_N$ is a Borel function of the field.
+
+\begin{lemma}[Derivative bounds under conditioning]\label{lem:mo-regularity}
+Let $\mathcal K\subset\R^2$ be compact. There exists $C>0$ such that, for all $N\ge2$, $u\in S_N$, and $(e,k)\in\mathcal K$,
+\begin{equation}\label{eq:mo-regularity}
+\Pp_{e,k,u}\bigl(\mathcal D_N(H)>C\bigr)\le Ce^{-N}\qquad\text{and}\qquad\Pp\bigl(\mathcal D_N(H)>C\bigr)\le Ce^{-N}.
+\end{equation}
+In a pure model, the first bound holds under $\Pp_{e,u}$, uniformly for $e$ in a compact interval.
+\end{lemma}
+
+\begin{proof}
+By \eqref{eq:kr-coefficients}, $H_Q(v)=\sum_p(c_pQ^pN)^{1/2}T_p[(v/N^{1/2})^{\otimes p}]$, where $T_p[w_1,\dots,w_p]=\sum_{i_1,\dots,i_p}Z_{p,i_1,\dots,i_p}(w_1)_{i_1}\cdots(w_p)_{i_p}$. Under $\Pp_{e,k,u}$, the coefficient vector is $(\mathrm{Id}-\Pi_u)Z+m$ by \eqref{eq:kr-regression}, where $\Pi_u=\Lambda_u^*\mathcal C_u^{-1}\Lambda_u$ is an orthogonal projection and $m$ is deterministic. Accordingly, $H_Q=H^{\rm res}+H^{\rm mean}$, where $H^{\rm res}$ is defined by the tensors $T_p^{\rm res}$ with coefficient vector $(\mathrm{Id}-\Pi_u)Z$, and $H^{\rm mean}=\E_{e,k,u}H_Q$.
+
+We first bound the residual tensors. For unit vectors $w_1,\dots,w_p$, the variable $T^{\rm res}_p[w_1,\dots,w_p]$ is a centered Gaussian whose variance is the squared norm of the image of $w_1\otimes\cdots\otimes w_p$ under the projection $\mathrm{Id}-\Pi_u$, hence at most one. Let $\|T\|=\sup|T[w_1,\dots,w_p]|$ over unit vectors, and let $\mathcal N$ be a $(2p)^{-1}$-net of the unit sphere of $\R^N$ with $|\mathcal N|\le(1+4p)^N$. Replacing one slot at a time by its nearest net point, we find $\|T\|\le\max_{\mathcal N^p}|T|+p(2p)^{-1}\|T\|$, that is, $\|T\|\le2\max_{\mathcal N^p}|T|$. Let $A_p^2=2p\log(1+4p)+2$. Using a union bound over $\mathcal N^p$ and the Gaussian tail, we obtain
+\[
+\Pp\bigl(\|T_p^{\rm res}\|>2A_pN^{1/2}\bigr)\le2(1+4p)^{pN}e^{-A_p^2N/2}=2e^{-N}.
+\]
+The $j$-th Euclidean derivative of $(c_pQ^pN)^{1/2}T_p[(v/N^{1/2})^{\otimes p}]$ is a sum of at most $p^j$ contractions. On the event $\|T^{\rm res}_p\|\le2A_pN^{1/2}$, its operator norm is at most $CN^{1-j/2}$ for $|v|\le N^{1/2}$.
+
+Next, we bound the mean. The gradient target in \eqref{eq:kr-regression} is zero, and Gaussian regression shows that
+\[
+H^{\rm mean}(v)=N\bigl(\xi_Q(R(v,u)),R(v,u)\xi_Q'(R(v,u))\bigr)\Sigma_Q^{-1}(e,k)^{\mathsf T}=N\sum_pc_pQ^p\lambda_pR(v,u)^p,
+\]
+with $\lambda_p=(1,p)\Sigma_Q^{-1}(e,k)^{\mathsf T}$, which is bounded for $(e,k)\in\mathcal K$. The $j$-th Euclidean derivative of $R(v,u)^p=(v\cdot u/N)^p$ is $p(p-1)\cdots(p-j+1)R(v,u)^{p-j}(u/N)^{\otimes j}$, and we have $\|D^jH^{\rm mean}(v)\|_{\rm op}\le CN^{1-j/2}$ for $|v|\le N^{1/2}$. In the pure case, the mean is $NeR(v,u)^p$, and without conditioning it is zero. The same bound holds in both cases. As there are finitely many degrees, we conclude that, outside an event of probability at most $Ce^{-N}$,
+\begin{equation}\label{eq:mo-euclid-bounds}
+\sup_{|v|\le N^{1/2}}\|D^jH_Q(v)\|_{\rm op}\le CN^{1-j/2},\qquad j=0,1,2,3.
+\end{equation}
+
+It remains to pass to the sphere. The spherical gradient is the tangential part of $DH_Q$. For tangent vectors $X,Y$ at $v\in S_N$, the Riemannian Hessian is $\nabla_{S_N}^2H_Q(X,Y)=D^2H_Q(X,Y)-N^{-1}\langle X,Y\rangle\,v\cdot DH_Q(v)$, since the second fundamental form of the sphere of radius $N^{1/2}$ is $-N^{-1}\langle X,Y\rangle v$. Differentiating this identity along a tangent vector $Z$ and using that the connection is compatible with the metric, we find
+\begin{multline*}
+\nabla_{S_N}^3H_Q(Z,X,Y)=D^3H_Q(Z,X,Y)-\frac1N\Bigl[\langle Z,X\rangle D^2H_Q(v,Y)+\langle Z,Y\rangle D^2H_Q(v,X)\\
++\langle X,Y\rangle\bigl(DH_Q(Z)+D^2H_Q(v,Z)\bigr)\Bigr].
+\end{multline*}
+For unit tangent vectors, \eqref{eq:mo-euclid-bounds} and $|v|=N^{1/2}$ bound each term on the right by $CN^{-1/2}$, and similarly $\|\nabla_{S_N}^2H_Q\|_{\rm op}\le C$ and $|\nabla_{S_N}H_Q|\le CN^{1/2}$. This proves \eqref{eq:mo-regularity}.
+\end{proof}
+
+The next statement is deterministic.
+
+\begin{lemma}[No critical point near a strict maximum]\label{lem:mo-geodesic}
+Let $\kappa,C_3>0$ and let $f$ be a smooth function on $S_N$ with $\sup_{S_N}\|\nabla_{S_N}^3f\|_{\rm op}\le C_3N^{-1/2}$. Let $u$ be a critical point of $f$ with $\nabla_{S_N}^2f(u)\preceq-\kappa I$. Let $t_*=\min\{\pi/4,\kappa/(2C_3)\}$ and $\eta=1-\cos t_*$. Then $f$ has no critical point $v\ne u$ with $R(u,v)\ge1-\eta$.
+\end{lemma}
+
+\begin{proof}
+Let $v\ne u$ with $R(u,v)\ge1-\eta=\cos t_*$, and let $\gamma$ be the unit-speed minimizing geodesic from $u$ to $v$, of length $l_v=N^{1/2}\arccos R(u,v)\le t_*N^{1/2}$. Let $\phi(l)=f(\gamma(l))$. We have $\phi''(l)=\nabla_{S_N}^2f(\gamma(l))(\gamma'(l),\gamma'(l))$, because $\gamma$ is a geodesic, and $\gamma'$ is parallel along $\gamma$. Differentiating along $\gamma$, we find $|\phi''(l)-\phi''(0)|\le lC_3N^{-1/2}$. This implies that $\phi''(l)\le-\kappa+C_3t_*\le-\kappa/2$ for $0\le l\le t_*N^{1/2}$. Since $\phi'(0)=0$, we conclude that $\phi'(l_v)<0$. In particular, $\nabla_{S_N}f(v)\ne0$.
+\end{proof}
+
+\paragraph{Base choices.}
+We fix, once and for all, a bounded open interval $U_0$ with $K_0\in U_0$ and $\overline U_0\subset(2b_Q^{1/2},\infty)$, and set
+\begin{equation}\label{eq:mo-base}
+g_0=\inf_{k\in\overline U_0}\bigl(k-2b_Q^{1/2}\bigr)>0,\qquad\kappa=\frac{g_0}4.
+\end{equation}
+Let $C_{\rm reg}$ be a constant for which \eqref{eq:mo-regularity} holds both unconditionally and under $\Pp_{e,k,u}$, uniformly for $(e,k)\in\mathcal K_0=[E_0-1,E_0+1]\times\overline U_0$, and set
+\begin{equation}\label{eq:mo-eta}
+t_*=\min\Bigl\{\frac\pi4,\frac\kappa{2C_{\rm reg}}\Bigr\},\qquad\eta=1-\cos t_*.
+\end{equation}
+These constants depend only on $\xi$, $\beta$, and the choice of $U_0$. For instance, $U_0$ may be the interval of \cref{lem:th-hessian}(2); the number $g_0$ defined here is then three quarters of the number denoted $g_0$ there. For $k\in\overline U_0$, we have $k-\kappa\ge2b_Q^{1/2}+3g_0/4$. By \eqref{eq:mo-edge} and the Hessian law, for all $u\in S_N$ and $e\in\R$,
+\begin{equation}\label{eq:mo-hessian-fail}
+\Pp_{e,k,u}\bigl(\nabla_{S_N}^2H_Q(u)\not\preceq-\kappa I\bigr)\le2e^{-c_HN},\qquad c_H=\frac{9g_0^2}{64b_Q}.
+\end{equation}
+
+Estimates of the kind proved in part (a) of the next proposition were obtained by Sellke for all approximate ground states, not only for critical points. The field $H_Q$ is a spherical spin glass with mixture $\xi_Q$, and its ground-state energy is $E_0$. Applied to $H_Q$, \cite[Proposition~1.2]{Sellke2025marginal} shows for every $\xi$ that, for each $\eps>0$, there exists $\delta>0$ such that, for all large $N$, with probability at least $1-e^{-cN}$, every $u\in S_N$ with $H_Q(u)\ge N(E_0-\delta)$ satisfies $|\nabla H_Q(u)-ru|\le\eps\sqrt N$, where $r$ is a constant given by the zero-temperature Parisi formula for $\xi_Q$. At a critical point, the Euclidean gradient is $K_Q(u)u/N$, so this gives $|K_Q(u)/N-r|\le\eps$. Applying this and part (a) below to a maximizer of $H_Q$, we find that $r=K_0$. For even $\xi$, \cite[Theorem~1.3]{Sellke2025marginal} shows that the largest eigenvalue of $\nabla_{S_N}^2H_Q(u)$ at the same points is at most $2b_Q^{1/2}-r+\eps$. Since $2b_Q^{1/2}-K_0\le-g_0=-4\kappa$, this gives the bound on the Hessian in \eqref{eq:mo-all-high} for even $\xi$, with $\eps\le3\kappa$. Our proof uses the Kac--Rice formula and the 1RSB assumptions, and it allows odd degrees. Xu and Yang \cite[Theorem~1.3]{XuYang2025} proved convergence of the Hessian empirical measure and its extreme eigenvalues at the global minimizer for zero-temperature 1RSB models with a strict spectral gap, allowing odd degrees. Their result concerns the global minimizer; \cref{prop:mo-all-high} gives uniform localization of all high critical points of the center field.
+
+\begin{proposition}[High critical points are strict local maxima]\label{prop:mo-all-high}
+Let $\xi$ be a non-pure mixture, and let $U$ be an open interval with $K_0\in U$ and $\overline U\subset U_0$. There exists $\delta_U>0$ such that, for every $\delta\in(0,\delta_U]$, there exist $c,C>0$ with the following property. With probability at least $1-Ce^{-cN}$:
+\begin{enumerate}
+\item[(a)] every $u\in\mathrm{Crt}_N$ with $H_Q(u)\ge N(E_0-\delta)$ satisfies
+\begin{equation}\label{eq:mo-all-high}
+H_Q(u)\le N(E_0+\delta),\qquad K_Q(u)/N\in U,\qquad\nabla_{S_N}^2H_Q(u)\preceq-\kappa I;
+\end{equation}
+\item[(b)] $\mathcal D_N(H)\le C_{\rm reg}$; in particular $\sup_{S_N}\|\nabla_{S_N}^3H_Q\|_{\rm op}\le C_{\rm reg}N^{-1/2}$;
+\item[(c)] no critical point $v$ of $H_Q$ other than $u$ satisfies $R(u,v)\ge1-\eta$, for any $u$ as in (a).
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+By fact (4) above and \eqref{eq:mo-hessian-fail}, for $k\in\overline U$ we have
+\[
+\E_{e,k,u}\bigl[D(u)\ind\{\nabla_{S_N}^2H_Q(u)\not\preceq-\kappa I\}\bigr]\le\mathsf K_2^{1/2}\bigl(2e^{-c_HN}\bigr)^{1/2}d_N^{\rm all}(k)\le Ce^{-c_HN/2}d_N^{\rm all}(k).
+\]
+This bound uses no independence between the determinant and the event. Let $\delta_U=\min\{\kappa_\Theta u_U^2/(8c_0),c_H/(4c_0),1\}$ and $0<\delta\le\delta_U$. By \cref{lem:mo-intensity} with $f=\ind\{\nabla_{S_N}^2H_Q(u)\not\preceq-\kappa I\}$ and $A=[N(E_0-\delta),\infty)\times U$, and by \eqref{eq:mo-coarse-count}, the expected number of $u\in\mathrm{Crt}_N$ with $H_Q(u)\ge N(E_0-\delta)$, $K_Q(u)/N\in U$, and $\nabla_{S_N}^2H_Q(u)\not\preceq-\kappa I$ is at most
+\[
+Ce^{-c_HN/2}\cdot CNe^{c_0\delta N}\le CNe^{-c_HN/4}.
+\]
+The expected number of critical points with $H_Q(u)\ge N(E_0-\delta)$ and $K_Q(u)/N\notin U$ is exponentially small by \cref{lem:mo-intensity-bounds}(b), whose hypothesis holds since $\delta\le\kappa_\Theta u_U^2/(8c_0)$, and the expected number with $H_Q(u)\ge N(E_0+\delta)$ is exponentially small by \cref{lem:mo-intensity-bounds}(c). Using Markov's inequality, we find that (a) holds with probability at least $1-Ce^{-cN}$. Part (b) holds with probability at least $1-C_{\rm reg}e^{-N}$ by the unconditional bound in \eqref{eq:mo-regularity}. On the intersection of the two events, (c) follows from \cref{lem:mo-geodesic} with $C_3=C_{\rm reg}$.
+\end{proof}
+
+\Cref{prop:mo-all-high} concerns all critical points, not only those counted as local maxima in advance. Part (c) excludes only the endpoint of positive overlap. It says nothing about points near $-u$, which matter for mixtures with odd degrees and are treated in \cref{sec:mixpair}.
+
+
+\section{Exclusion of high-energy points at positive overlap}\label{sec:mo-filter}
+
+This exclusion estimate is due to Huang and Sellke \cite[Section~3.3]{HuangSellke2024}. They showed that, conditionally on a critical point $u$ whose normalized energy and normalized radial derivative lie in a small box offset from the ground-state parameters, with probability $1-e^{-cN}$ the field has no high point at intermediate overlap with $u$ and no other critical point near $u$ \cite[Proposition~3.10]{HuangSellke2024}. Their proof combines the law of the field on a latitude of $u$ \cite[Lemma~3.11]{HuangSellke2024}, an explicit one-step trial for the conditional ground state \cite[Proposition~3.13]{HuangSellke2024}, and the one-step upper bound below. We need the conclusion at the ground-state parameters $(E_0,K_0)$ themselves, uniformly on a rectangle around them, with a failure probability that remains exponentially small after weighting by the Hessian determinant. Their Proposition~3.10 does not cover such a rectangle. We prove the estimate here, as \cref{thm:mo-filter}. We follow their route. We compute the latitude law and the trial value again, and keep the exact slack $g(r)$ of the zero-temperature contact inequality at $(E_0,K_0)$ (\cref{lem:mo-trial}).
+
+For a covariance $\chi(t)=\sum_{j=1}^J\gamma_jt^j$ with $\gamma_j\ge0$, let $H_m^\chi$ be the centered Gaussian field on $S_m$ with covariance $m\chi(R_m(\sigma,\sigma'))$, where $R_m(\sigma,\sigma')=\sigma\cdot\sigma'/m$. For $L>0$, $\alpha\ge0$, and $q_0\in[0,1]$ such that $b(t)=L-\alpha(t-q_0)_+$ is positive on $[0,1]$, set
+\begin{equation}\label{eq:mo-Qtrial}
+\mathcal Q_\chi(b)=\frac12\Bigl[\chi'(0)L+\int_0^1\chi''(t)b(t)\dd t+\int_0^1\frac{\dd t}{b(t)}\Bigr].
+\end{equation}
+
+\begin{theorem}[Huang--Sellke {\cite[Proposition~2.5]{HuangSellke2024}}]\label{thm:mo-HS}
+Let $\chi$ and $b$ be as above. Then, for every $t>0$,
+\[
+\lim_{m\to\infty}\Pp\Bigl(\frac1m\max_{S_m}H_m^\chi>\mathcal Q_\chi(b)+t\Bigr)=0.
+\]
+\end{theorem}
+
+In \cite{HuangSellke2024}, the trial is written as $(L,\alpha)$ with $\alpha(t)=\alpha\ind\{t\ge q_0\}$ and $b(t)=L-\int_0^t\alpha$, and \eqref{eq:mo-Qtrial} is their functional \cite[Eq.~(2.1)]{HuangSellke2024}. Positivity of $b$ is their admissibility condition $L>\int_0^1\alpha$. They write the external field as the degree-one term of the mixture \cite[footnote to Eq.~(1.1)]{HuangSellke2024}. In particular, $\chi$ may have a linear term, and no parity or replica-symmetry assumption on $\chi$ is needed. As they explain in \cite[Remark~2.6]{HuangSellke2024}, the bound follows from the zero-temperature Crisanti--Sommers formula of Chen and Sen \cite{ChenSen2017}.
+
+For $u\in S_N$ and $0<r<1$, we write
+\[
+\mathrm{Lat}_r(u)=\{w\in S_N:R(u,w)=r\}=\bigl\{ru+(1-r^2)^{1/2}v:\ v\perp u,\ |v|^2=N\bigr\}
+\]
+for the latitude of $u$ at overlap $r$.
+
+\begin{lemma}[Latitude law and the trial at the ground-state parameters]\label{lem:mo-trial}
+Let $\xi$ be a non-pure mixture, $u\in S_N$, and $0<r<1$.
+\begin{enumerate}
+\item[(a)] Under $\Pp_{e,k,u}$, the restriction of $H_Q$ to $\mathrm{Lat}_r(u)$ equals $N\mu_{e,k}(r)+\widehat H_r$, where $\widehat H_r$ is a centered Gaussian field whose law does not depend on $(e,k)$, with
+\begin{equation}\label{eq:mo-lat-cov}
+\begin{aligned}
+\E\widehat H_r(w_1)\widehat H_r(w_2)&=N\tau_r\Bigl(\frac{v_1\cdot v_2}N\Bigr),\\
+\tau_r(t)&=\xi_Q\bigl(r^2+(1-r^2)t\bigr)-C_r-\frac{(1-r^2)\xi_Q'(r)^2}{a_Q}t,
+\end{aligned}
+\end{equation}
+for $w_i=ru+(1-r^2)^{1/2}v_i$, where $C_r=(\xi_Q(r),r\xi_Q'(r))\Sigma_Q^{-1}(\xi_Q(r),r\xi_Q'(r))^{\mathsf T}$. The mean is
+\begin{equation}\label{eq:mo-lat-mean}
+\mu_{e,k}(r)=\bigl(\xi_Q(r),r\xi_Q'(r)\bigr)\Sigma_Q^{-1}(e,k)^{\mathsf T}=\frac{r\xi_Q'(r)+z\xi_Q(r)}y+\varpi(r)\cdot(e-E_0,k-K_0),
+\end{equation}
+with $\varpi(r)=\Sigma_Q^{-1}(\xi_Q(r),r\xi_Q'(r))^{\mathsf T}$.
+\item[(b)] We have $\tau_r(0)\ge0$, and $\bar\tau_r(t)=\tau_r(t)-\tau_r(0)$ is a polynomial in $t$ with nonnegative coefficients and $\bar\tau_r(0)=0$. Its linear coefficient may be positive.
+\item[(c)] Let
+\[
+D_r=1+(1-r)z,\qquad t_r=\frac r{1+r},\qquad L_r=\frac{D_r}{(1-r^2)y},\qquad b_r(t)=L_r-\frac zy(t-t_r)_+.
+\]
+Then $b_r(1)=((1-r^2)y)^{-1}>0$, and
+\begin{equation}\label{eq:mo-completed-square}
+\mu_{E_0,K_0}(r)+\mathcal Q_{\bar\tau_r}(b_r)=E_0-\frac z{2y}g(r)-\frac{[ra_Q-D_r\xi_Q'(r)]^2}{2ya_QD_r}.
+\end{equation}
+\item[(d)] For $0<\eps<1-\eta$, let $G_\eps=(z/(2y))\min_{[\eps,1-\eta]}g$, which is positive by \eqref{eq:mo-g}. Then $\mu_{E_0,K_0}(r)+\mathcal Q_{\bar\tau_r}(b_r)\le E_0-G_\eps$ for all $r\in[\eps,1-\eta]$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+We begin with (a). For $w=ru+(1-r^2)^{1/2}v$, the covariances of $H_Q(w)$ with $H_Q(u)$ and $K_Q(u)$ are $N\xi_Q(r)$ and $Nr\xi_Q'(r)$, and its covariance with $\nabla_{S_N}H_Q(u)$ is the tangent vector $\xi_Q'(r)(1-r^2)^{1/2}v$. We use Gaussian regression with the covariance $N\Sigma_Q\oplus a_Q\mathrm{Id}_{u^\perp}$ of the conditioned variables and zero gradient target. It yields the first expression in \eqref{eq:mo-lat-mean} and the covariance \eqref{eq:mo-lat-cov}, since $\E H_Q(w_1)H_Q(w_2)=N\xi_Q(r^2+(1-r^2)v_1\cdot v_2/N)$. The residual is the image of $(\mathrm{Id}-\Pi_u)Z$, whose law does not depend on $(e,k)$. The second expression in \eqref{eq:mo-lat-mean} follows from \eqref{eq:mo-score}, since $(\xi_Q(r),r\xi_Q'(r))(c_0,1/y)^{\mathsf T}=(z\xi_Q(r)+r\xi_Q'(r))/y$. This is the computation of \cite[Lemma~3.11]{HuangSellke2024}, with $K_Q/N$ as the radial derivative.
+
+Next, we prove (b). We write $H_Q=\sum_pH_{Q,p}$ for the decomposition into homogeneous components, which are independent with $\E H_{Q,p}(x)H_{Q,p}(x')=Nc_pQ^p(x\cdot x'/N)^p$. Let $X_r=\sum_pr^pH_{Q,p}(u)$. Then $\Var X_r=N\xi_Q(r^2)$ and $\Cov(X_r,H_Q(u))=N\xi_Q(r)$. By Euler's identity, $K_Q(u)=\sum_ppH_{Q,p}(u)$, which gives $\Cov(X_r,K_Q(u))=Nr\xi_Q'(r)$. Each $H_{Q,p}(u)$ is uncorrelated with $\nabla_{S_N}H_Q(u)$. The variance of $X_r$ minus its regression on $(H_Q(u),K_Q(u),\nabla_{S_N}H_Q(u))$ is therefore $N(\xi_Q(r^2)-C_r)=N\tau_r(0)\ge0$. The coefficient of $t$ in $\tau_r$ is $(1-r^2)[\xi_Q'(r^2)-\xi_Q'(r)^2/a_Q]$, which is nonnegative by the Cauchy--Schwarz inequality
+\[
+\xi_Q'(r)^2=\Bigl(\sum_ppc_pQ^pr^{p-1}\Bigr)^2\le\Bigl(\sum_ppc_pQ^p\Bigr)\Bigl(\sum_ppc_pQ^pr^{2p-2}\Bigr)=a_Q\xi_Q'(r^2).
+\]
+For $j\ge2$, the coefficient of $t^j$ is $(1-r^2)^j\xi_Q^{(j)}(r^2)/j!\ge0$, since $\xi_Q$ has nonnegative coefficients and $r^2\ge0$. This holds for every parity.
+
+For (c), the value of $b_r(1)$ follows from $D_r-z(1-r)=1$. We note that $b_r=L_r$ on $[0,t_r]$. After an integration by parts on $[t_r,1]$, the first two terms of $2\mathcal Q_{\bar\tau_r}(b_r)$ combine to
+\[
+\bar\tau_r'(t_r)L_r+\int_{t_r}^1\bar\tau_r''(t)b_r(t)\dd t=\bar\tau_r'(1)b_r(1)+\frac zy\bigl(\bar\tau_r(1)-\bar\tau_r(t_r)\bigr).
+\]
+Since $r^2+(1-r^2)t_r=r$, we have $\bar\tau_r'(1)=(1-r^2)(a_Q-\xi_Q'(r)^2/a_Q)$ and $\bar\tau_r(1)-\bar\tau_r(t_r)=\xi(Q)-\xi_Q(r)-(1-r)\xi_Q'(r)^2/a_Q$. These two terms are equal to
+\[
+\frac{a_Q^2+za_Q(\xi(Q)-\xi_Q(r))-D_r\xi_Q'(r)^2}{ya_Q}.
+\]
+The last two terms of $2\mathcal Q_{\bar\tau_r}(b_r)$ are
+\[
+\frac{t_r}{L_r}+\int_{t_r}^1\frac{\dd t}{b_r(t)}=\frac{r(1-r)y}{D_r}+\frac yz\log\frac{L_r}{b_r(1)}=\frac{r(1-r)y}{D_r}+\frac yz\log D_r.
+\]
+Using the definition \eqref{eq:mo-g} of $g$ and $y^2=(1+z)a_Q$, we find $(y/z)\log D_r=y^{-1}[z(\xi(Q)-\xi_Q(r)-g(r))+(1-r)a_Q]$. We now add $\mu_{E_0,K_0}(r)=(r\xi_Q'(r)+z\xi_Q(r))/y$ to half the sum of these expressions and subtract $E_0=(a_Q+z\xi(Q))/y$. Multiplying by $y$, the terms containing $\xi_Q(r)$ and $\xi(Q)$ cancel, and we find
+\[
+y\bigl[\mu_{E_0,K_0}(r)+\mathcal Q_{\bar\tau_r}(b_r)-E_0\bigr]=r\xi_Q'(r)-\frac{D_r\xi_Q'(r)^2}{2a_Q}-\frac{r^2a_Q}{2D_r}-\frac{zg(r)}2,
+\]
+where we used $y^2=(1+z)a_Q$ and $r(1-r)(1+z)-rD_r=-r^2$ to combine the terms $-ra_Q/2$ and $r(1-r)y^2/(2D_r)$. Completing the square in $\xi_Q'(r)$ gives \eqref{eq:mo-completed-square}. Part (d) follows from \eqref{eq:mo-completed-square}, since its last term is nonpositive and $g$ is continuous and positive on $[\eps,1-\eta]$.
+\end{proof}
+
+The trial $b_r$ is that of \cite[Eq.~(3.13)]{HuangSellke2024}, and \eqref{eq:mo-completed-square} is the computation in the proof of \cite[Proposition~3.13]{HuangSellke2024}, where the slack $g(r)$ is bounded below by the constant $6y\eta_3/z$ of \cite[Eq.~(3.5)]{HuangSellke2024}.
+
+\begin{theorem}[Exclusion of high-energy points at positive overlap]\label{thm:mo-filter}
+Let $\xi$ be a non-pure mixture, and let $\kappa$, $C_{\rm reg}$, and $\eta$ be the base constants \eqref{eq:mo-base}--\eqref{eq:mo-eta}. Let $0<\eps<1-\eta$ and $G=G_\eps$ as in \cref{lem:mo-trial}(d). There exist an open interval $U$ with $K_0\in U$ and $\overline U\subset U_0$, a number $\delta\in(0,G/4)$, and $c_\eps>0$, $N_\eps$, such that $(U,\delta)$ is admissible, $\delta\le\delta_U$ in \cref{prop:mo-all-high}, and the following holds with $\mathcal K=[E_0-\delta,E_0+\delta]\times\overline U$. For all $N\ge N_\eps$, $u\in S_N$, and $(e,k)\in\mathcal K$, the event $\mathcal A_\eps(u)$ on which
+\begin{enumerate}
+\item[(i)] $\nabla_{S_N}^2H_Q(u)\preceq-\kappa I$ and $\mathcal D_N(H)\le C_{\rm reg}$, and
+\item[(ii)] $\sup\{H_Q(w):w\in S_N,\ \eps\le R(u,w)\le1-\eta\}\le N(E_0-G/2)$,
+\end{enumerate}
+satisfies $\Pp_{e,k,u}(\mathcal A_\eps(u))\ge1-Ce^{-c_\eps N}$, where $C$ depends only on $\xi$, $\beta$, and $U_0$. On $\mathcal A_\eps(u)$, if $u$ is a critical point:
+\begin{enumerate}
+\item[(iii)] there is no critical point $v\ne u$ with $R(u,v)\ge1-\eta$;
+\item[(iv)] there is no critical point $v\ne u$ with $H_Q(v)\ge N(E_0-\delta)$ and $R(u,v)\ge\eps$.
+\end{enumerate}
+The same holds after replacing $U$ by a smaller open interval containing $K_0$ and $\delta$ by a smaller number keeping $(U,\delta)$ admissible.
+\end{theorem}
+
+\Cref{tab:mo-parameters} lists the parameters of the theorem in the order in which they are chosen.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.27\textwidth}>{\raggedright\arraybackslash}p{0.43\textwidth}>{\raggedright\arraybackslash}p{0.22\textwidth}@{}}
+\toprule
+Parameter & Role & Depends on\\
+\midrule
+$U_0$, $\kappa$, $C_{\rm reg}$, $\eta$ & base interval, Hessian margin, derivative bound, endpoint overlap & $\xi$, $\beta$\\
+$\eps\in(0,1-\eta)$ & overlap cutoff, chosen where the theorem is applied & free\\
+$G=G_\eps$ & gap in the contact inequality on $[\eps,1-\eta]$ & $\eps$\\
+$U\subset U_0$, $\delta<G/4$ & radial interval and coarse energy width & $\eps$\\
+$\mathcal T_\eps$, $J_\eps$ & finite net of latitudes and its size & $\eps$, $U$, $\delta$\\
+$c_\eps$, $N_\eps$ & failure exponent and dimension threshold & all of the above\\
+$a,b,t,L,M$ & fixed energy windows & fixed last, before $N\to\infty$\\
+\bottomrule
+\end{tabular}
+\caption{Parameters of \cref{thm:mo-filter}, in the order of their choice.}\label{tab:mo-parameters}
+\end{table}
+
+\begin{proof}
+The proof has three steps. We first bound, for a single latitude, the conditional mean of the maximum of the residual field using \cref{thm:mo-HS}. We then choose the neighborhoods and a finite net of latitudes, and use concentration at the net points. Finally, we interpolate between the net points on the event $\mathcal D_N(H)\le C_{\rm reg}$.
+
+\paragraph{One latitude.}
+Fix $r\in[\eps,1-\eta]$ and let $M_r=\max_{\mathrm{Lat}_r(u)}\widehat H_r$, with $\widehat H_r$ from \cref{lem:mo-trial}(a). Identify $u^\perp$ with $\R^n$ and write $v=(N/n)^{1/2}\sigma$ with $\sigma\in S_n$, so that $v_1\cdot v_2/N=R_n(\sigma_1,\sigma_2)$. By \cref{lem:mo-trial}(a),(b), the field $\widehat H_r$ has the law of $(N\tau_r(0))^{1/2}\gamma_0+(N/n)^{1/2}H_n^{\bar\tau_r}(\sigma)$, with $\gamma_0$ a standard Gaussian variable independent of $H_n^{\bar\tau_r}$. The covariance $\bar\tau_r$ has nonnegative coefficients and $b_r$ is positive, and \cref{thm:mo-HS} therefore applies with $\chi=\bar\tau_r$ and $b=b_r$. As $N^{-1}(N/n)^{1/2}=(n/N)^{1/2}n^{-1}$ and $N^{-1/2}\gamma_0\to0$ in probability, we obtain
+\begin{equation}\label{eq:mo-one-lat}
+\lim_{N\to\infty}\Pp\Bigl(\frac{M_r}N>\mathcal Q_{\bar\tau_r}(b_r)+t\Bigr)=0,\qquad t>0.
+\end{equation}
+Next, $\widehat H_r(w)$ is the inner product of the residual coefficient vector with a fixed vector whose norm is the standard deviation of $\widehat H_r(w)$, namely $(N\tau_r(1))^{1/2}\le(N\xi(Q))^{1/2}$. (The inequality holds because a conditional variance is at most the variance.) Then $M_r$ is a $(N\xi(Q))^{1/2}$-Lipschitz function of a standard Gaussian vector, and \eqref{eq:mo-gauss} implies that
+\begin{equation}\label{eq:mo-band-conc}
+\Pp\bigl(|M_r-\E M_r|>Nt\bigr)\le2e^{-Nt^2/(2\xi(Q))},\qquad t>0.
+\end{equation}
+If $N^{-1}\E M_r>\mathcal Q_{\bar\tau_r}(b_r)+2t$ along a subsequence, then \eqref{eq:mo-band-conc} would make the probability in \eqref{eq:mo-one-lat} tend to one along it. We conclude that $\limsup_NN^{-1}\E M_r\le\mathcal Q_{\bar\tau_r}(b_r)$. The law of $M_r$ depends neither on $(e,k)$ nor on $u$, since the covariance \eqref{eq:mo-lat-cov} does not.
+
+\paragraph{Neighborhoods and the net.}
+The function $\varpi$ is bounded on $[\eps,1-\eta]$. We choose an open interval $U$ with $K_0\in U$ and $\overline U\subset U_0$, and then $\delta\in(0,G/4)$, such that $(U,\delta)$ is admissible, $\delta\le\delta_U$, and
+\begin{equation}\label{eq:mo-mark-cont}
+\sup_{r\in[\eps,1-\eta]}\bigl|\varpi(r)\cdot(e-E_0,k-K_0)\bigr|\le\frac G8\qquad\text{for }(e,k)\in\mathcal K.
+\end{equation}
+By \cref{lem:mo-trial}(c),(d), we then have $\mu_{e,k}(r)+\mathcal Q_{\bar\tau_r}(b_r)\le E_0-7G/8$ for $r\in[\eps,1-\eta]$ and $(e,k)\in\mathcal K$. Let $C_1=C_{\rm reg}(1-(1-\eta)^2)^{-1/2}$, and let $\mathcal T_\eps\subset[\eps,1-\eta]$ be a finite set containing both endpoints with mesh at most $G/(8C_1)$, and let $J_\eps=|\mathcal T_\eps|$. By the first step, there exists $N_\eps$ such that $N^{-1}\E M_r\le\mathcal Q_{\bar\tau_r}(b_r)+G/8$ for all $r\in\mathcal T_\eps$ and $N\ge N_\eps$. Only finitely many latitudes enter here, and no uniformity of \cref{thm:mo-HS} in the covariance is needed. Using $H_Q=N\mu_{e,k}(r)+\widehat H_r$ on $\mathrm{Lat}_r(u)$, we obtain
+\[
+\E_{e,k,u}\Bigl[\frac1N\max_{\mathrm{Lat}_r(u)}H_Q\Bigr]\le E_0-\frac{3G}4,\qquad r\in\mathcal T_\eps,\ N\ge N_\eps.
+\]
+Using \eqref{eq:mo-band-conc} with $t=G/8$ and a union bound over $\mathcal T_\eps$, we find
+\begin{equation}\label{eq:mo-net-fail}
+\Pp_{e,k,u}\Bigl(\exists r\in\mathcal T_\eps:\frac1N\max_{\mathrm{Lat}_r(u)}H_Q>E_0-\frac{5G}8\Bigr)\le2J_\eps e^{-b_\eps N}\le e^{-b_\eps N/2},\qquad b_\eps=\frac{G^2}{128\xi(Q)},
+\end{equation}
+where the last inequality holds for $N\ge2b_\eps^{-1}\log(2J_\eps)$. We enlarge $N_\eps$ accordingly. In this way the size of the net is absorbed into the threshold $N_\eps$.
+
+\paragraph{Interpolation and conclusion.}
+For $v\perp u$ with $|v|^2=N$, the curve $r\mapsto ru+(1-r^2)^{1/2}v$ stays on $S_N$ and has speed $(N/(1-r^2))^{1/2}$. On the event $\mathcal D_N(H)\le C_{\rm reg}$, we have $|\nabla_{S_N}H_Q|\le C_{\rm reg}N^{1/2}$, which implies that $r\mapsto N^{-1}\max_{\mathrm{Lat}_r(u)}H_Q$ is $C_1$-Lipschitz on $[\eps,1-\eta]$. On the intersection of this event with the complement of the event in \eqref{eq:mo-net-fail}, each $r\in[\eps,1-\eta]$ is within $G/(8C_1)$ of a net point, so that $N^{-1}\max_{\mathrm{Lat}_r(u)}H_Q\le E_0-5G/8+G/8=E_0-G/2$, which is (ii). For $(e,k)\in\mathcal K\subset\mathcal K_0$, the bounds \eqref{eq:mo-hessian-fail} and \eqref{eq:mo-regularity} control the failure of (i) by $2e^{-c_HN}+C_{\rm reg}e^{-N}$. Altogether,
+\[
+\Pp_{e,k,u}\bigl(\mathcal A_\eps(u)^c\bigr)\le2e^{-c_HN}+C_{\rm reg}e^{-N}+e^{-b_\eps N/2}\le Ce^{-c_\eps N},\qquad c_\eps=\min\{c_H,1,b_\eps/2\},
+\]
+for $N\ge N_\eps$, with $C=3+C_{\rm reg}$.
+
+On $\mathcal A_\eps(u)$, part (iii) follows from \cref{lem:mo-geodesic} with $C_3=C_{\rm reg}$, by the choice \eqref{eq:mo-eta} of $\eta$. For (iv), a critical point $v\ne u$ with $R(u,v)\ge\eps$ has $R(u,v)\le1-\eta$ by (iii). Then (ii) implies that $H_Q(v)\le N(E_0-G/2)<N(E_0-\delta)$, since $\delta<G/4$. Finally, every requirement on $(U,\delta)$ above is preserved when $U$ is replaced by a smaller interval containing $K_0$ and $\delta$ by a smaller admissible value.
+\end{proof}
+
+\begin{definition}[Retained maxima]\label{def:mo-retained}
+Let $\eps$, $U$, $\delta$, $G$, and $\mathcal K$ be as in \cref{thm:mo-filter}. For a field $H$ and a point $u\in S_N$, let $\mathcal G_\eps(H,u)\in\{0,1\}$ be the indicator of the event $\mathcal A_\eps(u)$ of \cref{thm:mo-filter}. We call $\mathcal A_\eps(u)$ the \emph{selection event} at $u$. A point $u$ is a \emph{retained maximum} if $u\in\mathrm{Crt}_N^{\max}$, $(H_Q(u)/N,K_Q(u)/N)\in\mathcal K$, and $\mathcal G_\eps(H,u)=1$, that is, if $u$ is a local maximum with marks in $\mathcal K$ on its selection event. We set
+\begin{equation}\label{eq:mo-ret-intensity}
+\lambda_N^{\rm ret}(h,k)=\mathfrak c_Ne^{-Nq(h/N,k)/2}\int_{S_N}\E_{h/N,k,u}\bigl[D(u)\ind\{\nabla_{S_N}^2H_Q(u)\prec0\}\mathcal G_\eps(H,u)\bigr]\nu_N(\dd u).
+\end{equation}
+\end{definition}
+
+The indicator $\mathcal G_\eps$ is a bounded Borel function of the field and the point, since the suprema in its definition may be taken over countable dense sets. \Cref{lem:mo-intensity} implies that $\lambda_N^{\rm ret}$ is the density of the expected number of retained maxima on $\{(h,k):(h/N,k)\in\mathcal K\}$.
+
+\begin{proposition}[Maxima discarded by the selection event]\label{prop:mo-filter-loss}
+Let $\xi$ be a non-pure mixture and let $\eps$, $U$, $\delta$, $\mathcal K$, and $c_\eps$ be as in \cref{thm:mo-filter}.
+\begin{enumerate}
+\item[(a)] For all large $N$, all $u\in S_N$, and all $(e,k)\in\mathcal K$,
+\begin{equation}\label{eq:mo-relative-loss}
+\E_{e,k,u}\bigl[D(u)\bigl(1-\mathcal G_\eps(H,u)\bigr)\bigr]\le Ce^{-c_\eps N/2}d_N^{\rm all}(k).
+\end{equation}
+In particular, $0\le1-\lambda_N^{\rm ret}(Ne,k)/\lambda_N^{\max}(Ne,k)\le Ce^{-c_\eps N/2}$.
+\item[(b)] For all fixed $a<b$ and $t\in\R$, the expected number of retained maxima $u$ with $H_Q(u)-m_N\in[a,b]$ tends to $e^{-c_0a}-e^{-c_0b}$, and the expected number with $H_Q(u)\ge m_N+t$ tends to $e^{-c_0t}$.
+\item[(c)] Distinct retained maxima $u\ne v$ satisfy $R(u,v)<\eps$.
+\item[(d)] There exists $\delta'\in(0,\delta]$ such that, with the same $\eps$ and $U$ and with $\delta'$ in place of $\delta$, with probability at least $1-Ce^{-cN}$ every critical point $u$ with $H_Q(u)\ge N(E_0-\delta')$ is a retained maximum.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+For (a), fact (4) of \cref{sec:mo-inputs} and \cref{thm:mo-filter} give
+\[
+\E_{e,k,u}\bigl[D(u)(1-\mathcal G_\eps)\bigr]\le\mathsf K_2^{1/2}\Pp_{e,k,u}(\mathcal A_\eps(u)^c)^{1/2}d_N^{\rm all}(k)\le Ce^{-c_\eps N/2}d_N^{\rm all}(k).
+\]
+No independence between the selection event and the determinant is used. Since $\mathcal G_\eps=1$ implies $\nabla_{S_N}^2H_Q(u)\prec0$, we have $\lambda_N^{\max}-\lambda_N^{\rm ret}=\mathfrak c_Ne^{-Nq/2}\int\E_{e,k,u}[D(u)\ind\{\nabla_{S_N}^2H_Q(u)\prec0\}(1-\mathcal G_\eps)]\nu_N(\dd u)$. We divide by $\lambda_N^{\max}(Ne,k)=\mathfrak c_Ne^{-Nq/2}d_N^{\max}(k)$ and use $d_N^{\rm all}\le2d_N^{\max}$ on $\overline U$, which holds for large $N$ by \eqref{eq:mo-det-gap}. This gives the second statement.
+
+For (b), we note that a fixed window $[m_N+a,m_N+b]$ lies in $[N(E_0-\delta),N(E_0+\delta)]$ for all large $N$, by \eqref{eq:mo-centering}. Integrating (a) over the window and over $k\in U$, the expected number of retained maxima differs from that of the points of $\mathrm{Crt}_N^{\max}$ with $K_Q/N\in U$ in the window by a factor $1+O(e^{-c_\eps N/2})$. The first limit then follows from \cref{thm:mo-microscopic}(c). For the second, the retained maxima with $H_Q(u)\ge m_N+t$ are those with energy in $[m_N+t,N(E_0+\delta)]$, and the expected number of local maxima with $H_Q(u)\ge N(E_0+\delta)$ is exponentially small by \eqref{eq:mo-coarse-upper}. The limit therefore equals that of $T_N(m_N+t)$, which is $e^{-c_0t}$ by \cref{thm:mo-microscopic}(b).
+
+For (c), let $u\ne v$ be retained maxima. Then $\mathcal A_\eps(u)$ holds, $v$ is a critical point, and $H_Q(v)\ge N(E_0-\delta)$. By \cref{thm:mo-filter}(iv), we have $R(u,v)<\eps$.
+
+For (d), let $\delta'\le\delta$ with $c_0\delta'\le c_\eps/4$. The event $\mathcal A_\eps$ does not involve $\delta$, and by \cref{thm:mo-filter} the bound (a) holds on the smaller rectangle. By \cref{lem:mo-intensity} with $f=1-\ind\{\nabla_{S_N}^2H_Q(u)\prec0\}\mathcal G_\eps=1-\mathcal G_\eps$, by (a), and by \eqref{eq:mo-coarse-count}, the expected number of $u\in\mathrm{Crt}_N$ with marks in $[E_0-\delta',E_0+\delta']\times U$ that are not retained is at most $Ce^{-c_\eps N/2}\cdot CNe^{c_0\delta'N}\le CNe^{-c_\eps N/4}$. The expected numbers of critical points with $H_Q(u)\ge N(E_0-\delta')$ and $K_Q(u)/N\notin U$, or with $H_Q(u)>N(E_0+\delta')$, are exponentially small by \cref{lem:mo-intensity-bounds}(b),(c). Markov's inequality completes the proof.
+\end{proof}
+
+
+\section{Pure models}\label{sec:mo-pure}
+
+In this section, $\xi(r)=c_pr^p$ with $p\ge4$, and $(\xi,\beta)$ is strictly 1RSB with a nondegenerate contact at $Q$. Then $\xi_Q(r)=\xi(Q)r^p$, $a_Q=p\xi(Q)$, $b_Q=p(p-1)\xi(Q)$, and by Euler's identity $K_Q=pH_Q$. In particular, $\Sigma_Q$ is singular and the marks satisfy $k=pe$. From \eqref{eq:mo-marks}, we have $E_0=(p+z)\xi(Q)/y$ and $K_0=((1+z)a_Q+b_Q)/y=pE_0$. We write
+\begin{equation}\label{eq:mo-phi}
+\phi(e)=\frac12+\frac12\log\frac{b_Q}{a_Q}-\frac{e^2}{2\xi(Q)}+\Omega\bigl(pe/b_Q^{1/2}\bigr),
+\end{equation}
+for the complexity on the line $k=pe$.
+
+\paragraph{Admissible sets in the pure case.}
+Every statement of \cref{sec:mo-micro,sec:mo-localization,sec:mo-filter} that involves the marks $(e,k)$ is interpreted on the graph $\{(e,pe)\}$. A bounded open interval $U\ni K_0$ with $\overline U\subset(2b_Q^{1/2},\infty)$ and a number $\delta>0$ are admissible if $p[E_0-\delta,E_0+\delta]\subset U$ and $c_-'\le-\phi'(e)\le c_+'$ whenever $pe\in\overline U$, where $c_-'=(c_-+c_0)/2$ and $c_+'=(c_0+c_+)/2$. Such pairs exist because $\phi'(E_0)=-c_0$ (\cref{prop:mo-pure}(a) below). The rectangle $\mathcal K$ is replaced by $\mathcal K_p=\{(e,pe):|e-E_0|\le\delta\}$. The conditional law $\Pp_{e,k,u}$ is replaced by $\Pp_{e,u}$. The covariance $\Sigma_Q$ is singular, so $q$, $\Sigma_Q^{-1}$, $\mathfrak c_N$, the two-dimensional densities of \cref{lem:mo-intensity}, the radial integral $\mathcal R_N$, and the kernel \eqref{eq:mo-full-palm} are not used. They are replaced by the one-dimensional intensities, the singular joint measures, and the one-dimensional Palm kernel of \cref{prop:mo-pure}(a).
+
+\begin{proposition}[Pure specialization]\label{prop:mo-pure}
+Let $\xi(r)=c_pr^p$ with $p\ge4$, and let $(U,\delta)$ be admissible in the sense just described.
+\begin{enumerate}
+\item[(a)] Let $A_{N,p}=|S_N|(2\pi a_Q)^{-n/2}(2\pi N\xi(Q))^{-1/2}$ and, for $j\in\{{\rm all},\max\}$,
+\begin{equation}\label{eq:mo-pure-intensity}
+\lambda_{N,p}^j(h)=\ind_U(ph/N)\,A_{N,p}\,e^{-h^2/(2N\xi(Q))}d_N^j(ph/N).
+\end{equation}
+For a Borel set $B\subset\R$, the expected numbers of points of $\mathrm{Crt}_N$ and of $\mathrm{Crt}_N^{\max}$ with $K_Q(u)/N\in U$ and $H_Q(u)\in B$ are $\int_B\lambda_{N,p}^{\rm all}(h)\dd h$ and $\int_B\lambda_{N,p}^{\max}(h)\dd h$; the corresponding expected-count measures on the pairs $(h,k)=(H_Q(u),K_Q(u)/N)$ are $\lambda_{N,p}^j(h)\dd h\,\delta_{ph/N}(\dd k)$. We write $\lambda_N=\lambda_{N,p}^{\max}$. For fixed $u\in S_N$ and $pe\in U$, the Palm kernel of local maxima at $u$ with energy $Ne$ is
+\begin{equation}\label{eq:mo-pure-palm}
+\E^{\mathrm{Palm},\max}_{N,Ne,u}f(H,k)=\frac{\E_{e,u}\bigl[D(u)\ind\{\nabla_{S_N}^2H_Q(u)\prec0\}f(H,pe)\bigr]}{d_N^{\max}(pe)},
+\end{equation}
+for nonnegative Borel $f$, and the expected sum of $f(H,K_Q(u)/N)$ over the points $u\in\mathrm{Crt}_N^{\max}$ with $K_Q(u)/N\in U$ and $H_Q(u)\in B$ is $\int_B\lambda_N(h)\int_{S_N}\E^{\mathrm{Palm},\max}_{N,h,u}f\,\nu_N(\dd u)\dd h$. Further, $\phi(E_0)=0$, $\phi'(E_0)=-c_0$, $\phi(e)\le-c_0(e-E_0)-\frac{p-2}{4(p-1)\xi(Q)}(e-E_0)^2$ for all $e\in\R$, and $\lambda_{N,p}^j(Ne)\asymp N^{-1/2}e^{N\phi(e)}$ uniformly for $pe\in U$.
+\item[(b)] For all large $N$, $(\log\lambda_N)'(h)=\phi'(h/N)+O(N^{-1})$, uniformly for $ph/N\in U$.
+\item[(c)] All conclusions of \cref{thm:mo-microscopic} hold, with the same $c_0=\beta x$, the same centering \eqref{eq:mo-centering}, and the same window limits.
+\item[(d)] \Cref{lem:mo-regularity} (with $\Pp_{e,u}$), \cref{prop:mo-all-high}, \cref{thm:mo-filter}, \cref{def:mo-retained}, and \cref{prop:mo-filter-loss} hold with marks restricted to $\mathcal K_p$ and $\Pp_{e,k,u}$ replaced by $\Pp_{e,u}$, with their original neighborhood hypotheses and choices; for \cref{thm:mo-filter}, the neighborhoods are shrunk for the prescribed $\eps$ as in its statement. In the pure form of \cref{def:mo-retained}, the retained energy intensity is
+\begin{multline}\label{eq:mo-pure-ret}
+\lambda_{N,p}^{\rm ret}(h)=\ind\{|h/N-E_0|\le\delta\}\ind_U(ph/N)\,A_{N,p}\,e^{-h^2/(2N\xi(Q))}\\
+\times\int_{S_N}\E_{h/N,u}\bigl[D(u)\ind\{\nabla_{S_N}^2H_Q(u)\prec0\}\mathcal G_\eps(H,u)\bigr]\nu_N(\dd u),
+\end{multline}
+with joint measure $\lambda_{N,p}^{\rm ret}(h)\dd h\,\delta_{ph/N}(\dd k)$, and in the pure form of \cref{prop:mo-filter-loss}(a) the intensity ratio is $\lambda_{N,p}^{\rm ret}(Ne)/\lambda_{N,p}^{\max}(Ne)$, for $|e-E_0|\le\delta$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+The proof follows the non-pure case. We describe the changes, which come from the singular covariance and from the energy dependence of the determinant.
+
+\paragraph{The intensity and the complexity.}
+Under $\Pp_{e,u}$, the Hessian has the law of $W_{n,N}-peI_n$. We obtain \eqref{eq:mo-pure-intensity}, the joint measures, and the kernel \eqref{eq:mo-pure-palm} from the pure form \eqref{eq:kr-marked-pure} of the marked Kac--Rice formula, since the density of $H_Q(u)$ is $(2\pi N\xi(Q))^{-1/2}e^{-h^2/(2N\xi(Q))}$ and $K_Q(u)/N=pH_Q(u)/N$. Next, $\phi$ is the function $\Theta_{\rm pure}$ of \cref{prop:th-scores}(4), which gives $\phi(E_0)=0$ and $\phi'(E_0)=-c_0$. (The proof is the computation in \cref{lem:mo-concavity}: since $pE_0=K_0$ and $\Sigma_Q(c_0,1/y)^{\mathsf T}=(E_0,K_0)^{\mathsf T}$ still holds, we have $E_0^2/\xi(Q)=c_0E_0+K_0/y$ and $\phi'(E_0)=-E_0/\xi(Q)+p/y=-c_0$.) Because $\Omega(t)-t^2/4$ is concave, $\phi(e)+\frac12(\xi(Q)^{-1}-p^2/(2b_Q))e^2$ is concave, and
+\[
+\frac1{\xi(Q)}-\frac{p^2}{2b_Q}=\frac1{\xi(Q)}-\frac p{2(p-1)\xi(Q)}=\frac{p-2}{2(p-1)\xi(Q)}>0.
+\]
+The tangent-plane argument at the end of the proof of \cref{lem:mo-concavity} yields the quadratic bound on $\phi$. By Stirling's formula \eqref{eq:mo-stirling} and \eqref{eq:mo-det-gap} with $J=\overline U$, we have $\lambda_{N,p}^j(Ne)\asymp N^{-1/2}e^{N\phi(e)}$ for $pe\in U$, with constants uniform because \eqref{eq:mo-det-gap} holds on $\overline U$. (At the endpoints of $U$, $\lambda_{N,p}^j$ vanishes, so the comparison cannot hold on $\overline U$.) The factor $N^{-1/2}$ now comes from the Gaussian density of the value, and there is no radial integral. This proves (a). The analogs of \cref{lem:mo-intensity-bounds}(b),(c) follow as before, with \cref{lem:mo-goe}(b),(c) at $k=pe$: since $p(E_0-\delta)\in U$, a critical point with $H_Q(u)\ge N(E_0-\delta)$ and $pH_Q(u)/N\notin U$ has $H_Q(u)\ge N\sup U/p>N(E_0+\delta)$. The excluded marks are covered by the bound for high energies.
+
+\paragraph{The slope in energy.}
+For $ph/N\in U$,
+\begin{equation}\label{eq:mo-pure-slope}
+\frac{\dd}{\dd h}\log\lambda_N(h)=-\frac{h/N}{\xi(Q)}+\frac pN\frac{(d_N^{\max})'(ph/N)}{d_N^{\max}(ph/N)},
+\end{equation}
+so we must differentiate the determinant. Let $J=\overline U$, $W=W_{n,N}$, $\varrho=\frac12\min_{k\in J}(k-2b_Q^{1/2})$, and $Y_k=\sum_i\log\max\{|k-\lambda_i(W)|,\varrho\}$. Recall from \cref{prop:kr-determinant} that $\E e^{2Y_k}\le C\,d_N^{\rm all}(k)^2$ for $k\in J$. Let $\mathcal E=\{\|W\|_{\rm op}\le2b_Q^{1/2}+\varrho/2\}$, so that $\Pp(\mathcal E^c)\le2e^{-N\varrho^2/(16b_Q)}$ by \eqref{eq:mo-edge}. On $\mathcal E$, we have $k-\lambda_i(W)>\varrho$ for all $i$. For fixed $W$, the function $k\mapsto\det(kI-W)\ind\{\lambda_{\max}(W)<k\}$ is continuous, since the determinant vanishes at $k=\lambda_{\max}(W)$, and is smooth elsewhere with derivative $\partial_k\det(kI-W)\ind\{\lambda_{\max}(W)<k\}$. By Fubini's theorem and dominated convergence,
+\[
+(d_N^{\max})'(k)=\E\bigl[\partial_k\det(kI-W)\ind\{\lambda_{\max}(W)<k\}\bigr],\qquad P_N'(k)=\E\,\partial_k\det(kI-W),
+\]
+where $P_N(k)=\E\det(kI-W)$ is the signed expectation. Since $|\partial_k\det(kI-W)|=|\sum_i\prod_{j\ne i}(k-\lambda_j(W))|\le n\varrho^{-1}e^{Y_k}$ and $\{\lambda_{\max}(W)\ge k\}\subset\mathcal E^c$, the Cauchy--Schwarz inequality implies that
+\[
+\bigl|P_N'(k)-(d_N^{\max})'(k)\bigr|\le n\varrho^{-1}\bigl(\E e^{2Y_k}\bigr)^{1/2}\Pp(\mathcal E^c)^{1/2}\le Cne^{-cN}d_N^{\rm all}(k),
+\]
+and in the same way $|P_N(k)-d_N^{\max}(k)|\le Ce^{-cN}d_N^{\rm all}(k)$. With \eqref{eq:mo-det-gap}, we obtain
+\begin{equation}\label{eq:mo-logdet-derivative}
+\bigl(\log d_N^{\max}\bigr)'(k)=\frac{P_N'(k)}{P_N(k)}+O(ne^{-cN}),\qquad k\in J.
+\end{equation}
+We now compute $P_N'/P_N$. Recall from \eqref{eq:kr-hermite} that $P_n(t)=\E\det(tI-G_n)=n^{-n/2}\mathrm{He}_n(n^{1/2}t)$, and that its roots $\lambda_1,\dots,\lambda_n$ lie in $(-2,2)$. Let $g_n(t)=P_n'(t)/(nP_n(t))=n^{-1}\sum_j(t-\lambda_j)^{-1}$ for $t>2$. In the proof of \cref{prop:kr-prefactors}, the Riccati equation \eqref{eq:kr-riccati} is used to show that
+\begin{equation}\label{eq:mo-riccati}
+0\le g_{\rm sc}(t)-g_n(t)\le\frac1{n(t-2)^2(t^2-4)^{1/2}},\qquad t>2,
+\end{equation}
+where $g_{\rm sc}(t)=(t-(t^2-4)^{1/2})/2=\Omega'(t)$.
+We have $P_N(k)=b_N^nP_n(k/b_N)$, and therefore $P_N'(k)/P_N(k)=(n/b_N)g_n(k/b_N)$. Inserting this into \eqref{eq:mo-logdet-derivative} and \eqref{eq:mo-pure-slope}, and using \eqref{eq:mo-riccati}, $n/N=1-N^{-1}$, $b_N=b_Q^{1/2}(1+O(N^{-1}))$, and the Lipschitz continuity of $g_{\rm sc}$ on compact subsets of $(2,\infty)$, we obtain
+\[
+\frac{\dd}{\dd h}\log\lambda_N(h)=-\frac{h/N}{\xi(Q)}+\frac p{b_Q^{1/2}}\Omega'\Bigl(\frac{ph/N}{b_Q^{1/2}}\Bigr)+O(N^{-1})=\phi'(h/N)+O(N^{-1}),
+\]
+uniformly for $ph/N\in U$. This proves (b). Since $c_-<c_-'$ and $c_+'<c_+$, the admissibility condition and (b) imply that $c_-\le-(\log\lambda_N)'(h)\le c_+$ on the support of $\lambda_N$ for all large $N$.
+
+\paragraph{Normalization.}
+The proof of \cref{thm:mo-microscopic} applies with $N^{-1/2}e^{N\phi(e)}$ in place of the radial integral and with (b) in place of \cref{lem:mo-radial}(e); there is no radial distribution. The density $\lambda_N$ vanishes for $ph/N\notin U$. The envelope \eqref{eq:mo-envelope} therefore also holds when $h+v$ lies above the support, and the upper tail bound holds from $m_N$ on. The tail $T_N$ is constant below the support and strictly decreasing on it, and $T_N(NE_0-D\log N)>1>T_N(NE_0+D\log N)$. Then the root $m_N$ exists, is unique, and lies in the interior of the support for all large $N$. This proves (c).
+
+\paragraph{Localization and the exclusion estimate.}
+\Cref{lem:mo-regularity} was proved for $\Pp_{e,u}$ as well. The Hessian bound \eqref{eq:mo-hessian-fail} holds at $k=pe$, and the proofs of \cref{prop:mo-all-high} and \cref{prop:mo-filter-loss} apply verbatim, with \cref{thm:kr-marked} in its pure form and with the one-dimensional intensities \eqref{eq:mo-pure-intensity} and \eqref{eq:mo-pure-ret} in place of the two-dimensional ones. For \cref{thm:mo-filter}, we note that under $\Pp_{e,u}$ the latitude mean is $e\xi_Q(r)/\xi(Q)$ and the residual covariance is
+\[
+\tau^{\rm pure}_r(t)=\xi_Q\bigl(r^2+(1-r^2)t\bigr)-\frac{\xi_Q(r)^2}{\xi(Q)}-\frac{(1-r^2)\xi_Q'(r)^2}{a_Q}t.
+\]
+Since $\xi_Q(r)^2=\xi(Q)\xi_Q(r^2)$ and $\xi_Q'(r)^2=a_Q\xi_Q'(r^2)$ for a pure covariance, the constant and linear coefficients of $\tau^{\rm pure}_r$ vanish, and the higher coefficients are nonnegative. At $e=E_0$ the mean equals $(r\xi_Q'(r)+z\xi_Q(r))/y$, because $r\xi_Q'(r)=p\xi_Q(r)$ and $E_0/\xi(Q)=(p+z)/y$. The computation in \cref{lem:mo-trial}(c) used only $\bar\tau_r'$ on $[t_r,1]$, the difference $\bar\tau_r(1)-\bar\tau_r(t_r)$, and the mean at $(E_0,K_0)$, which are given by the same formulas. It follows that \eqref{eq:mo-completed-square} holds for $\tau^{\rm pure}_r-\tau^{\rm pure}_r(0)$. The mark perturbation is $(e-E_0)\xi_Q(r)/\xi(Q)$, which replaces \eqref{eq:mo-mark-cont}. With these changes, we may repeat the rest of the proof of \cref{thm:mo-filter}, which uses no inverse of $\Sigma_Q$. This proves (d).
+\end{proof}
+
+
+\section{Summary of one-point estimates}\label{sec:mo-interface}
+
+\begin{corollary}[Summary of one-point estimates]\label{cor:mo-interface}
+Let $\xi$ be a finite mixture with minimum degree $d\ge4$, of either parity, pure or not, and let $(\xi,\beta)$ be strictly 1RSB with a nondegenerate contact at $Q$. Let $\eta$, $\kappa$, and $C_{\rm reg}$ be the base constants \eqref{eq:mo-base}--\eqref{eq:mo-eta}, and fix $\eps\in(0,1-\eta)$. Then one can choose, in this order and before $N$, a bounded open interval $U\ni K_0$ with $\overline U\subset U_0$ and a number $\delta>0$, independent of any fixed energy window, such that, with $m_N$ defined by \cref{thm:mo-microscopic} (the expected number of nondegenerate local maxima with $K_Q/N\in U$ and $H_Q\ge m_N$ equals one), the following hold. In the pure case all marks lie on the graph $k=pe$, and the conditional law is $\Pp_{e,u}$.
+\begin{enumerate}
+\item[(i)] \emph{One-point density.} For a non-pure mixture, the joint densities are given by \cref{lem:mo-intensity}, with $\lambda_N^j(Ne,k)\asymp e^{N\Theta(e,k)}$ for $k\in\overline U$; the normalization integral $\mathcal R_N$ of \eqref{eq:mo-raw} satisfies \cref{lem:mo-radial}(c); and $\lambda_N(Ne)=\mathfrak c_N\mathcal R_N(e)\asymp N^{-1/2}e^{N\theta(e)}$ for $|e-E_0|\le\delta$. For a pure model, the expected-count measures are $\lambda_{N,p}^j(h)\dd h\,\delta_{ph/N}(\dd k)$ of \cref{prop:mo-pure}(a), with $\lambda_{N,p}^j(Ne)\asymp N^{-1/2}e^{N\phi(e)}$ for $pe\in U$. For a non-pure mixture the Palm kernel at a fixed point is \eqref{eq:mo-full-palm}; for a pure model it is the one-dimensional kernel \eqref{eq:mo-pure-palm}.
+\item[(ii)] \emph{Normalization.} $m_N=NE_0-\log N/(2c_0)+O(1)$ with $c_0=\beta x$. For all fixed $a<b$ and $t\in\R$,
+\begin{align*}
+\E\#\bigl\{u\in\mathrm{Crt}_N:K_Q(u)/N\in U,\ H_Q(u)-m_N\in[a,b]\bigr\}&\longrightarrow e^{-c_0a}-e^{-c_0b},\\
+\E\#\bigl\{u\in\mathrm{Crt}_N:K_Q(u)/N\in U,\ H_Q(u)\ge m_N+t\bigr\}&\longrightarrow e^{-c_0t},
+\end{align*}
+and the same limits hold for nondegenerate local maxima. The density satisfies $\lambda_N(m_N-v)\le Ce^{c_+v}$ for $0\le v\le m_N-N(E_0-\delta)$, with $c_+<\beta$, and $T_N(m_N+v)\le e^{-c_-v}$ for $v\ge0$. In particular, for every fixed $M$,
+\begin{equation}\label{eq:mo-CNM}
+\sup_N\E|\mathcal C_{N,M}|<\infty,\quad\text{where}\quad\mathcal C_{N,M}=\Bigl\{u\in\mathrm{Crt}_N:|H_Q(u)-m_N|\le M,\ \frac{K_Q(u)}N\in U\Bigr\}.
+\end{equation}
+\item[(iii)] \emph{Localization.} With probability at least $1-Ce^{-cN}$, every critical point $u$ with $H_Q(u)\ge N(E_0-\delta)$ satisfies $K_Q(u)/N\in U$ and $\nabla_{S_N}^2H_Q(u)\preceq-\kappa I$, and $\sup_{S_N}\|\nabla_{S_N}^3H_Q\|_{\rm op}\le C_{\rm reg}N^{-1/2}$ (\cref{prop:mo-all-high}).
+\item[(iv)] \emph{Upper tail of the maximum.} $\limsup_N\Pp(\max_{S_N}H_Q>m_N+L)\le e^{-c_0L}$ for $L\ge0$, and with probability at least $1-Ce^{-cN}$ every global maximizer $u$ with $H_Q(u)\ge N(E_0-\delta)$ is a nondegenerate local maximum with $K_Q(u)/N\in U$.
+\item[(v)] \emph{Selection event.} The indicator $\mathcal G_\eps(H,u)$ of the selection event (\cref{def:mo-retained}) is a bounded Borel function of the field and the point. Retained maxima are nondegenerate local maxima with marks in $\mathcal K=[E_0-\delta,E_0+\delta]\times\overline U$ (pure: $\mathcal K_p$); distinct retained maxima $u\ne v$ satisfy $R(u,v)<\eps$; and, uniformly for $u\in S_N$ and $(e,k)\in\mathcal K$,
+\[
+\E_{e,k,u}\bigl[D(u)\bigl(1-\mathcal G_\eps(H,u)\bigr)\bigr]\le Ce^{-cN}\,\E_{e,k,u}D(u),
+\]
+where, in a pure model, $\E_{e,k,u}$ is replaced by $\E_{e,u}$ and $(e,k)\in\mathcal K_p$. In the notation of \cref{sec:kacrice}, $\E_{e,k,u}$ is the conditioned expectation $\E_{h,k,u}$ with normalized energy $h=e$.
+The expected numbers of retained maxima in fixed windows and above $m_N+t$ have the limits in (ii). No statement is made about pairs at negative overlap.
+\end{enumerate}
+The constants $c,C$ depend on $\xi$, $\beta$, $U_0$, and $\eps$; every window is fixed before $N\to\infty$.
+\end{corollary}
+
+\begin{proof}
+For a non-pure mixture, choose $U$ and $\delta$ as in \cref{thm:mo-filter} for the given $\eps$, so that $(U,\delta)$ is admissible and $\delta\le\delta_U$. If the simultaneous retention is wanted, we then decrease $\delta$ as in \cref{prop:mo-filter-loss}(d). Each requirement is a strict inequality at $(E_0,K_0)$ or a condition preserved under shrinking, and a single choice satisfies all of them. Part (i) is \cref{lem:mo-intensity}, \cref{lem:mo-intensity-bounds}(a), and \cref{lem:mo-radial}. Part (ii) is \cref{thm:mo-microscopic}, and \eqref{eq:mo-CNM} follows from the window limit for all critical points and the finiteness of the expected counts for each $N$. Part (iii) is \cref{prop:mo-all-high}, (iv) is \cref{thm:mo-microscopic}(f), and (v) is \cref{def:mo-retained} and \cref{prop:mo-filter-loss}, where in (a) of the latter $d_N^{\rm all}(k)=\E_{e,k,u}D(u)$. For a pure covariance, use \cref{prop:mo-pure}, with the one-dimensional intensities and kernel of its part (a) and the retained intensity \eqref{eq:mo-pure-ret}.
+\end{proof}
+
+\begin{remark}[Counting conventions and numerators without the selection indicator]\label{rem:mo-counting}
+In an even model one may count antipodal pairs once. Then the expected tail is halved, and if $m_N^{\rm proj}$ denotes the centering for this convention, \eqref{eq:mo-ratio} gives $m_N^{\rm proj}-m_N=-(\log2)/c_0+o(1)$. This deterministic shift must accompany any change of convention. We use ordinary counts throughout. In upper bounds for sums of a nonnegative weight over critical points, the selection indicator may be dropped from the numerator, and the Palm kernel without the selection indicator, given by \eqref{eq:mo-full-palm} for non-pure mixtures and by \eqref{eq:mo-pure-palm} for pure models, remains the natural normalization. \Cref{prop:mo-filter-loss} compares intensities. It is not a statement about determinant moments under the conditional law restricted to the selection event.
+\end{remark}

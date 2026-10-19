@@ -1,0 +1,798 @@
+\chapter{Mixed models: Gibbs concentration on bands}\label{sec:mixbands}
+
+In this section, we prove \cref{thm:mb-capture}, the concentration of the Gibbs measure on the bands around the critical points in a fixed energy window. Let $(\xi,\beta)$ be strictly 1RSB with a nondegenerate contact at $Q$, as in \cref{def:intro-certificate}; the minimum degree is $d\ge4$, and the degrees may have either parity. We show that, in expectation, the union of the bands $B_u=\{\sigma\in S_N:|R(\sigma,u)-\sqrt Q|\le b\}$ around the critical points $u$ of the center field $H_Q$ whose energy lies in a fixed window $[m_N-M,m_N+M]$ carries almost all of the Gibbs mass. Here $N\to\infty$ first and $M\to\infty$ afterward. This is the concentration hypothesis of \cref{prop:red-consumer}, and \cref{sec:condproof} uses it in the proof of \cref{thm:main-condensed}. For pure models, the same conclusion is proved in \cref{sec:purecover} (\cref{thm:pc-capture}). The argument below also covers them. We note the changes where the covariance of the value and the radial derivative of $H_Q$ is singular. For generic mixtures that are strictly one-step replica symmetry breaking, Dembo and Subag proved a decomposition of the Gibbs measure into narrow bands around critical points whose energy is maximal up to $o(N)$ \cite[Proposition~3.1]{DemboSubag2026}; we compare it with \cref{thm:mb-capture} in \cref{sec:intro-ideas}.
+
+We use the following results of earlier sections. From \cref{sec:thermal}, we use the static consequences of the 1RSB assumptions (\cref{prop:th-structure}), and from \cref{sec:directing}, the constant squared norm of the directing measure (\cref{thm:dir-norm}). From \cref{sec:kacrice}, we use the determinant moments and prefactors (\cref{prop:kr-determinant,cor:kr-dimension}) and the marked Kac--Rice formula (\cref{thm:kr-marked,cor:kr-count}). From \cref{sec:mixone,sec:mixpair}, we use the centering and the counts in fixed energy windows (\cref{thm:mo-microscopic,thm:mc-counts}) and the localization of all high critical points (\cref{prop:mo-all-high,prop:mo-pure}). We deduce the theorem from the reduction in \cref{prop:red-capture}, and use the measurability statement of \cref{lem:red-unions}. From \cref{sec:prelim}, we need the regularity of the field (\cref{lem:pre-field}), the concentration of free energies (\cref{lem:pre-concentration}), and the lower tail of normalized partition functions (\cref{lem:pre-HMP-Z}), which is the theorem of Huang, Montanari, and Pham \cite[Lemma~3.2 and Remark~3.3]{HuangMontanariPham2024}. The only further outside input is Subag's estimates for replicated bands with a fixed number of replicas \cite[Lemmas~17--19 and Proposition~24]{Subag2024}.
+
+\paragraph{Outline.}
+The proof has three steps, one for each hypothesis of \cref{prop:red-capture}.
+
+The first step (\cref{sec:mb-coarse}) shows that the bands around all critical points of $H_Q$ with radial derivative in a fixed interval $U$ and energy at least $N(E_0-\tau)$ carry almost all of the Gibbs mass, for every fixed $\tau>0$ (\cref{prop:mb-coarse}). By \cref{thm:dir-norm}, the directing measure of every limit of the overlap array is carried by vectors of squared norm $Q$. This implies that a Gibbs sample $\sigma^0$ is typically accompanied, among finitely many further samples, by a group of $n$ samples whose mutual overlaps and overlaps with $\sigma^0$ are all close to $Q$. Using Subag's replicated band estimates, we show that the normalized empirical mean of such a group has energy close to the ground-state energy $NE_0$ of $H_Q$. Here $n$ is large but fixed before $N$, and the squared norm of the empirical mean is close to $Q+(1-Q)/n$, not to $Q$. A deterministic localization lemma then moves the empirical mean to a nearby local maximum of $H_Q$, and $\sigma^0$ lies in its band.
+
+The second step (\cref{sec:mb-prefactor,sec:mb-upper,sec:mb-lowsum}) reduces the coarse family to a fixed window. We compare the sum of the partition functions of the bands around coarse centers with energy below $m_N-M$ with the partition function of a single band in a fixed window, on the common deterministic scale $D_N$ of \eqref{eq:mb-DN}. In \cref{prop:mb-upper}, we show that the partition function of the band around a critical point of energy $E$ has Palm expectation at most $CD_Ne^{\beta(E-m_N)+CN(E/N-E_0)^2}$. In \cref{lem:mb-envelope}, we show that the density of critical points at energy $m_N-u$ is at most $Ce^{c_+u}$ with $c_+<\beta$. The product of these bounds is summable in $u$, which gives \cref{cor:mb-low-sum}. The upper bound must hold without any power of $N$, because $M$ is fixed while $N\to\infty$. This is the main technical point of the section. The Palm expectation is the ratio of a Laplace integral in two variables, the radial derivative and the latitude, to a Laplace integral in the radial derivative alone. The latitude width $N^{-1/2}$ that remains in the ratio cancels the growth of the coarea constant $c_N^{\mathrm{lat}}\approx(N/2\pi)^{1/2}$, and the determinant prefactors are bounded by \cref{lem:mb-prefactor}.
+
+The third step (\cref{sec:mb-lower}) shows that the band around a critical point of energy $E$ has partition function at least $\delta D_Ne^{\beta(E-m_N)}$ with Palm probability close to one, uniformly in a fixed window (\cref{prop:mb-lower}). At the exact latitude $\sqrt Q$, the field on the band is the prescribed energy plus a residual field with covariance $N\psi_Q$. Since the residual mixture is strictly replica symmetric with $\beta^2\psi_Q''(0)<1$, the theorem of Huang, Montanari, and Pham implies that the normalized partition function of this field is tight away from zero. Jensen's inequality over a symmetric latitude interval of width $N^{-1/2}$ passes from the exact latitude to the band. The Palm law weights the field by the absolute Hessian determinant, which is correlated with the band. We transfer the estimates to the Palm law with the normalized second moment of the determinant.
+
+\section{Notation and inputs}\label{sec:mb-notation}
+
+\paragraph{Standing assumptions.}
+Throughout this section, $\xi(r)=\sum_pc_pr^p$ is a finite mixture with $c_p\ge0$ and minimum degree $d\ge4$, and $\beta>0$ is such that $(\xi,\beta)$ is strictly 1RSB with parameters $x,Q\in(0,1)$ and a nondegenerate contact at $Q$ (\cref{def:intro-certificate}). Recall from \cref{def:pre-model} that the mixture is non-pure if at least two degrees have positive coefficients, and \emph{pure} if $\xi(r)=c_pr^p$. As in \cref{sec:thermal}, we write
+\[
+s=1-Q,\qquad C=s+xQ,\qquad z=\frac{xQ}{s},\qquad y=\frac{Q}{\beta s},\qquad c_0=\beta x,
+\]
+\[
+a_Q=Q\xi'(Q),\qquad b_Q=Q^2\xi''(Q),\qquad \Sigma_Q=\begin{pmatrix}\xi(Q)&a_Q\\a_Q&a_Q+b_Q\end{pmatrix},
+\]
+and $\psi_Q(t)=\xi(Q+st)-\xi(Q)-s\xi'(Q)t$ for the residual mixture.
+For a non-pure mixture, $\Sigma_Q$ is positive definite: with the weights $w_p=c_pQ^p/\xi(Q)$, its determinant is $\xi(Q)^2$ times the variance of the degree under $w$. We set
+\begin{equation}\label{eq:mb-mu}
+\rho=\beta^2s^2\xi''(Q)=\frac{b_Q}{y^2},\qquad q(e,k)=(e,k)\,\Sigma_Q^{-1}\binom ek,\qquad \ell(e,k)=\frac12\partial_eq(e,k),
+\end{equation}
+as in \cref{sec:mixone}. That is, $\ell(e,k)$ is the first coordinate of $\Sigma_Q^{-1}(e,k)^{\mathsf T}$, and $-\ell(e,k)$ is the derivative in $e$ of the exponent $-\frac12q(e,k)$ of the Gaussian density of the value and the radial derivative.
+Constants $C,c>0$ depend only on $\xi$, $\beta$, and the fixed parameters introduced below, never on $N$ or on energies and marks in the stated ranges, and their values may change from line to line. The constant $C=s+xQ$ of \cref{def:th-certificate} appears only in the identity $a_Q/y^2=s/C$ below and in the computations in the proof of \cref{lem:mb-saddle} and after \eqref{eq:mb-pure-derivs}, where no generic constant occurs. The letter $x$ denotes the 1RSB parameter. In this section, we denote points of $S_N$ by $\sigma$.
+
+\paragraph{The center field and its marks.}
+Recall that $H_Q(u)=H_N(\sqrt Q\,u)$ for $u\in S_N$, and that the radial derivative is $K_Q(u)=u\cdot\nabla H_Q(u)$, where $\nabla$ is the Euclidean gradient of the polynomial extension of $H_Q$ to $\R^N$. A critical point of $H_Q$ is a point $u\in S_N$ with $\nabla_{S_N}H_Q(u)=0$. We write $e=H_Q(u)/N$ and $k=K_Q(u)/N$ for the normalized marks of a center $u$, as in \cref{sec:mixone}; in \cref{sec:kacrice,sec:mixpair}, the normalized energy is denoted $h$. In a pure model, $K_Q=pH_Q$ identically, by Euler's identity.
+
+\paragraph{Latitudes and bands.}
+Fix $u\in S_N$. Every $\sigma\in S_N\setminus\{\pm u\}$ can be written uniquely as
+\begin{equation}\label{eq:mb-latitude}
+\sigma(a,\omega)=au+(1-a^2)^{1/2}\omega,\qquad a=R(\sigma,u)\in(-1,1),\quad \omega\in S_u^\perp,
+\end{equation}
+where $S_u^\perp=\{\omega\in\R^N:\omega\cdot u=0,\ |\omega|^2=N\}$.
+We write $\nu_u^\perp$ for the uniform probability measure on the sphere $S_u^\perp$. Under $\nu_N$, the latitude $a$ and the point $\omega$ are independent, $\omega$ has law $\nu_u^\perp$, and $a$ has density $c_N^{\mathrm{lat}}(1-a^2)^{(N-3)/2}$ on $(-1,1)$, where
+\begin{equation}\label{eq:mb-clat}
+c_N^{\mathrm{lat}}=\frac{\Gamma(N/2)}{\sqrt\pi\,\Gamma((N-1)/2)},\qquad \lim_{N\to\infty}\frac{c_N^{\mathrm{lat}}}{\sqrt N}=\frac1{\sqrt{2\pi}} .
+\end{equation}
+For a band width $b>0$, we set $I_b=[\sqrt Q-b,\sqrt Q+b]$ and $B_u=\{\sigma\in S_N:R(\sigma,u)\in I_b\}$. For a Borel set $B\subset S_N$, we write $Z_H(B)=\int_Be^{\beta H_N}\dd\nu_N$, so that $Z_{N,\beta}=Z_H(S_N)$ and $\pi(B)=Z_H(B)/Z_{N,\beta}$. By the coarea formula, we have
+\begin{equation}\label{eq:mb-coarea}
+Z_H(B_u)=c_N^{\mathrm{lat}}\int_{I_b\cap(-1,1)}(1-a^2)^{(N-3)/2}Z_u(a)\dd a,\qquad Z_u(a)=\int e^{\beta H_N(\sigma(a,\omega))}\,\nu_u^\perp(\dd\omega).
+\end{equation}
+We also define the deterministic reference scale
+\begin{equation}\label{eq:mb-DN}
+D_N=e^{\beta m_N}\,\frac{c_N^{\mathrm{lat}}}{\sqrt N}\,s^{(N-3)/2}e^{N\beta^2\psi_Q(1)/2},
+\end{equation}
+where $m_N$ is the centering of \cref{thm:mc-counts}.
+
+\paragraph{Static inputs.}
+We use the following consequences of the 1RSB assumptions, which are proved in \cref{prop:th-structure}. The ground-state parameters are
+\begin{equation}\label{eq:mb-marks}
+E_0=\frac{a_Q+z\xi(Q)}{y},\qquad K_0=y+\frac{b_Q}{y},
+\end{equation}
+the stationarity relation $y^2=(1+z)a_Q$ holds, and $\rho<1$. Note that the last inequality implies that $y>\sqrt{b_Q}$ and $K_0>2\sqrt{b_Q}$, and that the stationarity relation gives $a_Q/y^2=1/(1+z)=s/C$. For a non-pure mixture,
+\begin{equation}\label{eq:mb-score}
+\Sigma_Q^{-1}\binom{E_0}{K_0}=\binom{c_0}{1/y};
+\end{equation}
+indeed, $\Sigma_Q(c_0,1/y)^{\mathsf T}=((z\xi(Q)+a_Q)/y,((1+z)a_Q+b_Q)/y)^{\mathsf T}=(E_0,K_0)^{\mathsf T}$ by $c_0=z/y$ and the stationarity relation. The residual mixture is strictly replica symmetric in the sense of \cref{def:pre-thresholds},
+\begin{equation}\label{eq:mb-residual-rs}
+\beta^2\psi_Q(t)+t+\log(1-t)<0\qquad(0<t<1),
+\end{equation}
+and the free energy satisfies the TAP identity
+\begin{equation}\label{eq:mb-tap}
+F(\beta)=\beta E_0+F_{\mathrm{band}},\qquad F_{\mathrm{band}}=\frac12\log s+\frac{\beta^2}2\psi_Q(1).
+\end{equation}
+Finally $c_0=\beta x<\beta$, since $x<1$.
+
+\paragraph{Counts and localization.}
+Let $\widetilde U$ and $m_N=NE_0-\log N/(2c_0)+O(1)$ be the open interval and the centering of \cref{thm:mc-counts}. They are chosen in \cref{cor:mo-interface}, and $\overline{\widetilde U}\subset U_0$, where $U_0$ is the base interval of \cref{sec:mixone}. For a closed interval $U$ and a Borel set $I\subset\R$, we write
+\begin{equation}\label{eq:mb-centers}
+\begin{gathered}
+\cC(I)=\cC_U(I)=\{u\in S_N:\nabla_{S_N}H_Q(u)=0,\ H_Q(u)\in I,\ K_Q(u)/N\in U\},\\
+\cC_{N,M}=\cC([m_N-M,m_N+M]).
+\end{gathered}
+\end{equation}
+Let $\kappa>0$ and $C_3=C_{\mathrm{reg}}$ be the Hessian margin and the derivative bound of \cref{sec:mixone}. By \cref{prop:mo-all-high}, and by \cref{prop:mo-pure}(d) in a pure model, applied to the interior of a closed interval $U\subset\widetilde U$ with $K_0$ in its interior, there exist $\delta_U,c>0$ such that, with probability at least $1-Ce^{-cN}$,
+\begin{equation}\label{eq:mb-allhigh}
+K_Q(u)/N\in U\quad\text{and}\quad\nabla^2_{S_N}H_Q(u)\preceq-\kappa\,\mathrm{Id}\qquad\text{if }\nabla_{S_N}H_Q(u)=0,\ H_Q(u)\ge N(E_0-\delta_U),
+\end{equation}
+and $\sup_{S_N}\|\nabla^3_{S_N}H_Q\|_{\mathrm{op}}\le C_3N^{-1/2}$.
+
+\paragraph{Determinants and the Kac--Rice formula.}
+Fix $u\in S_N$. For normalized marks $(e,k)$, we write $\Pp_{e,k,u}$ and $\E_{e,k,u}$ for the canonical conditional law of the whole field $H_N$ given $(H_Q(u),K_Q(u),\nabla_{S_N}H_Q(u))=(Ne,Nk,0)$, as in \cref{sec:kacrice}. In a pure model, the conditioning is on $(H_Q(u),\nabla_{S_N}H_Q(u))=(Ne,0)$, and $k=pe$. Under $\Pp_{e,k,u}$, the intrinsic Hessian is $\nabla^2_{S_N}H_Q(u)=W-k\,\mathrm{Id}$, where $W$ has the law of $W_{N-1,N}=(b_Q(N-1)/N)^{1/2}G_{N-1}$ and $G_n$ is a normalized $n\times n$ GOE matrix (off-diagonal variance $1/n$, diagonal variance $2/n$). We set
+\begin{equation}\label{eq:mb-dN}
+D_u=|\det\nabla^2_{S_N}H_Q(u)|,\qquad d_N(k)=\mu_{N-1,N}(k)=\E|\det(W_{N-1,N}-k\,\mathrm{Id})| ;
+\end{equation}
+for notational convenience, we abbreviate the mean determinant $\mu_{N-1,N}(k)$ of \cref{sec:kacrice} by $d_N(k)$ (it is $d_N^{\mathrm{all}}(k)$ in \cref{sec:mixone}). By \cref{prop:kr-determinant}, for every compact set $\mathcal K\subset(2\sqrt{b_Q},\infty)$ and every $r\ge1$, there exists $\mathsf K_r<\infty$ such that $\E_{e,k,u}[D_u^r]\le\mathsf K_rd_N(k)^r$ for all $k\in\mathcal K$, all $e$, and all large $N$.
+
+\begin{definition}[Palm laws and the intensity]\label{def:mb-palm}
+Let $U\subset(2\sqrt{b_Q},\infty)$ be a nondegenerate closed interval and fix $u\in S_N$. For marks $(e,k)$ with $k\in U$ and a nonnegative Borel function $Y$ of the field, the \emph{Palm expectation} is, as in \cref{rem:kr-palm},
+\[
+\E^{\mathrm{Palm}}_{e,k,u}[Y]=\frac{\E_{e,k,u}[D_uY]}{d_N(k)} .
+\]
+For a non-pure mixture and $E\in\R$, we set $w_N(E,k)=e^{-Nq(E/N,k)/2}d_N(k)$ for $k\in U$, and define the \emph{Palm expectation at energy $E$} and the \emph{intensity of all critical points} by
+\[
+\E^{\mathrm{Palm}}_{E,u}[Y]=\frac{\int_Uw_N(E,k)\,\E^{\mathrm{Palm}}_{E/N,k,u}[Y]\dd k}{\int_Uw_N(E,k)\dd k},\qquad
+\lambda^{\mathrm{all}}_N(E)=\mathfrak c_N\int_Uw_N(E,k)\dd k,
+\]
+where
+\[
+\mathfrak c_N=\frac{|S_N|}{(2\pi a_Q)^{(N-1)/2}\,2\pi(\det\Sigma_Q)^{1/2}},\qquad |S_N|=\frac{2\pi^{N/2}N^{(N-1)/2}}{\Gamma(N/2)},
+\]
+and $|S_N|$ is the surface area of $S_N$. For a pure mixture, $\E^{\mathrm{Palm}}_{E,u}=\E^{\mathrm{Palm}}_{E/N,pE/N,u}$ and
+\[
+\lambda^{\mathrm{all}}_N(E)=|S_N|(2\pi a_Q)^{-(N-1)/2}(2\pi N\xi(Q))^{-1/2}e^{-E^2/(2N\xi(Q))}d_N(pE/N)\ind\{pE/N\in U\}.
+\]
+\end{definition}
+
+Let $Y(H,u)\ge0$ be a Borel function which is rotation covariant, in the sense that $Y(H\circ g^{-1},gu)=Y(H,u)$ for $g\in O(N)$. Since the law of $H_N$ is invariant under rotations (\cref{lem:pre-field}), the Palm expectations of $Y(\cdot,u)$ do not depend on $u$. Applying \cref{thm:kr-marked} to the bounded field-dependent weights $Y\wedge j$, changing variables $E=Ne$, and letting $j\to\infty$, we obtain, by monotone convergence,
+\begin{equation}\label{eq:mb-kr}
+\E\sum_{u\in\cC(I)}Y(H,u)=\int_I\lambda^{\mathrm{all}}_N(E)\,\E^{\mathrm{Palm}}_{E,u}[Y(\cdot,u)]\dd E
+\end{equation}
+for every Borel set $I\subset\R$. With $Y=1$, this is the count formula of \cref{cor:kr-count}: $\E|\cC(I)|=\int_I\lambda^{\mathrm{all}}_N(E)\dd E$. Thus $\lambda^{\mathrm{all}}_N$ is the density, in the energy variable, of the expected number of critical points with radial derivative in $U$. The density $\lambda_N$ of \cref{sec:mixone} counts only nondegenerate local maxima. All weights used below, such as $Z_H(B_u)$ and indicators of events defined by overlaps with $u$ and by $H_Q(u)$, are rotation covariant, and their measurability is checked in \cref{lem:mb-borel}.
+
+\paragraph{The interval $U$.}
+We fix once and for all a closed interval $U\subset \widetilde U$, with $K_0$ in its interior, and numbers $b_0,\varepsilon_0>0$, chosen as in \cref{sec:mb-choice}. The interval $U$ is small enough for \eqref{eq:mb-allhigh}, and $\min U>2\sqrt{b_Q}$. We write $\mathcal K_*=[E_0-\varepsilon_0,E_0+\varepsilon_0]\times U$ for the rectangle of marks on which the Palm estimates hold. In a pure model, $\mathcal K_*$ stands for the compatible marks $\{(e,pe):|e-E_0|\le\varepsilon_0\}$. The following lemma transfers the counts of \cref{thm:mc-counts} from $\widetilde U$ to $U$, with the same centering $m_N$.
+
+\begin{lemma}[Counts in the smaller interval]\label{lem:mb-counts}
+For every fixed $M>0$, we have $\sup_N\E|\cC_{N,M}|<\infty$, and
+\begin{equation}\label{eq:mb-existence}
+\lim_{M\to\infty}\liminf_{N\to\infty}\Pp\Bigl(\cC_{N,M}\neq\varnothing,\ \max_{S_N}H_Q\le m_N+M\Bigr)=1.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The set $\cC_{N,M}$ is contained in the corresponding set for $\widetilde U$, and the first claim follows from \cref{thm:mc-counts}. For the second, fix $M$. As $m_N/N\to E_0$, we have $m_N-M\ge N(E_0-\delta_U)$ for all large $N$. On the event in \eqref{eq:mb-allhigh}, every critical point $u$ with $|H_Q(u)-m_N|\le M$ has $K_Q(u)/N\in U$, and the sets $\cC_{N,M}$ defined with $U$ and with $\widetilde U$ coincide. This event has probability at least $1-Ce^{-cN}$, and \eqref{eq:mb-existence} follows from the corresponding statement in \cref{thm:mc-counts}.
+\end{proof}
+
+\paragraph{Parameters.}
+\Cref{tab:mb-parameters} lists the parameters of this section and the order in which they are chosen. All auxiliary parameters are fixed before $N\to\infty$, and every window half-width $M$ or $L$ is fixed during this limit. The coarse cutoff $N(E_0-\tau)$ and the rectangle $\mathcal K_*$ of normalized marks define energy ranges of order $N$.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{6.2cm}>{\raggedright\arraybackslash}p{4.4cm}@{}}
+\toprule
+Parameter & Role & Chosen \\
+\midrule
+$U$, $b_0$, $\varepsilon_0$ & radial interval, largest band width, energy window of the Palm estimates & first, in \cref{sec:mb-choice} \\
+$b\in(0,b_0]$ & band width & after $b_0$ \\
+$\tau$ & lower energy cutoff $N(E_0-\tau)$ of the coarse family & after $U,\varepsilon_0$ (\cref{cor:mb-low-sum}) \\
+$\varepsilon,n,\theta,J$ & localization tolerance, replica number, overlap tolerance, number of additional replicas & after $b$ and $\tau$, inside the proof of \cref{prop:mb-coarse} \\
+$L,\delta,M$ & half-width of the existence window, lower threshold for band partition functions, half-width of the final window & in this order, after all of the above (\cref{prop:red-capture}) \\
+\bottomrule
+\end{tabular}
+\caption{The parameters of \cref{sec:mixbands} and the order of their choice.}
+\label{tab:mb-parameters}
+\end{table}
+
+\section{Regularity and regression at a center}\label{sec:mb-regression}
+
+We realize $H_N$ by independent Gaussian tensors, as in \cref{lem:pre-field}:
+\begin{equation}\label{eq:mb-tensor}
+H_N(v)=\sum_p\sqrt{c_p}\,N^{-(p-1)/2}\,T_p[v,\dots,v],\qquad v\in\R^N,
+\end{equation}
+where $T_p$ is the $p$-linear form whose entries are the independent standard Gaussian variables $g^{(p)}_{i_1\dots i_p}$ of \cref{lem:pre-field}, indexed by ordered $p$-tuples. The right side is the polynomial extension of $H_N$ to $\R^N$, with covariance $\E H_N(v)H_N(v')=N\xi(v\cdot v'/N)$. For a $p$-linear form $T$, we write $\|T\|_{\mathrm{op}}=\sup\{T[v_1,\dots,v_p]:|v_1|=\dots=|v_p|=1\}$.
+
+\begin{lemma}[Regularity under the conditioning at a critical point]\label{lem:mb-regularity}
+Let $\mathcal K_0\subset\R^2$ be a compact set of marks (in a pure model, of compatible marks $(e,pe)$), and let $I\subset(-1,1)$ be a compact interval. There exist $C,c>0$ such that, for every $u\in S_N$ and every $(e,k)\in\mathcal K_0$,
+\begin{equation}\label{eq:mb-latitude-reg}
+\Pp_{e,k,u}\Bigl(\sup_{a\in I,\ \omega\in S_u^\perp}\bigl|\partial_a^2H_N(\sigma(a,\omega))\bigr|>CN\Bigr)\le Ce^{-cN}.
+\end{equation}
+Moreover, the Lipschitz constant $\mathrm{Lip}_N$ of $H_N$ on the ball $\{v\in\R^N:|v|\le\sqrt N\}$ satisfies $\Pp(\mathrm{Lip}_N>C\sqrt N)\le Ce^{-cN}$ and $\E\,\mathrm{Lip}_N\le C\sqrt N$.
+\end{lemma}
+
+\begin{proof}
+We begin with a net bound. Let $T$ be a $p$-linear form on $\R^N$ and let $\mathcal N_p$ be a $1/(2p)$-net of the unit sphere with $|\mathcal N_p|\le(1+4p)^N$. Replacing the arguments of $T$ by net points one at a time changes $T[v_1,\dots,v_p]$ by at most $p\cdot(2p)^{-1}\|T\|_{\mathrm{op}}$. This gives $\|T\|_{\mathrm{op}}\le2\max_{\mathcal N_p^p}|T|$. If every evaluation $T[v_1,\dots,v_p]$ at unit vectors is a centered Gaussian variable with variance at most one, then the union bound implies that
+\begin{equation}\label{eq:mb-net}
+\Pp\bigl(\|T\|_{\mathrm{op}}>2t\bigr)\le2(1+4p)^{pN}e^{-t^2/2},\qquad t>0 .
+\end{equation}
+For $T_p$, every such evaluation is standard Gaussian. Taking $t=C_p\sqrt N+t'$ with $C_p$ large in \eqref{eq:mb-net} and integrating the tail in $t'$, we obtain $\Pp(\|T_p\|_{\mathrm{op}}>C\sqrt N)\le Ce^{-cN}$ and $\E\|T_p\|_{\mathrm{op}}\le C\sqrt N$. The gradient of the degree-$p$ term of \eqref{eq:mb-tensor} at $|v|\le\sqrt N$ has norm at most $p\sqrt{c_p}\,\|T_p\|_{\mathrm{op}}$, and the assertions on $\mathrm{Lip}_N$ follow, since there are finitely many degrees. (The bound in probability is also part of \cref{lem:pre-field}.)
+
+Under $\Pp_{e,k,u}$, the vector of all tensor entries is Gaussian. By the explicit form of the canonical conditional law in \cref{sec:kacrice}, its centered part is the image of a standard Gaussian vector under an orthogonal projection, and its covariance is dominated by the identity. Then every evaluation of the centered conditioned forms $T_p^{\mathrm c}$ at unit vectors has variance at most one, and \eqref{eq:mb-net} implies that $\|T^{\mathrm c}_p\|_{\mathrm{op}}\le C\sqrt N$ for all $p$, except on an event of probability $Ce^{-cN}$. Let $\hat\sigma(a)=\sigma(a,\omega)/\sqrt N$. Then $|\hat\sigma(a)|=1$, and $|\hat\sigma'(a)|$ and $|\hat\sigma''(a)|$ are bounded on $I$, uniformly in $\omega$. The centered conditioned field at $\sigma(a,\omega)$ equals $\sum_p\sqrt{c_p}\sqrt N\,T_p^{\mathrm c}[\hat\sigma(a),\dots,\hat\sigma(a)]$. Differentiating twice in $a$, we find that its second latitude derivative is at most $C\sqrt N\sum_p\|T_p^{\mathrm c}\|_{\mathrm{op}}\le CN$ on the preceding event. The conditional mean of the field at $\sigma(a,\omega)$ is $Nm_{e,k}(a)$, with $m_{e,k}$ given in \cref{lem:mb-regression} below. It depends only on $a$, and $|m_{e,k}''|$ is bounded on $I\times\mathcal K_0$. Adding the mean proves \eqref{eq:mb-latitude-reg}.
+\end{proof}
+
+The conditional mean must be bounded separately: the domination of the conditional covariance by the identity controls only the centered part of the field.
+
+We now describe the field on the latitude spheres around a fixed center. The conditional law of the field on a band of fixed latitude, given the value, the radial derivative, and a vanishing gradient at the center, was computed by Huang and Sellke \cite[Lemma~3.11]{HuangSellke2024}; see also \cite{BenArousSubagZeitouni2020} for the one-point law at a critical point. We need, in addition, the decomposition of the field by the number of tangential coordinates, which shows how the band is correlated with the Hessian at the center. For $a\in(-1,1)$, let
+\begin{equation}\label{eq:mb-bd}
+b(a)=\binom{\xi(\sqrt Q\,a)}{\sqrt Q\,a\,\xi'(\sqrt Q\,a)},\qquad d(a)=\frac{(1-a^2)\,\xi'(\sqrt Q\,a)^2}{\xi'(Q)},\qquad v_2(a)=\frac12(1-a^2)^2\xi''(a^2).
+\end{equation}
+For a non-pure mixture, let $m_{e,k}(a)=b(a)^{\mathsf T}\Sigma_Q^{-1}(e,k)^{\mathsf T}$ and $v(a)=\xi(1)-b(a)^{\mathsf T}\Sigma_Q^{-1}b(a)-d(a)$. For a pure mixture $\xi(r)=c_pr^p$, let $m_{e,k}(a)=e(a/\sqrt Q)^p$ and $v(a)=c_p\{1-a^{2p}-pa^{2p-2}(1-a^2)\}$.
+
+\begin{lemma}[Decomposition by tangential degree and Gaussian regression]\label{lem:mb-regression}
+Fix $u\in S_N$ and marks $(e,k)$. Under $\Pp_{e,k,u}$, for $a\in(-1,1)$ and $\omega\in S_u^\perp$,
+\begin{equation}\label{eq:mb-banks}
+H_N(\sigma(a,\omega))=Nm_{e,k}(a)+Y_{\le1}(a,\omega)+Y_2(a,\omega)+Y_{\ge3}(a,\omega),
+\end{equation}
+where the following hold.
+\begin{enumerate}
+\item The processes $Y_{\le1}$ and $Y_{\ge3}$ and the pair $(Y_2,W)$ are independent and centered Gaussian, where $\nabla^2_{S_N}H_Q(u)=W-k\,\mathrm{Id}$ and $W$ has the law of $W_{N-1,N}$.
+\item For all $a$ and $\omega,\omega'\in S_u^\perp$, we have $\E\,Y_2(a,\omega)Y_2(a,\omega')=Nv_2(a)R(\omega,\omega')^2$ and
+\[
+\Var\,Y_{\le1}(a,\omega)+\Var\,Y_{\ge3}(a,\omega)=N\bigl(v(a)-v_2(a)\bigr).
+\]
+In particular, $H_N(\sigma(a,\omega))$ has conditional mean $Nm_{e,k}(a)$ and conditional variance $Nv(a)$.
+\item At the latitude $a=\sqrt Q$, we have $Y_{\le1}(\sqrt Q,\cdot)=0$. Hence
+\begin{equation}\label{eq:mb-section}
+H_N(\sqrt Q\,u+\sqrt s\,\omega)=Ne+G^{\mathrm{res}}_u(\omega),\qquad \E\,G^{\mathrm{res}}_u(\omega)G^{\mathrm{res}}_u(\omega')=N\psi_Q(R(\omega,\omega')),
+\end{equation}
+where $G^{\mathrm{res}}_u=Y_2(\sqrt Q,\cdot)+Y_{\ge3}(\sqrt Q,\cdot)$, and the law of $G^{\mathrm{res}}_u$ does not depend on $(e,k)$.
+\end{enumerate}
+Finally, $2\beta^2v_2(\sqrt Q)=\rho<1$.
+\end{lemma}
+
+\begin{proof}
+By rotation invariance, we may take $u=\sqrt N e_1$. In \eqref{eq:mb-tensor}, group the entries of $T_p$ according to the number $j$ of positions in the index tuple that differ from $1$, and let $\mathcal Y_{p,j}$ be the corresponding part of the degree-$p$ term, which we call its component of tangential degree $j$. The processes $\mathcal Y_{p,j}$ are independent, because they involve disjoint families of entries. For $\sigma=\sigma(a,\omega)$ and $\sigma'=\sigma(a',\omega')$, counting the choices of the $j$ positions, we find
+\begin{equation}\label{eq:mb-bank-cov}
+\E\,\mathcal Y_{p,j}(\sigma)\mathcal Y_{p,j}(\sigma')=Nc_p\binom pj(aa')^{p-j}\bigl((1-a^2)(1-a'^2)\bigr)^{j/2}R(\omega,\omega')^j .
+\end{equation}
+Let $\mathcal Y_j=\sum_p\mathcal Y_{p,j}$. The value $H_Q(u)$ and the radial derivative $K_Q(u)$ are functionals of the components $\mathcal Y_{p,0}$, the tangential gradient $\nabla_{S_N}H_Q(u)$ is a linear functional of the components $\mathcal Y_{p,1}$, and the Euclidean tangential Hessian of $H_Q$ at $u$ is a linear functional of the components $\mathcal Y_{p,2}$. Its law is that of $W_{N-1,N}$, and the intrinsic Hessian is obtained by subtracting $(K_Q(u)/N)\,\mathrm{Id}=k\,\mathrm{Id}$ (see \cref{sec:kacrice}). Then the conditioning leaves the components with $j\ge2$ unchanged, and it replaces $\mathcal Y_0+\mathcal Y_1$ by its conditional mean plus a centered Gaussian process $Y_{\le1}$ independent of the other components. We set $Y_2=\mathcal Y_2$ and $Y_{\ge3}=\sum_{j\ge3}\mathcal Y_j$. This proves (1).
+
+To identify the conditional mean and variance, we compute the covariances of $H_N(\sigma(a,\omega))$ with the conditioned variables. Recall that $(H_Q(u),K_Q(u))$ has covariance matrix $N\Sigma_Q$. Since $R(\sigma(a,\omega),\sqrt Q\,u)=\sqrt Q\,a$, differentiating $N\xi(tR(\sigma,\sqrt Qu))$ at $t=1$, we find that the covariance of $H_N(\sigma(a,\omega))$ with $(H_Q(u),K_Q(u))$ is $Nb(a)$. For a unit tangent vector $w$ at $u$, the covariance with $w\cdot\nabla H_Q(u)$ is $\sqrt Q\,\xi'(\sqrt Q\,a)(1-a^2)^{1/2}\,\omega\cdot w$, and the tangential gradient has covariance $a_Q\,\mathrm{Id}$. The sum of the squares of these covariances over an orthonormal basis of tangent vectors, divided by $a_Q$, is $Nd(a)$. By Gaussian regression, we have that the conditional mean is $Nb(a)^{\mathsf T}\Sigma_Q^{-1}(e,k)^{\mathsf T}=Nm_{e,k}(a)$ and that the conditional variance is $N\{\xi(1)-b(a)^{\mathsf T}\Sigma_Q^{-1}b(a)-d(a)\}=Nv(a)$. In a pure model, the same computation with the single observation $H_Q(u)$ yields the mean $Ne(a/\sqrt Q)^p$ and, since $d(a)=c_pp(1-a^2)a^{2p-2}$, the variance $Nv(a)$. Summing \eqref{eq:mb-bank-cov} over $p$ with $j=2$ and $a=a'$ gives $Nv_2(a)R(\omega,\omega')^2$, since $\sum_pc_p\binom p2t^{p-2}=\xi''(t)/2$. The variance of $Y_{\le1}+Y_{\ge3}$ is the difference $N(v(a)-v_2(a))$, by independence. This proves (2).
+
+At $a=\sqrt Q$, the component $\mathcal Y_0(\sqrt Q,\cdot)=\sum_pH_{N,p}(\sqrt Q\,u)$ equals $H_Q(u)=Ne$. The component $\mathcal Y_1$ is the part of the polynomial that is linear in the tangential component, so $\mathcal Y_1(\sqrt Q,\omega)=\sqrt s\,\omega\cdot\nabla H_N(\sqrt Q\,u)=(s/Q)^{1/2}\,\omega\cdot\nabla_{S_N}H_Q(u)$, which vanishes under the conditioning, so that $Y_{\le1}(\sqrt Q,\cdot)=0$. By \eqref{eq:mb-bank-cov}, the covariance of $\sum_{j\ge2}\mathcal Y_j$ at $a=a'=\sqrt Q$ is
+\[
+N\sum_{j\ge2}\sum_pc_p\binom pjQ^{p-j}s^jR(\omega,\omega')^j=N\sum_{j\ge2}\frac{s^j\xi^{(j)}(Q)}{j!}R(\omega,\omega')^j=N\psi_Q(R(\omega,\omega')),
+\]
+which proves (3). Since the components with $j\ge2$ are not affected by the conditioning, the law of $G^{\mathrm{res}}_u$ does not depend on $(e,k)$. Note that $G^{\mathrm{res}}_u$ is correlated with the Hessian through $Y_2$. Finally, $2\beta^2v_2(\sqrt Q)=\beta^2s^2\xi''(Q)=\rho$.
+\end{proof}
+
+\section{Fixed replicas and the coarse cover}\label{sec:mb-coarse}
+
+In this section, we prove \cref{prop:mb-coarse}. We first state Subag's estimates for replicated bands in our normalization. For $m\in\R^N$ with $|m|^2=NQ$, an integer $n\ge1$, and $\alpha,\theta>0$, let
+\[
+\cA(m;n,\alpha,\theta)=\bigl\{(\sigma^1,\dots,\sigma^n)\in S_N^n:\ |R(\sigma^i,m)-Q|<\alpha,\ \ |R(\sigma^i,\sigma^j)-Q|<\theta\ (i\neq j)\bigr\},
+\]
+and define the replicated free energy
+\begin{equation}\label{eq:mb-replicated}
+\widetilde F_N(m;n,\alpha,\theta)=\frac1{Nn}\log\int_{\cA(m;n,\alpha,\theta)}\exp\Bigl\{\beta\sum_{i=1}^n\bigl(H_N(\sigma^i)-H_N(m)\bigr)\Bigr\}\,\nu_N^{\otimes n}(\dd\sigma^1\cdots\dd\sigma^n).
+\end{equation}
+In the notation of \cite{Subag2024}, this is $\widetilde F_{N,\beta}(m,n,\rho,\delta)$ with $\rho=\theta$ and $\delta=\alpha/\sqrt Q$: Subag's band of width $\delta$ around $m$ is the set of $\sigma$ with $|R(\sigma,m)-Q|\le\delta\sqrt Q$. The boundaries of these sets have measure zero, so strict and non-strict inequalities give the same free energy. Subag's results hold for general mixtures with nonnegative coefficients, and impose no parity condition. For pure models, the same input is \cref{prop:pc-subag}, written for $\widetilde P_N(m,n,\rho,\delta)$ with $\rho=\theta$ and $\delta=\alpha/\sqrt Q$, and \cref{lem:mb-subag-mean,lem:mb-replica,lem:mb-localization,prop:mb-coarse} below are the counterparts of \cref{lem:pc-replica-mean,prop:pc-replica-means,lem:pc-superlevel,prop:pc-coarse}.
+
+\begin{theorem}[{\cite[Proposition~24]{Subag2024}}]\label{thm:mb-subag}
+For all $t,c>0$, there exist $\alpha_0,\theta_0>0$ and an integer $n_0$ such that, for all fixed $n\ge n_0$, $\alpha\in(0,\alpha_0]$, and $\theta\in(0,\theta_0]$, and all sufficiently large $N$,
+\begin{equation}\label{eq:mb-subag}
+\Pp\Bigl(\sup_{|m|^2=NQ}\bigl(\widetilde F_N(m;n,\alpha,\theta)-\E\widetilde F_N(m;n,\alpha,\theta)\bigr)<t\Bigr)>1-e^{-cN}.
+\end{equation}
+\end{theorem}
+
+The statement in \cite{Subag2024} is made for every $N$. When $N\le n$, the set $\cA(m;n,\alpha,\theta)$ can be empty: for $N=2$, $Q=0.9$, and $\alpha=\theta=0.001$, the band condition confines each $\sigma^i$ to one of two short arcs, two of any three points lie on the same arc, and their overlap exceeds $0.9999$, which is larger than $Q+\theta$. Then both sides of \eqref{eq:mb-subag} involve $-\infty$. For $N\ge n+1$, there exist orthogonal vectors $\omega_1,\dots,\omega_n$ in $S_u^\perp$, where $u=m/\sqrt Q$. The points $\sigma^i=\sqrt Q\,u+\sqrt s\,\omega_i$ satisfy $R(\sigma^i,m)=Q$ and $R(\sigma^i,\sigma^j)=Q$, and $\cA(m;n,\alpha,\theta)$ contains an open neighborhood of this tuple, which has positive measure. This restriction is harmless, because $n$ is fixed and only large $N$ matter below.
+
+The next lemma is the bound on the expectation in \eqref{eq:mb-subag} that we need. It holds for each fixed $n$. We derive it from \cite[Lemmas~18 and~19]{Subag2024}, rather than from a limit in which $n$ grows with $N$.
+
+\begin{lemma}[Expected replicated free energy]\label{lem:mb-subag-mean}
+The expectation $\E\widetilde F_N(m;n,\alpha,\theta)$ does not depend on $m$ with $|m|^2=NQ$. There exist $C<\infty$ and $\alpha_1>0$ such that, for every integer $n\ge1$ and all $\alpha\in(0,\alpha_1]$ and $\theta>0$,
+\begin{equation}\label{eq:mb-subag-mean}
+\limsup_{N\to\infty}\E\widetilde F_N(m;n,\alpha,\theta)\le F_{\mathrm{band}}+C\sqrt\alpha+C\Bigl(\frac1n+\frac{\theta+C\sqrt\alpha}s\Bigr)^{1/2}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The expectation does not depend on $m$, by the rotation invariance of the law of $H_N$. We write $m=\sqrt Q\,u$ and $\delta=\alpha/\sqrt Q$. The exact band $\{\sigma:R(\sigma,m)=Q\}$ is the sphere $\{\sqrt Q\,u+\sqrt s\,\omega:\omega\in S_u^\perp\}$, with uniform probability measure the image of $\nu_u^\perp$. For $\theta'>0$, let $\widetilde F^\circ_N(m;n,\theta')$ be defined as in \eqref{eq:mb-replicated}, with $\nu_N$ replaced by this measure and with only the constraints $|R(\sigma^i,\sigma^j)-Q|<\theta'$.
+
+We first pass to the exact band. Subag projects each point of the band $\{|R(\sigma,m)-Q|<\alpha\}$ along its meridian to the exact band. The projection moves points by at most $(2N\delta)^{1/2}$, changes overlaps by at most $(8\delta)^{1/2}$, and maps the uniform measure on the band to the uniform measure on the exact band. With this projection, the argument of \cite[Lemma~18, Eq.~(2.2)]{Subag2024} gives
+\begin{equation}\label{eq:mb-subag18}
+\widetilde F_N(m;n,\alpha,\theta)\le\widetilde F_N^\circ\bigl(m;n,\theta+(8\delta)^{1/2}\bigr)+\frac1N\log\nu_N\bigl(|R(\sigma,m)-Q|<\alpha\bigr)+\beta(2\delta)^{1/2}\frac{\mathrm{Lip}_N}{\sqrt N} .
+\end{equation}
+Indeed, the lemma in \cite{Subag2024} is stated on the event $\mathrm{Lip}_N\le L\sqrt N$, with $L$ in place of $\mathrm{Lip}_N/\sqrt N$, and its proof uses the Lipschitz bound only through $|H_N(\sigma)-H_N(\sigma')|\le\mathrm{Lip}_N|\sigma-\sigma'|$. It therefore gives \eqref{eq:mb-subag18} for every field. We have $\E\,\mathrm{Lip}_N\le C\sqrt N$ by \cref{lem:mb-regularity}; the corresponding bound in probability is \cite[Lemma~17]{Subag2024}.
+
+Next, the band condition reads $|a-\sqrt Q|<\delta$ in terms of the latitude $a=R(\sigma,u)$. By \eqref{eq:mb-clat}, its probability is at most $2\delta c_N^{\mathrm{lat}}\max(1-a^2)^{(N-3)/2}$ over $|a-\sqrt Q|<\delta$, and the maximum of $\frac12\log(1-a^2)$ over this interval differs from $\frac12\log s$ by at most $C\alpha$ for small $\alpha$. We obtain
+\[
+\frac1N\log\nu_N\bigl(|R(\sigma,m)-Q|<\alpha\bigr)\le\frac12\log s+C\alpha+O\Bigl(\frac{\log N}N\Bigr).
+\]
+
+On the exact band, we have $R(\sigma^i,\sigma^j)=Q+sR(\omega_i,\omega_j)$, and the constraint becomes $|R(\omega_i,\omega_j)|<\theta'/s$. The field $\omega\mapsto H_N(\sqrt Q\,u+\sqrt s\,\omega)-H_N(m)$ is centered Gaussian with covariance $N\{\xi(Q+sR(\omega,\omega'))-\xi(Q)\}=N\{s\xi'(Q)R(\omega,\omega')+\psi_Q(R(\omega,\omega'))\}$. It has the law of the sum of two independent fields, a linear field with covariance $Ns\xi'(Q)R$ and a field $h^{\mathrm{res}}$ with covariance $N\psi_Q(R)$. After identifying $S_u^\perp$ with the sphere of radius $\sqrt N$ in $\R^{N-1}$, as in \cite[Eq.~(2.4)]{Subag2024}, \cite[Lemma~19, Eq.~(2.5)]{Subag2024} removes the linear field: with the one-spin coefficient $\gamma_1^2=Ns\xi'(Q)/(N-1)$, the expectation of $\widetilde F_N^\circ(m;n,\theta')$ exceeds the corresponding expectation with $h^{\mathrm{res}}$ alone by at most $C\beta\gamma_1(1/n+\theta'/s)^{1/2}$. Dropping all constraints and using Jensen's inequality, we find that the expectation with $h^{\mathrm{res}}$ alone is at most $N^{-1}\log\E\int e^{\beta h^{\mathrm{res}}}\dd\nu_u^\perp=\beta^2\psi_Q(1)/2$.
+
+Inserting these bounds into \eqref{eq:mb-subag18}, with $\theta'=\theta+(8\delta)^{1/2}$ and $\delta=\alpha/\sqrt Q$, yields \eqref{eq:mb-subag-mean}, where we absorbed $C\alpha$ into $C\sqrt\alpha$.
+\end{proof}
+
+The next lemma is the step in which the diagonal of the overlap matrix matters. For $\sigma^1,\dots,\sigma^n\in S_N$, we write
+\begin{equation}\label{eq:mb-mean}
+\bar\sigma=\frac1n\sum_{i=1}^n\sigma^i,\qquad \bar q=\frac{|\bar\sigma|^2}N,\qquad \widehat m=\Bigl(\frac Q{\bar q}\Bigr)^{1/2}\bar\sigma\quad(\bar q>0),\qquad q_n=Q+\frac sn .
+\end{equation}
+If $|R(\sigma^i,\sigma^j)-Q|<\theta\le Q/2$ for all $i\neq j$, then, since $R(\sigma^i,\sigma^i)=1$,
+\begin{equation}\label{eq:mb-diagonal}
+|\bar q-q_n|\le\theta,\qquad |R(\sigma^i,\bar\sigma)-q_n|\le\theta,\qquad |R(\sigma^i,\widehat m)-Q|\le C_Q\Bigl(\frac1n+\theta\Bigr).
+\end{equation}
+Indeed, $\bar q=n^{-2}\sum_{i,j}R(\sigma^i,\sigma^j)$ and $R(\sigma^i,\bar\sigma)=n^{-1}\sum_jR(\sigma^i,\sigma^j)$ consist of the diagonal term $1/n$ and the average of $n-1$ off-diagonal terms. For the last bound, $R(\sigma^i,\widehat m)=(Q/\bar q)^{1/2}R(\sigma^i,\bar\sigma)$ is a Lipschitz function of $(\bar q,R(\sigma^i,\bar\sigma))$ on $[Q/2,2]\times[-1,1]$, and its value at $(q_n,q_n)$ is $(Qq_n)^{1/2}$, which exceeds $Q$ by at most $s/(2n)$. The squared norm of the empirical mean is close to $q_n=Q+(1-Q)/n$, and we never replace it by $Q$.
+
+\begin{lemma}[Near-ground replica means]\label{lem:mb-replica}
+Let $\varepsilon>0$. There exists an integer $n_1$ such that, for every integer $n\ge n_1$, there exist $\theta_n>0$ and $c_n>0$ such that, for every $\theta\in(0,\theta_n]$ and all sufficiently large $N$,
+\begin{equation}\label{eq:mb-replica}
+\E\,\pi^{\otimes n}\Bigl(|R(\sigma^i,\sigma^j)-Q|<\theta\ \text{for all }i\neq j,\ \ H_N(\widehat m)<N(E_0-\varepsilon)\Bigr)\le e^{-c_nN}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The parameters are chosen in the following order: first the tolerances $\alpha,\theta_1$ and a lower bound $n_2$ for the replica number, for which the published estimates hold; then the mesh $h$ of a net; then $n_1$; and finally $\theta_n$.
+
+By \cref{thm:mb-subag} with $t=\beta\varepsilon/32$ and $c=1$, and by \cref{lem:mb-subag-mean}, there exist $\alpha,\theta_1>0$ and $n_2$ such that, for every fixed $n\ge n_2$, the following holds with probability at least $1-e^{-N}$ for all large $N$:
+\begin{equation}\label{eq:mb-sup-replicated}
+\sup_{|m|^2=NQ}\widetilde F_N(m;n,\alpha,\theta_1)\le F_{\mathrm{band}}+\frac{\beta\varepsilon}8 .
+\end{equation}
+Indeed, let $\alpha_0,\theta_0,n_0$ be given by \cref{thm:mb-subag}. We choose $\alpha\le\min\{\alpha_0,\alpha_1\}$, $\theta_1\le\theta_0$, and $n_2\ge n_0$ so that the error terms on the right side of \eqref{eq:mb-subag-mean} sum to at most $\beta\varepsilon/32$ for all $n\ge n_2$; this is possible, because they decrease in $n$ and increase in $\theta$. Then $\E\widetilde F_N(m;n,\alpha,\theta_1)\le F_{\mathrm{band}}+\beta\varepsilon/16$ for large $N$, and \eqref{eq:mb-subag} gives \eqref{eq:mb-sup-replicated}. By \cref{lem:pre-concentration} with $B=S_N$ and $h=0$, we have $\Pp(|\log Z_{N,\beta}-\E\log Z_{N,\beta}|\ge tN)\le2e^{-t^2N/(2\beta^2\xi(1))}$. Since $N^{-1}\E\log Z_{N,\beta}\to F(\beta)$, we obtain
+\begin{equation}\label{eq:mb-free-energy}
+\Pp\Bigl(\frac1N\log Z_{N,\beta}<F(\beta)-\frac{\beta\varepsilon}8\Bigr)\le e^{-cN}
+\end{equation}
+for all large $N$. By \cref{lem:mb-regularity}, there exists $L$ with $\Pp(\mathrm{Lip}_N>L\sqrt N)\le Ce^{-cN}$.
+
+Let $h=\min\{\varepsilon/(4L),\alpha/4\}$, and let $\mathcal N$ be an $h\sqrt N$-net of the sphere $\{|m|^2=NQ\}$ with $|\mathcal N|\le e^{Na_h}$, where $a_h=\log(1+2\sqrt Q/h)$. We fix $n_1\ge n_2$ with $C_Q/n_1<\alpha/4$ and $n_1\beta\varepsilon>4a_h$, and for $n\ge n_1$ we set $\theta_n=\min\{\theta_1,\alpha/(4C_Q),Q/2\}$.
+
+Fix $n\ge n_1$ and $\theta\le\theta_n$, and suppose that \eqref{eq:mb-sup-replicated}, the bound $N^{-1}\log Z_{N,\beta}\ge F(\beta)-\beta\varepsilon/8$, and $\mathrm{Lip}_N\le L\sqrt N$ hold. Let $(\sigma^1,\dots,\sigma^n)$ belong to the event in \eqref{eq:mb-replica}, and let $m'\in\mathcal N$ satisfy $|\widehat m-m'|\le h\sqrt N$. Then
+\[
+H_N(m')\le H_N(\widehat m)+LhN<N\Bigl(E_0-\frac{3\varepsilon}4\Bigr),\qquad |R(\sigma^i,m')-Q|\le|R(\sigma^i,\widehat m)-Q|+h<\alpha,
+\]
+where in the second bound we used \eqref{eq:mb-diagonal}, $C_Q(1/n+\theta)<\alpha/2$, and $h\le\alpha/4$. We conclude that the tuple belongs to $\cA(m';n,\alpha,\theta_1)$ for a net point $m'$ with $H_N(m')<N(E_0-3\varepsilon/4)$. For such $m'$, using \eqref{eq:mb-sup-replicated}, the bound on $Z_{N,\beta}$, and the TAP identity \eqref{eq:mb-tap}, we have
+\[
+\begin{aligned}
+\pi^{\otimes n}\bigl(\cA(m';n,\alpha,\theta_1)\bigr)&=Z_{N,\beta}^{-n}\exp\bigl\{n\beta H_N(m')+Nn\widetilde F_N(m';n,\alpha,\theta_1)\bigr\}\\
+&\le\exp\Bigl\{nN\Bigl[\beta\Bigl(E_0-\frac{3\varepsilon}4\Bigr)+F_{\mathrm{band}}+\frac{\beta\varepsilon}4-F(\beta)\Bigr]\Bigr\}=e^{-nN\beta\varepsilon/2}.
+\end{aligned}
+\]
+Summing over the net, we find that the Gibbs probability of the event in \eqref{eq:mb-replica} is at most $e^{Na_h-nN\beta\varepsilon/2}\le e^{-Na_h}$. The three events on the field that we assumed fail with probability at most $Ce^{-cN}$, and taking expectations proves \eqref{eq:mb-replica}.
+\end{proof}
+
+The next lemma is deterministic. It moves a point of high energy to a nearby local maximum. Localization of deep connected components around critical points also appears in \cite[Proposition~39]{BenArousSubagZeitouni2020} and \cite[Corollary~1.5 and its proof]{Sellke2025marginal}; we give the deterministic estimate used here.
+
+\begin{lemma}[Proximity of high-energy points to local maxima]\label{lem:mb-localization}
+Let $f$ be a $C^3$ function on $S_N$, and let $E_0\in\R$ and $\varepsilon_{\mathrm{loc}},\kappa>0$, $C_3\ge0$. Suppose that every critical point $c$ of $f$ with $f(c)\ge N(E_0-\varepsilon_{\mathrm{loc}})$ satisfies $\nabla^2_{S_N}f(c)\preceq-\kappa\,\mathrm{Id}$, and that $\sup\|\nabla^3_{S_N}f\|_{\mathrm{op}}\le C_3N^{-1/2}$. Let $r_0=\min\{1,\kappa/(2C_3)\}$ (with $r_0=1$ if $C_3=0$), and suppose that $\max f\le N(E_0+\varepsilon)$, where $3\varepsilon<\min\{\varepsilon_{\mathrm{loc}},\kappa r_0^2/4\}$. Then every $v\in S_N$ with $f(v)\ge N(E_0-\varepsilon)$ lies within geodesic distance $(8\varepsilon/\kappa)^{1/2}\sqrt N$ of a critical point $c$ of $f$ with $f(c)\ge f(v)$ and $\nabla^2_{S_N}f(c)\preceq-\kappa\,\mathrm{Id}$.
+\end{lemma}
+
+\begin{proof}
+Let $K$ be the connected component of the closed set $\{f\ge N(E_0-2\varepsilon)\}$ that contains $v$. Since $K$ is compact, $f$ attains its maximum on $K$ at some point $c$, and $f(c)\ge f(v)>N(E_0-2\varepsilon)$. A point at which $f$ exceeds $N(E_0-2\varepsilon)$ has a connected open neighborhood in the superlevel set, which is contained in $K$. Then $c$ is a local maximum of $f$ on $S_N$, and $c$ is a critical point with $f(c)\ge N(E_0-\varepsilon)>N(E_0-\varepsilon_{\mathrm{loc}})$. By assumption, $\nabla^2_{S_N}f(c)\preceq-\kappa\,\mathrm{Id}$.
+
+Along a unit-speed geodesic $\gamma$ from $c$, the Hessian $\nabla^2_{S_N}f(\gamma(t))[\gamma'(t),\gamma'(t)]$ changes by at most $C_3N^{-1/2}t$, which is at most $\kappa/2$ for $t\le r_0\sqrt N$. As $r_0\le1$, the geodesic ball of radius $r_0\sqrt N$ about $c$ lies within the injectivity radius $\pi\sqrt N$. Integrating twice along radial geodesics, we obtain
+\[
+f(c)-f(w)\ge\frac\kappa4\operatorname{dist}(c,w)^2\qquad\text{for }\operatorname{dist}(c,w)\le r_0\sqrt N .
+\]
+On the sphere $\operatorname{dist}(c,w)=r_0\sqrt N$, this gives $f(w)\le N(E_0+\varepsilon)-\kappa r_0^2N/4<N(E_0-2\varepsilon)$. The connected set $K$ contains $c$ and does not meet this sphere, and therefore $K$ lies in the open ball of radius $r_0\sqrt N$ about $c$. In particular $v$ lies in this ball, and $\kappa\operatorname{dist}(c,v)^2/4\le f(c)-f(v)\le2\varepsilon N$, as desired.
+\end{proof}
+
+We also record the measurability of the unions of bands and of the weights used below, which is needed to apply \eqref{eq:mb-kr}. We identify the field $H$ with its finite vector of tensor entries, as in \cref{sec:kacrice}.
+
+\begin{lemma}[Measurability]\label{lem:mb-borel}
+Let $U'\subset\R$ and $I\subset\R$ be closed and $b>0$. The set of pairs $(H,\sigma)$ such that $\sigma\in B_u$ for some $u\in\cC_{U'}(I)$ is closed in the product of coefficient space and $S_N$. The function $(H,u)\mapsto Z_H(B_u)$ is continuous. In particular, $\pi(S_N\setminus\bigcup_{u\in\cC_{U'}(I)}B_u)$ is a Borel function of $H$, and $(H,u)\mapsto\ind\{Z_H(B_u)<tD_Ne^{\beta(H_Q(u)-m_N)}\}$ is Borel for every $t>0$.
+\end{lemma}
+
+\begin{proof}
+The value $H_Q(u)$, the radial derivative $K_Q(u)$, and the gradient $\nabla_{S_N}H_Q(u)$ are continuous in $(H,u)$. The set of triples $(H,\sigma,u)$ with $\nabla_{S_N}H_Q(u)=0$, $K_Q(u)/N\in U'$, $H_Q(u)\in I$, and $|R(\sigma,u)-\sqrt Q|\le b$ is closed. Its projection onto $(H,\sigma)$ is closed, because $S_N$ is compact: if $(H_i,\sigma_i)\to(H,\sigma)$ with witnessing centers $u_i$, a subsequence of $(u_i)$ converges, and its limit is a witnessing center for $(H,\sigma)$. This is the argument of \cref{lem:red-unions}. The boundary $\{|R(\sigma,u)-\sqrt Q|=b\}$ has $\nu_N$-measure zero, and dominated convergence implies that $Z_H(B_u)$ is continuous in $(H,u)$. The remaining assertions follow, since $Z_{N,\beta}>0$ is continuous in $H$.
+\end{proof}
+
+For $\tau>0$, the \emph{coarse family} is $\cC(I_\tau)$ with $I_\tau=[N(E_0-\tau),\infty)$, the set of critical points of $H_Q$ with radial derivative in $U$ and energy at least $N(E_0-\tau)$, and the coarse union is
+\[
+B^{\mathrm{coarse}}_N(\tau)=\bigcup_{u\in\cC(I_\tau)}B_u .
+\]
+
+\begin{proposition}[Coarse cover]\label{prop:mb-coarse}
+For every fixed $b>0$ and $\tau>0$,
+\begin{equation}\label{eq:mb-coarse}
+\lim_{N\to\infty}\E\,\pi\bigl(S_N\setminus B^{\mathrm{coarse}}_N(\tau)\bigr)=0 .
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+The proof has four steps. We first fix a localization tolerance $\varepsilon$; then we choose a replica number $n$ and an overlap tolerance $\theta$, so that a sample whose overlaps with the members of a group are close to $Q$, where all mutual overlaps in the group are close to $Q$, lies in the band of the local maximum near the empirical mean of the group; then, along a subsequence, we use the directing measure to produce such a group among $J$ additional independent replicas; and finally we average over the samples.
+
+\paragraph{Localization.}
+Let $\delta_U,\kappa,C_3$ be as in \eqref{eq:mb-allhigh}, and let $r_0=\min\{1,\kappa/(2C_3)\}$. Fix $\varepsilon\in(0,\tau]$ with $3\varepsilon<\min\{\delta_U,\kappa r_0^2/4\}$ and $(8\varepsilon/\kappa)^{1/2}<b/4$. Let $\cG_N$ be the event that the conclusions of \eqref{eq:mb-allhigh} hold and $\max H_Q\le N(E_0+\varepsilon)$. Note that $m_N+M\le N(E_0+\varepsilon)$ for every fixed $M$ and all large $N$; together with \eqref{eq:mb-allhigh} and \cref{lem:mb-counts}, this implies that $\Pp(\cG_N)\to1$. On $\cG_N$, \cref{lem:mb-localization} applies to $f=H_Q$ with $\varepsilon_{\mathrm{loc}}=\delta_U$, and it shows that every $v\in S_N$ with $H_Q(v)\ge N(E_0-\varepsilon)$ lies within geodesic distance $(b/4)\sqrt N$ of a critical point $c$ with $H_Q(c)\ge N(E_0-\varepsilon)$. By \eqref{eq:mb-allhigh}, we have $K_Q(c)/N\in U$, and $c\in\cC(I_\tau)$ because $\varepsilon\le\tau$.
+
+\paragraph{The replica group.}
+Let $n_1$ be given by \cref{lem:mb-replica} for this $\varepsilon$, and fix $n\ge n_1$ with $|Q/q_n^{1/2}-\sqrt Q|<b/4$, which is possible since $q_n\to Q$. Then fix $\theta\in(0,\theta_n]$ so small that the following holds: if $\sigma^1,\dots,\sigma^n$ satisfy $|R(\sigma^i,\sigma^j)-Q|<\theta$ for $i\neq j$ and $\sigma^0$ satisfies $|R(\sigma^0,\sigma^i)-Q|<\theta$ for all $i$, then $u=\bar\sigma/\bar q^{1/2}\in S_N$ satisfies $|R(\sigma^0,u)-Q/q_n^{1/2}|<b/4$. This is possible because $R(\sigma^0,\bar\sigma)$ is the average of the overlaps $R(\sigma^0,\sigma^i)$ and $|\bar q-q_n|\le\theta$ by \eqref{eq:mb-diagonal}. Note that $H_Q(u)=H_N(\widehat m)$. Suppose now that, in addition, $\cG_N$ holds and $H_N(\widehat m)\ge N(E_0-\varepsilon)$. Let $c$ be the critical point given by the localization step for $v=u$. Since $|R(\sigma^0,c)-R(\sigma^0,u)|\le|c-u|/\sqrt N$ and the Euclidean distance is at most the geodesic distance, we obtain
+\[
+|R(\sigma^0,c)-\sqrt Q|\le|R(\sigma^0,c)-R(\sigma^0,u)|+|R(\sigma^0,u)-Q/q_n^{1/2}|+|Q/q_n^{1/2}-\sqrt Q|<\frac{3b}4 .
+\]
+We conclude that $\sigma^0\in B_c\subset B^{\mathrm{coarse}}_N(\tau)$.
+
+\paragraph{Additional replicas.}
+Let $(\sigma^l)_{l\ge0}$ be independent samples from $\pi$, and consider their overlap array under the annealed law $\E\,\pi^{\otimes\infty}$, as in \cref{sec:directing}. Every subsequence of $N$ has a further subsequence along which this law converges to a limiting overlap law $\mathcal L$. We fix such a subsequence, and a directing measure $(G_\omega)_{\omega\in\Omega}$ of $\mathcal L$ (\cref{def:dir-directing,thm:dir-DS}). Under $\mathcal L$, we draw $\omega$ and then independent vectors $v^0,v^1,\dots$ with law $G_\omega$, and $R_{ll'}=v^l\cdot v^{l'}$ for $l\neq l'$. By \cref{thm:dir-norm}, $G_\omega$ is carried by $\{|v|^2=Q\}$ for almost every $\omega$. The vector $v^0$ lies almost surely in the support of $G_\omega$, and $G_\omega(\{v:|v-v^0|<\theta/4\})>0$ almost surely. If $|v|^2=|v'|^2=Q$ and $|v-v^0|,|v'-v^0|<\theta/4$, then $|v\cdot v'-Q|<\theta/2$ and $|v\cdot v^0-Q|<\theta/2$, since all vectors have norm at most one. Conditionally on $(\omega,v^0)$, the number of $l\in\{1,\dots,J\}$ with $|v^l-v^0|<\theta/4$ is binomial with $J$ trials and positive success probability. Given $\varepsilon'>0$, it follows that there exists $J$ such that, with limiting probability at least $1-\varepsilon'$, at least $n$ of the vectors $v^1,\dots,v^J$ lie in this ball. Let $\mathcal O_J$ be the event that there is an $n$-element set $S\subset\{1,\dots,J\}$ with $|R_{ll'}-Q|<\theta$ for all distinct $l,l'\in S\cup\{0\}$. It is an open subset of the space of finite arrays, and the limiting array belongs to it with probability at least $1-\varepsilon'$. By the portmanteau theorem, $\liminf\E\,\pi^{\otimes(J+1)}(\mathcal O_J)\ge1-\varepsilon'$ along the subsequence.
+
+\paragraph{Averaging.}
+By \cref{lem:mb-borel}, $B^{\mathrm{coarse}}_N(\tau)$ is a Borel function of the field, and $\E\,\pi(S_N\setminus B^{\mathrm{coarse}}_N(\tau))$ is the annealed probability that $\sigma^0\notin B^{\mathrm{coarse}}_N(\tau)$. By the second step, this event is contained in the union of $\mathcal O_J^c$, of $\cG_N^c$, and of the events that some $n$-element set $S\subset\{1,\dots,J\}$ has all mutual overlaps within $\theta$ of $Q$ and has $H_N(\widehat m_S)<N(E_0-\varepsilon)$, where $\widehat m_S$ is the normalized empirical mean of $(\sigma^l)_{l\in S}$. Using \cref{lem:mb-replica} and a union bound over the $\binom Jn$ sets $S$, we find that the last events have total annealed probability at most $\binom Jne^{-c_nN}$. We conclude that
+\[
+\limsup\E\,\pi\bigl(S_N\setminus B^{\mathrm{coarse}}_N(\tau)\bigr)\le\varepsilon'
+\]
+along the subsequence. Since $\varepsilon'$ is arbitrary, the limit along the subsequence is zero. Every subsequence has such a further subsequence, which proves \eqref{eq:mb-coarse}.
+\end{proof}
+
+The number $J$ of additional replicas depends on the subsequence through its limiting directing measure, while the coarse union depends only on the field. The argument uses neither atoms of the directing measure nor a description of its weights.
+
+\section{Determinant prefactors and the quadratic component}\label{sec:mb-prefactor}
+
+Let $\sigma_{\mathrm{sc}}(\dd r)=(2\pi)^{-1}(4-r^2)^{1/2}\ind_{[-2,2]}(r)\dd r$ be the semicircle law. Recall the logarithmic potential $\Omega$ of \cref{sec:kacrice,sec:mixone}. For $t>2$, we have
+\begin{equation}\label{eq:mb-Omega}
+\Omega(t)=\int\log(t-r)\,\sigma_{\mathrm{sc}}(\dd r),\qquad \Omega'(t)=\frac{t-\sqrt{t^2-4}}2,\qquad \Omega''(t)=\frac12\Bigl(1-\frac t{\sqrt{t^2-4}}\Bigr)<0 .
+\end{equation}
+The formula for $\Omega'$ is the Stieltjes transform of the semicircle law. The next lemma shows that the mean determinant $d_N(k)$ equals its exponential rate up to a bounded factor. The absence of any power of $N$ in this comparison is used in \cref{prop:mb-upper}.
+
+\begin{lemma}[Bounded determinant prefactors]\label{lem:mb-prefactor}
+For every compact set $\mathcal K\subset(2\sqrt{b_Q},\infty)$, there exist $0<c\le C<\infty$ such that, for all large $N$ and all $k\in\mathcal K$,
+\begin{equation}\label{eq:mb-prefactor}
+d_N(k)=\chi_N(k)\exp\Bigl\{N\Bigl[\frac12\log b_Q+\Omega\bigl(k/\sqrt{b_Q}\bigr)\Bigr]\Bigr\},\qquad c\le\chi_N(k)\le C .
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+We use \cref{cor:kr-dimension} with $b=b_Q$. With $m=N-1$, we have $b_m=b_Q(N-1)/N$ and $\sqrt{b_m}\,G_{N-1}=W_{N-1,N}$, and the corollary implies that $e^{\Lambda_{N-1,N}(k)}\le d_N(k)\le Ce^{\Lambda_{N-1,N}(k)}$ uniformly for $k\in\mathcal K$. With $m=N$, we have $b_m=b_Q$ and $\Lambda_{N,N}(k)=N[\frac12\log b_Q+\Omega(k/\sqrt{b_Q})]$, and the comparison of the two dimensions in the corollary yields $|\Lambda_{N-1,N}(k)-\Lambda_{N,N}(k)|\le C$. Combining these bounds, we obtain \eqref{eq:mb-prefactor}.
+\end{proof}
+
+
+The band around a center is correlated with the Hessian at the center through the quadratic component $Y_2$ of \cref{lem:mb-regression}. The next lemma shows that this correlation costs only a bounded factor in the Palm expectation of the partition function $Z_u(a)$ of the latitude sphere at $a$, defined in \eqref{eq:mb-coarea}. For marks $(e,k)$ and $a\in(-1,1)$, let
+\begin{equation}\label{eq:mb-ell}
+\Xi(e,k,a)=\beta m_{e,k}(a)+\frac{\beta^2}2v(a),
+\end{equation}
+so that $\E_{e,k,u}e^{\beta H_N(\sigma(a,\omega))}=e^{N\Xi(e,k,a)}$ for every $\omega$, by \cref{lem:mb-regression}.
+
+\begin{lemma}[Correlation with the quadratic component]\label{lem:mb-quadratic}
+Let $b_0>0$ and $\varepsilon_2\in(0,1)$ satisfy $I_{b_0}\subset(0,1)$ and $2\beta^2v_2(a)\le1-\varepsilon_2$ for $a\in I_{b_0}$, and let $\mathcal K_0$ be a compact set of marks with $k$ in a compact subset of $(2\sqrt{b_Q},\infty)$. There exists $C$ such that, for all $N\ge8/\varepsilon_2$, $a\in I_{b_0}$, and $(e,k)\in\mathcal K_0$,
+\begin{equation}\label{eq:mb-quadratic}
+\E_{e,k,u}\bigl[D_uZ_u(a)\bigr]\le Cd_N(k)e^{N\Xi(e,k,a)} .
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Fix $a$ and $(e,k)$. \Cref{lem:mb-regression} implies that $D_u$ is a function of $W$, and that $(W,Y_2)$ is independent of $Y_{\le1}$ and $Y_{\ge3}$. Using Fubini's theorem and this independence, we find
+\[
+\begin{aligned}
+\E_{e,k,u}\bigl[D_uZ_u(a)\bigr]&=e^{\beta Nm_{e,k}(a)}\int\E\bigl[e^{\beta(Y_{\le1}+Y_{\ge3})(a,\omega)}\bigr]\,\E\bigl[D_ue^{\beta Y_2(a,\omega)}\bigr]\,\nu_u^\perp(\dd\omega)\\
+&=e^{\beta Nm_{e,k}(a)+\beta^2N(v(a)-v_2(a))/2}\,\E\bigl[D_uZ_{2}\bigr],
+\end{aligned}
+\]
+where $Z_2=\int e^{\beta Y_2(a,\omega)}\nu_u^\perp(\dd\omega)$, and we used that the variance of $(Y_{\le1}+Y_{\ge3})(a,\omega)$ does not depend on $\omega$. By the Cauchy--Schwarz inequality and \cref{prop:kr-determinant},
+\[
+\E[D_uZ_2]\le\bigl(\E D_u^2\bigr)^{1/2}\bigl(\E Z_2^2\bigr)^{1/2}\le\mathsf K_2^{1/2}d_N(k)\bigl(\E Z_2^2\bigr)^{1/2}.
+\]
+It remains to show that $\E Z_2^2\le C(\E Z_2)^2$, where $\E Z_2=e^{\beta^2Nv_2(a)/2}$. Using rotation invariance and the covariance of $Y_2$, we have
+\[
+\frac{\E Z_2^2}{(\E Z_2)^2}=\int e^{\beta^2Nv_2(a)R(\omega,\omega')^2}\,\nu_u^\perp(\dd\omega')=c_{N-1}^{\mathrm{lat}}\int_{-1}^1e^{\beta^2Nv_2(a)r^2}(1-r^2)^{(N-4)/2}\dd r,
+\]
+since the overlap $r=R(\omega,\omega')$ of a fixed point with a uniform point of the $(N-2)$-dimensional sphere $S_u^\perp$ has density $c_{N-1}^{\mathrm{lat}}(1-r^2)^{(N-4)/2}$. Since $\log(1-r^2)\le-r^2$ and $2\beta^2v_2(a)\le1-\varepsilon_2$, the exponent in the last integral is at most $Nr^2(1-\varepsilon_2)/2-(N-4)r^2/2\le-N\varepsilon_2r^2/4$ for $N\ge8/\varepsilon_2$. Then $c_{N-1}^{\mathrm{lat}}\le C\sqrt N$ and $\int e^{-N\varepsilon_2r^2/4}\dd r\le C/\sqrt N$ imply that the ratio is bounded. This proves \eqref{eq:mb-quadratic}.
+\end{proof}
+
+The proof uses a second moment of the quadratic part of the field on the latitude sphere only, not of the full residual partition function.
+
+\section{The Palm expectation of the band partition function}\label{sec:mb-upper}
+
+In this section, we prove \cref{prop:mb-upper}. For a non-pure mixture, define
+\begin{equation}\label{eq:mb-Theta}
+\begin{gathered}
+\Theta(e,k)=\frac12+\frac12\log\frac{b_Q}{a_Q}+\Omega\bigl(k/\sqrt{b_Q}\bigr)-\frac12q(e,k),\\
+g(e,k,a)=\Theta(e,k)+\Xi(e,k,a)+\frac12\log(1-a^2).
+\end{gathered}
+\end{equation}
+Here $\Theta$ is the marked complexity of \cref{sec:mixone}, and $g$ adds to it the exponent of the annealed contribution of the latitude $a$ to the band partition function. By \eqref{eq:mb-prefactor}, we have
+\begin{equation}\label{eq:mb-wN}
+w_N(Ne,k)=\chi_N(k)\,e^{N(\frac12\log a_Q-\frac12)}\,e^{N\Theta(e,k)} .
+\end{equation}
+
+\begin{lemma}[The Laplace exponent at the ground-state parameters]\label{lem:mb-saddle}
+Let the mixture be non-pure. At $(e,k,a)=(E_0,K_0,\sqrt Q)$,
+\begin{gather}
+\partial_e\Theta=-c_0,\qquad\partial_k\Theta=0,\qquad\partial_k^2\Theta=-\frac1{y^2(1-\rho)}-(\Sigma_Q^{-1})_{22},\label{eq:mb-Theta-derivs}\\
+\partial_eg=\beta-c_0,\quad\partial_kg=\partial_ag=\partial_e\partial_ag=0,\quad\partial_k\partial_ag=\frac\beta{\sqrt Q},\quad\partial_a^2g=-\frac{(1-\rho)(1+Q-C\rho)}{s^2},\label{eq:mb-g-derivs}
+\end{gather}
+and the Hessian of $g$ in the variables $(k,a)$ is negative definite. Moreover, for all $(e,k)$,
+\begin{equation}\label{eq:mb-g-exact}
+g(e,k,\sqrt Q)=\Theta(e,k)+\beta e+F_{\mathrm{band}} .
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Let $t_0=K_0/\sqrt{b_Q}$. Since $K_0=y+b_Q/y$ and $y>\sqrt{b_Q}$, we have $(t_0^2-4)^{1/2}=(y^2-b_Q)/(y\sqrt{b_Q})$. Using \eqref{eq:mb-Omega}, we find $\Omega'(t_0)=\sqrt{b_Q}/y$ and $\Omega''(t_0)=-b_Q/(y^2-b_Q)$. Together with \eqref{eq:mb-score}, this implies \eqref{eq:mb-Theta-derivs}, since $\partial_k\Theta=\Omega'(k/\sqrt{b_Q})/\sqrt{b_Q}-(\Sigma_Q^{-1}(e,k)^{\mathsf T})_2$ and $b_Q/y^2=\rho$.
+
+For the derivatives of $\Xi$, note that $b(\sqrt Q)=\Sigma_Qe_1$ and $b'(\sqrt Q)=Q^{-1/2}\Sigma_Qe_2$, where $e_1,e_2$ are the standard basis vectors of $\R^2$. Also, $d(\sqrt Q)=s\xi'(Q)$ and $d'(\sqrt Q)=2\sqrt Q(s\xi''(Q)-\xi'(Q))$. Using \eqref{eq:mb-score}, we find that, at $(E_0,K_0)$,
+\[
+b'(\sqrt Q)^{\mathsf T}\Sigma_Q^{-1}\binom{E_0}{K_0}=\frac{K_0}{\sqrt Q},\quad b'(\sqrt Q)^{\mathsf T}\Sigma_Q^{-1}b(\sqrt Q)=\sqrt Q\,\xi'(Q),\quad b(\sqrt Q)^{\mathsf T}\Sigma_Q^{-1}=e_1^{\mathsf T}.
+\]
+The last identity implies that $\partial_eg=-c_0+\beta$, and it also gives \eqref{eq:mb-g-exact}, since at $a=\sqrt Q$ the mean is $m_{e,k}(\sqrt Q)=e$ and $v(\sqrt Q)=\xi(1)-\xi(Q)-s\xi'(Q)=\psi_Q(1)$. Since $\Xi$ is linear in $(e,k)$ with coefficients $\beta b(a)^{\mathsf T}\Sigma_Q^{-1}$, we have $\partial_e\partial_ag=\beta(e_2^{\mathsf T}e_1)/\sqrt Q=0$ and $\partial_k\partial_ag=\beta/\sqrt Q$, and $\partial_kg=\partial_k\Theta=0$. For the latitude derivative,
+\[
+\partial_ag=\frac{\beta K_0}{\sqrt Q}-\beta^2\sqrt Q\,\xi'(Q)-\frac{\beta^2}2d'(\sqrt Q)-\frac{\sqrt Q}s=\frac{\beta K_0}{\sqrt Q}-\beta^2s\sqrt Q\,\xi''(Q)-\frac{\sqrt Q}s=0,
+\]
+where in the last step we used $\beta y=Q/s$ and $\beta b_Q/y=\beta^2s\,Q\,\xi''(Q)$ in $\beta K_0=\beta y+\beta b_Q/y$.
+
+For the second latitude derivative, a direct computation gives
+\[
+b''(\sqrt Q)=\frac1Q\binom{b_Q}{2b_Q+Q^3\xi'''(Q)},\qquad d''(\sqrt Q)=-\frac{2a_Q+8b_Q}Q+\frac{2s}{Q^2}\Bigl(\frac{b_Q^2}{a_Q}+Q^3\xi'''(Q)\Bigr),
+\]
+and, since $\Sigma_Q^{-1}(E_0,K_0)^{\mathsf T}=(c_0,1/y)^{\mathsf T}$ and $\Sigma_Q^{-1}b(\sqrt Q)=e_1$,
+\[
+\partial_a^2g=-\frac{1+Q}{s^2}+\beta\,b''(\sqrt Q)^{\mathsf T}\binom{c_0-\beta}{1/y}-\frac{\beta^2(a_Q+b_Q)}Q-\frac{\beta^2}2d''(\sqrt Q).
+\]
+The terms containing $\xi'''(Q)$ are $\beta Q^2\xi'''(Q)/y=\beta^2sQ\,\xi'''(Q)$ from the second term, where we used $1/y=\beta s/Q$, and $-\beta^2sQ\,\xi'''(Q)$ from the last term; they cancel. Collecting the remaining terms, we obtain
+\[
+\partial_a^2g=-\frac{1+Q}{s^2}+\frac{\beta b_Q}Q\Bigl(c_0+\frac2y\Bigr)+\frac{2\beta^2b_Q}Q-\frac{\beta^2s\,b_Q^2}{Q^2a_Q}.
+\]
+Substituting $b_Q=\rho y^2$, $y=Q/(\beta s)$, $c_0=\beta x$, and $y^2/a_Q=1+z=C/s$, we find
+\[
+\begin{aligned}
+\partial_a^2g&=\frac{-(1+Q)+xQ\rho+2s\rho+2Q\rho-C\rho^2}{s^2}\\
+&=\frac{-(1+Q)+(2+xQ)\rho-C\rho^2}{s^2}=-\frac{(1-\rho)(1+Q-C\rho)}{s^2} .
+\end{aligned}
+\]
+It remains to show that the $(k,a)$-Hessian is negative definite. Its diagonal entry $\partial_k^2g=\partial_k^2\Theta$ is negative. For the inverse of a positive definite $2\times2$ matrix, we have $(\Sigma_Q^{-1})_{22}-(\Sigma_Q^{-1})_{12}^2/(\Sigma_Q^{-1})_{11}=1/(\Sigma_Q)_{22}=1/(a_Q+b_Q)$. It follows that $(\Sigma_Q^{-1})_{22}\ge1/(a_Q+b_Q)$ and $|\partial_k^2g|\ge h$, where
+\[
+h=\frac1{y^2(1-\rho)}+\frac1{a_Q+b_Q}=\frac1{y^2}\Bigl(\frac1{1-\rho}+\frac C{s+C\rho}\Bigr)=\frac{1+s/C}{y^2(1-\rho)(s/C+\rho)},
+\]
+where we used $a_Q+b_Q=y^2(s/C+\rho)$. Then the Schur complement of $\partial_k^2g$ in the $(k,a)$-Hessian satisfies
+\[
+\begin{aligned}
+\partial_a^2g-\frac{(\partial_k\partial_ag)^2}{\partial_k^2g}\le\partial_a^2g+\frac{\beta^2}{Qh}&=-\frac{1-\rho}{s^2}\Bigl[1+Q-C\rho-\frac{Q(s+C\rho)}{C+s}\Bigr]\\
+&=-\frac{1-\rho}{s^2}\Bigl[(1-C)+\frac{(1-\rho)C(C+1)}{C+s}\Bigr],
+\end{aligned}
+\]
+where we used $\beta^2y^2/Q=Q/s^2$. The last equality is checked by multiplying by $C+s$ and using $s+Q=1$. The right side is negative, because $\rho<1$ and $C=1-Q(1-x)<1$. This proves the claim.
+\end{proof}
+
+In a pure model, the radial derivative is determined by the energy, and only the latitude is integrated. Let $\xi(r)=c_pr^p$ and define
+\begin{equation}\label{eq:mb-Lp}
+L_p(e,a)=\beta e\Bigl(\frac a{\sqrt Q}\Bigr)^p+\frac12\log(1-a^2)+\frac{\beta^2}2v(a),\qquad \theta_p(e)=-\frac{e^2}{2\xi(Q)}+\Omega\bigl(pe/\sqrt{b_Q}\bigr).
+\end{equation}
+We have $a_Q=p\xi(Q)$, $b_Q=p(p-1)\xi(Q)$, $K_0=pE_0$, and $E_0=\xi(Q)(p+z)/y$. Differentiating, we find
+\begin{equation}\label{eq:mb-pure-derivs}
+\begin{gathered}
+\partial_aL_p(E_0,\sqrt Q)=0,\qquad\partial_a^2L_p(E_0,\sqrt Q)=-\frac{(1-\rho)(pQ-(p-2))}{s^2},\\
+L_p(e,\sqrt Q)=\beta e+F_{\mathrm{band}},\qquad\theta_p'(E_0)=-c_0 .
+\end{gathered}
+\end{equation}
+Indeed, $\partial_aL_p(E_0,\sqrt Q)=Q^{-1/2}(\beta K_0-Q/s-\beta^2sb_Q/Q)=0$ by $\beta K_0=Q/s+\beta^2sb_Q/Q$. For the second derivative, we have $\beta K_0(p-1)/Q=(p-1)(1+\rho)/s$, $v''(\sqrt Q)=2b_Q((2p-1)Q-(2p-3))/Q^2$, and $\beta^2b_Q/Q^2=\rho/s^2$, and collecting terms gives the formula. The value at $\sqrt Q$ follows from $v(\sqrt Q)=\psi_Q(1)$, and $\theta_p'(E_0)=-E_0/\xi(Q)+p/y=-z/y=-c_0$, by $\Omega'(t_0)=\sqrt{b_Q}/y$. Since $\rho=b_Q/y^2=(p-1)a_Q/y^2=(p-1)s/C<1$ and $C<1$, we have $s<1/(p-1)$. This implies that $pQ-(p-2)=2-ps>0$ and $\partial_a^2L_p(E_0,\sqrt Q)<0$.
+
+\subsection{Choice of the neighborhoods}\label{sec:mb-choice}
+
+We now choose $U$, $b_0$, and $\varepsilon_0$. Let $c_-=c_0/2$ and $c_+=(c_0+\beta)/2$, so that $0<c_-<c_0<c_+<\beta$. The first requirement below holds for every sufficiently small closed interval $U$ about $K_0$. The other three are strict inequalities that hold at $(E_0,K_0,\sqrt Q)$, by $\rho<1$ and \cref{lem:mb-regression}, by \cref{lem:mb-saddle} and \eqref{eq:mb-pure-derivs}, and by \eqref{eq:mb-score} and \eqref{eq:mb-pure-derivs}, respectively. By continuity, there exist a closed interval $U$ with $K_0$ in its interior and $b_0,\varepsilon_1,\varepsilon_2,c_*>0$ such that:
+\begin{enumerate}
+\item $U\subset \widetilde U$, $\min U>2\sqrt{b_Q}$, and $U$ is small enough for \eqref{eq:mb-allhigh};
+\item $I_{b_0}\subset(0,1)$ and $2\beta^2v_2(a)\le1-\varepsilon_2$ for $a\in I_{b_0}$;
+\item for a non-pure mixture, $\partial_k^2\Theta\le-c_*$ and the $(k,a)$-Hessian of $g$ is at most $-c_*\mathrm{Id}$ on $[E_0-\varepsilon_1,E_0+\varepsilon_1]\times U\times I_{b_0}$; for a pure mixture, $\partial_a^2L_p\le-c_*$ on $[E_0-\varepsilon_1,E_0+\varepsilon_1]\times I_{b_0}$;
+\item for a non-pure mixture, $c_-\le\ell(e,k)\le c_+$ on $[E_0-\varepsilon_1,E_0+\varepsilon_1]\times U$; for a pure mixture, $p[E_0-\varepsilon_1,E_0+\varepsilon_1]$ lies in the interior of $U$ and $c_-\le-\theta_p'\le c_+$ on $[E_0-\varepsilon_1,E_0+\varepsilon_1]$.
+\end{enumerate}
+By the third requirement, for $|e-E_0|\le\varepsilon_1$, the function $\Theta(e,\cdot)$ has a unique maximizer $k_*(e)$ on $U$, and $g(e,\cdot,\cdot)$ has a unique maximizer $(\widehat k(e),\widehat a(e))$ on $U\times I_{b_0}$; in a pure model, $L_p(e,\cdot)$ has a unique maximizer $a_*(e)$ on $I_{b_0}$. At $e=E_0$ these maximizers are $K_0$, $(K_0,\sqrt Q)$, and $\sqrt Q$, which are interior critical points. By the implicit function theorem, we can choose $\varepsilon_0\in(0,\varepsilon_1]$ such that, for $|e-E_0|\le\varepsilon_0$, the maximizers are smooth functions of $e$ and lie at distance at least $r_*>0$ from the boundaries of $U$, $U\times I_{b_0}$, and $I_{b_0}$, respectively. This fixes $U$, $b_0$, and $\varepsilon_0$. We set
+\[
+\theta(e)=\Theta(e,k_*(e)),\qquad\bar g(e)=g(e,\widehat k(e),\widehat a(e)),\qquad L_*(e)=L_p(e,a_*(e)).
+\]
+
+\begin{lemma}[Laplace bounds without polynomial loss]\label{lem:mb-laplace}
+Let the mixture be non-pure. There exist $c,C,C_2>0$ such that, for $|e-E_0|\le\varepsilon_0$ and all large $N$,
+\begin{gather}
+c\,\frac{e^{N\theta(e)}}{\sqrt N}\le\mathcal I_N(e)=\int_U\chi_N(k)e^{N\Theta(e,k)}\dd k\le C\,\frac{e^{N\theta(e)}}{\sqrt N},\label{eq:mb-radial}\\
+\mathcal J_N(e)=\int_{I_{b_0}}\int_U\chi_N(k)(1-a^2)^{-3/2}e^{Ng(e,k,a)}\dd k\dd a\le C\,\frac{e^{N\bar g(e)}}N,\label{eq:mb-joint}\\
+\bar g(e)-\theta(e)\le F(\beta)+\beta(e-E_0)+C_2(e-E_0)^2 .\label{eq:mb-exponent}
+\end{gather}
+In a pure model, $\int_{I_{b_0}}(1-a^2)^{-3/2}e^{NL_p(e,a)}\dd a\le Ce^{NL_*(e)}/\sqrt N$ and $L_*(e)\le F(\beta)+\beta(e-E_0)+C_2(e-E_0)^2$.
+\end{lemma}
+
+\begin{proof}
+By the third requirement of \cref{sec:mb-choice}, integrating $\partial_k^2\Theta\le-c_*$ twice from the maximizer, we obtain $\Theta(e,k)\le\theta(e)-c_*(k-k_*(e))^2/2$ on $U$, and, since $\partial_k^2\Theta$ is bounded on the compact rectangle, $\Theta(e,k)\ge\theta(e)-C(k-k_*(e))^2$. Recall that $c\le\chi_N\le C$ by \cref{lem:mb-prefactor}. The upper bound in \eqref{eq:mb-radial} follows from the Gaussian integral, and the lower bound follows by integrating over $|k-k_*(e)|\le N^{-1/2}$, which lies in $U$ for large $N$ because $k_*(e)$ has distance at least $r_*$ from the boundary. Similarly, $g(e,k,a)\le\bar g(e)-c_*\{(k-\widehat k(e))^2+(a-\widehat a(e))^2\}/2$ on $U\times I_{b_0}$, and $\chi_N(k)(1-a^2)^{-3/2}$ is bounded there; integration over $\R^2$ gives \eqref{eq:mb-joint}. These inequalities hold at every $N$, and no error term of the Laplace method is suppressed. The integral $\int_Uw_N(Ne,k)\dd k$ over the radial derivative equals $e^{N(\frac12\log a_Q-\frac12)}\mathcal I_N(e)$ by \eqref{eq:mb-wN}. After removal of this common factor, \eqref{eq:mb-radial} is the bound of \cref{lem:mo-radial}(c), written with the mean absolute determinant in place of the mean determinant restricted to local maxima.
+
+By \eqref{eq:mb-g-exact}, we have $g(E_0,K_0,\sqrt Q)=\Theta(E_0,K_0)+\beta E_0+F_{\mathrm{band}}$, and \eqref{eq:mb-tap} implies that $\bar g(E_0)-\theta(E_0)=\beta E_0+F_{\mathrm{band}}=F(\beta)$. The maximizers are interior and smooth in $e$, and we have $\theta'(e)=\partial_e\Theta(e,k_*(e))$ and $\bar g'(e)=\partial_eg(e,\widehat k(e),\widehat a(e))$. We have $\theta'(E_0)=-c_0$ and $\bar g'(E_0)=\beta-c_0$ by \cref{lem:mb-saddle}, and therefore $(\bar g-\theta)'(E_0)=\beta$. The second derivatives of $\theta$ and $\bar g$ are bounded on $[E_0-\varepsilon_0,E_0+\varepsilon_0]$, and Taylor's theorem yields \eqref{eq:mb-exponent}. The pure case is the same computation in the variable $a$, with \eqref{eq:mb-pure-derivs}: $L_*(E_0)=F(\beta)$ and $L_*'(E_0)=\partial_eL_p(E_0,\sqrt Q)=\beta$.
+\end{proof}
+
+In the passage from the exponent $\bar g$ of the joint integral to the Palm expectation, the derivative in the energy changes from $\partial_e\bar g(E_0)=\beta-c_0$ to $\beta$, because the exponent $\theta$ of the normalizing integral over the radial derivative has slope $-c_0$. The energy variable is held fixed in both Laplace integrals.
+
+\begin{proposition}[Palm expectation of the band partition function]\label{prop:mb-upper}
+There exist $C_1,C_2<\infty$ such that, for every $b\in(0,b_0]$, every $E$ with $|E/N-E_0|\le\varepsilon_0$, and all large $N$,
+\begin{equation}\label{eq:mb-upper}
+\E^{\mathrm{Palm}}_{E,u}\bigl[Z_H(B_u)\bigr]\le C_1D_N\exp\Bigl\{\beta(E-m_N)+C_2N\Bigl(\frac EN-E_0\Bigr)^2\Bigr\}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+The band partition function $Z_H(B_u)$ increases with $b$, and it suffices to take $b=b_0$. Let $e=E/N$ and let the mixture be non-pure. Using \eqref{eq:mb-coarea}, Fubini's theorem, and \cref{lem:mb-quadratic}, we find, for $k\in U$,
+\[
+\begin{aligned}
+\E^{\mathrm{Palm}}_{e,k,u}\bigl[Z_H(B_u)\bigr]&=\frac{c_N^{\mathrm{lat}}}{d_N(k)}\int_{I_{b_0}}(1-a^2)^{(N-3)/2}\,\E_{e,k,u}\bigl[D_uZ_u(a)\bigr]\dd a\\
+&\le Cc_N^{\mathrm{lat}}\int_{I_{b_0}}(1-a^2)^{-3/2}e^{N\Xi(e,k,a)+\frac N2\log(1-a^2)}\dd a .
+\end{aligned}
+\]
+We integrate against the radial density in \cref{def:mb-palm}. By \eqref{eq:mb-wN}, the factor $e^{N(\frac12\log a_Q-\frac12)}$ is common to the numerator and the denominator, and we obtain
+\begin{equation}\label{eq:mb-palm-ratio}
+\E^{\mathrm{Palm}}_{E,u}\bigl[Z_H(B_u)\bigr]\le Cc_N^{\mathrm{lat}}\,\frac{\mathcal J_N(e)}{\mathcal I_N(e)}\le C\,\frac{c_N^{\mathrm{lat}}}{\sqrt N}\,e^{N(\bar g(e)-\theta(e))}\le C\,\frac{c_N^{\mathrm{lat}}}{\sqrt N}\,e^{N[F(\beta)+\beta(e-E_0)+C_2(e-E_0)^2]},
+\end{equation}
+where in the second and third inequalities we used \cref{lem:mb-laplace}. The joint integral contributes the two widths $N^{-1/2}$ in the radial derivative and in the latitude, and the normalizing integral over the radial derivative contributes one width $N^{-1/2}$. Their ratio leaves the latitude width $N^{-1/2}$, which cancels the growth of $c_N^{\mathrm{lat}}$. On the other hand, by \eqref{eq:mb-DN} and \eqref{eq:mb-tap}, we have the exact identity
+\begin{equation}\label{eq:mb-DN-identity}
+D_Ne^{\beta(E-m_N)}=s^{-3/2}\,\frac{c_N^{\mathrm{lat}}}{\sqrt N}\,e^{N[F(\beta)+\beta(e-E_0)]}.
+\end{equation}
+Combining \eqref{eq:mb-palm-ratio} and \eqref{eq:mb-DN-identity}, we obtain \eqref{eq:mb-upper}. The centering error $m_N-NE_0=O(\log N)$ enters only through the deterministic factor $e^{\beta(E-m_N)}$, and it is not a variable of the Laplace integrals.
+
+In a pure model, the Palm law at energy $E$ is $\E^{\mathrm{Palm}}_{e,pe,u}$, and there is no radial integral. Using \cref{lem:mb-quadratic}, with $\Xi(e,pe,a)+\frac12\log(1-a^2)=L_p(e,a)$, and \cref{lem:mb-laplace}, we obtain
+\[
+\E^{\mathrm{Palm}}_{e,pe,u}\bigl[Z_H(B_u)\bigr]\le Cc_N^{\mathrm{lat}}\int_{I_{b_0}}(1-a^2)^{-3/2}e^{NL_p(e,a)}\dd a\le C\,\frac{c_N^{\mathrm{lat}}}{\sqrt N}\,e^{N[F(\beta)+\beta(e-E_0)+C_2(e-E_0)^2]},
+\]
+and \eqref{eq:mb-DN-identity} again implies \eqref{eq:mb-upper}. No inverse of the singular matrix $\Sigma_Q$ is used.
+\end{proof}
+
+\section{The intensity and the bands below the window}\label{sec:mb-lowsum}
+
+\begin{lemma}[Exponential bound on the intensity]\label{lem:mb-envelope}
+There exists $C$ such that, for all large $N$,
+\begin{equation}\label{eq:mb-envelope}
+\lambda^{\mathrm{all}}_N(m_N-u)\le Ce^{c_+u}\qquad\text{for }0\le u\le m_N-N(E_0-\varepsilon_0).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Let the mixture be non-pure. For fixed $k$, the determinant $d_N(k)$ does not depend on $E$, and
+\[
+\partial_E\log w_N(E,k)=-\ell(E/N,k) .
+\]
+Recall that $\ell(E_0,K_0)=c_0$ by \eqref{eq:mb-score}, so that this derivative equals $-c_0$ at the ground-state parameters. By the fourth requirement of \cref{sec:mb-choice}, its negative $\ell(E/N,k)$ lies in $[c_-,c_+]$ for $E/N\in[E_0-\varepsilon_0,E_0+\varepsilon_0]$ and $k\in U$. Differentiating under the integral over the compact interval $U$, which is justified by the Gaussian form of $w_N$, we find that $\partial_E\log\lambda^{\mathrm{all}}_N(E)$ is a weighted average of the values $-\ell(E/N,k)$, $k\in U$. We conclude that
+\begin{equation}\label{eq:mb-score-bounds}
+-c_+\le\partial_E\log\lambda^{\mathrm{all}}_N(E)\le-c_-\qquad\text{for }|E/N-E_0|\le\varepsilon_0 .
+\end{equation}
+Integrating the lower bound from $m_N-u$ to $m_N$, we obtain $\lambda^{\mathrm{all}}_N(m_N-u)\le\lambda^{\mathrm{all}}_N(m_N)e^{c_+u}$. It remains to bound $\lambda^{\mathrm{all}}_N(m_N)$. Since the interval $[m_N,m_N+1]$ lies in the range of \eqref{eq:mb-score-bounds} for large $N$, we have
+\[
+\lambda^{\mathrm{all}}_N(m_N)\int_0^1e^{-c_+v}\dd v\le\int_{m_N}^{m_N+1}\lambda^{\mathrm{all}}_N(E)\dd E\le\E|\cC_{N,1}|,
+\]
+and the right side is bounded by \cref{lem:mb-counts}.
+
+In a pure model, the determinant depends on the energy through its shift $pE/N$. We do not differentiate it. By \cref{lem:mb-prefactor}, for $E/N\in[E_0-\varepsilon_0,E_0+\varepsilon_0]$,
+\[
+\lambda^{\mathrm{all}}_N(E)=|S_N|(2\pi a_Q)^{-(N-1)/2}(2\pi N\xi(Q))^{-1/2}\,b_Q^{N/2}\,\chi_N(pE/N)\,e^{N\theta_p(E/N)},
+\]
+with $c\le\chi_N\le C$. By the fourth requirement of \cref{sec:mb-choice}, we have $-\theta_p'\le c_+$ on this range, which implies that $\lambda^{\mathrm{all}}_N(m_N-u)\le(C/c)\lambda^{\mathrm{all}}_N(m_N)e^{c_+u}$. The bound $\lambda^{\mathrm{all}}_N(m_N)\le C$ follows as before, from $\lambda^{\mathrm{all}}_N(m_N+v)\ge(c/C)e^{-c_+v}\lambda^{\mathrm{all}}_N(m_N)$ for $v\in[0,1]$ and \cref{lem:mb-counts}.
+\end{proof}
+
+\Cref{cor:mo-interface}(ii) contains the same exponential bound for the density of nondegenerate local maxima. The lemma above concerns all critical points, which is the count used in \eqref{eq:mb-kr}.
+
+\begin{corollary}[Band partition functions below the window]\label{cor:mb-low-sum}
+Let $\tau_0=\min\{\varepsilon_0,(\beta-c_+)/(4C_2)\}$ and $a_0=(\beta-c_+)/2$. There exists $C$ such that, for every $b\in(0,b_0]$, every $\tau\in(0,\tau_0]$, every $M\ge0$, and all large $N$,
+\begin{equation}\label{eq:mb-low-sum}
+\E\sum_{u\in\cC([N(E_0-\tau),m_N-M))}Z_H(B_u)\le CD_Ne^{-a_0M}.
+\end{equation}
+The bound also holds when an additional Borel indicator of $(H,u)$ is inserted in the sum.
+\end{corollary}
+
+\begin{proof}
+By \eqref{eq:mb-kr} with $Y=Z_H(B_u)$, the left side equals $\int\lambda^{\mathrm{all}}_N(E)\E^{\mathrm{Palm}}_{E,u}[Z_H(B_u)]\dd E$ over $N(E_0-\tau)\le E<m_N-M$; the interval is empty, and the sum is zero, when $m_N-M<N(E_0-\tau)$. We write $E=m_N-u$ and $h_N=m_N-NE_0$, so that $|h_N|\le C\log N$ and $u$ ranges over $(M,\tau N+h_N]$. For large $N$, we have $3|h_N|\le\tau N$, and then, for $0\le u\le\tau N+h_N$,
+\[
+N\Bigl(\frac EN-E_0\Bigr)^2=\frac{(h_N-u)^2}N\le\frac{h_N^2+2|h_N|u+u(\tau N+h_N)}N\le\frac{h_N^2}N+2\tau u .
+\]
+The energies in the integral satisfy $|E/N-E_0|\le\varepsilon_0$ for large $N$, since $\tau\le\varepsilon_0$ and $m_N/N\to E_0$. Combining \cref{prop:mb-upper} and \cref{lem:mb-envelope}, we obtain
+\[
+\frac1{D_N}\E\sum_{u\in\cC([N(E_0-\tau),m_N-M))}Z_H(B_u)\le Ce^{C_2h_N^2/N}\int_M^\infty e^{-(\beta-c_+-2C_2\tau)u}\dd u\le\frac{2C}{a_0}e^{-a_0M},
+\]
+where we used $2C_2\tau\le(\beta-c_+)/2$ and $e^{C_2h_N^2/N}\le2$ for large $N$. An additional indicator only decreases the integrand.
+\end{proof}
+
+The strict inequality $c_0<\beta$ enters the proof of \cref{thm:mb-capture} only here, through the choice $c_+<\beta$.
+
+\section{The lower tail of the band partition function}\label{sec:mb-lower}
+
+In this section, we prove \cref{prop:mb-lower}. Let $G^{\mathrm{res}}_u$ be the residual field of \eqref{eq:mb-section}, and let
+\begin{equation}\label{eq:mb-Lres}
+L_N^{\mathrm{res}}=e^{-N\beta^2\psi_Q(1)/2}\int e^{\beta G^{\mathrm{res}}_u(\omega)}\,\nu_u^\perp(\dd\omega)
+\end{equation}
+be its normalized partition function. Its law does not depend on $u$ or on the marks $(e,k)$, by \cref{lem:mb-regression}.
+
+\begin{lemma}[Lower tail of the residual partition function]\label{lem:mb-residual}
+We have
+\begin{equation}\label{eq:mb-residual}
+\lim_{t\downarrow0}\limsup_{N\to\infty}\Pp\bigl(L_N^{\mathrm{res}}<t\bigr)=0 .
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Let $\eta=\beta^2\psi_Q$. Its Taylor coefficients $\beta^2s^j\xi^{(j)}(Q)/j!$, $j\ge2$, are nonnegative, because $Q>0$ and $c_p\ge0$. This holds also when $\xi$ has odd degrees. It has no constant or linear term, $\eta''(0)=\rho<1$, and $\eta(t)+t+\log(1-t)<0$ for $0<t<1$ by \eqref{eq:mb-residual-rs}. Thus $\eta$ satisfies \eqref{eq:pre-HMP-condition}, which is the condition \cite[Eq.~(2.21)]{HuangMontanariPham2024} under which \cite[Lemma~3.2]{HuangMontanariPham2024} is proved, by \cite[Remark~3.3]{HuangMontanariPham2024}. A quadratic component of $\eta$ is allowed. For $n\ge2$, let $h_n$ be a centered Gaussian field on $S_n$ with covariance $n\psi_Q(R)$, and let $L_n=e^{-n\beta^2\psi_Q(1)/2}\int e^{\beta h_n}\dd\nu_n$. By \cref{lem:pre-HMP-Z}(1), applied with this $\eta$ and the field $\beta h_n$,
+\begin{equation}\label{eq:mb-HMP-tight}
+\lim_{t\downarrow0}\limsup_{n\to\infty}\Pp(L_n<t)=0 .
+\end{equation}
+
+The field $G^{\mathrm{res}}_u$ lives on a sphere in an ambient space of dimension $n=N-1$, but its covariance carries the factor $N$. Identify the tangent space at $u$ with $\R^n$ and rescale $\omega$ to $\omega'=(n/N)^{1/2}\omega\in S_n$; overlaps are unchanged. Then $G^{\mathrm{res}}_u(\omega)$ has the law of $(N/n)^{1/2}h_n(\omega')$. By \cref{lem:pre-field}, applied to the finite mixture $\psi_Q$, we have $\sup|h_n|\le C_0n$ except on an event of probability $e^{-cn}$. On this event,
+\[
+\beta\bigl((N/n)^{1/2}-1\bigr)\sup|h_n|\le\frac{\beta C_0}{(1+1/n)^{1/2}+1}\le\frac{\beta C_0}2,
+\]
+and the normalizations differ by the fixed factor $e^{\beta^2\psi_Q(1)/2}$, since $N-n=1$. It follows that $e^{-K}L_n\le L_N^{\mathrm{res}}\le e^KL_n$ on this event, with $K=\beta C_0/2+\beta^2\psi_Q(1)/2$. Then $\Pp(L_N^{\mathrm{res}}<t)\le e^{-cn}+\Pp(L_n<e^Kt)$, and \eqref{eq:mb-HMP-tight} implies \eqref{eq:mb-residual}.
+\end{proof}
+
+The proof uses only the tightness of the limit away from zero. It does not identify the limiting law of $L_N^{\mathrm{res}}$, and it does not require a version of the theorem of Huang, Montanari, and Pham that is uniform in the dimension or in the covariance.
+
+\begin{lemma}[Symmetric latitude averaging]\label{lem:mb-jensen}
+Let $b\in(0,b_0]$ and $C_0>0$. There exists $K<\infty$ such that the following holds for all $N$ with $[\sqrt Q-N^{-1/2},\sqrt Q+N^{-1/2}]\subset I_b$. If $|\partial_a^2H_N(\sigma(a,\omega))|\le C_0N$ for all $a\in I_b$ and $\omega\in S_u^\perp$, then
+\begin{equation}\label{eq:mb-jensen}
+Z_H(B_u)\ge\frac2{\sqrt N}\,c_N^{\mathrm{lat}}\,s^{(N-3)/2}e^{-K}\,Z_u(\sqrt Q).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For fixed $\omega$, let $J(a)=\beta H_N(\sigma(a,\omega))+\frac{N-3}2\log(1-a^2)$, so that $Z_H(B_u)=c_N^{\mathrm{lat}}\int_{I_b}\int e^{J(a)}\nu_u^\perp(\dd\omega)\dd a$. The second derivative of the entropy term is $-(N-3)(1+a^2)/(1-a^2)^2$. Since its absolute value is at most $C_bN$ on $I_b$, we have $|J''|\le C'N$ on $I_b$, with $C'=\beta C_0+C_b$. Let $\mathrm{avg}$ denote the uniform average over $a\in[\sqrt Q-N^{-1/2},\sqrt Q+N^{-1/2}]$. We expand $J$ around $\sqrt Q$ by Taylor's theorem. The linear term has average zero and $\mathrm{avg}(a-\sqrt Q)^2=1/(3N)$, and we find
+\[
+\mathrm{avg}\,J(a)\ge J(\sqrt Q)-\frac{C'N}2\cdot\frac1{3N}=J(\sqrt Q)-\frac{C'}6 .
+\]
+By Jensen's inequality, $\int_{\sqrt Q-N^{-1/2}}^{\sqrt Q+N^{-1/2}}e^{J(a)}\dd a\ge2N^{-1/2}e^{\mathrm{avg}J}\ge2N^{-1/2}e^{J(\sqrt Q)-C'/6}$. Integrating in $\omega$, multiplying by $c_N^{\mathrm{lat}}$, and using $e^{J(\sqrt Q)}=s^{(N-3)/2}e^{\beta H_N(\sigma(\sqrt Q,\omega))}$, we obtain \eqref{eq:mb-jensen} with $K=C'/6$.
+\end{proof}
+
+The averaging is symmetric, and no bound on the first latitude derivative is needed.
+
+\begin{proposition}[Lower tail of the band partition function under the Palm law]\label{prop:mb-lower}
+For every fixed $b\in(0,b_0]$,
+\begin{equation}\label{eq:mb-lower}
+\lim_{\delta\downarrow0}\limsup_{N\to\infty}\sup_{(e,k)\in\mathcal K_*}\Pp^{\mathrm{Palm}}_{e,k,u}\Bigl(Z_H(B_u)<\delta D_Ne^{\beta(Ne-m_N)}\Bigr)=0 .
+\end{equation}
+The same holds for the Palm laws at energy $E$, uniformly for $|E/N-E_0|\le\varepsilon_0$.
+\end{proposition}
+
+\begin{proof}
+Let $(e,k)\in\mathcal K_*$ and write $\widehat D_u=D_u/d_N(k)$. For every event $A$ of the whole field, \cref{prop:kr-determinant} and the Cauchy--Schwarz inequality give
+\begin{equation}\label{eq:mb-palm-cs}
+\Pp^{\mathrm{Palm}}_{e,k,u}(A)=\E_{e,k,u}\bigl[\widehat D_u\ind_A\bigr]\le\mathsf K_2^{1/2}\,\Pp_{e,k,u}(A)^{1/2}.
+\end{equation}
+This holds even when $A$ depends on the quadratic component, which is correlated with the determinant. Let $A_1$ be the event in \eqref{eq:mb-latitude-reg} with $I=I_{b_0}$ and $\mathcal K_0=\mathcal K_*$; by \eqref{eq:mb-palm-cs}, we have $\Pp^{\mathrm{Palm}}_{e,k,u}(A_1)\le Ce^{-cN/2}$. On $A_1^c$, \cref{lem:mb-jensen} applies with the constant $C_0$ of \eqref{eq:mb-latitude-reg}. By \eqref{eq:mb-section}, we have $Z_u(\sqrt Q)=e^{\beta Ne}e^{N\beta^2\psi_Q(1)/2}L_N^{\mathrm{res}}$. Together with \eqref{eq:mb-jensen} and \eqref{eq:mb-DN}, this gives
+\[
+\frac{Z_H(B_u)}{D_Ne^{\beta(Ne-m_N)}}\ge2e^{-K}L_N^{\mathrm{res}}\qquad\text{on }A_1^c .
+\]
+Applying \eqref{eq:mb-palm-cs} to the event $\{L_N^{\mathrm{res}}<\delta e^K/2\}$, whose $\Pp_{e,k,u}$-probability does not depend on $(e,k)$, we obtain
+\[
+\sup_{(e,k)\in\mathcal K_*}\Pp^{\mathrm{Palm}}_{e,k,u}\Bigl(Z_H(B_u)<\delta D_Ne^{\beta(Ne-m_N)}\Bigr)\le Ce^{-cN/2}+\mathsf K_2^{1/2}\,\Pp\bigl(L_N^{\mathrm{res}}<\delta e^K/2\bigr)^{1/2}.
+\]
+Letting $N\to\infty$ and then $\delta\downarrow0$, we obtain \eqref{eq:mb-lower} from \cref{lem:mb-residual}. The Palm law at energy $E$ is an average of the laws $\Pp^{\mathrm{Palm}}_{E/N,k,u}$ over $k\in U$, and the uniform bound passes to it.
+\end{proof}
+
+The determinant weight is never removed from the Palm law: both the regularity failure and the lower tail of the residual are transferred to the Palm law through \eqref{eq:mb-palm-cs}.
+
+\begin{corollary}[Few light bands, and one heavy band]\label{cor:mb-bad}
+Let $b\in(0,b_0]$. We call a critical point $u$ of $H_Q$ \emph{$\delta$-light} if $Z_H(B_u)<\delta D_Ne^{\beta(H_Q(u)-m_N)}$.
+\begin{enumerate}
+\item For every fixed $L>0$,
+\begin{equation}\label{eq:mb-bad}
+\lim_{\delta\downarrow0}\limsup_{N\to\infty}\E\,\#\{u\in\cC_{N,L}:u\text{ is $\delta$-light}\}=0 .
+\end{equation}
+\item For every $\varepsilon'>0$, there exist $L<\infty$ and $\delta>0$ such that $\limsup_N\Pp(Z_{N,\beta}<\delta e^{-\beta L}D_N)\le2\varepsilon'$.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+Fix $L$. For large $N$, the window $[m_N-L,m_N+L]$ lies in $N[E_0-\varepsilon_0,E_0+\varepsilon_0]$. By \cref{lem:mb-borel}, the indicator that $u$ is $\delta$-light is a Borel weight, and it is rotation covariant. Then \eqref{eq:mb-kr} implies that
+\[
+\begin{aligned}
+\E\,\#\{u\in\cC_{N,L}:u\text{ is $\delta$-light}\}&=\int_{m_N-L}^{m_N+L}\lambda^{\mathrm{all}}_N(E)\,\Pp^{\mathrm{Palm}}_{E,u}\Bigl(Z_H(B_u)<\delta D_Ne^{\beta(E-m_N)}\Bigr)\dd E\\
+&\le q_N(\delta)\,\E|\cC_{N,L}|,
+\end{aligned}
+\]
+where $q_N(\delta)$ is the supremum in \eqref{eq:mb-lower}. We have $\E|\cC_{N,L}|\le K_L<\infty$ by \cref{lem:mb-counts}, and (1) follows from \cref{prop:mb-lower}.
+
+For (2), we choose $L$ by \eqref{eq:mb-existence} so that $\limsup_N\Pp(\cC_{N,L}=\varnothing)\le\varepsilon'$, and then $\delta$ by (1) so that the limit superior of the expected number of $\delta$-light centers in $\cC_{N,L}$ is at most $\varepsilon'$. By Markov's inequality, the probability that some center of $\cC_{N,L}$ is $\delta$-light has limit superior at most $\varepsilon'$. Outside these two events, there is a center $u\in\cC_{N,L}$ that is not $\delta$-light, and
+\[
+Z_{N,\beta}\ge Z_H(B_u)\ge\delta D_Ne^{\beta(H_Q(u)-m_N)}\ge\delta e^{-\beta L}D_N .\qedhere
+\]
+\end{proof}
+
+Part (2) uses a single band and the existence of one center in the window. It needs neither many centers nor any independence between the bands of different centers. If existence is proved for a subfamily of centers selected by an additional event, the expected number of light centers in the subfamily is bounded by the count in (1) without the selection, since the indicator of the selection event can be dropped from the nonnegative integrand in \eqref{eq:mb-kr}. No Palm law normalized after an additional selection is needed.
+
+\section{Gibbs concentration on bands in a fixed window}\label{sec:mb-capture}
+
+\begin{theorem}[Gibbs concentration on bands in a fixed window]\label{thm:mb-capture}
+Let $\xi$ be a finite mixture with nonnegative coefficients and minimum degree at least four, with any set of degrees of either parity, and let $\beta>0$ be such that $(\xi,\beta)$ is strictly 1RSB with parameters $x,Q\in(0,1)$ and a nondegenerate contact at $Q$ (\cref{def:intro-certificate}). Let $m_N$ be the centering of \cref{thm:mc-counts}. There exist a closed interval $U\subset(2\sqrt{b_Q},\infty)$ containing $K_0$ in its interior and $b_0\in(0,\sqrt Q)$ with the following property. Let $b\in(0,b_0]$, and let
+\[
+\begin{gathered}
+\cC_{N,M}=\bigl\{u\in S_N:\nabla_{S_N}H_Q(u)=0,\ |H_Q(u)-m_N|\le M,\ K_Q(u)/N\in U\bigr\},\\
+B_{N,M}=\bigcup_{u\in\cC_{N,M}}\bigl\{\sigma\in S_N:|R(\sigma,u)-\sqrt Q|\le b\bigr\}.
+\end{gathered}
+\]
+Then the following hold.
+\begin{enumerate}
+\item For every fixed $M>0$, $\sup_N\E|\cC_{N,M}|<\infty$, and \eqref{eq:mb-existence} holds.
+\item We have
+\begin{equation}\label{eq:mb-capture}
+\lim_{M\to\infty}\limsup_{N\to\infty}\E\,\pi\bigl(S_N\setminus B_{N,M}\bigr)=0 .
+\end{equation}
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Let $U$, $b_0$, and $\varepsilon_0$ be as in \cref{sec:mb-choice}; then $b_0<\sqrt Q$ since $I_{b_0}\subset(0,1)$. Part (1) is \cref{lem:mb-counts}. For part (2), fix $b\in(0,b_0]$ and $\tau=\tau_0$, the number of \cref{cor:mb-low-sum}, and consider the coarse family $\cC(I_\tau)$ of \cref{sec:mb-coarse}. It consists of critical points of $H_Q$ with radial derivative in $U$, and its bands are the bands $B_u$ of the statement. Its graph $\{(H,u):u\in\cC(I_\tau)\}$ is closed, by the argument of \cref{lem:mb-borel}. It is finite whenever $H_Q$ is a Morse function on $S_N$, hence almost surely by \cref{thm:kr-marked}. The set of fields for which it is infinite is Borel, by the argument of \cref{lem:red-unions}; on this null set we replace the coarse family by the empty set, which preserves the Borel graph and changes no expectation. We verify the hypotheses of \cref{prop:red-capture}, with the deterministic scale $D_N$ of \eqref{eq:mb-DN}:
+\begin{itemize}
+\item the existence of centers and the upper tightness of $\max_{S_N}H_Q-m_N$ hold by part (1);
+\item the bands of the coarse family carry almost all of the Gibbs mass, by \cref{prop:mb-coarse};
+\item for every fixed $L$, the expected number of $\delta$-light centers in $\cC_{N,L}$ tends to zero in the limit $N\to\infty$ followed by $\delta\downarrow0$, by \cref{cor:mb-bad}(1);
+\item for every fixed $M$, the coarse centers with energy below $m_N-M$ satisfy $\limsup_ND_N^{-1}\E\sum_uZ_H(B_u)\le Ce^{-a_0M}$, by \cref{cor:mb-low-sum}, since $\cC(I_\tau)\cap\{H_Q<m_N-M\}=\cC([N(E_0-\tau),m_N-M))$.
+\end{itemize}
+\Cref{prop:red-capture} gives \eqref{eq:mb-capture}. The sets $B_{N,M}$ increase with $M$, so the limit in $M$ exists.
+\end{proof}
+
+\begin{remark}[How the inputs combine]\label{rem:mb-assembly}
+For the reader's convenience, we recall how the four inputs give \eqref{eq:mb-capture}. This is the proof of \cref{prop:red-capture}, specialized to the coarse family $\cC(I_\tau)$. Fix $\varepsilon'>0$, and choose $L$ and $\delta$ by \cref{cor:mb-bad}(2); the light-band estimate enters only here. Then choose $M$. All three parameters are fixed before $N\to\infty$. On the event $\{\max H_Q\le m_N+M\}$, every coarse center is either in $\cC_{N,M}$ or has energy below $m_N-M$. On the intersection of this event with $\{Z_{N,\beta}\ge\delta e^{-\beta L}D_N\}$, a union bound gives
+\[
+\pi\bigl(S_N\setminus B_{N,M}\bigr)\le\pi\bigl(S_N\setminus B^{\mathrm{coarse}}_N(\tau)\bigr)+\frac{e^{\beta L}}{\delta D_N}\sum_{u\in\cC([N(E_0-\tau),m_N-M))}Z_H(B_u);
+\]
+overlaps between bands only increase the sum. Bounding the Gibbs mass by one outside these events and using \cref{prop:mb-coarse} and \cref{cor:mb-low-sum}, we obtain
+\[
+\limsup_{N\to\infty}\E\,\pi\bigl(S_N\setminus B_{N,M}\bigr)\le2\varepsilon'+\limsup_{N\to\infty}\Pp\Bigl(\max_{S_N}H_Q>m_N+M\Bigr)+\frac{C}{\delta}e^{\beta L-a_0M}.
+\]
+The right side is at most $3\varepsilon'$ for all large $M$ by \eqref{eq:mb-existence}. Since $\varepsilon'$ is arbitrary, \eqref{eq:mb-capture} follows.
+\end{remark}
+
+\begin{remark}[Even models and antipodal centers]\label{rem:mb-even}
+In an even model, $H_N(-\sigma)=H_N(\sigma)$, the critical points of $H_Q$ come in antipodal pairs, and we count both points of each pair. The bands $B_u$ and $B_{-u}$ are reflections of each other and have equal partition functions. For an antipodal class $[u]=\{u,-u\}$, let $B_{[u]}=\{\sigma:||R(\sigma,u)|-\sqrt Q|\le b\}$. Since $b<\sqrt Q$, this is the disjoint union $B_u\cup B_{-u}$, and $Z_H(B_{[u]})=2Z_H(B_u)$. Keeping the same centering $m_N$, counting classes once leaves $B_{N,M}$ unchanged, halves the unweighted center counts, and leaves the sums of band partition functions in \cref{cor:mb-low-sum} unchanged. A class is $\delta$-light precisely when either representative is $\delta/2$-light, so the number of light classes is one half of the number of oriented $\delta/2$-light centers. Thus \cref{cor:mb-bad} and \eqref{eq:mb-capture} hold with the same sequential limits. In a model with odd degrees, the proof uses only the bands of positive latitude.
+\end{remark}
+
+\begin{remark}[What the proof uses]\label{rem:mb-scope}
+The upper band estimate, \cref{prop:mb-upper}, combines the static identities of \cref{prop:th-structure} with the bounded GOE determinant prefactors of \cref{lem:mb-prefactor}, conditional Gaussian regression, and the second-moment estimate for the quadratic component in \cref{lem:mb-quadratic}. The lower band estimate, \cref{prop:mb-lower}, uses the conditional regularity of \cref{lem:mb-regularity}, symmetric latitude averaging (\cref{lem:mb-jensen}), and the lower-tail tightness of the strictly replica-symmetric residual partition function (\cref{lem:mb-residual}), obtained from the theorem of Huang, Montanari, and Pham stated in \cref{lem:pre-HMP-Z}. The determinant moments of \cref{prop:kr-determinant} transfer these lower-tail estimates to the Palm law. The coarse cover uses in addition the directing measure (\cref{thm:dir-norm}), Subag's replicated band estimates, and the localization \eqref{eq:mb-allhigh}. The strict inequality $c_0<\beta$ is used only in \cref{cor:mb-low-sum}. The proof does not use a limit theorem for the extremal process of the critical points, an independence between a band and the Hessian at its center, a second moment of the full residual partition function, or an evenness assumption.
+\end{remark}

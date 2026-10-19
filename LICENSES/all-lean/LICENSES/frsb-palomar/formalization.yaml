@@ -1,0 +1,177 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: v0.4
+project:
+  name: Full replica symmetry breaking in the Sherrington–Kirkpatrick model
+  description: >-
+    Lean formalization of Patrick Lopatto's zero-field Sherrington–Kirkpatrick
+    results. The selected claims are full interval support, a nonnegative smooth
+    density with a terminal atom for every inverse temperature beta > 1, and
+    quantitative inequalities for that actual atom. The independent Challenge
+    defines the Parisi functional through concrete bounded-gradient weak PDE
+    solutions, with terminal log cosh and coefficient beta squared divided by two.
+    Solution identifies that definition with the constructed Parisi potential.
+    The repository retains the supporting PDE, diffusion, covariance, minimizer,
+    and numbered-result development described in COVERAGE.md and results.json.
+  authors:
+  - P. M. Aronow
+  - Patrick Lopatto
+  responsible_maintainers:
+  - P. M. Aronow
+  - Patrick Lopatto
+  license: MIT
+sources:
+- title: Full replica symmetry breaking in the Sherrington–Kirkpatrick model
+  authors:
+  - Patrick Lopatto
+  id: https://arxiv.org/abs/2607.11756v4
+  type: paper
+  location: Theorems 1.1 and 1.2; twenty-six numbered statements mapped in results.json
+  relationship: formalizes
+  license: arXiv non-exclusive distribution license; no open redistribution license asserted
+  author_endorsement: participated
+  note: >-
+    The mathematical source is the supplied revision, identified by its SHA-256
+    in results.json. Its only difference from the public v4 TeX source is abstract
+    line wrapping. Patrick Lopatto is the paper author; P. M. Aronow and Patrick
+    Lopatto are the formalization authors and responsible maintainers. These
+    attributions do not establish human mathematical review. The manuscript is
+    cited in the public repository and supplied separately in the local delivery.
+- title: Replica symmetry up to the de Almeida–Thouless line in the Sherrington–Kirkpatrick model
+  authors: [Patrick Lopatto]
+  id: https://arxiv.org/abs/2604.11921v2
+  type: paper
+  relationship: background
+  location: Retained Paper namespace and its fifteen numbered targets
+  note: >-
+    Earlier mathematical source of the reusable PDE, diffusion and positive-field
+    development. It is not one of the two headline results selected by Comparator.
+related_formalizations:
+- id: https://github.com/pmaronow/at-palomar
+  relationship: builds-on
+  revision: 915bca99f46bad65629ef35c8be4bf8fc962af9a
+  note: >-
+    Model for the repository interface, verification tools and compiler port.
+    The supplied Paper namespace is an earlier zero/positive-field PDE and SK
+    proof foundation; this reference is not asserted to be its original revision.
+- id: https://github.com/qiangwu2/ParisiFormula
+  relationship: builds-on
+  revision: 9fd12231429de72fa524b471c43f4a237553a711
+  note: Vendored finite-step Parisi formula; exact source provenance in vendor/spin-glass-foundations.
+- id: https://github.com/njimaMath/research_public
+  relationship: builds-on
+  revision: f3b34d2071d9cde5262c6672b6ebab132d4a7b43
+  note: Vendored RSAT subtree used by the retained earlier-paper foundation.
+- id: https://github.com/RemyDegenne/brownian-motion
+  relationship: builds-on
+  revision: 0d5b6eb928e616d3b1f774ad7d233c167d9f42c9
+  note: Concrete Brownian construction; selected vendored closure.
+- id: https://github.com/RemyDegenne/kolmogorov_extension4
+  relationship: builds-on
+  revision: 7d76e184c3d2138a2741baf923b57e9a01b9cf25
+  note: Kolmogorov extension foundation for the Brownian law.
+- id: https://github.com/savarin/lean-stochastic-calculus
+  relationship: builds-on
+  revision: bde839683ba3cf1bf149355a40e9de9522babe92
+  note: Selected stochastic calculus closure with recorded generic-sample-space adaptation.
+- id: https://github.com/or4nge19/SpinGlass
+  relationship: builds-on
+  revision: dc1d3820af6e443c09bd1177ec3e409cf0640d5c
+  note: Cole–Hopf proof foundations with namespace adaptation.
+classification:
+  arxiv:
+  - math.PR
+  - math-ph
+  msc2020:
+  - 82B44
+  - 60G15
+status:
+  scope: >-
+    Two headline results selected by comparator.json; twenty-six numbered targets
+    and a retained earlier-paper foundation checked separately by tools/audit.py.
+    Challenge contains two intentional theorem holes, excluded from sorry_count.
+    Verification status and its exact source identity are recorded in VERIFICATION.md.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms:
+  - propext
+  - Classical.choice
+  - Quot.sound
+  main_results:
+  - declaration: PalomarFRSB.fullRSB
+    file: Solution.lean
+    sorry_count: 0
+    axioms: [propext, Classical.choice, Quot.sound]
+    comparator_config: comparator.json
+    literature_dependencies: []
+  - declaration: PalomarFRSB.quantitativeAtom
+    file: Solution.lean
+    sorry_count: 0
+    axioms: [propext, Classical.choice, Quot.sound]
+    comparator_config: comparator.json
+    literature_dependencies: []
+automation:
+  methods:
+  - method: agent
+    models: [Sol 6.1]
+    tool_setup: >-
+      Sol 6.1 autoformalized the original development. Original harness, prompt
+      history, costs and model execution records were not supplied.
+  - method: agent
+    models: [GPT-6 (Codex)]
+    framework: Codex
+    tool_setup: >-
+      Subsequent Codex preparation, compiler and module-system compatibility work,
+      independent submission-interface construction, documentation and packaging.
+  - method: agent
+    models: [GPT-6 (Codex)]
+    framework: Codex
+    tool_setup: >-
+      Separate automated source review of statement and definition fidelity,
+      proof routes and dependencies; reproducible build, transitive axiom,
+      numbered-target, metadata and independent-kernel verification attempts.
+      Completed checks and unresolved failures are recorded in VERIFICATION.md.
+  notes: >-
+    Original autoformalization, subsequent preparation and compatibility work,
+    and automated review are disclosed separately. No human mathematical peer
+    review or Palomar review is inferred from authorship or responsibility.
+fidelity:
+  divergences: >-
+    The independent headline quantifies over every minimizer and includes
+    existence and uniqueness rather than relying on a chosen minimizer. It adds
+    explicit density-plus-atom normalization. Closed-interval smoothness uses
+    within derivatives at both endpoints and does not differentiate through the
+    terminal CDF jump. The concrete weak-PDE value is defined by an infimum;
+    existence and uniqueness identify its value on beta > 1. The selected support
+    proof uses a strict covariance identity at zeros and a scalar crossing argument;
+    the paper's full positive transport representation is separately formalized.
+    Supporting stochastic results use a projective Gaussian probability space
+    carrying a continuous Brownian modification and its natural filtration; no
+    transport to every usual augmented Brownian space is asserted. Some supporting
+    statements extend hypotheses to nonzero beta or arbitrary measures; scope
+    differences are documented in MATHEMATICS.md. Mixed-p-spin and historical
+    results quoted in the manuscript are cited background, not registry claims.
+review:
+  status: agent-reviewed
+  reviewers: [Codex automated review]
+  notes: >-
+    Automated inspection of concrete mathematical objects, selected statements,
+    supporting numbered targets and alternative proof routes. VERIFICATION.md
+    distinguishes completed machine checks from unresolved checks and binds the
+    record to a source identity. No separate human mathematical peer review,
+    author verification of the prepared package, or Palomar approval is asserted.
+alignment:
+  namespace: PalomarFRSB
+  statements:
+  - source: arXiv:2607.11756v4, Theorem 1.1
+    lean: PalomarFRSB.fullRSB
+    module: Solution
+    status: proved
+    note: Independent weak-PDE/minimizer statement in Challenge; proof transfers FRSB.fullRSB and minimizer uniqueness.
+  - source: arXiv:2607.11756v4, Theorem 1.2
+    lean: PalomarFRSB.quantitativeAtom
+    module: Solution
+    status: proved
+    note: Actual singleton atom mass; proof transfers FRSB.quantitative_atom.
+acknowledgements: >-
+  Lean, Mathlib and the cited formal proof foundations. Vendored sources retain
+  their original licenses, notices, upstream revisions and adaptation records.

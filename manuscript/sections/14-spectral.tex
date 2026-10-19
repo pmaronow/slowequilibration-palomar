@@ -1,0 +1,351 @@
+\chapter{Counting slow modes and the overlap-weighted Gibbs mean}\label{sec:spectral}
+
+This section collects the deterministic estimates that turn the pressure estimates of \cref{sec:pressure} into the conclusions of \cref{thm:main-memory}. Everything here concerns a fixed dimension $N$ and a fixed smooth field; no randomness enters. In \cref{lem:sp-frame}, we bound from below the number of eigenvalues of $-L$ below a cutoff, for any family of nonnegative trial functions with small averaged energy and small overlaps. In \cref{lem:sp-bumps}, we apply this bound to translated bumps of a single vector observable $B$. This observable is aligned with the spin $U$ on most of the Gibbs measure and has small vector energy. When the energy term is small, the number of slow modes is then at least a constant times the inverse of the sum of two masses: the Gibbs mass of the set where the alignment fails, and the largest Gibbs mass of a spherical cap of fixed latitude. We show in \cref{lem:sp-correlation,lem:sp-projection} that if the centered spin and the centered observable have a fixed positive inner product and the energy errors are small, then a fixed part of the centered spin lies on slow modes and the stationary connected correlation of the spin stays above a plateau. The overlap-weighted Gibbs mean of \cref{def:sp-barycenter} is the observable to which these lemmas are applied. Its basic properties are recorded in \cref{lem:sp-barycenter}. It is the mean of $U$ under a reweighted Gibbs measure, its norm is at most one, and its gradient is controlled by a weighted variance. Finally, we show in \cref{lem:sp-trap} that an aligned observable with small vector energy keeps the law of the diffusion started from most Gibbs points far from $\pi$, in total variation and in relative entropy, provided that the alignment fails only on a set of small Gibbs mass and that all caps of a fixed latitude have small Gibbs mass.
+
+The lemmas use only the spectral facts in \cref{lem:pre-dynamics,lem:pre-spectral} and the contraction and data processing facts in \cref{lem:pre-contraction,lem:pre-binary}. In \cref{sec:memory}, they are combined with the estimates of \cref{sec:pressure} to prove \cref{thm:main-memory}. \Cref{sec:plateau} uses \cref{lem:sp-projection,lem:sp-barycenter}, and \cref{sec:infinite} uses \cref{lem:sp-frame} through \cref{rem:mem-direct-frame}.
+
+For pure spherical models in a narrower range of temperatures, exponentially many exponentially small eigenvalues and an exponential-time plateau of the stationary spin correlation were proved by El Alaoui, Montanari, and Sellke \cite[Corollaries~2.8 and~2.9]{ElAlaouiMontanariSellke2025}.
+Their argument counts eigenvalues with smoothed indicators of the clusters of a shattering decomposition, which have disjoint supports, together with the variational characterization of eigenvalues. We construct no clusters. Instead, we replace disjoint supports by the averaged counting bound of \cref{lem:sp-frame}, which needs only an upper bound on overlaps. We apply this bound to translates of one observable. More broadly, the relation between metastable sets and small eigenvalues of reversible dynamics is a central theme of the potential-theoretic approach to metastability \cite[Theorem~1.3]{BovierEckhoffGayrardKlein2002}, \cite[Theorem~1.2]{BovierGayrardKlein2005}; see also the monograph \cite{BovierDenHollander2015}. For the reversible diffusions of \cite[Theorem~1.2]{BovierGayrardKlein2005}, the dimension is fixed and the asymptotics concern a noise parameter tending to zero. Here, the dimension tends to infinity and the number of slow modes is exponential in $N$.
+
+\section{Standing notation}\label{sec:sp-notation}
+
+Throughout this section, $N\ge2$, $\beta>0$, and a smooth function $H_N$ on $S_N$ are fixed, and $\pi$, $L$, $\cE$, and $P_t$ are the Gibbs measure, generator, Dirichlet form, and semigroup of \cref{def:pre-dynamics}. All statements are deterministic; in \cref{sec:memory} they are applied to each realization of a finite mixture.
+
+We use the spectral notation of \cref{lem:pre-dynamics}(3): the eigenvalues $0=\lambda_0<\lambda_1\le\lambda_2\le\cdots$ of $-L$, listed with multiplicity, an orthonormal basis $(\phi_j)_{j\ge0}$ of $L^2(\pi)$ of real smooth eigenfunctions with $\phi_0=1$, the form domain $\mathcal D(\cE)$, and the coefficients $\hat f_j=\ip{f}{\phi_j}$ of $f\in L^2(\pi)$. Recall that for all $f\in\mathcal D(\cE)$,
+\begin{equation}\label{eq:sp-parseval}
+\norm{f}_2^2=\sum_{j\ge0}\hat f_j^2,\qquad \cE(f,f)=\sum_{j\ge0}\lambda_j\hat f_j^2.
+\end{equation}
+
+A vector observable is a map $F=(F_1,\dots,F_n)\colon S_N\to\R^n$ with components in $L^2(\pi)$; usually $n=N$. As in \cref{sec:pre-dynamics}, inner products, norms, and operators such as $P_t$ act componentwise and are summed over components, so that $\ip FG=\int F\cdot G\dd\pi$, and we write $\pi(F)=\int F\dd\pi\in\R^n$. If every component of $F$ lies in $\mathcal D(\cE)$, then
+\[
+\cE_{\rm vec}(F)=\sum_{i=1}^n\cE(F_i,F_i)=\int\norm{\nabla F}_{\rm HS}^2\dd\pi,
+\qquad
+\norm{\nabla F}_{\rm HS}^2=\sum_{i=1}^n\abs{\nabla F_i}^2,
+\]
+where $\nabla=\nabla_{S_N}$ is the spherical gradient. Note that $\cE_{\rm vec}(F-\pi(F))=\cE_{\rm vec}(F)$, since constants have zero energy. For $\Lambda>0$, we write
+\[
+\Pi_\Lambda=\ind_{(0,\Lambda]}(-L)
+\]
+for the spectral projection onto the eigenfunctions with eigenvalues in $(0,\Lambda]$, as in \cref{lem:pre-spectral}(4); it annihilates constants. The number $\#\{j\ge0:\lambda_j\le\Lambda\}$ counts eigenvalues with multiplicity and includes $\lambda_0=0$. If it is at least $m+1$, then $\lambda_m\le\Lambda$. Because $\lambda_0$ is simple, the eigenvalues $\lambda_1,\dots,\lambda_m$ are then positive and at most $\Lambda$.
+
+Recall that $U(x)=x/\sqrt N$, so that $\abs{U(x)}=1$ and $U(x)\cdot U(y)=R(x,y)$ for $x,y\in S_N$. For fixed $u\in S_N$, the spherical gradient of the overlap is
+\begin{equation}\label{eq:sp-gradR}
+\nabla_xR(x,u)=\frac{u-R(x,u)x}{N},\qquad \abs{\nabla_xR(x,u)}^2=\frac{1-R(x,u)^2}{N}.
+\end{equation}
+Indeed, the Euclidean gradient of $x\mapsto x\cdot u/N$ is $u/N$, its projection onto the tangent space $x^\perp$ is $(u-R(x,u)x)/N$, and $\abs{u-Rx}^2=N-2R\,(x\cdot u)+R^2N=N(1-R^2)$ with $R=R(x,u)$.
+
+We fix once and for all a smooth nondecreasing function $\chi\colon\R\to[0,1]$ with $\chi=0$ on $(-\infty,0]$, $\chi=1$ on $[1,\infty)$, and $\norm{\chi'}_\infty\le2$. For instance, $\chi(t)=\int_0^t\varphi/\int_0^1\varphi$ works for any smooth $\varphi\colon\R\to[0,1]$ supported in $[0,1]$ and equal to one on $[1/8,7/8]$, since then $\int_0^1\varphi\ge3/4$.
+
+\section{Counting with nonnegative trial functions}\label{sec:sp-frame}
+
+\begin{lemma}[Counting with nonnegative trial functions]\label{lem:sp-frame}
+Let $(\mathcal V,\mu)$ be a finite measure space, and let $(u,x)\mapsto f_u(x)$ be a nonnegative measurable function on $\mathcal V\times S_N$ such that $f_u\in\mathcal D(\cE)$ for every $u\in\mathcal V$. Suppose that there exist $r\in[0,\infty)$ and $\mathsf R,\mathsf C\in(0,\infty)$ such that
+\begin{equation}\label{eq:sp-frame-trace}
+0<\mathsf T=\int\norm{f_u}_2^2\,\mu(\mathrm du)<\infty,\qquad
+\int\cE(f_u,f_u)\,\mu(\mathrm du)\le r\,\mathsf T,
+\end{equation}
+and
+\begin{equation}\label{eq:sp-frame-rowcol}
+\pi(f_u)\le\mathsf R\quad\text{for $\mu$-almost every $u$},\qquad
+\int f_u(x)\,\mu(\mathrm du)\le\mathsf C\quad\text{for $\pi$-almost every $x$}.
+\end{equation}
+Then for every $\Lambda>r$,
+\[
+\#\{j\ge0:\lambda_j\le\Lambda\}\ge\Big(1-\frac r\Lambda\Big)\frac{\mathsf T}{\mathsf R\,\mathsf C}.
+\]
+\end{lemma}
+
+The count includes the eigenvalue $\lambda_0=0$. The finiteness of $\mathsf T$ is used at the end of the proof, where $r\mathsf T/\Lambda$ is subtracted from $\mathsf T$; without it, the energy hypothesis could hold in the form $\infty\le\infty$ while the conclusion fails.
+
+\begin{proof}
+The spectral step below is the averaged variational principle \cite[Theorem~2.1]{ElSoufiHarrellIliasStubbe2017}. The bound on $b_j$ is the integral analog of Schur's row--column estimate \cite[Section~2, part~I, p.~6]{Schur1911}; we give the argument under the stated hypotheses.
+
+For $j\ge0$, we define
+\[
+b_j=\int\ip{f_u}{\phi_j}^2\,\mu(\mathrm du).
+\]
+The map $u\mapsto\ip{f_u}{\phi_j}$ is measurable by Tonelli's theorem, applied to the positive and negative parts of $f_u\phi_j$. Using $f_u\ge0$ and the Cauchy--Schwarz inequality for the measure $f_u\dd\pi$, we have
+\[
+\ip{f_u}{\phi_j}^2=\Big(\int f_u\phi_j\dd\pi\Big)^2\le\pi(f_u)\int f_u\phi_j^2\dd\pi.
+\]
+Integrating in $u$, using the first bound in \eqref{eq:sp-frame-rowcol}, and then Tonelli's theorem and the second bound, we obtain
+\begin{equation}\label{eq:sp-frame-bj}
+b_j\le\mathsf R\int\phi_j(x)^2\Big(\int f_u(x)\,\mu(\mathrm du)\Big)\pi(\mathrm dx)\le\mathsf R\,\mathsf C,
+\end{equation}
+where in the last step we used $\norm{\phi_j}_2=1$. Next, \eqref{eq:sp-parseval}, applied to each $f_u$, and Tonelli's theorem for series give
+\[
+\sum_{j\ge0}b_j=\int\norm{f_u}_2^2\,\mu(\mathrm du)=\mathsf T,
+\qquad
+\sum_{j\ge0}\lambda_jb_j=\int\cE(f_u,f_u)\,\mu(\mathrm du)\le r\,\mathsf T.
+\]
+Here $u\mapsto\cE(f_u,f_u)$ is measurable, as a series of nonnegative measurable functions. Bounding $\lambda_j$ from below by $\Lambda$ on the indices with $\lambda_j>\Lambda$, we have
+\[
+\Lambda\sum_{j:\lambda_j>\Lambda}b_j\le\sum_{j\ge0}\lambda_jb_j\le r\,\mathsf T.
+\]
+Subtracting this from $\sum_jb_j=\mathsf T$, which is finite, we find
+\[
+\sum_{j:\lambda_j\le\Lambda}b_j\ge\mathsf T-\frac{r\,\mathsf T}\Lambda=\Big(1-\frac r\Lambda\Big)\mathsf T.
+\]
+The left side is at most $\mathsf R\,\mathsf C\cdot\#\{j\ge0:\lambda_j\le\Lambda\}$ by \eqref{eq:sp-frame-bj}, which proves the lemma.
+\end{proof}
+
+\Cref{lem:sp-frame} is a specialization of the averaged variational principle of Harrell and Stubbe \cite[Theorem~3.1]{HarrellStubbe2014}; see \cite[Theorem~2.1]{ElSoufiHarrellIliasStubbe2017} for its form for elliptic operators on manifolds, which covers $-L$.
+In our notation, that principle, applied to the whole family $(f_u)$ with cutoff $\Lambda$, implies that $(\Lambda-r)\mathsf T\le\sum_j(\Lambda-\lambda_j)_+b_j$, and the counting bound follows from \eqref{eq:sp-frame-bj}. Positivity of the trial functions is used only in \eqref{eq:sp-frame-bj}, which is an upper frame bound of Schur type. Averaged families of trial functions were used earlier by Kr\"oger \cite{Kroger1992} to bound Neumann eigenvalues. We have included the short proof because the hypotheses of \cref{lem:sp-frame} are exactly the ones verified below.
+
+\section{Many slow modes from one aligned observable}\label{sec:sp-bumps}
+
+\begin{lemma}[One aligned observable gives many slow modes]\label{lem:sp-bumps}
+Let $B\colon S_N\to\R^N$ be smooth with $\abs B\le1$, and suppose that $U(x)\cdot B(x)\ge q>0$ for every $x$ in a measurable set $\cG\subset S_N$. Fix $0<\rho<q/2$ and set
+\[
+M_\rho=\pi(\cG^c)+\sup_{v\in S_N}\pi\{y\in S_N:R(y,v)\ge q-2\rho\}.
+\]
+Let $\alpha\colon\R\to[0,1]$ be smooth, equal to zero on $(-\infty,0]$ and to one on $[1,\infty)$. Then for every $\Lambda>0$,
+\begin{equation}\label{eq:sp-bumps}
+\#\{j\ge0:\lambda_j\le\Lambda\}\ge\frac{\frac12-4\norm{\alpha'}_\infty^2N^2\rho^{-2}\cE_{\rm vec}(B)/\Lambda}{M_\rho}.
+\end{equation}
+\end{lemma}
+
+The count includes the constant eigenfunction. Note that $M_\rho>0$. Indeed, if $\cG$ is empty, then $\pi(\cG^c)=1$. Otherwise, the alignment and $\abs B\le1$ imply that $q\le1$, so $q-2\rho<1$, and every cap of latitude $q-2\rho$ has positive Gibbs mass, because $\pi$ has a positive density.
+
+\begin{proof}
+We use \cref{lem:sp-frame} with the bumps $x\mapsto\alpha(N[1-\abs{B(x)-z}^2/\rho^2])$, indexed by all centers $z$ in a ball of $\R^N$. A bump is supported where $B$ lies within $\rho$ of $z$. On $\cG$, its support lies in a spherical cap, and averaging over $z$ keeps the overlaps of the bumps under control.
+
+For $s>0$ and $z\in\R^N$, let $\mathbb B_s(z)\subset\R^N$ be the closed Euclidean ball of radius $s$ centered at $z$, write $\mathbb B_s=\mathbb B_s(0)$, and let $\abs{\,\cdot\,}$ also denote Lebesgue measure on $\R^N$. We use the finite index measure and the trial functions
+\[
+\mu(\mathrm dz)=\frac{\ind_{\mathbb B_{1+\rho}}(z)\dd z}{\abs{\mathbb B_\rho}},
+\qquad
+f_z(x)=\alpha\big(N[1-\abs{B(x)-z}^2/\rho^2]\big),\qquad z\in\R^N,\ x\in S_N.
+\]
+The function $(z,x)\mapsto f_z(x)$ is smooth with values in $[0,1]$; in particular, it is measurable and each $f_z$ lies in $\mathcal D(\cE)$. As $\alpha$ vanishes on $(-\infty,0]$ and equals one on $[1,\infty)$, we have
+\begin{equation}\label{eq:sp-bump-supp}
+f_z(x)>0\ \Rightarrow\ \abs{B(x)-z}<\rho,
+\qquad
+\abs{B(x)-z}\le\rho\,(1-1/N)^{1/2}\ \Rightarrow\ f_z(x)=1.
+\end{equation}
+
+\paragraph{Column bound and total mass.} Fix $x\in S_N$. The ball $\mathbb B_\rho(B(x))$ is contained in $\mathbb B_{1+\rho}$, because $\abs{B(x)}\le1$, and on $\mathbb B_{1+\rho}$ the measure $\mu$ is Lebesgue measure divided by $\abs{\mathbb B_\rho}$. By the first implication in \eqref{eq:sp-bump-supp} and $f_z\le1$, we have
+\[
+\int f_z(x)\,\mu(\mathrm dz)\le\mu\big(\mathbb B_\rho(B(x))\big)=1.
+\]
+Similarly, the second implication gives
+\[
+\int f_z(x)^2\,\mu(\mathrm dz)\ge\mu\big(\mathbb B_{\rho(1-1/N)^{1/2}}(B(x))\big)=(1-1/N)^{N/2}\ge\frac12.
+\]
+For the last inequality, note that the function $F(t)=(t/2)\log(1-1/t)$ satisfies $F(2)=-\log2$ and
+\[
+F'(t)=\frac12\Big[\frac1{t-1}-\log\Big(1+\frac1{t-1}\Big)\Big]\ge0\qquad(t>1),
+\]
+since $\log(1+y)\le y$. Integrating over $x$ and using $f_z^2\le f_z$, we obtain
+\begin{equation}\label{eq:sp-bump-mass}
+\frac12\le\mathsf T=\int\norm{f_z}_2^2\,\mu(\mathrm dz)\le1,
+\qquad
+\int f_z(x)\,\mu(\mathrm dz)\le1\quad(x\in S_N).
+\end{equation}
+
+\paragraph{Energy.} By the chain rule,
+\[
+\nabla f_z(x)=-\frac{2N}{\rho^2}\,\alpha'\big(N[1-\abs{B(x)-z}^2/\rho^2]\big)\sum_{i=1}^N(B_i(x)-z_i)\nabla B_i(x).
+\]
+The right side vanishes unless $\abs{B(x)-z}\le\rho$, because $\alpha'$ vanishes outside $[0,1]$. Using the Cauchy--Schwarz inequality in $i$, we have
+\begin{align*}
+\abs{\nabla f_z(x)}^2&\le\frac{4N^2}{\rho^4}\norm{\alpha'}_\infty^2\abs{B(x)-z}^2\norm{\nabla B(x)}_{\rm HS}^2\,\ind\{\abs{B(x)-z}\le\rho\}\\
+&\le\frac{4\norm{\alpha'}_\infty^2N^2}{\rho^2}\norm{\nabla B(x)}_{\rm HS}^2\,\ind\{z\in\mathbb B_\rho(B(x))\}.
+\end{align*}
+Integrating first over $z$, using $\mu(\mathbb B_\rho(B(x)))=1$, and then over $x$ yields
+\begin{equation}\label{eq:sp-bump-energy}
+\int\cE(f_z,f_z)\,\mu(\mathrm dz)\le4\norm{\alpha'}_\infty^2N^2\rho^{-2}\cE_{\rm vec}(B)=E_\alpha,
+\end{equation}
+where the last equality defines $E_\alpha$.
+
+\paragraph{Row bound.} Fix $z$ and let $S_z=\{x\in S_N:\abs{B(x)-z}<\rho\}$. By \eqref{eq:sp-bump-supp} and $f_z\le1$, we have $\pi(f_z)\le\pi(\cG^c)+\pi(\cG\cap S_z)$. If $\cG\cap S_z$ is empty, then $\pi(f_z)\le M_\rho$. Otherwise, choose a point $x_z\in\cG\cap S_z$. For $y\in\cG\cap S_z$, we have $\abs{B(y)-B(x_z)}<2\rho$ and $\abs{U(y)}=1$, which give
+\[
+U(y)\cdot B(x_z)\ge U(y)\cdot B(y)-2\rho\ge q-2\rho>0.
+\]
+Further, $\abs{B(x_z)}\ge U(x_z)\cdot B(x_z)\ge q>0$. With $v_z=\sqrt N\,B(x_z)/\abs{B(x_z)}\in S_N$, we have
+\[
+R(y,v_z)=\frac{U(y)\cdot B(x_z)}{\abs{B(x_z)}}\ge q-2\rho,
+\]
+where we used $0<\abs{B(x_z)}\le1$ and $q-2\rho>0$. We conclude that $\cG\cap S_z$ lies in the cap $\{R(\cdot,v_z)\ge q-2\rho\}$, and
+\begin{equation}\label{eq:sp-bump-row}
+\pi(f_z)\le M_\rho\qquad(z\in\R^N).
+\end{equation}
+The point $x_z$ is used only to prove \eqref{eq:sp-bump-row} for each fixed $z$, so no measurable choice of $x_z$ is needed.
+
+\paragraph{Conclusion.} If $\frac12-E_\alpha/\Lambda\le0$, there is nothing to prove. Otherwise, let $r=\mathsf T^{-1}\int\cE(f_z,f_z)\,\mu(\mathrm dz)$. Combining \eqref{eq:sp-bump-mass} and \eqref{eq:sp-bump-energy}, we obtain
+\[
+\Big(1-\frac r\Lambda\Big)\mathsf T=\mathsf T-\frac1\Lambda\int\cE(f_z,f_z)\,\mu(\mathrm dz)\ge\frac12-\frac{E_\alpha}\Lambda>0,
+\]
+so $r<\Lambda$, and \cref{lem:sp-frame}, with $\mathsf R=M_\rho$ and $\mathsf C=1$ from \eqref{eq:sp-bump-mass} and \eqref{eq:sp-bump-row}, implies that
+\[
+\#\{j\ge0:\lambda_j\le\Lambda\}\ge\Big(1-\frac r\Lambda\Big)\frac{\mathsf T}{M_\rho}\ge\frac{\frac12-E_\alpha/\Lambda}{M_\rho},
+\]
+which is \eqref{eq:sp-bumps}.
+\end{proof}
+
+Averaging translates of a fixed trial function over a parameter space is a standard way of applying averaged variational principles; compare \cite[Section~4]{ElSoufiHarrellIliasStubbe2017}.
+Compared with counting smoothed indicators of disjoint clusters, as in \cite[proof of Corollary~2.8]{ElAlaouiMontanariSellke2025}, \cref{lem:sp-bumps} needs no decomposition of the Gibbs measure: the supports of the bumps overlap, and the overlaps are controlled by the column bound $\mathsf C=1$ and by the Gibbs masses of caps.
+
+\section{Correlation and spectral projection estimates}\label{sec:sp-correlation}
+
+The next two lemmas turn an aligned observable with small energy into a lower bound on the projection of the centered spin onto slow modes. The first works directly with the semigroup, and the second with spectral projections.
+
+\begin{lemma}[Direct correlation estimate]\label{lem:sp-correlation}
+Let $Z,\overline B\in L^2(\pi;\R^N)$ be centered vector observables with $\norm Z_2\le1$ and $\norm{\overline B}_2\le1$, and suppose that every component of $\overline B$ lies in $\mathcal D(\cE)$. Set $a=\ip Z{\overline B}$ and $E=\cE_{\rm vec}(\overline B)$. Then for every $t\ge0$,
+\[
+\ip Z{P_tZ}\ge\big[a-(tE/2)^{1/2}\big]_+^2.
+\]
+\end{lemma}
+
+\begin{proof}
+Because the operators $P_t$ are self-adjoint and $P_t=P_{t/2}P_{t/2}$, we have $\ip Z{P_tZ}=\norm{P_{t/2}Z}_2^2$ and
+\[
+\ip{P_{t/2}Z}{\overline B}=\ip Z{P_{t/2}\overline B}=a-\ip Z{(1-P_{t/2})\overline B}.
+\]
+By \cref{lem:pre-spectral}(2), applied to each component of $\overline B$, we have $\norm{(1-P_{t/2})\overline B}_2^2\le tE/2$; this rests on the inequality $(1-e^{-x})^2\le x$ for $x\ge0$. Using the Cauchy--Schwarz inequality and $\norm Z_2,\norm{\overline B}_2\le1$, we obtain
+\[
+\norm{P_{t/2}Z}_2\ge\ip{P_{t/2}Z}{\overline B}\ge a-(tE/2)^{1/2}.
+\]
+The left side is nonnegative, and squaring the positive part of the right side proves the lemma.
+\end{proof}
+
+\begin{remark}[Choice of the exponents]\label{rem:sp-exponents}
+Suppose that for each $N$, the observables $Z_N$ and $\overline B_N$ satisfy the hypotheses of \cref{lem:sp-correlation} with $a_N\ge a_0>0$ and $E_N\le Ce^{-c_EN}$, where $a_0$, $C$, and $c_E$ do not depend on $N$. Then for each fixed $b<a_0^2$ and $\tau<c_E$, we have $\inf_{0\le t\le e^{\tau N}}\ip{Z_N}{P_tZ_N}\ge b$ for all sufficiently large $N$, since $tE_N\le Ce^{-(c_E-\tau)N}$ on this interval. A fixed margin is needed here: a strict inequality $b<a_N^2$ that depends on $N$ would not suffice. The same plateau also follows from \cref{lem:sp-projection} below. Let $\tau<\sigma<c_E$ and $\Lambda=e^{-\sigma N}$. We have $E_N/\Lambda\to0$, and $\Lambda t\le e^{-(\sigma-\tau)N}$ for $t\le e^{\tau N}$. The spectral cutoff and the time exponent can be chosen independently; there is no need to impose $\sigma=2\tau$.
+\end{remark}
+
+\begin{lemma}[Spectral projection estimate]\label{lem:sp-projection}
+Let $Z\in L^2(\pi;\R^N)$ with $\pi(Z)=0$, let $B\colon S_N\to\R^N$ have components in $\mathcal D(\cE)$, and set $\overline B=B-\pi(B)$. Then for every $\Lambda>0$,
+\begin{align}
+\norm{\overline B-\Pi_\Lambda\overline B}_2^2&\le\Lambda^{-1}\cE_{\rm vec}(B),\label{eq:sp-proj-tail}\\
+\norm{\Pi_\Lambda Z}_2\,\norm{\overline B}_2&\ge\ip Z{\overline B}-\norm Z_2\big(\cE_{\rm vec}(B)/\Lambda\big)^{1/2},\label{eq:sp-proj}
+\end{align}
+and for every $t\ge0$,
+\begin{equation}\label{eq:sp-proj-corr}
+\ip Z{P_tZ}\ge e^{-\Lambda t}\norm{\Pi_\Lambda Z}_2^2.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Each component of $\overline B$ has zero coefficient on $\phi_0=1$, because $\overline B$ is centered. As $\lambda_0=0$ is simple, we have $\overline B-\Pi_\Lambda\overline B=\ind_{(\Lambda,\infty)}(-L)\overline B$, and by \eqref{eq:sp-parseval},
+\[
+\norm{\overline B-\Pi_\Lambda\overline B}_2^2=\sum_{i=1}^N\sum_{j:\lambda_j>\Lambda}\ip{\overline B_i}{\phi_j}^2
+\le\frac1\Lambda\sum_{i=1}^N\sum_{j\ge0}\lambda_j\ip{\overline B_i}{\phi_j}^2=\frac{\cE_{\rm vec}(B)}\Lambda,
+\]
+which is \eqref{eq:sp-proj-tail}; this is also the last assertion of \cref{lem:pre-spectral}(4), applied componentwise. Using that $\Pi_\Lambda$ is an orthogonal projection, we write
+\[
+\ip Z{\overline B}=\ip{\Pi_\Lambda Z}{\overline B}+\ip Z{\overline B-\Pi_\Lambda\overline B},
+\]
+and \eqref{eq:sp-proj} follows from the Cauchy--Schwarz inequality and \eqref{eq:sp-proj-tail}. Finally, \eqref{eq:sp-proj-corr} is \cref{lem:pre-spectral}(4) applied to each component of the centered observable $Z$: the components have zero coefficient on $\phi_0$, all terms of $\ip Z{P_tZ}=\sum_i\sum_{j\ge1}e^{-t\lambda_j}\ip{Z_i}{\phi_j}^2$ are nonnegative, and the terms with $0<\lambda_j\le\Lambda$ are at least $e^{-\Lambda t}\ip{Z_i}{\phi_j}^2$.
+\end{proof}
+
+In particular, if $\norm Z_2\le1$ and $\norm{\overline B}_2\le1$, then \eqref{eq:sp-proj} implies that
+\[
+\norm{\Pi_\Lambda Z}_2\ge\ip Z{\overline B}-\big(\cE_{\rm vec}(B)/\Lambda\big)^{1/2}.
+\]
+These estimates are standard spectral calculus; see \cite[Section~1.7]{BakryGentilLedoux2014}.
+
+\section{The overlap-weighted Gibbs mean}\label{sec:sp-barycenter}
+
+\begin{definition}[Overlap-weighted Gibbs mean]\label{def:sp-barycenter}
+Let $K>0$, and let $h\colon[-1,1]\to[0,K]$ be smooth and nonincreasing. For $x,u\in S_N$, we set $\psi_u(x)=e^{-Nh(R(x,u))}$, and we define
+\[
+d_N(x)=\int\psi_u(x)^2\,\pi(\mathrm du),
+\qquad
+B_N(x)=\frac1{d_N(x)}\int U(u)\,\psi_u(x)^2\,\pi(\mathrm du).
+\]
+We call $B_N$ the overlap-weighted Gibbs mean associated with $h$. For $x\in S_N$, we also let $w_x$ be the probability measure $w_x(\mathrm du)=\psi_u(x)^2\pi(\mathrm du)/d_N(x)$ on $S_N$, so that $B_N(x)=\int U\dd w_x$.
+\end{definition}
+
+In words, $B_N(x)$ is the mean of $U(u)$ when $u$ is drawn from the Gibbs measure reweighted by $\psi_u(x)^2$; we call $w_x$ the overlap-reweighted Gibbs measure seen from $x$. The weight penalizes references $u$ at small overlap with $x$, as $h$ is nonincreasing. All references $u\in S_N$ enter the definition, including those at which the estimates of \cref{sec:pressure} fail; this matters in \cref{sec:memory}, where those estimates are available only for $x$ in a set of large Gibbs mass. For vectors $a\in\R^N$ and tangent vectors $e$, we write $a\otimes e$ for the matrix with rows $a_ie$, so that $\norm{a\otimes e}_{\rm HS}=\abs a\abs e$.
+
+\begin{lemma}[Properties of the overlap-weighted Gibbs mean]\label{lem:sp-barycenter}
+In the setting of \cref{def:sp-barycenter}, the following hold.
+\begin{enumerate}
+\item The function $B_N$ is smooth, $\abs{B_N(x)}\le1$, and $d_N(x)\ge e^{-2KN}$ for all $x\in S_N$.
+\item For all $x\in S_N$, we have $U(x)\cdot B_N(x)=\int R(x,u)\,w_x(\mathrm du)$ and $\abs{B_N(x)}^2=\iint R(u,u')\,w_x(\mathrm du)\,w_x(\mathrm du')$.
+\item The gradient of $B_N$ is the $w_x$-mean
+\begin{equation}\label{eq:sp-bary-identity}
+\nabla B_N(x)=2\int\big(U(u)-B_N(x)\big)\otimes\nabla\log\psi_u(x)\,w_x(\mathrm du),
+\end{equation}
+and for every $x\in S_N$,
+\begin{equation}\label{eq:sp-bary-gradient}
+\norm{\nabla B_N(x)}_{\rm HS}^2\le\frac4{d_N(x)}\int\abs{\nabla\psi_u(x)}^2\,\pi(\mathrm du)\le4N\norm{h'}_\infty^2.
+\end{equation}
+\item Suppose that $-1<q_1<q_2\le1$, that $h=K$ on $[-1,q_1]$, and that $h=0$ on $[q_2,1]$. Then for every $x\in S_N$,
+\begin{align}
+d_N(x)&\ge\pi\{u:R(x,u)\ge q_2\},\label{eq:sp-bary-denominator}\\
+\norm{\nabla B_N(x)}_{\rm HS}^2&\le4N\norm{h'}_\infty^2\,\frac{\pi\{u:q_1\le R(x,u)\le q_2\}}{d_N(x)},\label{eq:sp-bary-collar}\\
+U(x)\cdot B_N(x)&\ge q_1-(1+q_1)\,\frac{e^{-2KN}}{d_N(x)}.\label{eq:sp-bary-align}
+\end{align}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+We may differentiate under the integral sign, since the integrands in the definition of $d_N$ and $B_N$ are smooth functions of $(x,u)$ on the compact manifold $S_N\times S_N$. We have $d_N\ge e^{-2KN}>0$, as $\psi_u\ge e^{-KN}$ and $\pi$ is a probability measure; in particular, $B_N$ is smooth. Further, $\abs{B_N(x)}\le\int\abs U\dd w_x=1$. This proves (1). Part (2) follows from $U(x)\cdot U(u)=R(x,u)$ and from $\abs{B_N(x)}^2=\iint U(u)\cdot U(u')\,w_x(\mathrm du)\,w_x(\mathrm du')$.
+
+For (3), write $B_N=n/d_N$ with $n(x)=\int U(u)\psi_u(x)^2\,\pi(\mathrm du)$. Differentiating, we have $\nabla n=2\int U(u)\otimes\psi_u\nabla\psi_u\,\pi(\mathrm du)$ and $\nabla d_N=2\int\psi_u\nabla\psi_u\,\pi(\mathrm du)$, and therefore
+\[
+\nabla B_N=\frac{\nabla n}{d_N}-B_N\otimes\frac{\nabla d_N}{d_N}=\frac2{d_N}\int\big(U(u)-B_N\big)\otimes\psi_u\nabla\psi_u\,\pi(\mathrm du).
+\]
+This is \eqref{eq:sp-bary-identity}, because $\psi_u\nabla\psi_u=\psi_u^2\nabla\log\psi_u$. Using the triangle inequality for the integral and then the Cauchy--Schwarz inequality for $w_x$, we obtain
+\begin{align*}
+\norm{\nabla B_N}_{\rm HS}&\le2\int\abs{U(u)-B_N}\,\abs{\nabla\log\psi_u}\,\mathrm dw_x\\
+&\le2\Big(\int\abs{U-B_N}^2\dd w_x\Big)^{1/2}\Big(\int\abs{\nabla\log\psi_u}^2\dd w_x\Big)^{1/2}.
+\end{align*}
+Recall that $B_N(x)$ is the $w_x$-mean of $U$ and that $\abs U=1$, which implies that $\int\abs{U-B_N}^2\dd w_x=1-\abs{B_N}^2\le1$. Also, $\int\abs{\nabla\log\psi_u}^2\dd w_x=d_N^{-1}\int\abs{\nabla\psi_u}^2\,\pi(\mathrm du)$. Inserting these two facts into the last display, we obtain the first inequality in \eqref{eq:sp-bary-gradient}. For the second, we note that $\nabla\psi_u(x)=-Nh'(R(x,u))\psi_u(x)\nabla_xR(x,u)$, and by \eqref{eq:sp-gradR},
+\begin{equation}\label{eq:sp-grad-psi}
+\abs{\nabla\psi_u(x)}^2=Nh'(R(x,u))^2\big(1-R(x,u)^2\big)\psi_u(x)^2\le N\norm{h'}_\infty^2\psi_u(x)^2.
+\end{equation}
+Integrating over $u$ gives $\int\abs{\nabla\psi_u(x)}^2\,\pi(\mathrm du)\le N\norm{h'}_\infty^2d_N(x)$.
+
+For (4), the bound \eqref{eq:sp-bary-denominator} holds because $\psi_u(x)=1$ when $R(x,u)\ge q_2$. Next, $h'$ vanishes outside $[q_1,q_2]$ and $\psi_u\le1$, and \eqref{eq:sp-grad-psi} implies that $\int\abs{\nabla\psi_u(x)}^2\,\pi(\mathrm du)\le N\norm{h'}_\infty^2\pi\{u:q_1\le R(x,u)\le q_2\}$. Inserting this into \eqref{eq:sp-bary-gradient} yields \eqref{eq:sp-bary-collar}. Finally, $\psi_u(x)^2=e^{-2KN}$ when $R(x,u)\le q_1$, which implies that $p=w_x\{u:R(x,u)\le q_1\}\le e^{-2KN}/d_N(x)$. On the complement of this set we have $R(x,u)>q_1$, and $R\ge-1$ everywhere. By part (2), we have $U(x)\cdot B_N(x)\ge q_1(1-p)-p=q_1-(1+q_1)p$, which proves \eqref{eq:sp-bary-align}.
+\end{proof}
+
+The bound $4N\norm{h'}_\infty^2$ in \eqref{eq:sp-bary-gradient} holds at every point, even where $d_N$ is exponentially small. In \cref{sec:memory}, this is what lets us treat the points where the pressure estimates fail through their Gibbs mass alone.
+
+\section{Slow equilibration from Gibbs-typical points}\label{sec:sp-trap}
+
+\begin{lemma}[Slow equilibration from Gibbs-typical points]\label{lem:sp-trap}
+Let $B\colon S_N\to\R^N$ be smooth, and let $T>0$, $\rho>0$, and $\eta\in(0,1)$. Let $(X_t)_{t\ge0}$ be the stationary diffusion, with $X_0\sim\pi$.
+\begin{enumerate}
+\item We have $\E_\pi\abs{B(X_T)-B(X_0)}^2=2\ip B{(1-P_T)B}\le2T\cE_{\rm vec}(B)$.
+\item The set $\mathcal Y=\{x\in S_N:P_T(x,\{y:\abs{B(y)-B(x)}>\rho\})\le\eta\}$ is measurable, and
+\[
+\pi(\mathcal Y^c)\le\frac{2T\cE_{\rm vec}(B)}{\rho^2\eta}.
+\]
+\item Suppose in addition that $\abs B\le1$ on $S_N$ and that $U\cdot B\ge q$ on a measurable set $\cG$, where $q>\rho$. Set
+\[
+w=\pi(\cG^c)+\sup_{v\in S_N}\pi\{y\in S_N:R(y,v)\ge q-\rho\}.
+\]
+For $x\in\mathcal Y\cap\cG$, let $D_x=\{y\in S_N:\abs{B(y)-B(x)}\le\rho\}$. Then $P_T(x,D_x)\ge1-\eta$ and $\pi(D_x)\le w$, and
+\begin{align}
+\inf_{0\le t\le T}\norm{P_t(x,\cdot)-\pi}_{\TV}&\ge1-\eta-w,\label{eq:sp-trap-tv}\\
+\inf_{0<t\le T}\KL\big(P_t(x,\cdot)\,\big\|\,\pi\big)&\ge(1-\eta)\log(1/w)-\log2.\label{eq:sp-trap-ent}
+\end{align}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Part (1) is \cref{lem:pre-spectral}(3), applied to each component of $B$ and summed. In words, both endpoints have law $\pi$, so the left side equals $2\norm B_2^2-2\ip B{P_TB}$, and in the spectral expansion of $\ip B{(1-P_T)B}$ we use $1-e^{-T\lambda_j}\le T\lambda_j$.
+
+For (2), let $F(x)=P_T(x,\{y:\abs{B(y)-B(x)}>\rho\})$. By \cref{lem:pre-dynamics}, the kernel $P_T(x,\mathrm dy)$ has a density with respect to $\pi$ that is continuous in $(x,y)$, and $F$ is measurable by Tonelli's theorem. By Markov's inequality and (1), we have
+\[
+\int F\dd\pi=\Pp_\pi\big(\abs{B(X_T)-B(X_0)}>\rho\big)\le\frac{2T\cE_{\rm vec}(B)}{\rho^2}.
+\]
+Applying Markov's inequality once more, we find $\pi\{F>\eta\}\le2T\cE_{\rm vec}(B)/(\rho^2\eta)$.
+
+For (3), fix $x\in\mathcal Y\cap\cG$, so that $P_T(x,D_x)=1-F(x)\ge1-\eta$. For $y\in D_x\cap\cG$, we have
+\[
+U(y)\cdot B(x)\ge U(y)\cdot B(y)-\abs{B(y)-B(x)}\ge q-\rho>0.
+\]
+Further, $\abs{B(x)}\ge U(x)\cdot B(x)\ge q>0$. With $v_x=\sqrt N\,B(x)/\abs{B(x)}\in S_N$, we find $R(y,v_x)=U(y)\cdot B(x)/\abs{B(x)}\ge q-\rho$, since $0<\abs{B(x)}\le1$. We conclude that $D_x\subset\cG^c\cup\{R(\cdot,v_x)\ge q-\rho\}$ and $\pi(D_x)\le w$.
+
+Testing the event $D_x$, we have $\norm{P_T(x,\cdot)-\pi}_{\TV}\ge P_T(x,D_x)-\pi(D_x)\ge1-\eta-w$. For $0\le t\le T$, we have $P_T(x,\cdot)=P_t(x,\cdot)P_{T-t}$ and $\pi P_{T-t}=\pi$, and the contraction of total variation in \cref{lem:pre-contraction} implies that $\norm{P_T(x,\cdot)-\pi}_{\TV}\le\norm{P_t(x,\cdot)-\pi}_{\TV}$. This proves \eqref{eq:sp-trap-tv}; it is also the case $\nu=\delta_x$ of \cref{prop:pre-endpoint}.
+
+For \eqref{eq:sp-trap-ent}, we may assume $w<1$. The set $D_x$ contains a neighborhood of $x$, because $B$ is continuous, and $\pi(D_x)>0$ because $\pi$ has a positive density. By binary data processing (\cref{lem:pre-binary}), applied to $P_T(x,\cdot)$, $\pi$, and the event $D_x$, we have
+\[
+\KL\big(P_T(x,\cdot)\,\big\|\,\pi\big)\ge P_T(x,D_x)\log\frac1{\pi(D_x)}-\log2\ge(1-\eta)\log\frac1w-\log2.
+\]
+For $0<t\le T$, we have $\KL(P_T(x,\cdot)\|\pi)\le\KL(P_t(x,\cdot)\|\pi)$, by the data processing inequality for relative entropy under the kernel $P_{T-t}$ and $\pi P_{T-t}=\pi$ (\cref{lem:pre-contraction}). This proves \eqref{eq:sp-trap-ent}.
+\end{proof}
+
+\Cref{lem:sp-trap} bounds the law of $X_t$ at each time $t\le T$. It does not bound the probability that a trajectory started at $x$ leaves $D_x$ and later returns, and the proof needs no estimate of that kind.

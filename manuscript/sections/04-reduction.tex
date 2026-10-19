@@ -1,0 +1,373 @@
+\chapter{Total variation lower bounds from Gibbs concentration and hitting estimates}\label{sec:reduction}
+
+In this section, we reduce the separation from equilibrium of the dynamics started from the uniform law to estimates on the critical points of the center field $H_Q$ and on the Gibbs measure of the bands around them. The main statement is \cref{prop:red-consumer}. It shows that separation up to a deterministic time $T_N$ follows from three properties of the critical points in a fixed energy window: the union of their bands carries almost all of the Gibbs mass once the window is large; their expected number is bounded; and the probability that the diffusion started from $\nu_N$ comes close to one of them before time $T_N$, averaged with the weights of the Kac--Rice formula, tends to zero. \Cref{prop:red-capture} reduces the first property to three estimates on single bands. In \cref{sec:red-initial}, we use the rotation invariance of the disorder to transfer the conclusion from the uniform initial law to every initial law independent of the field (\cref{thm:red-haar}), to field-dependent choices among polynomially many prescribed laws (\cref{cor:red-selection}), and to field-dependent initial laws whose relative entropy with respect to $\nu_N$ is $o(\log N)$ (\cref{cor:red-entropy}).
+
+No estimate on the critical points or on the Gibbs measure is proved here. The only property of the disorder that we use is the invariance of its law under rotations. From \cref{sec:prelim}, we use the representation of $H_N$ by Gaussian tensors (\cref{lem:pre-field}), the construction of the dynamics (\cref{lem:pre-dynamics}), the contraction and data processing inequalities (\cref{lem:pre-contraction}), binary data processing (\cref{lem:pre-binary}), and the endpoint estimate of \cref{prop:pre-endpoint}. The results of this section are applied in \cref{sec:condproof}, where the three properties above are verified using \cref{sec:thermal,sec:directing,sec:kacrice,sec:entrance,sec:purecover,sec:mixone,sec:mixpair,sec:mixbands}.
+
+\section{Setting and notation}\label{sec:red-setting}
+
+Throughout this part, $\xi(r)=\sum_pc_pr^p$ is a nonzero finite mixture with $c_p\ge0$, and $\mathcal P=\{p:c_p>0\}$. For $N\ge2$, we let $\mathcal H_N$ be the finite-dimensional real vector space spanned by the homogeneous polynomials on $\R^N$ whose degrees lie in $\mathcal P$, with the topology given by any norm $|\cdot|$. The field $H_N$ is a centered Gaussian random element of $\mathcal H_N$ (\cref{lem:pre-field}). We write $\Pp_H$ and $\E_H$ for its law and the corresponding expectation, and $H$ for a generic element of $\mathcal H_N$. For $g\in O(N)$, we set $H^g=H\circ g^{-1}$, and for a probability measure $\mu$ on $S_N$ we let $g_*\mu=\mu\circ g^{-1}$ be its image under $g$. The covariance of $H_N$ depends only on $R(x,y)$, and \cref{lem:pre-field} shows that
+\begin{equation}\label{eq:red-isotropy}
+H_N^g\overset{d}{=}H_N\qquad\text{for every }g\in O(N).
+\end{equation}
+
+Fix $\beta\ge0$. For $H\in\mathcal H_N$, we write $\pi^H=\pi^H_{N,\beta}$ for the Gibbs measure, $P^H_t=e^{tL_{\beta,H}}$ for the semigroup, and $P^H_t(x,A)$ for its transition kernel. For a probability measure $\mu$ on $S_N$, we set $(\mu P^H_t)(A)=\int\mu(\dd x)P^H_t(x,A)$. We let $\Pp^H_\mu$ be the law of the diffusion $(X_t)_{t\ge0}$ with generator $L_{\beta,H}$ and initial law $\mu$; we write $\Pp^H_x$ when $\mu=\delta_x$. The initial point is always independent of the driving noise. For a Borel set $D\subset S_N$, we set
+\begin{equation*}
+Z_H(D)=\int_De^{\beta H}\dd\nu_N,
+\end{equation*}
+so that $Z_{N,\beta}=Z_H(S_N)$ and $\pi^H(D)=Z_H(D)/Z_H(S_N)$.
+
+Fix $Q\in(0,1)$. Recall the center field $H_Q(u)=H(\sqrt Q\,u)$ and the radial derivative $K_Q(u)=\frac{\dd}{\dd t}H(t\sqrt Q\,u)\big|_{t=1}$ for $u\in S_N$. Here $H$ is the polynomial itself, and $K_Q(u)=\sqrt Q\,u\cdot\nabla H(\sqrt Q\,u)$, where $\nabla$ is the Euclidean gradient. We write $\nabla_{S_N}$ for the gradient along $S_N$.
+
+\begin{definition}[Critical points in a window and their bands]\label{def:red-centers}
+Let $Q\in(0,1)$, let $U\subset\R$ be a compact interval, let $(m_N)_{N\ge2}$ be a deterministic real sequence, and let $b\in(0,\sqrt Q)$. For $H\in\mathcal H_N$ and $M>0$, we define
+\begin{equation*}
+\cC_{N,M}(H)=\bigl\{u\in S_N:\ \nabla_{S_N}H_Q(u)=0,\ |H_Q(u)-m_N|\le M,\ K_Q(u)/N\in U\bigr\}.
+\end{equation*}
+For $u\in S_N$, the band of $u$ is $B_u=\{x\in S_N:|R(x,u)-\sqrt Q|\le b\}$, and we set
+\begin{equation*}
+B_{N,M}(H)=\bigcup_{u\in\cC_{N,M}(H)}B_u.
+\end{equation*}
+For $a\in(0,1)$ and $u\in S_N$, we let $C_a(u)=\{x\in S_N:|R(x,u)|\ge a\}$.
+\end{definition}
+
+The elements of $\cC_{N,M}(H)$ are the critical points of $H_Q$ in the energy window $[m_N-M,m_N+M]$ whose normalized radial derivative lies in $U$. In \cref{sec:condproof}, $U$ is a small interval around $K_0$ and $m_N=NE_0+O(\log N)$, where the ground-state energy $E_0$ and the radial derivative $K_0$ are given by \cref{prop:th-structure}; in this section, $U$, $(m_N)$, and $b$ are arbitrary. We count points of $S_N$. When $\xi$ is even, we have $H_Q(-u)=H_Q(u)$ and $K_Q(-u)=K_Q(u)$. Then $\cC_{N,M}(H)=-\cC_{N,M}(H)$, and both bands $B_u$ and $B_{-u}=-B_u$ enter the union. If $a<\sqrt Q-b$, then
+\begin{equation*}
+B_u\subset C_a(u),
+\end{equation*}
+since every $x\in B_u$ satisfies $R(x,u)\ge\sqrt Q-b>a$.
+
+We say that the bands carry almost all of the Gibbs mass if
+\begin{equation}\label{eq:red-capture}
+\lim_{M\to\infty}\limsup_{N\to\infty}\E_H\bigl[\pi^{H}\bigl(B_{N,M}(H)^c\bigr)\bigr]=0.
+\end{equation}
+Because $0\le\pi^H(B_{N,M}(H)^c)\le1$, this is equivalent to
+\begin{equation*}
+\lim_{M\to\infty}\limsup_{N\to\infty}\Pp_H\bigl\{\pi^H\bigl(B_{N,M}(H)^c\bigr)>\eta\bigr\}=0\qquad\text{for every }\eta>0,
+\end{equation*}
+by Markov's inequality in one direction and the bound $\E Y\le\eta+\Pp\{Y>\eta\}$ for $Y\in[0,1]$ in the other. The order of the limits is part of the meaning of \eqref{eq:red-capture}: $M$ is fixed while $N$ tends to infinity, and only afterward does $M$ tend to infinity. The same convention applies to every iterated limit in this part; no parameter is allowed to grow with $N$.
+
+\section{Measurability and rotations}\label{sec:red-measurability}
+
+The arguments below integrate quantities such as $P^H_T(x,B_{N,M}(H))$ over the field, the initial point, and the rotation group. The next two lemmas show that these quantities are Borel functions and that they transform correctly under rotations.
+
+\begin{lemma}[Measurable path laws and rotation covariance]\label{lem:red-kernels}
+Let $N\ge2$, $\beta\ge0$, and $T\in(0,\infty)$. For $H\in\mathcal H_N$ and $x\in S_N$, let $\Pp^H_x$ also denote the law of $(X_t)_{t\in[0,T]}$ on $C([0,T],S_N)$.
+\begin{enumerate}[label=(\alph*)]
+\item The map $(H,x)\mapsto\Pp^H_x$ is a Borel probability kernel from $\mathcal H_N\times S_N$ to $C([0,T],S_N)$. In particular, $(H,x)\mapsto P^H_t(x,A)$ is Borel for every $t\in[0,T]$ and every Borel set $A\subset S_N$.
+\item For every $g\in O(N)$, $x\in S_N$, $t\ge0$, and Borel set $A\subset S_N$,
+\begin{equation}\label{eq:red-covariance}
+P^{H^g}_t(gx,gA)=P^H_t(x,A),\qquad\pi^{H^g}=g_*\pi^H.
+\end{equation}
+\item For every Borel probability kernel $H\mapsto\mu^H$ from $\mathcal H_N$ to $S_N$ and every $t\ge0$, the map $H\mapsto\norm{\mu^HP^H_t-\pi^H}_{\TV}$ is Borel, and
+\begin{equation}\label{eq:red-contraction}
+\inf_{0\le t\le T}\norm{\mu^HP^H_t-\pi^H}_{\TV}=\norm{\mu^HP^H_T-\pi^H}_{\TV}.
+\end{equation}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+We realize the diffusion as the solution of an It\^o equation in $\R^N$ whose coefficients depend continuously on $H$. Part (a) then follows from the continuity of the solution in $(H,x)$, and part (b) from the transformation of the equation under $g$.
+
+\paragraph{The stochastic differential equation.}
+For $x\in\R^N$, let $\Pi_x=\mathrm{Id}-xx^{\mathsf T}/N$; for $x\in S_N$, this is the orthogonal projection onto the tangent space of $S_N$ at $x$. Fix a smooth function $\chi\colon\R^N\to[0,1]$ that depends only on $|x|$, equals one on $\{N/2\le|x|^2\le2N\}$, and vanishes outside $\{N/4\le|x|^2\le4N\}$. Let $W$ be a standard Brownian motion in $\R^N$, and consider
+\begin{equation}\label{eq:red-sde}
+\dd X_t=\sqrt2\,\chi(X_t)\Pi_{X_t}\dd W_t+\chi(X_t)\Bigl(\beta\Pi_{X_t}\nabla H(X_t)-\frac{N-1}{N}X_t\Bigr)\dd t,\qquad X_0=x\in S_N.
+\end{equation}
+For $x\in S_N$, we have $\Pi_x\nabla H(x)=\nabla_{S_N}H(x)$. Then \eqref{eq:red-sde} is the equation \eqref{eq:pre-sde} of \cref{lem:pre-dynamics}, with a particular extension of its coefficients off a neighborhood of $S_N$. That lemma shows that \eqref{eq:red-sde} has a unique strong solution $X^{H,x}$, which stays on $S_N$ and is the diffusion with generator $L_{\beta,H}$ started at $x$, so that $\Pp^H_x$ is the law of $X^{H,x}$.
+
+We now show that $X^{H,x}$ depends continuously on $(H,x)$. The coefficients of \eqref{eq:red-sde} are smooth with compact support in $x$, and the drift is affine in $H$. For every $R>0$, there exists $C=C(N,\beta,R)$ such that, for $|H|,|H'|\le R$, both coefficients are $C$-Lipschitz in $x$ and the drift changes by at most $C|H-H'|$ when $H$ is replaced by $H'$. We set $X^{(0)}_t=x$ and define $X^{(k+1)}$ by inserting $X^{(k)}$ on the right side of \eqref{eq:red-sde}. Using Doob's maximal inequality and the It\^o isometry, we find
+\begin{equation*}
+\E\sup_{s\le t}\bigl|X^{(k+1)}_s-X^{(k)}_s\bigr|^2\le C'\int_0^t\E\sup_{v\le s}\bigl|X^{(k)}_v-X^{(k-1)}_v\bigr|^2\dd s,
+\end{equation*}
+so the left side is at most $C''(C't)^k/k!$. The iterates converge almost surely, uniformly on $[0,T]$, and by uniqueness the limit is $X^{H,x}$. By induction on $k$, the joint law of $(X^{(k)},W)$ is the same for all standard Brownian motions $W$, because the stochastic integral in \eqref{eq:red-sde} is a limit in probability of Riemann sums, which are continuous functions of $(X^{(k)},W)$. Hence the law of $X^{H,x}$ does not depend on the choice of the driving Brownian motion. Using the same inequalities and Gronwall's lemma, we obtain
+\begin{equation}\label{eq:red-stability}
+\E\sup_{t\le T}\bigl|X^{H,x}_t-X^{H',x'}_t\bigr|^2\le C_T\bigl(|x-x'|^2+|H-H'|^2\bigr),\qquad|H|,|H'|\le R,
+\end{equation}
+where both solutions are driven by the same $W$ and $C_T$ depends on $N$, $\beta$, $R$, and $T$.
+
+\paragraph{Measurability.}
+If $(H_j,x_j)\to(H,x)$, then \eqref{eq:red-stability} implies that $X^{H_j,x_j}\to X^{H,x}$ in probability in $C([0,T],\R^N)$, and in particular $\Pp^{H_j}_{x_j}\to\Pp^H_x$ weakly. Then $(H,x)\mapsto\int\Phi\dd\Pp^H_x$ is continuous for all bounded continuous functions $\Phi$ on $C([0,T],S_N)$, and by the monotone class theorem it is Borel for all bounded Borel $\Phi$. This proves (a).
+
+\paragraph{Rotations.}
+Fix $g\in O(N)$. Note that $\chi$ depends only on $|x|$, that $\Pi_{gx}=g\Pi_xg^{-1}$, and that $\nabla H^g(gx)=g\nabla H(x)$. Then the process $gX^{H,x}$ solves \eqref{eq:red-sde} with $H^g$ in place of $H$, initial point $gx$, and the Brownian motion $gW$ in place of $W$. By pathwise uniqueness, $gX^{H,x}$ is the solution of \eqref{eq:red-sde} for the field $H^g$ and the initial point $gx$, driven by $gW$. Since $gW$ is a standard Brownian motion and the law of the solution does not depend on the driving Brownian motion, $gX^{H,x}$ has the law of $X^{H^g,gx}$. Evaluating at time $t$, we obtain the first identity in \eqref{eq:red-covariance}. For the second identity, we use the invariance of $\nu_N$ under $g$:
+\begin{equation*}
+\int_{gA}e^{\beta H^g}\dd\nu_N=\int_{gA}e^{\beta H(g^{-1}y)}\,\nu_N(\dd y)=\int_Ae^{\beta H}\dd\nu_N.
+\end{equation*}
+Taking $A=S_N$ and dividing, we obtain $\pi^{H^g}(gA)=\pi^H(A)$.
+
+\paragraph{Total variation.}
+Let $\cA$ be the algebra generated by a countable base of the topology of $S_N$; it is countable. For finite Borel measures $\lambda,\rho$ on $S_N$, we claim that the supremum of $|\lambda(A)-\rho(A)|$ over $A\in\cA$ equals the supremum over all Borel sets. Indeed, given a Borel set $A$ and $\eps>0$, by regularity there exist a compact set $K$ and an open set $O$ with $K\subset A\subset O$ and $(\lambda+\rho)(O\setminus K)<\eps$. Finitely many base sets contained in $O$ cover $K$, and their union $A'\in\cA$ satisfies $|\lambda(A)-\lambda(A')|+|\rho(A)-\rho(A')|\le(\lambda+\rho)(O\setminus K)<\eps$. For each $A\in\cA$, the map $H\mapsto(\mu^HP^H_t)(A)$ is Borel by (a), and $H\mapsto\pi^H(A)$ is continuous by dominated convergence. We deduce that $H\mapsto\norm{\mu^HP^H_t-\pi^H}_{\TV}$ is Borel, as a countable supremum of Borel functions. Finally, $\pi^H$ is invariant for $P^H_t$ by \cref{lem:pre-dynamics}, and \cref{lem:pre-contraction} implies that $t\mapsto\norm{\mu^HP^H_t-\pi^H}_{\TV}$ is nonincreasing, which gives \eqref{eq:red-contraction}.
+\end{proof}
+
+\begin{lemma}[Measurable and equivariant critical sets]\label{lem:red-unions}
+Let $Q$, $U$, $(m_N)$, and $b$ be as in \cref{def:red-centers}, and let $M>0$, $a\in(0,1)$, and $T\in(0,\infty)$.
+\begin{enumerate}[label=(\alph*)]
+\item The sets $\{(H,u):u\in\cC_{N,M}(H)\}$ and $\{(H,x):x\in B_{N,M}(H)\}$ are closed in $\mathcal H_N\times S_N$. For every $g\in O(N)$ and $H\in\mathcal H_N$,
+\begin{equation}\label{eq:red-equivariance}
+\cC_{N,M}(H^g)=g\,\cC_{N,M}(H),\qquad B_{N,M}(H^g)=g\,B_{N,M}(H).
+\end{equation}
+\item The function $\theta(H,u)=\Pp^H_{\nu_N}\{X_t\in C_a(u)\text{ for some }t\in[0,T]\}$ is Borel on $\mathcal H_N\times S_N$, and the probability $\Pp^H_{\nu_N}\{X_t\in C_a(u)\text{ for some }t\in[0,T]\text{ and some }u\in\cC_{N,M}(H)\}$ is a Borel function of $H$.
+\item The set of $H$ for which $\cC_{N,M}(H)$ is finite is Borel, and $S(H)=\sum_{u\in\cC_{N,M}(H)}\theta(H,u)\in[0,\infty]$ is a Borel function of $H$; it equals $+\infty$ when $\cC_{N,M}(H)$ is infinite. Moreover, for all $H$,
+\begin{equation}\label{eq:red-union-bound}
+\begin{split}
+\sup_{0\le t\le T}(\nu_NP^H_t)\Bigl(\bigcup_{u\in\cC_{N,M}(H)}C_a(u)\Bigr)
+&\le\Pp^H_{\nu_N}\bigl\{X_t\in C_a(u)\text{ for some }t\le T\text{ and }u\in\cC_{N,M}(H)\bigr\}\\
+&\le S(H).
+\end{split}
+\end{equation}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For (a), we first note that the maps $(H,u)\mapsto H_Q(u)$, $K_Q(u)$, and $\nabla_{S_N}H_Q(u)$ are continuous, because the coefficients of these polynomials in $u$ depend linearly on $H$. The first set is closed because $U$ is closed. The second set is the projection, along the compact factor $S_N$ of the variable $u$, of the closed set $\{(H,u,x):u\in\cC_{N,M}(H),\ |R(x,u)-\sqrt Q|\le b\}$. Such a projection is closed: if $(H_j,x_j)\to(H,x)$ with witnesses $u_j$, we may pass to a subsequence along which $u_j$ converges to some $u$, and then $(H,u,x)$ belongs to the closed set. For the equivariance, note that $(H^g)_Q(v)=H_Q(g^{-1}v)$ for $v\in S_N$, so that
+\begin{equation*}
+(H^g)_Q(gu)=H_Q(u),\qquad (K^g)_Q(gu)=K_Q(u),\qquad\nabla_{S_N}(H^g)_Q(gu)=g\nabla_{S_N}H_Q(u),
+\end{equation*}
+where $(K^g)_Q$ is the radial derivative of $H^g$. From these identities, we see that $u\in\cC_{N,M}(H)$ if and only if $gu\in\cC_{N,M}(H^g)$. Since $R(gx,gu)=R(x,u)$, we have $B_{gu}=gB_u$, and the second identity in \eqref{eq:red-equivariance} follows.
+
+For (b), the map $(\omega,u)\mapsto\max_{t\le T}|R(\omega(t),u)|$ is continuous on $C([0,T],S_N)\times S_N$, and the set $\{(\omega,u):\max_{t\le T}|R(\omega(t),u)|\ge a\}$ is closed. Integrating its indicator against the Borel kernel $\Pp^H_x$ of \cref{lem:red-kernels}(a), and then against $\nu_N(\dd x)$, we find that $\theta$ is Borel. The set of pairs $(H,\omega)$ for which some $u\in\cC_{N,M}(H)$ satisfies $\max_{t\le T}|R(\omega(t),u)|\ge a$ is closed, by the projection argument of (a), and the same integration proves the second assertion. The first assertion is also the case $\mathcal A=\{(\omega,u):\max_{t\le T}|R(\omega(t),u)|\ge a\}$ of \cref{lem:kr-hitting}.
+
+For (c), let $O\subset S_N$ be open and let $O_k=\{x\in S_N:\mathrm{dist}(x,O^c)\ge1/k\}$. For $l\in\N$, the event $\{\#(\cC_{N,M}(H)\cap O)\ge l\}$ is the union over $k$ of the events that there exist $u_1,\dots,u_l\in\cC_{N,M}(H)\cap O_k$ with $|u_i-u_j|\ge1/k$ for $i\ne j$. Each of these is the projection along the compact factor $(S_N)^l$ of a closed set, and it is closed. Hence $H\mapsto\#(\cC_{N,M}(H)\cap O)$ is Borel for all open $O$, and the set $F$ where $\cC_{N,M}(H)$ is finite is Borel. On $F_l=\{H:\#\cC_{N,M}(H)\le l\}$, the counting measure $n_H=\sum_{u\in\cC_{N,M}(H)}\delta_u$ is finite. The Borel sets $A$ for which $H\mapsto n_H(A)\ind_{F_l}(H)$ is Borel form a class that contains the open sets and is closed under proper differences and increasing unions; by Dynkin's theorem, it contains all Borel sets. Applying the monotone class theorem to $\theta$, starting from products $\ind_{A_1}(H)\ind_{A_2}(u)$, we find that $H\mapsto\int\theta(H,u)\,n_H(\dd u)=S(H)$ is Borel on each $F_l$. Off $F$, every term satisfies $\theta(H,u)\ge\Pp^H_{\nu_N}\{X_0\in C_a(u)\}=\nu_N(C_a(u))$, and $\nu_N(C_a(u))>0$ does not depend on $u$, because $a<1$ and $\nu_N$ is rotation invariant. Then $S=+\infty$ off $F$, and $S$ is Borel. In \eqref{eq:red-union-bound}, the first inequality holds because $X_t\in\bigcup_uC_a(u)$ for one $t\le T$ is contained in the event on the right. The second is countable subadditivity when $\cC_{N,M}(H)$ is finite, and it is trivial otherwise.
+\end{proof}
+
+\section{Separation from Gibbs concentration, counts, and hitting bounds}\label{sec:red-separation}
+
+Each of the separation statements in this part ends with the same order of limits: a window half-width $M$ is fixed for a given tolerance, $N$ tends to infinity, and only then is the tolerance removed. We isolate this step.
+
+\begin{lemma}[Testing the band union]\label{lem:red-test}
+Assume that the bands carry almost all of the Gibbs mass, \eqref{eq:red-capture}. Let $\Delta_N(H)\in[0,1]$ be random variables. Suppose that, for every fixed $M>0$, there exist random variables $\mathcal E_{N,M}(H)\ge0$ with $\mathcal E_{N,M}\to0$ in $\Pp_H$-probability as $N\to\infty$, such that
+\begin{equation*}
+\Delta_N(H)\ge1-\pi^H\bigl(B_{N,M}(H)^c\bigr)-\mathcal E_{N,M}(H)\qquad\text{for all }N\text{ and }H.
+\end{equation*}
+Then $\Delta_N\to1$ in $\Pp_H$-probability.
+\end{lemma}
+
+\begin{proof}
+Fix $\eps,\delta\in(0,1)$. By \eqref{eq:red-capture}, there exists $M$ such that $\limsup_N\E_H\pi^H(B_{N,M}^c)<\eps\delta/4$. Using Markov's inequality, we find that $\limsup_N\Pp_H\{\pi^H(B_{N,M}^c)>\eps/2\}\le\delta/2$. With this $M$ fixed, $\Pp_H\{\mathcal E_{N,M}>\eps/2\}\to0$. Outside these two events we have $\Delta_N\ge1-\eps$, so $\limsup_N\Pp_H\{\Delta_N<1-\eps\}\le\delta/2$. Since $\delta$ is arbitrary, this completes the proof.
+\end{proof}
+
+In the applications, $\Delta_N=\inf_{0\le t\le T_N}\norm{\mu^HP^H_t-\pi^H}_{\TV}$ for an initial law $\mu^H$, and \cref{prop:pre-endpoint} implies that $\Delta_N\ge1-\pi^H(B_{N,M}^c)-(\mu^HP^H_{T_N})(B_{N,M})$. The next proposition is the reduction for the uniform initial law.
+
+\begin{proposition}[Separation from Gibbs concentration, counts, and hitting bounds]\label{prop:red-consumer}
+Let $\beta>0$, let $Q$, $U$, $(m_N)$, and $b$ be as in \cref{def:red-centers}, let $a\in(0,\sqrt Q-b)$, and let $(T_N)$ be deterministic times. For $u\in S_N$, set
+\begin{equation*}
+\theta_N(H,u)=\Pp^H_{\nu_N}\bigl\{X_t\in C_a(u)\text{ for some }t\in[0,T_N]\bigr\}.
+\end{equation*}
+Assume the following.
+\begin{enumerate}[label=(\roman*)]
+\item The bands carry almost all of the Gibbs mass, \eqref{eq:red-capture}.
+\item For every fixed $M>0$, $A_M=\limsup_{N\to\infty}\E_H|\cC_{N,M}(H)|<\infty$.
+\item For every fixed $M>0$, there exist numbers $q_{N,M}\ge0$ with $\lim_{N\to\infty}q_{N,M}=0$ such that, for all sufficiently large $N$,
+\begin{equation}\label{eq:red-palm}
+\E_H\sum_{u\in\cC_{N,M}(H)}\theta_N(H,u)\le q_{N,M}\,\E_H|\cC_{N,M}(H)|.
+\end{equation}
+\end{enumerate}
+For $M>0$, let $S_{N,M}(H)=\sum_{u\in\cC_{N,M}(H)}\theta_N(H,u)$. Then $\lim_{N\to\infty}\E_HS_{N,M}=0$ for each fixed $M$, and, for all $H$,
+\begin{equation}\label{eq:red-path-bound}
+\begin{gathered}
+\sup_{0\le t\le T_N}(\nu_NP^H_t)\bigl(B_{N,M}(H)\bigr)\le S_{N,M}(H),\\
+\inf_{0\le t\le T_N}\norm{\nu_NP^H_t-\pi^H}_{\TV}\ge1-\pi^H\bigl(B_{N,M}(H)^c\bigr)-S_{N,M}(H).
+\end{gathered}
+\end{equation}
+In particular, $\inf_{0\le t\le T_N}\norm{\nu_NP^H_t-\pi^H}_{\TV}\to1$ in $\Pp_H$-probability.
+\end{proposition}
+
+\begin{proof}
+Fix $M$. By (ii) and (iii), we have $\E_HS_{N,M}\le q_{N,M}(A_M+1)$ for all sufficiently large $N$, and the right side tends to zero. Because $a<\sqrt Q-b$, every band satisfies $B_u\subset C_a(u)$, so that $B_{N,M}(H)\subset\bigcup_{u\in\cC_{N,M}(H)}C_a(u)$. The first bound in \eqref{eq:red-path-bound} now follows from \eqref{eq:red-union-bound}. For every $t\le T_N$, we test the set $B_{N,M}(H)$ in the definition of the total variation distance and obtain
+\begin{equation*}
+\begin{split}
+\norm{\nu_NP^H_t-\pi^H}_{\TV}&\ge\pi^H\bigl(B_{N,M}(H)\bigr)-(\nu_NP^H_t)\bigl(B_{N,M}(H)\bigr)\\
+&\ge1-\pi^H\bigl(B_{N,M}(H)^c\bigr)-S_{N,M}(H),
+\end{split}
+\end{equation*}
+which is the second bound. Using Markov's inequality, we find that $S_{N,M}\to0$ in $\Pp_H$-probability for each fixed $M$. \Cref{lem:red-test}, applied with $\Delta_N=\inf_{t\le T_N}\norm{\nu_NP^H_t-\pi^H}_{\TV}$ and $\mathcal E_{N,M}=S_{N,M}$, completes the proof. The function $\Delta_N$ is Borel by \cref{lem:red-kernels}(c), and $S_{N,M}$ is Borel by \cref{lem:red-unions}(c).
+\end{proof}
+
+\begin{remark}[The weights in hypothesis (iii)]\label{rem:red-palm}
+The left side of \eqref{eq:red-palm} is the expected sum of the hitting probabilities over the critical points in the window. By the marked Kac--Rice formula of \cref{thm:kr-marked}, we can write it as the integral, against the intensity measure of $\cC_{N,M}$, of the expectation of $\theta_N(H,u)$ under the law of the field conditioned on a critical point at $u$ with prescribed marks, reweighted by $|\det\nabla^2_{S_N}H_Q(u)|$ and normalized to a probability measure. Since the total mass of the intensity measure is $\E_H|\cC_{N,M}|$, \eqref{eq:red-palm} holds whenever this determinant-weighted conditional hitting probability is at most $q_{N,M}$ at every point of the window. The hitting estimate for the caps under critical-point conditioning in \cref{sec:entrance} bounds the hitting probability under the ordinary Gaussian conditioning on the values of $H_Q(u)$, $K_Q(u)$, and $\nabla_{S_N}H_Q(u)$, without the determinant. The weight cannot simply be dropped, since the determinant and the trajectory both depend on the whole field. \Cref{lem:kr-holder} converts the ordinary bound into \eqref{eq:red-palm}, at the cost of a power, using the moments of the normalized determinant from \cref{prop:kr-determinant}. This is carried out in \cref{prop:cp-transfer}.
+\end{remark}
+
+\begin{remark}[The order of the parameters]\label{rem:red-order}
+In \cref{prop:red-consumer}, the times $T_N$ do not depend on $M$, and hypothesis (iii) must hold for every fixed $M$ with the same $T_N$. In \cref{sec:condproof}, $T_N=e^{\gamma N}$, and $\gamma$ comes from a hitting estimate that holds uniformly over a fixed compact rectangle of normalized marks $(h,k)=(H_Q(u)/N,K_Q(u)/N)$. When $m_N/N$ converges, this rectangle contains the marks $[(m_N-M)/N,(m_N+M)/N]\times U$ of every fixed window once $N$ is large enough, depending on $M$. We therefore fix the rectangle, $a$, and $\gamma$ first. The half-width $M$ is chosen afterward, depending on the tolerance, and only the constants and the threshold for $N$ in (iii) depend on $M$. A hitting estimate whose time scale depended on $M$ would not suffice, because \eqref{eq:red-capture} lets $M$ tend to infinity after $N$.
+\end{remark}
+
+\begin{remark}[An endpoint formulation]\label{rem:red-endpoint}
+For separation alone, the bound on the whole path in \eqref{eq:red-path-bound} is more than needed. If $\lim_{N\to\infty}\E_H(\nu_NP^H_{T_N})(B_{N,M}(H))=0$ for each fixed $M$, then the same conclusion follows from \cref{prop:pre-endpoint}, Markov's inequality, and \cref{lem:red-test}. The results of \cref{sec:red-initial} use this endpoint form.
+\end{remark}
+
+\section{Concentration on the bands of a fixed window from a coarse cover}\label{sec:red-capture}
+
+The hypothesis \eqref{eq:red-capture} concerns critical points in a fixed window $[m_N-M,m_N+M]$. In the next proposition, we derive it from three estimates that are easier to verify directly: the bands of a coarser family of critical points carry almost all of the Gibbs mass; the band of a critical point in a fixed window is rarely much lighter than its energy suggests; and the sum of the partition functions $Z_H(B_u)$ of the bands of critical points with $H_Q(u)<m_N-M$ decays exponentially in $M$. The estimates of \cref{sec:purecover,sec:mixbands} have this form.
+
+\begin{proposition}[Concentration on the bands of a fixed window from a coarse cover]\label{prop:red-capture}
+Let $\beta>0$ and let $Q$, $U$, $(m_N)$, and $b$ be as in \cref{def:red-centers}. Assume that
+\begin{equation}\label{eq:red-ground}
+\lim_{L\to\infty}\liminf_{N\to\infty}\Pp_H\Bigl\{\cC_{N,L}(H)\ne\varnothing\ \text{and}\ \max_{S_N}H_Q\le m_N+L\Bigr\}=1.
+\end{equation}
+Let $D_N>0$ be deterministic, and let $\cC^{\mathrm{co}}_N(H)$ be finite sets of critical points $u$ of $H_Q$ with $K_Q(u)/N\in U$, whose graphs $\{(H,u):u\in\cC^{\mathrm{co}}_N(H)\}$ are Borel. Assume the following.
+\begin{enumerate}[label=(\roman*)]
+\item (Coarse cover.) $\displaystyle\lim_{N\to\infty}\E_H\,\pi^H\Bigl(\Bigl[\bigcup_{u\in\cC^{\mathrm{co}}_N(H)}B_u\Bigr]^c\Bigr)=0$.
+\item (Light bands are rare.) For every fixed $L>0$,
+\begin{equation*}
+\lim_{\delta\downarrow0}\limsup_{N\to\infty}\E_H\sum_{u\in\cC_{N,L}(H)}\ind\bigl\{Z_H(B_u)<\delta D_Ne^{\beta(H_Q(u)-m_N)}\bigr\}=0.
+\end{equation*}
+\item (Critical points below the window.) There exist $C_*,c_*>0$ such that, for every fixed $M>0$,
+\begin{equation*}
+\limsup_{N\to\infty}D_N^{-1}\,\E_H\sum_{\substack{u\in\cC^{\mathrm{co}}_N(H)\\H_Q(u)<m_N-M}}Z_H(B_u)\le C_*e^{-c_*M}.
+\end{equation*}
+\end{enumerate}
+Then the bands carry almost all of the Gibbs mass, \eqref{eq:red-capture}.
+\end{proposition}
+
+We call the band $B_u$ of a point $u\in\cC_{N,L}(H)$ \emph{light} if $Z_H(B_u)<\delta D_Ne^{\beta(H_Q(u)-m_N)}$, so that (ii) bounds the expected number of light bands. The quantities in (i)--(iii) are Borel functions of $H$. Indeed, the map $(H,u)\mapsto Z_H(B_u)$ is continuous, by dominated convergence, since the two latitude spheres bounding $B_u$ have $\nu_N$-measure zero. For fixed $N$, $L$, and $\delta$, let $f(H,u)=\delta D_Ne^{\beta(H_Q(u)-m_N)}-Z_H(B_u)$. The event that at least $l$ points $u\in\cC_{N,L}(H)$ satisfy $f(H,u)>0$ is the union over $k\ge1$ of the projections, along the compact factor $(S_N)^l$, of the closed sets defined by $u_i\in\cC_{N,L}(H)$, $f(H,u_i)\ge1/k$, and $|u_i-u_j|\ge1/k$ for $i\ne j$. These projections are closed, so the count in (ii) is Borel, also on fields with infinitely many critical points. The graph of $\cC^{\mathrm{co}}_N$ is a Borel set with finite sections. By the Lusin--Novikov uniformization theorem \cite[Theorem~18.10]{Kechris1995}, it is a countable disjoint union of graphs of Borel maps $u_j$ defined on Borel subsets of $\mathcal H_N$. Summing over this enumeration shows that the sum in (iii) is Borel, and that the union of the coarse bands has a Borel graph in $(H,x)$, so that its Gibbs mass in (i) is Borel.
+
+\begin{proof}
+We first use (ii) and the existence part of \eqref{eq:red-ground} to bound $Z_H(S_N)$ from below by one band. Then we split the missing Gibbs mass into the part missed by the coarse family and the part carried by the bands of critical points below the window.
+
+\paragraph{A lower bound for the partition function.}
+Fix $\eps\in(0,1)$. By \eqref{eq:red-ground}, there exists $L$ such that $\limsup_N\Pp_H\{\cC_{N,L}(H)=\varnothing\}<\eps$. With $L$ fixed, by (ii) there exists $\delta>0$ such that the expected number of $u\in\cC_{N,L}(H)$ with $Z_H(B_u)<\delta D_Ne^{\beta(H_Q(u)-m_N)}$ has $\limsup$ in $N$ below $\eps$. Using Markov's inequality, we see that the probability that there exists such a $u$ has $\limsup$ below $\eps$. If $\cC_{N,L}(H)$ contains a point $u$ that is not of this kind, then $H_Q(u)\ge m_N-L$, and
+\begin{equation*}
+Z_H(S_N)\ge Z_H(B_u)\ge\delta D_Ne^{\beta(H_Q(u)-m_N)}\ge\eta D_N,\qquad\eta=\delta e^{-\beta L}.
+\end{equation*}
+We conclude that
+\begin{equation}\label{eq:red-denominator}
+\limsup_{N\to\infty}\Pp_H\bigl\{Z_H(S_N)<\eta D_N\bigr\}<2\eps.
+\end{equation}
+This uses only the expected number of light bands; no band is selected in a way that depends on its determinant or on the field.
+
+\paragraph{Critical points below the window.}
+Let $G_{N,M}=\{\max_{S_N}H_Q\le m_N+M\}$. Note that $\lim_{M\to\infty}\limsup_N\Pp_H(G_{N,M}^c)=0$ by \eqref{eq:red-ground}. On $G_{N,M}$, every $u\in\cC^{\mathrm{co}}_N(H)\setminus\cC_{N,M}(H)$ satisfies $H_Q(u)<m_N-M$. Indeed, $u$ is a critical point with $K_Q(u)/N\in U$, and $u\notin\cC_{N,M}(H)$ means that $|H_Q(u)-m_N|>M$, while $H_Q(u)\le m_N+M$ on $G_{N,M}$. It follows that, on $G_{N,M}$,
+\begin{equation*}
+B_{N,M}(H)^c\subset\Bigl[\bigcup_{u\in\cC^{\mathrm{co}}_N(H)}B_u\Bigr]^c\cup\bigcup_{\substack{u\in\cC^{\mathrm{co}}_N(H)\\H_Q(u)<m_N-M}}B_u,
+\end{equation*}
+and on $G_{N,M}\cap\{Z_H(S_N)\ge\eta D_N\}$ we obtain
+\begin{equation}\label{eq:red-capture-split}
+\pi^H\bigl(B_{N,M}(H)^c\bigr)\le\pi^H\Bigl(\Bigl[\bigcup_{u\in\cC^{\mathrm{co}}_N(H)}B_u\Bigr]^c\Bigr)+\frac1{\eta D_N}\sum_{\substack{u\in\cC^{\mathrm{co}}_N(H)\\H_Q(u)<m_N-M}}Z_H(B_u).
+\end{equation}
+A point covered by several bands is counted several times in the last sum, which only increases it; we therefore do not need the bands to be disjoint.
+
+\paragraph{Conclusion.}
+We bound $\pi^H(B_{N,M}^c)$ by one outside $G_{N,M}\cap\{Z_H(S_N)\ge\eta D_N\}$, take expectations in \eqref{eq:red-capture-split}, and let $N\to\infty$ with $M$ fixed. Using (i), \eqref{eq:red-denominator}, and (iii), we find
+\begin{equation*}
+\limsup_{N\to\infty}\E_H\pi^H\bigl(B_{N,M}(H)^c\bigr)\le2\eps+\limsup_{N\to\infty}\Pp_H(G_{N,M}^c)+\eta^{-1}C_*e^{-c_*M}.
+\end{equation*}
+Letting $M\to\infty$ with $L$, $\delta$, and $\eta$ fixed, the right side tends to $2\eps$. Since $\eps$ is arbitrary, \eqref{eq:red-capture} follows. The parameters are chosen in the order $L$, $\delta$, $M$, and each is fixed before $N\to\infty$.
+\end{proof}
+
+\begin{remark}[On hypothesis (ii)]\label{rem:red-capture-filter}
+Hypothesis (ii) bounds the expected number of critical points in a fixed window whose band is light. Suppose that the counts in the window $\cC_{N,L}$ are bounded as in \cref{prop:red-consumer}(ii), and that the determinant-weighted conditional probability of $\{Z_H(B_u)<\delta D_Ne^{\beta(H_Q(u)-m_N)}\}$ is at most $\rho_L(\delta)+o_N(1)$, uniformly over the points and marks of this window, where $\rho_L(\delta)\to0$ as $\delta\downarrow0$. Using the marked Kac--Rice formula of \cref{thm:kr-marked}, we find that the expected number of light bands is at most $(A_L+o_N(1))(\rho_L(\delta)+o_N(1))$, which gives (ii). If the existence part of \eqref{eq:red-ground} is known only for a subfamily of $\cC_{N,L}(H)$, for instance the critical points on which an additional selection event holds, the proof applies with that subfamily in the existence event. The light bands are still counted over all of $\cC_{N,L}(H)$, which can only increase their number, and no conditional law normalized by the probability of the selection event is needed.
+\end{remark}
+
+\section{Initial laws other than the uniform law}\label{sec:red-initial}
+
+We now transfer separation from the uniform initial law to other initial laws. The first result uses only the rotation invariance \eqref{eq:red-isotropy}. It is an instance of the classical symmetrization over a compact group: the expected distance to equilibrium is a convex and rotation-invariant function of the initial law, so it is smallest at the rotation average of any initial law, which is $\nu_N$. The same averaging over a group underlies the Hunt--Stein theorem in statistics; see \citet[Section~8.5]{LehmannRomano2005}.
+
+\begin{theorem}[Initial laws independent of the field]\label{thm:red-haar}
+Let $\beta>0$ and $N\ge2$. For every Borel probability measure $\mu$ on $S_N$ and every $T\ge0$,
+\begin{equation}\label{eq:red-haar}
+\E_H\bigl[1-\norm{\mu P^H_T-\pi^H}_{\TV}\bigr]\le\E_H\bigl[1-\norm{\nu_NP^H_T-\pi^H}_{\TV}\bigr].
+\end{equation}
+Further, for deterministic times $T_N$ and every $\eps>0$,
+\begin{equation}\label{eq:red-haar-uniform}
+\sup_\mu\Pp_H\Bigl\{\inf_{0\le t\le T_N}\norm{\mu P^H_t-\pi^H}_{\TV}<1-\eps\Bigr\}\le\eps^{-1}\,\E_H\bigl[1-\norm{\nu_NP^H_{T_N}-\pi^H}_{\TV}\bigr],
+\end{equation}
+where the supremum is over all Borel probability measures $\mu$ on $S_N$. In particular, if $\inf_{0\le t\le T_N}\norm{\nu_NP^H_t-\pi^H}_{\TV}\to1$ in $\Pp_H$-probability, then the left side of \eqref{eq:red-haar-uniform} tends to zero for every $\eps>0$. The same convergence holds for every random probability measure $\mu_N$ on $S_N$ that is independent of $H_N$, in the joint probability of $H_N$ and $\mu_N$.
+\end{theorem}
+
+\begin{proof}
+We show that the expected distance is invariant under rotations of the initial law and convex in it, and then average over the rotation group.
+
+\paragraph{Averaging over rotations.}
+Let $\dd g$ be the normalized Haar measure on $O(N)$, which is invariant under left and right multiplication. For a bounded Borel function $f$ on $S_N$, let $\varphi(x)=\int f(gx)\dd g$. For $h\in O(N)$, we have $\varphi(hx)=\int f(ghx)\dd g=\varphi(x)$ by right invariance. The group $O(N)$ acts transitively on $S_N$, and $\varphi$ is constant. Integrating against $\nu_N$ and using Fubini's theorem and the rotation invariance of $\nu_N$, we find that the constant is $\int f\dd\nu_N$. Since $f$ is arbitrary, we obtain $\iint f(gx)\,\mu(\dd x)\dd g=\int f\dd\nu_N$, that is,
+\begin{equation}\label{eq:red-haar-average}
+\int_{O(N)}g_*\mu\dd g=\nu_N.
+\end{equation}
+
+\paragraph{Invariance and convexity.}
+For a probability measure $\lambda$ on $S_N$, let $F(\lambda)=\E_H\norm{\lambda P^H_T-\pi^H}_{\TV}$; the integrand is Borel by \cref{lem:red-kernels}(c). Fix $g\in O(N)$. By \eqref{eq:red-covariance}, we have $(g_*\mu)P^{H^g}_T=g_*(\mu P^H_T)$ and $\pi^{H^g}=g_*\pi^H$. As $g_*$ preserves the total variation distance, it follows that
+\begin{equation*}
+\norm{(g_*\mu)P^{H^g}_T-\pi^{H^g}}_{\TV}=\norm{\mu P^H_T-\pi^H}_{\TV}.
+\end{equation*}
+Taking expectations and using \eqref{eq:red-isotropy}, we obtain $F(g_*\mu)=F(\mu)$. On the other hand, by \eqref{eq:red-haar-average} and Fubini's theorem, we have $\nu_NP^H_T=\int(g_*\mu)P^H_T\dd g$ for all $H$. For every Borel set $A$, we therefore have
+\begin{equation*}
+\bigl|(\nu_NP^H_T)(A)-\pi^H(A)\bigr|\le\int\bigl|((g_*\mu)P^H_T)(A)-\pi^H(A)\bigr|\dd g\le\int\norm{(g_*\mu)P^H_T-\pi^H}_{\TV}\dd g.
+\end{equation*}
+Taking the supremum over $A$, we find $\norm{\nu_NP^H_T-\pi^H}_{\TV}\le\int\norm{(g_*\mu)P^H_T-\pi^H}_{\TV}\dd g$. The integrand is jointly Borel in $(H,g)$: the map $(H,g,x)\mapsto P^H_T(gx,A)$ is Borel by \cref{lem:red-kernels}(a), and the distance is a supremum over the countable algebra $\cA$ in the proof of that lemma. Taking expectations and using Tonelli's theorem, we conclude that $F(\nu_N)\le\int F(g_*\mu)\dd g=F(\mu)$, which is \eqref{eq:red-haar}.
+
+\paragraph{Uniformity.}
+Recall from \eqref{eq:red-contraction} that the infimum over $t\le T_N$ in \eqref{eq:red-haar-uniform} equals the distance at $T_N$. Applying Markov's inequality to the nonnegative deficit $1-\norm{\mu P^H_{T_N}-\pi^H}_{\TV}$ and using \eqref{eq:red-haar}, we obtain \eqref{eq:red-haar-uniform} for each $\mu$; the bound does not depend on $\mu$. If the deficit $Y_N=1-\norm{\nu_NP^H_{T_N}-\pi^H}_{\TV}\in[0,1]$ of the uniform initial law tends to zero in probability, then $\E_HY_N\to0$, because $\E_HY_N\le\eta+\Pp_H\{Y_N>\eta\}$ for every $\eta>0$. For a random initial law $\mu_N$ independent of $H_N$, we condition on $\mu_N$, apply \eqref{eq:red-haar-uniform} to its realization, and integrate. The map $(H,\mu)\mapsto\norm{\mu P^H_{T_N}-\pi^H}_{\TV}$ is jointly measurable, by the countable supremum above and the measurability of $\mu\mapsto\int f\dd\mu$ for bounded Borel $f$.
+\end{proof}
+
+\begin{remark}[The order of the supremum and the probability]\label{rem:red-haar-order}
+The supremum in \eqref{eq:red-haar-uniform} is outside the probability: for each initial law fixed before the field is drawn, the probability of failure is small, uniformly in the law. The theorem does not give one event of high probability on which the conclusion holds for every initial law, and no such event exists: the field-dependent choice $\mu=\pi^H$ is at distance zero from $\pi^H$ at all times. The remaining results of this section allow field-dependent initial laws under explicit restrictions.
+\end{remark}
+
+\begin{lemma}[Equal expected mass from every starting point]\label{lem:red-equal-mass}
+Let $T\ge0$, and let $B(H)\subset S_N$ be sets such that $\{(H,x):x\in B(H)\}$ is Borel and $B(H^g)=gB(H)$ for all $g\in O(N)$ and $H\in\mathcal H_N$. Set $q=\E_H(\nu_NP^H_T)(B(H_N))$. Then, for every $x\in S_N$ and every Borel probability measure $\mu$ on $S_N$,
+\begin{equation}\label{eq:red-equal-mass}
+\E_HP^H_T\bigl(x,B(H)\bigr)=q,\qquad\E_H(\mu P^H_T)\bigl(B(H)\bigr)=q.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The function $\varrho(H,x)=P^H_T(x,B(H))$ is Borel on $\mathcal H_N\times S_N$, since it is the integral of the indicator of the Borel graph of $B$ against the kernel of \cref{lem:red-kernels}(a). By \eqref{eq:red-covariance} and the equivariance of $B$, we have $\varrho(H^g,gx)=P^{H^g}_T(gx,gB(H))=\varrho(H,x)$. Then \eqref{eq:red-isotropy} implies that $\E_H\varrho(H,gx)=\E_H\varrho(H^g,gx)=\E_H\varrho(H,x)$. Because $O(N)$ acts transitively on $S_N$, the function $x\mapsto\E_H\varrho(H,x)$ is constant. Integrating it against $\nu_N$ and using Fubini's theorem identifies the constant as $q$, and integrating it against $\mu$ gives the second identity.
+\end{proof}
+
+For the remaining results, we let $Q$, $U$, $(m_N)$, and $b$ be as in \cref{def:red-centers}. Recall from \cref{lem:red-unions}(a) that the band unions $B_{N,M}(H)$ have Borel graphs and satisfy $B_{N,M}(H^g)=gB_{N,M}(H)$; in particular, \cref{lem:red-equal-mass} applies to them. For deterministic times $T_N$, we write
+\begin{equation*}
+q_{N,M}=\E_H(\nu_NP^H_{T_N})\bigl(B_{N,M}(H)\bigr).
+\end{equation*}
+In \cref{prop:cp-transfer}, this endpoint mass is shown to be at most a negative power of $N$ for each fixed $M$. Such a bound leaves room for initial laws that depend on the field in a limited way. We will use the bound
+\begin{equation}\label{eq:red-polynomial}
+q_{N,M}\le C_MN^{-\zeta}\qquad\text{for all sufficiently large }N,
+\end{equation}
+where $\zeta>0$ and, for each fixed $M>0$, $C_M$ is a constant.
+
+The next result allows a field-dependent choice among $K_N$ prescribed initial laws. It uses a union bound and allows $K_N$ to grow polynomially when \eqref{eq:red-polynomial} holds.
+
+\begin{corollary}[Selection among prescribed initial laws]\label{cor:red-selection}
+Let $\beta>0$, let $(T_N)$ be deterministic times, and suppose that the bands carry almost all of the Gibbs mass, \eqref{eq:red-capture}. For each $N$, let $\mu_{N,1},\dots,\mu_{N,K_N}$ be Borel probability measures on $S_N$ that do not depend on $H$. If $K_Nq_{N,M}\to0$ as $N\to\infty$ for every fixed $M>0$, then
+\begin{equation}\label{eq:red-selection}
+\inf\Bigl\{\Bigl\|\Bigl(\sum_{j=1}^{K_N}w_j\mu_{N,j}\Bigr)P^H_t-\pi^H\Bigr\|_{\TV}:\ w_j\ge0,\ \sum_{j=1}^{K_N}w_j=1,\ 0\le t\le T_N\Bigr\}\longrightarrow1
+\end{equation}
+in $\Pp_H$-probability. In particular, the conclusion holds for weights $w_j=w_j(H)$ that are arbitrary Borel functions of the field, and for a field-dependent choice of one of the laws $\mu_{N,j}$. For collections that are random but independent of $H_N$, with the same deterministic $K_N$, the conclusion holds in the joint probability.
+\end{corollary}
+
+\begin{proof}
+Fix $M>0$ and set $a_j(H)=(\mu_{N,j}P^H_{T_N})(B_{N,M}(H))$. By \cref{lem:red-equal-mass}, $\E_Ha_j=q_{N,M}$ for all $j$, and
+\begin{equation*}
+\E_H\max_{j\le K_N}a_j(H)\le\sum_{j\le K_N}\E_Ha_j(H)=K_Nq_{N,M}\longrightarrow0.
+\end{equation*}
+For every choice of weights, the mass of $B_{N,M}(H)$ under $(\sum_jw_j\mu_{N,j})P^H_{T_N}$ is $\sum_jw_ja_j(H)\le\max_ja_j(H)$. Applying \cref{prop:pre-endpoint} to each mixture, we find that the infimum $\Delta_N(H)$ in \eqref{eq:red-selection} satisfies
+\begin{equation*}
+\Delta_N(H)\ge1-\pi^H\bigl(B_{N,M}(H)^c\bigr)-\max_{j\le K_N}a_j(H).
+\end{equation*}
+Then \cref{lem:red-test}, with $\mathcal E_{N,M}=\max_ja_j$, implies \eqref{eq:red-selection}. The infimum $\Delta_N$ is a Borel function of $H$. Indeed, by \eqref{eq:red-contraction} it is the infimum over the weights of the distance at $T_N$; this distance changes by at most $\sum_j|w_j-w'_j|$ when $w$ is replaced by $w'$, so the infimum may be taken over the countable set of rational weights. For an independent random collection, we condition on its realization. The bound $\E_H\max_ja_j\le K_Nq_{N,M}$ holds for all realizations, and it can be integrated.
+\end{proof}
+
+Finally, we measure the dependence of the initial law on the field by its relative entropy with respect to $\nu_N$, which may be large on a set of fields of small probability.
+
+\begin{corollary}[Field-dependent initial laws with small relative entropy]\label{cor:red-entropy}
+Let $\beta>0$ and let $(T_N)$ be deterministic times. Assume that the bands carry almost all of the Gibbs mass, \eqref{eq:red-capture}, and that \eqref{eq:red-polynomial} holds for some $\zeta>0$. Let $H\mapsto\mu^H_N$ be a Borel probability kernel from $\mathcal H_N$ to $S_N$ such that
+\begin{equation}\label{eq:red-entropy}
+\frac{\KL(\mu^H_N\Vert\nu_N)}{\log N}\longrightarrow0\qquad\text{in }\Pp_H\text{-probability}.
+\end{equation}
+Then $\inf_{0\le t\le T_N}\norm{\mu^H_NP^H_t-\pi^H}_{\TV}\to1$ in $\Pp_H$-probability.
+\end{corollary}
+
+\begin{proof}
+Fix $M>0$ and $\tau\in(0,\zeta)$, and let $a_{N,M}(H)=(\nu_NP^H_{T_N})(B_{N,M}(H))$. By Markov's inequality and \eqref{eq:red-polynomial}, we have
+\begin{equation*}
+\Pp_H\bigl\{a_{N,M}>N^{-\tau}\bigr\}\le C_MN^{\tau-\zeta}\longrightarrow0.
+\end{equation*}
+Fix a field $H$ with $a_{N,M}(H)\le N^{-\tau}$ and $\KL(\mu^H_N\Vert\nu_N)<\infty$. If $a_{N,M}(H)=0$, then by \cref{prop:pre-endpoint} we have
+\begin{equation*}
+\inf_{0\le t\le T_N}\norm{\mu^H_NP^H_t-\pi^H}_{\TV}\ge1-\pi^H\bigl(B_{N,M}(H)^c\bigr).
+\end{equation*}
+If $0<a_{N,M}(H)\le N^{-\tau}<1$, then \cref{prop:pre-endpoint} implies that
+\begin{equation*}
+\inf_{0\le t\le T_N}\norm{\mu^H_NP^H_t-\pi^H}_{\TV}\ge1-\pi^H\bigl(B_{N,M}(H)^c\bigr)-\frac{\KL(\mu^H_N\Vert\nu_N)+\log2}{\tau\log N}.
+\end{equation*}
+Let $\mathcal E_{N,M}(H)$ be the last fraction when $a_{N,M}(H)\le N^{-\tau}$ and $\KL(\mu^H_N\Vert\nu_N)<\infty$, and let $\mathcal E_{N,M}(H)=1$ otherwise. Then \eqref{eq:red-entropy} implies that the fraction tends to zero in probability and that the probability that the relative entropy is infinite tends to zero. Therefore $\mathcal E_{N,M}\to0$ in probability, and \cref{lem:red-test} completes the proof.
+\end{proof}

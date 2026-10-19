@@ -1,0 +1,557 @@
+\chapter{Correlation bounds at every level below \texorpdfstring{$q_*$}{q*}}\label{sec:plateau}
+
+In this section, we prove \cref{thm:main-plateau}. Its conclusions (i), (iv), and (v) do not involve the plateau $b$; they follow from \cref{thm:main-memory}. The new statement concerns (ii) and (iii). It asserts that for every fixed $b<q_*$, with probability tending to one, the slow part of the centered spin $Z_N=U-\pi(U)$ has squared norm at least $b$ and the connected stationary correlation of the spin stays above $b$ up to time $e^{\gamma N}$. In \cref{thm:main-memory}, these two conclusions hold with probability at least $1-Ce^{-aN}$, but only for $b<q_*^2$.
+
+We first explain why the proof of \cref{thm:main-memory} stops at $q_*^2$. That proof detects slow modes of the spin with the overlap-weighted Gibbs mean $B_N$ of \cref{def:sp-barycenter}, and shows that $\ip U{B_N}\ge q_1-o(1)$, where $q_1<q_*$ may be taken arbitrarily close to $q_*$. This lower bound is close to optimal. Indeed, $U(x)\cdot B_N(x)$ is the mean of $R(x,u)$ under the reweighted Gibbs measure $w_x$ of \cref{def:sp-barycenter}. We will see that $w_x$ charges mostly points $u$ with $R(x,u)$ close to $q_*$. The loss occurs in the next step. Let $\overline B_N=B_N-\pi(B_N)$. By \cref{lem:sp-projection}, we have
+\[
+\norm{\Pi_\Lambda Z_N}_2\,\norm{\overline B_N}_2\ge\ip{Z_N}{\overline B_N}-o(1),
+\]
+and the proof of \cref{thm:main-memory} uses only $\norm{\overline B_N}_2\le1$, which leads to $\norm{\Pi_\Lambda Z_N}_2^2\ge q_1^2-o(1)$. However, by \cref{lem:sp-barycenter}, $\abs{B_N(x)}^2$ is the mean of $R(u,u')$ for two independent samples $u,u'$ from $w_x$. If the overlap of two such samples concentrates at $q_*$, then $\abs{B_N(x)}^2$ is close to $q_*$, and the same inequality implies that $\norm{\Pi_\Lambda Z_N}_2^2\ge q_1^2/q_*-o(1)$, which is close to $q_*$. The main step of this section is therefore the estimate
+\[
+\int\abs{B_N}^2\dd\pi\longrightarrow q_*\qquad\text{in probability},
+\]
+which is \cref{prop:pl-norm} below.
+
+To prove it, we work under the planted law, in which $x$ is uniform on $S_N$ and the field is a centered Gaussian field plus the drift $\beta N\xi(R(x,\cdot))$. We write each $u\in S_N$ through its latitude $r=R(x,u)$ and a transverse part orthogonal to $x$. We show, using the constrained pressure of \cref{sec:pressure}, that the latitude concentrates at $q_*$ under $w_x$. For two samples, $R(u,u')$ equals $rr'$ plus $((1-r^2)(1-r'^2))^{1/2}$ times the overlap of the transverse parts. It suffices to show that the transverse overlap concentrates at
+\[
+t_0=\frac{q_*}{1+q_*},
+\]
+because $q_*^2+(1-q_*^2)t_0=q_*$. By the equality at $q_*$ (\cref{prop:pr-certificate}), the Parisi measure of the transverse spin glass at latitude $q_*$ is the point mass at $t_0$. Its covariance contains the monomials $t$ and $t^2$ with positive coefficients, even when $\xi$ has no quadratic term. We multiply the corresponding two Gaussian components of the field by amplitudes $s_1$ and $s_2$, and differentiate the expected logarithm of the partition function in these amplitudes. By Gaussian integration by parts, the two derivatives at $s_1=s_2=1$ are affine functions of the first and the second moment of the transverse overlap. Their limits can be computed from the Crisanti--Sommers formula by the envelope theorem, and convexity in the amplitudes lets us pass from the convergence of the pressures to the convergence of their derivatives. It follows that the two moments are $t_0+o(1)$ and $t_0^2+o(1)$, so that the variance of the transverse overlap tends to zero. Finally, since $(\xi,\beta)$ is strictly replica symmetric with $\beta^2\xi''(0)<1$, the planted law and the Gibbs-reference law are mutually contiguous \cite[Lemma~3.2, Remark~3.3, and Corollary~3.5]{HuangMontanariPham2024}, which transfers the estimate to the original disorder. Contiguity gives convergence in probability but no rate, and this is why (ii) and (iii) hold only with probability tending to one in \cref{thm:main-plateau}.
+
+The proof uses \cref{def:sp-barycenter} and \cref{lem:sp-barycenter,lem:sp-projection} from \cref{sec:spectral}. From \cref{sec:pressure}, it uses the planted law (\cref{def:pr-planted,lem:pr-planted}), the sections of the sphere and the uniform latitude estimates (\cref{lem:pr-section,lem:pr-latitude}), the trial bound and the equality at $q_*$ (\cref{lem:pr-trial,prop:pr-certificate}), the good reference points of \cref{prop:pr-good}, and the uniform cap bound of \cref{cor:pr-cap}. From \cref{sec:prelim}, it uses the representation of the field (\cref{lem:pre-field}), the concentration of free energies (\cref{lem:pre-concentration}), the Crisanti--Sommers functional, the Parisi formula, and the Crisanti--Sommers optimality criterion (\cref{def:pre-CS,thm:pre-parisi,lem:pre-support}), and the limit law of the normalized partition function (\cref{lem:pre-HMP-Z}). No later section depends on this one.
+
+Differentiating a free energy in the coefficients of its covariance in order to identify moments of the overlap is a classical device in the theory of mean-field spin glasses; see \cite{Panchenko2008}, and \cite[Proposition~2.2]{AuffingerElAlaouiSellke2025} for the derivative in the coefficients of a spherical mixture. Here it is applied to the transverse model under planting, whose components of degree one and two need not come from terms of $\xi$ of the same degree. The equation $\beta^2(1-q)\xi'(q)=q$ is the stationary plateau equation of \cite[Eq.~(14)]{BarratBurioniMezard1996} and \cite[Eq.~(A2)]{FolenaFranzRicciTersenghi2020}. In the pure models of \cite{BarratBurioniMezard1996}, the predicted plateau is its largest positive solution, which is $q_*$. For general finite mixtures, we keep the definition of $q_*$ as the right endpoint of the rightmost component of $\{\beta^2A>1\}$, which excludes isolated solutions farther to the right at which $\beta^2A$ touches $1$ from below. The lower bounds of \cref{thm:main-plateau} approach $q_*$; we do not prove a matching upper bound.
+
+
+\section{Setting and parameters}\label{sec:pl-setting}
+
+Throughout this section, $\xi$ is a finite mixture with $\bd<\bs$, the inverse temperature $\beta\in(\bd,\bs)$ is fixed, and $q_*=\sup\{r\in(0,1)\colon\beta^2A(r)>1\}$. Sums over $p$ run over the finitely many degrees with $c_p>0$. As in \cref{sec:pressure}, we write $F=\beta^2\xi(1)/2$ and use the trial pressure $\Psi$, the admissible collars $(q_1,q_2)$, the core exponent $J$, and the collar gap $G$ of \cref{def:pr-collar}. Recall from \cref{prop:pr-certificate} that $q_*\in(0,1)$, that $J>0$ and $\Psi(q_*)=F-J$, that $\beta^2A\le1$ on $[q_*,1)$, and that there exists $\eps_0>0$ such that $\beta^2A>1$ on $(q_*-\eps_0,q_*)$. Let $(q_1,q_2)$ be an admissible collar. Then \eqref{eq:pr-Psi-prime} shows that $\Psi$ is strictly increasing on $[q_1,q_*]$. Since $\beta^2A\le1$ on $[q_*,1)$ and the polynomial $\beta^2A-1$ has finitely many zeros, $\Psi$ is strictly decreasing on $[q_*,1)$.
+
+We set $t_0=q_*/(1+q_*)$, which is the value of $r_0=r/(1+r)$ in \cref{lem:pr-trial} at $r=q_*$. Note that
+\begin{equation}\label{eq:pl-t0}
+q_*^2+(1-q_*^2)\,t_0=q_*^2+(1-q_*)q_*=q_* .
+\end{equation}
+
+\paragraph{The overlap-weighted Gibbs mean.}
+Let $(q_1,q_2)$ be an admissible collar and $K>0$, and let $h\colon[-1,1]\to[0,K]$ be smooth and nonincreasing, with $h=K$ on $[-1,q_1]$ and $h=0$ on $[q_2,1]$. As in \cref{def:sp-barycenter}, we set $\psi_u(x)=e^{-Nh(R(x,u))}$ and $d_N(x)=\int\psi_u(x)^2\,\pi(\mathrm du)$, and we let $B_N$ be the overlap-weighted Gibbs mean associated with $h$. The reweighted Gibbs measure is $w_x(\mathrm du)=\psi_u(x)^2\pi(\mathrm du)/d_N(x)$, so that $B_N(x)=\int U\dd w_x$. Then \cref{lem:sp-barycenter}(2) gives
+\begin{equation}\label{eq:pl-bary}
+U(x)\cdot B_N(x)=\int R(x,u)\,w_x(\mathrm du),\qquad
+\abs{B_N(x)}^2=\iint R(u,u')\,w_x(\mathrm du)\,w_x(\mathrm du').
+\end{equation}
+The measure $w_x$ and the mean $B_N$ depend on the field $H$ through $\pi=\pi^H$. When this dependence matters, we use the notation $w_x^H$ and $B_N^H$.
+
+\paragraph{Parameters.}
+\Cref{tab:pl-parameters} lists the constants in the proof of \cref{thm:main-plateau}, in the order in which they are fixed. Each depends only on $\xi$, $\beta$, $b$, and the entries above it, and all of them are fixed before $N\to\infty$. The proof of \cref{prop:pl-norm} in \cref{sec:pl-planted,sec:pl-pressure,sec:pl-derivatives,sec:pl-transfer} uses further auxiliary constants, which are also chosen before $N\to\infty$.
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Parameters in the proof of \cref{thm:main-plateau}, in the order in which they are fixed.}\label{tab:pl-parameters}
+\begin{tabular}{@{}l l l@{}}
+\toprule
+Parameter & Choice & Input\\
+\midrule
+$b'$ & $b'=(b+q_*)/2$, so that $b<b'<q_*$ & \\
+$q_1,q_2$ & $q_*-\eps_0<q_1<q_2<q_*$ and $q_1^2>b'q_*$ & \cref{prop:pr-certificate}\\
+$\delta$ & $0<\delta<\min\{J,G\}/8$ & \cref{prop:pr-good}\\
+$K$, $h$ & $K=(J+2\delta+1)/2$, and $h$ as in \cref{sec:pl-setting} & \\
+$\vartheta$ & $0<\vartheta<\min\{1,q_1/3\}$ and $(q_1-3\vartheta)^2>b'(q_*+\vartheta)$ & \\
+$c_E,a_E,C_E$ & energy and alignment constants & \cref{lem:pl-energy}\\
+$c_\vartheta$ & rate of the cap bound at $s=\vartheta^2$ & \cref{cor:pr-cap}\\
+$\kappa',\gamma',a',c',C'$ & constants for the plateau $q_*^2/2$ & \cref{thm:main-memory}\\
+$\gamma$ & $\gamma=\min\{\gamma',c_E/4\}$ & \\
+$\kappa,a,c,C$ & $\kappa=\kappa'$, $a=a'$, $c=c'$, $C=C'$ & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Because $b'<q_*$, we have $(b'q_*)^{1/2}<q_*$, and $q_1$ can be chosen as required. Then $(q_1,q_2)$ is an admissible collar. The squared inequality defining $\vartheta$ is strict at $\vartheta=0$, because $q_1^2>b'q_*$. We may therefore choose $0<\vartheta<\min\{1,q_1/3\}$ so small that it holds. The condition $\vartheta<q_1/3$ gives $q_1-3\vartheta>0$, which is used in the proof of (ii) below.
+
+
+\section{Reduction to the norm of the overlap-weighted Gibbs mean}\label{sec:pl-reduction}
+
+The following proposition is the main step. It is proved in \cref{sec:pl-planted,sec:pl-pressure,sec:pl-derivatives,sec:pl-transfer}.
+
+\begin{proposition}[The norm of the overlap-weighted Gibbs mean]\label{prop:pl-norm}
+Let $(q_1,q_2)$ be an admissible collar, let $K>J/2$, and let $h$ and $B_N$ be as in \cref{sec:pl-setting}. Then
+\[
+\int\bigl(\abs{B_N(x)}^2-q_*\bigr)^2\,\pi(\mathrm dx)\longrightarrow0\qquad\text{in probability}.
+\]
+In particular, $\int\abs{B_N}^2\dd\pi\to q_*$ in probability.
+\end{proposition}
+
+The next lemma records the two other properties of $B_N$ that we need. They hold with probability exponentially close to one, and they are obtained in the proof of \cref{thm:main-memory}.
+
+\begin{lemma}[Energy and alignment]\label{lem:pl-energy}
+Let $q_1,q_2,\delta,K,h$ be as in \cref{tab:pl-parameters}, and let $B_N$ be the overlap-weighted Gibbs mean associated with $h$. There exist $c_E,a_E,C_E>0$ such that, for all sufficiently large $N$, with probability at least $1-C_Ee^{-a_EN}$,
+\[
+\cE_{\rm vec}(B_N)\le e^{-c_EN}\qquad\text{and}\qquad\ip U{B_N}\ge q_1-2(1+q_1)e^{-a_EN}.
+\]
+\end{lemma}
+
+\begin{proof}
+The argument in the proof of \cref{thm:main-memory} that gives these two bounds uses only that $(q_1,q_2)$ is an admissible collar, that $8\delta<\min\{J,G\}$, and that $2K-J-2\delta=1$. We recall it here. By \cref{prop:pr-good}, there exist $a_\cG>0$ and $N_\cG$ such that, for $N\ge N_\cG$, with probability at least $1-5e^{-a_\cG N}$, there exists a Borel set $\cG\subset S_N$ with $\pi(\cG^c)\le e^{-a_\cG N}$ such that, for every $x\in\cG$,
+\[
+\pi\{u\colon R(x,u)\ge q_2\}\ge e^{-N(J+2\delta)},\qquad
+\pi\{u\colon q_1\le R(x,u)\le q_2\}\le e^{-N(J+G-2\delta)}.
+\]
+The first bound follows from \eqref{eq:pr-good-core}, since the core band lies in $(q_2,1)$, and the second is \eqref{eq:pr-good-collar}. Here we used $R(x,u)=R(u,x)$. Fix $x\in\cG$. We have $d_N(x)\ge e^{-N(J+2\delta)}$ by \eqref{eq:sp-bary-denominator}. Inserting this into \eqref{eq:sp-bary-collar} and \eqref{eq:sp-bary-align}, we obtain
+\begin{align*}
+\norm{\nabla B_N(x)}_{\rm HS}^2&\le4N\norm{h'}_\infty^2e^{-N(G-4\delta)},\\
+U(x)\cdot B_N(x)&\ge q_1-(1+q_1)e^{-N(2K-J-2\delta)}=q_1-(1+q_1)e^{-N}.
+\end{align*}
+For $x\notin\cG$, we use the bound $\norm{\nabla B_N(x)}_{\rm HS}^2\le4N\norm{h'}_\infty^2$ of \eqref{eq:sp-bary-gradient} and $U(x)\cdot B_N(x)\ge-1$. Integrating over $x$, we find
+\[
+\cE_{\rm vec}(B_N)\le4N\norm{h'}_\infty^2\bigl(e^{-N(G-4\delta)}+e^{-a_\cG N}\bigr),\qquad
+\ip U{B_N}\ge q_1-(1+q_1)\bigl(e^{-N}+e^{-a_\cG N}\bigr).
+\]
+The lemma follows with $c_E=\min\{G-4\delta,a_\cG\}/2$, $a_E=\min\{1,a_\cG\}$, and $C_E=5$, after enlarging $N$ so that $8N\norm{h'}_\infty^2e^{-c_EN}\le1$.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:main-plateau}]
+Fix $0<b<q_*$, and fix the parameters of \cref{tab:pl-parameters} in the order listed. We first treat conclusions (i), (iv), and (v), and then (ii) and (iii).
+
+\paragraph{Conclusions (i), (iv), and (v).}
+\Cref{thm:main-memory} applies with the plateau $q_*^2/2<q_*^2$. Let $\kappa',\gamma',a',c',C'$ be the resulting constants, so that, for all sufficiently large $N$, with probability at least $1-C'e^{-a'N}$, conclusions (i), (iv), and (v) hold with these constants. Let $\gamma=\min\{\gamma',c_E/4\}$, $\kappa=\kappa'$, $a=a'$, $c=c'$, and $C=C'$. Since $\gamma\le\gamma'$, we have $e^{-2\gamma'N}\le e^{-2\gamma N}$ and $[0,e^{\gamma N}]\subset[0,e^{\gamma'N}]$. Then (i), (iv), and (v) also hold with the constants $\kappa,\gamma,a,c,C$, on the same event.
+
+\paragraph{Conclusions (ii) and (iii).}
+Let $\Omega_N$ be the intersection of the events of \cref{lem:pl-energy} and of \cref{cor:pr-cap} with $s=\vartheta^2$, on which $\abs{\pi(U)}^2\le\vartheta^2+e^{-c_\vartheta N}$, with the event $\{\int\abs{B_N}^2\dd\pi\le q_*+\vartheta\}$. Then $\Pp(\Omega_N)\to1$ by \cref{lem:pl-energy}, \cref{cor:pr-cap}, and \cref{prop:pl-norm}. We work on $\Omega_N$ for the rest of the proof.
+
+Let $\mathfrak m_N=\pi(U)$, $Z_N=U-\mathfrak m_N$, $\overline B_N=B_N-\pi(B_N)$, and $\Lambda_N=e^{-2\gamma N}$, so that $\Pi_{\Lambda_N}=\Pi_N$. Then $\norm{Z_N}_2^2=1-\abs{\mathfrak m_N}^2\le1$ and
+\[
+\norm{\overline B_N}_2^2=\pi\bigl(\abs{B_N}^2\bigr)-\abs{\pi(B_N)}^2\le q_*+\vartheta .
+\]
+Using $\abs{\pi(B_N)}\le1$, $\abs{\mathfrak m_N}\le\vartheta+e^{-c_\vartheta N/2}$, and the alignment bound of \cref{lem:pl-energy}, we find
+\[
+\ip{Z_N}{\overline B_N}=\ip U{B_N}-\mathfrak m_N\cdot\pi(B_N)\ge q_1-2(1+q_1)e^{-a_EN}-\vartheta-e^{-c_\vartheta N/2}.
+\]
+The energy bound of \cref{lem:pl-energy} and $4\gamma\le c_E$ imply that $(\cE_{\rm vec}(B_N)/\Lambda_N)^{1/2}\le e^{-(c_E/2-\gamma)N}\le e^{-c_EN/4}$. By \eqref{eq:sp-proj} and $\norm{Z_N}_2\le1$, we have
+\[
+\norm{\Pi_NZ_N}_2\,\norm{\overline B_N}_2\ge\ip{Z_N}{\overline B_N}-\bigl(\cE_{\rm vec}(B_N)/\Lambda_N\bigr)^{1/2}\ge q_1-\vartheta-\eps_N,
+\]
+where $\eps_N=2(1+q_1)e^{-a_EN}+e^{-c_\vartheta N/2}+e^{-c_EN/4}$. Let $N_1$ be such that $\eps_N\le2\vartheta$ for $N\ge N_1$. For such $N$, the right side is at least $q_1-3\vartheta>0$. In particular, $\norm{\overline B_N}_2>0$, and we have
+\[
+\norm{\Pi_NZ_N}_2^2\ge\frac{(q_1-3\vartheta)^2}{q_*+\vartheta}>b',
+\]
+where in the last step we used the choice of $\vartheta$. Since $b'>b$, this proves (ii).
+
+For (iii), recall from the proof of \cref{thm:main-memory} that $\E_\pi R(X_0,X_t)-\abs{\pi(U)}^2=\ip{Z_N}{P_tZ_N}$ for the stationary diffusion: indeed, $\E_\pi R(X_0,X_t)=\ip U{P_tU}$ by the Markov property, $P_t\mathfrak m_N=\mathfrak m_N$, and $\pi(Z_N)=0$. For $0\le t\le e^{\gamma N}$, we have $\Lambda_Nt\le e^{-\gamma N}$, and \eqref{eq:sp-proj-corr} implies that
+\[
+\E_\pi R(X_0,X_t)-\abs{\pi(U)}^2\ge e^{-\Lambda_Nt}\norm{\Pi_NZ_N}_2^2\ge e^{-e^{-\gamma N}}\,b'\ge b
+\]
+for $N\ge N_2$, where $N_2$ depends on the fixed margin $b'-b>0$. This proves (iii).
+
+For $N\ge\max\{N_1,N_2\}$, conclusions (ii) and (iii) hold on $\Omega_N$, whose probability tends to one, and conclusions (i), (iv), and (v) hold on an event of probability at least $1-Ce^{-aN}$, all with the constants $\kappa,\gamma,a,c,C$. In particular, all five conclusions hold simultaneously with probability tending to one. This completes the proof.
+\end{proof}
+
+
+\section{The planted law and the transverse decomposition}\label{sec:pl-planted}
+
+In this section and the next two, we prove a version of \cref{prop:pl-norm} under the planted law; \cref{sec:pl-transfer} transfers it to the original disorder. Throughout these sections, $(q_1,q_2)$, $K$, and $h$ are as in \cref{prop:pl-norm}. We fix a degree $p_0$ with $c_{p_0}>0$. Constants may depend on $\xi$, $\beta$, $q_1$, $q_2$, $K$, $h$, and $p_0$, but not on $N$.
+
+\paragraph{The planted law.}
+We use the planted law $\mathsf P_N$ and the Gibbs-reference law $\mathsf Q_N$ of \cref{def:pr-planted}, with the reference point called $x$. Recall from \cref{lem:pr-planted} that under $\mathsf P_N$, the point $x$ has law $\nu_N$ and that, conditionally on $x$, the field has the law of $G+\beta N\xi(R(x,\cdot))$, where $G$ has the law of $H_N$. The quantity $\abs{B_N^H(x)}^2$ is invariant under a simultaneous rotation of the field and of $x$. Indeed, for $g\in O(N)$, the Gibbs measure of $H\circ g^{-1}$ is the image of $\pi^H$ under $g$, so $w^{H\circ g^{-1}}_{gx}$ is the image of $w^H_x$ and $B_N^{H\circ g^{-1}}(gx)=gB_N^H(x)$. As $H_N\circ g^{-1}$ has the law of $H_N$ by \cref{lem:pre-field}(2), and $\xi(R(gx,\cdot))=\xi(R(x,\cdot))\circ g^{-1}$, we conclude that the conditional law of $\abs{B_N^H(x)}^2$ given $x$ does not depend on $x$. The following proposition is the planted form of \cref{prop:pl-norm}.
+
+\begin{proposition}[The norm of $B_N$ under the planted law]\label{prop:pl-planted}
+Fix $x\in S_N$, let $G$ have the law of $H_N$, and let $H=G+\beta N\xi(R(x,\cdot))$. Then
+\[
+\lim_{N\to\infty}\E\bigl(\abs{B^H_N(x)}^2-q_*\bigr)^2=0 .
+\]
+\end{proposition}
+
+By the rotation invariance just explained, \cref{prop:pl-planted} implies that $\E_{\mathsf P_N}(\abs{B_N^H(x)}^2-q_*)^2\to0$, where now $x$ is the reference point of the planted law.
+
+For the rest of this section and in the next two, $x\in S_N$ is fixed, $N\ge3$, and $n=N-1$. As in \cref{sec:pr-cross}, we identify $x^\perp$ with $\R^n$ and write $S_n\subset x^\perp$ for the sphere of radius $\sqrt n$, $\nu_n$ for its uniform probability measure, and $R_n(y,y')=y\cdot y'/n$. For $r\in(-1,1)$ and $y\in S_n$, we set
+\begin{equation}\label{eq:pl-section}
+u_r(y)=rx+\Bigl(\frac{N(1-r^2)}n\Bigr)^{1/2}y ;
+\end{equation}
+this is the point of \eqref{eq:pr-xr}, with the reference point called $x$. Then $u_r(y)\in S_N$ and $R(x,u_r(y))=r$. Since $y,y'\perp x$, we have, for $r,r'\in(-1,1)$ and $y,y'\in S_n$,
+\begin{equation}\label{eq:pl-overlap}
+R\bigl(u_r(y),u_{r'}(y')\bigr)=rr'+\bigl((1-r^2)(1-r'^2)\bigr)^{1/2}R_n(y,y').
+\end{equation}
+Every $u\in S_N\setminus\{x,-x\}$ equals $u_r(y)$ for exactly one pair $(r,y)$, namely $r=R(x,u)$ and $y=(n/(N(1-r^2)))^{1/2}(u-rx)$. We call $r$ the latitude and $y$ the transverse part of $u$. The two points $\pm x$ form a null set for all the measures on $S_N$ below, which have densities with respect to $\nu_N$.
+
+\paragraph{Independent Gaussian components.}
+For $0\le k\le p$ and $r\in[-1,1]$, let
+\[
+b_{p,k}=\Bigl(c_p\binom pk\Bigr)^{1/2},\qquad a_{p,k}(r)=b_{p,k}\,r^{p-k}(1-r^2)^{k/2},
+\]
+so that $\abs{a_{p,k}}\le b_{p,k}$ on $[-1,1]$.
+We note that, by the binomial theorem, the auxiliary mixture $\eta_r$ of \eqref{eq:pr-etar} is
+\begin{equation}\label{eq:pl-etar-coef}
+\eta_r(t)=\xi\bigl(r^2+(1-r^2)t\bigr)-\xi(r^2)=\sum_p\sum_{k=1}^pa_{p,k}(r)^2t^k,\qquad r\in(-1,1).
+\end{equation}
+
+\begin{lemma}[Independent Gaussian components]\label{lem:pl-banks}
+Let $(G_{p,k})$, for $c_p>0$ and $0\le k\le p$, be independent centered Gaussian fields on $x^\perp$ such that $G_{p,k}$ is a homogeneous polynomial of degree $k$ and
+\[
+\E G_{p,k}(w)G_{p,k}(w')=N\Bigl(\frac{w\cdot w'}n\Bigr)^k,\qquad w,w'\in x^\perp .
+\]
+For $y\in\R^N$, let $P^\perp y$ be the orthogonal projection of $y$ onto $x^\perp$, and define
+\begin{equation}\label{eq:pl-G}
+G(y)=\sum_p\sum_{k=0}^pb_{p,k}\Bigl(\frac nN\Bigr)^{k/2}R(x,y)^{p-k}\,G_{p,k}(P^\perp y).
+\end{equation}
+\begin{enumerate}
+\item For $y,y'\in\R^N$, we have $\E G(y)G(y')=N\xi(R(y,y'))$. In particular, the restriction of $G$ to $S_N$ has the law of $H_N$.
+\item For $r\in(-1,1)$ and $y\in S_n$, we have $G(u_r(y))=\sum_p\sum_{k=0}^pa_{p,k}(r)G_{p,k}(y)$.
+\item There exist $K_1,c_1>0$ such that, for all sufficiently large $N$, the event $\mathcal F_N$ that $\sup_{S_n}\abs{G_{p,k}}\le K_1N$ for all $p$ and $k$ has probability at least $1-e^{-c_1N}$. Moreover, $\E(\sup_{S_n}\abs{G_{p,k}})^2\le N^{k+1}$ for all $p$, $k$, and $N$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Such fields exist. Let $e_1,\dots,e_n$ be an orthonormal basis of $x^\perp$, and let $g^{(p,k)}_{i_1\cdots i_k}$ be independent standard Gaussian variables. Then
+\begin{equation}\label{eq:pl-tensor}
+G_{p,k}(w)=N^{1/2}n^{-k/2}\sum_{i_1,\dots,i_k=1}^ng^{(p,k)}_{i_1\cdots i_k}\,(w\cdot e_{i_1})\cdots(w\cdot e_{i_k})
+\end{equation}
+has covariance $Nn^{-k}(w\cdot w')^k$. For $k=0$, the field $G_{p,0}=N^{1/2}g^{(p,0)}$ is constant.
+
+For (1), let $R=R(x,y)$, $R'=R(x,y')$, and $\varrho=(P^\perp y\cdot P^\perp y')/N$. Since $x/\sqrt N$ is a unit vector, we have $R(y,y')=RR'+\varrho$. Using the independence of the fields and the binomial theorem, we find
+\[
+\begin{aligned}
+\E G(y)G(y')&=\sum_pc_p\sum_{k=0}^p\binom pk\Bigl(\frac nN\Bigr)^k(RR')^{p-k}\,N\Bigl(\frac{N\varrho}n\Bigr)^k\\
+&=N\sum_pc_p(RR'+\varrho)^p=N\xi(R(y,y')).
+\end{aligned}
+\]
+Two centered Gaussian processes on $S_N$ with continuous paths and the same covariance have the same law.
+
+For (2), note that $P^\perp u_r(y)=(N(1-r^2)/n)^{1/2}y$ and $R(x,u_r(y))=r$. By the homogeneity of $G_{p,k}$, we have $(n/N)^{k/2}G_{p,k}(P^\perp u_r(y))=(1-r^2)^{k/2}G_{p,k}(y)$, and (2) follows from \eqref{eq:pl-G}.
+
+For (3), it suffices to treat each of the finitely many pairs $(p,k)$. For $k=0$, the bound follows from $\Pp(\abs g>K_1N^{1/2})\le e^{-K_1^2N/2}$ for a standard Gaussian variable $g$. For $k=1$, we have $G_{p,1}(y)=(N/n)^{1/2}\,y\cdot\tilde g$, where $\tilde g=\sum_ig^{(p,1)}_ie_i$ is a standard Gaussian vector in $x^\perp$, and $\sup_{S_n}\abs{G_{p,1}}=N^{1/2}\abs{\tilde g}$. The function $\tilde g\mapsto\abs{\tilde g}$ is $1$-Lipschitz and $\E\abs{\tilde g}\le n^{1/2}$, and the Gaussian concentration inequality recalled in the proof of \cref{lem:pre-concentration} gives $\Pp(\abs{\tilde g}>2N^{1/2})\le2e^{-N/2}$. For $k\ge2$, the field $(n/N)^{1/2}G_{p,k}$ on $S_n$ has covariance $nR_n(y,y')^k$, that is, it is the pure $k$-spin field in dimension $n$, and \cref{lem:pre-field} applied to the mixture $t^k$ in dimension $n$ gives $K,c>0$ with $\Pp(\sup_{S_n}\abs{G_{p,k}}>(N/n)^{1/2}Kn)\le e^{-cn}$ for large $n$. As $(N/n)^{1/2}n\le N$, this proves the first statement of (3). For the second, applying the Cauchy--Schwarz inequality to \eqref{eq:pl-tensor}, we find $\abs{G_{p,k}(y)}\le N^{1/2}n^{-k/2}\abs y^k\,\norm{g^{(p,k)}}=N^{1/2}\norm{g^{(p,k)}}$ for $y\in S_n$, where $\norm{g^{(p,k)}}$ is the Euclidean norm of the array, and $\E\norm{g^{(p,k)}}^2=n^k\le N^k$.
+\end{proof}
+
+We record a consequence of (3). For every event $\cA$, splitting $\cA$ according to $\mathcal F_N$ and using the Cauchy--Schwarz inequality on $\mathcal F_N^c$, we find, for all sufficiently large $N$,
+\begin{equation}\label{eq:pl-ui}
+\E\Bigl[\frac1N\sup_{S_n}\abs{G_{p,k}}\,;\,\cA\Bigr]\le K_1\Pp(\cA)+N^{(k-1)/2}e^{-c_1N/2}.
+\end{equation}
+
+\paragraph{Amplitudes.}
+By \cref{lem:pl-banks}(1), we may and do realize the field $H$ of \cref{prop:pl-planted} as $H=G+\beta N\xi(R(x,\cdot))$, with $G$ given by \eqref{eq:pl-G}; then $\E$ denotes the expectation over the components $G_{p,k}$. For $s=(s_1,s_2)\in[1/2,3/2]^2$, let $s_{p_0,1}=s_1$, $s_{p_0,2}=s_2$, and $s_{p,k}=1$ for all other pairs $(p,k)$; since $p_0\ge2$, the components $G_{p_0,1}$ and $G_{p_0,2}$ exist. We define $G_s$ by inserting the factor $s_{p,k}$ in each term of \eqref{eq:pl-G}, and
+\begin{equation}\label{eq:pl-Z}
+\begin{aligned}
+\mathcal Z_N(s)&=\int_{S_N}\exp\Bigl\{\beta G_s(u)+\beta^2N\xi(R(x,u))-2Nh(R(x,u))\Bigr\}\,\nu_N(\mathrm du),\\
+\Upsilon_N(s)&=\frac1N\E\log\mathcal Z_N(s).
+\end{aligned}
+\end{equation}
+The partition function $\mathcal Z_N(s)$ is not normalized. Let $\mu_s$ be the probability measure on $S_N$ whose density with respect to $\nu_N$ is proportional to the integrand in \eqref{eq:pl-Z}, and let $\mu_s^{\otimes2}$ be the law of two independent samples from $\mu_s$. Only the Gaussian components are multiplied by amplitudes; the drift $\beta^2N\xi(R(x,u))$ and the penalty $2Nh(R(x,u))$ do not change. At $s=(1,1)$, we have $G_s=G$ and $\beta G+\beta^2N\xi(R(x,\cdot))=\beta H$. Using the identity $e^{\beta H(u)-2Nh(R(x,u))}\nu_N(\mathrm du)=Z_{N,\beta}(H)\,\psi_u(x)^2\,\pi^H(\mathrm du)$, where $Z_{N,\beta}(H)=\int e^{\beta H}\dd\nu_N$ is the partition function of \cref{def:pre-model}, we find
+\begin{equation}\label{eq:pl-mu1}
+\mu_{(1,1)}=w_x^H,\qquad\mathcal Z_N(1,1)=Z_{N,\beta}(H)\,d_N(x).
+\end{equation}
+
+For $r\in(-1,1)$ and $s\in[1/2,3/2]^2$, we define the perturbed auxiliary mixture
+\begin{equation}\label{eq:pl-etars}
+\eta_{r;s}(t)=\sum_p\sum_{k=1}^ps_{p,k}^2\,a_{p,k}(r)^2\,t^k
+=\eta_r(t)+\sum_{k=1}^2(s_k^2-1)\,a_{p_0,k}(r)^2\,t^k .
+\end{equation}
+It is a covariance polynomial in the sense of \cref{def:pre-CS}, and $\eta_{r;(1,1)}=\eta_r$ by \eqref{eq:pl-etar-coef}. We deduce from \cref{lem:pl-banks}(2) that, for fixed $r\in(-1,1)$ and $y\in S_n$,
+\begin{equation}\label{eq:pl-section-field}
+\begin{aligned}
+G_s(u_r(y))&=G^{(0)}(r)+X_{r;s}(y),\qquad\text{where}\\
+G^{(0)}(r)&=\sum_pa_{p,0}(r)G_{p,0},\qquad
+X_{r;s}(y)=\sum_p\sum_{k=1}^ps_{p,k}a_{p,k}(r)G_{p,k}(y).
+\end{aligned}
+\end{equation}
+The variable $G^{(0)}(r)$ is centered Gaussian and independent of the field $X_{r;s}$, whose covariance is
+\[
+\E X_{r;s}(y)X_{r;s}(y')=N\eta_{r;s}\bigl(R_n(y,y')\bigr)=n\cdot\frac Nn\,\eta_{r;s}\bigl(R_n(y,y')\bigr).
+\]
+Thus $X_{r;s}$ has the law of $H_n^{(N/n)\eta_{r;s}}$, in the notation of \cref{sec:pr-cross}.
+
+Finally, for a Borel set $D\subset(-1,1)$, let $\mathcal Z_N^D(s)$ be the integral in \eqref{eq:pl-Z} restricted to $\{u\colon R(x,u)\in D\}$. Using the coarea identity in the proof of \cref{lem:pr-section}(a), we have
+\begin{equation}\label{eq:pl-coarea}
+\begin{aligned}
+\mathcal Z_N^D(s)&=C_N\int_D(1-r^2)^{(N-3)/2}e^{N(\beta^2\xi(r)-2h(r))}\,\mathcal Y_N(r;s)\dd r,\\
+\mathcal Y_N(r;s)&=\int_{S_n}e^{\beta G_s(u_r(y))}\,\nu_n(\mathrm dy),
+\end{aligned}
+\end{equation}
+where $C_N$ is the constant of \eqref{eq:pr-coarea}, and $N^{-1}\log C_N\to0$.
+
+
+\section{The limiting pressure}\label{sec:pl-pressure}
+
+For $s\in[1/2,3/2]^2$, we define the profile
+\begin{equation}\label{eq:pl-Theta}
+\Theta_s(r)=\Theta^0(r)+\cP_\beta(\eta_{r;s}),\qquad
+\Theta^0(r)=\beta^2\xi(r)-2h(r)+\frac12\log(1-r^2),\qquad r\in(-1,1),
+\end{equation}
+and $\Upsilon(s)=\sup_{-1<r<1}\Theta_s(r)$. At $s=(1,1)$, we have $\Theta_{(1,1)}=f-2h$, where $f$ is the function \eqref{eq:pr-f}; by \cref{prop:pr-cross}, $f=F_{\rm FP}$. We first show that $q_*$ is the only maximizer of $f-2h$, and then that $\Upsilon_N\to\Upsilon$.
+
+\begin{lemma}[The latitude profile]\label{lem:pl-profile}
+The following hold.
+\begin{enumerate}
+\item The measure $\delta_{t_0}$ is the unique minimizer of $\cP_\beta(\cdot\,;\eta_{q_*})$.
+\item For every $r\in(-1,1)$, we have $f(r)\le F$.
+\item The function $f-2h$ attains its supremum over $(-1,1)$ only at $q_*$, and $f(q_*)-2h(q_*)=F-J$. For every $\eps>0$,
+\[
+\Delta_\eps=F-J-\sup\bigl\{f(r)-2h(r)\colon r\in(-1,1),\ \abs{r-q_*}\ge\eps\bigr\}>0 .
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+By \cref{prop:pr-certificate}(b) and \cref{prop:pr-cross}, we have $f(q_*)=F_{\rm FP}(q_*)=\Psi(q_*)$. In view of the equality case of \cref{lem:pr-trial}, this means that $\cP_\beta(\delta_{t_0};\eta_{q_*})=\cP_\beta(\eta_{q_*})$, so $\delta_{t_0}$ is a minimizer. It is the only one by \cref{lem:pre-support}(3). This proves (1); it is also the conclusion of the proof of \cref{prop:pr-certificate}.
+
+For (2), let $r\in[0,1)$. Then \cref{prop:pr-certificate}(b) implies that $f(r)=F_{\rm FP}(r)\le\Psi(r)=F+\Phi_\beta(r)/2$, and $\Phi_\beta(r)\le0$ since $(\xi,\beta)$ is strictly replica symmetric (\cref{lem:pre-RS}) and $\Phi_\beta(0)=0$. For $r=-v\in(-1,0)$, we have $\eta_{-v}=\eta_v$, since $\eta_r$ depends on $r$ only through $r^2$, and $\xi(-v)\le\xi(v)$, since the coefficients of $\xi$ are nonnegative. We conclude that $f(-v)\le f(v)\le F$.
+
+For (3), let $r\in[q_1,1)$. Using $h\ge0$ and \cref{prop:pr-certificate}(b), we have $f(r)-2h(r)\le\Psi(r)$, and by the monotonicity of $\Psi$ recalled in \cref{sec:pl-setting}, $\Psi(r)<\Psi(q_*)=F-J$ for $r\ne q_*$. For $r\in(-1,q_1)$, we have $h(r)=K$, and (2) implies that $f(r)-2h(r)\le F-2K$, which is smaller than $F-J$ because $2K>J$. Finally, $h(q_*)=0$ because $q_*>q_2$, and therefore $f(q_*)-2h(q_*)=\Psi(q_*)=F-J$. This proves the first statement of (3). For the second, the same three bounds and the monotonicity of $\Psi$ imply that
+\[
+\Delta_\eps\ge\min\bigl\{2K-J,\ \Psi(q_*)-\Psi(q_*-\eps),\ \Psi(q_*)-\Psi(q_*+\eps)\bigr\}>0,
+\]
+where the second term is omitted when $q_*-\eps<q_1$, and the third when $q_*+\eps\ge1$.
+\end{proof}
+
+The next lemma is the analog of \cref{lem:pr-latitude,prop:pr-cross} for the perturbed fields, with the penalty $2h$ and with all latitudes in $(-1,1)$.
+
+\begin{lemma}[The limiting pressure]\label{lem:pl-pressure}
+The following hold.
+\begin{enumerate}
+\item For every $s\in[1/2,3/2]^2$, the supremum $\Upsilon(s)$ is attained, and $\Upsilon_N(s)\to\Upsilon(s)$.
+\item For every $\eps>0$, we have $\E\,w_x^H\{u\colon\abs{R(x,u)-q_*}\ge\eps\}\to0$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+The proof has five steps. We first record continuity and growth properties of the profile, and then bounds on the fields. Next, we compare $N^{-1}\log\mathcal Y_N(r;s)$ with $\cP_\beta(\eta_{r;s})$ uniformly on a compact set of latitudes. Then we integrate over the latitude, and finally we take expectations.
+
+\emph{The profile.} By \cref{lem:pr-latitude}(a) and \eqref{eq:pl-etars}, we have, for $r,r'\in(-1,1)$ and $s,s'\in[1/2,3/2]^2$,
+\begin{align}
+\bigl|\cP_\beta(\eta_{r;s})-\cP_\beta(\eta_{r;s'})\bigr|&\le\beta^2\sum_{k=1}^2\abs{s_k^2-s_k'^2}\,a_{p_0,k}(r)^2,\label{eq:pl-lip-s}\\
+\bigl|\cP_\beta(\eta_{r;s})-\cP_\beta(\eta_{r';s})\bigr|&\le\beta^2L_\eta\abs{r-r'},\qquad L_\eta=\frac92\sum_pp\,2^pc_p.\label{eq:pl-lip-r}
+\end{align}
+For \eqref{eq:pl-lip-r}, we used $s_{p,k}^2\le9/4$, $\abs t\le1$, $\sum_k\binom pk=2^p$, and the bound $\abs{\partial_r(r^{2(p-k)}(1-r^2)^k)}\le2(p-k)+2k=2p$ for $\abs r\le1$. Next, for every covariance polynomial $\eta$, we have $0\le\cP_\beta(\eta)\le\beta^2\eta(1)/2$. The lower bound follows from Jensen's inequality, which gives $p_n(\eta)\ge n^{-1}\E\int\beta H_n^\eta\dd\nu_n=0$. The upper bound follows from $\cP_\beta(\eta)\le\cP_\beta(\delta_0;\eta)=\beta^2\eta(1)/2$, see \cref{def:pre-CS} and the remark after it. Since $\eta_{r;s}(1)\le(9/4)\eta_r(1)\le(9/4)\xi(1)$, $\beta^2\xi(r)\le\beta^2\xi(1)$, and $h\ge0$, we obtain
+\begin{equation}\label{eq:pl-Theta-bounds}
+\Theta_s(r)\le\frac{17}8\beta^2\xi(1)+\frac12\log(1-r^2),\qquad
+\Upsilon(s)\ge\Theta_s(0)\ge-2K .
+\end{equation}
+Note that $\Theta_s$ is continuous on $(-1,1)$ by \eqref{eq:pl-lip-r}, and that $\Theta_s(r)\to-\infty$ as $\abs r\to1$ by \eqref{eq:pl-Theta-bounds}. Then the supremum $\Upsilon(s)$ is attained.
+
+\emph{Bounds on the fields.} Let $K_2=(3/2)K_1\sum_p\sum_kp\,b_{p,k}$. Fix $\rho\in(0,1)$. For $\abs r\le\rho$, we have $\abs{a_{p,k}'(r)}\le b_{p,k}\,p\,(1-\rho^2)^{-1/2}$. On the event $\mathcal F_N$ of \cref{lem:pl-banks}(3), we deduce from \eqref{eq:pl-section-field} and $s_{p,k}\le3/2$ that
+\[
+\sup_{S_N}\abs{G_s}\le K_2N,\qquad
+\bigl|\partial_rG_s(u_r(y))\bigr|=\Bigl|\sum_p\sum_{k=0}^ps_{p,k}a_{p,k}'(r)G_{p,k}(y)\Bigr|\le\frac{K_2N}{(1-\rho^2)^{1/2}},
+\]
+where the second bound holds for $\abs r\le\rho$ and $y\in S_n$.
+For the first bound, note that every $u\in S_N\setminus\{\pm x\}$ is of the form $u_r(y)$, and that $G_s(\pm x)=\sum_p(\pm1)^pb_{p,0}G_{p,0}$. The derivative $\partial_r\log\mathcal Y_N(r;s)$ is the average of $\beta\,\partial_rG_s(u_r(y))$ under a probability measure in $y$. On $\mathcal F_N$, we therefore have
+\begin{equation}\label{eq:pl-lip-Y}
+\Bigl|\partial_r\frac1N\log\mathcal Y_N(r;s)\Bigr|\le\frac{\beta K_2}{(1-\rho^2)^{1/2}}\quad(\abs r\le\rho),
+\qquad
+\mathcal Y_N(r;s)\le e^{\beta K_2N}\quad(-1<r<1).
+\end{equation}
+
+\emph{Uniform comparison with the Parisi formula.} Fix $r\in(-1,1)$. By \eqref{eq:pl-section-field} and $\E G^{(0)}(r)=0$, we have $N^{-1}\E\log\mathcal Y_N(r;s)=(n/N)\,p_n((N/n)\eta_{r;s})$. Further, \cref{lem:pr-latitude}(a) implies that $\abs{p_n((N/n)\eta_{r;s})-p_n(\eta_{r;s})}\le\beta^2n^{-1}\eta_{r;s}(1)$, and $p_n(\eta_{r;s})\to\cP_\beta(\eta_{r;s})$ by \cref{thm:pre-parisi}, since $\eta_{r;s}$ is a covariance polynomial; it may have a term of degree one. We conclude that
+\begin{equation}\label{eq:pl-mean}
+\lim_{N\to\infty}\frac1N\E\log\mathcal Y_N(r;s)=\cP_\beta(\eta_{r;s}).
+\end{equation}
+In the Gaussian coordinates of all the components, see \eqref{eq:pl-tensor}, $G_s(u)$ is a linear function whose coefficient vector has squared norm $\E G_s(u)^2\le9N\xi(1)/4$ for $u\in S_N$. The proof of \cref{lem:pre-concentration} therefore applies to $\log\mathcal Y_N(r;s)$, with $\xi(1)$ replaced by $9\xi(1)/4$: this function is Lipschitz in the coordinates with constant $(3/2)\beta(N\xi(1))^{1/2}$, and since $\beta^2\xi(1)=2F$, we find
+\begin{equation}\label{eq:pl-conc}
+\Pp\Bigl(\Bigl|\frac1N\log\mathcal Y_N(r;s)-\frac1N\E\log\mathcal Y_N(r;s)\Bigr|>\eps'\Bigr)\le2e^{-\eps'^2N/(9F)},\qquad\eps'>0.
+\end{equation}
+Now fix $\eps'\in(0,1)$, and choose $\rho\in(0,1)$ such that
+\begin{equation}\label{eq:pl-rho}
+\frac{17}8\beta^2\xi(1)+\beta K_2+\frac12\log(1-\rho^2)\le-2K-1 .
+\end{equation}
+Let $L=\beta K_2(1-\rho^2)^{-1/2}+\beta^2L_\eta$, and choose points $r_1,\dots,r_m\in[-\rho,\rho]$ such that every $r\in[-\rho,\rho]$ is within $\eps'/L$ of some $r_i$. Let $\cA_N$ be the intersection of $\mathcal F_N$ with the $m$ events $\{\abs{N^{-1}\log\mathcal Y_N(r_i;s)-N^{-1}\E\log\mathcal Y_N(r_i;s)}\le\eps'\}$. By \cref{lem:pl-banks}(3) and \eqref{eq:pl-conc},
+\begin{equation}\label{eq:pl-AN}
+\Pp(\cA_N^c)\le e^{-c_1N}+2me^{-\eps'^2N/(9F)}\longrightarrow0 .
+\end{equation}
+In view of \eqref{eq:pl-mean}, there exists $N_0$ such that $\abs{N^{-1}\E\log\mathcal Y_N(r_i;s)-\cP_\beta(\eta_{r_i;s})}\le\eps'$ for $i\le m$ and $N\ge N_0$. For $r\in[-\rho,\rho]$, let $r_i$ be within $\eps'/L$ of $r$. On $\cA_N$, for $N\ge N_0$, \eqref{eq:pl-lip-Y} and \eqref{eq:pl-lip-r} bound the changes from $r$ to $r_i$ by $L\abs{r-r_i}\le\eps'$ in total, and we obtain
+\begin{equation}\label{eq:pl-unif}
+\Bigl|\frac1N\log\mathcal Y_N(r;s)-\cP_\beta(\eta_{r;s})\Bigr|\le3\eps',\qquad r\in[-\rho,\rho].
+\end{equation}
+The constants $\rho$, $m$, and $N_0$ depend on $s$ and $\eps'$, and they are fixed before $N\to\infty$.
+
+\emph{Integration over the latitude.} We show that, on $\cA_N$ and for $N\ge N_0$, every Borel set $D\subset(-1,1)$ satisfies
+\begin{equation}\label{eq:pl-upper}
+\frac1N\log\mathcal Z_N^D(s)\le\max\Bigl\{\sup_{D\cap[-\rho,\rho]}\Theta_s,\ \Upsilon(s)-1\Bigr\}+3\eps'+\frac1N\log\bigl(4C_N(1-\rho^2)^{-3/2}\bigr),
+\end{equation}
+and that there exists $w>0$, independent of $N$, such that
+\begin{equation}\label{eq:pl-lower}
+\frac1N\log\mathcal Z_N(s)\ge\Upsilon(s)-4\eps'+\frac1N\log(2wC_N).
+\end{equation}
+For \eqref{eq:pl-upper}, we split the integral in \eqref{eq:pl-coarea} into $\abs r\le\rho$ and $\abs r>\rho$. For $\abs r\le\rho$, we use $(1-r^2)^{(N-3)/2}\le(1-\rho^2)^{-3/2}e^{(N/2)\log(1-r^2)}$, and \eqref{eq:pl-unif} shows that the integrand is at most $C_N(1-\rho^2)^{-3/2}e^{N(\Theta_s(r)+3\eps')}$. For $\abs r>\rho$, we use $(1-r^2)^{(N-3)/2}\le(1-\rho^2)^{(N-3)/2}$, the bound $\beta^2\xi(r)-2h(r)\le\beta^2\xi(1)$, and \eqref{eq:pl-lip-Y}. Then \eqref{eq:pl-rho} and \eqref{eq:pl-Theta-bounds} imply that the integrand is at most
+\[
+C_N(1-\rho^2)^{-3/2}\exp\Bigl\{N\Bigl[\beta^2\xi(1)+\beta K_2+\frac12\log(1-\rho^2)\Bigr]\Bigr\}\le C_N(1-\rho^2)^{-3/2}e^{N(\Upsilon(s)-1)}.
+\]
+Each part is integrated over a set of length at most $2$, which gives \eqref{eq:pl-upper}. For \eqref{eq:pl-lower}, let $r_*$ be a maximizer of $\Theta_s$. By \eqref{eq:pl-Theta-bounds} and \eqref{eq:pl-rho}, we have $\Theta_s(r)\le-2K-1<\Upsilon(s)$ for $\abs r\ge\rho$, which implies that $\abs{r_*}<\rho$. As $\Theta_s$ is continuous, there exists $w>0$ with $[r_*-w,r_*+w]\subset(-\rho,\rho)$ and $\Theta_s\ge\Upsilon(s)-\eps'$ on this interval. Using $(1-r^2)^{-3/2}\ge1$ and \eqref{eq:pl-unif}, we find that the integrand in \eqref{eq:pl-coarea} is at least $C_Ne^{N(\Upsilon(s)-4\eps')}$ on $[r_*-w,r_*+w]$, which gives \eqref{eq:pl-lower}.
+
+\emph{Expectations.} For every realization of the components, $\xi(r)\ge-\xi(1)$ and $0\le h\le K$ give
+\begin{equation}\label{eq:pl-crude}
+\Bigl|\frac1N\log\mathcal Z_N(s)\Bigr|\le\frac\beta N\sup_{S_N}\abs{G_s}+\beta^2\xi(1)+2K,
+\qquad
+\sup_{S_N}\abs{G_s}\le\frac32\sum_p\sum_kb_{p,k}\sup_{S_n}\abs{G_{p,k}}.
+\end{equation}
+The expectation of the right side of the first bound on $\cA_N^c$ tends to zero by \eqref{eq:pl-ui} and \eqref{eq:pl-AN}. Combining this with \eqref{eq:pl-upper} for $D=(-1,1)$ and with \eqref{eq:pl-lower}, and recalling $N^{-1}\log C_N\to0$, we obtain
+\[
+\Upsilon(s)-4\eps'\le\liminf_{N\to\infty}\Upsilon_N(s)\le\limsup_{N\to\infty}\Upsilon_N(s)\le\Upsilon(s)+3\eps'.
+\]
+Since $\eps'$ is arbitrary, this proves (1).
+
+For (2), let $s=(1,1)$ and $D=\{r\in(-1,1)\colon\abs{r-q_*}\ge\eps\}$. Recall from \cref{lem:pl-profile}(3) that $\Upsilon(1,1)=F-J$ and $\sup_D\Theta_{(1,1)}\le F-J-\Delta_\eps$. We run the construction above with $\eps'=\min\{\Delta_\eps,1\}/16$. By \eqref{eq:pl-mu1}, we have $w_x^H\{u\colon\abs{R(x,u)-q_*}\ge\eps\}=\mathcal Z_N^D(1,1)/\mathcal Z_N(1,1)$. On $\cA_N$, we find from \eqref{eq:pl-upper} and \eqref{eq:pl-lower} that, for all sufficiently large $N$,
+\[
+w_x^H\{u\colon\abs{R(x,u)-q_*}\ge\eps\}\le\exp\Bigl\{-N\bigl(\min\{\Delta_\eps,1\}-7\eps'\bigr)+o(N)\Bigr\}\le e^{-N\min\{\Delta_\eps,1\}/2}.
+\]
+Since this probability is at most one, we conclude that $\E\,w_x^H\{u\colon\abs{R(x,u)-q_*}\ge\eps\}\le e^{-N\min\{\Delta_\eps,1\}/2}+\Pp(\cA_N^c)$, which tends to zero by \eqref{eq:pl-AN}.
+\end{proof}
+
+
+\section{Two amplitude derivatives}\label{sec:pl-derivatives}
+
+In this section, we compute the derivatives of $\Upsilon$ in $s_1$ and $s_2$ at $(1,1)$, we express the derivatives of $\Upsilon_N$ through the overlaps of $\mu_s$, and we combine the two to prove \cref{prop:pl-planted}. We use the notation of \cref{def:pre-CS} and \cref{lem:pre-support}: $\mathscr M$ is the set of admissible measures, $\hat x_\zeta$ and $\cP_\beta(\zeta;\eta)$ are as in \eqref{eq:pre-CS}, and $f_\zeta$ and $S_\zeta$ are the first variation \eqref{eq:pre-first-variation} and its maximizing set, with derivative $f_\zeta'$ given by \eqref{eq:pr-fprime}. Recall from \cref{lem:pre-support}(3), which is \cite[Lemma~1.2]{HuangSellke2024}, that for every covariance polynomial $\eta\ne0$ the functional $\cP_\beta(\cdot\,;\eta)$ has a unique minimizer $\zeta\in\mathscr M$ and that $\zeta(S_\zeta)=1$.
+
+\begin{lemma}[Minimizers]\label{lem:pl-minimizers}
+For $r\in(-1,1)$ and $s\in[1/2,3/2]^2$, let $\zeta_{r;s}$ be the minimizer of $\cP_\beta(\cdot\,;\eta_{r;s})$.
+\begin{enumerate}
+\item The measure $\zeta_{r;s}$ is concentrated on $[0,\bar t\,]$, where $\bar t=9\beta^2\xi'(1)/(4+9\beta^2\xi'(1))<1$.
+\item If $(r_j,s_j)\to(q_*,(1,1))$, then $\zeta_{r_j;s_j}\to\delta_{t_0}$ weakly.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For (1), let $\zeta=\zeta_{r;s}$, and let $t_1$ be the largest point of the support of $\zeta$; it is smaller than one because $\zeta\in\mathscr M$. We may assume $t_1>0$. The set $S_\zeta$ is compact by \cref{lem:pre-support}(1) and has full $\zeta$-measure by \cref{lem:pre-support}(3). It therefore contains the support of $\zeta$, and $t_1\in(0,1)$ is a point at which $f_\zeta$ attains its supremum over $[0,1)$. Since $f_\zeta$ is continuously differentiable on $[0,1)$, we have $f_\zeta'(t_1)=0$. Using \eqref{eq:pr-fprime} and $\hat x_\zeta(t)\le1-t$, we find
+\[
+\beta^2\eta_{r;s}'(t_1)=\int_0^{t_1}\frac{\mathrm dt}{\hat x_\zeta(t)^2}\ge\int_0^{t_1}\frac{\mathrm dt}{(1-t)^2}=\frac{t_1}{1-t_1}.
+\]
+For $t\in[0,1]$, we have $\eta_{r;s}'(t)\le(9/4)\eta_r'(t)=(9/4)(1-r^2)\xi'(r^2+(1-r^2)t)\le(9/4)\xi'(1)$ by \eqref{eq:pl-etars} and \eqref{eq:pl-etar-coef}. Combining the two bounds, we obtain $t_1/(1-t_1)\le9\beta^2\xi'(1)/4$, that is, $t_1\le\bar t$.
+
+For (2), let $\eta_j=\eta_{r_j;s_j}$ and $\zeta_j=\zeta_{r_j;s_j}$. The argument for \eqref{eq:pl-lip-r}, together with \eqref{eq:pl-etars}, shows that $\sup_{0\le t\le1}\abs{\eta_j(t)-\eta_{q_*}(t)}\to0$. Part (1) implies that all $\zeta_j$ are probability measures on $[0,\bar t\,]$, and this set of measures is compact for weak convergence. Let $\zeta_\infty$ be the weak limit of a subsequence, and fix $Q\in(\bar t,1)$. For each $t\in[0,Q]$, we have $\hat x_{\zeta_j}(t)\to\hat x_{\zeta_\infty}(t)$ along the subsequence, since $v\mapsto1-\max\{t,v\}$ is bounded and continuous, and $\hat x_{\zeta_j}(t)\ge1-Q$. By dominated convergence, $\int_0^Q\hat x_{\zeta_j}^{-1}\to\int_0^Q\hat x_{\zeta_\infty}^{-1}$, and the uniform convergence of $\eta_j$ gives $\int\eta_j\dd\zeta_j\to\int\eta_{q_*}\dd\zeta_\infty$. We conclude that $\cP_\beta(\zeta_j;\eta_j)\to\cP_\beta(\zeta_\infty;\eta_{q_*})$ along the subsequence. On the other hand, for every $\zeta\in\mathscr M$, we have $\cP_\beta(\zeta_j;\eta_j)\le\cP_\beta(\zeta;\eta_j)$, and the right side tends to $\cP_\beta(\zeta;\eta_{q_*})$, since only the energy term in \eqref{eq:pre-CS} depends on $\eta$. It follows that $\zeta_\infty$ minimizes $\cP_\beta(\cdot\,;\eta_{q_*})$, and $\zeta_\infty=\delta_{t_0}$ by \cref{lem:pl-profile}(1). Since every subsequence has a further subsequence converging to $\delta_{t_0}$, the whole sequence converges to $\delta_{t_0}$.
+\end{proof}
+
+For $k\in\{1,2\}$, we abbreviate $a_k=a_{p_0,k}$ and note that
+\begin{equation}\label{eq:pl-ak}
+a_k(q_*)^2=c_{p_0}\binom{p_0}k\,q_*^{2(p_0-k)}(1-q_*^2)^k>0,
+\end{equation}
+since $c_{p_0}>0$, $k\le2\le p_0$, and $0<q_*<1$. Let $e_1,e_2$ be the standard unit vectors of $\R^2$.
+
+\begin{lemma}[Derivatives of the limiting pressure]\label{lem:pl-envelope}
+Let $k\in\{1,2\}$. The function $\tau\mapsto\Upsilon((1,1)+\tau e_k)$, defined for $\abs\tau\le1/2$, is differentiable at $\tau=0$, and its derivative there is $\beta^2a_k(q_*)^2(1-t_0^k)$.
+\end{lemma}
+
+This is an instance of the envelope theorem for a family of optimization problems \cite[Theorem~1 and Corollary~4]{MilgromSegal2002}, applied first to the minimum over $\zeta$ and then to the maximum over $r$. We give the short argument, which needs only the convergence of the optimizers and never differentiates them. It uses no nondegeneracy of the maximum at $q_*$.
+
+\begin{proof}
+Let $s(\tau)=(1,1)+\tau e_k$, so that $s(\tau)_k^2-1=\tau(2+\tau)$. Then $\eta_{r;s(\tau)}=\eta_r+\tau(2+\tau)a_k(r)^2t^k$ by \eqref{eq:pl-etars}. Since only the energy term of \eqref{eq:pre-CS} depends on $\eta$, we have, for every $\zeta\in\mathscr M$,
+\begin{equation}\label{eq:pl-cs-shift}
+\cP_\beta(\zeta;\eta_{r;s(\tau)})=\cP_\beta(\zeta;\eta_r)+\frac{\beta^2}2\,\tau(2+\tau)\,a_k(r)^2\Bigl(1-\int t^k\,\zeta(\mathrm dt)\Bigr).
+\end{equation}
+Let $r_\tau$ be a maximizer of $\Theta_{s(\tau)}$, which exists by \cref{lem:pl-pressure}(1). We first show that $r_\tau\to q_*$ as $\tau\to0$. By \eqref{eq:pl-lip-s}, $\sup_r\abs{\Theta_{s(\tau)}(r)-\Theta_{(1,1)}(r)}\le\omega(\tau)$ with $\omega(\tau)=\beta^2\abs{\tau(2+\tau)}c_{p_0}\binom{p_0}k$. Then
+\[
+\Theta_{(1,1)}(r_\tau)\ge\Theta_{s(\tau)}(r_\tau)-\omega(\tau)\ge\Theta_{s(\tau)}(q_*)-\omega(\tau)\ge\Theta_{(1,1)}(q_*)-2\omega(\tau),
+\]
+and \cref{lem:pl-profile}(3) shows that $\abs{r_\tau-q_*}<\eps$ as soon as $2\omega(\tau)<\Delta_\eps$.
+
+Recall that $\Upsilon(1,1)=\Theta_{(1,1)}(q_*)=\Theta^0(q_*)+\cP_\beta(\eta_{q_*})$. For the upper bound, we test the minimum defining $\cP_\beta(\eta_{r_\tau;s(\tau)})$ with $\zeta_{r_\tau;(1,1)}$. Using \eqref{eq:pl-cs-shift} and $\Theta^0(r_\tau)+\cP_\beta(\eta_{r_\tau})\le\Upsilon(1,1)$, we obtain
+\[
+\Upsilon(s(\tau))=\Theta^0(r_\tau)+\cP_\beta(\eta_{r_\tau;s(\tau)})
+\le\Upsilon(1,1)+\frac{\beta^2}2\,\tau(2+\tau)\,a_k(r_\tau)^2\Bigl(1-\int t^k\,\zeta_{r_\tau;(1,1)}(\mathrm dt)\Bigr).
+\]
+For the lower bound, we evaluate $\Theta_{s(\tau)}$ at $q_*$ and write $\cP_\beta(\eta_{q_*;s(\tau)})=\cP_\beta(\zeta_{q_*;s(\tau)};\eta_{q_*;s(\tau)})$. Using \eqref{eq:pl-cs-shift} and $\cP_\beta(\zeta_{q_*;s(\tau)};\eta_{q_*})\ge\cP_\beta(\eta_{q_*})$, we obtain
+\[
+\Upsilon(s(\tau))\ge\Theta^0(q_*)+\cP_\beta(\eta_{q_*;s(\tau)})
+\ge\Upsilon(1,1)+\frac{\beta^2}2\,\tau(2+\tau)\,a_k(q_*)^2\Bigl(1-\int t^k\,\zeta_{q_*;s(\tau)}(\mathrm dt)\Bigr).
+\]
+As $\tau\to0$, we have $r_\tau\to q_*$ and $a_k(r_\tau)\to a_k(q_*)$, and \cref{lem:pl-minimizers}(2) implies that $\zeta_{r_\tau;(1,1)}\to\delta_{t_0}$ and $\zeta_{q_*;s(\tau)}\to\delta_{t_0}$. Since $t\mapsto t^k$ is bounded and continuous on $[0,1]$, both integrals tend to $t_0^k$, and the two bounds read
+\[
+\frac{\beta^2}2\,\tau(2+\tau)\bigl[\ell_k+o(1)\bigr]
+\le\Upsilon(s(\tau))-\Upsilon(1,1)\le
+\frac{\beta^2}2\,\tau(2+\tau)\bigl[\ell_k+o(1)\bigr],
+\]
+where $\ell_k=a_k(q_*)^2(1-t_0^k)$, with two different $o(1)$ terms. Dividing by $\tau$, which reverses both inequalities when $\tau<0$, and letting $\tau\to0$, we conclude that the derivative at $\tau=0$ exists and equals $\beta^2a_k(q_*)^2(1-t_0^k)$.
+\end{proof}
+
+For $u\in S_N\setminus\{\pm x\}$, we write $r=R(x,u)$ for its latitude and $y$ for its transverse part, as in \cref{sec:pl-planted}, and for a second point $u'$, we write $r'$ and $y'$.
+
+\begin{lemma}[Gaussian integration by parts]\label{lem:pl-ibp}
+For every $N$, the function $\Upsilon_N$ is convex and differentiable on $(1/2,3/2)^2$, and for $k\in\{1,2\}$,
+\begin{equation}\label{eq:pl-ibp}
+\partial_{s_k}\Upsilon_N(s)=\beta^2s_k\,\E\Bigl[\mu_s\bigl(a_k(r)^2\bigr)-\mu_s^{\otimes2}\bigl(a_k(r)a_k(r')R_n(y,y')^k\bigr)\Bigr].
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+We use the covariance-amplitude differentiation method behind \cite[Theorem~1]{Panchenko2008} and \cite[Proposition~2.2]{AuffingerElAlaouiSellke2025}, retaining the latitude-dependent factors. For $k\in\{1,2\}$, let $Y_k(u)=b_{p_0,k}(n/N)^{k/2}R(x,u)^{p_0-k}G_{p_0,k}(P^\perp u)$ be the $(p_0,k)$ term of \eqref{eq:pl-G}, so that $G_s=G+(s_1-1)Y_1+(s_2-1)Y_2$. For every $u$ and every realization of the components, the exponent in \eqref{eq:pl-Z} is an affine function of $s$, so $\log\mathcal Z_N(s)$ is convex in $s$ by H\"older's inequality, and so is $\Upsilon_N$. Differentiating under the integral sign, we have $\partial_{s_k}\log\mathcal Z_N(s)=\beta\mu_s(Y_k)$, which is bounded by $\beta\sup_{S_N}\abs{Y_k}$ uniformly in $s$. This bound is integrable by \cref{lem:pl-banks}(3), and by dominated convergence, $\Upsilon_N$ is differentiable, with $\partial_{s_k}\Upsilon_N(s)=N^{-1}\beta\,\E\mu_s(Y_k)$.
+
+Using \eqref{eq:pl-tensor}, we may write $Y_k=\sum_\alpha g_\alpha v_\alpha$ as a finite sum, where the $g_\alpha$ are the independent standard Gaussian coordinates of the component $G_{p_0,k}$ and the $v_\alpha$ are deterministic polynomials. By \cref{lem:pl-banks}(2), for $u,u'\in S_N\setminus\{\pm x\}$,
+\begin{equation}\label{eq:pl-Ycov}
+\sum_\alpha v_\alpha(u)v_\alpha(u')=\E Y_k(u)Y_k(u')=a_k(r)a_k(r')\,\E G_{p_0,k}(y)G_{p_0,k}(y')=Na_k(r)a_k(r')R_n(y,y')^k .
+\end{equation}
+The exponent in \eqref{eq:pl-Z} depends on $g_\alpha$ only through the term $\beta s_kg_\alpha v_\alpha(u)$, and the other components are independent of $G_{p_0,k}$. Differentiating, we find $\partial_{g_\alpha}\mu_s(v_\alpha)=\beta s_k[\mu_s(v_\alpha^2)-\mu_s(v_\alpha)^2]$, and $\mu_s(v_\alpha)$ is a bounded Lipschitz function of $g_\alpha$ when the other coordinates are fixed. By Gaussian integration by parts in each coordinate, $\E[g_\alpha F(g_\alpha)]=\E[F'(g_\alpha)]$, we find
+\[
+\E\mu_s(Y_k)=\sum_\alpha\E\bigl[g_\alpha\mu_s(v_\alpha)\bigr]
+=\beta s_k\,\E\Bigl[\mu_s\Bigl(\sum_\alpha v_\alpha^2\Bigr)-\mu_s^{\otimes2}\Bigl(\sum_\alpha v_\alpha(u)v_\alpha(u')\Bigr)\Bigr].
+\]
+Inserting \eqref{eq:pl-Ycov} and multiplying by $\beta/N$ proves \eqref{eq:pl-ibp}.
+\end{proof}
+
+At $s=(1,1)$, \eqref{eq:pl-mu1} identifies $\mu_s$ with $w_x^H$, so \eqref{eq:pl-ibp} expresses the derivatives of $\Upsilon_N$ through the overlaps of two independent samples from the reweighted Gibbs measure.
+
+\begin{proof}[Proof of \cref{prop:pl-planted}]
+The proof has three steps. We first show that the derivatives of $\Upsilon_N$ at $(1,1)$ converge to those of $\Upsilon$. We then deduce that the first two moments of the transverse overlap converge to $t_0$ and $t_0^2$, and finally we pass to the full overlap and to $B_N$.
+
+\emph{Convergence of the derivatives.} Let $k\in\{1,2\}$ and $0<\tau\le1/2$. By the convexity of $\Upsilon_N$ in $s_k$ (\cref{lem:pl-ibp}),
+\[
+\frac{\Upsilon_N(1,1)-\Upsilon_N((1,1)-\tau e_k)}\tau\le\partial_{s_k}\Upsilon_N(1,1)\le\frac{\Upsilon_N((1,1)+\tau e_k)-\Upsilon_N(1,1)}\tau .
+\]
+We let $N\to\infty$, using \cref{lem:pl-pressure}(1) at the three points, and then $\tau\downarrow0$, using \cref{lem:pl-envelope}. This gives
+\begin{equation}\label{eq:pl-derivative-limit}
+\lim_{N\to\infty}\partial_{s_k}\Upsilon_N(1,1)=\beta^2a_k(q_*)^2(1-t_0^k).
+\end{equation}
+This is the one-dimensional convex derivative squeeze, which requires differentiability of the limit only at the point in question; see \cite[Theorem~24.5]{Rockafellar1970}, applied to the restrictions $\tau\mapsto\Upsilon_N((1,1)+\tau e_k)$. In statistical mechanics it is often called Griffiths' lemma. It gives no rate of convergence.
+
+\emph{Two moments of the transverse overlap.} By \eqref{eq:pl-mu1} and \eqref{eq:pl-ibp} at $s=(1,1)$,
+\begin{equation}\label{eq:pl-ibp1}
+\partial_{s_k}\Upsilon_N(1,1)=\beta^2\,\E\Bigl[w_x^H\bigl(a_k(r)^2\bigr)-(w_x^H)^{\otimes2}\bigl(a_k(r)a_k(r')R_n(y,y')^k\bigr)\Bigr].
+\end{equation}
+Recall that $\abs{a_k}\le b_{p_0,k}$ on $[-1,1]$. For $\eps>0$, let
+\[
+\omega_k(\eps)=\sup\bigl\{\abs{a_k(r)-a_k(q_*)}\colon\abs{r-q_*}<\eps\bigr\}.
+\]
+On the event $\{\abs{r-q_*}<\eps,\ \abs{r'-q_*}<\eps\}$, we have $\abs{a_k(r)a_k(r')-a_k(q_*)^2}\le2b_{p_0,k}\omega_k(\eps)$ and $\abs{a_k(r)^2-a_k(q_*)^2}\le2b_{p_0,k}\omega_k(\eps)$; both differences are at most $2b_{p_0,k}^2$ everywhere. Since $\abs{R_n(y,y')}\le1$, we obtain
+\[
+\Bigl|\partial_{s_k}\Upsilon_N(1,1)-\beta^2a_k(q_*)^2\bigl(1-M_{N,k}\bigr)\Bigr|\le4\beta^2\Bigl(b_{p_0,k}\omega_k(\eps)+2b_{p_0,k}^2\,\E\,w_x^H\{u\colon\abs{r-q_*}\ge\eps\}\Bigr),
+\]
+where $M_{N,k}=\E\,(w_x^H)^{\otimes2}(R_n(y,y')^k)$. The last expectation tends to zero by \cref{lem:pl-pressure}(2), and $\omega_k(\eps)\to0$ as $\eps\to0$ since $a_k$ is continuous. Combining this with \eqref{eq:pl-derivative-limit} and \eqref{eq:pl-ak}, we find that $M_{N,k}\to t_0^k$ for $k=1,2$, and therefore
+\begin{equation}\label{eq:pl-transverse-L2}
+\E\,(w_x^H)^{\otimes2}\bigl((R_n(y,y')-t_0)^2\bigr)=M_{N,2}-2t_0M_{N,1}+t_0^2\longrightarrow0 .
+\end{equation}
+
+\emph{The overlap and $B_N$.} By \eqref{eq:pl-overlap} and \eqref{eq:pl-t0}, for $u,u'\in S_N\setminus\{\pm x\}$,
+\[
+\begin{aligned}
+R(u,u')-q_*&=\bigl(rr'-q_*^2\bigr)+\Bigl[\bigl((1-r^2)(1-r'^2)\bigr)^{1/2}-(1-q_*^2)\Bigr]R_n(y,y')\\
+&\qquad+(1-q_*^2)\bigl(R_n(y,y')-t_0\bigr).
+\end{aligned}
+\]
+The first two terms are bounded by two in absolute value, and they are bounded by $\omega(\eps)$ when $\abs{r-q_*}<\eps$ and $\abs{r'-q_*}<\eps$, where $\omega(\eps)\to0$ as $\eps\to0$. Using $(\alpha_1+\alpha_2+\alpha_3)^2\le3(\alpha_1^2+\alpha_2^2+\alpha_3^2)$, \cref{lem:pl-pressure}(2), and \eqref{eq:pl-transverse-L2}, we find
+\[
+\begin{aligned}
+\E\,(w_x^H)^{\otimes2}\bigl((R(u,u')-q_*)^2\bigr)&\le6\,\omega(\eps)^2+48\,\E\,w_x^H\{u\colon\abs{r-q_*}\ge\eps\}\\
+&\qquad+3\,\E\,(w_x^H)^{\otimes2}\bigl((R_n(y,y')-t_0)^2\bigr),
+\end{aligned}
+\]
+and the right side tends to $6\omega(\eps)^2$ as $N\to\infty$. Since $\eps$ is arbitrary, the left side tends to zero. Finally, by \eqref{eq:pl-bary} and the Cauchy--Schwarz inequality,
+\[
+\bigl(\abs{B_N^H(x)}^2-q_*\bigr)^2=\Bigl((w_x^H)^{\otimes2}\bigl(R(u,u')-q_*\bigr)\Bigr)^2\le(w_x^H)^{\otimes2}\bigl((R(u,u')-q_*)^2\bigr).
+\]
+Taking expectations proves \cref{prop:pl-planted}.
+\end{proof}
+
+
+\section{Transfer to the original disorder}\label{sec:pl-transfer}
+
+\begin{proof}[Proof of \cref{prop:pl-norm}]
+Let $\phi_N(H,x)=(\abs{B_N^H(x)}^2-q_*)^2$. Note that $0\le \phi_N\le1$, since $\abs{B_N^H(x)}^2\in[0,1]$ and $q_*\in(0,1)$. \Cref{prop:pl-planted} and the rotation invariance explained before it imply that $\E_{\mathsf P_N}\phi_N\to0$. Let $L_N(H)=Z_{N,\beta}(H)/\E Z_{N,\beta}$ be the likelihood ratio of \cref{def:pr-planted}, and fix $\eps,\theta>0$. By \eqref{eq:pr-likelihood},
+\[
+\mathsf Q_N(\phi_N>\theta)\le\mathsf Q_N(L_N<\eps)+\int_{\{\phi_N>\theta,\ L_N\ge\eps\}}\frac{L_N}\eps\dd\mathsf Q_N
+\le\Pp(L_N<\eps)+\frac{\E_{\mathsf P_N}\phi_N}{\eps\theta}.
+\]
+In the second step, we used that the law of $H$ under $\mathsf Q_N$ is $\Pp$, and Markov's inequality under $\mathsf P_N$. Recall that $(\xi,\beta)$ is strictly replica symmetric with $\beta^2\xi''(0)<1$, by $\beta<\bs$ and \cref{lem:pre-RS}(2). We apply \cref{lem:pre-HMP-Z} with $n=N$, $\eta=\beta^2\xi$, and $G_N=\beta H_N$, so that $W_N=L_N$. It shows that $L_N$ converges in distribution to $e^{\sigma g-\sigma^2/2}$ with $\sigma^2=-\log(1-\beta^2\xi''(0))/2$, where $\sigma=0$ when $c_2=0$, and its part (1) gives $\lim_{\eps\downarrow0}\limsup_{N\to\infty}\Pp(L_N<\eps)=0$. Letting $N\to\infty$ and then $\eps\downarrow0$, we obtain $\mathsf Q_N(\phi_N>\theta)\to0$ for every $\theta>0$. The order of the limits matters here: $\eps$ is fixed while $N\to\infty$.
+
+As $0\le \phi_N\le1$, we have $\E_{\mathsf Q_N}\phi_N\le\theta+\mathsf Q_N(\phi_N>\theta)$ for every $\theta>0$. We conclude that $\E_{\mathsf Q_N}\phi_N\to0$. By the definition of $\mathsf Q_N$, we have $\E_{\mathsf Q_N}\phi_N=\E V_N$, where
+\[
+V_N=\int\bigl(\abs{B_N(x)}^2-q_*\bigr)^2\,\pi(\mathrm dx).
+\]
+Markov's inequality then implies that $V_N\to0$ in probability. Finally, we have $\abs{\int\abs{B_N}^2\dd\pi-q_*}^2\le V_N$ by the Cauchy--Schwarz inequality, which completes the proof.
+\end{proof}
+
+\begin{remark}[What the proof uses]\label{rem:pl-scope}
+The probability in (ii) and (iii) of \cref{thm:main-plateau} tends to one, but the proof gives no rate, for two reasons. The convergence of the derivatives in \eqref{eq:pl-derivative-limit} comes from convexity and has no rate, and the transfer in \cref{sec:pl-transfer} uses only the distributional limit of $L_N$. The exponential transfer of \cref{lem:pr-transfer} would require an exponentially small failure probability under the planted law, which the derivative argument does not provide. The proof uses no nondegeneracy at $q_*$: the marginal case $A'(q_*)=0$ is allowed, and the maximum of the profile at $q_*$ need not be quadratic, since \cref{lem:pl-envelope} compares values of the profile and never differentiates the maximizer. Finally, the proof uses no decomposition of the Gibbs measure into bands around critical points.
+\end{remark}

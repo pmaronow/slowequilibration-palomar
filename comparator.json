@@ -1,0 +1,23 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "SlowEquilibrationCondensedSource.theorem_1_2",
+    "SlowEquilibrationCondensedSource.corollary_1_3_a",
+    "SlowEquilibrationCondensedSource.corollary_1_3_b",
+    "SlowEquilibrationCondensedSource.corollary_1_3_b_degree_window",
+    "SlowEquilibrationCondensedSource.corollary_1_3_b_support",
+    "SlowEquilibrationCondensedSource.corollary_1_3_c",
+    "SlowEquilibrationCondensedSource.corollary_1_3_d",
+    "SlowEquilibrationCondensedSource.theorem_1_4_haar",
+    "SlowEquilibrationCondensedSource.theorem_1_4",
+    "SlowEquilibrationCondensedSource.theorem_1_5",
+    "SlowEquilibrationCondensedSource.theorem_1_6",
+    "SlowEquilibrationCuspSource.theorem_1_7"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

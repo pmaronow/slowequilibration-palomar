@@ -1,0 +1,1195 @@
+\begin{thebibliography}{154}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Achlioptas and Coja-Oghlan(2008)]{AchlioptasCojaOghlan2008}
+Dimitris Achlioptas and Amin Coja-Oghlan.
+\newblock Algorithmic barriers from phase transitions.
+\newblock In \emph{2008 49th Annual {IEEE} Symposium on Foundations of Computer
+  Science}, pages 793--802. IEEE, 2008.
+\newblock \doi{10.1109/FOCS.2008.11}.
+\newblock URL \url{https://arxiv.org/abs/0803.2122}.
+
+\bibitem[Adhikari et~al.(2024)Adhikari, Brennecke, Xu, and
+  Yau]{AdhikariBrenneckeXuYau2024}
+Arka Adhikari, Christian Brennecke, Changji Xu, and Horng-Tzer Yau.
+\newblock Spectral gap estimates for mixed p-spin models at high temperature.
+\newblock \emph{Probability Theory and Related Fields}, 189\penalty0
+  (3-4):\penalty0 879--907, 2024.
+\newblock \doi{10.1007/s00440-024-01261-9}.
+
+\bibitem[Adler and Taylor(2007)]{AdlerTaylor2007}
+Robert~J. Adler and Jonathan~E. Taylor.
+\newblock \emph{Random Fields and Geometry}.
+\newblock Springer Monographs in Mathematics. Springer, 2007.
+\newblock \doi{10.1007/978-0-387-48116-6}.
+
+\bibitem[Aizenman and Contucci(1998)]{AizenmanContucci1998}
+Michael Aizenman and Pierluigi Contucci.
+\newblock On the stability of the quenched state in mean-field spin-glass
+  models.
+\newblock \emph{Journal of Statistical Physics}, 92\penalty0 (5-6):\penalty0
+  765--783, 1998.
+\newblock \doi{10.1023/A:1023080223894}.
+
+\bibitem[Anari et~al.(2024)Anari, Jain, Koehler, Pham, and
+  Vuong]{AnariJainKoehlerPhamVuong2024}
+Nima Anari, Vishesh Jain, Frederic Koehler, Huy~Tuan Pham, and Thuy-Duong
+  Vuong.
+\newblock Universality of spectral independence with applications to fast
+  mixing in spin glasses.
+\newblock In \emph{Proceedings of the 2024 Annual ACM-SIAM Symposium on
+  Discrete Algorithms}, pages 5029--5056. SIAM, 2024.
+\newblock \doi{10.1137/1.9781611977912.181}.
+
+\bibitem[Anderson et~al.(2010)Anderson, Guionnet, and
+  Zeitouni]{AndersonGuionnetZeitouni2010}
+Greg~W. Anderson, Alice Guionnet, and Ofer Zeitouni.
+\newblock \emph{An Introduction to Random Matrices}, volume 118 of
+  \emph{Cambridge Studies in Advanced Mathematics}.
+\newblock Cambridge University Press, 2010.
+\newblock \doi{10.1017/CBO9780511801334}.
+
+\bibitem[Atkinson and Han(2012)]{AtkinsonHan2012}
+Kendall Atkinson and Weimin Han.
+\newblock \emph{Spherical Harmonics and Approximations on the Unit Sphere: An
+  Introduction}, volume 2044 of \emph{Lecture Notes in Mathematics}.
+\newblock Springer, Heidelberg, 2012.
+\newblock \doi{10.1007/978-3-642-25983-8}.
+
+\bibitem[Auffinger and Ben~Arous(2013)]{AuffingerBenArous2013}
+Antonio Auffinger and G{\'e}rard Ben~Arous.
+\newblock Complexity of random smooth functions on the high-dimensional sphere.
+\newblock \emph{The Annals of Probability}, 41\penalty0 (6):\penalty0
+  4214--4247, 2013.
+\newblock \doi{10.1214/13-AOP862}.
+
+\bibitem[Auffinger and Chen(2015)]{AuffingerChen2015}
+Antonio Auffinger and Wei-Kuo Chen.
+\newblock On properties of {Parisi} measures.
+\newblock \emph{Probability Theory and Related Fields}, 161:\penalty0 817--850,
+  2015.
+\newblock \doi{10.1007/s00440-014-0563-y}.
+
+\bibitem[Auffinger and Chen(2018)]{AuffingerChen2018}
+Antonio Auffinger and Wei-Kuo Chen.
+\newblock On the energy landscape of spherical spin glasses.
+\newblock \emph{Advances in Mathematics}, 330:\penalty0 553--588, 2018.
+\newblock \doi{10.1016/j.aim.2018.03.028}.
+
+\bibitem[Auffinger and Zhou(2025)]{AuffingerZhou2025}
+Antonio Auffinger and Yuxin Zhou.
+\newblock The spherical {$p+s$} spin glass at zero temperature.
+\newblock \emph{Communications in Mathematical Physics}, 406\penalty0
+  (12):\penalty0 314, 2025.
+\newblock \doi{10.1007/s00220-025-05487-z}.
+\newblock URL
+  \url{https://link.springer.com/article/10.1007/s00220-025-05487-z}.
+\newblock Article 314.
+
+\bibitem[Auffinger et~al.(2013)Auffinger, Ben~Arous, and {\v
+  C}ern{\'y}]{AuffingerBenArousCerny2013}
+Antonio Auffinger, G{\'e}rard Ben~Arous, and Ji{\v r}{\'i} {\v C}ern{\'y}.
+\newblock Random matrices and complexity of spin glasses.
+\newblock \emph{Communications on Pure and Applied Mathematics}, 66\penalty0
+  (2):\penalty0 165--201, 2013.
+\newblock \doi{10.1002/cpa.21422}.
+
+\bibitem[Auffinger et~al.(2025)Auffinger, El~Alaoui, and
+  Sellke]{AuffingerElAlaouiSellke2025}
+Antonio Auffinger, Ahmed El~Alaoui, and Mark Sellke.
+\newblock On the discontinuous breaking of replica symmetry and shattering in
+  mean-field spin glasses, 2025.
+\newblock URL \url{https://arxiv.org/abs/2506.02238v1}.
+
+\bibitem[Aza{\"i}s and Wschebor(2009)]{AzaisWschebor2009}
+Jean-Marc Aza{\"i}s and Mario Wschebor.
+\newblock \emph{Level Sets and Extrema of Random Processes and Fields}.
+\newblock John Wiley \& Sons, 2009.
+\newblock \doi{10.1002/9780470434642}.
+\newblock URL
+  \url{https://www.math.univ-toulouse.fr/~azais/styles/other/student/level.pdf}.
+\newblock Author draft.
+
+\bibitem[Badiei~Khuzani(2026)]{BadieiKhuzani2026}
+Masoud Badiei~Khuzani.
+\newblock Spectral gap bounds for {L}angevin dynamics in mixed spherical spin
+  glasses, 2026.
+\newblock URL \url{https://arxiv.org/abs/2609.15157v3}.
+\newblock Version 3, October 2, 2026.
+
+\bibitem[Bakry and {\'E}mery(1985)]{BakryEmery1985}
+Dominique Bakry and Michel {\'E}mery.
+\newblock Diffusions hypercontractives.
+\newblock In \emph{S{\'e}minaire de Probabilit{\'e}s {XIX}, 1983/84}, volume
+  1123 of \emph{Lecture Notes in Mathematics}, pages 177--206. Springer,
+  Berlin, 1985.
+\newblock \doi{10.1007/BFb0075847}.
+
+\bibitem[Bakry et~al.(2014)Bakry, Gentil, and Ledoux]{BakryGentilLedoux2014}
+Dominique Bakry, Ivan Gentil, and Michel Ledoux.
+\newblock \emph{Analysis and Geometry of Markov Diffusion Operators}, volume
+  348 of \emph{Grundlehren der mathematischen Wissenschaften}.
+\newblock Springer, 2014.
+\newblock \doi{10.1007/978-3-319-00227-9}.
+
+\bibitem[Barg and Musin(2007)]{BargMusin2007}
+Alexander Barg and Oleg~R. Musin.
+\newblock Codes in spherical caps.
+\newblock \emph{Advances in Mathematics of Communications}, 1\penalty0
+  (1):\penalty0 131--149, 2007.
+\newblock \doi{10.3934/amc.2007.1.131}.
+\newblock ArXiv:math/0606734v2.
+
+\bibitem[Barrat et~al.(1996)Barrat, Burioni, and
+  M{\'e}zard]{BarratBurioniMezard1996}
+A.~Barrat, R.~Burioni, and M.~M{\'e}zard.
+\newblock Dynamics within metastable states in a mean-field spin glass.
+\newblock \emph{Journal of Physics A: Mathematical and General}, 29\penalty0
+  (5):\penalty0 L81--L87, 1996.
+\newblock \doi{10.1088/0305-4470/29/5/001}.
+
+\bibitem[Barrat et~al.(1997)Barrat, Franz, and Parisi]{BarratFranzParisi1997}
+A.~Barrat, S.~Franz, and G.~Parisi.
+\newblock Temperature evolution and bifurcations of metastable states in
+  mean-field spin glasses, with connections with structural glasses.
+\newblock \emph{Journal of Physics A: Mathematical and General}, 30\penalty0
+  (16):\penalty0 5593--5612, 1997.
+\newblock \doi{10.1088/0305-4470/30/16/006}.
+
+\bibitem[Bauerschmidt and Bodineau(2019)]{BauerschmidtBodineau2019}
+Roland Bauerschmidt and Thierry Bodineau.
+\newblock A very simple proof of the lsi for high temperature spin systems.
+\newblock \emph{Journal of Functional Analysis}, 276\penalty0 (8):\penalty0
+  2582--2588, 2019.
+\newblock \doi{10.1016/j.jfa.2019.01.007}.
+
+\bibitem[Belius and Schmidt(2022)]{BeliusSchmidt2022}
+David Belius and Marius~A. Schmidt.
+\newblock Complexity of local maxima of given radial derivative for mixed
+  {$p$}-spin {Hamiltonians}, 2022.
+\newblock URL \url{https://arxiv.org/abs/2207.14361v1}.
+
+\bibitem[Ben~Arous and Guionnet(1995)]{BenArousGuionnet1995}
+G{\'e}rard Ben~Arous and Alice Guionnet.
+\newblock Large deviations for langevin spin glass dynamics.
+\newblock \emph{Probability Theory and Related Fields}, 102\penalty0
+  (4):\penalty0 455--509, 1995.
+\newblock \doi{10.1007/BF01198846}.
+
+\bibitem[Ben~Arous and Guionnet(1997)]{BenArousGuionnet1997}
+G{\'e}rard Ben~Arous and Alice Guionnet.
+\newblock Symmetric langevin spin glass dynamics.
+\newblock \emph{The Annals of Probability}, 25\penalty0 (3):\penalty0
+  1367--1422, 1997.
+\newblock \doi{10.1214/aop/1024404517}.
+
+\bibitem[Ben~Arous and Jagannath(2018)]{BenArousJagannath2018}
+G{\'e}rard Ben~Arous and Aukosh Jagannath.
+\newblock Spectral gap estimates in mean field spin glasses.
+\newblock \emph{Communications in Mathematical Physics}, 361\penalty0
+  (1):\penalty0 1--52, 2018.
+\newblock \doi{10.1007/s00220-018-3152-6}.
+
+\bibitem[Ben~Arous and Jagannath(2024)]{BenArousJagannath2024}
+G{\'e}rard Ben~Arous and Aukosh Jagannath.
+\newblock Shattering versus metastability in spin glasses.
+\newblock \emph{Communications on Pure and Applied Mathematics}, 77\penalty0
+  (1):\penalty0 139--176, 2024.
+\newblock \doi{10.1002/cpa.22133}.
+
+\bibitem[Ben~Arous et~al.(2001)Ben~Arous, Dembo, and
+  Guionnet]{BenArousDemboGuionnet2001}
+G{\'e}rard Ben~Arous, Amir Dembo, and Alice Guionnet.
+\newblock Aging of spherical spin glasses.
+\newblock \emph{Probability Theory and Related Fields}, 120\penalty0
+  (1):\penalty0 1--67, 2001.
+\newblock \doi{10.1007/PL00008774}.
+
+\bibitem[Ben~Arous et~al.(2006)Ben~Arous, Dembo, and
+  Guionnet]{BenArousDemboGuionnet2006}
+G{\'e}rard Ben~Arous, Amir Dembo, and Alice Guionnet.
+\newblock Cugliandolo--kurchan equations for dynamics of spin-glasses.
+\newblock \emph{Probability Theory and Related Fields}, 136\penalty0
+  (4):\penalty0 619--660, 2006.
+\newblock \doi{10.1007/s00440-005-0491-y}.
+
+\bibitem[Ben~Arous et~al.(2020{\natexlab{a}})Ben~Arous, Gheissari, and
+  Jagannath]{BenArousGheissariJagannath2020}
+G{\'e}rard Ben~Arous, Reza Gheissari, and Aukosh Jagannath.
+\newblock Bounding flows for spherical spin glass dynamics.
+\newblock \emph{Communications in Mathematical Physics}, 373:\penalty0
+  1011--1048, 2020{\natexlab{a}}.
+\newblock \doi{10.1007/s00220-019-03649-4}.
+
+\bibitem[Ben~Arous et~al.(2020{\natexlab{b}})Ben~Arous, Subag, and
+  Zeitouni]{BenArousSubagZeitouni2020}
+G{\'e}rard Ben~Arous, Eliran Subag, and Ofer Zeitouni.
+\newblock Geometry and temperature chaos in mixed spherical spin glasses at low
+  temperature: the perturbative regime.
+\newblock \emph{Communications on Pure and Applied Mathematics}, 73\penalty0
+  (8):\penalty0 1732--1828, 2020{\natexlab{b}}.
+\newblock \doi{10.1002/cpa.21875}.
+\newblock URL \url{https://arxiv.org/abs/1804.10573v1}.
+\newblock ArXiv version 1.
+
+\bibitem[Bhatia and Davis(2000)]{BhatiaDavis2000}
+Rajendra Bhatia and Chandler Davis.
+\newblock A better bound on the variance.
+\newblock \emph{The American Mathematical Monthly}, 107\penalty0 (4):\penalty0
+  353--357, 2000.
+\newblock \doi{10.1080/00029890.2000.12005203}.
+
+\bibitem[Biroli(1999)]{Biroli1999}
+G.~Biroli.
+\newblock Dynamical {TAP} approach to mean field glassy systems.
+\newblock \emph{Journal of Physics A: Mathematical and General}, 32\penalty0
+  (48):\penalty0 8365--8388, 1999.
+\newblock \doi{10.1088/0305-4470/32/48/301}.
+
+\bibitem[Biroli and Kurchan(2001)]{BiroliKurchan2001}
+G.~Biroli and J.~Kurchan.
+\newblock Metastable states in glassy systems.
+\newblock \emph{Physical Review E}, 64:\penalty0 016101, 2001.
+\newblock \doi{10.1103/PhysRevE.64.016101}.
+
+\bibitem[Bovier and den Hollander(2015)]{BovierDenHollander2015}
+Anton Bovier and Frank den Hollander.
+\newblock \emph{Metastability: A Potential-Theoretic Approach}, volume 351 of
+  \emph{Grundlehren der mathematischen Wissenschaften}.
+\newblock Springer, 2015.
+\newblock \doi{10.1007/978-3-319-24777-9}.
+
+\bibitem[Bovier et~al.(2000)Bovier, Eckhoff, Gayrard, and
+  Klein]{BovierEckhoffGayrardKlein2000}
+Anton Bovier, Michael Eckhoff, V{\'e}ronique Gayrard, and Markus Klein.
+\newblock Metastability and small eigenvalues in markov chains.
+\newblock \emph{Journal of Physics A: Mathematical and General}, 33\penalty0
+  (46):\penalty0 L447--L451, 2000.
+\newblock \doi{10.1088/0305-4470/33/46/102}.
+
+\bibitem[Bovier et~al.(2001)Bovier, Eckhoff, Gayrard, and
+  Klein]{BovierEckhoffGayrardKlein2001}
+Anton Bovier, Michael Eckhoff, V{\'e}ronique Gayrard, and Markus Klein.
+\newblock Metastability in stochastic dynamics of disordered mean-field models.
+\newblock \emph{Probability Theory and Related Fields}, 119\penalty0
+  (1):\penalty0 99--161, 2001.
+\newblock \doi{10.1007/PL00012740}.
+
+\bibitem[Bovier et~al.(2002)Bovier, Eckhoff, Gayrard, and
+  Klein]{BovierEckhoffGayrardKlein2002}
+Anton Bovier, Michael Eckhoff, V{\'e}ronique Gayrard, and Markus Klein.
+\newblock Metastability and low lying spectra in reversible markov chains.
+\newblock \emph{Communications in Mathematical Physics}, 228\penalty0
+  (2):\penalty0 219--255, 2002.
+\newblock \doi{10.1007/s002200200609}.
+
+\bibitem[Bovier et~al.(2004)Bovier, Eckhoff, Gayrard, and
+  Klein]{BovierEckhoffGayrardKlein2004}
+Anton Bovier, Michael Eckhoff, V{\'e}ronique Gayrard, and Markus Klein.
+\newblock Metastability in reversible diffusion processes i. sharp asymptotics
+  for capacities and exit times.
+\newblock \emph{Journal of the European Mathematical Society}, 6\penalty0
+  (4):\penalty0 399--424, 2004.
+\newblock \doi{10.4171/JEMS/14}.
+
+\bibitem[Bovier et~al.(2005)Bovier, Gayrard, and Klein]{BovierGayrardKlein2005}
+Anton Bovier, V{\'e}ronique Gayrard, and Markus Klein.
+\newblock Metastability in reversible diffusion processes ii. precise
+  asymptotics for small eigenvalues.
+\newblock \emph{Journal of the European Mathematical Society}, 7\penalty0
+  (1):\penalty0 69--99, 2005.
+\newblock \doi{10.4171/JEMS/22}.
+
+\bibitem[Castellani and Cavagna(2005)]{CastellaniCavagna2005}
+T.~Castellani and A.~Cavagna.
+\newblock Spin-glass theory for pedestrians.
+\newblock \emph{Journal of Statistical Mechanics: Theory and Experiment},
+  2005\penalty0 (05):\penalty0 P05012, 2005.
+\newblock \doi{10.1088/1742-5468/2005/05/P05012}.
+
+\bibitem[Cavagna et~al.(1997{\natexlab{a}})Cavagna, Giardina, and
+  Parisi]{CavagnaGiardinaParisi1997a}
+A.~Cavagna, I.~Giardina, and G.~Parisi.
+\newblock An investigation of the hidden structure of states in a mean-field
+  spin-glass model.
+\newblock \emph{Journal of Physics A: Mathematical and General}, 30\penalty0
+  (20):\penalty0 7021--7038, 1997{\natexlab{a}}.
+\newblock \doi{10.1088/0305-4470/30/20/009}.
+
+\bibitem[Cavagna et~al.(1997{\natexlab{b}})Cavagna, Giardina, and
+  Parisi]{CavagnaGiardinaParisi1997b}
+A.~Cavagna, I.~Giardina, and G.~Parisi.
+\newblock Barriers between metastable states in the {$p$}-spin spherical model,
+  1997{\natexlab{b}}.
+\newblock URL \url{https://arxiv.org/abs/cond-mat/9702069}.
+
+\bibitem[Cavagna et~al.(1998)Cavagna, Giardina, and
+  Parisi]{CavagnaGiardinaParisi1998}
+A.~Cavagna, I.~Giardina, and G.~Parisi.
+\newblock Stationary points of the thouless-anderson-palmer free energy.
+\newblock \emph{Physical Review B}, 57:\penalty0 11251--11257, 1998.
+\newblock \doi{10.1103/PhysRevB.57.11251}.
+
+\bibitem[Charbonneau et~al.(2026)Charbonneau, Folena, Malatesta, Rizzo, and
+  Zamponi]{CharbonneauFolenaMalatestaRizzoZamponi2026}
+Patrick Charbonneau, Giampaolo Folena, Enrico~M. Malatesta, Tommaso Rizzo, and
+  Francesco Zamponi.
+\newblock Rare trajectories in a prototypical mean-field disordered model:
+  Insights into landscape and instantons.
+\newblock \emph{Physical Review E}, 113\penalty0 (3):\penalty0 034107, 2026.
+\newblock \doi{10.1103/f4dj-d2sh}.
+\newblock URL \url{https://arxiv.org/abs/2505.00107v3}.
+\newblock Article 034107; arXiv version 3, February 9, 2026.
+
+\bibitem[Chatzakou and Sarantopoulos(2019)]{ChatzakouSarantopoulos2019}
+M.~Chatzakou and Y.~Sarantopoulos.
+\newblock Bernstein and {Markov}-type inequalities for polynomials on
+  {$L_p(\mu)$} spaces.
+\newblock \emph{Dolomites Research Notes on Approximation}, 12:\penalty0
+  16--28, 2019.
+\newblock \doi{10.14658/pupj-drna-2019-Special_Issue-4}.
+
+\bibitem[Chen(2013)]{Chen2013}
+Wei-Kuo Chen.
+\newblock The {Aizenman--Sims--Starr} scheme and {Parisi} formula for mixed
+  {$p$}-spin spherical models.
+\newblock \emph{Electronic Journal of Probability}, 18\penalty0 (94):\penalty0
+  1--14, 2013.
+\newblock \doi{10.1214/EJP.v18-2580}.
+\newblock URL \url{https://arxiv.org/abs/1204.5115v1}.
+\newblock ArXiv version 1.
+
+\bibitem[Chen and Panchenko(2018)]{ChenPanchenko2018}
+Wei-Kuo Chen and Dmitry Panchenko.
+\newblock On the {TAP} free energy in the mixed {$p$}-spin models.
+\newblock \emph{Communications in Mathematical Physics}, 362\penalty0
+  (1):\penalty0 219--252, 2018.
+\newblock \doi{10.1007/s00220-018-3143-7}.
+
+\bibitem[Chen and Sen(2017)]{ChenSen2017}
+Wei-Kuo Chen and Arnab Sen.
+\newblock Parisi formula, disorder chaos and fluctuation for the ground state
+  energy in the spherical mixed {$p$}-spin models.
+\newblock \emph{Communications in Mathematical Physics}, 350\penalty0
+  (1):\penalty0 129--173, 2017.
+\newblock \doi{10.1007/s00220-016-2808-3}.
+\newblock URL \url{https://arxiv.org/abs/1512.08492v2}.
+\newblock ArXiv version 2.
+
+\bibitem[Chen et~al.(2021)Chen, Panchenko, and Subag]{ChenPanchenkoSubag2021}
+Wei-Kuo Chen, Dmitry Panchenko, and Eliran Subag.
+\newblock The generalized {TAP} free energy {II}.
+\newblock \emph{Communications in Mathematical Physics}, 381\penalty0
+  (1):\penalty0 257--291, 2021.
+\newblock \doi{10.1007/s00220-020-03887-x}.
+
+\bibitem[Chen et~al.(2023)Chen, Panchenko, and Subag]{ChenPanchenkoSubag2023}
+Wei-Kuo Chen, Dmitry Panchenko, and Eliran Subag.
+\newblock Generalized {TAP} free energy.
+\newblock \emph{Communications on Pure and Applied Mathematics}, 76\penalty0
+  (7):\penalty0 1329--1415, 2023.
+\newblock \doi{10.1002/cpa.22040}.
+
+\bibitem[Citro and Ricci-Tersenghi(2025)]{CitroRicciTersenghi2025}
+Vincenzo Citro and Federico Ricci-Tersenghi.
+\newblock Strong ergodicity breaking in dynamical mean-field equations for
+  mixed {$p$}-spin glasses.
+\newblock \emph{Physical Review Letters}, 135\penalty0 (24):\penalty0 247102,
+  2025.
+\newblock \doi{10.1103/lvmp-pydk}.
+\newblock URL \url{https://arxiv.org/abs/2504.12367v3}.
+\newblock Article 247102; arXiv version 3, December 10, 2025.
+
+\bibitem[Crisanti and Sommers(1992)]{CrisantiSommers1992}
+A.~Crisanti and H.-J. Sommers.
+\newblock The spherical {$p$}-spin interaction spin glass model: The statics.
+\newblock \emph{Zeitschrift f{\"u}r Physik B Condensed Matter}, 87:\penalty0
+  341--354, 1992.
+\newblock \doi{10.1007/BF01309287}.
+
+\bibitem[Crisanti and Sommers(1995)]{CrisantiSommers1995TAP}
+A.~Crisanti and H.-J. Sommers.
+\newblock {Thouless--Anderson--Palmer} approach to the spherical {$p$}-spin
+  spin glass model.
+\newblock \emph{Journal de Physique I}, 5\penalty0 (7):\penalty0 805--813,
+  1995.
+\newblock \doi{10.1051/jp1:1995164}.
+
+\bibitem[Crisanti et~al.(1993)Crisanti, Horner, and
+  Sommers]{CrisantiHornerSommers1993}
+A.~Crisanti, H.~Horner, and H.-J. Sommers.
+\newblock The spherical {$p$}-spin interaction spin-glass model: The dynamics.
+\newblock \emph{Zeitschrift f{\"u}r Physik B Condensed Matter}, 92:\penalty0
+  257--271, 1993.
+\newblock \doi{10.1007/BF01312184}.
+
+\bibitem[Csisz{\'a}r(1967)]{Csiszar1967}
+Imre Csisz{\'a}r.
+\newblock Information-type measures of difference of probability distributions
+  and indirect observations.
+\newblock \emph{Studia Scientiarum Mathematicarum Hungarica}, 2:\penalty0
+  299--318, 1967.
+
+\bibitem[Cugliandolo and Kurchan(1993)]{CugliandoloKurchan1993}
+L.~F. Cugliandolo and J.~Kurchan.
+\newblock Analytical solution of the off-equilibrium dynamics of a long-range
+  spin-glass model.
+\newblock \emph{Physical Review Letters}, 71:\penalty0 173--176, 1993.
+\newblock \doi{10.1103/PhysRevLett.71.173}.
+
+\bibitem[Dembo and Subag(2020)]{DemboSubag2020}
+Amir Dembo and Eliran Subag.
+\newblock Dynamics for spherical spin glasses: disorder dependent initial
+  conditions.
+\newblock \emph{Journal of Statistical Physics}, 181\penalty0 (2):\penalty0
+  465--514, 2020.
+\newblock \doi{10.1007/s10955-020-02587-z}.
+
+\bibitem[Dembo and Subag(2025)]{DemboSubag2025}
+Amir Dembo and Eliran Subag.
+\newblock Dynamics for spherical spin glasses: Gibbs distributed initial
+  conditions, 2025.
+\newblock URL \url{https://arxiv.org/abs/2503.23342v3}.
+\newblock Version 3, revised July 8, 2026.
+
+\bibitem[Dembo and Subag(2026)]{DemboSubag2026}
+Amir Dembo and Eliran Subag.
+\newblock Disordered {G}ibbs measures and {G}aussian conditioning.
+\newblock \emph{Probability Theory and Related Fields}, 2026.
+\newblock \doi{10.1007/s00440-026-01526-5}.
+\newblock URL \url{https://arxiv.org/abs/2409.19453v3}.
+\newblock Published online August 22, 2026; arXiv version 3.
+
+\bibitem[Dembo et~al.(2007)Dembo, Guionnet, and Mazza]{DemboGuionnetMazza2007}
+Amir Dembo, Alice Guionnet, and Christian Mazza.
+\newblock Limiting dynamics for spherical models of spin glasses at high
+  temperature.
+\newblock \emph{Journal of Statistical Physics}, 128\penalty0 (4):\penalty0
+  847--881, 2007.
+\newblock \doi{10.1007/s10955-006-9239-z}.
+
+\bibitem[Dembo et~al.(2021)Dembo, Lubetzky, and
+  Zeitouni]{DemboLubetzkyZeitouni2021}
+Amir Dembo, Eyal Lubetzky, and Ofer Zeitouni.
+\newblock Universality for langevin-like spin glass dynamics.
+\newblock \emph{The Annals of Applied Probability}, 31\penalty0 (6):\penalty0
+  2864--2880, 2021.
+\newblock \doi{10.1214/21-AAP1665}.
+
+\bibitem[DLMF()]{DLMF}
+DLMF.
+\newblock {NIST} digital library of mathematical functions.
+\newblock \url{https://dlmf.nist.gov/}, Release 1.2.8 of 2026-09-15, 2026.
+\newblock Section 18.5(iii), equation (18.5.10).
+
+\bibitem[Dovbysh and Sudakov(1982)]{DovbyshSudakov1982}
+L.~N. Dovbysh and V.~N. Sudakov.
+\newblock On the {Gram--de Finetti} matrices.
+\newblock \emph{Zapiski Nauchnykh Seminarov LOMI}, 119:\penalty0 77--86, 1982.
+\newblock URL \url{https://www.mathnet.ru/eng/znsl3986}.
+
+\bibitem[Dyatlov(2026)]{Dyatlov2026Notes}
+Semyon Dyatlov.
+\newblock Lecture notes for 18.155: distributions, elliptic regularity, and
+  applications to {PDE}s, 2026.
+\newblock URL \url{https://math.mit.edu/~dyatlov/18.155/155-notes.pdf}.
+\newblock Version dated October 2, 2026.
+
+\bibitem[El~Alaoui et~al.(2025)El~Alaoui, Montanari, and
+  Sellke]{ElAlaouiMontanariSellke2025}
+Ahmed El~Alaoui, Andrea Montanari, and Mark Sellke.
+\newblock Shattering in pure spherical spin glasses.
+\newblock \emph{Communications in Mathematical Physics}, 406\penalty0
+  (5):\penalty0 111, 2025.
+\newblock \doi{10.1007/s00220-025-05243-3}.
+\newblock URL \url{https://arxiv.org/abs/2307.04659v4}.
+\newblock Article 111; arXiv version 4.
+
+\bibitem[El~Soufi et~al.(2017)El~Soufi, Harrell, Ilias, and
+  Stubbe]{ElSoufiHarrellIliasStubbe2017}
+Ahmad El~Soufi, Evans~M. Harrell, II, Sa{\"i}d Ilias, and Joachim Stubbe.
+\newblock On sums of eigenvalues of elliptic operators on manifolds.
+\newblock \emph{Journal of Spectral Theory}, 7\penalty0 (4):\penalty0
+  985--1022, 2017.
+\newblock \doi{10.4171/JST/183}.
+
+\bibitem[Eldan et~al.(2022)Eldan, Koehler, and
+  Zeitouni]{EldanKoehlerZeitouni2022}
+Ronen Eldan, Frederic Koehler, and Ofer Zeitouni.
+\newblock A spectral condition for spectral gap: fast mixing in
+  high-temperature ising models.
+\newblock \emph{Probability Theory and Related Fields}, 182\penalty0
+  (3-4):\penalty0 1035--1051, 2022.
+\newblock \doi{10.1007/s00440-021-01085-x}.
+
+\bibitem[Farouki(2012)]{Farouki2012}
+Rida~T. Farouki.
+\newblock The {Bernstein} polynomial basis: A centennial retrospective.
+\newblock \emph{Computer Aided Geometric Design}, 29\penalty0 (6):\penalty0
+  379--419, 2012.
+\newblock \doi{10.1016/j.cagd.2012.03.001}.
+
+\bibitem[Federer(1969)]{Federer1969}
+Herbert Federer.
+\newblock \emph{Geometric Measure Theory}, volume 153 of \emph{Grundlehren der
+  mathematischen Wissenschaften}.
+\newblock Springer, 1969.
+\newblock \doi{10.1007/978-3-642-62010-2}.
+\newblock Reprinted in Classics in Mathematics, 1996.
+
+\bibitem[Folena et~al.(2020)Folena, Franz, and
+  Ricci-Tersenghi]{FolenaFranzRicciTersenghi2020}
+G.~Folena, S.~Franz, and F.~Ricci-Tersenghi.
+\newblock Rethinking mean-field glassy dynamics and its relation with the
+  energy landscape: The surprising case of the spherical mixed {$p$}-spin
+  model.
+\newblock \emph{Physical Review X}, 10:\penalty0 031045, 2020.
+\newblock \doi{10.1103/PhysRevX.10.031045}.
+
+\bibitem[Folena and Zamponi(2023)]{FolenaZamponi2023}
+Giampaolo Folena and Francesco Zamponi.
+\newblock On weak ergodicity breaking in mean-field spin glasses.
+\newblock \emph{SciPost Physics}, 15\penalty0 (3):\penalty0 109, 2023.
+\newblock \doi{10.21468/SciPostPhys.15.3.109}.
+\newblock URL \url{https://arxiv.org/abs/2303.00026v3}.
+\newblock Article 109; arXiv version 3, June 10, 2023.
+
+\bibitem[Franz(2005)]{Franz2005}
+S.~Franz.
+\newblock First steps of a nucleation theory in disordered systems.
+\newblock \emph{Journal of Statistical Mechanics: Theory and Experiment},
+  2005\penalty0 (04):\penalty0 P04001, 2005.
+\newblock \doi{10.1088/1742-5468/2005/04/P04001}.
+
+\bibitem[Franz and Parisi(1995)]{FranzParisi1995}
+S.~Franz and G.~Parisi.
+\newblock Recipes for metastable states in spin glasses.
+\newblock \emph{Journal de Physique I}, 5\penalty0 (11):\penalty0 1401--1415,
+  1995.
+\newblock \doi{10.1051/jp1:1995201}.
+
+\bibitem[Franz and Parisi(1997)]{FranzParisi1997}
+S.~Franz and G.~Parisi.
+\newblock Phase diagram of coupled glassy systems: A mean-field study.
+\newblock \emph{Physical Review Letters}, 79:\penalty0 2486--2489, 1997.
+\newblock \doi{10.1103/PhysRevLett.79.2486}.
+
+\bibitem[Freidlin and Wentzell(2012)]{FreidlinWentzell2012}
+Mark~I. Freidlin and Alexander~D. Wentzell.
+\newblock \emph{Random Perturbations of Dynamical Systems}, volume 260 of
+  \emph{Grundlehren der mathematischen Wissenschaften}.
+\newblock Springer, 3 edition, 2012.
+\newblock \doi{10.1007/978-3-642-25847-3}.
+
+\bibitem[Fukushima et~al.(2011)Fukushima, Oshima, and
+  Takeda]{FukushimaOshimaTakeda2011}
+Masatoshi Fukushima, Yoichi Oshima, and Masayoshi Takeda.
+\newblock \emph{Dirichlet Forms and Symmetric Markov Processes}, volume~19 of
+  \emph{De Gruyter Studies in Mathematics}.
+\newblock De Gruyter, 2 edition, 2011.
+\newblock \doi{10.1515/9783110218091}.
+
+\bibitem[Gamarnik and Jagannath(2021)]{GamarnikJagannath2021}
+David Gamarnik and Aukosh Jagannath.
+\newblock The overlap gap property and approximate message passing algorithms
+  for p-spin models.
+\newblock \emph{The Annals of Probability}, 49\penalty0 (1):\penalty0 180--205,
+  2021.
+\newblock \doi{10.1214/20-AOP1448}.
+
+\bibitem[Gamarnik et~al.(2024)Gamarnik, Jagannath, and
+  Wein]{GamarnikJagannathWein2024}
+David Gamarnik, Aukosh Jagannath, and Alexander~S. Wein.
+\newblock Hardness of random optimization problems for boolean circuits,
+  low-degree polynomials, and langevin dynamics.
+\newblock \emph{SIAM Journal on Computing}, 53\penalty0 (1):\penalty0 1--46,
+  2024.
+\newblock \doi{10.1137/22M150263X}.
+
+\bibitem[Gaveau and Schulman(1998)]{GaveauSchulman1998}
+Bernard Gaveau and Lawrence~S. Schulman.
+\newblock Theory of nonequilibrium first-order phase transitions for stochastic
+  dynamics.
+\newblock \emph{Journal of Mathematical Physics}, 39\penalty0 (3):\penalty0
+  1517--1533, 1998.
+\newblock \doi{10.1063/1.532394}.
+
+\bibitem[Gebelein(1941)]{Gebelein1941}
+Hans Gebelein.
+\newblock Das statistische {P}roblem der {K}orrelation als {V}ariations- und
+  {E}igenwertproblem und sein {Z}usammenhang mit der {A}usgleichsrechnung.
+\newblock \emph{Zeitschrift f{\"u}r Angewandte Mathematik und Mechanik},
+  21\penalty0 (6):\penalty0 364--379, 1941.
+\newblock \doi{10.1002/zamm.19410210604}.
+
+\bibitem[Gheissari and Jagannath(2019)]{GheissariJagannath2019}
+Reza Gheissari and Aukosh Jagannath.
+\newblock On the spectral gap of spherical spin glass dynamics.
+\newblock \emph{Annales de l'Institut Henri Poincar{\'e}, Probabilit{\'e}s et
+  Statistiques}, 55\penalty0 (2):\penalty0 756--776, 2019.
+\newblock \doi{10.1214/18-AIHP897}.
+
+\bibitem[Gheissari et~al.(2026)Gheissari, Grant, and Yu]{GheissariGrantYu2026}
+Reza Gheissari, Curtis Grant, and Tianmin Yu.
+\newblock Mixing times of langevin dynamics for spiked matrix models, 2026.
+\newblock URL \url{https://arxiv.org/abs/2604.20008v2}.
+\newblock Version 2.
+
+\bibitem[Ghirlanda and Guerra(1998)]{GhirlandaGuerra1998}
+Stefano Ghirlanda and Francesco Guerra.
+\newblock General properties of overlap probability distributions in disordered
+  spin systems. towards {Parisi} ultrametricity.
+\newblock \emph{Journal of Physics A: Mathematical and General}, 31\penalty0
+  (46):\penalty0 9149--9155, 1998.
+\newblock \doi{10.1088/0305-4470/31/46/006}.
+
+\bibitem[Gross(1975)]{Gross1975}
+Leonard Gross.
+\newblock Logarithmic {Sobolev} inequalities.
+\newblock \emph{American Journal of Mathematics}, 97\penalty0 (4):\penalty0
+  1061--1083, 1975.
+\newblock \doi{10.2307/2373688}.
+
+\bibitem[Guerra and Toninelli(2002)]{GuerraToninelli2002}
+Francesco Guerra and Fabio~Lucio Toninelli.
+\newblock Quadratic replica coupling in the {Sherrington--Kirkpatrick} mean
+  field spin glass model.
+\newblock \emph{Journal of Mathematical Physics}, 43\penalty0 (7):\penalty0
+  3704--3716, 2002.
+\newblock \doi{10.1063/1.1483378}.
+\newblock URL \url{https://arxiv.org/abs/cond-mat/0201091v2}.
+\newblock ArXiv version 2, Section 3.
+
+\bibitem[Harrell and Stubbe(2014)]{HarrellStubbe2014}
+Evans~M. Harrell, II and Joachim Stubbe.
+\newblock On sums of graph eigenvalues.
+\newblock \emph{Linear Algebra and its Applications}, 455:\penalty0 168--186,
+  2014.
+\newblock \doi{10.1016/j.laa.2014.05.001}.
+\newblock Corrigendum: Linear Algebra and its Applications 458 (2014),
+  699--700, \url{https://doi.org/10.1016/j.laa.2014.06.020}.
+
+\bibitem[Helffer and Sj{\"o}strand(1984)]{HelfferSjostrand1984}
+Bernard Helffer and Johannes Sj{\"o}strand.
+\newblock Multiple wells in the semi-classical limit i.
+\newblock \emph{Communications in Partial Differential Equations}, 9\penalty0
+  (4):\penalty0 337--408, 1984.
+\newblock \doi{10.1080/03605308408820335}.
+
+\bibitem[Helffer et~al.(2004)Helffer, Klein, and Nier]{HelfferKleinNier2004}
+Bernard Helffer, Markus Klein, and Francis Nier.
+\newblock Quantitative analysis of metastability in reversible diffusion
+  processes via a witten complex approach.
+\newblock \emph{Matem{\'a}tica Contempor{\^a}nea}, 26:\penalty0 41--85, 2004.
+\newblock \doi{10.21711/231766362004/rmc265}.
+
+\bibitem[Hoffman and Wielandt(1953)]{HoffmanWielandt1953}
+Alan~J. Hoffman and Helmut~W. Wielandt.
+\newblock The variation of the spectrum of a normal matrix.
+\newblock \emph{Duke Mathematical Journal}, 20\penalty0 (1):\penalty0 37--39,
+  1953.
+\newblock \doi{10.1215/S0012-7094-53-02004-3}.
+
+\bibitem[Huang and Sellke(2024)]{HuangSellke2024}
+Brice Huang and Mark Sellke.
+\newblock A constructive proof of the spherical parisi formula, 2024.
+\newblock URL \url{https://arxiv.org/abs/2311.15495v3}.
+\newblock Version 3; first posted in 2023.
+
+\bibitem[Huang and Sellke(2025)]{HuangSellke2025}
+Brice Huang and Mark Sellke.
+\newblock Tight lipschitz hardness for optimizing mean field spin glasses.
+\newblock \emph{Communications on Pure and Applied Mathematics}, 78\penalty0
+  (1):\penalty0 60--119, 2025.
+\newblock \doi{10.1002/cpa.22222}.
+
+\bibitem[Huang and Sellke(2026)]{HuangSellke2026}
+Brice Huang and Mark Sellke.
+\newblock Strong topological trivialization of multi-species spherical spin
+  glasses.
+\newblock \emph{The Annals of Probability}, 54\penalty0 (2):\penalty0
+  1034--1107, 2026.
+\newblock \doi{10.1214/25-AOP1785}.
+
+\bibitem[Huang et~al.(2024)Huang, Montanari, and Pham]{HuangMontanariPham2024}
+Brice Huang, Andrea Montanari, and Huy~Tuan Pham.
+\newblock Sampling from spherical spin glasses in total variation via
+  algorithmic stochastic localization, 2024.
+\newblock URL \url{https://arxiv.org/abs/2404.15651v1}.
+
+\bibitem[Huang et~al.(2025)Huang, Mohanty, Rajaraman, and
+  Wu]{HuangMohantyRajaramanWu2025}
+Brice Huang, Sidhanth Mohanty, Amit Rajaraman, and David~X. Wu.
+\newblock Weak poincar{\'e} inequalities, simulated annealing, and sampling
+  from spherical spin glasses.
+\newblock In \emph{Proceedings of the 57th Annual ACM Symposium on Theory of
+  Computing}, pages 915--923. ACM, 2025.
+\newblock \doi{10.1145/3717823.3718236}.
+\newblock URL \url{https://arxiv.org/abs/2411.09075v2}.
+\newblock ArXiv version 2.
+
+\bibitem[Jagannath(2019)]{Jagannath2019}
+Aukosh Jagannath.
+\newblock Dynamics of mean field spin glasses on short and long timescales.
+\newblock \emph{Journal of Mathematical Physics}, 60\penalty0 (8):\penalty0
+  083305, 2019.
+\newblock \doi{10.1063/1.5094173}.
+
+\bibitem[Jagannath and Tobasco(2017)]{JagannathTobasco2017low}
+Aukosh Jagannath and Ian Tobasco.
+\newblock Low temperature asymptotics of spherical mean field spin glasses.
+\newblock \emph{Communications in Mathematical Physics}, 352\penalty0
+  (3):\penalty0 979--1017, 2017.
+\newblock \doi{10.1007/s00220-017-2864-3}.
+
+\bibitem[Jagannath and Tobasco(2018)]{JagannathTobasco2018contacts}
+Aukosh Jagannath and Ian Tobasco.
+\newblock Bounds on the complexity of replica symmetry breaking for spherical
+  spin glasses.
+\newblock \emph{Proceedings of the American Mathematical Society}, 146\penalty0
+  (7):\penalty0 3127--3142, 2018.
+\newblock \doi{10.1090/proc/13875}.
+
+\bibitem[Kechris(1995)]{Kechris1995}
+Alexander~S. Kechris.
+\newblock \emph{Classical Descriptive Set Theory}, volume 156 of \emph{Graduate
+  Texts in Mathematics}.
+\newblock Springer-Verlag, New York, 1995.
+\newblock \doi{10.1007/978-1-4612-4190-4}.
+
+\bibitem[Kim(2026)]{Kim2026nonshattering}
+Taegyun Kim.
+\newblock Non-shattering at and above the dynamical temperature in the
+  spherical pure {$p$}-spin model, 2026.
+\newblock URL \url{https://arxiv.org/abs/2608.14369v2}.
+\newblock Version 2, revised August 21, 2026.
+
+\bibitem[Kirkpatrick and Thirumalai(1987)]{KirkpatrickThirumalai1987}
+T.~R. Kirkpatrick and D.~Thirumalai.
+\newblock Dynamics of the structural glass transition and the
+  {$p$}-spin--interaction spin-glass model.
+\newblock \emph{Physical Review Letters}, 58:\penalty0 2091--2094, 1987.
+\newblock \doi{10.1103/PhysRevLett.58.2091}.
+
+\bibitem[Kirkpatrick and Wolynes(1987)]{KirkpatrickWolynes1987}
+T.~R. Kirkpatrick and P.~G. Wolynes.
+\newblock Stable and metastable states in mean-field potts and structural
+  glasses.
+\newblock \emph{Physical Review B}, 36:\penalty0 8552--8564, 1987.
+\newblock \doi{10.1103/PhysRevB.36.8552}.
+
+\bibitem[Kirkpatrick et~al.(1989)Kirkpatrick, Thirumalai, and
+  Wolynes]{KirkpatrickThirumalaiWolynes1989}
+T.~R. Kirkpatrick, D.~Thirumalai, and P.~G. Wolynes.
+\newblock Scaling concepts for the dynamics of viscous liquids near an ideal
+  glassy state.
+\newblock \emph{Physical Review A}, 40:\penalty0 1045--1054, 1989.
+\newblock \doi{10.1103/PhysRevA.40.1045}.
+
+\bibitem[Kouraich and Warzel(2026)]{KouraichWarzel2026}
+Anouar Kouraich and Simone Warzel.
+\newblock Lower bound on the mixing time of p-spin glasses, 2026.
+\newblock URL \url{https://arxiv.org/abs/2605.14681v1}.
+
+\bibitem[Kr{\"o}ger(1992)]{Kroger1992}
+Pawel Kr{\"o}ger.
+\newblock Upper bounds for the neumann eigenvalues on a bounded domain in
+  euclidean space.
+\newblock \emph{Journal of Functional Analysis}, 106\penalty0 (2):\penalty0
+  353--357, 1992.
+\newblock \doi{10.1016/0022-1236(92)90052-K}.
+
+\bibitem[Krzakala and Zdeborov{\'a}(2009)]{KrzakalaZdeborova2009}
+F.~Krzakala and L.~Zdeborov{\'a}.
+\newblock Hiding quiet solutions in random constraint satisfaction problems.
+\newblock \emph{Physical Review Letters}, 102:\penalty0 238701, 2009.
+\newblock \doi{10.1103/PhysRevLett.102.238701}.
+
+\bibitem[Krzakala et~al.(2007)Krzakala, Montanari, Ricci-Tersenghi, Semerjian,
+  and Zdeborov{\'a}]{KrzakalaMontanariRicciTersenghiSemerjianZdeborova2007}
+F.~Krzakala, A.~Montanari, F.~Ricci-Tersenghi, G.~Semerjian, and
+  L.~Zdeborov{\'a}.
+\newblock Gibbs states and the set of solutions of random constraint
+  satisfaction problems.
+\newblock \emph{Proceedings of the National Academy of Sciences}, 104\penalty0
+  (25):\penalty0 10318--10323, 2007.
+\newblock \doi{10.1073/pnas.0703685104}.
+
+\bibitem[Kurchan and Laloux(1996)]{KurchanLaloux1996}
+J.~Kurchan and L.~Laloux.
+\newblock Phase space geometry and slow dynamics.
+\newblock \emph{Journal of Physics A: Mathematical and General}, 29\penalty0
+  (9):\penalty0 1929--1948, 1996.
+\newblock \doi{10.1088/0305-4470/29/9/009}.
+
+\bibitem[Kurchan et~al.(1993)Kurchan, Parisi, and
+  Virasoro]{KurchanParisiVirasoro1993}
+J.~Kurchan, G.~Parisi, and M.~A. Virasoro.
+\newblock Barriers and metastable states as saddle points in the replica
+  approach.
+\newblock \emph{Journal de Physique I}, 3\penalty0 (8):\penalty0 1819--1838,
+  1993.
+\newblock \doi{10.1051/jp1:1993217}.
+
+\bibitem[Lang et~al.(2025)Lang, Sachdev, and Diehl]{LangSachdevDiehl2025}
+Johannes Lang, Subir Sachdev, and Sebastian Diehl.
+\newblock Numerical renormalization of glassy dynamics.
+\newblock \emph{Physical Review Letters}, 135\penalty0 (24):\penalty0 247101,
+  2025.
+\newblock \doi{10.1103/z64g-nqs6}.
+\newblock URL \url{https://arxiv.org/abs/2504.06849v2}.
+\newblock Article 247101; arXiv version 2, December 11, 2025.
+
+\bibitem[Lang et~al.(2026)Lang, Citro, Leuzzi, and
+  Ricci-Tersenghi]{LangCitroLeuzziRicciTersenghi2026}
+Johannes Lang, Vincenzo Citro, Luca Leuzzi, and Federico Ricci-Tersenghi.
+\newblock Aging phase diagram and exact asymptotic energies of mixed spherical
+  spin glasses, 2026.
+\newblock URL \url{https://arxiv.org/abs/2608.20623v1}.
+\newblock Version 1, August 20, 2026.
+
+\bibitem[Ledoux(1994)]{LedouxSemigroup1994}
+Michel Ledoux.
+\newblock Semigroup proofs of the isoperimetric inequality in {E}uclidean and
+  {G}auss space.
+\newblock \emph{Bulletin des Sciences Math{\'e}matiques}, 118\penalty0
+  (6):\penalty0 485--510, 1994.
+\newblock Author manuscript.
+
+\bibitem[Ledoux(2001)]{Ledoux2001}
+Michel Ledoux.
+\newblock \emph{The Concentration of Measure Phenomenon}, volume~89 of
+  \emph{Mathematical Surveys and Monographs}.
+\newblock American Mathematical Society, 2001.
+\newblock \doi{10.1090/surv/089}.
+
+\bibitem[Lehmann and Romano(2005)]{LehmannRomano2005}
+Erich~L. Lehmann and Joseph~P. Romano.
+\newblock \emph{Testing Statistical Hypotheses}.
+\newblock Springer, 3 edition, 2005.
+\newblock \doi{10.1007/0-387-27605-X}.
+
+\bibitem[Lopatin and Ioffe(2000)]{LopatinIoffe2000}
+A.~V. Lopatin and L.~B. Ioffe.
+\newblock Barriers in the {$p$}-spin interacting spin-glass model: The
+  dynamical approach.
+\newblock \emph{Physical Review Letters}, 84\penalty0 (18):\penalty0
+  4208--4211, 2000.
+\newblock \doi{10.1103/PhysRevLett.84.4208}.
+
+\bibitem[Lorentz(1986)]{Lorentz1986}
+George~G. Lorentz.
+\newblock \emph{Bernstein Polynomials}.
+\newblock Chelsea Publishing Company, New York, 2 edition, 1986.
+\newblock ISBN 0828403236.
+
+\bibitem[Mathis and Stecconi(2024)]{MathisStecconi2024}
+L{\'e}o Mathis and Michele Stecconi.
+\newblock Expectation of a random submanifold: the zonoid section.
+\newblock \emph{Annales Henri Lebesgue}, 7:\penalty0 903--967, 2024.
+\newblock \doi{10.5802/ahl.214}.
+\newblock URL \url{https://www.numdam.org/articles/10.5802/ahl.214/}.
+
+\bibitem[M{\'e}zard and Montanari(2006)]{MezardMontanari2006}
+M.~M{\'e}zard and A.~Montanari.
+\newblock Reconstruction on trees and spin glass transition.
+\newblock \emph{Journal of Statistical Physics}, 124:\penalty0 1317--1350,
+  2006.
+\newblock \doi{10.1007/s10955-006-9162-3}.
+
+\bibitem[Milgrom and Segal(2002)]{MilgromSegal2002}
+Paul Milgrom and Ilya Segal.
+\newblock Envelope theorems for arbitrary choice sets.
+\newblock \emph{Econometrica}, 70\penalty0 (2):\penalty0 583--601, 2002.
+\newblock \doi{10.1111/1468-0262.00296}.
+
+\bibitem[Monasson(1995)]{Monasson1995}
+R.~Monasson.
+\newblock Structural glass transition and the entropy of the metastable states.
+\newblock \emph{Physical Review Letters}, 75:\penalty0 2847--2850, 1995.
+\newblock \doi{10.1103/PhysRevLett.75.2847}.
+
+\bibitem[Montanari and Semerjian(2006)]{MontanariSemerjian2006}
+Andrea Montanari and Guilhem Semerjian.
+\newblock Rigorous inequalities between length and time scales in glassy
+  systems.
+\newblock \emph{Journal of Statistical Physics}, 125\penalty0 (1):\penalty0
+  23--54, 2006.
+\newblock \doi{10.1007/s10955-006-9175-y}.
+
+\bibitem[Mueller and Weissler(1982)]{MuellerWeissler1982}
+Carl~E. Mueller and Fred~B. Weissler.
+\newblock Hypercontractivity for the heat semigroup for ultraspherical
+  polynomials and on the {$n$}-sphere.
+\newblock \emph{Journal of Functional Analysis}, 48\penalty0 (2):\penalty0
+  252--283, 1982.
+\newblock \doi{10.1016/0022-1236(82)90069-6}.
+
+\bibitem[Panchenko(2008)]{Panchenko2008}
+Dmitry Panchenko.
+\newblock On differentiability of the {Parisi} formula.
+\newblock \emph{Electronic Communications in Probability}, 13:\penalty0
+  241--247, 2008.
+\newblock \doi{10.1214/ECP.v13-1365}.
+
+\bibitem[Panchenko(2010{\natexlab{a}})]{Panchenko2010DS}
+Dmitry Panchenko.
+\newblock On the {Dovbysh--Sudakov} representation result.
+\newblock \emph{Electronic Communications in Probability}, 15:\penalty0
+  330--338, 2010{\natexlab{a}}.
+\newblock \doi{10.1214/ECP.v15-1562}.
+
+\bibitem[Panchenko(2010{\natexlab{b}})]{Panchenko2010GG}
+Dmitry Panchenko.
+\newblock The {Ghirlanda--Guerra} identities for mixed {$p$}-spin model.
+\newblock \emph{Comptes Rendus Mathematique}, 348\penalty0 (3-4):\penalty0
+  189--192, 2010{\natexlab{b}}.
+\newblock \doi{10.1016/j.crma.2010.02.004}.
+
+\bibitem[Panchenko(2013{\natexlab{a}})]{Panchenko2013book}
+Dmitry Panchenko.
+\newblock \emph{The {Sherrington--Kirkpatrick} Model}.
+\newblock Springer Monographs in Mathematics. Springer, New York,
+  2013{\natexlab{a}}.
+\newblock \doi{10.1007/978-1-4614-6289-7}.
+
+\bibitem[Panchenko(2013{\natexlab{b}})]{Panchenko2013ultrametricity}
+Dmitry Panchenko.
+\newblock The {Parisi} ultrametricity conjecture.
+\newblock \emph{Annals of Mathematics}, 177\penalty0 (1):\penalty0 383--393,
+  2013{\natexlab{b}}.
+\newblock \doi{10.4007/annals.2013.177.1.8}.
+
+\bibitem[Polyanskiy and Wu(2025)]{PolyanskiyWu2025}
+Yury Polyanskiy and Yihong Wu.
+\newblock \emph{Information Theory: From Coding to Learning}.
+\newblock Cambridge University Press, 2025.
+\newblock \doi{10.1017/9781108966351}.
+\newblock URL
+  \url{https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf}.
+\newblock Author draft dated August 16, 2024.
+
+\bibitem[Queff{\'e}lec and Zarouf(2019)]{QueffelecZarouf2019}
+Herv{\'e} Queff{\'e}lec and Rachid Zarouf.
+\newblock On {Bernstein}'s inequality for polynomials.
+\newblock \emph{Analysis and Mathematical Physics}, 9\penalty0 (3):\penalty0
+  1181--1207, 2019.
+\newblock \doi{10.1007/s13324-019-00294-x}.
+\newblock URL \url{https://arxiv.org/abs/1903.10801v1}.
+\newblock ArXiv:1903.10801v1.
+
+\bibitem[Rankin(1955)]{Rankin1955}
+Robert~A. Rankin.
+\newblock The closest packing of spherical caps in {$n$} dimensions.
+\newblock \emph{Proceedings of the Glasgow Mathematical Association},
+  2\penalty0 (3):\penalty0 139--144, 1955.
+\newblock \doi{10.1017/S2040618500033219}.
+
+\bibitem[Rizzo(2021)]{Rizzo2021}
+T.~Rizzo.
+\newblock Path integral approach unveils role of complex energy landscape for
+  activated dynamics of glassy systems.
+\newblock \emph{Physical Review B}, 104:\penalty0 094203, 2021.
+\newblock \doi{10.1103/PhysRevB.104.094203}.
+
+\bibitem[Rockafellar(1970)]{Rockafellar1970}
+R.~Tyrrell Rockafellar.
+\newblock \emph{Convex Analysis}, volume~28 of \emph{Princeton Mathematical
+  Series}.
+\newblock Princeton University Press, 1970.
+\newblock \doi{10.1515/9781400873173}.
+
+\bibitem[Ros et~al.(2019)Ros, Biroli, and Cammarota]{RosBiroliCammarota2019}
+Valentina Ros, Giulio Biroli, and Chiara Cammarota.
+\newblock Complexity of energy barriers in mean-field glassy systems.
+\newblock \emph{EPL (Europhysics Letters)}, 126\penalty0 (2):\penalty0 20003,
+  2019.
+\newblock \doi{10.1209/0295-5075/126/20003}.
+\newblock Article 20003.
+
+\bibitem[Ros et~al.(2021)Ros, Biroli, and Cammarota]{RosBiroliCammarota2021}
+Valentina Ros, Giulio Biroli, and Chiara Cammarota.
+\newblock Dynamical instantons and activated processes in mean-field glass
+  models.
+\newblock \emph{SciPost Physics}, 10\penalty0 (1):\penalty0 002, 2021.
+\newblock \doi{10.21468/SciPostPhys.10.1.002}.
+\newblock URL \url{https://arxiv.org/abs/2006.08399v3}.
+\newblock Article 002; arXiv version 3, December 15, 2020.
+
+\bibitem[Sard(1942)]{Sard1942}
+Arthur Sard.
+\newblock The measure of the critical values of differentiable maps.
+\newblock \emph{Bulletin of the American Mathematical Society}, 48\penalty0
+  (12):\penalty0 883--890, 1942.
+\newblock \doi{10.1090/S0002-9904-1942-07811-6}.
+
+\bibitem[Schur(1911)]{Schur1911}
+Issai Schur.
+\newblock Bemerkungen zur theorie der beschr{\"a}nkten bilinearformen mit
+  unendlich vielen ver{\"a}nderlichen.
+\newblock \emph{Journal f{\"u}r die reine und angewandte Mathematik},
+  140:\penalty0 1--28, 1911.
+\newblock \doi{10.1515/crll.1911.140.1}.
+\newblock URL \url{https://eudml.org/doc/149352}.
+
+\bibitem[Sellke(2024)]{Sellke2024}
+Mark Sellke.
+\newblock The threshold energy of low temperature langevin dynamics for pure
+  spherical spin glasses.
+\newblock \emph{Communications on Pure and Applied Mathematics}, 77\penalty0
+  (11):\penalty0 4065--4099, 2024.
+\newblock \doi{10.1002/cpa.22197}.
+
+\bibitem[Sellke(2025{\natexlab{a}})]{Sellke2025}
+Mark Sellke.
+\newblock Exponentially slow mixing of the low temperature sk model,
+  2025{\natexlab{a}}.
+\newblock URL \url{https://arxiv.org/abs/2511.22621v2}.
+\newblock Version 2.
+
+\bibitem[Sellke(2025{\natexlab{b}})]{Sellke2025marginal}
+Mark Sellke.
+\newblock On marginal stability in low temperature spherical spin glasses.
+\newblock \emph{Communications in Mathematical Physics}, 406\penalty0
+  (9):\penalty0 227, 2025{\natexlab{b}}.
+\newblock \doi{10.1007/s00220-025-05410-6}.
+\newblock URL \url{https://arxiv.org/abs/2409.15728v4}.
+\newblock Article 227; arXiv version 4, August 23, 2026.
+
+\bibitem[Stecconi(2022)]{Stecconi2022}
+Michele Stecconi.
+\newblock Kac--rice formula for transverse intersections.
+\newblock \emph{Analysis and Mathematical Physics}, 12\penalty0 (2):\penalty0
+  44, 2022.
+\newblock \doi{10.1007/s13324-022-00654-0}.
+\newblock URL \url{https://arxiv.org/abs/2103.10853v1}.
+\newblock Article 44; arXiv version 1, Theorem 29, Section 4.
+
+\bibitem[Subag(2017{\natexlab{a}})]{Subag2017complexity}
+Eliran Subag.
+\newblock The complexity of spherical {$p$}-spin models: a second moment
+  approach.
+\newblock \emph{The Annals of Probability}, 45\penalty0 (5):\penalty0
+  3385--3450, 2017{\natexlab{a}}.
+\newblock \doi{10.1214/16-AOP1139}.
+
+\bibitem[Subag(2017{\natexlab{b}})]{Subag2017geometry}
+Eliran Subag.
+\newblock The geometry of the {Gibbs} measure of pure spherical spin glasses.
+\newblock \emph{Inventiones Mathematicae}, 210\penalty0 (1):\penalty0 135--209,
+  2017{\natexlab{b}}.
+\newblock \doi{10.1007/s00222-017-0726-4}.
+\newblock URL \url{https://arxiv.org/abs/1604.00679v2}.
+\newblock ArXiv version 2.
+
+\bibitem[Subag(2023)]{Subag2023pure}
+Eliran Subag.
+\newblock The free energy of spherical pure {$p$}-spin models: computation from
+  the {TAP} approach.
+\newblock \emph{Probability Theory and Related Fields}, 186\penalty0
+  (3--4):\penalty0 715--734, 2023.
+\newblock \doi{10.1007/s00440-023-01200-0}.
+
+\bibitem[Subag(2024)]{Subag2024}
+Eliran Subag.
+\newblock Free energy landscapes in spherical spin glasses.
+\newblock \emph{Duke Mathematical Journal}, 173\penalty0 (7):\penalty0
+  1291--1357, 2024.
+\newblock \doi{10.1215/00127094-2023-0033}.
+\newblock URL \url{https://arxiv.org/abs/1804.10576v6}.
+\newblock ArXiv version 6.
+
+\bibitem[Subag and Zeitouni(2017)]{SubagZeitouni2017}
+Eliran Subag and Ofer Zeitouni.
+\newblock The extremal process of critical points of the pure {$p$}-spin
+  spherical spin glass model.
+\newblock \emph{Probability Theory and Related Fields}, 168\penalty0
+  (3-4):\penalty0 773--820, 2017.
+\newblock \doi{10.1007/s00440-016-0724-2}.
+\newblock URL \url{https://arxiv.org/abs/1509.03098v2}.
+\newblock ArXiv version 2.
+
+\bibitem[Sun et~al.(2012)Sun, Crisanti, Krzakala, Leuzzi, and
+  Zdeborov{\'a}]{SunCrisantiKrzakalaLeuzziZdeborova2012}
+Y.~Sun, A.~Crisanti, F.~Krzakala, L.~Leuzzi, and L.~Zdeborov{\'a}.
+\newblock Following states in temperature in the spherical {$s+p$}-spin glass
+  model.
+\newblock \emph{Journal of Statistical Mechanics: Theory and Experiment},
+  2012\penalty0 (07):\penalty0 P07002, 2012.
+\newblock \doi{10.1088/1742-5468/2012/07/P07002}.
+
+\bibitem[Talagrand(2006)]{Talagrand2006}
+Michel Talagrand.
+\newblock Free energy of the spherical mean field model.
+\newblock \emph{Probability Theory and Related Fields}, 134\penalty0
+  (3):\penalty0 339--382, 2006.
+\newblock \doi{10.1007/s00440-005-0433-8}.
+
+\bibitem[Talagrand(2011)]{Talagrand2011Volume1}
+Michel Talagrand.
+\newblock \emph{Mean Field Models for Spin Glasses. Volume {I}: Basic
+  Examples}, volume~54 of \emph{Ergebnisse der Mathematik und ihrer
+  Grenzgebiete. 3. Folge}.
+\newblock Springer, Berlin, Heidelberg, 2011.
+\newblock \doi{10.1007/978-3-642-15202-3}.
+\newblock URL \url{https://michel.talagrand.net/challenge/volume1.pdf}.
+\newblock Author manuscript dated September 14, 2010.
+
+\bibitem[T{\u a}nase-Nicola and Kurchan(2004)]{TanaseNicolaKurchan2004}
+S.~T{\u a}nase-Nicola and J.~Kurchan.
+\newblock Metastable states, transitions, basins and borders at finite
+  temperatures.
+\newblock \emph{Journal of Statistical Physics}, 116:\penalty0 1201--1245,
+  2004.
+\newblock \doi{10.1023/B:JOSS.0000041739.53068.6a}.
+
+\bibitem[Thouless et~al.(1977)Thouless, Anderson, and
+  Palmer]{ThoulessAndersonPalmer1977}
+D.~J. Thouless, P.~W. Anderson, and R.~G. Palmer.
+\newblock Solution of `{S}olvable model of a spin glass'.
+\newblock \emph{Philosophical Magazine}, 35\penalty0 (3):\penalty0 593--601,
+  1977.
+\newblock \doi{10.1080/14786437708235992}.
+
+\bibitem[Unger and Klein(1984)]{UngerKlein1984}
+C.~Unger and W.~Klein.
+\newblock Nucleation theory near the classical spinodal.
+\newblock \emph{Physical Review B}, 29:\penalty0 2698--2708, 1984.
+\newblock \doi{10.1103/PhysRevB.29.2698}.
+
+\bibitem[Varadhan(2000)]{VaradhanSDENotes}
+S.~R.~S. Varadhan.
+\newblock Stochastic processes, {C}hapter 4: {S}tochastic differential
+  equations, 2000.
+\newblock URL \url{https://math.nyu.edu/~varadhan/processes/chapter4.pdf}.
+\newblock Lecture notes, Courant Institute, fall 2000; author-hosted chapter.
+
+\bibitem[Wainwright and Jordan(2008)]{WainwrightJordan2008}
+Martin~J. Wainwright and Michael~I. Jordan.
+\newblock Graphical models, exponential families, and variational inference.
+\newblock \emph{Foundations and Trends in Machine Learning}, 1\penalty0
+  (1--2):\penalty0 1--305, 2008.
+\newblock \doi{10.1561/2200000001}.
+
+\bibitem[Witten(1982)]{Witten1982}
+Edward Witten.
+\newblock Supersymmetry and morse theory.
+\newblock \emph{Journal of Differential Geometry}, 17\penalty0 (4):\penalty0
+  661--692, 1982.
+\newblock \doi{10.4310/jdg/1214437492}.
+
+\bibitem[Xu and Yang(2025)]{XuYang2025}
+Hao Xu and Haoran Yang.
+\newblock Hessian spectrum at the global minimum of the spherical pure-like
+  mixed {$p$}-spin glasses.
+\newblock \emph{Journal of Mathematical Physics}, 66\penalty0 (9):\penalty0
+  093301, 2025.
+\newblock \doi{10.1063/5.0251208}.
+\newblock URL \url{https://arxiv.org/abs/2408.15849v3}.
+\newblock ArXiv version 3.
+
+\end{thebibliography}

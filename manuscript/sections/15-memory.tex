@@ -1,0 +1,223 @@
+\chapter{Proof of the main theorem below the static threshold}\label{sec:memory}
+
+In this section, we prove \cref{thm:main-memory}. Recall the setting: $\xi$ is a finite mixture with $\bd<\bs$, the temperature satisfies $\bd<\beta<\bs$, and $q_*=\sup\{r\in(0,1):\beta^2A(r)>1\}$. Fix $0<b<q_*^2$. The theorem asserts that there exist $\kappa,\gamma,a,c,C>0$ such that for all sufficiently large $N$, the following five conclusions hold with probability at least $1-Ce^{-aN}$.
+\begin{enumerate}[label=(\roman*)]
+\item $\lambda_{\lfloor e^{\kappa N}\rfloor}\le e^{-2\gamma N}$.
+\item $\norm{\Pi_NZ_N}_2^2\ge b$, where $Z_N=U-\pi(U)$ is the centered spin and $\Pi_N=\ind_{(0,e^{-2\gamma N}]}(-L)$ acts componentwise.
+\item $\E_\pi R(X_0,X_t)-\abs{\pi(U)}^2\ge b$ for the stationary diffusion and all $0\le t\le e^{\gamma N}$.
+\item There exists a set $\cX_N$ with $\pi(\cX_N)\ge1-Ce^{-aN}$ such that $\norm{P_t(x,\cdot)-\pi}_{\TV}\ge1-Ce^{-aN}$ for all $x\in\cX_N$ and $0\le t\le e^{\gamma N}$.
+\item $I(X_0;X_t)\ge cN$ for the stationary diffusion in the fixed field and all $0<t\le e^{\gamma N}$.
+\end{enumerate}
+
+The proof combines the deterministic lemmas of \cref{sec:spectral} with three inputs from \cref{sec:pressure}: the core lower bound and the collar upper bound of \cref{prop:pr-good}, and the uniform bound on the Gibbs mass of caps in \cref{cor:pr-cap}, which combines replica concentration (\cref{prop:pr-replica}) with \cref{lem:pr-cap}. The cap upper bound of \cref{prop:pr-good} is not used in the proof; it enters only in \cref{rem:mem-direct-frame}. All five conclusions come from one observable, the overlap-weighted Gibbs mean of \cref{def:sp-barycenter}, built from a cutoff that suppresses references at overlap below $q_1$ with the argument. Its vector energy is exponentially small because, seen from a Gibbs-typical point, the collar carries exponentially less Gibbs mass than the core. It is aligned with the spin because, after the reweighting, references at overlap below $q_1$ carry only an exponentially small part of the mass. The starting set $\cX_N$ in (iv) is measured by $\pi$, and (iv) gives no information about starting points that are chosen independently of the disorder.
+
+In \cref{sec:plateau}, conclusions (ii) and (iii) are improved to every $b<q_*$, with probability tending to one, while (i), (iv), and (v) are inherited from the present proof. \Cref{sec:infinite} uses \cref{rem:mem-direct-frame}.
+
+\section{Parameters}\label{sec:mem-parameters}
+
+The proof involves a number of constants, all fixed before $N\to\infty$. \Cref{tab:mem-parameters} lists them in the order in which they are chosen. Each depends only on $\xi$, $\beta$, $b$, and the entries above it, and none depends on $N$ or on the realization of the field.
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Parameters in the proof of \cref{thm:main-memory}, in the order in which they are fixed.}\label{tab:mem-parameters}
+\begin{tabular}{@{}>{\raggedright}p{2.2cm}>{\raggedright}p{9.6cm}>{\raggedright\arraybackslash}p{3.6cm}@{}}
+\toprule
+Parameter & Choice & Input\\
+\midrule
+$q_1,q_2$ & admissible collar with $\sqrt b<q_1$ & \cref{def:pr-collar,prop:pr-certificate}\\
+$J,G$ & $J=-\Phi_\beta(q_*)/2$, $G=[\Phi_\beta(q_*)-\Phi_\beta(q_2)]/2$ & \cref{def:pr-collar}\\
+$\delta$ & $0<\delta<\min\{J,G\}/8$ & \cref{prop:pr-good}\\
+$a_\cG$ & rate of the good set & \cref{prop:pr-good}\\
+$K,h$ & $K=(J+2\delta+1)/2$, $h(r)=K[1-\chi((r-q_1)/(q_2-q_1))]$ & \\
+$q_0,\eps,s_0$ & $q_0=(\sqrt b+q_1)/2$, $\eps=(q_1-q_0)^2/16$, $s_0=q_0/2$ & \\
+$c_\eps,c_0$ & rates of the cap and magnetization bounds at $\eps$ and $s_0$ & \cref{cor:pr-cap}\\
+$c_E,C_E$ & $c_E=\min\{G-4\delta,a_\cG\}/2$, $C_E=8\norm{h'}_\infty^2/(ec_E)$ & \\
+$\gamma$ & $\gamma=c_E/4$ & \\
+$\theta,C_M,C_D$ & $\theta=\min\{a_\cG,c_0\}$, $C_M=1+2/s_0$, $C_D=32C_E/q_1^2$ & \\
+$\kappa,c,a,C$ & $\kappa=\theta/2$, $c=\theta/4$, $a=\min\{c_\eps,\theta,\gamma\}$, $C=\max\{7,1+C_D,1+C_M\}$ & \\
+$N_0$ & large enough for finitely many inequalities in the proof & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Proof of the theorem}\label{sec:mem-proof}
+
+\begin{proof}[Proof of \cref{thm:main-memory}]
+We fix the parameters of \cref{tab:mem-parameters} and work on an event $\Omega^*_N$, the intersection of the event of \cref{prop:pr-good} with two events given by \cref{cor:pr-cap}. On $\Omega^*_N$ the argument is deterministic. We first show that the overlap-weighted Gibbs mean $B_N$ has exponentially small vector energy and is aligned with $U$ on the good set $\cG$. Conclusion (i) then follows from \cref{lem:sp-bumps}, (ii) and (iii) from \cref{lem:sp-projection}, and (iv) and (v) from \cref{lem:sp-trap}. At the end we collect the constants.
+
+\paragraph{The collar and the good set.} Fix $\xi$, $\beta$, and $b$. By \cref{prop:pr-certificate}(a), there exists an admissible collar $(q_1,q_2)$ in the sense of \cref{def:pr-collar} with $q_1>\sqrt b$; that is, $\sqrt b<q_1<q_2<q_*$ and $\beta^2A(r)>1$ for all $r\in(q_1,q_*)$. We fix such a collar. \Cref{prop:pr-certificate}(c) implies that the core exponent $J=-\Phi_\beta(q_*)/2$ and the collar gap $G=[\Phi_\beta(q_*)-\Phi_\beta(q_2)]/2$ are positive. Fix $\delta$ with $0<\delta<\min\{J,G\}/8$, and let $a_\cG>0$, $w_\cG>0$, and $N_\cG$ be the constants $a$, $w$, and $N_0$ of \cref{prop:pr-good}. For $N\ge N_\cG$, with probability at least $1-5e^{-a_\cG N}$, there exists a Borel set $\cG\subset S_N$ with $\pi(\cG^c)\le e^{-a_\cG N}$ such that for all $x\in\cG$,
+\begin{equation}\label{eq:mem-good}
+\pi\{u:R(x,u)\ge q_2\}\ge e^{-N(J+2\delta)},
+\qquad
+\pi\{u:q_1\le R(x,u)\le q_2\}\le e^{-N(J+G-2\delta)}.
+\end{equation}
+The first bound follows from the core lower bound \eqref{eq:pr-good-core}, because the core band $\{u:\abs{R(x,u)-q_*}\le w_\cG\}$ lies in $\{u:R(x,u)>q_2\}$, and the second is the collar upper bound \eqref{eq:pr-good-collar}. We have written both with $x$ as the reference point and $u$ as the integration variable, which is possible because $R(x,u)=R(u,x)$.
+
+\paragraph{The overlap-weighted Gibbs mean and the cap bounds.} Let $K=(J+2\delta+1)/2$, so that
+\begin{equation}\label{eq:mem-K}
+2K-J-2\delta=1,
+\end{equation}
+and let $h(r)=K[1-\chi((r-q_1)/(q_2-q_1))]$ for $r\in[-1,1]$, with $\chi$ as in \cref{sec:sp-notation}. Then $h$ is smooth and nonincreasing with values in $[0,K]$, it equals $K$ on $[-1,q_1]$ and $0$ on $[q_2,1]$, and $\norm{h'}_\infty\le2K/(q_2-q_1)$. Let $B_N$ be the overlap-weighted Gibbs mean associated with $h$ (\cref{def:sp-barycenter}). Next, set
+\[
+q_0=\frac{\sqrt b+q_1}2,\qquad \eps=\frac{(q_1-q_0)^2}{16},\qquad s_0=\frac{q_0}2,
+\]
+so that $\sqrt b<q_0<q_1$ and $q_0^2>b$. By \cref{cor:pr-cap}, applied at the two fixed latitudes $s_0$ and $\eps$, there exist $c_0,c_\eps>0$ and $N_R$ such that for $N\ge N_R$, with probability at least $1-e^{-c_0N}-e^{-c_\eps N}$,
+\begin{equation}\label{eq:mem-cap}
+\sup_{v\in S_N}\pi\{y:R(y,v)\ge s_0\}\le\frac2{s_0}\,e^{-c_0N},
+\qquad
+\abs{\pi(U)}^2\le\eps+e^{-c_\eps N}.
+\end{equation}
+Let $\Omega^*_N$ be the intersection of the event of \cref{prop:pr-good} with the event on which \eqref{eq:mem-cap} holds. Then
+\begin{equation}\label{eq:mem-event}
+\Pp\big((\Omega^*_N)^c\big)\le5e^{-a_\cG N}+e^{-c_0N}+e^{-c_\eps N}.
+\end{equation}
+For the rest of the proof, $N\ge\max\{N_\cG,N_R\}$ and we work on $\Omega^*_N$. All further statements are deterministic.
+
+\paragraph{Energy and alignment of $B_N$.} Fix $x\in\cG$. By \eqref{eq:sp-bary-denominator} and the first bound in \eqref{eq:mem-good}, we have $d_N(x)\ge e^{-N(J+2\delta)}$. Inserting this and the second bound in \eqref{eq:mem-good} into \eqref{eq:sp-bary-collar}, we obtain
+\[
+\norm{\nabla B_N(x)}_{\rm HS}^2\le4N\norm{h'}_\infty^2e^{-N(G-4\delta)}\qquad(x\in\cG).
+\]
+For $x\notin\cG$, we use the global bound $4N\norm{h'}_\infty^2$ from \eqref{eq:sp-bary-gradient}. Integrating over $x$ and using $\pi(\cG^c)\le e^{-a_\cG N}$, we find
+\begin{equation}\label{eq:mem-energy}
+\cE_{\rm vec}(B_N)\le4N\norm{h'}_\infty^2\big[e^{-N(G-4\delta)}+e^{-a_\cG N}\big]\le8N\norm{h'}_\infty^2e^{-2c_EN}\le C_Ee^{-c_EN},
+\end{equation}
+where $c_E=\min\{G-4\delta,a_\cG\}/2$, $C_E=8\norm{h'}_\infty^2/(ec_E)$, and in the last step we used $Ne^{-c_EN}\le(ec_E)^{-1}$. The points outside $\cG$ enter \eqref{eq:mem-energy} only through their Gibbs mass, and no comparison between $a_\cG$ and $J$ is needed.
+
+Next, combining \eqref{eq:sp-bary-align} with the bound $d_N(x)\ge e^{-N(J+2\delta)}$ and \eqref{eq:mem-K}, we find
+\begin{equation}\label{eq:mem-align}
+U(x)\cdot B_N(x)\ge q_1-(1+q_1)e^{-N}\qquad(x\in\cG).
+\end{equation}
+Let $N_1$ be such that $(1+q_1)e^{-N}\le\min\{q_1-q_0,q_1/4\}$ for $N\ge N_1$. For such $N$, we have $U\cdot B_N\ge q_0$ and $U\cdot B_N\ge3q_1/4$ on $\cG$. We note that \eqref{eq:mem-energy} and \eqref{eq:mem-align} hold on the event of \cref{prop:pr-good} alone, for every admissible collar $(q_1,q_2)$ and every $0<\delta<\min\{J,G\}/8$; the condition $q_1>\sqrt b$ enters only through the choice of $q_0$.
+
+\paragraph{The exponents.} We set
+\[
+\gamma=\frac{c_E}4,\qquad \Lambda_N=e^{-2\gamma N},\qquad T_N=e^{\gamma N}.
+\]
+Then \eqref{eq:mem-energy} yields
+\begin{equation}\label{eq:mem-exponents}
+\frac{\cE_{\rm vec}(B_N)}{\Lambda_N}\le C_Ee^{-2\gamma N},
+\qquad
+T_N\,\cE_{\rm vec}(B_N)\le C_Ee^{-3\gamma N}.
+\end{equation}
+The cutoff $\Lambda_N$ is used for (i) and (ii), and the time $T_N$ for (iii), (iv), and (v). As explained in \cref{rem:sp-exponents}, the relation between $\Lambda_N$ and $T_N$ is a convenience.
+
+\paragraph{Conclusion (i).} Let $N\ge N_1$. We use \cref{lem:sp-bumps} with $B=B_N$, $q=q_0$, the set $\cG$, $\rho=q_0/8$, $\alpha=\chi$, and $\Lambda=\Lambda_N$. Note that $q_0-2\rho=3q_0/4\ge s_0$. By the cap bound in \eqref{eq:mem-cap} and $\pi(\cG^c)\le e^{-a_\cG N}$, we have
+\[
+M_{q_0/8}\le e^{-a_\cG N}+\frac2{s_0}\,e^{-c_0N}\le C_Me^{-\theta N},
+\qquad
+\theta=\min\{a_\cG,c_0\},\quad C_M=1+\frac2{s_0}.
+\]
+Using $\norm{\chi'}_\infty\le2$ and \eqref{eq:mem-exponents}, we find that the numerator in \eqref{eq:sp-bumps} is at least
+\[
+\frac12-\frac{1024\,C_EN^2}{q_0^2}\,e^{-2\gamma N},
+\]
+which is at least $1/4$ for $N\ge N_2$. We conclude that
+\[
+\#\{j\ge0:\lambda_j\le\Lambda_N\}\ge\frac{e^{\theta N}}{4C_M}.
+\]
+Let $\kappa=\theta/2$, and let $N_3$ be such that $e^{\theta N}/(4C_M)\ge e^{\kappa N}+1$ for $N\ge N_3$. For such $N$, at least $\lfloor e^{\kappa N}\rfloor+1$ eigenvalues, counted from $\lambda_0=0$, lie in $[0,\Lambda_N]$, and therefore
+\[
+\lambda_{\lfloor e^{\kappa N}\rfloor}\le e^{-2\gamma N}.
+\]
+The eigenvalues $\lambda_1,\dots,\lambda_{\lfloor e^{\kappa N}\rfloor}$ are positive, as $\lambda_0$ is simple. This is (i).
+
+\paragraph{Conclusions (ii) and (iii).} We define $\mathfrak m_N=\pi(U)$, $Z_N=U-\mathfrak m_N$, and $\overline B_N=B_N-\pi(B_N)$. Integrating \eqref{eq:mem-align} over $\cG$, and using $U\cdot B_N\ge-1$ on $\cG^c$, we have
+\begin{equation}\label{eq:mem-UB}
+\ip U{B_N}\ge q_1-(1+q_1)\big(e^{-N}+e^{-a_\cG N}\big).
+\end{equation}
+By the magnetization bound in \eqref{eq:mem-cap},
+\begin{equation}\label{eq:mem-mag}
+\abs{\mathfrak m_N}\le\sqrt\eps+e^{-c_\eps N/2}.
+\end{equation}
+Further, $\norm{Z_N}_2^2=1-\abs{\mathfrak m_N}^2\le1$ and $\norm{\overline B_N}_2^2=\pi(\abs{B_N}^2)-\abs{\pi(B_N)}^2\le1$. Using $\abs{\pi(B_N)}\le1$, \eqref{eq:mem-UB}, and \eqref{eq:mem-mag}, we find
+\[
+\ip{Z_N}{\overline B_N}=\ip U{B_N}-\mathfrak m_N\cdot\pi(B_N)\ge q_1-\sqrt\eps-\eta_N,
+\]
+where $\eta_N=(1+q_1)(e^{-N}+e^{-a_\cG N})+e^{-c_\eps N/2}$.
+We now take $\Lambda=\Lambda_N$ in \cref{lem:sp-projection}, so that $\Pi_{\Lambda_N}=\Pi_N$. By \eqref{eq:sp-proj}, the two norm bounds, and \eqref{eq:mem-exponents}, we have
+\[
+\norm{\Pi_NZ_N}_2\ge q_1-\sqrt\eps-\eta_N-C_E^{1/2}e^{-\gamma N}.
+\]
+Recall that $\sqrt\eps=(q_1-q_0)/4$, and let $N_4$ be such that $\eta_N+C_E^{1/2}e^{-\gamma N}\le3(q_1-q_0)/4$ for $N\ge N_4$. For such $N$, we have $\norm{\Pi_NZ_N}_2\ge q_0$, and
+\begin{equation}\label{eq:mem-slow}
+\norm{\Pi_NZ_N}_2^2\ge q_0^2>b.
+\end{equation}
+This is (ii).
+
+For (iii), consider the stationary diffusion. \Cref{lem:pre-spectral}(3) gives $\E_\pi R(X_0,X_t)=\E_\pi[U(X_0)\cdot U(X_t)]=\ip U{P_tU}$. We have $P_t\mathfrak m_N=\mathfrak m_N$ and $\pi(Z_N)=0$, which implies that $\ip U{P_tU}=\ip{Z_N}{P_tZ_N}+\abs{\mathfrak m_N}^2$; that is, the connected correlation in (iii) equals $\ip{Z_N}{P_tZ_N}$. For $0\le t\le T_N$, we have $\Lambda_Nt\le e^{-\gamma N}$, and by \eqref{eq:sp-proj-corr} and \eqref{eq:mem-slow},
+\[
+\E_\pi R(X_0,X_t)-\abs{\pi(U)}^2=\ip{Z_N}{P_tZ_N}\ge e^{-e^{-\gamma N}}q_0^2\ge b
+\]
+for $N\ge N_5$, where $N_5$ depends on the fixed margin $q_0^2-b>0$. This is (iii). Applying \cref{lem:sp-correlation} to $Z_N$ and $\overline B_N$ would give the same conclusion without spectral projections.
+
+\paragraph{Conclusion (iv).} Let $N\ge N_1$. We use \cref{lem:sp-trap} with $B=B_N$, $T=T_N$, $\rho=q_1/4$, $\eta=e^{-\gamma N}$, and with $q=3q_1/4$ on the set $\cG$. Part (2) of that lemma and \eqref{eq:mem-exponents} give
+\[
+\pi(\mathcal Y_N^c)\le\frac{2T_N\cE_{\rm vec}(B_N)}{(q_1/4)^2e^{-\gamma N}}\le C_De^{-2\gamma N},
+\qquad
+C_D=\frac{32C_E}{q_1^2},
+\]
+where $\mathcal Y_N$ is the set $\mathcal Y$ of \cref{lem:sp-trap}. We define $\cX_N=\cG\cap\mathcal Y_N$. Then
+\begin{equation}\label{eq:mem-X}
+\pi(\cX_N^c)\le e^{-a_\cG N}+C_De^{-2\gamma N}.
+\end{equation}
+In part (3) of \cref{lem:sp-trap}, we have $q-\rho=q_1/2\ge s_0$, and by \eqref{eq:mem-cap},
+\begin{equation}\label{eq:mem-w}
+w\le e^{-a_\cG N}+\frac2{s_0}\,e^{-c_0N}\le C_Me^{-\theta N}.
+\end{equation}
+By \eqref{eq:sp-trap-tv}, for all $x\in\cX_N$,
+\begin{equation}\label{eq:mem-tv}
+\inf_{0\le t\le T_N}\norm{P_t(x,\cdot)-\pi}_{\TV}\ge1-e^{-\gamma N}-C_Me^{-\theta N}.
+\end{equation}
+The test sets $D_x$ may contain points outside $\cG$. Their Gibbs mass is included in $w$, and no separate bound on transitions into $\cG^c$ is needed.
+
+\paragraph{Conclusion (v).} By \eqref{eq:sp-trap-ent} and \eqref{eq:mem-w}, we have for all $x\in\cX_N$ and $0<t\le T_N$ that
+\[
+\KL\big(P_t(x,\cdot)\,\big\|\,\pi\big)\ge\big(1-e^{-\gamma N}\big)\big(\theta N-\log C_M\big)-\log2\ge\frac{\theta N}2
+\]
+for $N\ge N_6$. For the stationary diffusion in the fixed field and $t>0$, we have $I(X_0;X_t)=\int\KL(P_t(x,\cdot)\|\pi)\,\pi(\mathrm dx)$ by \eqref{eq:pre-golden-stationary} in \cref{lem:pre-MI}, applied with $K=P_t$. By \eqref{eq:mem-X}, there exists $N_7$ such that $\pi(\cX_N)\ge1/2$ for $N\ge N_7$. Integrating over $\cX_N$, we conclude that
+\[
+I(X_0;X_t)\ge\frac{\theta N}4\qquad(0<t\le T_N).
+\]
+This is (v) with $c=\theta/4$. At $t=0$ the mutual information is infinite, since the law of $(X_0,X_0)$ is carried by the diagonal, which is a null set for $\pi\otimes\pi$.
+
+\paragraph{The constants.} We set $a=\min\{c_\eps,\theta,\gamma\}$ and
+\begin{equation}\label{eq:mem-C}
+C=\max\{7,\ 1+C_D,\ 1+C_M\}.
+\end{equation}
+As $\theta\le a_\cG$ and $\theta\le c_0$, \eqref{eq:mem-event} implies that $\Pp((\Omega^*_N)^c)\le7e^{-aN}\le Ce^{-aN}$. Similarly, \eqref{eq:mem-X} implies that $\pi(\cX_N)\ge1-Ce^{-aN}$, because $a\le\min\{a_\cG,\gamma\}$, and by \eqref{eq:mem-tv}, the total variation distance in (iv) is at least $1-Ce^{-aN}$. Let $N_0$ be the largest of $N_\cG,N_R,N_1,\dots,N_7$. For $N\ge N_0$, conclusions (i)--(v) hold on $\Omega^*_N$, whose probability is at least $1-Ce^{-aN}$, with constants $\kappa,\gamma,a,c,C$ that depend only on $\xi$, $\beta$, and $b$. This completes the proof.
+\end{proof}
+
+\section{A direct route to slow modes}\label{sec:mem-routes}
+
+The proof above obtains all five conclusions from one observable. The following remark applies \cref{lem:sp-frame} directly to cap indicators. This gives better spectral exponents and is used in \cref{sec:infinite}.
+
+\begin{remark}[Slow modes from cap indicators]\label{rem:mem-direct-frame}
+The energy bound \eqref{eq:mem-energy} contains the exponent $a_\cG$ of the exceptional references, and the spectral exponent $2\gamma=c_E/2$ of (i) can be much smaller than the collar gap $G$. Taking indicators of caps as trial functions avoids this loss. Let $(q_1,q_2)$ be an admissible collar (\cref{def:pr-collar}); the condition $q_1>\sqrt b$ is not needed here. Let $c_1>0$ be the rate given by \cref{cor:pr-cap} at the latitude $q_1$, and fix $c_1'\in(0,c_1)$. Fix $\delta$ with $0<\delta<\min\{J,G\}/8$ and $4\delta<\min\{G,c_1'\}$, and let $\cG$ be the good set of \cref{prop:pr-good}, with $m_\cG=\pi(\cG)$. Let $\alpha(r)=\chi((r-q_1)/(q_2-q_1))$, so that $\alpha=0$ on $(-\infty,q_1]$, $\alpha=1$ on $[q_2,\infty)$, and $\abs{\alpha'}\le2/(q_2-q_1)$. We use \cref{lem:sp-frame} with
+\[
+\mathcal V=S_N,\qquad \mu(\mathrm du)=\ind_\cG(u)\,\pi(\mathrm du),\qquad f_u(x)=\alpha(R(x,u)).
+\]
+On the event of \cref{prop:pr-good}, we have
+\[
+\mathsf T\ge m_\cG\,e^{-N(J+2\delta)},
+\qquad
+\mathsf R=e^{-N(J-2\delta)},
+\qquad
+\int\cE(f_u,f_u)\,\mu(\mathrm du)\le\frac{4m_\cG}{N(q_2-q_1)^2}\,e^{-N(J+G-2\delta)}.
+\]
+The first bound uses the core lower bound \eqref{eq:pr-good-core}, since $f_u(x)=1$ when $R(x,u)\ge q_2$. The second uses the cap upper bound \eqref{eq:pr-good-cap}, since $f_u\le\ind\{R(\cdot,u)\ge q_1\}$. For the third, we have $\abs{\nabla f_u}^2=\alpha'(R)^2(1-R^2)/N$ with $R=R(\cdot,u)$ by \eqref{eq:sp-gradR}, which is at most $4/(N(q_2-q_1)^2)$ and vanishes outside the collar $\{q_1\le R(\cdot,u)\le q_2\}$; we then use the collar upper bound \eqref{eq:pr-good-collar}. Dividing the third bound by the first, before replacing $m_\cG$ by $1/2$, we may take
+\[
+r=\frac4{N(q_2-q_1)^2}\,e^{-N(G-4\delta)}.
+\]
+The factor $m_\cG$ cancels, and the exponent $a_\cG$ does not enter $r$. On the event of \cref{cor:pr-cap} at the latitude $q_1$, we have for every $x\in S_N$ that
+\[
+\int f_u(x)\,\mu(\mathrm du)\le\pi\{u:R(u,x)\ge q_1\}\le\frac2{q_1}\,e^{-c_1N}\le e^{-c_1'N}=\mathsf C
+\]
+for all sufficiently large $N$. It follows that $\mathsf T/(\mathsf R\mathsf C)\ge m_\cG e^{N(c_1'-4\delta)}\ge e^{N(c_1'-4\delta)}/2$ once $m_\cG\ge1/2$. Now fix $\sigma\in(0,G-4\delta)$ and $\kappa\in(0,c_1'-4\delta)$, and let $\Lambda=e^{-\sigma N}$. Then $r/\Lambda\to0$, and \cref{lem:sp-frame} implies that
+\[
+\#\{j\ge0:\lambda_j\le e^{-\sigma N}\}\ge\frac14e^{N(c_1'-4\delta)}\ge\lfloor e^{\kappa N}\rfloor+1,
+\qquad\text{so}\qquad
+\lambda_{\lfloor e^{\kappa N}\rfloor}\le e^{-\sigma N},
+\]
+for all sufficiently large $N$, with probability at least $1-5e^{-a_\cG N}-e^{-c_1N}$. The exponent $a_\cG$ affects only this probability. Since $c_1'<c_1$ and $\delta>0$ may be chosen freely, every spectral exponent $\sigma<G$ and every count exponent $\kappa<c_1$ are available for the chosen collar. Unlike the proof of \cref{thm:main-memory}, this argument uses the cap upper bound of \cref{prop:pr-good}, and it gives no information about the spin.
+\end{remark}

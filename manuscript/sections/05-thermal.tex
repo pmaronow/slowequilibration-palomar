@@ -1,0 +1,800 @@
+\chapter{Statics of the condensed phase}\label{sec:thermal}
+
+In this section, we prove the static results on which \cref{part:condensed} rests. The central object is the first-variation function $V_\beta$ of the Parisi measure, defined in \eqref{eq:th-V} below, whose zero set is the contact set. In \cref{thm:th-contact}, we show for every finite mixture and every $\beta>0$ that an overlap $q\in[0,1)$ is multisamplable in the sense of Subag (\cref{def:th-multisamplable}) if and only if $V_\beta(q)=0$. At every positive zero, the minimizer of the ground-state problem on the sphere of squared radius $qN$ and the Parisi measure of the residual model are obtained from the Parisi measure by restriction and rescaling. At every other overlap, the generalized TAP functional has an explicit gap. \Cref{lem:th-replica-exclusion} restates this gap as an exponential bound for replicas with mutual overlaps close to $q$.
+
+In \cref{sec:th-certificate}, we specialize to pairs $(\xi,\beta)$ that are strictly 1RSB with a nondegenerate contact at $Q$, in the sense of \cref{def:intro-certificate}, which we restate as \cref{def:th-certificate}. Such pairs are condensed (\cref{lem:th-superstatic}). \Cref{prop:th-structure} collects the static consequences of these 1RSB assumptions. The Parisi measure has two atoms $0$ and $Q$, and the residual model at $Q$ is strictly replica symmetric with $\beta^2\psi_Q''(0)<1$. The ground state of $H_Q$ is strictly one-step replica symmetry breaking at zero temperature, with explicit ground-state energy $E_0$ and radial derivative $K_0$, and $K_0$ lies strictly above the edge $2\sqrt{b_Q}$ of the spectrum of the GOE part of the tangent Hessian. The multisamplable overlaps are $0$ and $Q$. In \cref{sec:th-marks}, we record the covariance of the value and the radial derivative of $H_Q$ at a point, the identities satisfied by $E_0$ and $K_0$, and the conditional law of the Hessian. \Cref{sec:th-continuation} shows that the 1RSB assumptions persist under small changes of $\xi$ and $\beta$ and that the free energy is differentiable at every inverse temperature at which they hold. Finally, \cref{sec:th-classes} verifies the 1RSB assumptions for the classes of \cref{cor:main-classes}. These are the covariances for which $\xi''^{-1/2}$ is strictly convex (\cref{prop:th-convex}), in particular those in a degree window (\cref{prop:th-degree-window}), the pure models (\cref{prop:th-pure}), the small even perturbations of pure even models (\cref{prop:th-perturbative}), and the explicit covariance $r^4+br^{12}$ of \cref{prop:th-example}, for which $\xi''^{-1/2}$ is not convex. The finite rational computations behind the last example are in \cref{app:certificate}.
+
+From \cref{sec:prelim}, we use the representation of the field (\cref{lem:pre-field}), the Crisanti--Sommers functional, the Parisi formula, and the Crisanti--Sommers optimality criterion (\cref{def:pre-CS,thm:pre-parisi,lem:pre-support}), and the thresholds and the replica-symmetric regime (\cref{def:pre-thresholds,lem:pre-RS}). No other result of the paper is used here. The results of this section are used as follows. \Cref{sec:directing} uses \cref{thm:th-contact,lem:th-replica-exclusion,prop:th-structure,cor:th-pressure}. The radius $\sqrt Q$, the values $E_0$ and $K_0$, and the Hessian margin of \cref{prop:th-structure,prop:th-scores,lem:th-hessian} define the critical points studied in \cref{sec:reduction} and in \cref{sec:kacrice,sec:purecover,sec:mixone,sec:mixpair,sec:mixbands}. The bound of \cref{lem:th-pure-residual} is used in \cref{sec:purecover}, and the strict replica symmetry of the residual model in \cref{sec:mixbands}. The membership statements of \cref{sec:th-classes} enter only the proof of \cref{cor:main-classes} in \cref{sec:condproof}.
+
+\Cref{thm:th-contact} belongs to Subag's generalized TAP theory \cite{Subag2024}. That every zero of $V_\beta$ is multisamplable is \cite[Theorem~10, (1.39)]{Subag2024}, and the restricted and rescaled minimizers at a zero are \cite[Proposition~11, (1.43)--(1.44)]{Subag2024}. The converse, that every multisamplable overlap is a zero of $V_\beta$, is proved in \cite[Theorem~10, (1.40)]{Subag2024} for generic mixtures. We prove it for every finite mixture by an explicit variation of the ground profile. We derive the whole theorem from the ground-state and generalized TAP formulas recalled below (\cref{thm:th-ground,thm:th-subag}), using the identity \eqref{eq:th-telescope} for both directions. The ground-state formula that we use is due to Chen and Sen \cite{ChenSen2017} and, independently, to Jagannath and Tobasco \cite{JagannathTobasco2017low}. The two-atom stationarity equations are the classical one-step equations of Crisanti and Sommers \cite{CrisantiSommers1992}. The bound on the number of contacts under strict convexity of $\xi''^{-1/2}$ is their argument as presented by Talagrand \cite[Proposition~2.2]{Talagrand2006}, and its zero-temperature version is \cite[Lemma~3.21]{HuangSellke2024}. For pure models, the static parameters were computed from the TAP approach by Subag \cite[Theorems~1 and~2]{Subag2023pure}.
+
+\paragraph{Notation.}
+Throughout the section, $\xi(r)=\sum_{p=2}^Pc_pr^p$ is a finite mixture in the sense of \cref{def:pre-model}, with $c_P>0$, and $\beta>0$. Only \cref{sec:th-certificate,sec:th-marks,sec:th-continuation,sec:th-classes} assume that the minimum degree is at least four. We use the set $\mathscr M$, the functions $\hat x_\zeta$, and the functional $\cP_\beta(\zeta;\eta)$ of \cref{def:pre-CS}. For $\zeta\in\mathscr M$, we define
+\begin{equation}\label{eq:th-V}
+V_\zeta(r)=\int_0^r\frac{r-t}{\hat x_\zeta(t)^2}\dd t-\beta^2\xi(r),\qquad 0\le r<1.
+\end{equation}
+In the notation of \eqref{eq:pre-first-variation} with $\eta=\xi$, we have $V_\zeta=-f_\zeta$. The function $\hat x_\zeta$ is continuous and positive on $[0,1)$. Hence $V_\zeta$ is twice continuously differentiable on $[0,1)$, and
+\begin{equation}\label{eq:th-V-derivatives}
+V_\zeta(0)=V_\zeta'(0)=0,\qquad V_\zeta'(r)=\int_0^r\frac{\dd t}{\hat x_\zeta(t)^2}-\beta^2\xi'(r),\qquad V_\zeta''(r)=\frac1{\hat x_\zeta(r)^2}-\beta^2\xi''(r).
+\end{equation}
+We write $\zeta_\beta$ for the Parisi measure of $(\xi,\beta)$, that is, the minimizer of $\cP_\beta(\cdot\,;\xi)$ given by \cref{lem:pre-support}, and set $\hat x_\beta=\hat x_{\zeta_\beta}$ and $V_\beta=V_{\zeta_\beta}$. We call $V_\zeta$ the \emph{first-variation function} of $\zeta$; it is the function $-f_\zeta$ of \eqref{eq:pre-first-variation}, with the sign chosen so that $V_\beta\ge0$ (\cref{lem:th-zero}). The zero set of $V_\beta$ in $[0,1)$ is the \emph{contact set} of $(\xi,\beta)$, and its elements are the \emph{contact points}. This interpretation agrees with the coincidence set in the obstacle formulation of \cite[Theorem~1.1]{JagannathTobasco2018contacts}, after absorbing $\beta^2$ into the covariance. Recall from \cref{thm:pre-parisi} that $F(\beta)=\cP_\beta(\zeta_\beta;\xi)$, and by \cref{lem:pre-support}(3), $\zeta_\beta$ is carried by the set of minimizers of $V_\beta$ on $[0,1)$; since this set is closed, it contains the support of $\zeta_\beta$.
+
+For $0\le q<1$, the \emph{residual mixture} at $q$ is
+\begin{equation}\label{eq:th-residual-mixture}
+\psi_q(t)=\xi(q+(1-q)t)-\xi(q)-(1-q)\xi'(q)t=\sum_{k=2}^P\Big(\sum_{p=k}^Pc_p\binom pkq^{p-k}\Big)(1-q)^kt^k.
+\end{equation}
+Its coefficients are nonnegative, it has no terms of degree zero or one, and its coefficient of $t^P$ is $c_P(1-q)^P>0$. This means that $\psi_q$ is a finite mixture. Note that $\psi_0=\xi$. For $0<Q<1$ and $u\in S_N$, we write
+\[
+H_Q(u)=H_N(\sqrt Q\,u),\qquad K_Q(u)=\frac{\dd}{\dd t}H_N(t\sqrt Q\,u)\Big|_{t=1}=u\cdot\nabla H_Q(u),
+\]
+where $H_N$ is the polynomial of \eqref{eq:pre-tensor} and $\nabla$ is the Euclidean gradient. We also set $a_Q=Q\xi'(Q)$ and $b_Q=Q^2\xi''(Q)$. We call $K_Q(u)$ the \emph{radial derivative} of $H_Q$ at $u$.
+
+\section{Ground states and the generalized TAP functional}\label{sec:th-inputs}
+
+For $0<q\le1$, the field $u\mapsto H_N(\sqrt q\,u)$ on $S_N$ is centered Gaussian with covariance $N\xi(qR(u,v))$, and its maximum is the maximum of $H_N$ on the sphere of squared radius $qN$. The limit of this maximum, divided by $N$, is given by a zero-temperature analog of the Crisanti--Sommers formula.
+
+\begin{definition}[Zero-temperature Crisanti--Sommers functional]\label{def:th-ground}
+Let $0<q\le1$. An \emph{admissible ground profile} on $[0,q]$ is a function
+\[
+\ell(v)=L-\int_0^v\alpha(w)\dd w,\qquad 0\le v\le q,
+\]
+where $\alpha\colon[0,q)\to[0,\infty)$ is nondecreasing, right-continuous, and integrable, and $L>\int_0^q\alpha(w)\dd w$. The \emph{zero-temperature Crisanti--Sommers functional} is
+\begin{equation}\label{eq:th-ground-functional}
+\mathcal Q_q(\ell)=\frac12\bigg(\int_0^q\xi''(v)\ell(v)\dd v+\int_0^q\frac{\dd v}{\ell(v)}\bigg).
+\end{equation}
+\end{definition}
+
+Note that an admissible profile is nonincreasing. It follows that $\ell\ge\ell(q)>0$ on $[0,q]$ and that $\mathcal Q_q(\ell)$ is finite. The admissible profiles form a convex set, on which $\mathcal Q_q$ is strictly convex, because $z\mapsto1/z$ is strictly convex on $(0,\infty)$.
+
+\begin{theorem}[Ground-state energy; Chen--Sen]\label{thm:th-ground}
+Let $0<q\le1$. The limit
+\[
+E(q)=\lim_{N\to\infty}\frac1N\E\max_{u\in S_N}H_N(\sqrt q\,u)
+\]
+exists, and $E(q)=\min_\ell\mathcal Q_q(\ell)$, where the minimum is over admissible ground profiles on $[0,q]$ and is attained at exactly one profile.
+\end{theorem}
+
+We also set $E(0)=0$. \Cref{thm:th-ground} is \cite[Theorem~1]{ChenSen2017} after a change of variables, as we now explain. Chen and Sen consider a field on $S_N$ with covariance $N\eta(R)$, where $\eta(r)=\sum_{p\ge2}\gamma_p^2r^p$, and an external field $h$ \cite[(1)]{ChenSen2017}. We take $h=0$ and $\eta(r)=\xi(qr)$, which is the covariance of $u\mapsto H_N(\sqrt q\,u)$; their summability hypothesis $\sum_p2^p\gamma_p^2<\infty$ holds because only finitely many $\gamma_p$ are nonzero, and their formula allows odd degrees. Their theorem \cite[(8)--(11)]{ChenSen2017} states that $N^{-1}\max_{S_N}$ of the field converges in $L^1$ and almost surely to
+\[
+\min\frac12\bigg(\eta'(1)L-\int_0^1\eta''(r)\int_0^r\alpha(w)\dd w\dd r+\int_0^1\frac{\dd r}{L-\int_0^r\alpha(w)\dd w}\bigg),
+\]
+where the minimum is over $L>\int_0^1\alpha$ and nonnegative, nondecreasing, right-continuous $\alpha$ on $[0,1)$, and is attained at a unique pair. Given such a pair, let $b(r)=L-\int_0^r\alpha(w)\dd w$ and $\ell(v)=qb(v/q)$. Then $\ell$ is an admissible ground profile on $[0,q]$, with slope $\alpha(\cdot/q)$, and every admissible profile arises in this way from exactly one pair. Using $\eta'(0)=0$, $\eta''(r)=q^2\xi''(qr)$, and the substitution $v=qr$, we find
+\[
+\begin{aligned}
+\eta'(1)L-\int_0^1\eta''(r)\int_0^r\alpha(w)\dd w\dd r&=\int_0^1\eta''(r)b(r)\dd r=\int_0^q\xi''(v)\ell(v)\dd v,\\
+\int_0^1\frac{\dd r}{b(r)}&=\int_0^q\frac{\dd v}{\ell(v)}.
+\end{aligned}
+\]
+This shows that the objective of Chen and Sen at $(L,\alpha)$ equals $\mathcal Q_q(\ell)$, and \cref{thm:th-ground} follows.
+
+\begin{definition}[Generalized TAP functional]\label{def:th-TAP}
+For $0\le q<1$, let $F_{\rm res}(\beta,q)=\cP_\beta(\psi_q)$. By \cref{thm:pre-parisi}, this is the limiting free energy of a field with covariance $N\psi_q(R)$ at inverse temperature $\beta$. The \emph{generalized TAP functional} is
+\begin{equation}\label{eq:th-T}
+T_\beta(q)=\beta E(q)+\frac12\log(1-q)+F_{\rm res}(\beta,q).
+\end{equation}
+\end{definition}
+
+\begin{definition}[Multisamplable overlaps]\label{def:th-multisamplable}
+For $q\in[0,1)$, an integer $k\ge1$, and $\rho>0$, let
+\begin{equation}\label{eq:th-p}
+p_{N,k,\rho}(q)=\E\,\pi^{\otimes k}\Big(\abs{R(\sigma^i,\sigma^j)-q}<\rho\text{ for all }1\le i<j\le k\Big),
+\end{equation}
+where $\sigma^1,\dots,\sigma^k$ are independent samples from $\pi$. The overlap $q$ is \emph{multisamplable} if $\lim_{N\to\infty}N^{-1}\log p_{N,k,\rho}(q)=0$ for every $k\ge1$ and every $\rho>0$.
+\end{definition}
+
+Note that for $k=1$ the event in \eqref{eq:th-p} is the whole space; only $k\ge2$ matters.
+
+\begin{theorem}[Generalized TAP representation; Subag]\label{thm:th-subag}
+Let $0\le q<1$.
+\begin{enumerate}
+\item We have $T_\beta(q)\le F(\beta)$, with equality if and only if $q$ is multisamplable.
+\item If $\limsup_{N\to\infty}N^{-1}\log p_{N,k,\rho}(q)=0$ for every $k\ge1$ and every $\rho>0$, then $q$ is multisamplable.
+\end{enumerate}
+\end{theorem}
+
+Part (1) is \cite[Theorem~5, (1.24)]{Subag2024}, and part (2) is \cite[footnote~4 to Definition~2, and Remark~25]{Subag2024}. Subag's mixtures $\nu(t)=\sum_p\gamma_p^2t^p$ have exponentially decaying coefficients, which holds here with $\gamma_p^2=c_p$. Neither statement assumes genericity, and odd degrees are allowed. In his notation, the sphere of radius $\sqrt N$ carries the normalized surface measure, and his limiting free energy is our $F(\beta)$. His ground energy $E_\star(q)$ in \cite[(1.16)]{Subag2024} is the maximum over the sphere of squared radius $Nq$ divided by $N$, which is our $E(q)$. His residual free energy $F_\beta(q)$ is defined from the mixture $\nu_q$ of \cite[(1.22)]{Subag2024}, which is our $\psi_q$. We conclude that $F_\beta(q)=F_{\rm res}(\beta,q)$.
+
+\section{Multisamplable overlaps and the contact set}\label{sec:th-contact}
+
+We first show that $0$ always belongs to the contact set. This is \cite[Lemma~37]{Subag2024} in our notation; we include the short proof.
+
+\begin{lemma}[Zero is a contact point]\label{lem:th-zero}
+The minimum of $V_\beta$ on $[0,1)$ equals $V_\beta(0)=0$. In particular, $V_\beta\ge0$ on $[0,1)$, and $\zeta_\beta$ is carried by the contact set. If the minimum degree of $\xi$ is at least three, then $0$ belongs to the support of $\zeta_\beta$.
+\end{lemma}
+
+\begin{proof}
+Let $a_0$ be the smallest point of the support of $\zeta_\beta$, so that $0\le a_0<1$, and recall that $a_0$ minimizes $V_\beta$. If $a_0=0$, the minimum of $V_\beta$ is $V_\beta(0)=0$. Suppose that $a_0>0$. Then $\zeta_\beta([0,t])=0$ for $t<a_0$, and $\hat x_\beta$ is constant on $[0,a_0]$, equal to $\hat x_\beta(0)$. Using \eqref{eq:th-V-derivatives}, we see that the function $G=-V_\beta'$ is
+\[
+G(r)=\beta^2\xi'(r)-\frac r{\hat x_\beta(0)^2},\qquad 0\le r\le a_0.
+\]
+We have $G(0)=0$ because $\xi'(0)=0$, and $G(a_0)=0$ because $a_0$ is an interior minimum of $V_\beta$. Further, $G''=\beta^2\xi'''\ge0$ on $[0,a_0]$, since the coefficients of $\xi$ are nonnegative. A convex function that vanishes at both endpoints of an interval is nonpositive on it, so $G\le0$ on $[0,a_0]$ and
+\[
+V_\beta(a_0)-V_\beta(0)=-\int_0^{a_0}G(r)\dd r\ge0.
+\]
+Since $a_0$ is a global minimizer, we also have $V_\beta(a_0)\le V_\beta(0)$. We conclude that the minimum of $V_\beta$ equals $V_\beta(0)=0$ in this case too.
+
+If the minimum degree is at least three, then $\xi'''>0$ on $(0,1)$, and $G$ is strictly convex. In the case $a_0>0$, this gives $G<0$ on $(0,a_0)$ and $V_\beta(a_0)>V_\beta(0)$, which contradicts the minimality of $a_0$. This contradiction shows that $a_0=0$.
+\end{proof}
+
+For $q\in(0,1)$, we define $\zeta_{\beta,q}$ as the probability measure on $[0,1)$ with distribution function
+\begin{equation}\label{eq:th-residual-measure}
+\zeta_{\beta,q}([0,t])=\zeta_\beta([0,q+(1-q)t]),\qquad 0\le t\le1.
+\end{equation}
+Equivalently, $\zeta_{\beta,q}$ is the image of $\zeta_\beta$ under $\tau(r)=\max\{0,(r-q)/(1-q)\}$. It satisfies $\zeta_{\beta,q}(\{0\})=\zeta_\beta([0,q])$; this mass may be zero. Note that $\zeta_{\beta,q}\in\mathscr M$.
+
+\begin{theorem}[Multisamplable overlaps and the contact set]\label{thm:th-contact}
+Let $\xi$ be a finite mixture and $\beta>0$.
+\begin{enumerate}
+\item An overlap $q\in[0,1)$ is multisamplable if and only if $V_\beta(q)=0$.
+\item Let $q\in(0,1)$ with $V_\beta(q)=0$. Then the unique minimizer of $\mathcal Q_q$ is $\ell_q(v)=\beta\hat x_\beta(v)$, $0\le v\le q$, so that $E(q)=\mathcal Q_q(\ell_q)$. Further, $\zeta_{\beta,q}$ is the Parisi measure of $(\psi_q,\beta)$.
+\item Let $q\in(0,1)$ with $V_\beta(q)>0$, and let
+\[
+M_q=\frac1{\beta^3}\int_0^q\frac{(q-v)^2}{\hat x_\beta(v)^3}\dd v.
+\]
+Then $0<M_q\le q^3/(3\beta^3\hat x_\beta(q)^3)$, and
+\begin{equation}\label{eq:th-gap}
+T_\beta(q)\le F(\beta)-\frac{V_\beta(q)^2}{8\beta^3M_q}.
+\end{equation}
+In particular, for every compact set $K\subset(0,1)$ that contains no contact point, $\inf_{q\in K}V_\beta(q)^2/M_q>0$.
+\end{enumerate}
+\end{theorem}
+
+Before the proof, we describe its structure. For every $q\in(0,1)$, the identity \eqref{eq:th-telescope} below writes $F(\beta)$ as the sum of $\beta\mathcal Q_q(\ell_q)$, the term $\frac12\log(1-q)$, and the Crisanti--Sommers functional of $\psi_q$ evaluated at $\zeta_{\beta,q}$. Since $\ell_q$ and $\zeta_{\beta,q}$ are trial points of two variational problems, this identity yields an upper bound for $T_\beta(q)$. If $V_\beta(q)>0$, a variation of $\ell_q$ in an explicit admissible direction lowers the zero-temperature functional by an amount of order $V_\beta(q)^2$, and this leads to \eqref{eq:th-gap}. If $V_\beta(q)=0$, we show by a convexity inequality that $\ell_q$ is optimal and by the optimality criterion that $\zeta_{\beta,q}$ is optimal; then the upper bound is an equality. \Cref{thm:th-subag} then identifies the multisamplable overlaps.
+
+\begin{proof}
+Throughout the proof, we fix $q\in(0,1)$ and write $s=1-q$, $\zeta=\zeta_\beta$, $\hat x=\hat x_\beta$, and $V=V_\beta$. We also write $\cP_\beta(\cdot\,;\psi_q)$ for the Crisanti--Sommers functional of the residual mixture.
+
+\paragraph{A decomposition at overlap $q$.}
+We use the variational split behind \cite[proof of Lemma~34, (6.8)]{Subag2024}, evaluated here at trial profiles for every $q$. The function $\ell_q=\beta\hat x$ is an admissible ground profile on $[0,q]$: its slope is $\beta\zeta([0,\cdot])$, which is nonnegative, nondecreasing, right-continuous, and bounded, and $\ell_q(q)=\beta\hat x(q)>0$. For the residual measure, we use the definition \eqref{eq:th-residual-measure} and the substitution $w=q+su$, and find that
+\[
+\hat x_{\zeta_{\beta,q}}(t)=\int_t^1\zeta([0,q+su])\dd u=\frac1s\int_{q+st}^1\zeta([0,w])\dd w=\frac{\hat x(q+st)}s,\qquad 0\le t\le1.
+\]
+Fix $\hat q\in(q,1)$ with $\zeta([0,\hat q])=1$, and let $\hat q'=(\hat q-q)/s$, so that $\zeta_{\beta,q}([0,\hat q'])=1$. Using the last display and the substitution $v=q+st$, we find
+\[
+\int_0^{\hat q'}\frac{\dd t}{\hat x_{\zeta_{\beta,q}}(t)}+\log(1-\hat q')=\int_q^{\hat q}\frac{\dd v}{\hat x(v)}+\log\frac{1-\hat q}s.
+\]
+For the energy terms, we use \eqref{eq:pre-CS-HS} for $\psi_q$ and $\xi$. We have $\psi_q'(t)=s(\xi'(q+st)-\xi'(q))$, and the same substitution yields
+\[
+\psi_q(1)-\int\psi_q\dd\zeta_{\beta,q}=\int_0^1\psi_q'(t)\,\zeta([0,q+st])\dd t=\int_q^1\xi'(v)\zeta([0,v])\dd v-\xi'(q)\hat x(q).
+\]
+Inserting the last two displays into \eqref{eq:pre-CS}, we find
+\[
+\cP_\beta(\zeta_{\beta,q};\psi_q)=\frac{\beta^2}2\Big(\int_q^1\xi'(v)\zeta([0,v])\dd v-\xi'(q)\hat x(q)\Big)+\frac12\int_q^{\hat q}\frac{\dd v}{\hat x(v)}+\frac12\log(1-\hat q)-\frac12\log s.
+\]
+For the zero-temperature functional, we integrate by parts, using $\hat x'(v)=-\zeta([0,v])$ for almost every $v$ and $\xi'(0)=0$, and obtain
+\[
+\beta\mathcal Q_q(\ell_q)=\frac{\beta^2}2\Big(\xi'(q)\hat x(q)+\int_0^q\xi'(v)\zeta([0,v])\dd v\Big)+\frac12\int_0^q\frac{\dd v}{\hat x(v)}.
+\]
+We add the last two identities and $\frac12\log s$. The terms $\xi'(q)\hat x(q)$ and $\log s$ cancel, and the integrals combine into integrals over $[0,1]$ and $[0,\hat q]$. Then \eqref{eq:pre-CS-HS} for $\xi$ implies that
+\begin{equation}\label{eq:th-telescope}
+F(\beta)=\cP_\beta(\zeta;\xi)=\beta\mathcal Q_q(\ell_q)+\frac12\log s+\cP_\beta(\zeta_{\beta,q};\psi_q).
+\end{equation}
+This holds for every $q\in(0,1)$, whether or not $q$ is a contact point. By \cref{thm:th-ground}, $E(q)=\min\mathcal Q_q\le\mathcal Q_q(\ell_q)$, and by definition, $F_{\rm res}(\beta,q)=\min\cP_\beta(\cdot\,;\psi_q)\le\cP_\beta(\zeta_{\beta,q};\psi_q)$. Then \eqref{eq:th-telescope} implies that
+\begin{equation}\label{eq:th-trial}
+T_\beta(q)\le F(\beta)-\beta\big(\mathcal Q_q(\ell_q)-E(q)\big).
+\end{equation}
+
+\paragraph{Away from the contacts.}
+For $\eps\ge0$, let $\ell_\eps(v)=\ell_q(v)+\eps(q-v)$. Its slope is $\beta\zeta([0,\cdot])+\eps$, its value at $0$ is $\beta\hat x(0)+\eps q$, and $\ell_\eps(q)=\ell_q(q)>0$. Thus $\ell_\eps$ is admissible, and $\ell_\eps\ge\ell_q\ge\beta\hat x(q)$ on $[0,q]$. Since $\ell_\eps$ is bounded below by $\beta\hat x(q)>0$, uniformly in $\eps$, we may differentiate under the integrals in \eqref{eq:th-ground-functional}, and we find
+\[
+\begin{split}
+\frac{\dd}{\dd\eps}\mathcal Q_q(\ell_\eps)\Big|_{\eps=0}&=\frac12\int_0^q\Big(\xi''(v)-\frac1{\beta^2\hat x(v)^2}\Big)(q-v)\dd v\\
+&=-\frac1{2\beta^2}\int_0^qV''(v)(q-v)\dd v=-\frac{V(q)}{2\beta^2}.
+\end{split}
+\]
+In the second step, we used \eqref{eq:th-V-derivatives}, and in the last step we integrated by parts and used $V(0)=V'(0)=0$. Further, for every $\eps\ge0$,
+\[
+\frac{\dd^2}{\dd\eps^2}\mathcal Q_q(\ell_\eps)=\int_0^q\frac{(q-v)^2}{\ell_\eps(v)^3}\dd v\le\int_0^q\frac{(q-v)^2}{\ell_q(v)^3}\dd v=M_q.
+\]
+Taylor's theorem implies that $\mathcal Q_q(\ell_\eps)\le\mathcal Q_q(\ell_q)-\eps V(q)/(2\beta^2)+\eps^2M_q/2$ for every $\eps\ge0$. If $V(q)>0$, we choose $\eps=V(q)/(2\beta^2M_q)$ and obtain
+\[
+E(q)\le\mathcal Q_q(\ell_\eps)\le\mathcal Q_q(\ell_q)-\frac{V(q)^2}{8\beta^4M_q}.
+\]
+Inserting this bound into \eqref{eq:th-trial} gives \eqref{eq:th-gap}. The bounds on $M_q$ follow from $\beta\hat x(q)\le\ell_q\le\beta$ on $[0,q]$ and $\int_0^q(q-v)^2\dd v=q^3/3$. On a compact set $K\subset(0,1)$ without contact points, the continuous function $V$ has a positive minimum, while $M_q\le q^3/(3\beta^3\hat x(\max K)^3)$ is bounded, which proves the last assertion of (3).
+
+\paragraph{At a contact: the ground profile.}
+Suppose that $V(q)=0$. Then $q$ is an interior minimum of $V\ge0$ (\cref{lem:th-zero}), and we also have $V'(q)=0$. Let $\ell(v)=L-\int_0^v\alpha(w)\dd w$ be an admissible ground profile on $[0,q]$, and let $m$ be the Borel measure on $[0,q)$ with $m([0,v])=\alpha(v)$; it has an atom of mass $\alpha(0)$ at $0$ and may have infinite total mass. Similarly, the slope $\beta\zeta([0,\cdot])$ of $\ell_q$ is the distribution function of $m_q=\beta\zeta$ restricted to $[0,q)$. By Fubini's theorem, $\int_0^v\alpha(w)\dd w=\int_{[0,v]}(v-t)\,m(\dd t)$, and therefore
+\[
+\ell(v)=L-\int_{[0,v]}(v-t)\,m(\dd t),\qquad \ell_q(v)=\beta\hat x(0)-\int_{[0,v]}(v-t)\,m_q(\dd t).
+\]
+Using the convexity inequality $1/z\ge1/z_0-(z-z_0)/z_0^2$ for $z,z_0>0$ and \eqref{eq:th-V-derivatives}, we find that
+\begin{equation}\label{eq:th-convexity}
+\begin{split}
+\mathcal Q_q(\ell)-\mathcal Q_q(\ell_q)&\ge\frac12\int_0^q\Big(\xi''(v)-\frac1{\ell_q(v)^2}\Big)\big(\ell(v)-\ell_q(v)\big)\dd v\\
+&=-\frac1{2\beta^2}\int_0^qV''(v)\big(\ell(v)-\ell_q(v)\big)\dd v.
+\end{split}
+\end{equation}
+We compute the contribution of $\ell$. The constant $L$ contributes $-L(V'(q)-V'(0))=0$. For $0\le t<q$, we integrate by parts and obtain
+\[
+\int_t^qV''(v)(v-t)\dd v=(q-t)V'(q)-V(q)+V(t)=V(t).
+\]
+To exchange the order of integration below, note that $\int_t^q\abs{V''(v)}(v-t)\dd v\le\norm{V''}_{\infty,[0,q]}(q-t)^2/2$, and by Fubini's theorem for nonnegative functions, $\int_{[0,q)}(q-t)^2\,m(\dd t)\le q\int_{[0,q)}(q-t)\,m(\dd t)=q\int_0^q\alpha(w)\dd w<\infty$. Hence Fubini's theorem applies to $V''(v)(v-t)$ on $\{0\le t\le v\le q\}$ with respect to $m(\dd t)\dd v$, and we obtain
+\[
+-\int_0^qV''(v)\ell(v)\dd v=\int_{[0,q)}\Big(\int_t^qV''(v)(v-t)\dd v\Big)m(\dd t)=\int_{[0,q)}V(t)\,m(\dd t).
+\]
+For $\ell_q$, the same computation yields $\int_{[0,q)}V\dd m_q$, which is zero, because $\zeta$ is carried by the zeros of $V$ (\cref{lem:th-zero}). Inserting these two identities into \eqref{eq:th-convexity}, we find
+\begin{equation}\label{eq:th-stieltjes}
+\mathcal Q_q(\ell)-\mathcal Q_q(\ell_q)\ge\frac1{2\beta^2}\int_{[0,q)}V(t)\,m(\dd t)\ge0.
+\end{equation}
+We see that $\ell_q$ minimizes $\mathcal Q_q$. If $\mathcal Q_q(\ell)=\mathcal Q_q(\ell_q)$, then equality holds in \eqref{eq:th-convexity}, that is, $\int_0^q(\ell-\ell_q)^2/(\ell\ell_q^2)\dd v=0$, and the continuous functions $\ell$ and $\ell_q$ coincide. This proves the first assertion of (2), and $E(q)=\mathcal Q_q(\ell_q)$ by \cref{thm:th-ground}.
+
+\paragraph{At a contact: the residual measure.}
+Still assuming $V(q)=0$, let $W=V_{\zeta_{\beta,q}}$ be the function \eqref{eq:th-V} for the mixture $\psi_q$ and the measure $\zeta_{\beta,q}$, that is,
+\[
+W(t)=\int_0^t\frac{t-u}{\hat x_{\zeta_{\beta,q}}(u)^2}\dd u-\beta^2\psi_q(t),\qquad 0\le t<1.
+\]
+Using $\hat x_{\zeta_{\beta,q}}(u)=\hat x(q+su)/s$ and the substitution $v=q+su$, we find $\int_0^t(t-u)\hat x_{\zeta_{\beta,q}}(u)^{-2}\dd u=\int_q^{q+st}(q+st-v)\hat x(v)^{-2}\dd v$. On the other hand, by Taylor's formula with integral remainder and \eqref{eq:th-V-derivatives}, we have
+\[
+V(q+st)-V(q)-stV'(q)=\int_q^{q+st}\frac{q+st-v}{\hat x(v)^2}\dd v-\beta^2\big(\xi(q+st)-\xi(q)-st\xi'(q)\big).
+\]
+We have $V(q)=V'(q)=0$, and comparing the two displays shows that
+\begin{equation}\label{eq:th-residual-potential}
+W(t)=V(q+st),\qquad 0\le t<1.
+\end{equation}
+In particular, $W\ge0=W(0)$. Recall that $\zeta_{\beta,q}$ is the image of $\zeta$ under $\tau(r)=\max\{0,(r-q)/s\}$. For $r\le q$, we have $W(\tau(r))=W(0)=0$. For $\zeta$-almost every $r>q$, we have $W(\tau(r))=V(r)=0$, because $\zeta$ is carried by the zeros of $V$. This shows that $\zeta_{\beta,q}$ is carried by the zeros of $W$, which are its global minimizers, that is, the maximizers of $f_{\zeta_{\beta,q}}=-W$ for the mixture $\psi_q$. Using \cref{lem:pre-support}(3), we find that $\zeta_{\beta,q}$ is the Parisi measure of $(\psi_q,\beta)$. This completes the proof of (2).
+
+\paragraph{Conclusion.}
+If $q\in(0,1)$ and $V(q)>0$, then $T_\beta(q)<F(\beta)$ by (3), and $q$ is not multisamplable by \cref{thm:th-subag}(1). If $q\in(0,1)$ and $V(q)=0$, then by (2) both variational problems in \eqref{eq:th-telescope} are solved by the trial points, that is, $E(q)=\mathcal Q_q(\ell_q)$ and $F_{\rm res}(\beta,q)=\cP_\beta(\zeta_{\beta,q};\psi_q)$. Then \eqref{eq:th-telescope} gives $T_\beta(q)=F(\beta)$, and $q$ is multisamplable by \cref{thm:th-subag}(1). Finally, $V(0)=0$, and since $E(0)=0$ and $\psi_0=\xi$, we have $T_\beta(0)=\cP_\beta(\xi)=F(\beta)$; by \cref{thm:th-subag}(1), $0$ is multisamplable. This proves (1).
+\end{proof}
+
+The next lemma restates the bound for overlaps outside the contact set in the form used in \cref{sec:directing}. The point is that the replica number, the tolerance, and the exponential rate are fixed before $N\to\infty$, and that the bound holds along the full sequence.
+
+\begin{lemma}[Replicas at an overlap outside the contact set]\label{lem:th-replica-exclusion}
+Let $\xi$ be a finite mixture, $\beta>0$, and $q\in(0,1)$ with $V_\beta(q)>0$. There exist an integer $k\ge2$ and numbers $\rho\in(0,1)$ and $c>0$, depending only on $\xi$, $\beta$, and $q$, such that $p_{N,k,\rho}(q)\le e^{-cN}$ for all sufficiently large $N$.
+\end{lemma}
+
+\begin{proof}
+By \cref{thm:th-contact}(1), $q$ is not multisamplable. Every $\limsup_NN^{-1}\log p_{N,k,\rho}(q)$ is at most zero, because $p_{N,k,\rho}(q)\le1$. By \cref{thm:th-subag}(2), there exist $k\ge1$ and $\rho>0$ for which this $\limsup$ is negative, say smaller than $-c$ with $c>0$. Then $p_{N,k,\rho}(q)\le e^{-cN}$ for all sufficiently large $N$. We have $k\ge2$, because $p_{N,1,\rho}(q)=1$. Finally, since $p_{N,k,\rho}(q)$ is nondecreasing in $\rho$, we may replace $\rho$ by $\min\{\rho,1/2\}$.
+\end{proof}
+
+\section{Strict one-step replica symmetry breaking}\label{sec:th-certificate}
+
+We restate \cref{def:intro-certificate}.
+
+\begin{definition}[Strict one-step replica symmetry breaking]\label{def:th-certificate}
+Let $\xi$ be a finite mixture with minimum degree at least four, and let $\beta>0$. The pair $(\xi,\beta)$ is \emph{strictly 1RSB with a nondegenerate contact at $Q$} if there exist $x,Q\in(0,1)$ such that, with $s=1-Q$, $C=s+xQ$,
+\begin{equation}\label{eq:th-xhat}
+\hat x(v)=\begin{cases}C-xv,&0\le v\le Q,\\1-v,&Q\le v<1,\end{cases}
+\end{equation}
+and
+\[
+V(r)=\int_0^r\frac{r-v}{\hat x(v)^2}\dd v-\beta^2\xi(r),\qquad 0\le r<1,
+\]
+we have
+\begin{equation}\label{eq:th-certificate}
+V(Q)=V'(Q)=0,\qquad V(r)>0\quad\text{for }r\in(0,1)\setminus\{Q\},\qquad V''(Q)>0.
+\end{equation}
+We call $x$ and $Q$ the \emph{parameters}, and we refer to the three conditions in \eqref{eq:th-certificate} as the \emph{1RSB assumptions}.
+\end{definition}
+
+The function $\hat x$ is $\hat x_\zeta$ for $\zeta=x\delta_0+(1-x)\delta_Q$, as noted after \cref{def:pre-CS}, and $V=V_\zeta$. Then $V$ is twice continuously differentiable on $[0,1)$, $V(0)=V'(0)=0$, and $V''(Q)=s^{-2}-\beta^2\xi''(Q)$. By \cref{lem:pre-support}(3), as in the proof of \cref{prop:th-structure}(1) below, the first two conditions in \eqref{eq:th-certificate} imply that $\zeta$ is the Parisi measure, so that $V=V_\beta$ and the contact set of $(\xi,\beta)$ is exactly $\{0,Q\}$. Conversely, if the Parisi measure is $x\delta_0+(1-x)\delta_Q$ and the contact set is $\{0,Q\}$, then $V=V_\beta\ge0$ by \cref{lem:th-zero}, $Q$ is an interior minimum of $V$, and the first two conditions hold. In this sense, the pair is strictly 1RSB: the Parisi measure has two atoms and the contact set is exactly its support. In particular, the parameters are determined by $(\xi,\beta)$. The third condition says that the contact at $Q$ is nondegenerate. Since $V''(Q)=s^{-2}-\beta^2\xi''(Q)$, it is equivalent to $\beta^2s^2\xi''(Q)<1$, that is, to the positivity at $Q$ of the replicon eigenvalue $\hat x(Q)^{-2}-\beta^2\xi''(Q)$ of \cite[Section~1.3]{BenArousJagannath2018}, written with the temperature absorbed into the covariance.
+
+This terminology follows Huang and Sellke \cite{HuangSellke2024}, who call a model strictly replica symmetric if its contact set is $\{0\}$ \cite[Definition~3]{HuangSellke2024} (compare \cref{def:pre-thresholds}) and, at zero temperature, strictly 1RSB if the zero set of the corresponding function is $\{0,1\}$ \cite[Definition~4]{HuangSellke2024}; \cref{def:th-certificate} is the analogous notion at positive temperature, with the nondegeneracy condition added.
+Throughout \cref{sec:th-certificate,sec:th-marks}, when $(\xi,\beta)$ satisfies the 1RSB assumptions, we write
+\begin{equation}\label{eq:th-zy}
+z=\frac{xQ}s,\qquad y=\frac Q{\beta s},\qquad c_0=\beta x.
+\end{equation}
+In this section, the letter $C$ always denotes the constant $C=s+xQ$ of \cref{def:th-certificate}, never a generic constant.
+
+\begin{lemma}[Strictly 1RSB pairs are condensed]\label{lem:th-superstatic}
+If $(\xi,\beta)$ is strictly 1RSB with a nondegenerate contact at $Q$, then $\beta>\bs(\xi)$.
+\end{lemma}
+
+\begin{proof}
+For $0\le v<Q$, we have $\hat x(v)=1-Q+x(Q-v)<1-v$, since $x<1$. The equation $V(Q)=0$ implies that
+\[
+\beta^2\xi(Q)=\int_0^Q\frac{Q-v}{\hat x(v)^2}\dd v>\int_0^Q\frac{Q-v}{(1-v)^2}\dd v=-Q-\log(1-Q),
+\]
+where the last integral was computed in the proof of \cref{lem:pre-RS}. Dividing by $\xi(Q)>0$ and comparing with the definition of $\bs$ in \cref{def:pre-thresholds}, we obtain $\beta^2>\bs^2$.
+\end{proof}
+
+\begin{proposition}[Static consequences of strict 1RSB]\label{prop:th-structure}
+Let $(\xi,\beta)$ be strictly 1RSB with parameters $x,Q$ and a nondegenerate contact at $Q$, and let $s$, $C$, $\hat x$, $V$, $z$, $y$, and $c_0$ be as in \cref{def:th-certificate} and \eqref{eq:th-zy}.
+\begin{enumerate}
+\item \emph{(Parisi measure.)} The Parisi measure of $(\xi,\beta)$ is $\zeta_\beta=x\delta_0+(1-x)\delta_Q$, so that $\hat x_\beta=\hat x$ and $V_\beta=V$. The parameters satisfy
+\begin{equation}\label{eq:th-stationarity}
+\beta^2\xi'(Q)=\frac Q{sC},\qquad\beta^2x^2\xi(Q)=\log\frac Cs-\frac{xQ}C,
+\end{equation}
+and
+\begin{equation}\label{eq:th-pressure}
+F(\beta)=\frac12\Big(\beta^2\big(\xi(1)-(1-x)\xi(Q)\big)+\frac1x\log\frac Cs+\log s\Big).
+\end{equation}
+\item \emph{(Residual model.)} We have $\beta^2s^2\xi''(Q)<1$ and
+\begin{equation}\label{eq:th-residual}
+\beta^2\psi_Q(t)+t+\log(1-t)=-V(Q+st)<0,\qquad 0<t<1.
+\end{equation}
+There exists $\kappa_{\rm res}=\kappa_{\rm res}(\xi,\beta)>0$ such that $V(Q+st)\ge\kappa_{\rm res}t^2$ for $0<t<1$. In particular, $(\psi_Q,\beta)$ is strictly replica symmetric with $\beta^2\psi_Q''(0)<1$, its Parisi measure is $\delta_0$, and $F_{\rm res}(\beta,Q)=\beta^2\psi_Q(1)/2$.
+\item \emph{(Ground state at radius $\sqrt Q$.)} The unique minimizer of $\mathcal Q_Q$ is $\ell(v)=\beta\hat x(v)=\beta(C-xv)$, $0\le v\le Q$, and
+\begin{equation}\label{eq:th-E0}
+E(Q)=E_0,\qquad\text{where}\quad E_0=\frac{a_Q+z\xi(Q)}y.
+\end{equation}
+The function $g(r)=\beta^{-2}V(Qr)$ on $[0,1]$ satisfies $g(0)=g(1)=0$ and $g(r)>0$ for $0<r<1$, and
+\begin{equation}\label{eq:th-g}
+g(r)=\xi(Q)-\xi(Qr)-a_Q\Big(\frac{1+z}{z^2}\log\big(1+(1-r)z\big)-\frac{1-r}z\Big),\qquad 0\le r\le1.
+\end{equation}
+\item \emph{(Energy and radial derivative.)} Let $K_0=y+b_Q/y$. Then
+\begin{equation}\label{eq:th-marks}
+y^2=(1+z)a_Q,\qquad\frac{\xi(Q)}{a_Q}=\frac{(1+z)\log(1+z)-z}{z^2},\qquad c_0=\frac zy<\beta,
+\end{equation}
+and
+\begin{equation}\label{eq:th-edge}
+\frac{b_Q}{y^2}=\beta^2s^2\xi''(Q)<1,\qquad K_0-2\sqrt{b_Q}=\frac{(y-\sqrt{b_Q})^2}y>0.
+\end{equation}
+\item \emph{(TAP identity.)} We have
+\begin{equation}\label{eq:th-TAP}
+F(\beta)=\beta E_0+\frac12\log s+\frac{\beta^2}2\psi_Q(1),
+\end{equation}
+the set of multisamplable overlaps in $[0,1)$ is $\{0,Q\}$, and \eqref{eq:th-gap} holds for every $q\in(0,1)\setminus\{Q\}$, with $\hat x_\beta=\hat x$ in the definition of $M_q$.
+\end{enumerate}
+\end{proposition}
+
+In the language of \cite[Definition~4]{HuangSellke2024}, part (3) says that the field $H_Q$, whose covariance is $N\xi(QR)$, is strictly 1RSB at zero temperature: the function $g$ is the function of \cite[(2.3)]{HuangSellke2024} for the covariance $r\mapsto\xi(Qr)$ and the normalized profile $\ell(Qr)/Q$, and its zero set is $\{0,1\}$. We compare the parameters with those of \cite{HuangSellke2024} after the proof.
+
+\begin{proof}
+We prove the five parts in order, except that part (3) uses the first two identities of \eqref{eq:th-marks}, which are proved in part (4) from part (1) alone.
+
+\paragraph{Part (1).}
+Let $\zeta=x\delta_0+(1-x)\delta_Q$. Then $\hat x_\zeta=\hat x$, $V_\zeta=V$, and $f_\zeta=-V$ in \eqref{eq:pre-first-variation}. By \eqref{eq:th-certificate} and $V(0)=0$, the set of maximizers of $f_\zeta$ is $\{0,Q\}$, which carries $\zeta$. We conclude from \cref{lem:pre-support}(3) that $\zeta$ is the Parisi measure. Direct integration gives
+\[
+\int_0^Q\frac{\dd v}{(C-xv)^2}=\frac Q{sC},\qquad\int_0^Q\frac{Q-v}{(C-xv)^2}\dd v=\frac1{x^2}\Big(\log\frac Cs-\frac{xQ}C\Big),
+\]
+where we used $C-xQ=s$. Using \eqref{eq:th-V-derivatives}, we see that the equations $V'(Q)=0$ and $V(Q)=0$ are the two equations in \eqref{eq:th-stationarity}. For \eqref{eq:th-pressure}, we evaluate \eqref{eq:pre-CS} at $\zeta$ with $\hat q=Q$, using $\int\xi\dd\zeta=(1-x)\xi(Q)$ and $\int_0^Q\dd v/(C-xv)=x^{-1}\log(C/s)$, and recall that $F(\beta)=\cP_\beta(\zeta;\xi)$.
+
+\paragraph{Part (2).}
+On $[Q,1)$, we have $\hat x(v)=1-v$ and $V''(v)=(1-v)^{-2}-\beta^2\xi''(v)$. By Taylor's formula and $V(Q)=V'(Q)=0$, for $0\le t<1$,
+\[
+\begin{split}
+V(Q+st)&=\int_Q^{Q+st}\frac{Q+st-v}{(1-v)^2}\dd v-\beta^2\psi_Q(t)\\
+&=\int_0^t\frac{t-w}{(1-w)^2}\dd w-\beta^2\psi_Q(t)=-t-\log(1-t)-\beta^2\psi_Q(t),
+\end{split}
+\]
+where we substituted $v=Q+sw$ in the second step and used the computation in the proof of \cref{lem:pre-RS} in the third. With \eqref{eq:th-certificate}, this proves \eqref{eq:th-residual}. Further, since $V''(Q)=s^{-2}-\beta^2\xi''(Q)$, the condition $V''(Q)>0$ is equivalent to $\beta^2s^2\xi''(Q)<1$. Let $\kappa_{\rm res}=\inf_{0<t<1}V(Q+st)/t^2$. As $t\to0$, the ratio tends to $s^2V''(Q)/2>0$. As $t\to1$, the ratio tends to infinity, because $-\log(1-t)\to\infty$ while $t$ and $\psi_Q(t)$ stay bounded. Since the ratio is continuous and positive on $(0,1)$, we conclude that $\kappa_{\rm res}>0$. Using $\psi_Q''(0)=s^2\xi''(Q)$, we see that the residual pair $(\psi_Q,\beta)$ is strictly replica symmetric with $\beta^2\psi_Q''(0)<1$, in the sense of \cref{def:pre-thresholds}. Then \cref{lem:pre-RS}(1) shows that its Parisi measure is $\delta_0$ and that $F_{\rm res}(\beta,Q)=\cP_\beta(\psi_Q)=\beta^2\psi_Q(1)/2$.
+
+\paragraph{Part (3).}
+By (1), $V_\beta(Q)=V(Q)=0$, and \cref{thm:th-contact}(2) implies that $\ell=\beta\hat x_\beta=\beta\hat x$ is the unique minimizer of $\mathcal Q_Q$ and that $E(Q)=\mathcal Q_Q(\ell)$. We compute
+\[
+\begin{aligned}
+\int_0^Q\xi''(v)\beta(C-xv)\dd v&=\beta\big((C-xQ)\xi'(Q)+x\xi(Q)\big)=\beta\big(s\xi'(Q)+x\xi(Q)\big),\\
+\int_0^Q\frac{\dd v}{\beta(C-xv)}&=\frac1{\beta x}\log\frac Cs.
+\end{aligned}
+\]
+Using $C/s=1+z$, $\beta s\xi'(Q)=a_Q/y$, $\beta x=z/y$, and $1/(\beta x)=y/z$, we find
+\[
+2\mathcal Q_Q(\ell)=\frac{a_Q+z\xi(Q)}y+\frac yz\log(1+z).
+\]
+By the first two identities in \eqref{eq:th-marks}, we have $(y/z)\log(1+z)=(1+z)a_Q\log(1+z)/(yz)=(a_Q+z\xi(Q))/y$. This proves \eqref{eq:th-E0}.
+
+For $g$, we have $g(0)=\beta^{-2}V(0)=0$ and $g(1)=\beta^{-2}V(Q)=0$, and $g>0$ on $(0,1)$ by \eqref{eq:th-certificate}. To prove \eqref{eq:th-g}, let $\tilde g$ be its right side. Then $\tilde g(1)=0=g(1)$, and it suffices to show that $g'=\tilde g'$ on $[0,1]$. By \eqref{eq:th-V-derivatives},
+\[
+g'(r)=\frac Q{\beta^2}V'(Qr)=\frac Q{\beta^2}\int_0^{Qr}\frac{\dd v}{(C-xv)^2}-Q\xi'(Qr)=\frac{Q^2r}{\beta^2C(C-xQr)}-Q\xi'(Qr).
+\]
+Since $C=s(1+z)$, $C-xQr=s(1+(1-r)z)$, and $Q^2/(\beta^2s^2)=y^2=(1+z)a_Q$, the first term equals $a_Qr/(1+(1-r)z)$. On the other hand,
+\[
+\tilde g'(r)=-Q\xi'(Qr)-a_Q\Big(-\frac{1+z}{z(1+(1-r)z)}+\frac1z\Big)=-Q\xi'(Qr)+\frac{a_Qr}{1+(1-r)z},
+\]
+and we conclude that $g'=\tilde g'$.
+
+\paragraph{Part (4).}
+Recall that $C=s(1+z)$. The first equation in \eqref{eq:th-stationarity} reads $\beta^2\xi'(Q)=Q/(s^2(1+z))$. Multiplying by $Q/\beta^2$ gives $a_Q=y^2/(1+z)$. Further, $\log(C/s)=\log(1+z)$, $xQ/C=z/(1+z)$, and $\beta^2x^2=z^2/y^2=z^2/((1+z)a_Q)$, and the second equation in \eqref{eq:th-stationarity} reads
+\[
+\frac{z^2\xi(Q)}{(1+z)a_Q}=\log(1+z)-\frac z{1+z},
+\]
+which is the second identity in \eqref{eq:th-marks}. Next, $z/y=(xQ/s)(\beta s/Q)=\beta x=c_0$, and $c_0<\beta$ because $x<1$. Further, $b_Q/y^2=Q^2\xi''(Q)\beta^2s^2/Q^2=\beta^2s^2\xi''(Q)$, which is less than one by (2). Finally, $K_0-2\sqrt{b_Q}=(y^2-2y\sqrt{b_Q}+b_Q)/y$, which is positive because $y>\sqrt{b_Q}$.
+
+\paragraph{Part (5).}
+By (1), the contact set is the zero set of $V$, which is $\{0,Q\}$ by \eqref{eq:th-certificate}. Using \cref{thm:th-contact}(1), we find that the multisamplable overlaps are $0$ and $Q$, and \cref{thm:th-contact}(3) implies \eqref{eq:th-gap} for every other $q\in(0,1)$. We have $T_\beta(Q)=F(\beta)$ by \cref{thm:th-subag}(1). Inserting $E(Q)=E_0$ from (3) and $F_{\rm res}(\beta,Q)=\beta^2\psi_Q(1)/2$ from (2) into \eqref{eq:th-T} yields \eqref{eq:th-TAP}.
+\end{proof}
+
+\begin{remark}[Comparison with Huang and Sellke]\label{rem:th-HS}
+For the covariance $\eta(r)=\xi(Qr)$, we have $\eta(1)=\xi(Q)$, $\eta'(1)=a_Q$, and $\eta''(1)=b_Q$. The normalized ground profile is $\ell(Qr)/Q=(1+z-zr)/y$, which has initial value $(1+z)/y$ and constant slope $c_0=z/y$. Recall from \eqref{eq:th-marks} that $z$ solves $((1+z)\log(1+z)-z)/z^2=\eta(1)/\eta'(1)$ and $y=\sqrt{(1+z)\eta'(1)}$. These are the parameters $z$, $y$, $L=(1+z)/y$, and $u=z/y$ of \cite[Lemma~3.5]{HuangSellke2024}, whose energy $(\eta'(1)+z\eta(1))/y$ is our $E_0$. The zero-temperature contact inequality \cite[(3.4)]{HuangSellke2024}, with equality exactly at $0$ and $1$, is the positivity of \eqref{eq:th-g} on $(0,1)$. The radial value $R_0=y+\eta''(1)/y$ in \cite[Section~3.2, p.~15, display preceding (3.6)]{HuangSellke2024} is our $K_0$, because their radial derivative of $H_Q$ at $u$ is $K_Q(u)/\sqrt N$ and they normalize it by $\sqrt N$. Finally, \cite[Lemma~3.6]{HuangSellke2024} gives $y^2\ge\eta''(1)$ for every strictly 1RSB covariance; the strict inequality $b_Q<y^2$ in \eqref{eq:th-edge} comes from $V''(Q)>0$. In \cite{HuangSellke2024}, strict 1RSB at zero temperature is an assumption; here it is a consequence of the 1RSB assumptions at positive temperature.
+\end{remark}
+
+\section{Value, radial derivative, and Hessian at radius \texorpdfstring{$\sqrt Q$}{sqrt(Q)}}\label{sec:th-marks}
+
+In this section, $(\xi,\beta)$ is strictly 1RSB with parameters $x,Q$ and a nondegenerate contact at $Q$, and $E_0$, $K_0$, $c_0$, $y$, $z$ are given by \cref{prop:th-structure} and \eqref{eq:th-zy}. Let
+\begin{equation}\label{eq:th-Sigma}
+\Sigma_Q=\begin{pmatrix}\xi(Q)&a_Q\\a_Q&a_Q+b_Q\end{pmatrix}.
+\end{equation}
+For $t>2$, let
+\[
+\Omega(t)=\int_{-2}^2\log(t-\lambda)\,\rho_{\rm sc}(\dd\lambda),\qquad\rho_{\rm sc}(\dd\lambda)=\frac{\sqrt{4-\lambda^2}}{2\pi}\dd\lambda,
+\]
+and $\Omega(2)=\lim_{t\downarrow2}\Omega(t)$. For $n\ge1$, a GOE matrix $G_n$ is a real symmetric $n\times n$ random matrix whose entries on and above the diagonal are independent centered Gaussian variables, with variance $1/n$ off the diagonal and $2/n$ on the diagonal. Its empirical spectral distribution converges to $\rho_{\rm sc}$, whose support is $[-2,2]$.
+
+\begin{proposition}[Value and radial derivative]\label{prop:th-scores}
+Let $(\xi,\beta)$ be strictly 1RSB with a nondegenerate contact at $Q$.
+\begin{enumerate}
+\item For every $u\in S_N$, the vector $(H_Q(u),K_Q(u))$ is centered Gaussian with covariance $N\Sigma_Q$. With $w_p=c_pQ^p/\xi(Q)$, we have
+\[
+\det\Sigma_Q=\xi(Q)^2\Big(\sum_pp^2w_p-\Big(\sum_ppw_p\Big)^2\Big),
+\]
+which is $\xi(Q)^2$ times the variance of $p$ under the probability weights $(w_p)$. In particular, $\Sigma_Q$ is invertible if and only if $\xi$ is not pure.
+\item We have
+\begin{equation}\label{eq:th-score}
+\Sigma_Q\binom{c_0}{1/y}=\binom{E_0}{K_0}.
+\end{equation}
+If $\xi$ is not pure, then $\Sigma_Q^{-1}(E_0,K_0)^{\mathsf T}=(c_0,1/y)^{\mathsf T}$. If $\xi(r)=c_pr^p$ is pure, then $K_Q=pH_Q$ identically, $K_0=pE_0$, and $E_0/\xi(Q)=c_0+p/y$.
+\item Suppose that $\xi$ is not pure, and define, for $e\in\R$ and $k\ge2\sqrt{b_Q}$,
+\begin{equation}\label{eq:th-Theta}
+\Theta(e,k)=\frac12+\frac12\log\frac{b_Q}{a_Q}-\frac12(e,k)\Sigma_Q^{-1}(e,k)^{\mathsf T}+\Omega\big(k/\sqrt{b_Q}\big).
+\end{equation}
+Then
+\[
+\Theta(E_0,K_0)=0,\qquad\partial_e\Theta(E_0,K_0)=-c_0,\qquad\partial_k\Theta(E_0,K_0)=0,
+\]
+and $K_0$ is the unique maximizer of $k\mapsto\Theta(E_0,k)$ on $[2\sqrt{b_Q},\infty)$.
+\item Suppose that $\xi(r)=c_pr^p$ is pure, and define, for $e\ge2\sqrt{b_Q}/p$,
+\[
+\Theta_{\rm pure}(e)=\frac12+\frac12\log\frac{b_Q}{a_Q}-\frac{e^2}{2\xi(Q)}+\Omega\big(pe/\sqrt{b_Q}\big).
+\]
+Then $E_0>2\sqrt{b_Q}/p$, $\Theta_{\rm pure}(E_0)=0$, and $\Theta_{\rm pure}'(E_0)=-c_0$.
+\end{enumerate}
+\end{proposition}
+
+In \cref{sec:mixone}, $\Theta$ appears as the exponential growth rate of the Kac--Rice density of critical points of $H_Q$ with normalized value $e$ and normalized radial derivative $k$; for mixed spherical models this density was computed by Ben Arous, Subag, and Zeitouni \cite[Theorem~5, (3.4), and Section~4.1, (4.2)]{BenArousSubagZeitouni2020}. Part (3) says that $(E_0,K_0)$ is a point of zero complexity, at which the complexity decreases in the energy with slope $c_0$ and is stationary in the radial derivative. We only use the explicit formula here.
+
+\begin{proof}
+For (1), let $u\in S_N$. By \cref{lem:pre-field}(1), $\E H_N(t\sqrt Q\,u)H_N(t'\sqrt Q\,u)=N\xi(tt'Q)$ for $t,t'>0$, since $\abs u^2=N$. Differentiating once in $t'$, and once in each of $t$ and $t'$, at $t=t'=1$, we find
+\[
+\E H_Q(u)K_Q(u)=NQ\xi'(Q)=Na_Q,\qquad\E K_Q(u)^2=N\big(Q\xi'(Q)+Q^2\xi''(Q)\big).
+\]
+Differentiation under the expectation is justified because $H_N$ is a polynomial with Gaussian coefficients. With $w_p=c_pQ^p/\xi(Q)$, we have $\xi(Q)=\xi(Q)\sum_pw_p$, $a_Q=\xi(Q)\sum_ppw_p$, and $a_Q+b_Q=\sum_p(p+p(p-1))c_pQ^p=\xi(Q)\sum_pp^2w_p$, which implies the formula for $\det\Sigma_Q$. The variance of $p$ under $(w_p)$ vanishes if and only if exactly one $w_p$ is positive.
+
+For (2), we use $c_0=z/y$ and $y^2=(1+z)a_Q$ from \eqref{eq:th-marks}, and multiply:
+\[
+\Sigma_Q\binom{z/y}{1/y}=\frac1y\binom{z\xi(Q)+a_Q}{za_Q+a_Q+b_Q}=\binom{(a_Q+z\xi(Q))/y}{(y^2+b_Q)/y}=\binom{E_0}{K_0}.
+\]
+If $\Sigma_Q$ is invertible, this is the inverse statement. If $\xi=c_pr^p$, then by Euler's identity for homogeneous polynomials, we have $K_Q(u)=u\cdot\nabla H_Q(u)=pH_Q(u)$. In this case $a_Q=p\xi(Q)$ and $b_Q=p(p-1)\xi(Q)$, so that $\Sigma_Q=\xi(Q)\begin{pmatrix}1&p\\p&p^2\end{pmatrix}$, and \eqref{eq:th-score} reads $E_0=\xi(Q)(c_0+p/y)$ and $K_0=p\xi(Q)(c_0+p/y)=pE_0$.
+
+For (3) and (4), we first compute $\Omega$ to the right of $2$. For $t>2$, we write $t=\omega+1/\omega$ with $\omega>1$. Then
+\begin{equation}\label{eq:th-Omega}
+\Omega'(t)=\int\frac{\rho_{\rm sc}(\dd\lambda)}{t-\lambda}=\frac{t-\sqrt{t^2-4}}2=\frac1\omega,\qquad\Omega(t)=\log\omega+\frac1{2\omega^2}.
+\end{equation}
+The first identity is the classical Stieltjes transform of the semicircle law; the resulting logarithmic potential is also \cite[(3.3)]{BenArousSubagZeitouni2020}; it follows from the substitution $\lambda=2\cos\theta$ and the elementary integral $\int_0^\pi(t-2\cos\theta)^{-1}\dd\theta=\pi(t^2-4)^{-1/2}$. For the second, note that $\frac{\dd}{\dd t}(\log\omega+\frac1{2\omega^2})=(\frac1\omega-\frac1{\omega^3})\frac{\dd\omega}{\dd t}=\frac1\omega$, since $\frac{\dd t}{\dd\omega}=1-\omega^{-2}$, and that both sides of the second identity in \eqref{eq:th-Omega} equal $\log t+o(1)$ as $t\to\infty$. Further, $\Omega''(t)=-\int(t-\lambda)^{-2}\rho_{\rm sc}(\dd\lambda)<0$ for $t>2$, and $\Omega$ is continuous on $[2,\infty)$.
+
+We have $K_0/\sqrt{b_Q}=\omega+1/\omega$ with $\omega=y/\sqrt{b_Q}>1$, by \eqref{eq:th-edge}. Using \eqref{eq:th-Omega}, we obtain
+\begin{equation}\label{eq:th-Omega-K0}
+\frac12\log b_Q+\Omega\big(K_0/\sqrt{b_Q}\big)=\log y+\frac{b_Q}{2y^2},\qquad\frac1{\sqrt{b_Q}}\Omega'\big(K_0/\sqrt{b_Q}\big)=\frac1y.
+\end{equation}
+By \eqref{eq:th-score}, the quadratic term at $(E_0,K_0)$ is $(E_0,K_0)\Sigma_Q^{-1}(E_0,K_0)^{\mathsf T}=c_0E_0+K_0/y$, and
+\[
+c_0E_0+\frac{K_0}y=\frac{za_Q+z^2\xi(Q)}{y^2}+1+\frac{b_Q}{y^2}.
+\]
+When we insert this and \eqref{eq:th-Omega-K0} into \eqref{eq:th-Theta}, the constant terms and the terms $b_Q/(2y^2)$ cancel, which gives
+\[
+\Theta(E_0,K_0)=\frac12\log\frac{y^2}{a_Q}-\frac{za_Q+z^2\xi(Q)}{2y^2}=\frac12\log(1+z)-\frac z{2(1+z)}\Big(1+\frac{z\xi(Q)}{a_Q}\Big)=0.
+\]
+In the second step, we used $y^2=(1+z)a_Q$, and in the last step the second identity in \eqref{eq:th-marks}, which gives $1+z\xi(Q)/a_Q=(1+z)\log(1+z)/z$. The gradient of the positive quadratic cost $\frac12(e,k)\Sigma_Q^{-1}(e,k)^{\mathsf T}$ at $(E_0,K_0)$ is $\Sigma_Q^{-1}(E_0,K_0)^{\mathsf T}=(c_0,1/y)^{\mathsf T}$, and by \eqref{eq:th-Omega-K0} we find $\partial_e\Theta(E_0,K_0)=-c_0$ and $\partial_k\Theta(E_0,K_0)=-1/y+1/y=0$. The matrix $\Sigma_Q^{-1}$ is positive definite and $\Omega''<0$ to the right of $2$, so the function $k\mapsto\Theta(E_0,k)$ is strictly concave on $(2\sqrt{b_Q},\infty)$ and continuous on $[2\sqrt{b_Q},\infty)$. It follows that its stationary point $K_0$ is its unique maximizer. This proves (3).
+
+For (4), we have $pE_0=K_0>2\sqrt{b_Q}$ by (2) and \eqref{eq:th-edge}. By (2), $E_0^2/\xi(Q)=E_0(c_0+p/y)=c_0E_0+K_0/y$, and the computation of $\Theta(E_0,K_0)$ above applies without change. It shows that $\Theta_{\rm pure}(E_0)=0$. Finally, by \eqref{eq:th-Omega-K0},
+\[
+\Theta_{\rm pure}'(E_0)=-\frac{E_0}{\xi(Q)}+\frac p{\sqrt{b_Q}}\Omega'\big(K_0/\sqrt{b_Q}\big)=-\frac{E_0}{\xi(Q)}+\frac py=-c_0.\qedhere
+\]
+\end{proof}
+
+The next lemma gives the law of the Riemannian Hessian of $H_Q$ at a fixed point, given the value, the radial derivative, and a vanishing tangent gradient. It is the classical computation of Auffinger, Ben Arous, and \v{C}ern\'y \cite{AuffingerBenArousCerny2013} and Auffinger and Ben Arous \cite{AuffingerBenArous2013}; in exactly this form it is \cite[(2.11) and Lemma~2.14]{HuangSellke2024} for the covariance $r\mapsto\xi(Qr)$. The same computation appears in \cref{lem:kr-conditioned}, where the conditioning is used in the Kac--Rice formula. We include the short proof, with the exact factor $(N-1)/N$.
+
+\begin{lemma}[Conditional law of the Hessian]\label{lem:th-hessian}
+Let $\xi$ be a finite mixture, $0<Q<1$, $N\ge2$, and $u\in S_N$. Let $e_2,\dots,e_N$ be an orthonormal basis of the tangent space $\{w:w\cdot u=0\}$, and identify the Riemannian Hessian $\nabla^2_{S_N}H_Q(u)$ with the matrix $(\nabla^2_{S_N}H_Q(u)[e_i,e_j])_{i,j=2}^N$.
+\begin{enumerate}
+\item The matrix $\nabla^2_{S_N}H_Q(u)+N^{-1}K_Q(u)I_{N-1}$ is independent of $(H_Q(u),K_Q(u),\nabla_{S_N}H_Q(u))$ and has the law of $\sqrt{(N-1)b_Q/N}\,G_{N-1}$. Consequently, conditionally on $H_Q(u)=Ne$, $K_Q(u)=Nk$, and $\nabla_{S_N}H_Q(u)=0$, the Hessian has the law
+\begin{equation}\label{eq:th-hessian-law}
+\nabla^2_{S_N}H_Q(u)\overset{\rm law}=\sqrt{\frac{(N-1)b_Q}N}\,G_{N-1}-kI_{N-1}.
+\end{equation}
+When $\xi$ is pure of degree $p$, the conditioning on $K_Q(u)$ is redundant and only values with $k=pe$ occur.
+\item If $(\xi,\beta)$ is strictly 1RSB with a nondegenerate contact at $Q$, let $g_0=K_0-2\sqrt{b_Q}=(y-\sqrt{b_Q})^2/y>0$. Then the interval $U_0=(K_0-g_0/4,K_0+g_0/4)$ satisfies $\inf U_0=2\sqrt{b_Q}+3g_0/4$.
+\end{enumerate}
+\end{lemma}
+
+By (1), for each fixed $k\in U_0$, the conditional empirical spectral distribution of the Hessian converges to the semicircle law scaled by $\sqrt{b_Q}$ and translated by $-k$. Its limiting support is $[-k-2\sqrt{b_Q},-k+2\sqrt{b_Q}]$, whose upper endpoint is at most $-3g_0/4$. Localization of every eigenvalue at finite $N$ requires a fixed enlargement of this interval; the corresponding edge estimates are proved in \cref{sec:kacrice}. Part (2) itself is a deterministic statement about the location of $U_0$. The law in (1) is restated, for the version of the conditional law fixed in \cref{def:kr-conditioned}, as \cref{cor:kr-hessian}, which is the form used in the later sections.
+
+\begin{proof}
+For (1), by rotation invariance (\cref{lem:pre-field}(2)), we may assume that $u=\sqrt Ne_1$ and that $e_2,\dots,e_N$ are the remaining standard basis vectors. The field $H_Q$, extended to $\R^N$, is centered Gaussian with covariance $\E H_Q(v)H_Q(w)=N\eta(v\cdot w/N)$, where $\eta(r)=\xi(Qr)$, so that $\eta'(1)=a_Q$ and $\eta''(1)=b_Q$. Covariances of derivatives of $H_Q$ at $u$ are derivatives of $N\eta(v\cdot w/N)$ in $v$ and $w$, evaluated at $v=w=u$. For indices $i,j,k,l\ge2$, we find
+\[
+\E\big[\partial_{ij}H_Q(u)\,\partial_{kl}H_Q(u)\big]=\partial_{v_i}\partial_{v_j}\partial_{w_k}\partial_{w_l}N\eta\Big(\frac{v\cdot w}N\Big)\Big|_{v=w=u}=\frac{\eta''(1)}N\big(\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk}\big).
+\]
+Indeed, every other term of this fourth derivative contains a factor $w_i$, $w_j$, $v_k$, or $v_l$, which vanishes at $v=w=u$. Similarly, the covariances of $\partial_{ij}H_Q(u)$, with $i,j\ge2$, with $H_Q(u)$, with $\partial_1H_Q(u)$, and with $\partial_kH_Q(u)$ for $k\ge2$, are derivatives of the covariance in which every term contains a factor $w_i$ or $w_j$, and they vanish. Since these variables are jointly Gaussian, the tangent block $(\partial_{ij}H_Q(u))_{i,j\ge2}$ is independent of $H_Q(u)$, of $K_Q(u)=\sqrt N\partial_1H_Q(u)$, and of $\nabla_{S_N}H_Q(u)=(\partial_kH_Q(u))_{k\ge2}$. Its entries are independent up to symmetry, with variance $b_Q/N$ off the diagonal and $2b_Q/N$ on it, which is the law of $\sqrt{(N-1)b_Q/N}\,G_{N-1}$. By the formula for the Riemannian Hessian in the proof of \cref{lem:pre-field},
+\[
+\nabla^2_{S_N}H_Q(u)[e_i,e_j]=\partial_{ij}H_Q(u)-N^{-1}\big(u\cdot\nabla H_Q(u)\big)\delta_{ij}=\partial_{ij}H_Q(u)-N^{-1}K_Q(u)\delta_{ij},
+\]
+which proves the first assertion. The conditional law \eqref{eq:th-hessian-law} follows from this independence. In the pure case, $K_Q=pH_Q$ by Euler's identity.
+
+For (2), the identity for $g_0$ is \eqref{eq:th-edge}, and $K_0-g_0/4=2\sqrt{b_Q}+3g_0/4$.
+\end{proof}
+
+\section{Continuation of the 1RSB solution and the derivative of the free energy}\label{sec:th-continuation}
+
+In this section, we fix a finite set $\mathcal D$ of integers, each at least four, and for $c=(c_p)_{p\in\mathcal D}\in\R^{\mathcal D}$ we write $\xi_c(r)=\sum_{p\in\mathcal D}c_pr^p$. For $(c,\beta)$ with $c\in[0,\infty)^{\mathcal D}\setminus\{0\}$ and $\beta>0$, we write $V_{c,\beta,x,Q}$ for the function $V$ of \cref{def:th-certificate} built from $\xi_c$, $\beta$, and parameters $x,Q\in(0,1)$.
+
+\begin{lemma}[Continuation of the 1RSB solution]\label{lem:th-openness}
+Let $\bar c\in[0,\infty)^{\mathcal D}\setminus\{0\}$ and $\bar\beta>0$ be such that $(\xi_{\bar c},\bar\beta)$ is strictly 1RSB with parameters $\bar x,\bar Q$ and a nondegenerate contact at $\bar Q$. There exist a neighborhood $\mathcal U$ of $(\bar c,\bar\beta)$ in $\R^{\mathcal D}\times(0,\infty)$ and real-analytic functions $x,Q\colon\mathcal U\to(0,1)$ with $x(\bar c,\bar\beta)=\bar x$ and $Q(\bar c,\bar\beta)=\bar Q$, such that for every $(c,\beta)\in\mathcal U$ with $c\in[0,\infty)^{\mathcal D}\setminus\{0\}$, the pair $(\xi_c,\beta)$ is strictly 1RSB with parameters $x(c,\beta),Q(c,\beta)$ and a nondegenerate contact at $Q(c,\beta)$.
+\end{lemma}
+
+\begin{proof}
+The proof has two steps. We first continue the two contact equations $V(Q)=V'(Q)=0$ by the implicit function theorem. Because $V$ vanishes at the two contacts $0$ and $Q$, continuity alone does not give positivity of the continued function near them. In the second step, we therefore prove positivity separately near $0$, near the moving contact, near $1$, and on the remaining compact set.
+
+\paragraph{The contact equations.}
+For $(x,Q)\in(0,1)^2$, $c\in\R^{\mathcal D}$, and $\beta>0$, let $C=1-Q+xQ>0$ and
+\[
+\begin{aligned}
+H_1&=V_{c,\beta,x,Q}(Q)=\frac1{x^2}\Big(\log\frac C{1-Q}-\frac{xQ}C\Big)-\beta^2\xi_c(Q),\\
+H_2&=V_{c,\beta,x,Q}'(Q)=\frac Q{(1-Q)C}-\beta^2\xi_c'(Q),
+\end{aligned}
+\]
+where we used the integrals in the proof of \cref{prop:th-structure}(1). These are real-analytic functions of $(x,Q,c,\beta)$. We write $J_j=\int_0^Q(Q-v)^j(C-xv)^{-3}\dd v$ for $j=0,1,2$. Differentiating the integral expressions $H_1=\int_0^Q(Q-v)(C-xv)^{-2}\dd v-\beta^2\xi_c(Q)$ and $H_2=\int_0^Q(C-xv)^{-2}\dd v-\beta^2\xi_c'(Q)$, and using $\partial_x(C-xv)=Q-v$ and $\partial_Q(C-xv)=-(1-x)$, we find
+\begin{equation}\label{eq:th-jacobian}
+\begin{pmatrix}\partial_xH_1&\partial_QH_1\\\partial_xH_2&\partial_QH_2\end{pmatrix}=\begin{pmatrix}-2J_2&H_2+2(1-x)J_1\\-2J_1&V''(Q)+2(1-x)J_0\end{pmatrix},
+\end{equation}
+where $V''(Q)=(1-Q)^{-2}-\beta^2\xi_c''(Q)$. In $\partial_QH_1$, the boundary term vanishes because the integrand $(Q-v)(C-xv)^{-2}$ vanishes at $v=Q$; in $\partial_QH_2$, the boundary term is $(C-xQ)^{-2}=(1-Q)^{-2}$. At $(\bar x,\bar Q,\bar c,\bar\beta)$, we have $H_2=0$, and the determinant of \eqref{eq:th-jacobian} is
+\[
+-2J_2V''(\bar Q)-4(1-\bar x)\big(J_0J_2-J_1^2\big)<0.
+\]
+Here $J_2>0$, $V''(\bar Q)>0$ by \eqref{eq:th-certificate}, and $J_0J_2>J_1^2$ by the Cauchy--Schwarz inequality, which is strict because $v\mapsto \bar Q-v$ is not constant. By the implicit function theorem, there exist a neighborhood $\mathcal U_1$ of $(\bar c,\bar\beta)$ and real-analytic functions $x,Q$ on $\mathcal U_1$ with values in $(0,1)$, such that $H_1=H_2=0$ at $(x(c,\beta),Q(c,\beta),c,\beta)$.
+
+\paragraph{Positivity.}
+For $(c,\beta)\in\mathcal U_1$ with $c\in[0,\infty)^{\mathcal D}\setminus\{0\}$, let $\tilde V=V_{c,\beta,x(c,\beta),Q(c,\beta)}$, $\tilde Q=Q(c,\beta)$, and let $V_0$ be the function $V$ of $(\xi_{\bar c},\bar\beta)$. We shrink $\mathcal U_1$ to a neighborhood $\mathcal U$ with compact closure in $\mathcal U_1$, on which $\abs{Q(c,\beta)-\bar Q}$ is small and $\beta^2\sum_p\abs{c_p}\le M$ for some $M<\infty$. We cover $(0,1)$ by four regions.
+
+Near the origin: since the function $\hat x$ of \eqref{eq:th-xhat} satisfies $0<\hat x\le1$, and $\xi_c(r)\le r^4\sum_pc_p$ for $0\le r\le1$, we have $\tilde V(r)\ge r^2/2-Mr^4\ge r^2/4$ for $0<r\le r_0=(4M)^{-1/2}$.
+
+Near the contact: let $\lambda=V_0''(\bar Q)>0$. The function $V''=\hat x^{-2}-\beta^2\xi_c''$ is continuous in $r$ and in the parameters, on compact subsets of $[0,1)$, because $\hat x$ is continuous in $(v,x,Q)$ and positive for $v<1$. After shrinking $\mathcal U$, there exists $\delta>0$ such that $\tilde V''\ge\lambda/2$ on $I=[\bar Q-2\delta,\bar Q+2\delta]$ and $\abs{\tilde Q-\bar Q}\le\delta$. Using $\tilde V(\tilde Q)=\tilde V'(\tilde Q)=0$ and Taylor's formula, we find $\tilde V(r)\ge\lambda(r-\tilde Q)^2/4$ for $r\in I$, which is positive for $r\ne\tilde Q$.
+
+Near one: for $r\ge\tilde Q$, we have, by the computation in the proof of \cref{prop:th-structure}(2),
+\[
+\tilde V(r)=-\log\frac{1-r}{1-\tilde Q}-\frac{r-\tilde Q}{1-\tilde Q}-\beta^2\big(\xi_c(r)-\xi_c(\tilde Q)-(r-\tilde Q)\xi_c'(\tilde Q)\big).
+\]
+All terms except $-\log(1-r)$ are bounded uniformly over $\mathcal U$ and $r\in[\tilde Q,1)$, by a constant $M_1$. Then $\tilde V(r)\ge-\log(1-r)-M_1>0$ for $1-e^{-M_1}<r<1$; we may assume that $1-e^{-M_1}>\bar Q+2\delta$.
+
+The remaining set $K=[r_0,1-e^{-M_1}]\setminus(\bar Q-\delta,\bar Q+\delta)$ is compact and does not contain $0$, $\bar Q$, or $1$, so $V_0$ has a positive minimum $m_0$ on $K$. The function $(c,\beta,r)\mapsto\tilde V(r)$ is continuous on the closure of $\mathcal U$ times $K$. After shrinking $\mathcal U$, we have $\tilde V\ge m_0/2$ on $K$.
+
+Since these four regions cover $(0,1)$, we have $\tilde V>0$ on $(0,1)\setminus\{\tilde Q\}$. Together with $\tilde V(\tilde Q)=\tilde V'(\tilde Q)=0$ and $\tilde V''(\tilde Q)\ge\lambda/2$, this proves that $(\xi_c,\beta)$ satisfies the 1RSB assumptions with parameters $x(c,\beta)$ and $Q(c,\beta)$.
+\end{proof}
+
+The proof also shows that the margins $r^2/4$ near the origin, $\lambda(r-\tilde Q)^2/4$ near the contact, and $m_0/2$ on the compact set hold uniformly on $\mathcal U$.
+
+\begin{corollary}[Derivative of the free energy]\label{cor:th-pressure}
+Let $(\xi,\beta_0)$ be strictly 1RSB with parameters $x,Q$ and a nondegenerate contact at $Q$. Then $F$ is real-analytic on a neighborhood of $\beta_0$, and
+\begin{equation}\label{eq:th-Fprime}
+F'(\beta_0)=\beta_0\big(\xi(1)-(1-x)\xi(Q)\big).
+\end{equation}
+Moreover, $F_N'(\beta_0)=N^{-1}\E\,\pi(H_N)$ for every $N$, and $F_N'(\beta_0)\to F'(\beta_0)$ as $N\to\infty$.
+\end{corollary}
+
+\begin{proof}
+Let $\mathcal D$ be the set of supported degrees of $\xi$, and apply \cref{lem:th-openness} with $c$ fixed. For $\beta$ near $\beta_0$, the pair $(\xi,\beta)$ satisfies the 1RSB assumptions with real-analytic parameters $x(\beta),Q(\beta)$, and by \eqref{eq:th-pressure}, $F(\beta)=\mathcal F(x(\beta),Q(\beta),\beta)$, where
+\[
+\mathcal F(x,Q,\beta)=\frac12\Big(\beta^2\big(\xi(1)-(1-x)\xi(Q)\big)+\frac1x\log\frac{1-Q+xQ}{1-Q}+\log(1-Q)\Big).
+\]
+This proves analyticity. By direct differentiation, we have
+\[
+\partial_x\mathcal F=-\frac12V_{x,Q}(Q),\qquad\partial_Q\mathcal F=\frac12(1-x)V_{x,Q}'(Q),
+\]
+where $V_{x,Q}$ is the function of \cref{def:th-certificate} with parameters $x,Q$ at inverse temperature $\beta$; for the first identity, we used the expression for $H_1$ in the proof of \cref{lem:th-openness}, and for the second, the expression for $H_2$. Both vanish along the branch. Using the chain rule, we find that $F'(\beta_0)=\partial_\beta\mathcal F(x,Q,\beta_0)$, which is \eqref{eq:th-Fprime}.
+
+For each $N$, the function $F_N$ is convex and differentiable, with $F_N'(\beta)=N^{-1}\E\,\pi(H_N)$, by differentiation under the expectation (the field is a polynomial with Gaussian coefficients, and $\sup_{S_N}\abs{H_N}$ has Gaussian tails). For $h>0$, convexity implies that
+\[
+\frac{F_N(\beta_0)-F_N(\beta_0-h)}h\le F_N'(\beta_0)\le\frac{F_N(\beta_0+h)-F_N(\beta_0)}h.
+\]
+By \cref{thm:pre-parisi}, $F_N\to F$ at every inverse temperature. Letting $N\to\infty$ and then $h\downarrow0$, and using the differentiability of $F$ at $\beta_0$, we obtain $F_N'(\beta_0)\to F'(\beta_0)$.
+\end{proof}
+
+\section{Classes of strictly 1RSB covariances}\label{sec:th-classes}
+
+\begin{proposition}[Strict convexity of $\xi''^{-1/2}$]\label{prop:th-convex}
+Let $\xi$ be a finite mixture with minimum degree at least four, such that $r\mapsto\xi''(r)^{-1/2}$ is strictly convex on $(0,1]$. Then for every $\beta>\bs(\xi)$, the pair $(\xi,\beta)$ is strictly 1RSB with a nondegenerate contact at $Q$, where its parameters $x,Q$ are given by $\zeta_\beta=x\delta_0+(1-x)\delta_Q$.
+\end{proposition}
+
+The argument that bounds the number of contacts is that of Crisanti and Sommers \cite{CrisantiSommers1992}, as presented by Talagrand \cite[Proposition~2.2]{Talagrand2006}, who treats even mixtures. The optimality criterion of \cref{lem:pre-support} holds for all finite mixtures, and the argument applies to odd degrees as well; we include it with the strictness made explicit. The contact-count argument also appears in the rule of signs of \cite[Theorem~1.3(1) and Remark~1.4]{JagannathTobasco2018contacts} when $(\xi''^{-1/2})''>0$. For the ground state, the analogous criterion is \cite[Lemma~3.21]{HuangSellke2024}; we do not use it.
+
+\begin{proof}
+Fix $\beta>\bs(\xi)$, and write $\zeta=\zeta_\beta$, $\hat x=\hat x_\beta$, and $V=V_\beta$. By \cref{lem:th-zero}, $V\ge0$ on $[0,1)$, the support of $\zeta$ consists of contact points, and $0$ belongs to the support, since the minimum degree is at least three. Let
+\[
+D(r)=\big(\beta^2\xi''(r)\big)^{-1/2}-\hat x(r),\qquad 0<r<1.
+\]
+The function $\hat x$ is concave, because its almost everywhere derivative $-\zeta([0,r])$ is nonincreasing. Then $D$ is strictly convex on $(0,1)$, and it has at most two zeros there. By \eqref{eq:th-V-derivatives}, for $0<r<1$ we have $V''(r)=0$ if and only if $D(r)=0$.
+
+\paragraph{At most two contacts.}
+Let $a<b$ be two contact points. Then $V(a)=V(b)=0$ and $V'(a)=V'(b)=0$; for $a=0$ this is \eqref{eq:th-V-derivatives}, and otherwise it holds because $V\ge0$ has interior minima at $a$ and $b$. The function $V$ does not vanish identically on $[a,b]$: otherwise $V''=0$ on $(a,b)$, and $D$ would vanish on an interval. The maximum of $V$ on $[a,b]$ is therefore positive and is attained at some $c\in(a,b)$, where $V'(c)=0$. Applying Rolle's theorem to $V'$ on $[a,c]$ and on $[c,b]$, we obtain zeros of $V''$ in $(a,c)$ and in $(c,b)$, that is, two distinct zeros of $D$ in $(a,b)$. If there were three contacts $a<b<b'$, we would obtain two zeros of $D$ in $(a,b)$ and two in $(b,b')$, which is impossible. We conclude that there are at most two contact points.
+
+\paragraph{Two atoms.}
+As $\beta>\bs(\xi)$, \cref{lem:pre-RS}(1) implies that $\zeta\ne\delta_0$. The support of $\zeta$ contains $0$, is not $\{0\}$, and consists of at most two contacts. This implies that $\zeta=x\delta_0+(1-x)\delta_Q$ with $x,Q\in(0,1)$, and the contact set is $\{0,Q\}$. Then $\hat x$ is the function \eqref{eq:th-xhat} with these parameters, $V$ is the function of \cref{def:th-certificate}, $V(Q)=V'(Q)=0$, and $V>0$ on $(0,1)\setminus\{Q\}$.
+
+\paragraph{Strict curvature at $Q$.}
+Since $Q$ is an interior minimum of $V$, we have $V''(Q)\ge0$. If $V''(Q)=0$, then $D(Q)=0$. The argument above, applied to the contacts $0<Q$, shows that the function $D$ also has two zeros in $(0,Q)$. It would then have three zeros, which is impossible. Therefore $V''(Q)>0$, and $(\xi,\beta)$ satisfies \eqref{eq:th-certificate}.
+\end{proof}
+
+The next proposition gives a criterion for the convexity hypothesis of \cref{prop:th-convex} that involves only the smallest and the largest supported degrees.
+
+\begin{proposition}[A condition on the smallest and largest degrees]\label{prop:th-degree-window}
+Let $\xi$ be a finite mixture whose smallest supported degree is $d\ge4$ and whose largest supported degree is $P$. If
+\begin{equation}\label{eq:th-window}
+6(d-2)(P-2)>(d+P-5)^2,
+\end{equation}
+which is equivalent to $P-d<d-1+\sqrt{3d(d-2)}$, then $(\xi''^{-1/2})''>0$ on $(0,1]$. In particular, $\xi''^{-1/2}$ is strictly convex on $(0,1]$, and $(\xi,\beta)$ is strictly 1RSB with a nondegenerate contact for every $\beta>\bs(\xi)$. The condition \eqref{eq:th-window} holds whenever all supported degrees of $\xi$ lie in one of the sets $\{4,5,\dots,11\}$, $\{6,7,\dots,18\}$, and $\{8,9,\dots,26\}$.
+\end{proposition}
+
+The proof applies the Bhatia--Davis bound $\Var(I)\le(m-n)(M-m)$ for a random variable $I$ with values in $[n,M]$ and mean $m$ \cite{BhatiaDavis2000} to a tilted distribution of the degrees. No restriction on the number of supported degrees, their parity, or the sizes of the coefficients is needed.
+
+\begin{proof}
+We write $v(r)=\xi''(r)=\sum_ia_ir^i$, where $i=p-2$ ranges over the shifted supported degrees and $a_i=p(p-1)c_p>0$. Fix $r\in(0,1]$, and let $I$ be a random variable with $\Pp(I=i)=a_ir^i/v(r)$, with mean $m$ and variance $\sigma^2$. Differentiating term by term, we have
+\[
+\frac{rv'(r)}{v(r)}=m,\qquad\frac{r^2v''(r)}{v(r)}=\E[I(I-1)]=m^2+\sigma^2-m,
+\]
+and therefore
+\begin{equation}\label{eq:th-curvature}
+\frac{r^2}{v(r)^2}\big(3v'(r)^2-2v(r)v''(r)\big)=3m^2-2(m^2+\sigma^2-m)=m^2+2m-2\sigma^2.
+\end{equation}
+Let $n=d-2\ge2$ and $M=P-2$. Since $n\le I\le M$, we have $0\le\E[(I-n)(M-I)]=(m-n)(M-m)-\sigma^2$, which is the Bhatia--Davis bound. It follows that the right side of \eqref{eq:th-curvature} is at least
+\[
+f(m)=m^2+2m-2(m-n)(M-m)=3m^2-2(n+M-1)m+2nM,\qquad n\le m\le M.
+\]
+The vertex of this quadratic is at $m_*=(n+M-1)/3$. If $M\le2n+1$, then $m_*\le n$, and $f(m)\ge f(n)=n(n+2)>0$ on $[n,M]$. Otherwise, $m_*\in(n,M)$, and the minimum of $f$ on $[n,M]$ is $f(m_*)=2nM-(n+M-1)^2/3$, which is positive by \eqref{eq:th-window}. In both cases, $3v'^2-2vv''>0$ on $(0,1]$, and
+\[
+\big(v^{-1/2}\big)''=\frac{3v'^2-2vv''}{4v^{5/2}}>0\qquad\text{on }(0,1].
+\]
+A function with positive second derivative is strictly convex, and \cref{prop:th-convex} implies that the 1RSB assumptions hold for every $\beta>\bs(\xi)$.
+
+For the equivalent form, let $k=P-d$. Expanding both sides, we find
+\[
+6(d-2)(P-2)-(d+P-5)^2=3d(d-2)-\big(k-(d-1)\big)^2.
+\]
+Since $d-1-\sqrt{3d(d-2)}<0\le k$ for $d\ge4$, the left side is positive if and only if $k<d-1+\sqrt{3d(d-2)}$. For the three sets, let $h(d)=d-1+\sqrt{3d(d-2)}$, which is increasing in $d$, and let $[d_1,P_1]$ be the set. If $d_1\le d\le P\le P_1$, then $P-d\le P_1-d_1$, and it suffices to check $P_1-d_1<h(d_1)$. For $(d_1,P_1)=(4,11),(6,18),(8,26)$, the left side of \eqref{eq:th-window} is $108$, $384$, $864$ and the right side is $100$, $361$, $841$. By the equivalence just proved, this means that $P_1-d_1<h(d_1)$.
+\end{proof}
+
+\begin{remark}[Optimality among criteria in the extreme degrees]\label{rem:th-window}
+The inequality \eqref{eq:th-window} cannot be relaxed to a criterion that guarantees $(\xi''^{-1/2})''>0$ and depends only on $d$ and $P$. Indeed, suppose that $6(d-2)(P-2)<(d+P-5)^2$. Then $f(m_*)<0$, and $M>2n+1$ (otherwise $f\ge n(n+2)>0$ on $[n,M]$), which means that $n<m_*<M$. The two-point law on $\{n,M\}$ with mean $m_*$ attains the Bhatia--Davis bound, and it is the law of $I$ at $r=1$ for suitable positive coefficients on the degrees $d$ and $P$. For these coefficients, the right side of \eqref{eq:th-curvature} at $r=1$ is $f(m_*)<0$. Then $(\xi''^{-1/2})''<0$ near $r=1$, and this persists after adding sufficiently small positive coefficients on intermediate degrees. For example, $\xi(r)=\frac{19}{12}r^4+\frac5{132}r^{12}$ has $v(r)=19r^2+5r^{10}$; at $r=1$ we find $m=11/3$, $\sigma^2=95/9$, and $m^2+2m-2\sigma^2=-1/3$. When \eqref{eq:th-window} holds with equality, which can happen only if $d+P$ is odd, the same computation shows that $(\xi''^{-1/2})''\ge0$, with isolated zeros, and $\xi''^{-1/2}$ may still be strictly convex; the strict inequality is only a sufficient condition. \Cref{prop:th-example} below gives a covariance with degrees $4$ and $12$ that lies outside the window, for which $\xi''^{-1/2}$ is not convex, and which is still strictly 1RSB with a nondegenerate contact at one temperature.
+\end{remark}
+
+We now turn to pure models, whose static parameters Subag computed rigorously from the generalized TAP representation, without the Parisi formula (see \cref{rem:th-pure-subag}). For $z>0$, let
+\begin{equation}\label{eq:th-upsilon}
+\upsilon(z)=\frac{(1+z)\log(1+z)-z}{z^2}=\int_0^1\frac{1-t}{1+zt}\dd t.
+\end{equation}
+The second expression follows by computing the integral. Differentiating under the integral, we see that $\upsilon$ is strictly decreasing, with $\upsilon(0+)=1/2$ and $\upsilon(\infty)=0$. Under the 1RSB assumptions, \eqref{eq:th-marks} implies that the parameter $z$ of \eqref{eq:th-zy} satisfies $\upsilon(z)=\xi(Q)/a_Q$.
+
+\begin{proposition}[Pure models]\label{prop:th-pure}
+Let $p\ge4$ and $\xi(r)=r^p$. Let $z_p>0$ be the unique solution of $\upsilon(z_p)=1/p$, and let
+\[
+q_s=\frac{z_p}{1+z_p},\qquad e_p=\frac{p+z_p}{\sqrt{p(1+z_p)}}.
+\]
+\begin{enumerate}
+\item We have $z_p>2(p-2)$, $q_s$ is the unique minimizer of $r\mapsto(-r-\log(1-r))/r^p$ on $(0,1)$, and
+\[
+\bs(p)^2=\frac1{pq_s^{p-2}(1-q_s)}.
+\]
+\item Let $\beta>\bs(p)$. Then $(\xi,\beta)$ is strictly 1RSB with a nondegenerate contact. Its parameter $Q$ is the unique solution in $(q_s,1)$ of
+\begin{equation}\label{eq:th-pure-root}
+\beta^2p(1+z_p)Q^{p-2}(1-Q)^2=1,
+\end{equation}
+and $x=z_p(1-Q)/Q$. Moreover, $V''(Q)=(1-Q)^{-2}\big(1-(p-1)/(1+z_p)\big)$.
+\item We have $E(q)=e_pq^{p/2}$ for $0\le q\le1$, $E_0=e_pQ^{p/2}$, $K_0=pE_0$, and
+\[
+F(\beta)=\beta e_pQ^{p/2}+\frac12\log(1-Q)+\frac{\beta^2}2\big(1-Q^p-pQ^{p-1}(1-Q)\big).
+\]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Recall that $\upsilon$ is strictly decreasing from $1/2$ to $0$. As $1/p\in(0,1/2)$, the solution $z_p$ exists and is unique.
+
+\paragraph{The bound on $z_p$.}
+Let $m=p-2\ge2$. Since $\upsilon$ is decreasing, $z_p>2m$ is equivalent to $\upsilon(2m)>1/(m+2)$. Multiplying by $4m^2/(2m+1)$ and rearranging, this is equivalent to $h_0(m)>0$, where
+\[
+h_0(m)=\log(2m+1)-\frac{2m(3m+2)}{(m+2)(2m+1)}.
+\]
+A direct computation gives $h_0'(m)=4m^2(m-1)/((m+2)^2(2m+1)^2)>0$ for $m>1$. At $m=2$, since $\log5=2\atanh(2/3)$ and the series of $\atanh$ has positive terms,
+\[
+\log5>2\Big(\frac23+\frac{(2/3)^3}3+\frac{(2/3)^5}5+\frac{(2/3)^7}7\Big)=\frac85+\frac4{15309},
+\]
+that is, $h_0(2)=\log5-8/5>0$. Since $h_0$ is increasing, we have $h_0(m)>0$ for $m\ge2$, and therefore $z_p>2(p-2)$.
+
+\paragraph{The static threshold.}
+The derivative of $(-r-\log(1-r))/r^p$ has the sign of $D_p(r)=r^2/(1-r)-p(-r-\log(1-r))$. Substituting $r=z/(1+z)$, which is an increasing bijection of $(0,\infty)$ onto $(0,1)$, we find $r^2/(1-r)=z^2/(1+z)$ and $-r-\log(1-r)=z^2\upsilon(z)/(1+z)$, so that
+\[
+D_p\Big(\frac z{1+z}\Big)=\frac{z^2}{1+z}\big(1-p\upsilon(z)\big).
+\]
+This is negative for $z<z_p$ and positive for $z>z_p$, which shows that $q_s$ is the unique minimizer. Since $D_p(q_s)=0$, the minimum equals $q_s^2/(p(1-q_s)q_s^p)$, which is the formula for $\bs(p)^2$.
+
+\paragraph{The 1RSB assumptions.}
+The function $\xi''(r)^{-1/2}=(p(p-1))^{-1/2}r^{-(p-2)/2}$ has positive second derivative on $(0,1]$. \Cref{prop:th-convex} implies that $(\xi,\beta)$ satisfies the 1RSB assumptions for every $\beta>\bs(p)$. Let $x,Q$ be its parameters. By \eqref{eq:th-marks} and $\xi(Q)/a_Q=1/p$, we have $\upsilon(z)=1/p$. This means that $z=xQ/(1-Q)=z_p$, that is, $x=z_p(1-Q)/Q$. As $C=(1-Q)(1+z_p)$, the first equation in \eqref{eq:th-stationarity} becomes \eqref{eq:th-pure-root}. We have $Q>z_p/(1+z_p)=q_s$, because $x<1$. To see that \eqref{eq:th-pure-root} has only one solution in $(q_s,1)$, note that $r\mapsto r^{p-2}(1-r)^2$ is strictly decreasing on $((p-2)/p,1)$, and that $q_s>(p-2)/p$, because $z_p>2(p-2)$ gives $q_s>2(p-2)/(2p-3)>(p-2)/p$. Further, by \eqref{eq:th-pure-root}, we have $\beta^2p(p-1)Q^{p-2}=(p-1)/((1+z_p)(1-Q)^2)$, and $V''(Q)=(1-Q)^{-2}-\beta^2\xi''(Q)$ has the stated form; it is positive because $z_p>p-2$.
+
+\paragraph{Energies and free energy.}
+For $\xi=r^p$, we have $\xi(Q)=Q^p$, $a_Q=pQ^p$, $b_Q=p(p-1)Q^p$, and $y=\sqrt{(1+z_p)a_Q}=\sqrt{p(1+z_p)}\,Q^{p/2}$. Using \eqref{eq:th-E0}, we find $E_0=(p+z_p)Q^p/y=e_pQ^{p/2}$, and $K_0=pE_0$ by \cref{prop:th-scores}(2). By homogeneity, $\max_{u\in S_N}H_N(\sqrt q\,u)=q^{p/2}\max_{u\in S_N}H_N(u)$ for every $q\in(0,1]$ and every $N$, which implies that $E(q)=q^{p/2}E(1)$. Taking $q=Q$, we find $E(1)=e_p$, and then $E(q)=e_pq^{p/2}$ for $0\le q\le1$. The formula for $F(\beta)$ is \eqref{eq:th-TAP}, since $\psi_Q(1)=1-Q^p-pQ^{p-1}(1-Q)$.
+\end{proof}
+
+\begin{remark}[Subag's formulas for pure models]\label{rem:th-pure-subag}
+Subag obtained the formulas of \cref{prop:th-pure} for the static overlap, the static threshold, the ground-state energy, the largest multisamplable overlap, and the free energy at all temperatures, from the generalized TAP representation and without the Parisi formula \cite[Theorems~1 and~2, (1.9)--(1.13)]{Subag2023pure}. The free energy, the ground-state energy, and the 1RSB parameters had been derived earlier in physics, by the replica method and the TAP approach \cite{CrisantiSommers1992,KurchanParisiVirasoro1993,CrisantiSommers1995TAP}; see \cite[Section~1.1]{Subag2023pure}. His critical overlap $q_c$, defined by \cite[(1.9)]{Subag2023pure}, is our $q_s$: multiplying $D_p(q_s)=0$ by $1-q_s$ gives $p(1-q_s)\log(1-q_s)+pq_s-(p-1)q_s^2=0$. His critical inverse temperature \cite[(1.10)]{Subag2023pure} is $q_s^{1-p/2}(p(1-q_s))^{-1/2}=\bs(p)$. His ground-state energy \cite[(1.11)]{Subag2023pure} equals $e_p$, and his equation \cite[(1.12)]{Subag2023pure} for the largest multisamplable overlap is equivalent to \eqref{eq:th-pure-root}, where $z_p>p-2$ selects the root; \cite[(1.13)]{Subag2023pure} is the formula for $F(\beta)$ in \cref{prop:th-pure}(3). Our derivation of these parameters from the 1RSB assumptions, through \cref{prop:th-convex,prop:th-structure}, is independent of his argument. What the later sections need beyond his formulas is the strict 1RSB structure with a nondegenerate contact, in particular the strict inequalities $V>0$ on $(0,1)\setminus\{Q\}$ and $V''(Q)>0$.
+\end{remark}
+
+The next bound is used in \cref{sec:purecover} to control the variance of the residual field at latitudes $a\ge\sqrt Q$.
+
+\begin{lemma}[A bound on the pure residual coefficient]\label{lem:th-pure-residual}
+Let $p\ge4$, $\xi(r)=r^p$, $\beta>\bs(p)$, and let $Q$ be as in \cref{prop:th-pure}. For $0\le a\le1$, let
+\[
+C_\beta(a)=\beta^2\big(1-a^{2p}-pa^{2p-2}(1-a^2)\big).
+\]
+Then $C_\beta(\sqrt Q)=\beta^2\psi_Q(1)$,
+\begin{equation}\label{eq:th-pure-residual}
+C_\beta(\sqrt Q)<\frac{159}{320}<\frac12,\qquad C_\beta'(a)=-2\beta^2p(p-1)a^{2p-3}(1-a^2)\le0.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The identity $C_\beta(\sqrt Q)=\beta^2\psi_Q(1)$ follows from \eqref{eq:th-residual-mixture} with $\xi=r^p$, and the derivative is a direct computation. Let $m=p-2$, $z=z_p$, and $t=(1-Q)/Q$. By \eqref{eq:th-residual-mixture}, $\psi_Q(1)=Q^p\sum_{k=2}^p\binom pkt^k$, and by \eqref{eq:th-pure-root}, $\beta^2=1/(p(1+z)Q^{p-2}(1-Q)^2)$. We obtain
+\[
+C_\beta(\sqrt Q)=\frac{Q^2}{p(1+z)(1-Q)^2}\sum_{k=2}^p\binom pkt^k=\frac1{p(1+z)}\sum_{k=2}^p\binom pkt^{k-2}.
+\]
+For $2\le k\le p$, we have $\binom pk=\frac{p(p-1)}{k(k-1)}\binom{p-2}{k-2}\le\frac{p(p-1)}2\binom{p-2}{k-2}$. By the binomial theorem,
+\[
+C_\beta(\sqrt Q)\le\frac{p-1}{2(1+z)}\sum_{k=2}^p\binom{p-2}{k-2}t^{k-2}=\frac{m+1}{2(1+z)}(1+t)^m.
+\]
+By \cref{prop:th-pure}(1), we have $z>2m$, and therefore $(m+1)/(2(1+z))<(m+1)/(2(1+2m))\le3/10$, where the last inequality holds because $m\ge2$ and $(m+1)/(1+2m)$ is decreasing in $m$. Further, $zt=x<1$ by \cref{prop:th-pure}(2). Then $t<1/z<1/(2m)$ and $(1+t)^m\le e^{mt}<e^{1/2}$. It remains to bound $e^{1/2}$. For $j\ge8$, the ratio of consecutive terms of $\sum_j2^{-j}/j!$ is $1/(2(j+1))\le1/18$, and a geometric bound for the tail gives
+\[
+e^{1/2}<\sum_{j=0}^7\frac{2^{-j}}{j!}+\frac{2^{-8}}{8!}\cdot\frac1{1-1/18}=\frac{48217579}{29245440}<\frac{53}{32}.
+\]
+Combining these bounds, we obtain $C_\beta(\sqrt Q)<\frac3{10}\cdot\frac{53}{32}=\frac{159}{320}$.
+\end{proof}
+
+\begin{proposition}[Small even perturbations of pure even models]\label{prop:th-perturbative}
+Let $d\ge4$ be even, let $P>d$, and let $\beta>\bs(d)$. There exists $\eps_0=\eps_0(d,P,\beta)>0$ with the following property. For every $\eps\in[0,\eps_0)$ and every family $(b_p)$, indexed by the even integers $p$ with $d<p\le P$, such that $b_p\ge0$ and $\sum_pb_p\le1$, the covariance
+\[
+\xi(r)=r^d+\eps\sum_pb_pr^p
+\]
+is such that $(\xi,\beta)$ is strictly 1RSB with a nondegenerate contact. Moreover, its parameters converge to those of $(r^d,\beta)$ as $\eps\to0$, uniformly over the families $(b_p)$.
+\end{proposition}
+
+\begin{proof}
+Recall from \cref{prop:th-pure} that $(r^d,\beta)$ satisfies the 1RSB assumptions. Let $\mathcal D=\{d\}\cup\{p\text{ even}:d<p\le P\}$, and apply \cref{lem:th-openness} at the coefficient vector $e_d$ of $r^d$ and at $\beta$, with $\beta$ held fixed. Fix $\eps_0>0$ such that the compact convex set $B=\{(c,\beta):\sum_{p\in\mathcal D}\abs{c_p-(e_d)_p}\le\eps_0\}$, with $\beta$ fixed, is contained in the neighborhood $\mathcal U$ given by the lemma. The coefficient vector of $r^d+\eps\sum_pb_pr^p$ is $e_d+\eps b$, which is nonnegative, nonzero, and at $\ell^1$ distance at most $\eps<\eps_0$ from $e_d$. Using \cref{lem:th-openness}, we find that it satisfies the 1RSB assumptions with parameters $x(e_d+\eps b,\beta)$ and $Q(e_d+\eps b,\beta)$. The functions $x$ and $Q$ are smooth on $\mathcal U$, and their derivatives are bounded on $B$, and the mean value theorem shows that the parameters differ from those of $(r^d,\beta)$ by $O(\eps)$, uniformly in $b$.
+\end{proof}
+
+The proof uses neither the parity of $d$ nor that of the perturbing degrees, which may be any finite set of degrees larger than $d$. The threshold $\eps_0$ depends on $\beta$ and $P$; we make no claim of uniformity as $\beta\downarrow\bs(d)$ or as $P\to\infty$.
+
+Finally, we give a covariance that satisfies the 1RSB assumptions although $\xi''^{-1/2}$ is not convex. For related two-degree phase diagrams, Auffinger and Zhou classify the Parisi measure of spherical $p+s$ models at zero temperature \cite[Theorems~2--4]{AuffingerZhou2025}; the proposition below verifies the positive-temperature contact conditions directly.
+
+\begin{proposition}[A strictly 1RSB example without convexity]\label{prop:th-example}
+Let $Q=9/10$, $x=5/9$, and
+\begin{equation}\label{eq:th-example-constants}
+t=\frac{45-24\log6}{72\log6-85},\qquad b=t\Big(\frac{10}9\Big)^8,\qquad\xi(r)=r^4+br^{12},\qquad\beta^2=\frac{15}{Q^3(4+12t)}.
+\end{equation}
+Then $4539/100000<t<4541/100000$; in particular $b>0$ and $\beta>0$. The pair $(\xi,\beta)$ is strictly 1RSB with parameters $x,Q$ and a nondegenerate contact at $Q$, and $\beta^2(1-Q)^2\xi''(Q)<2/3$. Further, $(\xi''^{-1/2})''(5/6)<0$, so $\xi''^{-1/2}$ is not convex on $(0,1]$.
+\end{proposition}
+
+Numerically, $t\approx0.0453970$, $b\approx0.1054599$, and $\beta\approx2.1277773$; these decimals are not used in the proof. The degrees $4$ and $12$ violate \eqref{eq:th-window}, since $6\cdot2\cdot10=120<121=11^2$, and \cref{prop:th-convex} does not apply.
+
+\begin{proof}
+The proof uses two finite computations, which are carried out in \cref{app:certificate}: the enclosure of $t$ (\cref{lem:app-t}) and the sign pattern of a polynomial of degree twelve (\cref{lem:app-sign}). We have $s=1-Q=1/10$, $C=s+xQ=3/5$, $C/s=6$, and $z=xQ/s=5$.
+
+\paragraph{The contact equations.}
+By \cref{lem:app-t}, $t_-<t<t_+$, where $t_-=4539/100000$ and $t_+=4541/100000$; in particular $t$, $b$, and $\beta^2$ are positive. Solving the definition of $t$ for $\log6$, we find
+\begin{equation}\label{eq:th-example-t}
+\frac{1+t}{4+12t}=\frac{6\log6-5}{25}.
+\end{equation}
+We have $bQ^8=t$, $\xi(Q)=Q^4(1+t)$, and $\xi'(Q)=Q^3(4+12t)$. It follows that
+\[
+\beta^2\xi'(Q)=15=\frac Q{sC},\qquad\beta^2x^2\xi(Q)=\frac{25(1+t)}{6(4+12t)}=\log6-\frac56=\log\frac Cs-\frac{xQ}C,
+\]
+where we used \eqref{eq:th-example-t}. By the integrals in the proof of \cref{prop:th-structure}(1), these are the equations $V'(Q)=0$ and $V(Q)=0$.
+
+\paragraph{Below the contact.}
+For $0\le r\le1$, let $U(r)=x^2V(Qr)$. For $0\le q\le Q$, direct integration gives $\int_0^q(q-v)(C-xv)^{-2}\dd v=x^{-2}(\log(C/(C-xq))-xq/C)$. Since $C/(C-xQr)=6/(6-5r)$, $xQr/C=5r/6$, and $x^2\beta^2Q^4=25/(6(4+12t))$, we obtain
+\begin{equation}\label{eq:th-example-U}
+U(r)=-\log\Big(1-\frac{5r}6\Big)-\frac{5r}6-\frac{25}{6(4+12t)}\big(r^4+tr^{12}\big).
+\end{equation}
+We have $U(0)=U'(0)=0$, and $U(1)=x^2V(Q)=0$ and $U'(1)=x^2QV'(Q)=0$ by the contact equations. Differentiating twice, we find
+\begin{equation}\label{eq:th-example-U2}
+U''(r)=\frac{25\,P_t(r)}{6(4+12t)(6-5r)^2},\qquad P_t(r)=24+72t-\big(12r^2+132tr^{10}\big)(6-5r)^2.
+\end{equation}
+By \cref{lem:app-sign}, there exist $a_0\in(357/1000,359/1000)$ and $b_0\in(890/1000,892/1000)$ such that $U''>0$ on $(0,a_0)$, $U''<0$ on $(a_0,b_0)$, and $U''>0$ on $(b_0,1)$. Using $U'(0)=0$, we find $U'>0$ on $(0,a_0]$, and using $U'(1)=0$, we find $U'<0$ on $[b_0,1)$. As $U'$ is strictly decreasing on $[a_0,b_0]$, it has exactly one zero $c\in(a_0,b_0)$. We conclude that $U'>0$ on $(0,c)$ and $U'<0$ on $(c,1)$. Together with $U(0)=U(1)=0$, this shows that $U>0$ on $(0,1)$, that is, $V>0$ on $(0,Q)$.
+
+\paragraph{Above the contact.}
+By \eqref{eq:th-example-constants} and $bQ^{10}=Q^2t$,
+\[
+\mu_Q=\beta^2s^2\xi''(Q)=\frac{15\,(12Q^2+132tQ^2)}{100\,Q^3(4+12t)}=\frac{15\,(12+132t)}{90\,(4+12t)}=\frac{12+132t}{24+72t}.
+\]
+The right side is increasing in $t$, with derivative $2304/(24+72t)^2$, and therefore $\mu_Q<(12+132t_+)/(24+72t_+)=149951/227246<2/3$. For $p\in\{4,12\}$, the derivative of $(1-q)^2q^{p-2}$ is $(1-q)q^{p-3}((p-2)-pq)$, which is negative for $q\ge Q$, since $Q=9/10>5/6\ge(p-2)/p$. This implies that $\beta^2(1-q)^2\xi''(q)\le\mu_Q<1$ for $Q\le q<1$. As $\hat x(q)=1-q$ there, we have $V''(q)=(1-q)^{-2}(1-\beta^2(1-q)^2\xi''(q))>0$ on $[Q,1)$. In particular, $V''(Q)>0$, and since $V(Q)=V'(Q)=0$, we have $V>0$ on $(Q,1)$. We have now verified \eqref{eq:th-certificate}.
+
+\paragraph{Nonconvexity.}
+Let $v=\xi''$. Then $v(r)=12r^2(1+w(r))$ with $w(r)=11br^8$. We have $rv'(r)=12r^2(2+10w(r))$ and $r^2v''(r)=12r^2(2+90w(r))$, and
+\[
+\frac{r^2\big(3v'(r)^2-2v(r)v''(r)\big)}{(12r^2)^2}=3(2+10w)^2-2(1+w)(2+90w)=8(1-3w)(1-5w),
+\]
+where $w=w(r)$. At $r_0=5/6$, we have $w(r_0)=11t(10/9)^8(5/6)^8=11t(25/27)^8$, and \cref{lem:app-t} gives $1/4<11t_-(25/27)^8<w(r_0)<11t_+(25/27)^8<3/10$; the two outer inequalities are rational comparisons checked in \cref{app:certificate}. Then $1-3w(r_0)>0>1-5w(r_0)$, which implies that $3v'^2-2vv''<0$ and $(v^{-1/2})''=(3v'^2-2vv'')/(4v^{5/2})<0$ at $r_0$.
+\end{proof}

@@ -1,0 +1,1551 @@
+\chapter{Cap hitting estimates under critical-point conditioning}\label{sec:entrance}
+
+In this section, we prove \cref{thm:ent-main}, the hitting estimate for the
+caps under critical-point conditioning. It concerns the original
+Langevin diffusion started from the uniform law $\nu_N$, in a field
+conditioned to have a critical point of the center field $H_Q$ at a
+prescribed point $u$, with prescribed value and radial derivative. The theorem
+states that this diffusion reaches the set $\{x:|R(x,u)|\ge a\}$ before
+time $e^{\gamma N}$ with averaged probability at most
+$C(N^{1-d/2}+N^{3-d})+e^{-cN}$, for every finite mixture of minimum degree
+$d\ge4$. \Cref{cor:ent-rectangle} makes the estimate uniform over a compact
+rectangle of marks, with one time exponent. This corollary is the form of
+the conditioned hitting estimate used in \cref{prop:cp-transfer}, where it is combined with the
+determinant-weighted transfer of \cref{thm:kr-transfer} and the separation
+criterion of \cref{prop:red-consumer}.
+
+The section is self-contained. From earlier sections, it uses only the model
+(\cref{def:pre-model}), the construction of the dynamics
+(\cref{lem:pre-dynamics}), and the rotation covariance of the path kernels
+(\cref{lem:red-kernels}). It does not use the static results of \cref{sec:thermal},
+the counts of critical points and the concentration of the Gibbs measure on
+bands in \cref{sec:purecover,sec:mixone,sec:mixpair,sec:mixbands}, or the Kac--Rice formula of
+\cref{sec:kacrice}, and it needs no lower bound on the Hessian at the
+critical point. The
+spherical harmonic computations, the concentration estimate on the sphere,
+and the comparison of resolvents that we need are proved here.
+
+\paragraph{Standing notation.}
+Throughout this section, $\xi(r)=\sum_{p\in\cP}c_pr^p$ is a finite mixture
+with $c_p>0$ for $p\in\cP$, minimum degree $d=\min\cP\ge4$, and maximum
+degree $\bar p=\max\cP$. We realize $H_N=\sum_{p\in\cP}H_{N,p}$, where the
+$H_{N,p}$ are independent centered Gaussian homogeneous polynomials of degree
+$p$ on $\R^N$ with $\E H_{N,p}(x)H_{N,p}(y)=Nc_pR(x,y)^p$. For fixed $N$,
+the field is a function of the finite-dimensional Gaussian vector $J$ of the
+coefficients of these polynomials. We write $H_J$ when this dependence
+matters. The covariance identity $\E H_N(x)H_N(y)=N\xi(R(x,y))$, with
+$R(x,y)=x\cdot y/N$, holds for all $x,y\in\R^N$. We fix $Q\in(0,1]$ and
+$\beta\ge0$, and recall the center field and the radial derivative,
+\begin{equation}\label{eq:ent-center}
+ \begin{gathered}
+ H_Q(u)=H_N(\sqrt Q\,u)=\sum_{p\in\cP}Q^{p/2}H_{N,p}(u),\\
+ K_Q(u)=\frac{\dd}{\dd t}H_N(t\sqrt Q\,u)\Big|_{t=1}
+       =\sum_{p\in\cP}pQ^{p/2}H_{N,p}(u),
+ \end{gathered}
+\end{equation}
+and the parameters $\xi(Q)$, $a_Q=Q\xi'(Q)$, $b_Q=Q^2\xi''(Q)$, and
+\[
+ \Sigma_Q=\begin{pmatrix}\xi(Q)&a_Q\\ a_Q&a_Q+b_Q\end{pmatrix}.
+\]
+For $u\in S_N$ we write $G_u=\nabla_{S_N}H_Q(u)$, a vector in the tangent
+space $u^\perp$. We write $\nabla_E$ for the Euclidean gradient,
+$\nabla=\nabla_{S_N}$ for the gradient in the induced metric of $S_N$, and
+$\Pi_x=I-xx^{\mathsf T}/N$ for the orthogonal projection onto $x^\perp$,
+so that $\nabla H=\Pi_x\nabla_EH$ at $x\in S_N$. The diffusion with
+Hamiltonian $H$ has generator $L_{\beta,H}=\Delta_{S_N}+\beta\nabla H\cdot
+\nabla$ and invariant law $\pi^H$, and $\Pp^H_{\nu_N}$ denotes its path law
+started from $\nu_N$. For $0<a<1$ and $u\in S_N$, we write
+\[
+ C_a(u)=\{x\in S_N:|R(x,u)|\ge a\}
+\]
+for the union of the two antipodal caps of latitude $a$ around $\pm u$, and
+$I(a)=-\frac12\log(1-a^2)$.
+
+We prescribe the values $H_Q(u)=Nh$ and $K_Q(u)=Nk$ and call the pair
+$(h,k)$ of the energy and the radial derivative per spin the \emph{marks}. We fix bounds $\bar h,\bar k>0$ and call a pair $(h,k)$
+\emph{admissible} if $|h|\le\bar h$ and $|k|\le\bar k$, and, when $\xi$ is
+pure of degree $p$, also $k=ph$. Unless stated otherwise, $C$ and $c$ denote
+positive constants that depend only on $\xi$, $Q$, $\beta$, $\bar h$, and
+$\bar k$, and that may change from line to line. They never depend on $N$,
+$u$, $(h,k)$, a point of $S_N$, or the realization of the field on the
+regularity event of \cref{lem:ent-regularity}.
+
+\section{The main estimate}\label{sec:ent-statement}
+
+We first define the conditioned field. When $\xi$ is a non-pure mixture,
+$\Sigma_Q$ is nonsingular (see \cref{prop:ent-regression}), and we define
+polynomials $\theta_1,\theta_2,\theta_3$ by
+\begin{equation}\label{eq:ent-theta}
+ \bigl(\theta_1(r),\theta_2(r)\bigr)
+ =\bigl(\xi(\sqrt Q\,r),\ \sqrt Q\,r\,\xi'(\sqrt Q\,r)\bigr)\Sigma_Q^{-1},
+ \qquad
+ \theta_3(r)=\frac{\sqrt Q\,\xi'(\sqrt Q\,r)}{a_Q}.
+\end{equation}
+When $\xi=c_pr^p$ is pure, we set instead
+$\theta_1(r)=Q^{-p/2}r^p$, $\theta_2=0$, and
+$\theta_3(r)=Q^{-p/2}r^{p-1}$; the last formula agrees with
+\eqref{eq:ent-theta}.
+
+\begin{definition}[The conditioned field]\label{def:ent-conditioned}
+Let $u\in S_N$, and for $x\in\R^N$ let $r=x\cdot u/N$. The \emph{Gaussian
+regression projection} of $H_N$ at $u$ is the random polynomial
+\begin{equation}\label{eq:ent-deleted}
+ D_u(x)=\theta_1(r)H_Q(u)+\theta_2(r)K_Q(u)+\theta_3(r)\,G_u\cdot x .
+\end{equation}
+For an admissible pair $(h,k)$, the \emph{conditioned field} is
+\begin{equation}\label{eq:ent-conditioned}
+ H^{h,k,u}=H_N+\delta_{h,k,u},\qquad
+ \delta_{h,k,u}(x)=N\bigl(\theta_1(r)h+\theta_2(r)k\bigr)-D_u(x).
+\end{equation}
+We write $\E_{h,k,u}$ for the expectation under the law of $H^{h,k,u}$.
+\end{definition}
+
+We show in \cref{prop:ent-regression} below that the law of $H^{h,k,u}$ is
+a version of the conditional law of $H_N$ given $H_Q(u)=Nh$, $K_Q(u)=Nk$,
+and $G_u=0$. In the pure case, $K_Q(u)=pH_Q(u)$ identically, and the
+conditioning is on $H_Q(u)=Nh$ and $G_u=0$. This is the version given by
+Gaussian regression, and it depends continuously on $(h,k,u)$.
+
+\begin{theorem}[Cap hitting bound from the uniform initial law]
+\label{thm:ent-main}
+Let $\xi$ be a finite mixture of minimum degree $d\ge4$, and fix
+$Q\in(0,1]$, $\beta\ge0$, and $\bar h,\bar k>0$. Then there exists $a_*>0$
+such that, for every $a\in(0,a_*]$, there exist $\gamma,c,C>0$ and $N_0$
+with the following property. For every $N\ge N_0$, every $u\in S_N$, and
+every admissible pair $(h,k)$,
+\begin{equation}\label{eq:ent-main}
+ \E_{h,k,u}\Bigl[\Pp^{H}_{\nu_N}\Bigl(\sup_{0\le t\le e^{\gamma N}}
+   |R(X_t,u)|\ge a\Bigr)\Bigr]
+ \le C\bigl(N^{1-d/2}+N^{3-d}\bigr)+e^{-cN}.
+\end{equation}
+The constant $a_*$ depends only on $\xi,Q,\beta,\bar h,\bar k$, and the
+constants $\gamma,c,C,N_0$ depend only on these and on $a$.
+\end{theorem}
+
+In \eqref{eq:ent-main}, the field $H$ has the law of $H^{h,k,u}$, and $X$ is
+the diffusion with generator $L_{\beta,H}$; we assume that its initial point
+and its driving noise are independent of $H$. The event in
+\eqref{eq:ent-main} is the event that the path enters $C_a(u)$ by time
+$e^{\gamma N}$. Note that both
+polynomial terms tend to zero, since $d\ge4$.
+
+\begin{corollary}[Uniformity over a rectangle of marks]
+\label{cor:ent-rectangle}
+Let $\xi$, $Q$, and $\beta$ be as in \cref{thm:ent-main}, and let
+$\mathcal K\subset\R^2$ be compact. Then there exists $a_*>0$ such that, for
+every $a\in(0,a_*]$, there exist $\gamma,c,C>0$ and $N_0$, depending only on
+$\xi,Q,\beta,\mathcal K,a$, such that for every $N\ge N_0$,
+\begin{equation}\label{eq:ent-rectangle}
+ \sup_{u\in S_N}\ \sup_{(h,k)\in\mathcal K}\
+ \E_{h,k,u}\Bigl[\Pp^{H}_{\nu_N}\Bigl(\sup_{0\le t\le e^{\gamma N}}
+   |R(X_t,u)|\ge a\Bigr)\Bigr]
+ \le C\bigl(N^{1-d/2}+N^{3-d}\bigr)+e^{-cN}.
+\end{equation}
+When $\xi$ is pure of degree $p$, the supremum is over
+$(h,k)\in\mathcal K$ with $k=ph$. If the admissible set of marks is empty,
+the left side is taken to be zero.
+\end{corollary}
+
+\begin{proof}
+Fix $\bar h,\bar k$ with $\mathcal K\subset[-\bar h,\bar h]\times
+[-\bar k,\bar k]$ and apply \cref{thm:ent-main}. Its constants depend only
+on the bounds $\bar h,\bar k$ on the marks, equivalently on the
+bounds $|H_Q(u)|\le N\bar h$ and $|K_Q(u)|\le N\bar k$ on the conditioned
+values, and on $\xi,Q,\beta,a$.
+\end{proof}
+
+\begin{remark}[Scope]\label{rem:ent-scope}
+In \cref{prop:cp-transfer}, \cref{cor:ent-rectangle} is applied to a
+compact rectangle of marks that contains the marks of every fixed
+energy window $[m_N-M,m_N+M]$. Its constants, and in particular the time exponent $\gamma$,
+do not depend on the half-width $M$ of the window chosen later, as long
+as the marks of that window lie in $\mathcal K$. On the rectangle used there,
+$k$ also stays at a fixed distance above $2\sqrt{b_Q}$, which the determinant moments of
+\cref{sec:kacrice} require; the conditional law of $\nabla^2H_Q(u)$ under
+$\E_{h,k,u}$ is computed in that section. The proof below does not use this
+condition. We do not obtain uniformity as $Q\downarrow0$, as the coefficients of
+$\xi$ degenerate, or as $a$ shrinks with $N$. For minimum degree $d=3$, the
+term $N^{3-d}$ does not vanish, and our argument yields no hitting estimate.
+\end{remark}
+
+\section{The mechanism and the origin of the errors}
+\label{sec:ent-mechanism}
+
+We now explain why the dynamics started from $\nu_N$ cannot reach the caps
+around a critical point of $H_Q$ with a large value within time
+$e^{\gamma N}$, and where the two
+polynomial errors in \eqref{eq:ent-main} come from. The discussion in this
+section is informal; the precise statements and proofs follow in the next
+sections.
+
+\paragraph{The unconditioned field.}
+We begin with the case where the field is not conditioned and the axis $u$
+is uniform on $S_N$ and independent of $H_N$. A uniform point has overlap of
+order $N^{-1/2}$ with $u$, and $\nu_N(C_a(u))\le e^{-NI(a)/2}$ for
+large $N$. By rotation invariance, the Gibbs mass of $C_a(u)$, averaged over
+the field and the axis, is also exponentially small. To turn this into a
+bound that holds for the whole time interval $[0,e^{\gamma N}]$, we introduce
+a resolvent. Let $\kappa\ge0$ be a killing rate supported near $C_a(u)$, and
+let $\tau$ be the killing time, that is, the first time at which
+$\int_0^t\kappa(X_v)\dd v$ exceeds an independent unit exponential variable.
+We will see that $\E e^{-\lambda\tau}$ is
+controlled by $\lambda^{-1}\int\kappa\dd\pi^H$, together with a cost for the
+initial law. The relative entropy of $\nu_N$ with respect to $\pi^H$ is of
+order $N$, and it enters only through a bound on the Fisher information of
+the initial density after it is smoothed by the resolvent of the unperturbed
+generator. With $\lambda=e^{-\gamma N}$, the term $\lambda^{-1}\int\kappa\dd\pi^H$
+is of order
+$e^{\gamma N-NI(a)/2}$, which is exponentially small when $\gamma$ is small.
+
+\paragraph{The conditioning and the axis average.}
+Conditioning $u$ to be a critical point of $H_Q$ with a large value changes
+the whole field, and $H^{h,k,u}=H_N+\delta_{h,k,u}$. The correction is of
+order $N$ near $u$, so we cannot treat it as a small perturbation of $H_N$.
+The observation that makes a comparison possible is that the correction
+vanishes to high order at the equator of $u$. The functions $\theta_1$ and
+$\theta_2$ are of order $|r|^d$, and $\theta_3$ is of order $|r|^{d-1}$, so
+that
+\[
+ |\delta_{h,k,u}(x)|\le CN|r|^d+C\sqrt N|r|^{d-1}|V_x(u)|,
+ \qquad V_x(u)=N^{-1/2}\,G_u\cdot x,
+\]
+where $r=R(x,u)$. A fixed point $x$ has overlap of order $N^{-1/2}$ with a
+uniform axis $u$, and $V_x(u)$ is of order one. This means that the
+correction is of order $N^{1-d/2}$ for typical pairs $(x,u)$, and this is the
+source of both polynomial errors. We therefore compare the conditioned
+dynamics at a uniform axis with the unconditioned dynamics, using a smooth
+truncation $\delta_\alpha$ of $\delta_{h,k,u}$ at a small fixed scale
+$\alpha$ (see \eqref{eq:ent-cutoff} and the last paragraph of this section),
+through the density $e^w$ with $w=\beta\delta_\alpha$. The truncation is
+necessary: near $u$, the correction itself is of order $N$, and the axis
+average of $e^{\beta\delta_{h,k,u}}$ can be exponentially large. For a
+sufficiently small fixed $\alpha$, we will see that only two moments of
+$e^w$ are needed, averaged over the axis for each fixed point $x$ and each
+fixed field satisfying the regularity bounds of \cref{lem:ent-regularity}:
+\[
+ \eta=\E_u|e^w-1|=O(N^{1-d/2}),\qquad
+ \epsilon=\E_u\bigl[e^w(1-e^{-w})^2\bigr]=O(N^{2-d}).
+\]
+
+\paragraph{The correlated gradient.}
+This raises a difficulty, since the point $x$ in these averages may depend
+on the field, and $G_u$ is a function of the same field. We cannot treat
+$G_u$ as a Gaussian vector independent of $x$. To overcome this difficulty,
+we fix the field and $x$ and average $u$ over a latitude
+$\{u:R(x,u)=r\}$. We show in \cref{lem:ent-latitude} that $V_x$ concentrates
+on each latitude, by the logarithmic Sobolev inequality on the sphere
+(\cref{lem:ent-lsi}), and that its latitude mean can be computed exactly by
+the Funk--Hecke formula. The top spherical harmonic component of each
+$H_{N,p}$ contributes $\sqrt N|r|^{p-1}$ to this mean, and the lower
+components contribute a bounded amount. Note that these lower components
+have covariance weights $\omega_{p,j,N}=O(N^{-j})$, and hence pointwise
+variances of order $N^{1-j}$ (\cref{lem:ent-harmonic}); they must be
+kept.
+
+\paragraph{The time horizon.}
+The main obstacle is the length $e^{\gamma N}$ of the time interval. A
+comparison of path laws, for example by Girsanov's formula, costs an amount
+proportional to the time. To overcome this obstacle, we prove the
+entropy--resolvent comparison of \cref{lem:ent-resolvent}. It compares the
+Laplace transform $\E e^{-\lambda\tau}$ of the killing time for the
+perturbed process with an integrated killing rate, in which the initial
+density is smoothed by the resolvent of the unperturbed generator, at the cost
+\begin{equation}\label{eq:ent-cost}
+ \underbrace{\eta+\sqrt\epsilon}_{O(N^{1-d/2})}
+ \quad+\quad
+ \underbrace{\epsilon\,(1+\mathcal H_0)}_{O(N^{3-d})},
+\end{equation}
+where $\mathcal H_0=\int(1+f_0)\log(1+f_0)\dd\mu$, and $f_0$ is the density
+of the initial law with respect to the reference measure $\mu$ of
+\cref{lem:ent-resolvent}. In our application, $\mu$ is the joint law of the
+field and of a point drawn from the Gibbs measure, $f_0\mu$ is the joint law
+of the field and of the initial point, and $\mathcal H_0=O(N)$ by
+\eqref{eq:ent-start-entropy}. Since $\int f_0\dd\mu=1$ and the function
+$a\mapsto(1+a)\log(1+a)-a\log a$ is nonnegative and concave, Jensen's
+inequality shows that $\mathcal H_0$ exceeds $\int f_0\log f_0\dd\mu$, the
+entropy of $\nu_N$ relative to the Gibbs measure averaged over the field, by
+at most $2\log2$. The point is that this cost is not multiplied by the
+time: the factor $e^{\gamma N}$ appears only in the integrated killing rate,
+which is exponentially small. At $d=4$, both terms in \eqref{eq:ent-cost} are
+$O(N^{-1})$; at $d=3$, the second is of order one. In the proof of the
+comparison, we test the resolvent equation of the killed diffusion against a weighted
+function, and a commutator identity cancels a cross term that would
+otherwise be of order one.
+
+\paragraph{Truncation and the return to the true process.}
+The comparison lemma requires a bounded perturbation whose size is small
+compared with the entropy cost of the caps. For this reason, we truncate
+$\delta_{h,k,u}$ by smooth cutoffs at scale $\alpha$ in both $r=R(x,u)$ and
+$s=G_u\cdot x/N$. On the support of the cutoffs, the truncated correction is
+at most $CN\alpha^d$, while a cap of latitude $\alpha/4$ costs
+$NI(\alpha/4)\ge N\alpha^2/32$. Since $d>2$, we can choose $\alpha$ small and
+then $\gamma$ small, so that the integrated killing rate remains exponentially
+small. We then return to the true process using two facts. First, after a hit
+of the cap $C_{\alpha/2}(u)$, the killing rate equals one during a time
+interval of fixed length, except with exponentially small probability. Second, the true and
+truncated processes coincide until $|r|$ or $|s|$ reaches $\alpha$. Reaching
+$|r|=\alpha$ requires crossing $C_a(u)$ with $a=\alpha/2$ first. Reaching
+$|s|=\alpha$ is exponentially unlikely. Indeed, $G_u$ is
+exactly the Gaussian vector that the conditioning removes. It is independent
+of the conditioned field and of the whole true trajectory, and $s_t$ is
+Gaussian with variance at most $a_Q/N$ at each fixed time.
+
+\paragraph{Organization.}
+In \cref{sec:ent-regularity}, we compute the harmonic decomposition of the
+field and prove regularity bounds with exponential tails.
+\Cref{sec:ent-regression} constructs the conditioned field by regression and
+bounds the correction. \Cref{sec:ent-multipliers} proves the latitude
+concentration and the two moment bounds for $e^w$. \Cref{sec:ent-resolvent}
+states and proves the entropy--resolvent comparison for abstract diffusions.
+\Cref{sec:ent-truncated} applies it to the truncated process, and
+\cref{sec:ent-boundary} shows that the true process does not reach the
+cutoff boundary $\{|G_u\cdot x|/N=\alpha\}$. We assemble the
+proof of \cref{thm:ent-main} in \cref{sec:ent-proof}.
+\Cref{tab:ent-parameters} lists the parameters in the order in which they
+are fixed; all of them are fixed before $N\to\infty$.
+
+\begin{table}[ht]
+\centering
+\caption{Parameters in the proof of \cref{thm:ent-main}, in the order in
+which they are chosen.}\label{tab:ent-parameters}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Parameter & Role & Depends on\\
+\midrule
+$\xi,Q,\beta,\bar h,\bar k$ & model, radius, temperature, mark bounds
+  & given\\
+$C_0$ & regularity constant (\cref{lem:ent-regularity}) & $\xi,Q$\\
+$\alpha_1$ & largest cutoff scale (\cref{prop:ent-truncated})
+  & $\xi,Q,\beta,\bar h,\bar k$\\
+$a\in(0,\alpha_1/2]$, $\alpha=2a$ & latitude of the caps, cutoff scale
+  & chosen\\
+$\gamma$ & time exponent & the above and $a$\\
+$C,c,N_0$ & constants in \eqref{eq:ent-main} & the above and $a$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Harmonic coefficients and regularity of the field}
+\label{sec:ent-regularity}
+
+The latitude mean of the tangent gradient term $G_u\cdot x$ involves every spherical harmonic
+component of $H_{N,p}$, not only the top one. In this section, we compute
+the variances of these components exactly and prove regularity bounds at
+their correct scales.
+
+Let $N\ge3$ and $\alpha_N=(N-2)/2$. The Gegenbauer polynomials
+$C^{(\alpha_N)}_\ell$ are defined by
+$(1-2rt+t^2)^{-\alpha_N}=\sum_{\ell\ge0}C^{(\alpha_N)}_\ell(r)t^\ell$.
+Expanding the left side by the binomial series gives
+\[
+ C^{(\alpha_N)}_\ell(r)=\sum_{j=0}^{\lfloor\ell/2\rfloor}
+ \frac{(-1)^j(\alpha_N)_{\ell-j}}{j!\,(\ell-2j)!}(2r)^{\ell-2j},
+ \qquad C^{(\alpha_N)}_\ell(1)=\frac{(2\alpha_N)_\ell}{\ell!},
+\]
+where $(t)_j=t(t+1)\cdots(t+j-1)$ and $(t)_0=1$; see
+\cite[Section~18.5(iii), (18.5.10)]{DLMF}. We define the normalized zonal
+polynomials
+\begin{equation}\label{eq:ent-zonal}
+ \mathsf Z_{\ell,N}(r)=\frac{C^{(\alpha_N)}_\ell(r)}{C^{(\alpha_N)}_\ell(1)}
+ =\frac{\ell!}{(2\alpha_N)_\ell}\sum_{j=0}^{\lfloor\ell/2\rfloor}
+ \frac{(-1)^j(\alpha_N)_{\ell-j}}{j!\,(\ell-2j)!}(2r)^{\ell-2j},
+\end{equation}
+so that $\mathsf Z_{0,N}=1$ and $\mathsf Z_{\ell,N}(1)=1$. From the generating
+function, we also obtain the differential equation
+\begin{equation}\label{eq:ent-zonal-ode}
+ (1-r^2)\mathsf Z''-(N-1)r\mathsf Z'+\ell(\ell+N-2)\mathsf Z=0,
+ \qquad \mathsf Z=\mathsf Z_{\ell,N}.
+\end{equation}
+
+\begin{lemma}[Harmonic coefficients]\label{lem:ent-harmonic}
+Let $N\ge3$.
+\begin{enumerate}
+\item For every integer $p\ge0$,
+\begin{equation}\label{eq:ent-harmonic}
+ r^p=\sum_{j=0}^{\lfloor p/2\rfloor}\omega_{p,j,N}\,
+     \mathsf Z_{p-2j,N}(r),\qquad
+ \omega_{p,j,N}=\frac{p!\,\Gamma(\alpha_N)\,(p-2j+\alpha_N)}
+   {2^pj!\,\Gamma(p-j+\alpha_N+1)}\cdot
+   \frac{(2\alpha_N)_{p-2j}}{(p-2j)!}.
+\end{equation}
+The coefficients $\omega_{p,j,N}$ are positive and sum to one.
+\item For fixed $p$ and $0\le j\le p/2$, as $N\to\infty$,
+\begin{equation}\label{eq:ent-harmonic-asymp}
+ \omega_{p,j,N}=\frac{p!}{2^jj!\,(p-2j)!}N^{-j}\bigl(1+O_p(N^{-1})\bigr);
+ \quad\text{in particular } \omega_{p,j,N}\le C_pN^{-j}.
+\end{equation}
+\item For fixed $\ell$ and $m$, the function $\mathsf Z_{\ell,N}(r)-r^\ell$
+and its first $m$ derivatives are bounded by $C_{\ell,m}/N$ on $[-1,1]$. In
+particular, for $\ell\ge1$ and $|r|\le1$,
+\begin{equation}\label{eq:ent-zonal-derivative}
+ |\mathsf Z'_{\ell,N}(r)|\le C_\ell\bigl(|r|^{\ell-1}+N^{-1}\bigr).
+\end{equation}
+\item Let $H_{N,p}|_{S_N}=\sum_{j}H_{p,p-2j}$ be the decomposition into
+spherical harmonics, where $H_{p,\ell}$ has degree $\ell$. The fields
+$H_{p,p-2j}$, for $p\in\cP$ and $0\le j\le p/2$, are independent centered
+Gaussian fields on $S_N$, and
+\begin{equation}\label{eq:ent-sector-cov}
+ \E H_{p,p-2j}(x)H_{p,p-2j}(y)=Nc_p\,\omega_{p,j,N}\,
+ \mathsf Z_{p-2j,N}(R(x,y)),\qquad x,y\in S_N.
+\end{equation}
+\end{enumerate}
+\end{lemma}
+
+For example, at $p=4$ we have
+\[
+ r^4=\frac{(N-1)(N+1)}{(N+2)(N+4)}\mathsf Z_{4,N}(r)
+     +\frac{6(N-1)}{N(N+4)}\mathsf Z_{2,N}(r)+\frac{3}{N(N+2)}.
+\]
+In particular, the component of degree two of a quartic field has a
+variance of order $N^{-1}$ relative to the top component.
+
+\begin{proof}
+We first recall the uniqueness of zonal harmonics. Fix $z\in S_N$. The
+Laplacian $\Delta_{S_N}$ acts on functions of $r=R(x,z)$ by
+$g\mapsto N^{-1}\bigl[(1-r^2)g''-(N-1)rg'\bigr]$. Then
+\eqref{eq:ent-zonal-ode} implies that the function $x\mapsto\mathsf Z_{\ell,N}(R(x,z))$
+is an eigenfunction of $\Delta_{S_N}$ with eigenvalue
+$-\ell(\ell+N-2)/N$; since it is the restriction of a polynomial of degree
+$\ell$, it is a spherical harmonic of degree $\ell$, and it is invariant
+under the rotations fixing $z$. Conversely, a spherical harmonic of degree
+$\ell$ invariant under these rotations is a polynomial in $R(x,z)$ of degree
+at most $\ell$ that satisfies \eqref{eq:ent-zonal-ode}. The polynomial
+solutions of \eqref{eq:ent-zonal-ode} of degree at most $\ell$ form a
+one-dimensional space, since the coefficients are determined recursively by
+the leading one. Such a harmonic is a scalar multiple of
+$\mathsf Z_{\ell,N}(R(\cdot,z))$.
+
+\paragraph{The expansion \eqref{eq:ent-harmonic}.}
+By \eqref{eq:ent-zonal},
+$\omega_{p,j,N}\mathsf Z_{p-2j,N}=p!\,\Gamma(\alpha_N)(p-2j+\alpha_N)
+\bigl(2^pj!\,\Gamma(p-j+\alpha_N+1)\bigr)^{-1}C^{(\alpha_N)}_{p-2j}$.
+Inserting the explicit sum for $C^{(\alpha_N)}_{p-2j}$, we find that the
+coefficient of $r^{p-2s}$ in the right side of \eqref{eq:ent-harmonic} is
+\[
+ \frac{p!}{2^{2s}(p-2s)!}\sum_{j=0}^{s}
+ \frac{(-1)^{s-j}(p-2j+\alpha_N)\,\Gamma(p-s-j+\alpha_N)}
+ {j!\,(s-j)!\,\Gamma(p-j+\alpha_N+1)}.
+\]
+For $s=0$ this equals one. For $s\ge1$, recall the beta integral
+\[
+ \frac{\Gamma(p-s-j+\alpha_N)}{\Gamma(p-j+\alpha_N+1)}
+ =\frac1{s!}\int_0^1t^{p-s-j+\alpha_N-1}(1-t)^s\dd t .
+\]
+Writing $y=1/t$, the binomial theorem and its derivative in $y$ give
+\[
+ \sum_{j=0}^s\frac{(-1)^{s-j}(p+\alpha_N-2j)\,t^{-j}}{j!\,(s-j)!}
+ =\frac{t^{-s}(1-t)^{s-1}}{s!}\bigl[(p+\alpha_N)(1-t)-2s\bigr].
+\]
+Inserting these two identities, we find that the sum over $j$ equals
+$(s!)^{-2}$ times the integral over $[0,1]$ of
+\[
+ t^{p-2s+\alpha_N-1}(1-t)^{2s-1}\bigl[(p+\alpha_N)(1-t)-2s\bigr]
+ =\frac{\dd}{\dd t}\Bigl[t^{p-2s+\alpha_N}(1-t)^{2s}\Bigr].
+\]
+Both boundary values vanish, because $p-2s+\alpha_N>0$ and $2s>0$. This
+proves \eqref{eq:ent-harmonic}. The coefficients are positive by their
+formula, and evaluating \eqref{eq:ent-harmonic} at $r=1$ shows that they sum
+to one.
+
+\paragraph{Asymptotics.}
+For fixed $p$ and $j$, each gamma ratio and Pochhammer symbol in
+$\omega_{p,j,N}$ is a finite product of factors $\alpha_N+c$, or of factors
+$2\alpha_N+c$, with fixed constants $c$, or the reciprocal of such a
+product. The substitution $\alpha_N+c=\alpha_N(1+c/\alpha_N)$ gives
+\[
+ \omega_{p,j,N}=\frac{p!}{2^{2j}j!\,(p-2j)!}\,\alpha_N^{-j}
+ \bigl(1+O_p(\alpha_N^{-1})\bigr),
+\]
+which is \eqref{eq:ent-harmonic-asymp}, since $\alpha_N^{-j}=2^jN^{-j}
+(1+O_j(N^{-1}))$. In the same way, the leading coefficient of
+$\mathsf Z_{\ell,N}$ is $2^\ell(\alpha_N)_\ell/(2\alpha_N)_\ell=1+O_\ell
+(N^{-1})$, and its coefficient of $r^{\ell-2j}$ is $O_\ell(N^{-j})$ for
+$j\ge1$. Differentiating this polynomial of fixed degree yields (3).
+
+\paragraph{The harmonic components.}
+The decomposition of $H_{N,p}|_{S_N}$ into spherical harmonics is given by
+linear projections, and the components are jointly Gaussian with the
+original fields. Their covariances are obtained by applying the projections
+in both variables of the kernel $Nc_pR(x,y)^p
+=Nc_p\sum_j\omega_{p,j,N}\mathsf Z_{p-2j,N}(R(x,y))$. With one variable
+fixed, $\mathsf Z_{\ell,N}(R(x,y))$ is a spherical harmonic of degree $\ell$
+in the other variable. Harmonics of different degrees are orthogonal in
+$L^2(\nu_N)$, as they are eigenfunctions of $\Delta_{S_N}$ with the distinct
+eigenvalues $-\ell(\ell+N-2)/N$. The projection onto degree $\ell'$ in both
+variables keeps the term with $\ell=\ell'$ and removes the others. This
+proves \eqref{eq:ent-sector-cov}, and it shows that components of different
+degrees, or of different $p$, are uncorrelated. Being jointly Gaussian, they
+are independent.
+\end{proof}
+
+The next lemma is a refinement of \cref{lem:pre-field} for the finite
+mixtures of this section: it also controls the lower harmonic components, at
+their own scale. For a component $H_{p,\ell}$, we work with its harmonic
+homogeneous extension of degree $\ell$ to $\R^N$.
+
+\begin{lemma}[Regularity with exponential tails]\label{lem:ent-regularity}
+There exist $C_0$ and $N_0$, depending only on $\xi$ and $Q$, and events
+$\Omega_N$ determined by the coefficient vector $J$, such that
+$\Pp(\Omega_N^c)\le e^{-N}$ for $N\ge N_0$, each $\Omega_N$ is invariant under
+the rotations $H\mapsto H\circ g^{-1}$, $g\in O(N)$, and the following holds
+on $\Omega_N$.
+\begin{enumerate}
+\item For every $p\in\cP$ and $m\in\{0,1,2\}$,
+$\sup_{x\in S_N}\norm{\nabla_E^mH_{N,p}(x)}_{\rm op}\le C_0N^{1-m/2}$.
+\item For every $p\in\cP$ and $0\le j\le p/2$,
+$\sup_{x\in S_N}|H_{p,p-2j}(x)|\le C_0N^{1-j/2}$.
+\item With $\norm{\cdot}_\infty$ denoting the supremum over $S_N$,
+\begin{equation}\label{eq:ent-regularity}
+ \begin{gathered}
+ \norm{H_N}_\infty+\norm{H_Q}_\infty+\norm{K_Q}_\infty\le C_0N,\\
+ \norm{\nabla_EH_N}_\infty+\norm{\nabla_EH_Q}_\infty
+   +\norm{\nabla H_N}_\infty+\norm{\nabla H_Q}_\infty\le C_0\sqrt N,\\
+ \norm{\nabla_E^2H_N}_\infty+\norm{\nabla_E^2H_Q}_\infty
+   +\norm{\nabla^2H_N}_\infty+\norm{\nabla^2H_Q}_\infty\le C_0,
+ \end{gathered}
+\end{equation}
+where the norms of second derivatives are operator norms.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+We first treat a component of degree zero, which occurs as $H_{p,0}$ for
+even $p$. It is a centered Gaussian constant $Z$ with $\Var Z=N\sigma^2$,
+where $\sigma^2=c_p\omega_{p,p/2,N}$. The Gaussian tail bound gives
+$\Pp(|Z|>2L\sigma N)\le2e^{-2L^2N}$ for $L>0$, and on the complementary
+event $|Z|\le2L\sigma N\le CLN^{1-p/4}$, which is the value bound required
+in (2) with $j=p/2$; all derivatives of positive order vanish.
+
+Now let $T$ be an isotropic centered Gaussian homogeneous polynomial of
+degree $1\le\ell\le\bar p$ on $\R^N$, with $\E T(x)^2=N\sigma^2$ for $|x|^2=N$. By
+homogeneity and isotropy, $\E T(y)^2=N\sigma^2(|y|^2/N)^\ell$ for all $y$.
+Let $\mathcal T$ be the symmetric $\ell$-linear form with
+$T(y)=\mathcal T(y,\dots,y)$. For unit vectors $v_1,\dots,v_\ell$, the
+polarization identity
+\[
+ \mathcal T(v_1,\dots,v_\ell)=\frac1{2^\ell\ell!}
+ \sum_{\varepsilon\in\{\pm1\}^\ell}\Bigl(\prod_i\varepsilon_i\Bigr)
+ T\Bigl(\sum_i\varepsilon_iv_i\Bigr)
+\]
+and $|\sum_i\varepsilon_iv_i|\le\ell$ give
+$\E\mathcal T(v_1,\dots,v_\ell)^2\le D_\ell^2\sigma^2N^{1-\ell}$, where
+$D_\ell=\ell^\ell/\ell!$. Let $\mathcal N$ be a $(4\bar p)^{-1}$-net of the
+unit sphere; comparing disjoint balls shows that we may take
+$|\mathcal N|\le(1+8\bar p)^N$. Replacing the arguments one at a time by net
+points, and using that each replacement costs at most
+$(4\bar p)^{-1}\norm{\mathcal T}_{\rm op}$, we find
+$\norm{\mathcal T}_{\rm op}\le\frac43\max_{v_i\in\mathcal N}
+|\mathcal T(v_1,\dots,v_\ell)|$. The Gaussian tail bound and a union bound
+over the $(1+8\bar p)^{\ell N}$ tuples then give, for $L>0$,
+\begin{equation}\label{eq:ent-net}
+ \Pp\bigl(\norm{\mathcal T}_{\rm op}>2LD_\ell\sigma N^{1-\ell/2}\bigr)
+ \le2\exp\bigl(-N\bigl[L^2/2-\bar p\log(1+8\bar p)\bigr]\bigr).
+\end{equation}
+For $|x|=\sqrt N$ and $0\le m\le\ell$, the $m$th derivative of $T$ at $x$
+is $(\ell)_m^{\downarrow}\,\mathcal T(x,\dots,x,\cdot,\dots,\cdot)$, where
+$(\ell)_m^{\downarrow}=\ell(\ell-1)\cdots(\ell-m+1)$, and has operator norm
+at most $(\ell)_m^{\downarrow}\norm{\mathcal T}_{\rm op}N^{(\ell-m)/2}$. On
+the complement of the event in \eqref{eq:ent-net}, it is at most
+$2LD_\ell(\ell)_m^{\downarrow}\sigma N^{1-m/2}$. Derivatives of order
+$m>\ell$ vanish.
+
+We use these bounds for each $H_{N,p}$, with $\sigma^2=c_p$, and for the
+harmonic extension of each $H_{p,p-2j}$, with $\sigma^2=c_p\omega_{p,j,N}\le CN^{-j}$
+by \eqref{eq:ent-sector-cov} and \eqref{eq:ent-harmonic-asymp}. This is a
+fixed finite number $M_0$ of polynomials, those of degree zero included.
+We choose $L$ with
+$L^2/2\ge\bar p\log(1+8\bar p)+\log(2M_0)+2$. The union of the $M_0$
+exceptional events then has probability at most $e^{-N}$ for large $N$; any
+fixed exponential rate is possible by enlarging $L$. We define $\Omega_N$ by
+the resulting bounds on the suprema in (1) and (2), with a suitable $C_0$.
+These suprema are continuous functions of $J$, which makes $\Omega_N$
+Borel, and they are invariant under rotations, since the decomposition into components
+commutes with rotations.
+
+Part (3) follows by summing the components with the weights $1$,
+$Q^{p/2}$, and $pQ^{p/2}$ of \eqref{eq:ent-center}. For the spherical
+derivatives, recall that $\nabla T=\Pi_x\nabla_ET$ and
+\[
+ \nabla^2T(x)=\Pi_x\nabla_E^2T(x)\Pi_x
+ -\frac{x\cdot\nabla_ET(x)}{N}\,I_{x^\perp},
+\]
+and that $x\cdot\nabla_ET=\ell T$ for a homogeneous polynomial of
+degree $\ell$. Increasing $C_0$ once completes the proof.
+\end{proof}
+
+\section{Exact regression of the whole field}\label{sec:ent-regression}
+
+In this section, we show that the field of \cref{def:ent-conditioned} has
+the conditional law, and we bound the correction $\delta_{h,k,u}$. The
+regression is performed on the whole field $H_N$, although the conditioned
+quantities concern the center field at radius $\sqrt Q$; the dynamics are
+always driven by the field on $S_N$ itself.
+
+\begin{proposition}[Whole-field regression]\label{prop:ent-regression}
+Let $u\in S_N$, and let $r=x\cdot u/N$ for $x\in\R^N$.
+\begin{enumerate}
+\item If $\xi$ is a non-pure mixture, then $\det\Sigma_Q>0$, and the
+coefficient vector of the random polynomial $H_N-D_u$ is independent of the
+vector $(H_Q(u),K_Q(u),G_u)$. If $\xi$ is pure of degree $p$, then
+$K_Q(u)=pH_Q(u)$, and the coefficient vector of $H_N-D_u$ is independent of
+$(H_Q(u),G_u)$. In both cases, the law of $H^{h,k,u}$ is a version of the
+conditional law of $H_N$ given $H_Q(u)=Nh$, $K_Q(u)=Nk$, and $G_u=0$.
+\item For $|r|\le1$,
+\begin{equation}\label{eq:ent-theta-orders}
+ \begin{gathered}
+ |\theta_1(r)|+|\theta_2(r)|\le C|r|^d,\qquad
+ |\theta_3'(r)|\le C|r|^{d-2},\\
+ |\theta_1'(r)|+|\theta_2'(r)|+|\theta_3(r)|\le C|r|^{d-1}.
+ \end{gathered}
+\end{equation}
+\item The correction has spherical gradient
+\begin{equation}\label{eq:ent-correction-gradient}
+ \begin{split}
+ \nabla\delta_{h,k,u}(x)={}&\Bigl[\theta_1'(r)\bigl(Nh-H_Q(u)\bigr)
+ +\theta_2'(r)\bigl(Nk-K_Q(u)\bigr)-\theta_3'(r)\,G_u\cdot x\Bigr]
+ \frac{\Pi_xu}{N}\\
+ &-\theta_3(r)\Pi_xG_u
+ \end{split}
+\end{equation}
+at $x\in S_N$. On $\Omega_N$, for every admissible $(h,k)$ and $x\in S_N$,
+\begin{equation}\label{eq:ent-delta-bounds}
+ |\delta_{h,k,u}(x)|\le CN|r|^d+C|r|^{d-1}|G_u\cdot x|,
+ \qquad
+ \norm{\nabla\delta_{h,k,u}}_\infty\le C\sqrt N .
+\end{equation}
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+We begin with the covariances. Recall that
+$\E H_N(x)H_N(y)=N\xi(x\cdot y/N)$ for all $x,y\in\R^N$. Differentiating in
+$y$ along $t\sqrt Q\,u$ and along unit vectors $e\perp u$, we find, for
+every $x\in\R^N$,
+\begin{equation}\label{eq:ent-covariances}
+ \begin{gathered}
+ \Cov\bigl((H_Q(u),K_Q(u))\bigr)=N\Sigma_Q,\qquad
+ \Cov(G_u)=a_QI_{u^\perp},\\
+ \Cov\bigl((H_Q(u),K_Q(u)),G_u\bigr)=0,\qquad
+ \Cov\bigl(H_N(x),G_u\bigr)=\sqrt Q\,\xi'(\sqrt Q\,r)\Pi_ux,\\
+ \Cov\bigl(H_N(x),(H_Q(u),K_Q(u))\bigr)
+   =N\bigl(\xi(\sqrt Q\,r),\sqrt Q\,r\,\xi'(\sqrt Q\,r)\bigr).
+ \end{gathered}
+\end{equation}
+For example, the identity for $\Cov(H_N(x),G_u)$ follows by
+differentiating $N\xi(\sqrt Q\,x\cdot v/N)$ in $v$ at $v=u$ in a direction
+$e\perp u$, which yields $\sqrt Q\,\xi'(\sqrt Q\,r)\,x\cdot e$. The covariance of $G_u$ follows
+from $\partial_e\partial_{e'}N\xi(Qv\cdot v'/N)=Q\xi'(Q)\,e\cdot e'$ at
+$v=v'=u$, since $u\cdot e=u\cdot e'=0$. The same orthogonality shows that
+$(H_Q(u),K_Q(u))$ and $G_u$ are uncorrelated. With $w_p=c_pQ^p$, we have
+$\xi(Q)=\sum_pw_p$, $a_Q=\sum_ppw_p$, and $a_Q+b_Q=\sum_pp^2w_p$, so that
+\[
+ \det\Sigma_Q=\Bigl(\sum_pw_p\Bigr)\Bigl(\sum_pp^2w_p\Bigr)
+ -\Bigl(\sum_ppw_p\Bigr)^2>0
+\]
+by the Cauchy--Schwarz inequality, with equality exactly when only one degree
+occurs.
+
+Consider a non-pure mixture. By \eqref{eq:ent-covariances}, $D_u(x)$ is the
+orthogonal projection of $H_N(x)$ onto the span of the coordinates of
+$(H_Q(u),K_Q(u),G_u)$. Indeed, the coefficients of $H_Q(u)$ and $K_Q(u)$
+are $N\bigl(\xi(\sqrt Q\,r),\sqrt Q\,r\,\xi'(\sqrt Q\,r)\bigr)(N\Sigma_Q)^{-1}
+=(\theta_1(r),\theta_2(r))$, the coefficient vector of $G_u$ is
+$\sqrt Q\,\xi'(\sqrt Q\,r)\Pi_ux/a_Q$, and $\Pi_ux\cdot G_u=x\cdot
+G_u$. The family $\{(H_N-D_u)(x):x\in\R^N\}$ and the vector
+$(H_Q(u),K_Q(u),G_u)$ are jointly Gaussian with zero cross-covariances, and
+they are therefore independent. A polynomial of degree at most $\bar p$ is
+determined by its values at finitely many points, and its coefficient vector
+is a linear function of these values. This proves the independence in
+(1). Since
+$H_N=(H_N-D_u)+D_u$ and $D_u$ is linear in the conditioning vector, replacing
+$(H_Q(u),K_Q(u),G_u)$ by $(Nh,Nk,0)$ in $D_u$ produces a version of the
+conditional law; this is the field \eqref{eq:ent-conditioned}. In the pure
+case, $H_N=H_{N,p}$ is homogeneous of degree $p$, which implies that
+$K_Q(u)=pH_Q(u)$. We have $\Var H_Q(u)=Nc_pQ^p$ and
+$\Cov(H_N(x),H_Q(u))=Nc_pQ^{p/2}r^p$. By \eqref{eq:ent-covariances}, the
+regression coefficients on $H_Q(u)$ and $G_u$ are $Q^{-p/2}r^p$ and
+$Q^{-p/2}r^{p-1}$. The same argument applies, and no singular matrix is
+inverted.
+
+For (2), note that $\theta_1,\theta_2$ are linear combinations of
+$\xi(\sqrt Q\,r)$ and $\sqrt Q\,r\,\xi'(\sqrt Q\,r)$, whose lowest power of
+$r$ is $r^d$, and that $\theta_3$ is a multiple of $\xi'(\sqrt Q\,r)$, whose
+lowest power is $r^{d-1}$. These are fixed polynomials of degree at most
+$\bar p$, which implies \eqref{eq:ent-theta-orders}.
+
+For (3), the identity \eqref{eq:ent-correction-gradient} is the product rule,
+with $\nabla r=\Pi_xu/N$ and $\nabla(G_u\cdot x)=\Pi_xG_u$. On
+$\Omega_N$, we have $|Nh-H_Q(u)|\le(\bar h+C_0)N$, $|Nk-K_Q(u)|\le
+(\bar k+C_0)N$, $|G_u|\le C_0\sqrt N$, and $|\Pi_xu|/N\le N^{-1/2}$.
+Inserting these bounds and \eqref{eq:ent-theta-orders} into
+\eqref{eq:ent-conditioned} and \eqref{eq:ent-correction-gradient}, and using
+$|G_u\cdot x|\le C_0N$, we obtain \eqref{eq:ent-delta-bounds}. These bounds
+control the conditional mean $N(\theta_1h+\theta_2k)$, which is of order $N$
+near $u$, as well as the random part of the correction.
+\end{proof}
+
+\section{Latitude concentration and moments of the density ratio}
+\label{sec:ent-multipliers}
+
+In this section, we bound two moments of the density $e^w$ of the
+truncated perturbation, averaged over a uniform axis, for every fixed field
+on $\Omega_N$ and every fixed point $x$. We begin with the concentration
+inequality on the sphere. This is the curvature criterion of Bakry and \'Emery
+\cite[Corollary~2, p.~199; Example~(b), p.~200]{BakryEmery1985} for the
+logarithmic Sobolev inequality, followed by the Herbst argument; see also
+\cite[Sections~5.4 and~5.7]{BakryGentilLedoux2014}.
+The optimal constant on the sphere is due to Mueller and Weissler
+\cite{MuellerWeissler1982}; see also \cite[p.~200]{BakryEmery1985}. The
+curvature constant used below suffices for our purposes.
+
+\begin{lemma}[Concentration on the sphere]\label{lem:ent-lsi}
+Let $m\ge2$, let $\sigma_m$ be the normalized surface measure on the unit
+sphere $S^m\subset\R^{m+1}$, and let $g:S^m\to\R$ be $L$-Lipschitz for the
+geodesic distance. Then
+\begin{equation}\label{eq:ent-subgaussian}
+ \int e^{t(g-\int g\dd\sigma_m)}\dd\sigma_m
+ \le\exp\Bigl(\frac{L^2t^2}{2(m-1)}\Bigr),\qquad t\in\R .
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For a function $q>0$, let $\operatorname{Ent}(q)=\int q\log q\dd\sigma_m
+-\int q\dd\sigma_m\log\int q\dd\sigma_m$ and
+$\mathcal I(q)=\int|\nabla q|^2/q\dd\sigma_m$. We first show that
+\begin{equation}\label{eq:ent-lsi}
+ \operatorname{Ent}(q)\le\frac{\mathcal I(q)}{2(m-1)}
+\end{equation}
+for smooth $q>0$. Let $q_t=e^{t\Delta}q$ be the heat flow on $S^m$, which
+stays smooth and positive. By integration by parts,
+we have $\frac{\dd}{\dd t}\operatorname{Ent}(q_t)=-\mathcal I(q_t)$. Writing
+$v=\log q_t$, we have $\partial_tv=\Delta v+|\nabla v|^2$ and
+$\mathcal I(q_t)=\int q_t|\nabla v|^2$. Differentiating, we find
+\[
+ \frac{\dd}{\dd t}\mathcal I(q_t)
+ =\int q_t\Delta|\nabla v|^2+2\int q_t\nabla v\cdot\nabla\Delta v
+  +2\int q_t\nabla v\cdot\nabla|\nabla v|^2 ,
+\]
+where we moved the Laplacian in the first term. The divergence theorem for
+$q_t\nabla|\nabla v|^2$, with $\nabla q_t=q_t\nabla v$, shows that the third
+term equals $-2\int q_t\Delta|\nabla v|^2$. By the Bochner identity
+$\frac12\Delta|\nabla v|^2=\nabla v\cdot\nabla\Delta v+|\nabla^2v|^2
++\operatorname{Ric}(\nabla v,\nabla v)$ and $\operatorname{Ric}=(m-1)g_{S^m}$,
+we conclude that
+\[
+ \frac{\dd}{\dd t}\mathcal I(q_t)
+ =-2\int q_t\bigl(|\nabla^2v|^2+(m-1)|\nabla v|^2\bigr)
+ \le-2(m-1)\mathcal I(q_t).
+\]
+Hence $\mathcal I(q_t)\le e^{-2(m-1)t}\mathcal I(q)$. By the spherical harmonic
+expansion, $q_t$ converges uniformly to $\int q\dd\sigma_m$, and
+$\operatorname{Ent}(q_t)\to0$. Integrating in $t$ gives
+\eqref{eq:ent-lsi}.
+
+Now let $g$ be smooth with $|\nabla g|\le L$, and let
+$\psi(t)=\log\int e^{tg}\dd\sigma_m$. Applying \eqref{eq:ent-lsi} to
+$q=e^{tg}$, for which $\mathcal I(q)\le L^2t^2\int e^{tg}$, we find
+$t\psi'(t)-\psi(t)\le L^2t^2/(2(m-1))$. The derivative of $\psi(t)/t$ is
+at most $L^2/(2(m-1))$, and $\psi(t)/t\to\int g\dd\sigma_m$ as
+$t\downarrow0$. Integrating, we obtain \eqref{eq:ent-subgaussian} for $t>0$;
+the case $t<0$ follows by applying this to $-g$. A Lipschitz function is a uniform
+limit of smooth functions with the same Lipschitz constant, and dominated
+convergence completes the proof.
+\end{proof}
+
+We now fix $x\in S_N$ and let $u$ be uniform on $S_N$. Then $r=R(x,u)$ has
+density
+\begin{equation}\label{eq:ent-axis-density}
+ p_N(r)=c_N(1-r^2)^{(N-3)/2},\quad -1<r<1,\qquad
+ c_N=\frac{\Gamma(N/2)}{\sqrt\pi\,\Gamma((N-1)/2)}\le\sqrt N,
+\end{equation}
+by spherical coordinates and the beta integral; the bound on $c_N$ follows
+from $\Gamma(z+\frac12)\le\sqrt z\,\Gamma(z)$. Conditionally on $r$, we can
+write $u=rx+\sqrt{1-r^2}\,y$, where $y$ is uniform on the latitude sphere
+$S_N\cap x^\perp$, which has dimension $N-2$ and radius $\sqrt N$. We write
+$\E_{\rm lat}$ for the expectation over $y$ at fixed $r$, and define
+\begin{equation}\label{eq:ent-V}
+ V_x(u)=N^{-1/2}\,G_u\cdot x=N^{-1/2}\,\nabla H_Q(u)\cdot x .
+\end{equation}
+
+\begin{lemma}[The tangent gradient on a latitude]\label{lem:ent-latitude}
+Let $N\ge6$, let the field lie in $\Omega_N$, and fix $x\in S_N$. For
+$-1<r<1$, let $m_x(r)=\E_{\rm lat}V_x(u)$ and $Z=V_x(u)-m_x(r)$. Then
+\begin{equation}\label{eq:ent-latitude}
+ |m_x(r)|\le C\bigl(\sqrt N|r|^{d-1}+1\bigr),\qquad
+ \E_{\rm lat}e^{tZ}\le e^{Ct^2},\quad t\in\R .
+\end{equation}
+\end{lemma}
+
+The point $x$ in this lemma may be any function of the field: the lemma
+fixes the field and $x$ before averaging over the axis.
+
+\begin{proof}
+We first prove the concentration. Along a unit-speed curve in $S_N$, the
+derivative of $\Pi_u\nabla_EH_Q(u)$ has norm at most $2|\nabla_EH_Q(u)|/\sqrt N+\norm{\nabla^2_EH_Q(u)}_{\rm op}
+\le3C_0$ by \eqref{eq:ent-regularity}. Because $|x|=\sqrt N$, the function
+$V_x$ is $3C_0$-Lipschitz on $S_N$. The map $y\mapsto rx+\sqrt{1-r^2}\,y$ is
+$1$-Lipschitz. After rescaling the latitude sphere to the unit sphere
+$S^{N-2}$, the function $y\mapsto V_x(u)$ is $3C_0\sqrt
+N$-Lipschitz. Then \cref{lem:ent-lsi} with $m=N-2$ implies that
+$\E_{\rm lat}e^{tZ}\le\exp(9C_0^2Nt^2/(2(N-3)))\le e^{Ct^2}$.
+
+We next compute the mean, keeping all harmonic components. Let $Y$ be a
+spherical harmonic of degree $\ell$ on $S_N$. Its average over the rotations
+fixing $x$ is a spherical harmonic of degree $\ell$ invariant under these
+rotations, with the value $Y(x)$ at $x$. By the uniqueness of zonal
+harmonics recalled in the proof of \cref{lem:ent-harmonic}, it equals
+$Y(x)\mathsf Z_{\ell,N}(R(x,\cdot))$. Evaluated on the latitude of overlap
+$r$, this gives $\E_{\rm lat}Y(u)=\mathsf Z_{\ell,N}(r)\,Y(x)$, the
+latitude-averaging form of the Funk--Hecke identity. For the uniqueness of
+zonal harmonics used in this argument, see also
+\cite[Theorem~2.8, pp.~19--20]{AtkinsonHan2012}.
+Using \eqref{eq:ent-center} and \cref{lem:ent-harmonic}(4), we obtain
+\begin{equation}\label{eq:ent-funk-hecke}
+ \E_{\rm lat}H_Q(u)=\sum_{p\in\cP}Q^{p/2}\sum_{j=0}^{\lfloor p/2\rfloor}
+ \mathsf Z_{p-2j,N}(r)\,H_{p,p-2j}(x).
+\end{equation}
+For fixed $y$, we have $\partial_ru=x-ry/\sqrt{1-r^2}=(x-ru)/(1-r^2)$, and
+$(x-ru)\cdot u=0$. Since $G_u$ is tangent at $u$, we have
+\[
+ \frac{\dd}{\dd r}H_Q(u)=\nabla_EH_Q(u)\cdot\frac{x-ru}{1-r^2}
+ =\frac{G_u\cdot x}{1-r^2}=\frac{\sqrt N\,V_x(u)}{1-r^2}.
+\]
+Since the law of $y$ does not depend on $r$, we may differentiate
+\eqref{eq:ent-funk-hecke} under the expectation. We find
+\begin{equation}\label{eq:ent-latitude-mean}
+ m_x(r)=\frac{1-r^2}{\sqrt N}\sum_{p\in\cP}Q^{p/2}
+ \sum_{j=0}^{\lfloor p/2\rfloor}\mathsf Z'_{p-2j,N}(r)\,H_{p,p-2j}(x).
+\end{equation}
+For $j=0$, \cref{lem:ent-regularity}(2) and \eqref{eq:ent-zonal-derivative}
+bound the term by $C\sqrt N|r|^{p-1}+CN^{-1/2}$. For $j\ge1$, the component
+satisfies $|H_{p,p-2j}(x)|\le C_0\sqrt N$, and $|\mathsf Z'_{p-2j,N}|\le C$ on
+$[-1,1]$ by \cref{lem:ent-harmonic}(3), and the term is bounded. There are
+finitely many terms, and $|r|^{p-1}\le|r|^{d-1}$ since $p\ge d$. This proves
+the bound on $m_x(r)$.
+\end{proof}
+
+We now define the truncation. We fix once and for all an even
+$C^\infty$ function $\chi:\R\to[0,1]$ with $\chi=1$ on $[-1,1]$ and $\chi=0$
+outside $[-2,2]$. For a cutoff scale $\alpha>0$, $u,x\in S_N$, and an
+admissible pair $(h,k)$, we set
+\begin{equation}\label{eq:ent-cutoff}
+ \begin{gathered}
+ r=R(x,u),\qquad s=\frac{G_u\cdot x}{N},\\
+ \delta_\alpha(u,x)=\chi(r/\alpha)\chi(s/\alpha)\,\delta_{h,k,u}(x),\qquad
+ w(u,x)=\beta\delta_\alpha(u,x).
+ \end{gathered}
+\end{equation}
+The function $\delta_\alpha(u,\cdot)$ is smooth on $\R^N$, and it depends on
+the field through $H_Q(u)$, $K_Q(u)$, and $G_u$.
+
+\begin{proposition}[Axis-averaged moments of the density ratio]\label{prop:ent-multipliers}
+There exist $\alpha_0\in(0,1/8]$, $C_1$, and $N_0$ such that, for every
+$\alpha\in(0,\alpha_0]$, every $N\ge N_0$, every field in $\Omega_N$, every
+admissible $(h,k)$, and every $x\in S_N$, with $u$ uniform on $S_N$,
+\begin{align}
+ \E_u\bigl|e^{w(u,x)}-1\bigr|&\le C_1N^{1-d/2},
+ \label{eq:ent-eta}\\
+ \E_u\bigl[e^{w(u,x)}\bigl(1-e^{-w(u,x)}\bigr)^2\bigr]&\le C_1N^{2-d}.
+ \label{eq:ent-epsilon}
+\end{align}
+Moreover, for all $u\in S_N$,
+\begin{equation}\label{eq:ent-cutoff-sup}
+ \sup_{x\in S_N}|\delta_\alpha(u,x)|\le C_1N\alpha^d,
+ \qquad
+ \norm{\nabla\delta_\alpha(u,\cdot)}_\infty\le C_1\sqrt N\alpha^{d-1}.
+\end{equation}
+The constants $\alpha_0,C_1,N_0$ do not depend on $\alpha$.
+\end{proposition}
+
+\begin{proof}
+The proof has three steps. We first bound exponential moments on each
+latitude, then integrate over the overlap $r$, and finally verify the
+deterministic bounds.
+
+\paragraph{Moments on a latitude.}
+Fix $\zeta\ge0$; we will take $\zeta=2\beta$. Recall that $|G_u\cdot x|=\sqrt N|V_x(u)|$.
+Using \eqref{eq:ent-delta-bounds}, we find
+\begin{equation}\label{eq:ent-delta-V}
+ |\delta_{h,k,u}(x)|\le C_2N|r|^d+C_2\sqrt N|r|^{d-1}|V_x(u)|.
+\end{equation}
+Here $V_x$ is the gradient of the sampled field itself. A centered variable
+with the bound \eqref{eq:ent-latitude} satisfies
+$\Pp(|Z|>v)\le2e^{-v^2/(4C)}$ by Chernoff's inequality. It follows that
+$\E_{\rm lat}Z^4\le C$ and
+$\E_{\rm lat}e^{t|Z|}\le2e^{Ct^2}$ for $t\ge0$. The Cauchy--Schwarz
+inequality then gives $\E_{\rm lat}[Z^2e^{t|Z|}]\le Ce^{2Ct^2}$. We write
+$V_x=m_x+Z$, insert the bound on $m_x$ from \eqref{eq:ent-latitude} into
+\eqref{eq:ent-delta-V}, and apply these estimates with
+$t=\zeta C_2\sqrt N|r|^{d-1}$. We obtain
+\begin{equation}\label{eq:ent-lat-moments}
+ \E_{\rm lat}e^{\zeta|\delta|}\le C_\zeta e^{\Psi_\zeta(r)},\qquad
+ \E_{\rm lat}\bigl[V_x^2e^{\zeta|\delta|}\bigr]
+ \le C_\zeta\bigl(1+N|r|^{2d-2}\bigr)e^{\Psi_\zeta(r)},
+\end{equation}
+where $\delta=\delta_{h,k,u}(x)$ and
+\[
+ \Psi_\zeta(r)=C_\zeta\bigl(N|r|^d+N|r|^{2d-2}+\sqrt N|r|^{d-1}\bigr).
+\]
+In $\Psi_\zeta$, the first term comes from the value correction, the second
+from the square of the random coefficient $t$ and from the mean $m_x$, and
+the third from the bounded part of $m_x$.
+
+\paragraph{Integration over the overlap.}
+For $N\ge6$, the density \eqref{eq:ent-axis-density} satisfies
+$p_N(r)\le\sqrt Ne^{-Nr^2/4}$. We choose $\alpha_0\le1/8$ so small that
+$C_\zeta\bigl((2\alpha_0)^{d-2}+(2\alpha_0)^{2d-4}+(2\alpha_0)^{d-3}\bigr)
+\le1/8$. Since $\sqrt N\le N$ and $d\ge4$, we then have
+$\Psi_\zeta(r)\le Nr^2/8$ for $|r|\le2\alpha_0$. For every fixed $j\ge0$ and
+$\alpha\le\alpha_0$, it follows that
+\begin{equation}\label{eq:ent-overlap-moments}
+ \int_{|r|\le2\alpha}p_N(r)|r|^je^{\Psi_\zeta(r)}\dd r
+ \le\sqrt N\int_\R|r|^je^{-Nr^2/8}\dd r\le C_jN^{-j/2}.
+\end{equation}
+Note that $\delta_\alpha^2e^{\zeta|\delta_\alpha|}\le
+\ind_{\{|r|\le2\alpha\}}\delta^2e^{\zeta|\delta|}$, since the cutoffs take
+values in $[0,1]$ and vanish for $|r|>2\alpha$. Squaring \eqref{eq:ent-delta-V}, taking the latitude average
+with \eqref{eq:ent-lat-moments}, and integrating with
+\eqref{eq:ent-overlap-moments}, we find
+\begin{equation}\label{eq:ent-weighted-second}
+ \E_u\bigl[\delta_\alpha^2e^{\zeta|\delta_\alpha|}\bigr]
+ \le C\bigl(N^2N^{-d}+N\,N^{-(d-1)}+N^2N^{-(2d-2)}\bigr)\le CN^{2-d}.
+\end{equation}
+The three terms come from $N^2r^{2d}$, from $Nr^{2d-2}$ times the bounded
+part of the second moment of $V_x$, and from $Nr^{2d-2}$ times
+$Nr^{2d-2}$.
+
+We now take $\zeta=2\beta$. The inequalities $|e^t-1|\le|t|e^{|t|}$ and
+$e^t(1-e^{-t})^2=e^t+e^{-t}-2\le t^2e^{|t|}$, together with the
+Cauchy--Schwarz inequality, give
+\[
+ \E_u|e^w-1|\le\beta\bigl(\E_u[\delta_\alpha^2e^{2\beta|\delta_\alpha|}]
+ \bigr)^{1/2},\qquad
+ \E_u[e^w(1-e^{-w})^2]\le\beta^2\E_u[\delta_\alpha^2e^{2\beta|\delta_\alpha|}].
+\]
+Together with \eqref{eq:ent-weighted-second}, this proves \eqref{eq:ent-eta} and
+\eqref{eq:ent-epsilon}.
+
+\paragraph{Deterministic bounds.}
+Wherever the cutoff product or one of its derivatives is nonzero, we have
+$|r|\le2\alpha$ and $|s|\le2\alpha$. Since $G_u\cdot x=Ns$,
+\eqref{eq:ent-theta-orders} and the bounds on $\Omega_N$ imply that
+$|\delta_{h,k,u}|\le CN\alpha^d$ there. In
+\eqref{eq:ent-correction-gradient}, the terms with $\theta_1',\theta_2'$
+cost $C\sqrt N\alpha^{d-1}$, the term with $\theta_3'$ costs
+$C\alpha^{d-2}N|s|N^{-1/2}\le C\sqrt N\alpha^{d-1}$, and the last term costs
+$C\sqrt N\alpha^{d-1}$. Further, $|\nabla r|\le N^{-1/2}$ and
+$|\nabla s|=|\Pi_xG_u|/N\le C_0N^{-1/2}$, and each differentiated cutoff
+contributes at most $C\alpha^{-1}N^{-1/2}\cdot N\alpha^d$. These estimates
+prove \eqref{eq:ent-cutoff-sup}.
+\end{proof}
+
+\section{An entropy--resolvent comparison}\label{sec:ent-resolvent}
+
+The next lemma does not involve the Gaussian model. It compares the killing
+time of a perturbed reversible diffusion, killed at a rate $\kappa$, with the
+integrated killing rate against a resolvent of the unperturbed diffusion. The perturbation is
+averaged over a frozen label, and only the two averaged moments of
+\eqref{eq:ent-eta} and \eqref{eq:ent-epsilon} enter. We state the lemma for
+diffusion Dirichlet forms, so that integration by parts with frozen
+variables and bounded measurable perturbations has a precise meaning. Its
+ingredients are standard Dirichlet form calculus \cite{FukushimaOshimaTakeda2011}; the quantitative comparison below is proved here.
+
+\paragraph{Setting.}
+Let $(\mathcal U,\vartheta)$ and $(E,\mu)$ be probability spaces and
+$\bar\mu=\vartheta\otimes\mu$. We think of $u\in\mathcal U$ as a frozen
+label, that is, a parameter that does not move under the dynamics. Let $\cE_0$ be a symmetric Dirichlet form on $L^2(\bar\mu)$ with domain
+$\mathcal V$, and let $A_0\ge0$ be the associated self-adjoint operator, so
+that $\cE_0(g,v)=\ip{A_0g}{v}_{\bar\mu}$ for $g\in\operatorname{Dom}(A_0)$
+and $v\in\mathcal V$. We assume the following.
+\begin{enumerate}
+\item[(D1)] (Conservativeness.) $1\in\mathcal V$ and $\cE_0(1,1)=0$.
+\item[(D2)] (Carr\'e du champ.) There exists a symmetric bilinear map
+$(g,v)\mapsto Dg\cdot Dv$ from $\mathcal V\times\mathcal V$ to
+$L^1(\bar\mu)$, with $Dg\cdot Dg\ge0$, such that
+$\cE_0(g,v)=\int Dg\cdot Dv\dd\bar\mu$.
+\item[(D3)] (Diffusion property.) If $g,v\in\mathcal V\cap L^\infty$, then
+$gv\in\mathcal V$ and $D(gv)\cdot D\psi=g\,Dv\cdot D\psi+v\,Dg\cdot D\psi$
+for $\psi\in\mathcal V$. If $g\in\mathcal V\cap L^\infty$ and
+$\varphi\in C^1(\R)$, then $\varphi(g)\in\mathcal V$ and
+$D\varphi(g)\cdot D\psi=\varphi'(g)\,Dg\cdot D\psi$.
+\item[(D4)] (Frozen label.) The resolvents $(\lambda+A_0)^{-1}$,
+$\lambda>0$, and the map $(g,v)\mapsto Dg\cdot Dv$ send functions that do
+not depend on $u$ to functions that do not depend on $u$.
+\end{enumerate}
+By (D2), $|Dg\cdot Dv|\le(Dg\cdot Dg)^{1/2}(Dv\cdot Dv)^{1/2}$ pointwise. We
+write $|Dg|^2=Dg\cdot Dg$, and identify a function on $E$ with a function on
+$\mathcal U\times E$ that does not depend on $u$. In our application, $E$ is
+a product of a parameter space and $S_N$, the label is the axis, and $Dg\cdot
+Dv=\nabla g\cdot\nabla v$ with the gradient acting in the variable of $S_N$
+only.
+
+Let $w$ be a bounded measurable function on $\mathcal U\times E$. We define
+\[
+ M=\int e^w\dd\bar\mu,\qquad \mu_w=M^{-1}e^w\bar\mu,\qquad
+ \cE_w(g,v)=\int Dg\cdot Dv\dd\mu_w,\quad g,v\in\mathcal V .
+\]
+Since $w$ is bounded, the norms of $L^2(\mu_w)$ and $L^2(\bar\mu)$ are
+equivalent, and $\cE_w$ is a closed form on $L^2(\mu_w)$ with domain
+$\mathcal V$; let $A_w\ge0$ be its operator. For a smooth $w$ on a manifold,
+$-A_w=-A_0+Dw\cdot D$. We assume that there exists a Markov process
+$(u,X_t)_{t\ge0}$ on $\mathcal U\times E$, whose label coordinate $u$ does not
+move, and whose transition semigroup acts on bounded measurable functions by
+$e^{-tA_w}$, $\mu_w$-almost everywhere.
+
+\begin{lemma}[Entropy--resolvent comparison]\label{lem:ent-resolvent}
+In the setting above, suppose that for $\mu$-almost every $x\in E$,
+\begin{equation}\label{eq:ent-abstract-moments}
+ \int\bigl|e^{w(u,x)}-1\bigr|\dd\vartheta(u)\le\eta\le\frac12,
+ \qquad
+ \int e^{w(u,x)}\bigl(1-e^{-w(u,x)}\bigr)^2\dd\vartheta(u)\le\epsilon .
+\end{equation}
+Let $f_0\ge0$ be a function on $E$ with $\int f_0\dd\mu=1$ and
+$\mathcal H_0=\int(1+f_0)\log(1+f_0)\dd\mu<\infty$. Let $\kappa\ge0$ be a
+bounded measurable function on $\mathcal U\times E$. Start the process
+from the law $\vartheta\otimes(f_0\mu)$, let $\mathbf e$ be a unit
+exponential variable independent of it, and let
+$\tau_\kappa=\inf\{t\ge0:\int_0^t\kappa(u,X_v)\dd v\ge\mathbf e\}$, with
+$\inf\emptyset=\infty$, be the killing time at rate $\kappa$. For $\lambda>0$ define
+\begin{equation}\label{eq:ent-resolvents}
+ f=\lambda(\lambda+A_0)^{-1}f_0,\qquad F=1+f,\qquad
+ \mathcal R_\lambda=\lambda^{-1}\int\kappa F\dd\mu_w .
+\end{equation}
+Then
+\begin{equation}\label{eq:ent-resolvent-bound}
+ \E e^{-\lambda\tau_\kappa}\le4\eta+5\sqrt\epsilon+\mathcal R_\lambda
+ +2\sqrt{\epsilon\mathcal H_0\bigl[\mathcal R_\lambda
+   +\epsilon(1+\mathcal H_0)\bigr]},
+\end{equation}
+with $e^{-\lambda\cdot\infty}=0$. In particular, for every $T>0$,
+\begin{equation}\label{eq:ent-resolvent-horizon}
+ \Pp(\tau_\kappa\le T)\le14\bigl(\eta+\sqrt\epsilon
+ +\epsilon(1+\mathcal H_0)+\mathcal R_{1/T}\bigr).
+\end{equation}
+\end{lemma}
+
+The first resolvent in \eqref{eq:ent-resolvents} acts on the unperturbed
+form; for unbounded $f_0$ it is extended to $L^1(\mu)$, where it is a
+contraction. No constant in \eqref{eq:ent-resolvent-bound} depends on
+$\norm{w}_\infty$, on $\lambda$, or on a spectral gap, and the form need not
+be irreducible. The boundedness of $w$ is used only to define $\cE_w$ and
+$A_w$.
+
+\begin{proof}
+We first treat bounded $f_0$. An approximation removes this restriction at
+the end. The proof has four steps: an entropy bound for the resolvent of the
+unperturbed generator, the probabilistic meaning of the resolvent of the
+killed diffusion, a weighted energy
+estimate, and a comparison of initial laws.
+
+\paragraph{Two consequences of the moment bounds.}
+By the first bound in \eqref{eq:ent-abstract-moments}, we have
+$1-\eta\le M\le1+\eta$. Let $k=1-e^{-w}$. For every nonnegative measurable
+$\Gamma$ on $E$, Tonelli's theorem and \eqref{eq:ent-abstract-moments} give
+\begin{equation}\label{eq:ent-k-square}
+ \int k^2\Gamma\dd\mu_w\le2\epsilon\int\Gamma\dd\mu,\qquad
+ \int\Gamma\dd\mu_w\le3\int\Gamma\dd\mu .
+\end{equation}
+Indeed, $e^wk^2=e^w(1-e^{-w})^2$, $M\ge1/2$, and $(1+\eta)/(1-\eta)\le3$.
+All the small constants below come from \eqref{eq:ent-k-square}, not from a
+pointwise bound on $e^w$.
+
+\paragraph{The resolvent of the unperturbed generator.}
+For bounded $f_0$, the representation
+$f=\lambda\int_0^\infty e^{-\lambda t}e^{-tA_0}f_0\dd t$ and (D1) show that
+$f\ge0$, $\int f\dd\mu=1$, and $f\in\operatorname{Dom}(A_0)\cap L^\infty$.
+By (D4), $f$ does not depend on $u$. With $F_0=1+f_0$, we have
+$A_0F=A_0f=\lambda(F_0-F)$. The function $F\ge1$ is bounded, and (D3) shows that
+$\log F\in\mathcal V$ with $D\log F\cdot D\psi=F^{-1}DF\cdot D\psi$. Let
+$\mathcal J=\int|DF|^2F^{-1}\dd\mu$. Testing with $\log F$, we find
+\begin{equation}\label{eq:ent-fisher}
+ \begin{split}
+ \mathcal J&=\ip{A_0F}{\log F}_\mu=\lambda\ip{F_0-F}{\log F}_\mu\\
+ &\le\lambda\Bigl[\int F_0\log F_0\dd\mu-\int F\log F\dd\mu\Bigr]
+ \le\lambda\mathcal H_0 .
+ \end{split}
+\end{equation}
+In the first inequality, we used the tangent line inequality
+$(a-b)\log b\le a\log a-b\log b-(a-b)$ for $a,b>0$, and that $F_0$ and $F$
+both have integral two. In the second, we used $F\log F\ge0$.
+
+\paragraph{The resolvent of the killed diffusion.}
+The form $\cE_w(g,v)+\int\kappa gv\dd\mu_w$ is closed on $\mathcal V$; let
+\[
+ h=(\lambda+A_w+\kappa)^{-1}\kappa\in\operatorname{Dom}(A_w)\subset
+ \mathcal V .
+\]
+The Duhamel formula expresses $e^{-t(A_w+\kappa)}$
+as the series
+\[
+ e^{-t(A_w+\kappa)}=\sum_{n\ge0}(-1)^n\int_{0<v_1<\dots<v_n<t}
+ e^{-v_1A_w}\kappa e^{-(v_2-v_1)A_w}\kappa\cdots\kappa
+ e^{-(t-v_n)A_w}\dd v,
+\]
+whose $n$th term has norm at most $\norm{\kappa}_\infty^nt^n/n!$ on bounded
+functions.
+Expanding the exponential in
+$\E_{u,x}\bigl[e^{-\int_0^t\kappa(u,X_v)\dd v}g(X_t)\bigr]$ and using the
+Markov property, we identify the two series term by term. The result is
+the Feynman--Kac formula
+$e^{-t(A_w+\kappa)}g(u,x)=\E_{u,x}\bigl[e^{-\int_0^t\kappa(u,X_v)\dd v}
+g(X_t)\bigr]$ for bounded $g$. Conditionally on the path, $\tau_\kappa$ has
+density $\kappa(u,X_t)e^{-\int_0^t\kappa(u,X_v)\dd v}$ on $[0,\infty)$.
+Integrating the Feynman--Kac formula for $g=\kappa$ against
+$e^{-\lambda t}\dd t$, we obtain
+\begin{equation}\label{eq:ent-hazard-transform}
+ h(u,x)=\E_{u,x}e^{-\lambda\tau_\kappa}.
+\end{equation}
+Note that $0\le h\le1$. This is why the lemma controls the killing
+time itself.
+
+\paragraph{The commutator.}
+Let $g\in\operatorname{Dom}(A_0)$ not depend on $u$, and let $v\in\mathcal
+V$ be bounded. Then
+\begin{equation}\label{eq:ent-commutator}
+ \cE_w(g,v)=\ip{(1-k)A_0g}{v}_{\mu_w}+\int k\,Dg\cdot Dv\dd\mu_w .
+\end{equation}
+Indeed, since $(1-k)e^w=1$, the first term on the right equals
+$M^{-1}\int A_0g\,v\dd\bar\mu=M^{-1}\int Dg\cdot Dv\dd\bar\mu$, and adding the
+second term multiplies the integrand by $1+(e^w-1)=e^w$. The identity
+\eqref{eq:ent-commutator} is a weak form of $A_wg=(1-k)A_0g+D^*_w(kDg)$,
+where $D^*_w$ is the adjoint in $L^2(\mu_w)$; no derivative of $w$ or $k$
+appears in it.
+
+\paragraph{The weighted energy.}
+Let $B_h=\int F|Dh|^2\dd\mu_w$ and $A_h=\int Fh^2\dd\mu_w$, which are finite.
+By (D3), $Fh\in\mathcal V$ and $D(Fh)\cdot Dh=F|Dh|^2+h\,DF\cdot Dh$.
+Testing the equation $(\lambda+A_w+\kappa)h=\kappa$ against $Fh$, and using
+$h\le1$, we find
+\begin{equation}\label{eq:ent-weighted-energy}
+ B_h+\int h\,DF\cdot Dh\dd\mu_w+\int(\lambda+\kappa)Fh^2\dd\mu_w
+ =\int\kappa Fh\dd\mu_w\le\int\kappa F\dd\mu_w=\lambda\mathcal R_\lambda .
+\end{equation}
+The cross term is the delicate one, since $|DF|$ is not small. Using (D3), we write
+$h\,DF\cdot Dh=\frac12DF\cdot D(h^2)$. Applying \eqref{eq:ent-commutator}
+with $g=F$ and $v=h^2$, and using $A_0F=\lambda(f_0-f)$ and
+$(1-k)e^w=1$, we obtain
+\begin{equation}\label{eq:ent-cross}
+ \int h\,DF\cdot Dh\dd\mu_w
+ =\frac{\lambda}{2M}\int f_0h^2\dd\bar\mu
+ -\frac\lambda2\int fh^2\dd\mu_w+\frac\lambda2\int kfh^2\dd\mu_w
+ +\int kh\,DF\cdot Dh\dd\mu_w .
+\end{equation}
+The first term on the right is nonnegative. Since $F-f/2\ge F/2$, the second
+term combined with $\lambda A_h$ in \eqref{eq:ent-weighted-energy} leaves at
+least $\lambda A_h/2$. We apply \eqref{eq:ent-k-square} to the third and fourth
+terms, with $\Gamma=f$ and $\Gamma=|DF|^2/F$, which do not depend on $u$ by
+(D4). Using also $h\le1$, $\int f\dd\mu=1$, and the Cauchy--Schwarz
+inequality, we obtain
+\begin{equation}\label{eq:ent-energy-errors}
+ \Bigl|\int kfh^2\dd\mu_w\Bigr|\le\sqrt{2\epsilon A_h},\qquad
+ \Bigl|\int kh\,DF\cdot Dh\dd\mu_w\Bigr|\le\sqrt{2\epsilon\mathcal JB_h}.
+\end{equation}
+For the first bound, we used $\int fh^4\dd\mu_w\le A_h$. Inserting
+\eqref{eq:ent-cross} and \eqref{eq:ent-energy-errors} into
+\eqref{eq:ent-weighted-energy}, we have
+\[
+ B_h+\frac\lambda2A_h\le\lambda\mathcal R_\lambda
+ +\frac\lambda2\sqrt{2\epsilon A_h}+\sqrt{2\epsilon\mathcal JB_h}.
+\]
+Using Young's inequality in the forms $\frac\lambda2\sqrt{2\epsilon A_h}
+\le\frac\lambda4A_h+\frac\lambda2\epsilon$ and
+$\sqrt{2\epsilon\mathcal JB_h}\le\frac12B_h+\epsilon\mathcal J$, and then
+\eqref{eq:ent-fisher}, we find
+\begin{equation}\label{eq:ent-energy}
+ \frac{B_h}{\lambda}\le2\mathcal R_\lambda+\epsilon+2\epsilon\mathcal H_0 .
+\end{equation}
+The term $\lambda A_h$ must be kept here, since it absorbs the negative
+second term of \eqref{eq:ent-cross}. Without it, $B_h/\lambda$ would only be
+bounded by a constant, and the last term of \eqref{eq:ent-resolvent-bound}
+below would be of order $\sqrt{\epsilon\mathcal H_0}$, which is
+$N^{(3-d)/2}$ in our application.
+
+\paragraph{Comparison of initial laws.}
+The actual initial law $\vartheta\otimes(f_0\mu)$ has density
+$q_0=Me^{-w}f_0$ with respect to $\mu_w$. Because the first moment bound in
+\eqref{eq:ent-abstract-moments} holds for each $x$, we have
+\begin{equation}\label{eq:ent-initial}
+ \norm{q_0-f_0}_{L^1(\mu_w)}=M^{-1}\int f_0|M-e^w|\dd\bar\mu
+ \le2\int f_0\Bigl(|M-1|+\int|1-e^w|\dd\vartheta\Bigr)\dd\mu\le4\eta .
+\end{equation}
+By \eqref{eq:ent-hazard-transform}, $\E e^{-\lambda\tau_\kappa}
+=\ip{q_0}{h}_{\mu_w}\le\ip{f_0}{h}_{\mu_w}+4\eta$. To bound the last pairing,
+we test the equation for $h$ against $f$. Using \eqref{eq:ent-commutator} with $g=f$ and $v=h$, we have $\cE_w(f,h)=\lambda\ip{f_0-f}{h}_{\mu_w}
+-\ip{kA_0f}{h}_{\mu_w}+\int k\,Df\cdot Dh\dd\mu_w$. Inserting this
+into the equation
+$\lambda\ip{h}{f}_{\mu_w}+\cE_w(h,f)+\ip{\kappa h}{f}_{\mu_w}
+=\ip{\kappa}{f}_{\mu_w}$, we obtain
+\begin{equation}\label{eq:ent-source}
+ \ip{f_0}{h}_{\mu_w}=\lambda^{-1}\ip{f}{\kappa(1-h)}_{\mu_w}
+ +\ip{k(f_0-f)}{h}_{\mu_w}-\lambda^{-1}\int k\,Df\cdot Dh\dd\mu_w .
+\end{equation}
+The first term lies in $[0,\mathcal R_\lambda]$. For the second, by
+the Cauchy--Schwarz inequality and \eqref{eq:ent-k-square} with $\Gamma=f_0$
+and $\Gamma=f$, we have
+$\int|k|(f_0+f)\dd\mu_w\le2\sqrt{6\epsilon}\le5\sqrt\epsilon$.
+For the third, note that $Df=DF$. The argument for
+\eqref{eq:ent-energy-errors}, followed by \eqref{eq:ent-fisher} and
+\eqref{eq:ent-energy}, yields
+\[
+ \lambda^{-1}\Bigl|\int k\,Df\cdot Dh\dd\mu_w\Bigr|
+ \le\lambda^{-1}\sqrt{2\epsilon\mathcal JB_h}
+ \le\sqrt{2\epsilon\mathcal H_0\,B_h/\lambda}
+ \le2\sqrt{\epsilon\mathcal H_0\bigl[\mathcal R_\lambda
+   +\epsilon(1+\mathcal H_0)\bigr]}.
+\]
+Combining these bounds proves \eqref{eq:ent-resolvent-bound} for bounded
+$f_0$. All the integrations by parts above are identities between forms, for
+the functions $F$, $h$, $Fh$, $h^2$, and $\log F$, which lie in $\mathcal V$
+by (D3). We use no regularity of these functions or of $w$ beyond
+membership in $\mathcal V$.
+
+\paragraph{Unbounded initial densities.}
+For general $f_0$, let $f_0^{(n)}=(f_0\wedge n)/\int(f_0\wedge n)\dd\mu$.
+Then $f_0^{(n)}\to f_0$ in $L^1(\mu)$. For large $n$, we have
+$f_0^{(n)}\le2f_0$. Since $(1+2a)\log(1+2a)\le2(1+a)\log(1+a)+2a$ for
+$a\ge0$, dominated convergence gives $\mathcal H_0^{(n)}\to\mathcal H_0$. The
+resolvent $\lambda(\lambda+A_0)^{-1}$ is a contraction on $L^1(\mu)$, which implies that $f^{(n)}\to f$
+in $L^1(\mu)$. Since $\kappa$ and $e^w$ are bounded, it follows that
+$\mathcal R_\lambda^{(n)}\to\mathcal R_\lambda$. The function $h$ does not depend on $f_0$ and is bounded,
+so the left side of \eqref{eq:ent-resolvent-bound} converges as well. This
+proves \eqref{eq:ent-resolvent-bound} in general.
+
+\paragraph{The time horizon.}
+Finally, $\ind_{\{\tau_\kappa\le T\}}\le e\cdot e^{-\tau_\kappa/T}$. Using
+\eqref{eq:ent-resolvent-bound} with $\lambda=1/T$, together with
+$2\sqrt{\epsilon\mathcal H_0\mathcal R}\le\mathcal R+\epsilon\mathcal H_0$ and
+$2\epsilon\sqrt{\mathcal H_0(1+\mathcal H_0)}\le2\epsilon(1+\mathcal H_0)$, we
+find that $\Pp(\tau_\kappa\le T)\le e\bigl(4\eta+5\sqrt\epsilon
++2\mathcal R_{1/T}+3\epsilon(1+\mathcal H_0)\bigr)$. This implies
+\eqref{eq:ent-resolvent-horizon}.
+\end{proof}
+
+\section{Killing-time bound for the truncated process}\label{sec:ent-truncated}
+
+We now apply \cref{lem:ent-resolvent} to the diffusion whose Hamiltonian is
+$H_N+\delta_\alpha(u,\cdot)$, with $u$ uniform and independent of the field.
+Recall the constants $\alpha_0$ and $C_1$ of \cref{prop:ent-multipliers}.
+
+For a smooth function $\widetilde H$ on $\R^N$, the diffusion with generator
+$L_{\beta,\widetilde H}$ is the solution of the stochastic differential
+equation
+\begin{equation}\label{eq:ent-sde}
+ \dd X_t=\sqrt2\,\Pi_{X_t}\dd B_t
+ +\Bigl[\beta \Pi_{X_t}\nabla_E\widetilde H(X_t)
+ -\frac{N-1}{N}X_t\Bigr]\dd t
+\end{equation}
+in $\R^N$, where $B$ is a standard Brownian motion in $\R^N$; compare
+\cref{lem:pre-dynamics} and \eqref{eq:red-sde}. The coefficients are smooth and in particular
+locally Lipschitz. Let $\rho_t=|X_t|^2-N$. Note that $x\cdot \Pi_xv=-\rho\,x\cdot v/N$
+and $\operatorname{tr}(\Pi_x\Pi_x)=N-1+\rho^2/N^2$ for $\rho=|x|^2-N$.
+Then It\^o's formula gives $\dd\rho_t=\rho_t\,(a_t\dd t+b_t\cdot\dd B_t)$
+with locally bounded processes $a_t$ and $b_t$. This implies that $\rho_t=0$
+for all $t$ when $\rho_0=0$, so that the solution started on $S_N$ is
+global and pathwise unique. When the coefficients of
+$\widetilde H$ range over a finite-dimensional parameter space, localization
+on bounded sets of parameters and successive approximations construct the
+solution as a jointly measurable function of the parameters, the initial
+point, and the path of $B$.
+
+\begin{proposition}[The truncated process avoids the caps]
+\label{prop:ent-truncated}
+There exists $\alpha_1\in(0,\alpha_0]$ such that, for every
+$\alpha\in(0,\alpha_1]$, there exist $\gamma_0,c,C>0$ and $N_0$ with the
+following property. Let $\mathsf Q_\alpha$ be the joint law of: the
+coefficient vector $J$ of $H_N$, conditioned on $\Omega_N$; an independent
+uniform axis $u\in S_N$; an independent initial point $X_0$ with law
+$\nu_N$; and the solution $X$ of \eqref{eq:ent-sde} with
+$\widetilde H=H_J+\delta_\alpha(u,\cdot)$, driven by an independent Brownian
+motion. Then, for every $N\ge N_0$ and every admissible $(h,k)$,
+\begin{equation}\label{eq:ent-truncated}
+ \mathsf Q_\alpha\Bigl(\sup_{0\le t\le e^{\gamma_0N}}|R(X_t,u)|
+ \ge\frac\alpha2\Bigr)\le C\bigl(N^{1-d/2}+N^{3-d}\bigr)+e^{-cN}.
+\end{equation}
+The same bound holds with $\gamma_0$ replaced by any $\gamma\in(0,\gamma_0]$.
+\end{proposition}
+
+\begin{proof}
+The proof has three steps: we verify the hypotheses of
+\cref{lem:ent-resolvent}, bound the integrated killing rate, and convert the
+killing at a smooth rate into a hit of the cap $C_{\alpha/2}(u)$.
+
+\paragraph{The setting of the comparison lemma.}
+Let $\Theta$ be the space of coefficient vectors, $\Pp_\Omega(\dd J)
+=\Pp(\dd J\mid\Omega_N)$, $E=\Theta\times S_N$, and
+\[
+ \mu(\dd J,\dd x)=\Pp_\Omega(\dd J)\,\pi^{H_J}(\dd x),\qquad
+ f_0(J,x)=Z_{H_J}e^{-\beta H_J(x)},
+\]
+where $Z_{H_J}=\int e^{\beta H_J}\dd\nu_N$. The label space is
+$(\mathcal U,\vartheta)=(S_N,\nu_N)$, the space of axes. Then $f_0\mu$ is
+exactly $\Pp_\Omega\otimes\nu_N$, the law of the field and the initial
+point. On $\Omega_N$, we have $|H_J|\le C_0N$, which implies
+$f_0\le e^{2\beta C_0N}$ and
+\begin{equation}\label{eq:ent-start-entropy}
+ \mathcal H_0\le\log\bigl(1+e^{2\beta C_0N}\bigr)\int(1+f_0)\dd\mu
+ \le C(1+N).
+\end{equation}
+The base form is $\cE_0(g,v)=\int\nabla_xg\cdot\nabla_xv\dd\bar\mu$, where
+$\bar\mu=\nu_N\otimes\mu$ and $\nabla_x$ is the gradient in the variable
+of $S_N$, with domain
+$\mathcal V=L^2\bigl(\nu_N\otimes\Pp_\Omega;H^1(S_N,\nu_N)\bigr)$. Since
+$e^{-2\beta C_0N}\le\dd\mu/\dd(\Pp_\Omega\otimes\nu_N)\le e^{2\beta C_0N}$,
+the form norm $\bigl(\norm{g}_{L^2(\bar\mu)}^2+\cE_0(g,g)\bigr)^{1/2}$ on
+$\mathcal V$ is equivalent to the norm of this Hilbert space. Then $\cE_0$ is closed. Constants lie in $\mathcal V$ with zero
+energy, the product and chain rules hold fiberwise, and the operations in
+(D4) act fiberwise in $(u,J)$. The equivalence constants grow with $N$, but
+they are never used as small constants. For fixed $(u,J)$, the operator
+$A_0$ acts as $-L_{\beta,H_J}$, which is symmetric for $\pi^{H_J}$.
+
+We take $w=\beta\delta_\alpha(u,x)$, a bounded function of $(u,J,x)$, smooth
+in $x$. The conditional law of $\mu_w$ given $(u,J)$ is the Gibbs measure
+of $H_J+\delta_\alpha(u,\cdot)$. For fixed $(u,J)$, the form $\cE_w$ is
+therefore the Dirichlet form of $L_{\beta,H_J+\delta_\alpha(u,\cdot)}$, and $A_w$ acts as
+$-L_{\beta,H_J+\delta_\alpha(u,\cdot)}$. The solutions of \eqref{eq:ent-sde},
+constructed for each fixed $(u,J)$ and measurable in these parameters,
+provide the Markov process required by the lemma, with frozen label $u$ and
+frozen parameter $J$. Its initial law $\vartheta\otimes(f_0\mu)$ is the
+initial law of $\mathsf Q_\alpha$. No differentiation in $J$ is needed,
+since the gradient acts only in $x$.
+
+For $\alpha\le\alpha_0$, \cref{prop:ent-multipliers} verifies
+\eqref{eq:ent-abstract-moments} for every $(J,x)$ with $J\in\Omega_N$, with
+\begin{equation}\label{eq:ent-applied-moments}
+ \eta=C_1N^{1-d/2},\qquad\epsilon=C_1N^{2-d},
+\end{equation}
+and $\eta\le1/2$ for large $N$.
+
+\paragraph{The integrated killing rate.}
+Let $\varphi:\R\to[0,1]$ be smooth and even, with $\varphi(r)=0$ for
+$|r|\le\alpha/4$ and $\varphi(r)=1$ for $|r|\ge\alpha/3$, and let
+$\kappa(u,J,x)=\varphi(R(x,u))$. Since $f$ does not depend on $u$ and
+$\int F\dd\mu=2$, we integrate over the label first, bound $e^w$ by
+\eqref{eq:ent-cutoff-sup}, and use $M\ge1/2$. For fixed $x$, the set of
+axes $u$ with $\kappa(u,J,x)\neq0$ is contained in $C_{\alpha/4}(x)$. By
+symmetry, $\nu_N(C_b(x))$ does not depend on $x\in S_N$; we denote this
+common value by $\nu_N(C_b)$. We obtain
+\begin{equation}\label{eq:ent-hazard-mass}
+ \mathcal R_\lambda\le4\lambda^{-1}e^{C_1\beta N\alpha^d}\,
+ \nu_N\bigl(C_{\alpha/4}\bigr).
+\end{equation}
+This step uses that \eqref{eq:ent-cutoff-sup} holds for every $u$ and $x$,
+not only on average. By \eqref{eq:ent-axis-density}, for every fixed
+$b\in(0,1)$ and large $N$,
+\begin{equation}\label{eq:ent-cap}
+ \nu_N(C_b)=2\int_b^1p_N(r)\dd r\le2\sqrt N\,e^{-(N-3)I(b)}
+ \le e^{-NI(b)/2}.
+\end{equation}
+Since $I(b)\ge b^2/2$ and $d>2$, there exists $\alpha_1\in(0,\alpha_0]$
+such that $C_1\beta\alpha^d\le I(\alpha/4)/8$ for all $\alpha\le\alpha_1$.
+We fix $\alpha\le\alpha_1$ and set $\gamma_0=I(\alpha/4)/8$. For
+$\lambda=(e^{\gamma_0N}+1)^{-1}$, \eqref{eq:ent-hazard-mass} and
+\eqref{eq:ent-cap} imply that $\mathcal R_\lambda\le8e^{-NI(\alpha/4)/4}$
+for large $N$. Combining \eqref{eq:ent-resolvent-horizon}, \eqref{eq:ent-start-entropy},
+and \eqref{eq:ent-applied-moments}, we obtain
+\begin{equation}\label{eq:ent-first-firing}
+ \mathsf Q_\alpha\bigl(\tau_\kappa\le e^{\gamma_0N}+1\bigr)
+ \le C\bigl(N^{1-d/2}+N^{3-d}\bigr)+e^{-cN},
+\end{equation}
+where $\tau_\kappa$ is the killing time at rate $\kappa$, defined with an
+independent unit exponential variable as in \cref{lem:ent-resolvent}. In
+\eqref{eq:ent-first-firing} we used $N^{2-d}\le N^{1-d/2}$.
+
+\paragraph{From the killing time to the cap.}
+Let $r_t=R(X_t,u)$. By \eqref{eq:ent-sde}, $r_t$ has drift
+$-\frac{N-1}{N}r_t+\beta N^{-1}u\cdot\nabla\widetilde H(X_t)$ and
+martingale part with quadratic variation rate $2|\Pi_{X_t}u|^2/N^2
+=2(1-r_t^2)/N\le2/N$. On $\Omega_N$, we have $\norm{\nabla\widetilde H}_\infty\le C\sqrt N$ by
+\eqref{eq:ent-regularity} and \eqref{eq:ent-cutoff-sup}, and the drift is
+bounded by a constant $\bar d_r$. Let
+$\tau_{\alpha/2}=\inf\{t\ge0:|r_t|\ge\alpha/2\}$, let
+$\Delta=\alpha/2-\alpha/3=\alpha/6$, and let $t_0=\Delta/(4(\bar d_r+1))<1$. We
+claim that, for every $T>0$,
+\begin{equation}\label{eq:ent-exposure}
+ \mathsf Q_\alpha\Bigl(\{\tau_{\alpha/2}\le T\}\cap
+ \Bigl\{\inf_{\tau_{\alpha/2}\le t\le\tau_{\alpha/2}+t_0}|r_t|<\frac\alpha3
+ \Bigr\}\Bigr)\le2\exp\Bigl(-\frac{N\Delta^2}{16t_0}\Bigr).
+\end{equation}
+Indeed, after $\tau_{\alpha/2}$, the drift moves $r_t$ by at most
+$\bar d_rt_0\le\Delta/4$ during a time $t_0$. A decrease of $|r_t|$ from at least
+$\alpha/2$ to below $\alpha/3$ therefore requires an increment of the
+martingale part of absolute value at least $\Delta/2$, and its quadratic
+variation during this interval is at most $2t_0/N$. A continuous martingale
+whose quadratic variation is at most $v$ has an absolute increment at least
+$b$ with probability at most $2e^{-b^2/(2v)}$, by the exponential
+supermartingale. Applying this after the stopping time $\tau_{\alpha/2}$,
+conditionally on the frozen variables, and integrating, we conclude that
+\eqref{eq:ent-exposure} holds. This also covers the case $\tau_{\alpha/2}=0$.
+
+On the complement of the event in \eqref{eq:ent-exposure}, and on
+$\{\tau_{\alpha/2}\le T\}$, the killing rate equals one on the whole interval
+$[\tau_{\alpha/2},\tau_{\alpha/2}+t_0]$. Conditionally on the path, the
+integrated killing rate is at least $t_0$ by time $T+t_0$, and the killing occurs
+by that time with probability at least $1-e^{-t_0}$. Integrating, and using \eqref{eq:ent-exposure}, we find
+\[
+ \mathsf Q_\alpha(\tau_{\alpha/2}\le T)\le\bigl(1-e^{-t_0}\bigr)^{-1}
+ \mathsf Q_\alpha(\tau_\kappa\le T+t_0)+2e^{-N\Delta^2/(16t_0)}.
+\]
+We take $T=e^{\gamma_0N}$ and use \eqref{eq:ent-first-firing} with $t_0<1$.
+After adjusting $C$, $c$, and $N_0$, this proves \eqref{eq:ent-truncated}.
+The left side of \eqref{eq:ent-truncated} decreases when $\gamma_0$ is
+decreased.
+\end{proof}
+
+\section{The cutoff in the gradient variable}\label{sec:ent-boundary}
+
+The truncated and true processes coincide until $|r|$ or $|s|$ reaches the
+cutoff scale. In this section, we show that the true process is unlikely to
+reach the cutoff boundary $|s|=\alpha$. The argument uses the independence of $G_u$
+from the conditioned field, under the unrestricted Gaussian law.
+
+\begin{lemma}[The gradient cutoff is not reached]\label{lem:ent-boundary}
+Let $(h,k)$ be admissible. Let $u$ be uniform on $S_N$ and independent of
+$H_N$, let $X_0$ have law $\nu_N$, and let $X$ solve \eqref{eq:ent-sde} with
+$\widetilde H=H^{h,k,u}$, where $X_0$ and the Brownian motion are
+independent of $(H_N,u)$. Let $s_t=G_u\cdot X_t/N$. For every $b>0$, there
+exist $\gamma_b,c_b>0$ and $N_0$ such that, for $N\ge N_0$,
+\begin{equation}\label{eq:ent-boundary}
+ \Pp\Bigl(\sup_{0\le t\le e^{\gamma_bN}}|s_t|\ge b\Bigr)\le e^{-c_bN}.
+\end{equation}
+The same bound, with a smaller $c_b$, holds when the coefficient vector of
+$H_N$ is conditioned on $\Omega_N$. The constants do not depend on $(h,k)$.
+\end{lemma}
+
+\begin{proof}
+We first work under the unrestricted law. Conditionally on $u$, the
+coefficient vector of $H_N-D_u$ is independent of $G_u$, by
+\cref{prop:ent-regression}, and $G_u$ is a centered Gaussian vector in
+$u^\perp$ with covariance $a_QI_{u^\perp}$, by \eqref{eq:ent-covariances}.
+The coefficients of $H^{h,k,u}=(H_N-D_u)+N(\theta_1h+\theta_2k)$ are a
+continuous function of those of $H_N-D_u$ and of $u$. By the measurable
+construction of the solutions of \eqref{eq:ent-sde}, the whole trajectory
+$(X_t)_{t\ge0}$ is a measurable function of these coefficients, of $u$, of
+$X_0$, and of the Brownian motion. Conditionally on $u$, it is therefore
+independent of $G_u$. At each fixed time $t$, conditionally on $u$ and on
+the trajectory, $s_t$ is centered Gaussian with variance
+$a_Q|\Pi_uX_t|^2/N^2\le a_Q/N$, and
+\begin{equation}\label{eq:ent-grid-tail}
+ \Pp\bigl(|s_t|\ge b/2\bigr)\le2e^{-Nb^2/(8a_Q)} .
+\end{equation}
+
+We choose $0<\gamma_b<b^2/(32a_Q)$ and the grid of times $j/N$,
+$0\le j\le\lceil Ne^{\gamma_bN}\rceil$. A union bound in
+\eqref{eq:ent-grid-tail} shows that some grid value satisfies
+$|s_{j/N}|\ge b/2$ with probability at most $e^{-cN}$. We next control the
+intervals between grid points; here we use the regularity event once. On
+$\Omega_N$, we have $|G_u|\le C_0\sqrt N$ and $\norm{\nabla H^{h,k,u}}_\infty
+\le C\sqrt N$, by \eqref{eq:ent-regularity} and
+\eqref{eq:ent-delta-bounds}. By \eqref{eq:ent-sde}, $s_t$ has drift
+$-\frac{N-1}{N}s_t+\beta N^{-1}G_u\cdot\nabla H^{h,k,u}(X_t)$, which is
+bounded by a constant $\bar d_s$ since $|s_t|\le C_0$, and its martingale part
+has quadratic variation rate $2|\Pi_{X_t}G_u|^2/N^2\le\bar q_s/N$. On an
+interval of length $1/N$, the drift moves $s_t$ by at most $b/4$ for large
+$N$. If $|s|<b/2$ at the left endpoint and $|s|$ reaches $b$ in the interval,
+the martingale increment has absolute value at least $b/4$, while its
+quadratic variation is at most $\bar q_s/N^2$. The martingale inequality used
+in the proof of \cref{prop:ent-truncated} shows that this has probability at most
+$2e^{-b^2N^2/(32\bar q_s)}$. This bound holds conditionally on every field in
+$\Omega_N$ and every axis, because the Brownian motion is independent of
+them. A union over $O(Ne^{\gamma_bN})$ intervals costs at most $e^{-cN^2}$.
+Adding $\Pp(\Omega_N^c)\le e^{-N}$ once, we conclude that
+\eqref{eq:ent-boundary} holds.
+
+Under the law conditioned on $\Omega_N$, the probability of the event in
+\eqref{eq:ent-boundary} is at most its unrestricted probability divided by
+$\Pp(\Omega_N)\ge1/2$. This proves the second assertion. The independence of
+$G_u$ from the trajectory was used only under the unrestricted law.
+\end{proof}
+
+\section{Proof of the main estimate}\label{sec:ent-proof}
+
+\begin{proof}[Proof of \cref{thm:ent-main}]
+We fix the parameters, couple the true and truncated processes, remove the
+regularity restriction, and finally pass from a uniform axis to a
+deterministic one.
+
+\paragraph{Choice of parameters.}
+We fix $\xi,Q,\beta,\bar h,\bar k$, and take $C_0$ and $\Omega_N$ from
+\cref{lem:ent-regularity}, and $\alpha_1$ from \cref{prop:ent-truncated}. We
+set $a_*=\alpha_1/2$. Given $a\in(0,a_*]$, we set $\alpha=2a$, so that the
+cap $C_{\alpha/2}(u)$ in \eqref{eq:ent-truncated} is $C_a(u)$. We then choose
+\[
+ \gamma=\min\{\gamma_0,\gamma_\alpha\},
+\]
+where $\gamma_0$ is given by \cref{prop:ent-truncated} and $\gamma_\alpha$
+by \cref{lem:ent-boundary} with $b=\alpha$. All these choices precede
+$N\to\infty$, and none depends on $u$ or $(h,k)$; see
+\cref{tab:ent-parameters}.
+
+\paragraph{The coupling.}
+Let the coefficient vector $J$ of $H_N$ have its law conditioned on
+$\Omega_N$, and sample an independent uniform axis $u$, an independent
+initial point $X_0$ with law $\nu_N$, and an independent Brownian motion
+$B$. On this probability space, let $X^{\rm tr}$ solve \eqref{eq:ent-sde}
+with $\widetilde H=H^{h,k,u}=H_N+\delta_{h,k,u}$, and let $X^{\rm cut}$ solve
+it with $\widetilde H=H_N+\delta_\alpha(u,\cdot)$, both from $X_0$ and driven
+by $B$. Let $r_t$ and $s_t$ be defined by \eqref{eq:ent-cutoff} along each
+path. On the open set $\{x:|R(x,u)|<\alpha,\ |G_u\cdot x|/N<\alpha\}$, the
+two cutoffs equal one, and the two Hamiltonians and their gradients agree
+there. By pathwise uniqueness, the two solutions coincide up to the first
+time that either of them leaves this set.
+
+Let $T=e^{\gamma N}$, let $\tau_a^{\rm tr}$ and $\tau_a^{\rm cut}$ be the
+hitting times of $C_a(u)$ by the two processes, and let
+$\varsigma^{\rm tr}=\inf\{t\ge0:|s_t^{\rm tr}|\ge\alpha\}$. We claim that
+\begin{equation}\label{eq:ent-coupling}
+ \{\tau_a^{\rm tr}\le T\}\subset\{\tau_a^{\rm cut}\le T\}
+ \cup\{\varsigma^{\rm tr}\le T\}.
+\end{equation}
+If $|R(X_0,u)|\ge a$, both hitting times are zero. If $|s_0|\ge\alpha$, then
+$\varsigma^{\rm tr}=0$. Otherwise, suppose that $\tau_a^{\rm tr}\le T$ and
+$\varsigma^{\rm tr}>T$. Since $a<\alpha$ and the path is continuous, the
+true process reaches $|r|=a$ before $|r|=\alpha$, and it does not reach
+$|s|=\alpha$ before time $T$. The two processes therefore coincide on
+$[0,\tau_a^{\rm tr}]$, and $\tau_a^{\rm cut}=\tau_a^{\rm tr}\le T$. This
+proves \eqref{eq:ent-coupling}.
+
+The law of $(J,u,X^{\rm cut})$ is $\mathsf Q_\alpha$. Since $\gamma\le
+\gamma_0$, \cref{prop:ent-truncated} bounds the probability of the first
+event in \eqref{eq:ent-coupling} by $C(N^{1-d/2}+N^{3-d})+e^{-cN}$. In the
+same way, $\gamma\le\gamma_\alpha$ and the restricted bound of
+\cref{lem:ent-boundary} imply that the second event has probability at most
+$e^{-c_\alpha N}$.
+
+\paragraph{Removing the restriction.}
+Let now $J$ have its unrestricted Gaussian law, with the other variables as
+before. For any event $\mathcal A$, we have
+$\Pp(\mathcal A)\le\Pp(\mathcal A\mid\Omega_N)+\Pp(\Omega_N^c)$, and
+$\Pp(\Omega_N^c)\le e^{-N}$. Under the unrestricted law and conditionally
+on $u$, the field $H^{h,k,u}$ has the law $\E_{h,k,u}$ of
+\cref{def:ent-conditioned}, which is the conditional law by
+\cref{prop:ent-regression}, and it is independent of $X_0$ and $B$. By the measurable
+construction of the solutions of \eqref{eq:ent-sde}, the probability of
+$\{\tau_a^{\rm tr}\le T\}$ given $u$ is the left side of \eqref{eq:ent-main}
+at the axis $u$; it is a measurable function of $u$ (compare
+\cref{lem:red-kernels}). We have shown that
+\begin{equation}\label{eq:ent-averaged}
+ \int\E_{h,k,u}\Bigl[\Pp^H_{\nu_N}\Bigl(\sup_{0\le t\le e^{\gamma N}}
+ |R(X_t,u)|\ge a\Bigr)\Bigr]\nu_N(\dd u)
+ \le C\bigl(N^{1-d/2}+N^{3-d}\bigr)+e^{-cN}.
+\end{equation}
+
+\paragraph{Deterministic axes.}
+Let $g\in O(N)$. The law of $H_N$ is invariant under $H\mapsto H\circ
+g^{-1}$, and for the field $H\circ g^{-1}$ the quantities $H_Q(gu)$,
+$K_Q(gu)$, and $G_{gu}$ equal $H_Q(u)$, $K_Q(u)$, and $gG_u$ for the field
+$H$. By \eqref{eq:ent-deleted} and \eqref{eq:ent-conditioned}, the
+conditioned field at $gu$ built from $H\circ g^{-1}$ is $H^{h,k,u}\circ
+g^{-1}$. The law of $H^{h,k,gu}$ is therefore the image of the law of
+$H^{h,k,u}$ under $H\mapsto H\circ g^{-1}$. If $X$ solves \eqref{eq:ent-sde} for a
+Hamiltonian $\widetilde H$ with Brownian motion $B$, then $gX$ solves it for
+$\widetilde H\circ g^{-1}$ with Brownian motion $gB$; this is the rotation
+covariance of \cref{lem:red-kernels} at the level of paths. Together with
+the invariance of $\nu_N$ and $R(gx,gu)=R(x,u)$, it shows that the
+integrand in \eqref{eq:ent-averaged} takes the same value at $u$ and at
+$gu$. As $O(N)$ acts transitively on $S_N$, the
+integrand is constant, and \eqref{eq:ent-averaged} implies
+\eqref{eq:ent-main} for every $u\in S_N$. In the pure case, the same argument applies with the
+conditioning vector $(H_Q(u),G_u)$ and $k=ph$. Finite sums of exponentially small
+terms are bounded by $e^{-cN}$ after decreasing $c$ and increasing $N_0$,
+and this completes the proof.
+\end{proof}

@@ -1,0 +1,21 @@
+Slow Equilibration and Persistent Stationary Correlations in Spherical Spin Glasses
+
+Project Lean code and documentation retain the Apache License, Version 2.0.
+
+Vendored all-lean foundations are copied byte-for-byte from pmaronow/all-lean at
+4b5409b513d8ae9160b29401bff2ce6d3e95e5f1. The upstream MIT license, third-party
+licenses, and source-origin notices are retained under LICENSES/all-lean/;
+vendor/all-lean/VENDORED.json binds the selected files to their source hashes.
+
+GaussianPropeller's twelve modules are adapted from openai/math at
+1581d4cbdd69a0faf34b2089614fe2a814316a6a, under Apache-2.0. The upstream
+license, original paths, and module-system adaptations are recorded under
+vendor/openai-math/ and in each source header. Additional adapted openai/math
+GOE/resolvent and regularized determinant proofs retain their original notices
+under LICENSES/openai-math-CriticalSK/ and in the proof sources.
+
+The package is extracted from pmaronow/slowequilibration-temp at
+b020bce7f674675d7474740299b538edaa3cd25e. Historical working archives,
+Challenge/Solution surfaces for superseded scopes, build caches, and unrelated
+application results are not submission artifacts. Current validation is recorded
+separately under verification/; no registry acceptance is claimed.

@@ -1,0 +1,117 @@
+{
+  "scope": "Exactly the six headline result groups. Supporting declarations are proof infrastructure.",
+  "claim_groups": 6,
+  "comparator_theorem_exports": 12,
+  "manuscript_pdf": "manuscript/main.pdf",
+  "manuscript_pdf_sha256": "b9d9eeb61d869fdf7c70f6e3c0310f7aede4f6a59be9ff25cb7c1e5af48338e8",
+  "claims": [
+    {
+      "number": "1.2",
+      "label": "thm:main-condensed",
+      "title": "Slow equilibration from the uniform law",
+      "manuscript_source": "manuscript/sections/01-intro.tex",
+      "source_line": 97,
+      "statement_latex": "[Slow equilibration from the uniform law]\\label{thm:main-condensed}\nLet $\\xi$ be a finite mixture with minimum degree $d\\ge4$, and let $\\beta>0$ be such that $(\\xi,\\beta)$ is strictly 1RSB with a nondegenerate contact at $Q$. Then there exists $\\gamma=\\gamma(\\xi,\\beta)>0$ such that\n\\begin{equation}\\label{eq:intro-main}\n\\inf_{0\\le t\\le e^{\\gamma N}}\\norm{\\nu_NP_t-\\pi}_{\\TV}\\longrightarrow1\\qquad\\text{in probability as }N\\to\\infty.\n\\end{equation}",
+      "comparator_theorems": [
+        "SlowEquilibrationCondensedSource.theorem_1_2"
+      ],
+      "proof_facade_theorems": [
+        "SlowEquilibration.SixHeadlines.theorem_1_2"
+      ],
+      "literature_premise": "Chen2013FiniteParisi",
+      "qualification": "The ordinary model and theorem-specific hypotheses are retained."
+    },
+    {
+      "number": "1.3",
+      "label": "cor:main-classes",
+      "title": "Strictly 1RSB models",
+      "manuscript_source": "manuscript/sections/01-intro.tex",
+      "source_line": 108,
+      "statement_latex": "[Strictly 1RSB models]\\label{cor:main-classes}\nThe conclusion of \\cref{thm:main-condensed} holds in each of the following cases.\n\\begin{enumerate}[label=(\\alph*)]\n\\item The pure model $\\xi(r)=r^p$, for every $p\\ge4$ and every $\\beta>\\bs(p)$.\n\\item Every finite mixture $\\xi$ with minimum degree at least four such that $r\\mapsto\\xi''(r)^{-1/2}$ is strictly convex on $(0,1]$, and every $\\beta>\\bs(\\xi)$. This holds in particular if the smallest and the largest degrees $d$ and $P$ with $c_p>0$ satisfy $6(d-2)(P-2)>(d+P-5)^2$; for example, if all degrees with $c_p>0$ lie in $\\{4,5,\\dots,11\\}$.\n\\item The covariances $\\xi(r)=r^d+\\eps\\sum_{d<p\\le P,\\ p\\text{ even}}b_pr^p$, where $d\\ge4$ is even, $P>d$, $\\beta>\\bs(d)$, the numbers $b_p\\ge0$ satisfy $\\sum_pb_p=1$, and $0<\\eps<\\eps_0$, for some $\\eps_0=\\eps_0(d,P,\\beta)>0$ that does not depend on $(b_p)$.\n\\item The covariance $\\xi(r)=r^4+br^{12}$ at the inverse temperature $\\beta$, where\n\\begin{equation*}\nt=\\frac{45-24\\log6}{72\\log6-85},\\qquad b=t\\Bigl(\\frac{10}9\\Bigr)^8,\\qquad\\beta^2=\\frac{15000}{729(4+12t)}.\n\\end{equation*}\n\\end{enumerate}",
+      "comparator_theorems": [
+        "SlowEquilibrationCondensedSource.corollary_1_3_a",
+        "SlowEquilibrationCondensedSource.corollary_1_3_b",
+        "SlowEquilibrationCondensedSource.corollary_1_3_b_degree_window",
+        "SlowEquilibrationCondensedSource.corollary_1_3_b_support",
+        "SlowEquilibrationCondensedSource.corollary_1_3_c",
+        "SlowEquilibrationCondensedSource.corollary_1_3_d"
+      ],
+      "proof_facade_theorems": [
+        "SlowEquilibration.SixHeadlines.corollary_1_3_a",
+        "SlowEquilibration.SixHeadlines.corollary_1_3_b",
+        "SlowEquilibration.SixHeadlines.corollary_1_3_b_degree_window",
+        "SlowEquilibration.SixHeadlines.corollary_1_3_b_support",
+        "SlowEquilibration.SixHeadlines.corollary_1_3_c",
+        "SlowEquilibration.SixHeadlines.corollary_1_3_d"
+      ],
+      "literature_premise": "Chen2013FiniteParisi",
+      "qualification": "The ordinary model and theorem-specific hypotheses are retained."
+    },
+    {
+      "number": "1.4",
+      "label": "thm:main-initial",
+      "title": "Other initial laws",
+      "manuscript_source": "manuscript/sections/01-intro.tex",
+      "source_line": 125,
+      "statement_latex": "[Other initial laws]\\label{thm:main-initial}\nLet $\\xi$ and $\\beta$ satisfy the hypotheses of \\cref{thm:main-condensed}, let $\\gamma$ be the exponent given there, and let $T_N=e^{\\gamma N}$.\n\\begin{enumerate}[label=(\\roman*)]\n\\item For every $N$, every Borel probability measure $\\mu$ on $S_N$, and every $T\\ge0$,\n\\begin{equation}\\label{eq:intro-haar}\n\\E\\bigl[1-\\norm{\\mu P_T-\\pi}_{\\TV}\\bigr]\\le\\E\\bigl[1-\\norm{\\nu_NP_T-\\pi}_{\\TV}\\bigr].\n\\end{equation}\nIn particular, for every $\\eps>0$,\n\\begin{equation*}\n\\sup_\\mu\\Pp\\Bigl(\\inf_{0\\le t\\le T_N}\\norm{\\mu P_t-\\pi}_{\\TV}<1-\\eps\\Bigr)\\longrightarrow0,\n\\end{equation*}\nwhere the supremum is over all Borel probability measures $\\mu$ on $S_N$. The same convergence holds for every random initial law that is independent of $H_N$, in the joint probability of the disorder and the random initial law.\n\\item Let $0\\le\\kappa<(d-2)/2$ and $C_0>0$. For each $N$, let $\\mu_{N,1},\\dots,\\mu_{N,K_N}$ be Borel probability measures on $S_N$ that do not depend on $H_N$, with $K_N\\le C_0N^\\kappa$. Then\n\\begin{equation*}\n\\inf\\Bigl\\{\\Bigl\\|\\Bigl(\\sum_{j=1}^{K_N}w_j\\mu_{N,j}\\Bigr)P_t-\\pi\\Bigr\\|_{\\TV}:\\ w_j\\ge0,\\ \\sum_{j=1}^{K_N}w_j=1,\\ 0\\le t\\le T_N\\Bigr\\}\\longrightarrow1\n\\end{equation*}\nin probability. If the collection is random and independent of $H_N$, the same convergence holds in the joint probability.\n\\item Let $H\\mapsto\\mu^H_N$ be a Borel probability kernel from fields to $S_N$ such that $\\KL(\\mu^{H_N}_N\\Vert\\nu_N)/\\log N\\to0$ in probability. Then\n\\begin{equation*}\n\\inf_{0\\le t\\le T_N}\\norm{\\mu^{H_N}_NP_t-\\pi}_{\\TV}\\longrightarrow1\\qquad\\text{in probability.}\n\\end{equation*}\n\\end{enumerate}",
+      "comparator_theorems": [
+        "SlowEquilibrationCondensedSource.theorem_1_4_haar",
+        "SlowEquilibrationCondensedSource.theorem_1_4"
+      ],
+      "proof_facade_theorems": [
+        "SlowEquilibration.SixHeadlines.theorem_1_4",
+        "SlowEquilibration.SixHeadlines.theorem_1_4_haar"
+      ],
+      "literature_premise": "Chen2013FiniteParisi",
+      "qualification": "The finite-dimensional Haar comparison is unconditional; Chen applies to the asymptotic clauses."
+    },
+    {
+      "number": "1.5",
+      "label": "thm:main-memory",
+      "title": "Slow relaxation of the equilibrium dynamics",
+      "manuscript_source": "manuscript/sections/01-intro.tex",
+      "source_line": 155,
+      "statement_latex": "[Slow relaxation of the equilibrium dynamics]\\label{thm:main-memory}\nLet $\\xi$ be a finite mixture with $\\bd(\\xi)<\\bs(\\xi)$, let $\\beta\\in(\\bd,\\bs)$, and let $q_*=\\sup\\{r\\in(0,1):\\beta^2(1-r)\\xi'(r)>r\\}$. For every $0<b<q_*^2$, there exist $\\kappa,\\gamma,a,c,C>0$, depending on $\\xi$, $\\beta$, and $b$, such that for all sufficiently large $N$, with probability at least $1-Ce^{-aN}$, the following hold.\n\\begin{enumerate}[label=(\\roman*)]\n\\item $\\lambda_{\\lfloor e^{\\kappa N}\\rfloor}\\le e^{-2\\gamma N}$.\n\\item With $Z_N=U-\\pi(U)$ and $\\Pi_N=\\ind_{(0,e^{-2\\gamma N}]}(-L)$, acting componentwise, we have $\\norm{\\Pi_NZ_N}_{L^2(\\pi;\\R^N)}^2\\ge b$.\n\\item For the stationary diffusion, with $X_0\\sim\\pi$, we have $\\E_\\pi R(X_0,X_t)-|\\pi(U)|^2\\ge b$ for all $0\\le t\\le e^{\\gamma N}$.\n\\item There exists a Borel set $\\cX_N\\subset S_N$ with $\\pi(\\cX_N)\\ge1-Ce^{-aN}$ such that $\\norm{P_t(x,\\cdot)-\\pi}_{\\TV}\\ge1-Ce^{-aN}$ for all $x\\in\\cX_N$ and $0\\le t\\le e^{\\gamma N}$.\n\\item For the stationary diffusion in the given field, the mutual information satisfies $I(X_0;X_t)\\ge cN$ for all $0<t\\le e^{\\gamma N}$.\n\\end{enumerate}",
+      "comparator_theorems": [
+        "SlowEquilibrationCondensedSource.theorem_1_5"
+      ],
+      "proof_facade_theorems": [
+        "SlowEquilibration.SixHeadlines.theorem_1_5"
+      ],
+      "literature_premise": null,
+      "qualification": "The ordinary model and theorem-specific hypotheses are retained."
+    },
+    {
+      "number": "1.6",
+      "label": "thm:main-plateau",
+      "title": "Correlation bounds at every level below $q_*$",
+      "manuscript_source": "manuscript/sections/01-intro.tex",
+      "source_line": 172,
+      "statement_latex": "[Correlation bounds at every level below $q_*$]\\label{thm:main-plateau}\nLet $\\xi$, $\\beta$, and $q_*$ be as in \\cref{thm:main-memory}. For every $0<b<q_*$, there exist $\\kappa,\\gamma,a,c,C>0$, depending on $\\xi$, $\\beta$, and $b$, such that conclusions (ii) and (iii) of \\cref{thm:main-memory} hold with probability tending to one, and conclusions (i), (iv), and (v) hold for all sufficiently large $N$ with probability at least $1-Ce^{-aN}$.",
+      "comparator_theorems": [
+        "SlowEquilibrationCondensedSource.theorem_1_6"
+      ],
+      "proof_facade_theorems": [
+        "SlowEquilibration.SixHeadlines.theorem_1_6"
+      ],
+      "literature_premise": null,
+      "qualification": "The ordinary model and theorem-specific hypotheses are retained."
+    },
+    {
+      "number": "1.7",
+      "label": "thm:main-cusp",
+      "title": "Small eigenvalues near the dynamical threshold",
+      "manuscript_source": "manuscript/sections/01-intro.tex",
+      "source_line": 184,
+      "statement_latex": "[Small eigenvalues near the dynamical threshold]\\label{thm:main-cusp}\nLet $\\xi$ satisfy \\eqref{eq:intro-summability} and $\\bd(\\xi)<\\bs(\\xi)$, and let $A_{\\max}=\\sup_{(0,1)}A=\\bd^{-2}$. Then the set of global maximizers of $A$ on $[0,1]$ is a finite subset of $(0,1)$. Let $q_d$ be its largest element. There exist an integer $m\\ge1$ and $a>0$ such that\n\\begin{equation*}\nA(q_d+y)=A_{\\max}\\bigl[1-ay^{2m}+O(y^{2m+1})\\bigr]\\qquad(y\\to0).\n\\end{equation*}\nFor $\\beta>\\bd$, let $\\eps=\\beta^2A_{\\max}-1$, and set\n\\begin{equation*}\nC_d=\\frac{2m\\,q_d}{(2m+1)(1-q_d)}\\,a^{-1/(2m)}.\n\\end{equation*}\nThere exists $\\kappa_*>0$ such that for every $\\vartheta\\in(0,1)$, there exists $\\eps_0(\\vartheta)>0$ such that for every fixed $\\eps\\in(0,\\eps_0(\\vartheta))$, there exist $a',C>0$ such that, for all sufficiently large $N$, with probability at least $1-Ce^{-a'N}$,\n\\begin{equation*}\n\\lambda_{\\lfloor e^{\\kappa_*N}\\rfloor}\\le\\exp\\bigl[-(1-\\vartheta)C_d\\,\\eps^{1+1/(2m)}N\\bigr].\n\\end{equation*}",
+      "comparator_theorems": [
+        "SlowEquilibrationCuspSource.theorem_1_7"
+      ],
+      "proof_facade_theorems": [
+        "SlowEquilibration.SixHeadlines.theorem_1_7"
+      ],
+      "literature_premise": null,
+      "qualification": "The ordinary model and theorem-specific hypotheses are retained."
+    }
+  ]
+}

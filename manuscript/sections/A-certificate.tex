@@ -1,0 +1,98 @@
+\chapter{Exact rational bounds for the nonconvex example}\label{app:certificate}
+
+In this appendix, we prove the two finite statements used in the proof of \cref{prop:th-example}: an enclosure of the parameter $t$ of \eqref{eq:th-example-constants} between two rational numbers (\cref{lem:app-t}), and the sign pattern of the polynomial $P_t$ of \eqref{eq:th-example-U2} for all $t$ in this enclosure (\cref{lem:app-sign}). We also record the two rational comparisons used at the end of that proof. Every step is a finite computation with rational numbers. The sign pattern follows from the standard Bernstein-coefficient enclosure \cite{Farouki2012,Lorentz1986}, which we recall in \cref{lem:app-bernstein}.
+
+The computations can be repeated with the ancillary file \texttt{verify-thermal-example.py}, which is distributed with this paper. It uses only the Python standard library, with integer and rational arithmetic (\texttt{fractions.Fraction}); it uses no floating-point arithmetic, sampling, or root finding. It checks the inequalities of \cref{lem:app-t}, computes all $126$ Bernstein coefficients in \cref{tab:app-bernstein} at both endpoints of the enclosure, checks the four sign-and-margin bounds of \cref{lem:app-sign}, checks the endpoint identities \eqref{eq:app-endpoints} as a control of the conversion, and checks the comparisons in \eqref{eq:app-margins}.
+
+Throughout, we write
+\[
+t_-=\frac{4539}{100000},\qquad t_+=\frac{4541}{100000},\qquad\mathcal L(u)=\frac{45+85u}{24+72u}.
+\]
+
+\begin{lemma}[Enclosure of the parameter]\label{lem:app-t}
+Let $t=(45-24\log6)/(72\log6-85)$. Then $t_-<t<t_+$, and
+\begin{equation}\label{eq:app-log6}
+\frac{4885985}{2726952}=\mathcal L(t_+)<\log6<\mathcal L(t_-)=\frac{1628605}{908936}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Let $y_0=5/7$. Since $(1+y_0)/(1-y_0)=6$, we have $\log6=2\atanh(y_0)=2\sum_{k\ge0}y_0^{2k+1}/(2k+1)$, a series with positive terms. Let
+\[
+S_{13}=2\sum_{k=0}^{12}\frac{y_0^{2k+1}}{2k+1},\qquad R_{13}=\frac{2y_0^{27}}{27(1-y_0^2)}.
+\]
+The omitted terms satisfy $2y_0^{2k+1}/(2k+1)\le2y_0^{2k+1}/27$ for $k\ge13$, and by summing the geometric series we find $S_{13}<\log6<S_{13}+R_{13}$. The rational numbers $S_{13}$ and $R_{13}$ satisfy
+\[
+\frac{85}{72}<S_{13},\qquad\mathcal L(t_+)<S_{13}<S_{13}+R_{13}<\mathcal L(t_-).
+\]
+For orientation, $S_{13}\approx1.7917434$, $R_{13}\approx1.7\times10^{-5}$, $\mathcal L(t_+)\approx1.7917385$, and $\mathcal L(t_-)\approx1.7917708$; the margins are $S_{13}-\mathcal L(t_+)\approx4.9\times10^{-6}$ and $\mathcal L(t_-)-S_{13}-R_{13}\approx1.0\times10^{-5}$. These decimals are not part of the proof, which compares the rational numbers exactly. This proves \eqref{eq:app-log6}, and also $\log6>85/72$. The function $\ell\mapsto(45-24\ell)/(72\ell-85)$ is the inverse of $\mathcal L$ on $\ell>85/72$, and its derivative is $-1200/(72\ell-85)^2<0$. Its value at $\ell=\log6$ is $t$, and its values at $\mathcal L(t_\pm)$ are $t_\pm$. Then \eqref{eq:app-log6} implies that $t_-<t<t_+$.
+\end{proof}
+
+\begin{lemma}[Bernstein coefficients]\label{lem:app-bernstein}
+Let $p(r)=\sum_{i=0}^nc_ir^i$ be a real polynomial of degree at most $n$, and let $a<b$. For $0\le k\le n$, define
+\begin{equation}\label{eq:app-bernstein}
+B_k(p;[a,b])=\sum_{j=0}^k\frac{\binom kj}{\binom nj}(b-a)^j\sum_{i=j}^nc_i\binom ija^{i-j}.
+\end{equation}
+Then $p(a+(b-a)v)=\sum_{k=0}^nB_k(p;[a,b])\binom nkv^k(1-v)^{n-k}$ for all $v\in\R$. In particular,
+\begin{equation}\label{eq:app-endpoints}
+B_0(p;[a,b])=p(a),\qquad B_n(p;[a,b])=p(b),
+\end{equation}
+and $\min_kB_k(p;[a,b])\le p(r)\le\max_kB_k(p;[a,b])$ for every $r\in[a,b]$.
+\end{lemma}
+
+\begin{proof}
+Expanding $p(a+h)$ in powers of $h$, we find that the coefficient of $v^j$ in $p(a+(b-a)v)$ is $(b-a)^j\sum_{i=j}^nc_i\binom ija^{i-j}$. By the binomial theorem applied to $(v+(1-v))^{n-j}$, and the identity $\binom nk\binom kj=\binom nj\binom{n-j}{k-j}$, we have
+\[
+v^j=\sum_{k=j}^n\frac{\binom kj}{\binom nj}\binom nkv^k(1-v)^{n-k},\qquad 0\le j\le n.
+\]
+Substituting this into the expansion of $p(a+(b-a)v)$ and collecting the coefficient of $\binom nkv^k(1-v)^{n-k}$, we obtain the first assertion. Evaluating at $v=0$ and $v=1$ gives \eqref{eq:app-endpoints}. For $v\in[0,1]$, the functions $\binom nkv^k(1-v)^{n-k}$ are nonnegative and sum to one, so $p(a+(b-a)v)$ is a convex combination of the coefficients $B_k(p;[a,b])$.
+\end{proof}
+
+For $t\in\R$, the polynomial of \eqref{eq:th-example-U2} is
+\begin{equation}\label{eq:app-Pt}
+P_t(r)=24+72t-432r^2+720r^3-300r^4-4752tr^{10}+7920tr^{11}-3300tr^{12},
+\end{equation}
+of degree at most $12$, and its derivative $P_t'$ has degree at most $11$. Each coefficient of $P_t$ and of $P_t'$ is an affine function of $t$. It follows that each Bernstein coefficient $B_k(P_t;[a,b])$ and $B_k(P_t';[a,b])$ is an affine function of $t$, and a strict bound on it that holds at $t=t_-$ and at $t=t_+$ holds for all $t\in[t_-,t_+]$.
+
+\begin{lemma}[Sign pattern of $P_t$]\label{lem:app-sign}
+For every $t\in[t_-,t_+]$, we have
+\[
+\begin{aligned}
+P_t(r)&>2/25&&\text{for }r\in[0,357/1000]\cup[892/1000,1],\\
+P_t(r)&<-1/25&&\text{for }r\in[359/1000,890/1000],\\
+P_t'(r)&<-86&&\text{for }r\in[357/1000,359/1000],\\
+P_t'(r)&>73&&\text{for }r\in[890/1000,892/1000].
+\end{aligned}
+\]
+In particular, $P_t$ has exactly two zeros $a_0<b_0$ in $[0,1]$, both simple, with $a_0\in(357/1000,359/1000)$ and $b_0\in(890/1000,892/1000)$, and $P_t>0$ on $[0,a_0)\cup(b_0,1]$ and $P_t<0$ on $(a_0,b_0)$.
+\end{lemma}
+
+\begin{table}[htb]
+\centering
+\small
+\begin{tabular}{@{}lllcc@{}}
+\toprule
+Polynomial & Interval & Sign $\varsigma$ & Lower bounds at $t_-$, $t_+$ & Coefficients\\
+\midrule
+$P_t$ & $[0,\,357/1000]$ & $+1$ & $93$, $94$ & $26$\\
+$P_t$ & $[359/1000,\,890/1000]$ & $-1$ & $56$, $57$ & $26$\\
+$P_t$ & $[892/1000,\,1]$ & $+1$ & $92$, $92$ & $26$\\
+$P_t'$ & $[357/1000,\,359/1000]$ & $-1$ & $87410$, $87410$ & $24$\\
+$P_t'$ & $[890/1000,\,892/1000]$ & $+1$ & $74538$, $74529$ & $24$\\
+\bottomrule
+\end{tabular}
+\caption{Bounds on the Bernstein coefficients of $P_t$ and $P_t'$. In each row, every Bernstein coefficient $B_k$ of the polynomial on the interval, computed by \eqref{eq:app-bernstein} with $n=12$ for $P_t$ and $n=11$ for $P_t'$, satisfies $1000\,\varsigma B_k>L$, where $L$ is the first listed integer at $t=t_-$ and the second at $t=t_+$. The last column counts the coefficients over both endpoints; the total is $126$.}
+\label{tab:app-bernstein}
+\end{table}
+
+\begin{proof}
+An exact computation of the coefficients \eqref{eq:app-bernstein} at $t=t_-$ and $t=t_+$ gives the bounds in \cref{tab:app-bernstein}. The lower bounds $93,94,92$ exceed $80=1000\cdot2/25$, the bounds $56,57$ exceed $40=1000\cdot1/25$, and the bounds $87410$ and $74538,74529$ exceed $86000$ and $73000$. The rest of the proof uses only these weaker margins, which are the ones checked by the ancillary script; the integer bounds in the table are stronger and record the size of the margins. By the remark before \cref{lem:app-sign}, the same strict bounds on the Bernstein coefficients hold for all $t\in[t_-,t_+]$, and \cref{lem:app-bernstein} transfers them to the polynomials on the intervals. This proves the four displayed bounds.
+
+The five intervals cover $[0,1]$. On the three long intervals, $P_t$ has no zero. On $[357/1000,359/1000]$, $P_t$ is strictly decreasing, positive at the left endpoint, and negative at the right endpoint, so it has exactly one zero $a_0$ there, which is simple because $P_t'(a_0)<0$. Similarly, $P_t$ has exactly one zero $b_0\in(890/1000,892/1000)$, and $P_t'(b_0)>0$. The sign pattern follows.
+\end{proof}
+
+Finally, the proof of \cref{prop:th-example} uses the following rational comparisons:
+\begin{equation}\label{eq:app-margins}
+\frac{12+132t_+}{24+72t_+}=\frac{149951}{227246}<\frac23,\qquad\frac14<11t_-\Big(\frac{25}{27}\Big)^8,\qquad11t_+\Big(\frac{25}{27}\Big)^8<\frac3{10}.
+\end{equation}
+The first is checked by cross-multiplication, since $3\cdot149951=449853<454492=2\cdot227246$. For the other two, $11t_\pm(25/27)^8$ are explicit rational numbers, approximately $0.26975$ and $0.26987$, and the two inequalities are again checked by cross-multiplication.

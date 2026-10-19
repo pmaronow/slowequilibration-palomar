@@ -1,0 +1,101 @@
+{
+  "source_repository": "https://github.com/pmaronow/slowequilibration-temp",
+  "source_commit": "b020bce7f674675d7474740299b538edaa3cd25e",
+  "lean_sources": {
+    "entry_points": [
+      "Challenge",
+      "Solution",
+      "Audit"
+    ],
+    "module_count": 3940,
+    "unchanged_inherited_modules": 3930,
+    "adapted_inherited_interfaces": {
+      "SlowEquilibration/PalomarCondensedInitial.lean": {
+        "sha256": "3e29bf839cb06b997d8a7f8273c93e43fdab66ab3f6f65334add74641f2a46cf",
+        "source_sha256": "3aa3b7d70409e3445de38867f38ce33de699fad137095329be9d3c63e721b86e",
+        "adaptation": "Public proof elaboration gives generated tactic helpers stable names for the standalone Challenge. Mathematical formulas and proof logic are preserved."
+      }
+    },
+    "inherited_source_identity": "All inherited Lean files except the explicitly listed adapted interfaces are byte-identical to their paths at the source commit.",
+    "new_submission_interfaces": {
+      "Audit.lean": "4b8ccc1ed681efead00fa477702990767ca45773d5396598d334bb1b40bb4755",
+      "Challenge.lean": "675f488ea97495da36cc2eed44d249fb2f3c7026af3611135dd598938ba6e346",
+      "SlowEquilibration/PalomarHeatSpectralProjection.lean": "d6cdc5cb298366e4c6d9734cd52b658386223e742e2514ca4d7e39d8e26fecaf",
+      "SlowEquilibration/PalomarMemoryBridge.lean": "edb4f288a42f8a6f61a00378b4d14c151625cc64b75dcb04ad9ef23c25be09c3",
+      "SlowEquilibration/PalomarMemoryDefinitions.lean": "ac203a1902c7fe8d705a1d659516b0957664a1d7b1390480f421dbe3f72494f4",
+      "SlowEquilibration/PalomarSixClassDefinitions.lean": "d2c9d68eafdbed408c63fb76191811a4f573d85dcac187444c43841680eed9ea",
+      "SlowEquilibration/PalomarSixCondensed.lean": "77a4b85b7b4a12f19cd7851fc9575d3c1c449d1b783c92360657f471262db2f4",
+      "SlowEquilibration/PalomarSixCusp.lean": "2fda75dea76fe150d556e99878951f0edda7c3cee0c787f900969b88e794181d",
+      "Solution.lean": "0308c810774ddb7fc52c8c4d8dd8ab3fd893d75cdf6caf27b29fc40e6fb68f86"
+    },
+    "unresolved_imports": [],
+    "unreachable_sources": [],
+    "proof_snapshot": "verification/source-checks.json"
+  },
+  "controls_sha256": {
+    "lean-toolchain": "8dc8d6f560141069d9073e370611716ef77ada0da8ffa37e2149f44b2e63ac7a",
+    "lake-manifest.json": "0dccbe097ff58f7fd64619cca2217d8fd8f09393b5099044a0efa7396643fc72",
+    "lakefile.toml": "59198dfc28f15272c55ae60aa502b6f6d4054ca5bbbf0e26f6418ae2ae9dae72",
+    "comparator.json": "aba514c6d2f1c21d5bb56340db4337a836c5b39f5bb3830ea91a4a0c54381296"
+  },
+  "upstream_sources": [
+    {
+      "repository": "https://github.com/leanprover-community/mathlib4",
+      "commit": "065356127b1dc0016f66b7283ce0ce2c4055aa55",
+      "selection": "Pinned dependency; see lake-manifest.json."
+    },
+    {
+      "repository": "https://github.com/pmaronow/all-lean",
+      "commit": "4b5409b513d8ae9160b29401bff2ce6d3e95e5f1",
+      "retained_modules": 1374,
+      "file_identity_record": "vendor/all-lean/VENDORED.json",
+      "notices": "LICENSES/all-lean/"
+    },
+    {
+      "repository": "https://github.com/openai/math",
+      "commit": "1581d4cbdd69a0faf34b2089614fe2a814316a6a",
+      "retained_gaussian_propeller_modules": 12,
+      "source_notes": "vendor/openai-math/README.md"
+    }
+  ],
+  "manuscript": {
+    "source_directory": "source_material/manuscript",
+    "source_commit": "b020bce7f674675d7474740299b538edaa3cd25e",
+    "unchanged_files_sha256": {
+      "abstract.tex": "90ccc49b45b98636f468d5e10d0315bfb3e74d0712159680d3cc39793b30fd06",
+      "macros.tex": "db9217c6643a32695750a9aa645204188291286027592a6c7d070d87157782ce",
+      "main.bbl": "b4aa8ab6ebb6d16c1013281a555f7e0805cb734180cae762b83cb778e0934ed7",
+      "main.pdf": "b9d9eeb61d869fdf7c70f6e3c0310f7aede4f6a59be9ff25cb7c1e5af48338e8",
+      "main.tex": "4de340d6f5b8ce07150fdc880cfa1b04a42379f0e2c7e203c23e92131e20f97f",
+      "refs.bib": "5cba338593d760030e31e5965a77119d0a474f2c04161a24fa8718b0f5987b31",
+      "sections/01-intro.tex": "29b4eb1490d4bbf70f3784af1b87c010c7c99d54d38a504187ee5bba5aad53ef",
+      "sections/02-overview.tex": "4f49f80f8ccd628295f00e8e82645bf72a6aaa1fb2a3675f8a42ebef9bdead63",
+      "sections/03-prelim.tex": "7a2551fa5ee77f032c1d7f53010dc37703cef22ace2a6533d20d587ef4528fdb",
+      "sections/04-reduction.tex": "35fd971d7427a93972ef925c6d1f3508e5d9d746848000d19e5fc4c8ba5bcbff",
+      "sections/05-thermal.tex": "f12ab6e840fce3c86dbd9776aad1ca6f4471da02a921eba2bee534dd70772d3f",
+      "sections/06-directing.tex": "6dc0df85e8f89d69fb58f55cde79e5e20096cae37634b5b7793366d357d996df",
+      "sections/07-kacrice.tex": "ad23f1200ae11372866971c4cd55bcde690329330a0b88ff23d3cdc2312e3784",
+      "sections/08-entrance.tex": "04466f7de1a15175ea4d8d959fba021a64f8b248475c297508058d09b9faddca",
+      "sections/09-purecover.tex": "4270930faa7715b7c47b2a7c122d042c7a6abf4c2017e067c300deef3cfde65e",
+      "sections/10-mixone.tex": "faabd876f45e0d77e50212b3c37da4574d2d5770e55272dfa98378e812af9178",
+      "sections/10b-mixpair.tex": "0ca906a59c8f5461255b540fc1f6c0c803c2f0fdeba143f79baabdb37d126355",
+      "sections/11-mixbands.tex": "b756ffbb506970a8a03c51826e62b139c68748f053f745901d911bee8647d445",
+      "sections/12-condproof.tex": "234eecbc90ddef3c30e3fc5f64ed1d589a3528451bf6954903325649df756e7d",
+      "sections/13-pressure.tex": "067e52b66567fd17fe6ec092ae1aaed89c508afa378e0dae2c61852e8a7da27a",
+      "sections/14-spectral.tex": "4a458e6f6f173d4128901e6560fc704ae61066e0cd082232e6ac4238d376fe2b",
+      "sections/15-memory.tex": "640534d80730d1caad6e6e272973a11f3fc8edccf43c139db3f17e78f5f3dda5",
+      "sections/16-plateau.tex": "deed28aa8bb09b87700c5a307826f593b3961391aea890a4d0b3ad09f89390c8",
+      "sections/17-infinite.tex": "12e3e5a85793388b007038fb1510f7929a3c0dc62848c531bb18910b1f5aeba0",
+      "sections/A-certificate.tex": "0a9f984a3f914a9136f7ad09faa7406c3eca895b2d44b1e2dd5ce19df1a7793e",
+      "shared/trilogy-style.tex": "098b738415780d11d4d77e3eaa19aca8475ff05609199c3cc0ca913950c8d86e",
+      "shortheads.tex": "149f3898ad919bb2e96853ec8751c0c03cfda5caa6d6d0e1e6592b391b285142",
+      "verify-thermal-example.py": "79639142de9529d9400e381cb9cc6a8c7c57f2be46d9a4e214d5636fec5a4ff7"
+    }
+  },
+  "verifier": {
+    "repository": "https://github.com/PalomarRegistry/PalomarSubmission",
+    "commit": "d4e41c1d5b0d114c4859e6e5831dc6d3ad1d0d44",
+    "reproduction": "scripts/verify.sh",
+    "current_evidence": "verification/README.md"
+  }
+}

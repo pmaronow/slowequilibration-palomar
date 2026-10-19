@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <meta name="description" content="Manuscript, Lean statements, proofs, and verification materials for six results on slow equilibration and stationary correlations in spherical spin glasses.">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Slow Equilibration in Spherical Spin Glasses</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:,">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="wordmark" href="#top" aria-label="Slow equilibration, top of page">
+          <span class="wordmark-symbol" aria-hidden="true">ξ</span>
+          <span>Slow equilibration</span>
+        </a>
+        <nav aria-label="Main navigation">
+          <a href="#results">Results</a>
+          <a href="#formalization">Formalization</a>
+          <a href="#materials">Materials</a>
+          <a class="nav-source" href="https://github.com/pmaronow/slowequilibration">GitHub <span aria-hidden="true"><svg class="external-arrow" viewBox="0 0 16 16" focusable="false"><path d="M4 12 12 4M4 4h8v8"/></svg></span></a>
+        </nav>
+      </header>
+
+      <main id="main">
+        <section class="hero" id="top" aria-labelledby="paper-title">
+          <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Private package for Palomar</p>
+          <h1 id="paper-title">Slow Equilibration and Persistent Stationary Correlations in Spherical Spin Glasses</h1>
+          <p class="authors">P. M. Aronow <span aria-hidden="true">&amp;</span><span class="sr-only">and</span> Patrick Lopatto</p>
+          <p class="hero-description">Lean statements and proofs of six results on exponential equilibration times and persistent stationary memory, with the manuscript as a supporting document.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="https://github.com/pmaronow/slowequilibration/blob/main/Challenge.lean">Read the Lean statements <span aria-hidden="true"><svg class="external-arrow" viewBox="0 0 16 16" focusable="false"><path d="M4 12 12 4M4 4h8v8"/></svg></span></a>
+            <a class="button button-secondary" href="../manuscript/main.pdf">Read the manuscript <span aria-hidden="true"><svg class="external-arrow" viewBox="0 0 16 16" focusable="false"><path d="M4 12 12 4M4 4h8v8"/></svg></span></a>
+          </div>
+          <div class="hero-meta" aria-label="Package scope">
+            <span><strong>6</strong> headline result groups</span>
+            <span>Lean 4 + supporting manuscript</span>
+            <span>Explicit literature hypotheses</span>
+          </div>
+        </section>
+
+        <section class="setting" aria-labelledby="setting-title">
+          <div>
+            <p class="eyebrow">The model</p>
+            <h2 id="setting-title">Two questions about one diffusion.</h2>
+            <p>A centered Gaussian field on the sphere of radius √N defines a Gibbs measure π and reversible Langevin dynamics P<sub>t</sub>. Its covariance is ξ(r) = Σ<sub>p≥2</sub> c<sub>p</sub>r<sup>p</sup>, with c<sub>p</sub> ≥ 0. The paper studies both a uniform initial law and the joint behavior of two endpoints of the stationary dynamics.</p>
+          </div>
+          <div class="model-equations" aria-label="Model definitions">
+            <p>E[H<sub>N</sub>(x)H<sub>N</sub>(y)] = Nξ(R(x,y))</p>
+            <p>L = Δ<sub>S<sub>N</sub></sub> + β∇<sub>S<sub>N</sub></sub>H<sub>N</sub> · ∇<sub>S<sub>N</sub></sub></p>
+            <p class="equation-caption">R(x,y) = x · y / N &nbsp; · &nbsp; π(dx) ∝ e<sup>βH<sub>N</sub>(x)</sup>ν<sub>N</sub>(dx)</p>
+            <p class="equation-caption">A(r) = (1 − r)ξ′(r)/r &nbsp; · &nbsp; q<sub>*</sub> = sup{r ∈ (0,1) : β<sup>2</sup>A(r) &gt; 1}</p>
+          </div>
+        </section>
+
+        <section class="results-section" id="results" aria-labelledby="results-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">The mathematical scope</p>
+              <h2 id="results-title">Six headline results.</h2>
+            </div>
+            <p>These summaries accompany the complete statements and hypotheses in the manuscript and the Lean specification.</p>
+          </div>
+
+          <div class="result-grid">
+            <article class="result-card" id="theorem-1-2">
+              <div class="result-topline"><p class="result-number">Theorem 1.2</p><span class="premise premise-chen">Chen hypothesis</span></div>
+              <h3>Slow equilibration from the uniform law</h3>
+              <p>For a finite mixture of minimum degree at least four, under strict one-step replica symmetry breaking and a nondegenerate contact, the uniform start remains asymptotically at total variation distance one from equilibrium throughout an exponential time interval.</p>
+              <p class="result-formula">inf<sub>0 ≤ t ≤ exp(γN)</sub> ‖ν<sub>N</sub>P<sub>t</sub> − π‖<sub>TV</sub> → 1</p>
+              <p class="result-footnote">Convergence is in probability over the disorder; ξ and β are fixed.</p>
+            </article>
+
+            <article class="result-card" id="corollary-1-3">
+              <div class="result-topline"><p class="result-number">Corollary 1.3</p><span class="premise premise-chen">Chen hypothesis</span></div>
+              <h3>Concrete strictly 1RSB classes</h3>
+              <p>The hypotheses of Theorem 1.2 are verified for pure models of degree at least four above their static threshold, finite mixtures of minimum degree at least four with strictly convex ξ″<sup>−1/2</sup>, small even perturbations of pure even models of degree at least four, and an explicit nonconvex 4 + 12 example.</p>
+              <p class="result-footnote">The manuscript states the temperature, degree, coefficient, and small-perturbation restrictions for each case.</p>
+            </article>
+
+            <article class="result-card" id="theorem-1-4">
+              <div class="result-topline"><p class="result-number">Theorem 1.4</p><span class="premise premise-chen">Chen hypothesis*</span></div>
+              <h3>Other initial laws, with the same time exponent</h3>
+              <p>Separation extends to disorder-independent initial laws, adaptive convex combinations of prescribed laws with K<sub>N</sub> = O(N<sup>κ</sup>) and κ &lt; (d − 2)/2, and disorder-dependent laws whose relative entropy with respect to ν<sub>N</sub> is o(log N) in probability.</p>
+              <p class="result-footnote">*The asymptotic conclusions retain Chen. The finite-dimensional Haar comparison has no literature premise.</p>
+            </article>
+
+            <article class="result-card" id="theorem-1-5">
+              <div class="result-topline"><p class="result-number">Theorem 1.5</p><span class="premise premise-proved">No literature premise</span></div>
+              <h3>Five forms of stationary memory</h3>
+              <p>For finite mixtures with β<sub>d</sub> &lt; β &lt; β<sub>s</sub>, every fixed level 0 &lt; b &lt; q<sub>*</sub><sup>2</sup> has exponentially many slow modes, positive centered-spin projection, and a persistent connected correlation. Most Gibbs starting points remain far from equilibrium, and stationary endpoint mutual information is at least cN.</p>
+              <p class="result-footnote">For 0 &lt; b &lt; q<sub>*</sub><sup>2</sup>, all five conclusions share an event of probability at least 1 − Ce<sup>−aN</sup> and an exponential time scale.</p>
+            </article>
+
+            <article class="result-card" id="theorem-1-6">
+              <div class="result-topline"><p class="result-number">Theorem 1.6</p><span class="premise premise-proved">No literature premise</span></div>
+              <h3>Correlation at every level below q<sub>*</sub></h3>
+              <p>In the same finite-mixture regime, the centered-spin projection and stationary connected correlation reach every fixed level 0 &lt; b &lt; q<sub>*</sub>, with probability tending to one. The slow-mode count, typical-start separation, and information bound retain exponentially small failure probabilities.</p>
+              <p class="result-footnote">The stronger plateau has no asserted probability rate or matching upper bound.</p>
+            </article>
+
+            <article class="result-card" id="theorem-1-7">
+              <div class="result-topline"><p class="result-number">Theorem 1.7</p><span class="premise premise-proved">No literature premise</span></div>
+              <h3>Small eigenvalues near the dynamical threshold</h3>
+              <p>For mixtures satisfying Σ<sub>p≥2</sub> p<sup>5/2</sup>√c<sub>p</sub> &lt; ∞ and β<sub>d</sub> &lt; β<sub>s</sub>, exponentially many eigenvalues remain small as β decreases to β<sub>d</sub>. The largest global maximizer q<sub>d</sub> of A has contact of order 2m, which determines the spectral exponent.</p>
+              <p class="result-formula">λ<sub>⌊exp(κ<sub>*</sub>N)⌋</sub> ≤ exp[−(1 − ϑ)C<sub>d</sub>ε<sup>1+1/(2m)</sup>N]</p>
+              <p class="result-footnote">Here ε = β<sup>2</sup>/β<sub>d</sub><sup>2</sup> − 1. For fixed 0 &lt; ϑ &lt; 1 and sufficiently small fixed ε &gt; 0, the bound holds for large N with exponentially small failure probability. The count exponent κ<sub>*</sub> is independent of ε; the theorem concerns eigenvalues.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="formalization-section" id="formalization" aria-labelledby="formalization-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Formal statements and proofs</p>
+              <h2 id="formalization-title">The hypotheses stay visible.</h2>
+            </div>
+          </div>
+          <div class="formalization-grid">
+            <div class="formalization-copy">
+              <p>Universal pressure lower tails are proved in Lean for every finite mixture and every real β. No selected headline endpoint assumes a Subag result or a separate pressure-tail hypothesis.</p>
+              <p>Theorem 1.2, Corollary 1.3, and the asymptotic parts of Theorem 1.4 retain <a href="https://doi.org/10.1214/EJP.v18-2580">Chen’s finite-mixture Parisi formula</a> as an explicit theorem parameter. The finite-dimensional Haar comparison and Theorems 1.5–1.7 have no literature premise. Each result retains its mathematical model, temperature, and regularity assumptions.</p>
+              <p>The independent <a href="https://github.com/pmaronow/slowequilibration/blob/main/Challenge.lean">Challenge</a> states the selected claims, and the <a href="https://github.com/pmaronow/slowequilibration/blob/main/Solution.lean">Solution</a> supplies the proofs. The comparison configuration, exact dependencies, and verification records are part of the package.</p>
+            </div>
+            <div class="premise-table-wrap">
+              <table class="premise-table">
+                <caption>External literature premises of the selected Lean claims</caption>
+                <thead><tr><th scope="col">Result</th><th scope="col">Literature premise</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Theorem 1.2</th><td>Chen</td></tr>
+                  <tr><th scope="row">Corollary 1.3</th><td>Chen</td></tr>
+                  <tr><th scope="row">Theorem 1.4, asymptotic</th><td>Chen</td></tr>
+                  <tr><th scope="row">Theorem 1.4, finite-dimensional Haar</th><td>None</td></tr>
+                  <tr><th scope="row">Theorems 1.5–1.7</th><td>None</td></tr>
+                </tbody>
+              </table>
+              <p class="table-note">“None” refers to literature premises, with the stated mathematical hypotheses retained.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="materials-section" id="materials" aria-labelledby="materials-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Read, inspect, reproduce</p>
+              <h2 id="materials-title">All materials in one package.</h2>
+            </div>
+            <p>The verification record identifies source revisions, toolchain pins, and completed checks. Exact Lean declarations govern the formal claims.</p>
+          </div>
+          <div class="materials-grid">
+            <a class="material-link" href="https://github.com/pmaronow/slowequilibration/blob/main/Challenge.lean"><span class="material-kind">LEAN</span><span><strong>Challenge.lean</strong><span>Independent statement specification.</span></span><span class="link-arrow" aria-hidden="true"><svg class="external-arrow" viewBox="0 0 16 16" focusable="false"><path d="M4 12 12 4M4 4h8v8"/></svg></span></a>
+            <a class="material-link" href="https://github.com/pmaronow/slowequilibration/blob/main/Solution.lean"><span class="material-kind">LEAN</span><span><strong>Solution.lean</strong><span>Proofs of the selected statements.</span></span><span class="link-arrow" aria-hidden="true"><svg class="external-arrow" viewBox="0 0 16 16" focusable="false"><path d="M4 12 12 4M4 4h8v8"/></svg></span></a>
+            <a class="material-link" href="https://github.com/pmaronow/slowequilibration/blob/main/comparator.json"><span class="material-kind">JSON</span><span><strong>Comparator configuration</strong><span>Selected declarations and permitted axioms.</span></span><span class="link-arrow" aria-hidden="true"><svg class="external-arrow" viewBox="0 0 16 16" focusable="false"><path d="M4 12 12 4M4 4h8v8"/></svg></span></a>
+            <a class="material-link" href="https://github.com/pmaronow/slowequilibration/blob/main/formalization.yaml"><span class="material-kind">YAML</span><span><strong>Formalization metadata</strong><span>Scope, authorship, provenance, and external input.</span></span><span class="link-arrow" aria-hidden="true"><svg class="external-arrow" viewBox="0 0 16 16" focusable="false"><path d="M4 12 12 4M4 4h8v8"/></svg></span></a>
+            <a class="material-link" href="https://github.com/pmaronow/slowequilibration/blob/main/verification/README.md"><span class="material-kind">LOGS</span><span><strong>Verification record</strong><span>Check results and their source provenance.</span></span><span class="link-arrow" aria-hidden="true"><svg class="external-arrow" viewBox="0 0 16 16" focusable="false"><path d="M4 12 12 4M4 4h8v8"/></svg></span></a>
+            <a class="material-link" href="https://github.com/pmaronow/slowequilibration/blob/main/README.md"><span class="material-kind">GUIDE</span><span><strong>Build and reproduction</strong><span>Repository layout and verification commands.</span></span><span class="link-arrow" aria-hidden="true"><svg class="external-arrow" viewBox="0 0 16 16" focusable="false"><path d="M4 12 12 4M4 4h8v8"/></svg></span></a>
+            <a class="material-link" href="../manuscript/main.pdf"><span class="material-kind">PDF</span><span><strong>Manuscript</strong><span>The six results and their supporting proofs.</span></span><span class="link-arrow" aria-hidden="true"><svg class="external-arrow" viewBox="0 0 16 16" focusable="false"><path d="M4 12 12 4M4 4h8v8"/></svg></span></a>
+            <a class="material-link" href="https://github.com/pmaronow/slowequilibration/tree/main/manuscript"><span class="material-kind">TEX</span><span><strong>Manuscript source</strong><span>Buildable text, bibliography, and ancillary files.</span></span><span class="link-arrow" aria-hidden="true"><svg class="external-arrow" viewBox="0 0 16 16" focusable="false"><path d="M4 12 12 4M4 4h8v8"/></svg></span></a>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>P. M. Aronow and Patrick Lopatto</p>
+        <p>Lean statements, proofs, and supporting manuscript · <a href="https://github.com/pmaronow/slowequilibration">Source repository</a></p>
+      </footer>
+    </div>
+  </body>
+</html>

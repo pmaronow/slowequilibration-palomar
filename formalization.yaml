@@ -1,0 +1,106 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/v0.4.schema.json
+version: v0.4
+project:
+  name: Slow Equilibration and Persistent Stationary Correlations in Spherical Spin Glasses
+  description: 'Lean formalization of the six headline result groups: Theorem 1.2, Corollary 1.3, and
+    Theorems 1.4–1.7. Theorem 1.2, Corollary 1.3, and the asymptotic clauses of Theorem 1.4 are conditional
+    only on Chen’s finite-mixture Parisi formula. Universal pressure lower tails are proved internally.
+    The finite-dimensional Haar comparison and Theorems 1.5–1.7 have no literature premise. The manuscript
+    and exact model assumptions are included.'
+  authors:
+  - P. M. Aronow
+  responsible_maintainers:
+  - P. M. Aronow
+  license: Apache-2.0
+classification:
+  arxiv:
+  - math.PR
+  - math.LO
+  msc2020:
+  - 60K35
+  - 82B44
+  - 03B35
+sources:
+- title: Slow Equilibration and Persistent Stationary Correlations in Spherical Spin Glasses
+  authors:
+  - P. M. Aronow
+  - Patrick Lopatto
+  type: paper
+  relationship: formalizes
+  location: manuscript/main.tex and manuscript/main.pdf
+  note: Exactly the six headline groups numbered 1.2–1.7, with supporting proofs. The supplied author’s
+    note and final manuscript text are preserved.
+- title: The Aizenman–Sims–Starr scheme and Parisi formula for mixed p-spin spherical models
+  authors:
+  - Wei-Kuo Chen
+  id: https://arxiv.org/abs/1204.5115v1
+  type: paper
+  relationship: background
+  location: Theorem 1 and its Crisanti–Sommers representation
+  note: Chen2013FiniteParisi remains an explicit unproved premise for the first three headline groups.
+    It identifies the actual finite-mixture quenched pressure limit with the variational value; it is
+    not introduced as a global axiom.
+- title: Free energy landscapes in spherical spin glasses
+  authors:
+  - Eliran Subag
+  id: https://arxiv.org/abs/1804.10576v6
+  type: paper
+  relationship: background
+  location: Lemma 22 and the generalized TAP results cited by the manuscript
+  note: Universal PressureLowerTails, corresponding to Lemma 22, is proved internally for every finite
+    mixture and every real inverse temperature. No Subag proposition is a premise of an advertised headline
+    theorem. Historical module and predicate names retain their source attribution.
+related_formalizations:
+- id: https://github.com/pmaronow/slowequilibration-temp/tree/b020bce7f674675d7474740299b538edaa3cd25e
+  relationship: builds-on
+  note: Source of the completed six-headline proof development and manuscript. This package retains only
+    the transitive Lean proof closure, independent submission interfaces, required provenance, and current
+    verification evidence; it does not include historical working archives.
+- id: https://github.com/pmaronow/all-lean/tree/4b5409b513d8ae9160b29401bff2ce6d3e95e5f1
+  relationship: builds-on
+  note: Vendored Gaussian, probability, stochastic-calculus, and spin-glass foundations. File hashes and
+    source origins are recorded under vendor/all-lean/ and LICENSES/all-lean/; original library options
+    are preserved.
+- id: https://github.com/openai/math/tree/fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb/lean/OAI
+  relationship: adapts
+  note: Adapted GOE/resolvent, determinant, and spectral analysis. Original source paths and notices remain
+    in proof headers and LICENSES/openai-math-CriticalSK/.
+- id: https://github.com/openai/math/tree/1581d4cbdd69a0faf34b2089614fe2a814316a6a/lean/OAI/Probability/GaussianPropeller
+  relationship: adapts
+  note: Twelve adapted modules prove the smooth Ehrhard Gaussian heat-flow concavity input. Source paths,
+    module-system adaptations, and the upstream license are retained under vendor/openai-math/.
+automation:
+  methods:
+  - method: agent
+    models:
+    - GPT-6
+    framework: OpenAI Codex with parallel collaborating agents
+    tool_setup: Lean 4.35.0-rc2, pinned Mathlib, toolchain-bundled Comparator, and Linux verification
+      tools. Agents constructed proofs, audited manuscript correspondence, reviewed the universal pressure-tail
+      argument, and prepared the submission interfaces.
+  - method: agent
+    models:
+    - Claude Opus 5.5
+    - GPT-6.1-Sol
+    - GPT-6-Luna
+    framework: Claude Code orchestrating OpenAI Codex agents
+    notes: Historical source development recorded these models for proof repairs, audits, and mechanical
+      edits. The current package does not transfer historical comparator or independent-checker certificates
+      to a changed statement surface.
+review:
+  status: agent-reviewed
+  reviewers:
+  - OpenAI Codex parallel proof, mathematical correspondence, and submission-interface reviewers
+  notes: The manuscript underwent an adversarial review of all six proof paths, with independent exact
+    algebra and certificate checks. The final submission interfaces are checked separately; current commands,
+    results, and source identities are recorded under verification/. No Palomar registration or acceptance
+    is claimed.
+limitations:
+- Chen2013FiniteParisi is an explicit premise in the first three headline groups. Ordinary finite-mixture,
+  strict one-step certificate, nondegeneracy, threshold-gap, summability, temperature, and positivity
+  assumptions remain as stated.
+- Theorem 1.7 formalizes the actual ordered spectrum of the self-adjoint closure of the original-series
+  C² Langevin differential operator. It does not add an SDE-semigroup identity beyond that eigenvalue-only
+  claim.
+- Only the six headline groups are advertised submission claims. Other retained Lean declarations are
+  their proof infrastructure. Exact theorem types determine the formal scope.

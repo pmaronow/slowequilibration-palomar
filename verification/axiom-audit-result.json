@@ -1,0 +1,36 @@
+{
+  "recorded_at": "2026-10-19T02:11:27.906420+00:00",
+  "status": "PASS",
+  "command": [
+    "lake",
+    "env",
+    "lean",
+    "-j1",
+    "-DautoImplicit=false",
+    "-DwarningAsError=true",
+    "Audit.lean"
+  ],
+  "environment": {
+    "ELAN_TOOLCHAIN": "leanprover/lean4:v4.35.0-rc2",
+    "LEAN_NUM_THREADS": "1"
+  },
+  "exit_code": 0,
+  "elapsed_seconds": 11.41,
+  "selected_theorem_exports": 12,
+  "source_interface_declarations": 248,
+  "permitted_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "chen_explicit_premise_exports": 8,
+  "source_manifest": {
+    "path": "verification/source-checks.json",
+    "sha256": "2b720e644f4b56d198b49f2eb9a4c7e0cb79b075d3d1ca0c5d876fcdd4f4ec43"
+  },
+  "audit_source_sha256": "4b8ccc1ed681efead00fa477702990767ca45773d5396598d334bb1b40bb4755",
+  "log": "verification/axiom-audit.log",
+  "log_sha256": "edcce51ba2d8443b7eb44ca114bd725710f416f99aa23205e59839b57f852ef2",
+  "warnings": 0,
+  "errors": 0
+}

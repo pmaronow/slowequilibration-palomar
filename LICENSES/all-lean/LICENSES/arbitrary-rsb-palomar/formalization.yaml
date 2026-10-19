@@ -1,0 +1,246 @@
+version: v0.4
+
+project:
+  name: Replica symmetry breaking at arbitrary depth
+  description: >-
+    A Lean formalization of open phases with every prescribed finite replica
+    symmetry breaking depth in mixed even-spin Ising models at zero external
+    field and positive temperature. The first selected result constructs strictly
+    increasing even degrees beginning at four and a nonempty open set of
+    positive effective covariance coefficients, with an optimizing probability
+    measure having exactly k+1 support points. The independent statement uses
+    concrete Gaussian Cole–Hopf recursions and comparison against all finite
+    schemes at every competing depth. The substantive development constructs
+    minimizers over all probability measures and includes the revised
+    quadratic-inclusive universal transition, exact phase geometry and
+    asymptotics, atomic Hessian, entropy, and analytic comparison results.
+  authors:
+    - P. M. Aronow
+    - Patrick Lopatto
+  responsible_maintainers:
+    - P. M. Aronow
+    - Patrick Lopatto
+  license: MIT
+
+classification:
+  arxiv: [math.PR, math-ph]
+  msc2020: [60K35, 82B44]
+
+sources:
+  - title: Replica symmetry breaking at arbitrary depth
+    authors: [P. M. Aronow, Patrick Lopatto]
+    id: https://arxiv.org/abs/2609.05317
+    type: paper
+    location: Theorems 1.1 and 1.2, manuscript revision (16)
+    relationship: formalizes
+    note: >-
+      The mathematical comparison uses manuscript.tex SHA-256
+      1216a3820a4d632228f0a1218a53c1feda73d04a6bb11ab3eab8cfa1db9c2b9f. The supplied Revision (16) source has SHA-256
+      3302e39b8554fa851811c402d8aee3ccf32c8f37c727066f5c2fb79cd233bea6.
+      The corrected source changes only introductory overlap interpretation
+      and inclusive cutoff wording; numbered mathematical statements and
+      bibliography are preserved. The repository contains the substantive
+      development, with an independent
+      finite-step statement for the open-phase theorem, including depth zero.
+      The retained original transition is narrower; subsequent mathematical
+      extensions prove the revised universal Theorem 1.2 and selected
+      supporting targets. Both headline theorems have independent Challenge
+      statements.
+
+status:
+  scope: >-
+    Selected claims: open coefficient phases at every exact finite RSB depth,
+    and the universal high-degree transition with a unique critical coupling.
+    The Challenge compares every finite competitor depth. The underlying proof
+    gives full probability-measure minimization. Revised universal transition
+    wrappers allow quadratic terms under Xi.second 0 < 1 and use paper
+    nondegeneracy; Hessian positivity is proved rather than assumed.
+    General-measure time PDE assertions are distributional. All 41 nonremark
+    numbered targets have complete or explicitly stronger faithful interfaces.
+    The four remarks remain context; no complete formalization of all cited
+    background or of Remark A.8's all-positive Banach wording is claimed.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: [propext, Classical.choice, Quot.sound]
+  notes: >-
+    Proof-hole counts exclude the two deliberate theorem placeholders in
+    Challenge.lean. The selected Solution and its proof dependencies are
+    required to be hole-free; mechanical results are in docs/VERIFICATION.md.
+  main_results:
+    - declaration: ArbitraryRSB.arbitrary_finite_depth_open_set
+      file: Solution.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator.json
+    - declaration: ArbitraryRSB.universal_gardner_transition
+      file: Solution.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator.json
+
+automation:
+  methods:
+    - method: autonomous
+      models: [Sol 6.1]
+      framework: original autoformalization
+      tool_setup: >-
+        Original Lean development autoformalized by Sol 6.1, as identified by
+        the responsible maintainers. Original run costs and timing were not
+        independently established during preparation.
+    - method: agent
+      models: [Codex]
+      framework: Codex
+      tool_setup: >-
+        Subsequent local package preparation, source-preserving compiler
+        compatibility work, independent statement and proof bridges,
+        reproducible verification tooling, and public documentation.
+    - method: agent
+      models: [Codex]
+      framework: Codex mathematical extension
+      tool_setup: >-
+        New proof development for revised-paper targets, distinct from compiler
+        compatibility repairs. Verified additions include universal Theorem
+        1.2, criticality-only Hessian Lemma 2.6, entropy Lemma 3.2/Corollary 3.3,
+        full transition geometry and revised asymptotics, the all-measure
+        original-clock sharp first variation, expanded Section 2 and Section 4
+        results, finite-order Cole-Hopf stability, the closed-domain implicit
+        function theorem, exact Appendix A/B/C targets, and the full finite-atomic
+        physical Brownian Hessian integral with the same actual state driver.
+        Mathematical scope and proof routes are recorded in
+        COVERAGE.md; completed checks identify their exact source revision.
+    - method: agent
+      models: [Codex]
+      framework: Codex automated review
+      tool_setup: >-
+        Separate automated comparison of definitions, quantifiers,
+        normalization, domains, hypotheses, proof routes, and numbered targets
+        against the mathematical source. Mechanical verification is reported
+        separately from mathematical review.
+  notes: >-
+    Original Sol 6.1 autoformalization, Codex preparation and compatibility,
+    Codex mathematical extensions, and Codex automated review are distinct phases.
+    No human mathematical review is asserted. Expenditure was not tracked.
+
+fidelity:
+  divergences: >-
+    The selected open-phase theorem includes depth zero and nondegeneracy in
+    the substantive development. The independent statement uses the all-finite
+    Gaussian-recursion characterization rather than a PDE-defined functional
+    on every probability measure. Its Solution bridge uses the actual global
+    probability-measure minimizer. Original DepthPaper transition statements
+    retain their historical degree-at-least-four and internal Hessian inputs;
+    revised GeneralDepthPaper universal wrappers permit degree-two terms under
+    subcriticality and derive the Hessian invariant. Exact entropy identities
+    supplement the retained finite-Gibbs positivity route. Time PDE assertions
+    for arbitrary measures are weak or distributional. Lemma A.6 is proved for
+    all probability measures, strengthening the source atomic scope. Lemma C.2
+    uses bounded Gaussian reflection and association in place of the printed
+    covariance differentiation. Lemma C.1 states nonempty compact I explicitly
+    because the paper uses min I and preserves the exact polynomial degree and
+    exponential rate. Closed-domain Lemma B.4 is proved using relative
+    boundary derivatives and finite-order induction instead of a Whitney
+    extension. Lemma 2.2 uses an independently constructed physical-time
+    standard Brownian motion on the original sample space. Deterministic
+    inverse-clock Wiener transport identifies its square-root-volatility
+    integral with the actual state driver; normalized-time Ito calculus and
+    an L2 comparison prove convergence of the literal physical Hessian left
+    sums. The actual continuous gradient is a modification of the resulting
+    integral. Both endpoint atoms and zero origin volatility are included.
+    Brownian adaptation modulo null sets and future-increment independence
+    use the original clock past. Raw natural-filtration equality is not assumed;
+    no arbitrary-measure Hessian-integral extension is asserted.
+    Atomic coordinate neighborhoods use the product supremum norm, with
+    equivalent finite-dimensional norms changing local constants.
+    Lemma A.1(iii) uses a bounded Gaussian Fourier proof instead of Girsanov.
+    The four numbered remarks remain explanatory context. Remark A.8 has
+    supporting all-positive mixed bounds, but its Banach smoothness API is
+    proved on mass (0,2); the entire all-positive remark is not separately
+    certified. COVERAGE.md records exact domains, conditional infrastructure,
+    proof routes and cited background.
+
+review:
+  status: automated review; mechanically verified
+  reviewers: []
+  notes: >-
+    Codex performed automated statement and source review. The responsible
+    maintainers' authorship is not evidence of human mathematical review.
+    The verification status and checked proof-source identity are recorded
+    separately in docs/VERIFICATION.md.
+
+alignment:
+  namespace: ArbitraryRSB
+  statements:
+    - source: Theorem 1.1 (thm:main)
+      lean: ArbitraryRSB.arbitrary_finite_depth_open_set
+      module: Solution
+      status: verified
+      note: >-
+        Independent concrete all-finite-step variational statement with exact
+        support count and an open coefficient set; the development includes k=0.
+
+    - source: Theorem 1.2 (thm:gardner-main)
+      lean: ArbitraryRSB.universal_gardner_transition
+      module: Solution
+      status: verified
+      note: >-
+        Universal quadratic-inclusive subcritical covariance class and paper
+        nondegeneracy; no positive-Hessian hypothesis, exact critical/depth iff.
+        Independent finite-recursion definitions are connected to the full
+        measure functional, first variation, and physical pressure in Solution.
+    - source: Lemma 2.6 (lem:atomic-hessian)
+      lean: DepthPaper.RevisedCovariance.atomic_hessian
+      module: DepthPaper.RevisedCriticalHessian
+      status: verified
+      note: Actual atomic Hessian from chart criticality and contact curvature.
+    - source: Lemma 2.2 (lem:curvature)
+      lean: Verification.PhysicalStochasticTargets.lemma2_2_finite_atomic_physical_exact
+      module: Verification.PhysicalStochasticTargets
+      status: verified
+      note: >-
+        Full printed finite-support scope, including endpoint atoms and zero
+        origin volatility. Actual physical standard Brownian motion, common
+        state driver, progressive sqrt(Xi.second) times actual Hessian, genuine
+        left-sum limits and continuous gradient modification. The analytic and
+        martingale clauses also hold for arbitrary probability measures.
+    - source: Lemma 3.2 and Corollary 3.3
+      lean: Verification.RevisedTargets.entropyIdentity_exact
+      module: Verification.RevisedTargets
+      status: verified
+      note: >-
+        Exact atomic temperature identity and standing-context physical
+        diffusion entropy equality/positivity; entropySmooth_exact and
+        positiveEntropy_exact are the corresponding expanded checks.
+    - source: Theorem 4.12 and Corollary 5.2
+      lean: Verification.RevisedTargets.geometry_exact
+      module: Verification.RevisedTargets
+      status: verified
+      note: >-
+        Full universal geometry with common constants; asymptotics_exact checks
+        derivative-ratio normalization, the delta window and diagonal small-o.
+    - source: Lemma A.6 (lem:sharp-first-variation)
+      lean: DepthPaper.RevisedCovariance.sharp_first_variation
+      module: DepthPaper.RevisedSharpFirstVariation
+      status: verified
+      note: Original-clock drift/remainder, integrable and nonnegative, all measures.
+
+    - source: Lemma C.1 (lem:large-V)
+      lean: DepthPaper.large_variance_sharp
+      module: DepthPaper.RevisedLargeVarianceSharp
+      status: verified
+      note: >-
+        Exact sharp mixed-derivative power V^ell and decay rate
+        (min I)^2/2; compiled and axiom-audited supporting target.
+    - source: Lemma C.2 (lem:tanh-comparison)
+      lean: DepthPaper.revised_tanh_comparison
+      module: DepthPaper.RevisedDoobComparison
+      status: verified
+      note: >-
+        Actual Cole-Hopf derivative, every 0 < m <= 1 and real V >= 0;
+        both printed inequalities, compiled and axiom-audited.
+
+acknowledgements: >-
+  Lean, Mathlib, the preserved external Brownian, stochastic calculus,
+  Cole–Hopf, and spin glass foundation developments, and the bundled kernel
+  checking tools. Upstream authors, revisions, licenses, and adaptations are
+  recorded in docs/PROVENANCE.md and vendor provenance files.
+

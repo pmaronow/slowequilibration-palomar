@@ -1,0 +1,314 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/99c678e569c7c4c0772db297c5ddd5e4c9b6322e/schema/formalization.schema.json
+# Unpublished draft; human attribution and maintenance remain unresolved.
+version: v0.4
+project:
+  name: 'SK constant optimization: verified development'
+  description: Forty-six independently stated Lean claims cover the strict exponent range, actual finite
+    Gibbs and continuous-time heat-bath dynamics, balanced-flow mixing and the joint SK-start reduction,
+    entropy coverage and spin crossing, scalar Gaussian channels, Brownian meshes, Gaussian entropy, and
+    concrete dyadic/weighted Cholesky algebra. The full optimized SK mixing theorem remains unproved.
+  authors: []
+  license: Apache-2.0
+  responsible_maintainers: []
+classification:
+  arxiv:
+  - math.PR
+  - cs.LO
+  msc2020:
+  - 60K35
+  - 60J27
+  - 68V15
+sources:
+- title: A typical-start upper bound for low-temperature SK Glauber dynamics
+  id: openai/math@adc7f1241b42e322a6451854ab7e4b4c146bf78a
+  type: paper
+  location: https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/preprints/A-typical-start-upper-bound-for-low-temperature-SK-Glauber-dynamics-September-24-2026/paper.pdf
+  relationship: adapts
+  note: Formalizes selected finite and elementary components of an optimized informal argument; does not
+    claim formalization of the cited theorem. Novelty of the optimized argument has not been established
+    externally.
+  license: unknown
+  author_endorsement: not-contacted
+related_formalizations: []
+status:
+  scope: The 46 Challenge claims have complete Solution proofs. The development has no proof holes or
+    custom axioms; Challenge contains the deliberate independent statement placeholders prescribed by
+    the template. Frozen selected build and bundled three-kernel replay are
+    recorded in verification/final46-*.log; the frozen all-development audit is final-development-axioms.log.
+    The current aggregate audit is verification/checkpoint-2026-10-10-development-axioms.log.
+    The October 10 continuation adds actual local lag and
+    dependent-block MGFs, continuous normalized posterior row MGFs and population second moments,
+    variance-sensitive empirical covariance and adapted OpenAI Parisi refinement/derivative
+    lemmas, with their separate scope recorded in ../CONTINUATION_PROGRESS.md and dated verification logs.
+    The later user-requested checkpoint also proves actual finite-temperature full support,
+    literal scalar energy-entropy identities, continuous D reference normalization, actual full
+    scalar mixed-row concentration, Gibbs transport, spin pinning and query path stability;
+    current integration records are checkpoint-2026-10-10-*.log.
+    The exact full target and remaining flow-probability
+    proposition are transparent definitions, not proved claims. See README.md for mathematical gaps. This
+    is an unpublished local draft; human authors and responsible maintainers remain unspecified.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+automation:
+  methods:
+  - method: autonomous
+    models:
+    - GPT-6
+    framework: Codex multi-agent workspace
+    tool_setup: Autonomous proof research and independent agent audits; Lean 4, Mathlib, linarith, norm_num,
+      ring, elementary analysis and graph proofs; toolchain-bundled Comparator, Lean checker, NanoDa,
+      and con-ron.
+    cost:
+      wall_time: elapsed effort recorded in progress.log; exact total compute time not tracked
+      spend_usd: not tracked
+      hardware: managed cloud executor
+    prompting_notes: User requested autonomous constant optimization, followed by the simplest streamlined
+      proof, a writeup, and Lean formalization to Palomar standards. Parallel agents were instructed to
+      audit the mathematics skeptically and distinguish finite certificates from the unformalized full
+      SK theorem.
+  spend_usd: not tracked
+  notes: Development was produced in AI agent sessions; the continued Parisi proofs also adapt explicitly
+    attributed Apache-2.0 OpenAI Lean sources at commit fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb. No
+    human proof review, registry submission, publication, or endorsement by the source authors occurred.
+    Human author attribution and a responsible maintainer have not been specified; the empty fields above
+    deliberately prevent treating this metadata as submission-ready.
+fidelity:
+  divergences: The informal optimized exponent range is 0<c<1/4, while the source states c=1/40000000.
+    Lean proves the strict parameter system and a broad collection of genuine analytic, probabilistic,
+    geometric and finite-chain ingredients. It defines actual GOE disorder, Gibbs-start law and continuous-time
+    dynamics and proves their reduction to a high-probability balanced-flow estimate. That model-specific
+    estimate and the full theorem remain unproved. The fixed-field continuous tanh identities,
+    normalized posterior row moments and block lag bounds are proved; the full random-seed Parisi
+    process and source scalar callbacks are now constructed. The literal algorithm iid-row law,
+    linked likelihood and energy domination, sharp weighted temporal concentration, grid quadrature,
+    connecting paths and actual witness exclusion remain open. These limits are explicit in README.md and the protected
+    statements.
+review:
+  status: AI self-assessed; no independent human editorial review
+  reviewers:
+  - none
+  notes: Parallel AI mathematical audits, independent statement/parameter review, successful clean builds,
+    source-structure checks, axiom inspection, and bundled Comparator replay through three kernels. Palomar
+    editorial interest and statement fidelity have not been assessed by the registry.
+alignment:
+  namespace: SKConstants.Certified
+  statements:
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.parameter_range
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.explicit_certificate
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.finite_entropy_coverage
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.rectangle_bound
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.sampled_graph_crossing
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.coarse_graph_crossing
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.probability_sandwich
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.scalar_discrete_correction
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.flow_numerical_limit
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.flow_natural_limit
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.finite_gibbs_probability
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.gibbs_diagonal_invariance
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.gibbs_entropy_coverage
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.optimized_natural_rate
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.conditional_optimized_convergence
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.canonical_dyadic_partition
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.canonical_dyadic_gram_bound
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.weighted_cholesky_closure
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.independent_entropy_crossing
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.actual_heatBath_kernel
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.heatBath_diagonal_invariance
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.logarithmic_dissipation
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.actual_gibbs_variational
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.actual_gibbs_perturbation_KL
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.actual_heatbath_balanced_flow_mixing
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.actual_SK_typical_start_from_flow
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.concrete_gaussian_bilinear_covariance
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.actual_adaptive_gaussian_assembly
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.scalar_prior_upper_tail
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.scalar_prior_lower_tail
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.actual_scalar_innovation_variance
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.gaussian_square_exact_mgf
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.actual_brownian_mesh_maximal_tail
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.concrete_weighted_cholesky
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.concrete_cholesky_continuity
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.actual_measure_endpoint_coverage
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.actual_brownian_mesh_L2_isometry
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.actual_gaussian_smoothing_KL
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.factorial_moments_imply_local_MGF
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.actual_gaussian_vector_smoothing_KL
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.actual_heatbath_enlarged_boundary
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.actual_spin_coarse_crossing
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+  - source: 'writeup/simple-formal-status.tex: exact formal scope'
+    lean: SKConstants.Certified.concrete_cholesky_full_energy
+    module: Solution
+    status: proved
+    note: This independently stated component claim is not the full optimized SK theorem.
+acknowledgements: The source paper and its cited equilibrium results, Lean and Mathlib authors, and PalomarRegistry/PalomarTemplate
+  at commit 2891de4c48955af824969a263d31b25e7a9a1406. AI agents are credited under automation, not as
+  human authors or responsible maintainers.

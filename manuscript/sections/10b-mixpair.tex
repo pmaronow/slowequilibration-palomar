@@ -1,0 +1,615 @@
+\chapter{Mixed models: pair estimates and counts in fixed energy windows}\label{sec:mixpair}
+
+In this section, we prove \cref{thm:mc-counts}, which supplies the critical points of the center field $H_Q$ used in \cref{sec:mixbands,sec:condproof} for every covariance that satisfies the 1RSB assumptions of \cref{def:th-certificate}. It has two parts. The first is that a fixed energy window around the centering $m_N$ contains a bounded expected number of critical points of $H_Q$ with normalized radial derivative near $K_0$. The second is that, when the window is large, with probability close to one the window contains at least one such point and the maximum of $H_Q$ does not exceed its upper end. The first assertion follows from the one-point estimates of \cref{sec:mixone}. The second requires an upper bound for the second moment of the number of retained maxima in the window, which is \cref{thm:mp-count}. Its proof is the main task of this section.
+
+We split the ordered pairs of retained maxima according to their overlap $r$. Pairs with $r\ge\delta$ do not occur, by the separation property of the selection event of \cref{sec:mixone} (\cref{thm:mo-filter}). Pairs with $r\le-\delta$ are controlled deterministically by an elementary bound for spherical codes in a cap (\cref{lem:mp-gram}): every retained point has overlap at most $-\delta$ with at most a fixed number of other retained points. For $|r|<\delta$, we discard the selection indicator and use the two-point Kac--Rice formula. Its integrand factorizes when $|r|\le N^{-\alpha}$ with $1/4<\alpha<1/2$ (\cref{thm:mp-local-pair}). The remaining range is suppressed by the density $f_N(r)$ of the overlap of two independent uniform points, which satisfies $f_N(r)\le\sqrt N\exp(-(N-3)r^2/2)$ for $N\ge3$. The factorization requires control of three ratios: the density of the two gradients at zero, the density of the two pairs of value and radial derivative, and the expected product of the two Hessian determinants. The first two are explicit Gaussian computations (\cref{sec:mp-gaussian}). For the determinants (\cref{sec:mp-determinants}), we write each Hessian as a bulk block bordered by one row and a corner entry. Its determinant is then the bulk determinant times a Schur complement that concentrates around a deterministic value. We compare the two bulk determinants using a maximal correlation inequality for Gaussian vectors, whose constant does not depend on the dimension. No parity assumption is made, and all counts are ordinary: in an even model, both points of an antipodal pair are counted.
+
+The joint Gaussian law of values, radial derivatives, gradients, and Hessians at two points of the sphere was computed by Ben Arous, Subag, and Zeitouni \cite[Lemmas~13--15 and (4.6)--(4.10); Lemma~54 and (A.2)--(A.8)]{BenArousSubagZeitouni2020}.
+We derive the formulas we need directly from the covariance. Here the marks are of order $N$, both signs of the overlap occur, and we need the exact size of the conditional mean of the Hessian. The second moment method for critical points of spherical spin glasses goes back to Subag \cite{Subag2017complexity}. For general mixed models without a constant or linear component, Belius and Schmidt \cite[Theorem~1.1]{BeliusSchmidt2022} proved that the second moment of the number of local maxima with a prescribed radial derivative matches the square of its first moment on the exponential scale. Their count has no energy constraint and uses shrinking windows for the normalized radial derivative. The count here fixes an unnormalized energy window of bounded width and also restricts the radial derivative. For pure models, the extremal process of the critical values was identified by Subag and Zeitouni \cite{SubagZeitouni2017}. Here we prove only an upper bound for the second moment of the number of critical points in a fixed energy window, which is all that \cref{thm:mc-counts} requires.
+
+The ground-state energy $E_0$ and the radial derivative $K_0$ come from \cref{prop:th-structure}. From \cref{sec:kacrice}, we use the conditioned laws (\cref{def:kr-conditioned,lem:kr-conditioned}), the Gaussian concentration and edge estimates (\cref{lem:kr-gaussian}), the determinant moments of \cref{prop:kr-determinant}, the bordered determinant bound of \cref{lem:kr-border}, the two-point conditioned law of \cref{sec:kr-border}, and the Kac--Rice formulas \cref{prop:kr-coefficient,thm:kr-marked,cor:kr-count}. From \cref{sec:mixone}, we use the consequences of \cref{cor:mo-interface} listed in \cref{sec:mp-setting}. \Cref{thm:mc-counts} is used in \cref{sec:mixbands} for the concentration of the Gibbs measure on the bands (\cref{thm:mb-capture}) and in \cref{sec:condproof} for the proof of \cref{thm:main-condensed}.
+
+
+\section{Setting, inputs, and parameters}\label{sec:mp-setting}
+
+\paragraph{Standing assumptions.}
+Throughout this section, $\xi$ is a finite mixture with minimum degree $d\ge4$, and $\beta>0$ is such that $(\xi,\beta)$ is strictly 1RSB with a nondegenerate contact at $Q$ (\cref{def:th-certificate}), with 1RSB parameters $x,Q\in(0,1)$. The number of supported degrees and their parities are arbitrary. As in \cref{def:pre-model}, $\xi$ is \emph{pure} if exactly one coefficient is positive and \emph{non-pure} otherwise. We write $\xi_Q(r)=\xi(Qr)=\sum_pc_pQ^pr^p$, so that $\xi_Q(1)=\xi(Q)$, $\xi_Q'(1)=a_Q$, and $\xi_Q''(1)=b_Q$. Because every supported degree is at least $d$, we have, for $0\le j\le4$ and $|r|\le1$,
+\begin{equation}\label{eq:mp-derivative-orders}
+\abs{\xi_Q^{(j)}(r)}\le C_j\abs r^{d-j},\qquad C_j=\sum_pc_pQ^p\,p(p-1)\cdots(p-j+1).
+\end{equation}
+
+\paragraph{The center field and its marks.}
+We use the polynomial extension of $H_N$ to $\R^N$ (\cref{sec:kr-notation}), the center field $H_Q(u)=H_N(\sqrt Q\,u)$, and the radial derivative $K_Q(u)=u\cdot\nabla H_Q(u)$, for $u\in\R^N$. For all $u,v\in\R^N$,
+\begin{equation}\label{eq:mp-kernel}
+\E H_Q(u)H_Q(v)=N\xi_Q(R(u,v)),
+\end{equation}
+and every covariance used below is obtained by differentiating the kernel $N\xi_Q(u\cdot v/N)$. Here $\nabla$, $\nabla^j$, and $\partial_v$ denote Euclidean derivatives, while $\nabla_{S_N}$ and $\nabla^2_{S_N}$ are the spherical gradient and Hessian. At a critical point $u\in S_N$, the spherical Hessian is the compression of $\nabla^2H_Q(u)$ to $u^\perp$ minus $(K_Q(u)/N)\mathrm{Id}$, by \eqref{eq:kr-intrinsic}. A critical point $u$ carries the normalized marks $h=H_Q(u)/N$ and $k=K_Q(u)/N$ (in \cref{sec:mixone}, the normalized energy is denoted $e$, and $h$ is the unnormalized energy). We write $D(u)=\abs{\det\nabla^2_{S_N}H_Q(u)}$. All conditional laws are the explicit Gaussian regression laws of \cref{sec:kacrice}: $\E_{h,k,u}$ denotes the conditioned law of \cref{def:kr-conditioned} at $u$ with marks $(h,k)$, and $\E_{\mathrm{pair}}$ denotes the two-point conditioned law of \cref{sec:kr-border} at a pair $(u_1,u_2)$ with marks $(h_1,k_1,h_2,k_2)$. These laws are defined at every value of the marks, and they describe the conditional law of the whole field.
+
+For a non-pure mixture, the covariance matrix $\Sigma_Q$ of $(H_Q(u),K_Q(u))/\sqrt N$ is positive definite (\cref{lem:kr-one-point}). In a pure model of degree $p$, we have $K_Q=pH_Q$ by Euler's identity, the matrix $\Sigma_Q$ is singular, and the energy is the only mark; see \cref{rem:mp-pure}. In a pure model, every mark domain below is restricted to the compatible graph $k=ph$.
+
+\paragraph{Notation.}
+For a positive definite matrix $\Gamma$, we write $p_\Gamma$ for the centered Gaussian density with covariance $\Gamma$, and $p_N(h,k)=N\,p_{\Sigma_Q}(\sqrt Nh,\sqrt Nk)$ for the density of the normalized marks at a point, as in \eqref{eq:kr-disintegration}. We write $\norm{X}_q=(\E\abs X^q)^{1/q}$ and $\norm A$ for the operator norm of a matrix or multilinear form. As in \cref{sec:kacrice}, $W_{m,N}=\sqrt{b_Qm/N}\,G_m$, whose entries have variance $b_Q/N$ off the diagonal and $2b_Q/N$ on it, and $\mu_{m,N}(k)=\E\abs{\det(W_{m,N}-k\,\mathrm{Id}_m)}$. Throughout, $C$ and $c$ denote positive constants that may change from line to line. They depend only on $\xi$, $\beta$, the 1RSB parameters, the rectangle $\mathcal K_0$, and the gap $\kappa$ fixed below, and on the moment order $q$, the exponent $\alpha$, and the overlap cutoff $\eps$ of the selection event when these appear. They do not depend on $N$, on the points $u_1,u_2$, on the overlap $r$, on the marks in $\mathcal K_0$, or on the window half-width $L$, unless this is indicated.
+
+\paragraph{Inputs from \cref{sec:thermal}.}
+By \cref{prop:th-structure}, the ground-state energy $E_0$, the radial derivative $K_0$, and the slope $c_0=\beta x\in(0,\beta)$ are defined, and $K_0>2\sqrt{b_Q}$. We fix
+\begin{equation}\label{eq:mp-K0}
+\kappa=\tfrac12\bigl(K_0-2\sqrt{b_Q}\bigr),\qquad I=\bigl[2\sqrt{b_Q}+\kappa,\,K_0+1\bigr],\qquad \mathcal K_0=[E_0-1,E_0+1]\times I.
+\end{equation}
+Every value $k\in I$ of the normalized radial derivative lies at distance at least $\kappa$ above the edge $2\sqrt{b_Q}$ of the spectrum of $W_{N-1,N}$. All local estimates in \cref{sec:mp-gaussian,sec:mp-determinants,sec:mp-pair} are uniform over marks $(h_i,k_i)\in\mathcal K_0$.
+
+\paragraph{Inputs from \cref{sec:mixone}.}
+We use the following parts of \cref{cor:mo-interface}, which holds for pure and non-pure covariances.
+\begin{enumerate}[label=(M\arabic*)]
+\item\label{it:mp-M1} \emph{Selection event} (\cref{cor:mo-interface}(v), from \cref{thm:mo-filter,def:mo-retained,prop:mo-filter-loss}). Let $\eta>0$ be the endpoint overlap of \cref{cor:mo-interface}. For every $\eps\in(0,1-\eta)$, there exist an open interval $U$ with $K_0\in U$ and $\overline U\subset I$, a width $w_\eps\in(0,1]$, constants $C,c>0$, and a bounded Borel function $G_\eps(H,u)\in\{0,1\}$ of the field and of a point $u\in S_N$ (the indicator $\mathcal G_\eps$ of the selection event in \cref{def:mo-retained}), with the following properties. We write $\mathcal K_\eps=[E_0-w_\eps,E_0+w_\eps]\times\overline U$; the interval $U$ and the width $w_\eps$ (denoted $\delta$ in \cref{sec:mixone}) may be taken as small as desired. A critical point $u$ with marks in $\mathcal K_\eps$ and $G_\eps(H,u)=1$ is called \emph{retained}; it is a nondegenerate local maximum of $H_Q$ on $S_N$.
+\begin{enumerate}[label=(\roman*)]
+\item If $u\ne v$ are retained critical points, then $R(u,v)<\eps$.
+\item Uniformly in $u\in S_N$ and $(h,k)\in\mathcal K_\eps$,
+\begin{equation}\label{eq:mp-filter-loss}
+\E_{h,k,u}\bigl[D(u)\bigl(1-G_\eps(H,u)\bigr)\bigr]\le Ce^{-cN}\,\E_{h,k,u}D(u).
+\end{equation}
+\end{enumerate}
+\item\label{it:mp-M2} \emph{Centering and expected counts in fixed windows} (\cref{cor:mo-interface}(ii), from \cref{thm:mo-microscopic}). The centering $m_N$, defined from $U$, satisfies $m_N=NE_0-\log N/(2c_0)+O(1)$, and for all fixed $a<b$,
+\begin{equation}\label{eq:mp-window-mean}
+\E\#\bigl\{u\in S_N:\nabla_{S_N}H_Q(u)=0,\ H_Q(u)-m_N\in[a,b],\ K_Q(u)/N\in U\bigr\}\to e^{-c_0a}-e^{-c_0b}.
+\end{equation}
+\item\label{it:mp-M3} \emph{Upper tail of the maximum} (\cref{cor:mo-interface}(iv)). For every $L\ge0$,
+\begin{equation}\label{eq:mp-upper-tail}
+\limsup_{N\to\infty}\Pp\Bigl(\max_{S_N}H_Q>m_N+L\Bigr)\le e^{-c_0L}.
+\end{equation}
+\end{enumerate}
+Note that the denominator in \eqref{eq:mp-filter-loss} is $\E_{h,k,u}D(u)=\mu_{N-1,N}(k)$, the expected absolute determinant over all critical points; in \cref{sec:mixone} it is denoted $d_N^{\rm all}(k)$. We also note that the expected counts \eqref{eq:mp-window-mean} include all critical points with normalized radial derivative in $U$, not only local maxima.
+
+The selection event is built in \cref{sec:mixone} from the zero-temperature contact inequality for the field $H_Q$, that is, from the strict 1RSB property of its ground state (\cref{prop:th-structure}(3)). Given this property, \cite[Lemma~3.5]{HuangSellke2024} gives the formulas for the ground-state parameters and the strict inequality (3.4), on which the conditional ground-state trial of \cite[Lemma~3.11 and Proposition~3.13]{HuangSellke2024} rests.
+Each condition defining $G_\eps$ is invariant under rotations, so that $G_\eps(H\circ O^{-1},Ou)=G_\eps(H,u)$ for $O\in O(N)$. The arguments below discard the selection indicator in every pair integrand and use neither this invariance nor any two-point property of $G_\eps$.
+
+\paragraph{Parameters.}
+\Cref{tab:mp-parameters} lists the parameters of this section in the order in which they are chosen. We fix all of them before $N\to\infty$, and send the window half-width $L$ to infinity only after $N\to\infty$, in the last step of the proof of \cref{thm:mc-counts}. Narrowing $U$ or decreasing $w_\eps$ preserves every local estimate, because those estimates are uniform on the larger rectangle $\mathcal K_0$.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{@{}p{0.2\textwidth}p{0.49\textwidth}p{0.2\textwidth}@{}}
+\toprule
+Parameter & Role & Depends on\\
+\midrule
+$\xi,\beta,x,Q$ & covariance, temperature, and 1RSB parameters & fixed\\
+$E_0,K_0,c_0$ & ground-state parameters and slope (\cref{prop:th-structure}) & $\xi,\beta$\\
+$\kappa,\ I,\ \mathcal K_0$ & edge gap and initial mark rectangle \eqref{eq:mp-K0} & $\xi,\beta$\\
+$\delta_0$ & overlap range of the Gaussian estimates (\cref{sec:mp-gaussian}) & $\xi,Q,\mathcal K_0$\\
+$\delta_1\le\delta_0$ & overlap range of \cref{lem:mp-regular} & $\xi,Q,\mathcal K_0$\\
+$\delta\le\delta_0$ & local pair cutoff (\cref{thm:mp-local-pair}) & $\xi,Q,\mathcal K_0$\\
+$\eps$ & separation of retained maxima, $0<\eps<\min\{\delta^2/2,1-\eta\}$; fixed before \cref{cor:mo-interface} is applied & $\delta$, $\eta$\\
+$U,\ w_\eps,\ G_\eps,\ m_N$ & radial interval, width, selection indicator, and centering in \ref{it:mp-M1}--\ref{it:mp-M2}, with $\mathcal K_\eps\subset\mathcal K_0$ & $\eps$\\
+$\alpha\in(1/4,1/2)$ & local pair exponent & free\\
+$L$ & window half-width & fixed as $N\to\infty$\\
+\bottomrule
+\end{tabular}
+\caption{The parameters of \cref{sec:mixpair} and the order in which they are chosen.}\label{tab:mp-parameters}
+\end{table}
+
+
+\section{The two-point Gaussian structure}\label{sec:mp-gaussian}
+
+For the local two-point and bulk determinant estimates below, we assume $N\ge3$. Fix $u_1,u_2\in S_N$ with overlap $r=R(u_1,u_2)\in(-1,1)$, and let $s_r=\sqrt{1-r^2}$ and $n=N-2$. Let $e_1,\dots,e_n$ be an orthonormal basis of the orthogonal complement of $\{u_1,u_2\}$, and let
+\begin{equation}\label{eq:mp-frame}
+t_1=\frac{u_2-ru_1}{\sqrt N\,s_r},\qquad t_2=\frac{u_1-ru_2}{\sqrt N\,s_r}.
+\end{equation}
+Then $(e_1,\dots,e_n,t_i)$ is an orthonormal basis of $u_i^\perp$, the vector $t_i$ points from $u_i$ toward the other point, and
+\begin{equation}\label{eq:mp-frame-products}
+t_1\cdot u_2=u_1\cdot t_2=\sqrt N\,s_r,\qquad t_1\cdot t_2=-r.
+\end{equation}
+The direction $t_2$ is the negative of the direction used at $u_2$ in the proof of \cref{lem:kr-two-point} and in \cite{BenArousSubagZeitouni2020}; this changes the signs of some off-diagonal covariances and no density or determinant. We use the in-plane gradients $g_i=\partial_{t_i}H_Q(u_i)$, the vectors $Z_i=(H_Q(u_i),K_Q(u_i))/\sqrt N$ and $Z=(Z_1,Z_2)\in\R^4$, and the following deterministic functions of $r$:
+\begin{equation}\label{eq:mp-functions}
+\begin{gathered}
+c(r)=s_r^2\xi_Q''(r)-r\xi_Q'(r),\qquad \omega(r)=s_r^2\xi_Q'''(r)-2r\xi_Q''(r),\qquad \rho(r)=\frac{\xi_Q''(r)}{b_Q},\\
+\chi(r)=s_r\begin{pmatrix}\xi_Q'(r)\\ \xi_Q'(r)+r\xi_Q''(r)\end{pmatrix},\qquad
+\Sigma_Q(r)=\begin{pmatrix}\xi_Q(r)&r\xi_Q'(r)\\ r\xi_Q'(r)&r\xi_Q'(r)+r^2\xi_Q''(r)\end{pmatrix},\\
+\gamma(r)=\frac{a_Q}{a_Q^2-c(r)^2},\qquad \tau(r)=-\frac{c(r)}{a_Q^2-c(r)^2},\qquad
+\theta(r)=1-\frac{a_Q\,s_r^2\,\xi_Q''(r)^2}{b_Q\bigl(a_Q^2-\xi_Q'(r)^2\bigr)}.
+\end{gathered}
+\end{equation}
+Note that $\Sigma_Q(1)=\Sigma_Q$. We define the $4\times4$ matrix
+\begin{equation}\label{eq:mp-M}
+M(r)=\begin{pmatrix}\Sigma_Q-\gamma(r)\chi(r)\chi(r)^{\mathsf T}&\Sigma_Q(r)-\tau(r)\chi(r)\chi(r)^{\mathsf T}\\ \Sigma_Q(r)-\tau(r)\chi(r)\chi(r)^{\mathsf T}&\Sigma_Q-\gamma(r)\chi(r)\chi(r)^{\mathsf T}\end{pmatrix}
+\end{equation}
+and the row vectors $\ell_1(r),\ell_2(r)\in\R^4$,
+\begin{equation}\label{eq:mp-ell}
+\ell_1(r)=\Bigl(-s_r\omega(r)\gamma(r)\chi(r)^{\mathsf T},\ s_r^2\bigl(\xi_Q''(r),\,2\xi_Q''(r)+r\xi_Q'''(r)\bigr)-s_r\omega(r)\tau(r)\chi(r)^{\mathsf T}\Bigr),
+\end{equation}
+with $\ell_2(r)$ obtained from $\ell_1(r)$ by exchanging its first two and its last two coordinates. Using \eqref{eq:mp-derivative-orders}, we see that $\xi_Q'(r)=O(\abs r^{d-1})$ and $c(r)=O(\abs r^{d-2})$, and $M(r)\to\operatorname{diag}(\Sigma_Q,\Sigma_Q)$ as $r\to0$. We fix $\delta_0\in(0,1/2]$ such that, for $\abs r\le\delta_0$, we have $\abs{\xi_Q'(r)}\le a_Q/2$ and $\abs{c(r)}\le a_Q/2$, and, for a non-pure mixture, $\frac12\lambda_{\min}(\Sigma_Q)\mathrm{Id}\le M(r)\le2\norm{\Sigma_Q}\mathrm{Id}$, and such that $\delta_0$ is at most the constant $\rho_0$ of \cref{lem:kr-two-point}, applied with $g=\kappa$ and $\mathcal K_2=\mathcal K_0\times\mathcal K_0$ for a non-pure mixture, and with $\mathcal K_2=(\mathcal K_0\times\mathcal K_0)\cap\{k_1=ph_1,\ k_2=ph_2\}$ in a pure model. With this choice, the two-point conditioned law is defined for $\abs r\le\delta_0$.
+
+\begin{lemma}[Two-point Gaussian structure]\label{lem:mp-regression}
+Let $\xi$ be a non-pure mixture and $\abs r\le\delta_0$.
+\begin{enumerate}[label=(\alph*)]
+\item The transverse gradient pairs $(\partial_{e_j}H_Q(u_1),\partial_{e_j}H_Q(u_2))$, $1\le j\le n$, are independent of each other and of $(Z,g_1,g_2)$, and have covariance $\bigl(\begin{smallmatrix}a_Q&\xi_Q'(r)\\ \xi_Q'(r)&a_Q\end{smallmatrix}\bigr)$. The pair $(g_1,g_2)$ has covariance $\bigl(\begin{smallmatrix}a_Q&c(r)\\c(r)&a_Q\end{smallmatrix}\bigr)$, and
+\begin{equation}\label{eq:mp-mark-gradient}
+\Cov(Z_1,g_1)=\Cov(Z_2,g_2)=0,\qquad \Cov(Z_2,g_1)=\Cov(Z_1,g_2)=\chi(r).
+\end{equation}
+Conditionally on $\nabla_{S_N}H_Q(u_1)=\nabla_{S_N}H_Q(u_2)=0$, the vector $Z$ is centered Gaussian with covariance $M(r)$.
+\item Let $(h_i,k_i)\in\mathcal K_0$ and consider the two-point conditioned law $\E_{\mathrm{pair}}$ with these marks. In the frame $(e_1,\dots,e_n,t_i)$,
+\begin{equation}\label{eq:mp-hessian-blocks}
+-\nabla^2_{S_N}H_Q(u_i)=\begin{pmatrix}k_i\mathrm{Id}_n-W^{(i)}&-y_i\\-y_i^{\mathsf T}&k_i-z_i\end{pmatrix},
+\end{equation}
+where $W^{(i)}=(\partial_{e_j}\partial_{e_l}H_Q(u_i))_{j,l\le n}$, $y_i=(\partial_{e_j}\partial_{t_i}H_Q(u_i))_{j\le n}$, and $z_i=\partial_{t_i}\partial_{t_i}H_Q(u_i)$. Under $\E_{\mathrm{pair}}$, the following hold.
+\begin{enumerate}[label=(\roman*)]
+\item The pair $(W^{(1)},W^{(2)})$ is independent of $(y_1,y_2,z_1,z_2)$, and each $W^{(i)}$ has the law of $W_{n,N}$. The standardized entries of $W^{(1)}$ and $W^{(2)}$ in the same position have covariance $\rho(r)$, and entries in different positions are uncorrelated.
+\item The pair $(y_1,y_2)$ is centered and independent of $(z_1,z_2)$, with $\Cov(y_i)=(b_Q\theta(r)/N)\,\mathrm{Id}_n$. The coordinate pairs $(y_{1,j},y_{2,j})$, $1\le j\le n$, are independent.
+\item The corners satisfy $\E z_i=\ell_i(r)M(r)^{-1}(h_1,k_1,h_2,k_2)^{\mathsf T}$ and $\Var(z_i)\le2b_Q/N$. In particular, $\abs{\E z_i}\le C\abs r^{d-2}$.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+The corners $z_1$ and $z_2$ need not be asymptotically uncorrelated at $r=0$: their unconditional covariance at $r=0$ is $\xi_Q''''(0)/N$, which is nonzero when $d=4$. Each corner has variance $O(1/N)$, and this correlation does not affect the arguments below.
+
+\begin{proof}
+All covariances are derivatives of the kernel $N\xi_Q(x\cdot y/N)$ in fixed directions $v,v',w,w'$ of $\R^N$. Writing $R=R(x,y)$, we have
+\begin{equation}\label{eq:mp-kernel-derivatives}
+\begin{aligned}
+\Cov(H_Q(x),\partial_wH_Q(y))&=\xi_Q'(R)\,(x\cdot w),\\
+\Cov(\partial_vH_Q(x),\partial_wH_Q(y))&=\xi_Q'(R)\,(v\cdot w)+\frac{\xi_Q''(R)}N(v\cdot y)(x\cdot w),
+\end{aligned}
+\end{equation}
+and $\Cov(\partial_v\partial_{v'}H_Q(x),\partial_w\partial_{w'}H_Q(y))$ equals
+\begin{equation}\label{eq:mp-fourth-derivative}
+\begin{aligned}
+&\frac{\xi_Q''(R)}N\bigl[(v\cdot w)(v'\cdot w')+(v\cdot w')(v'\cdot w)\bigr]+\frac{\xi_Q''''(R)}{N^3}(v\cdot y)(v'\cdot y)(x\cdot w)(x\cdot w')\\
+&\quad+\frac{\xi_Q'''(R)}{N^2}(v\cdot y)\bigl[(v'\cdot w)(x\cdot w')+(v'\cdot w')(x\cdot w)\bigr]\\
+&\quad+\frac{\xi_Q'''(R)}{N^2}(v'\cdot y)\bigl[(v\cdot w)(x\cdot w')+(v\cdot w')(x\cdot w)\bigr].
+\end{aligned}
+\end{equation}
+Covariances involving $K_Q(y)$ are obtained by applying $\frac{\dd}{\dd s}|_{s=1}$ to the kernel at $(x,sy)$. At a single point, the law of the value and radial derivative, the tangent gradient, and the compressed Euclidean Hessian is given by \cref{lem:kr-one-point}: these three groups are independent, with covariances $N\Sigma_Q$, $a_Q\mathrm{Id}$, and that of $W_{N-1,N}$. We now compute the cross covariances between the two points, using \eqref{eq:mp-frame-products} and the fact that each $e_j$ is orthogonal to $u_1,u_2,t_1,t_2$.
+
+\emph{Gradients.} By \eqref{eq:mp-kernel-derivatives}, $\Cov(\partial_{e_j}H_Q(u_1),\partial_{e_l}H_Q(u_2))=\xi_Q'(r)\delta_{jl}$ and $\Cov(g_1,g_2)=\xi_Q'(r)(t_1\cdot t_2)+\xi_Q''(r)(t_1\cdot u_2)(u_1\cdot t_2)/N=c(r)$. A transverse gradient has zero covariance with $g_1,g_2$ and with the values and radial derivatives at both points, since every term in \eqref{eq:mp-kernel-derivatives} and its radial analog contains a factor $e_j\cdot u_i$ or $e_j\cdot t_i$. Next, $\Cov(H_Q(u_2),g_1)=\xi_Q'(r)(u_2\cdot t_1)=\sqrt Ns_r\xi_Q'(r)$, and differentiating $(x\cdot u_2)\xi_Q'(x\cdot u_2/N)$ in the direction $t_1$ at $x=u_1$, we find $\Cov(K_Q(u_2),g_1)=\sqrt Ns_r(\xi_Q'(r)+r\xi_Q''(r))$. After division by $\sqrt N$, this is \eqref{eq:mp-mark-gradient}; the case of $g_2$ is symmetric, and the covariances at a single point vanish by \cref{lem:kr-one-point}.
+
+\emph{Marks.} Applying the radial derivative to the kernel, we find that the cross covariance of $Z_1$ and $Z_2$ is $\Sigma_Q(r)$; for example, $\Cov(K_Q(u_1),K_Q(u_2))=\partial_s\partial_{s'}[N\xi_Q(ss'r)]_{s=s'=1}=N(r\xi_Q'(r)+r^2\xi_Q''(r))$. The transverse gradients do not affect the conditional law of $Z$, because they are uncorrelated with $(Z,g_1,g_2)$ and are conditioned to vanish. The inverse of the covariance of $(g_1,g_2)$ is $\bigl(\begin{smallmatrix}\gamma&\tau\\\tau&\gamma\end{smallmatrix}\bigr)$. In view of \eqref{eq:mp-mark-gradient}, the covariance of $(Z_1,Z_2)$ with $(g_1,g_2)$ is $J=\bigl(\begin{smallmatrix}0&\chi\\\chi&0\end{smallmatrix}\bigr)$, and a direct multiplication shows that
+\[
+J\begin{pmatrix}\gamma&\tau\\\tau&\gamma\end{pmatrix}J^{\mathsf T}=\begin{pmatrix}\gamma\chi\chi^{\mathsf T}&\tau\chi\chi^{\mathsf T}\\\tau\chi\chi^{\mathsf T}&\gamma\chi\chi^{\mathsf T}\end{pmatrix}.
+\]
+Subtracting this matrix from the unconditional covariance $\bigl(\begin{smallmatrix}\Sigma_Q&\Sigma_Q(r)\\\Sigma_Q(r)&\Sigma_Q\end{smallmatrix}\bigr)$ leaves $M(r)$. This proves (a).
+
+\emph{Bulk entries.} For $v,v'\in\{e_j\}$ at $x=u_1$, the products $v\cdot y$ and $v'\cdot y$ with $y=u_2$ vanish. By \eqref{eq:mp-fourth-derivative}, the covariance of $\partial_{e_j}\partial_{e_k}H_Q(u_1)$ with $\partial_{e_l}\partial_{e_m}H_Q(u_2)$ is $\xi_Q''(r)(\delta_{jl}\delta_{km}+\delta_{jm}\delta_{kl})/N$, and its covariance with a row entry $\partial_{e_l}\partial_{t_2}H_Q(u_2)$ or with the corner $z_2$ vanishes, because $e_j\cdot t_2=e_k\cdot t_2=0$. By the analogous formula for three derivatives, bulk entries are uncorrelated with all gradients and marks at both points. Dividing by the variances $b_Q/N$ and $2b_Q/N$, we find that the standardized covariance is $\rho(r)$. All variables are jointly Gaussian, and the bulk entries are uncorrelated with the conditioning variables, the rows, and the corners; this proves (i).
+
+\emph{Rows.} Let $y_{1,j}=\partial_{e_j}\partial_{t_1}H_Q(u_1)$. The only conditioning variable correlated with it is $\partial_{e_j}H_Q(u_2)$, with covariance $\xi_Q''(r)(t_1\cdot u_2)/N=s_r\xi_Q''(r)/\sqrt N$. By \eqref{eq:mp-fourth-derivative} with $(v,v',w,w')=(e_j,t_1,e_j,t_2)$, its unconditional covariance with $y_{2,j}$ is $(s_r^2\xi_Q'''(r)-r\xi_Q''(r))/N$, and its unconditional variance is $b_Q/N$. Regression on the transverse pair $(\partial_{e_j}H_Q(u_1),\partial_{e_j}H_Q(u_2))$, whose covariance has inverse $(a_Q^2-\xi_Q'(r)^2)^{-1}\bigl(\begin{smallmatrix}a_Q&-\xi_Q'(r)\\-\xi_Q'(r)&a_Q\end{smallmatrix}\bigr)$, subtracts $a_Qs_r^2\xi_Q''(r)^2/(N(a_Q^2-\xi_Q'(r)^2))$ from the variance. We conclude that $\Cov(y_i)=(b_Q\theta(r)/N)\mathrm{Id}_n$. Rows with different indices $j$, and rows and corners, are uncorrelated by the same differentiation, and conditioning on $Z$ changes nothing, since the rows are uncorrelated with $Z$ and with $(g_1,g_2)$. This proves (ii).
+
+\emph{Corners.} By \eqref{eq:mp-fourth-derivative} and \eqref{eq:mp-kernel-derivatives}, $z_1$ is uncorrelated with $Z_1$, with $g_1$, and with the transverse gradients, while
+\[
+\Cov(z_1,g_2)=\frac{s_r\omega(r)}{\sqrt N},\qquad \Cov(z_1,Z_2)=\frac{s_r^2}{\sqrt N}\bigl(\xi_Q''(r),\,2\xi_Q''(r)+r\xi_Q'''(r)\bigr).
+\]
+Regressing first on $(g_1,g_2)$, we find that the covariance of $z_1$ with $Z$ given $g_1=g_2=0$ is
+\[
+\Cov(z_1,Z)-\Cov\bigl(z_1,(g_1,g_2)\bigr)\begin{pmatrix}\gamma&\tau\\\tau&\gamma\end{pmatrix}J^{\mathsf T}=\frac{\ell_1(r)}{\sqrt N}.
+\]
+Regressing next on $Z$, whose conditional covariance is $M(r)$ and whose prescribed value is $\sqrt N(h_1,k_1,h_2,k_2)$, we obtain $\E z_1=\ell_1(r)M(r)^{-1}(h_1,k_1,h_2,k_2)^{\mathsf T}$: the factor $N^{-1/2}$ in the covariance cancels the size $\sqrt N$ of the prescribed marks. From \eqref{eq:mp-derivative-orders}, we have $\xi_Q''(r),r\xi_Q'''(r)=O(\abs r^{d-2})$, $\omega(r)=O(\abs r^{d-3})$, and $\chi(r)=O(\abs r^{d-1})$. As $\gamma$, $\tau$, and $M(r)^{-1}$ are bounded, every coordinate of $\ell_1(r)$ is $O(\abs r^{d-2})$, and because the marks lie in the compact set $\mathcal K_0$, we conclude that $\abs{\E z_1}\le C\abs r^{d-2}$. The conditional variance of $z_1$ is $N^{-1}(2b_Q-s_r^2\omega(r)^2\gamma(r)-\ell_1(r)M(r)^{-1}\ell_1(r)^{\mathsf T})$, which is at most $2b_Q/N$. The corner $z_2$ is treated in the same way, with the roles of the points exchanged. This proves (iii).
+\end{proof}
+
+\begin{lemma}[Small-overlap orders and density ratios]\label{lem:mp-densities}
+Let $\xi$ be a non-pure mixture and $\abs r\le\delta_0$. Then
+\begin{equation}\label{eq:mp-orders}
+\begin{gathered}
+\bigl\|M_{11}(r)-\Sigma_Q\bigr\|\le C\abs r^{2d-2},\qquad \bigl\|M_{12}(r)\bigr\|\le C\abs r^{d},\\
+\abs{\theta(r)-1}\le C\abs r^{2d-4},\qquad \abs{\rho(r)}\le C\abs r^{d-2},
+\end{gathered}
+\end{equation}
+where $M_{11}$ and $M_{12}$ are the diagonal and off-diagonal blocks of $M$. Let $g_N(r)$ be the density at zero of the pair of spherical gradients $(\nabla_{S_N}H_Q(u_1),\nabla_{S_N}H_Q(u_2))$, in orthonormal frames, divided by the product $(2\pi a_Q)^{-(N-1)}$ of the two one-point gradient densities at zero. Then
+\begin{equation}\label{eq:mp-gradient-ratio}
+g_N(r)=\Bigl(1-\frac{\xi_Q'(r)^2}{a_Q^2}\Bigr)^{-n/2}\Bigl(1-\frac{c(r)^2}{a_Q^2}\Bigr)^{-1/2},\qquad \abs{\log g_N(r)}\le C\bigl(N\abs r^{2d-2}+\abs r^{2d-4}\bigr).
+\end{equation}
+For $(h_i,k_i)\in\mathcal K_0$, let $\zeta=\sqrt N(h_1,k_1,h_2,k_2)$, $\zeta_i=\sqrt N(h_i,k_i)$, and $v_N(r;\zeta)=p_{M(r)}(\zeta)/(p_{\Sigma_Q}(\zeta_1)p_{\Sigma_Q}(\zeta_2))$. Then
+\begin{equation}\label{eq:mp-value-ratio}
+\abs{\log v_N(r;\zeta)}\le CN\abs r^{d}.
+\end{equation}
+These bounds hold for both signs of $r$.
+\end{lemma}
+
+\begin{proof}
+By \eqref{eq:mp-derivative-orders}, we have $\chi(r)=O(\abs r^{d-1})$, $\tau(r)=O(\abs r^{d-2})$, and every entry of $\Sigma_Q(r)$ is $O(\abs r^d)$. Then $\gamma\chi\chi^{\mathsf T}=O(\abs r^{2d-2})$ and $\tau\chi\chi^{\mathsf T}=O(\abs r^{3d-4})=O(\abs r^d)$, which is the first line of \eqref{eq:mp-orders}. The second line follows from the formulas for $\theta$ and $\rho$ in \eqref{eq:mp-functions}.
+
+Recall from \cref{lem:mp-regression}(a) that the gradients split into $n$ independent transverse pairs and the in-plane pair. A centered Gaussian pair with covariance $\bigl(\begin{smallmatrix}a_Q&b\\b&a_Q\end{smallmatrix}\bigr)$ has density $(2\pi)^{-1}(a_Q^2-b^2)^{-1/2}$ at zero, while the product of its one-dimensional marginal densities at zero is $(2\pi a_Q)^{-1}$. Taking the product over the $n+1=N-1$ pairs, we find the formula for $g_N$. Using $0\le-\log(1-x)\le2x$ for $0\le x\le1/4$, and the fact that $\xi_Q'(r)^2/a_Q^2$ and $c(r)^2/a_Q^2$ are at most $1/4$ for $\abs r\le\delta_0$, we find $\abs{\log g_N}\le n\xi_Q'(r)^2/a_Q^2+c(r)^2/a_Q^2$, and \eqref{eq:mp-derivative-orders} implies the bound in \eqref{eq:mp-gradient-ratio}.
+
+Let $M_0=\operatorname{diag}(\Sigma_Q,\Sigma_Q)$ and $E_r=M(r)-M_0$, so that $\norm{E_r}\le C\abs r^d$ by \eqref{eq:mp-orders}. The matrices $M_0+tE_r$, $0\le t\le1$, are uniformly positive definite, since they are convex combinations of $M_0$ and $M(r)$. The resolvent identity $M(r)^{-1}-M_0^{-1}=-M(r)^{-1}E_rM_0^{-1}$ gives $\norm{M(r)^{-1}-M_0^{-1}}\le C\norm{E_r}$, and integrating $\frac{\dd}{\dd t}\log\det(M_0+tE_r)=\Tr((M_0+tE_r)^{-1}E_r)$ over $[0,1]$, we find $\abs{\log\det M(r)-\log\det M_0}\le C\norm{E_r}$. Since
+\[
+\log v_N(r;\zeta)=-\frac12\log\frac{\det M(r)}{\det M_0}-\frac12\zeta^{\mathsf T}\bigl(M(r)^{-1}-M_0^{-1}\bigr)\zeta
+\]
+and $\abs\zeta^2\le CN$ for marks in $\mathcal K_0$, we obtain $\abs{\log v_N}\le C(1+N)\abs r^d$, which is \eqref{eq:mp-value-ratio}. No step used the sign of $r$ or the parity of the supported degrees.
+\end{proof}
+
+The factor $N$ in \eqref{eq:mp-value-ratio} is the reason for the restriction $\alpha>1/4$ below: when $d=4$, the cross covariance of the marks is of order $r^4$, and it is multiplied by the squared size $N$ of the prescribed marks.
+
+\begin{remark}[Pure covariances]\label{rem:mp-pure}
+Let $\xi_Q(r)=\xi(Q)r^p$ with $p\ge4$, so that $K_Q=pH_Q$. The two-point conditioned law then fixes the two values and the two spherical gradients only (\cref{sec:kr-border}), and $k_i=ph_i$. We replace $Z_i$ by $H_Q(u_i)/\sqrt N$, $\Sigma_Q$ by $\xi(Q)$, $\chi(r)$ by $s_r\xi_Q'(r)$, $\Sigma_Q(r)$ by $\xi_Q(r)$, and $\ell_1(r)$ by
+\[
+\ell_1(r)=\bigl(-s_r\omega(r)\gamma(r)\,s_r\xi_Q'(r),\ s_r^2\xi_Q''(r)-s_r\omega(r)\tau(r)\,s_r\xi_Q'(r)\bigr),
+\]
+with $\ell_2$ its reflection. The resulting $2\times2$ matrix $M(r)$ tends to $\xi(Q)\mathrm{Id}_2$ as $r\to0$, and the proofs of \cref{lem:mp-regression,lem:mp-densities} apply without change. Marks are restricted to the admissible set $\{(h,ph)\}\cap\mathcal K_0$, which contains $(E_0,K_0)$ because $K_0=pE_0$ in a pure model, and no inverse of the singular matrix $\Sigma_Q$ is taken. With these changes, every statement of \cref{sec:mp-determinants,sec:mp-pair} holds for pure covariances, with the energies $h_1,h_2$ as the only mark variables. The intensities and integrals then involve the energies alone, with a different Jacobian; they are given in the paragraph on pure models after \eqref{eq:mp-ratio-identity}.
+\end{remark}
+
+
+\section{Determinants under two-point conditioning}\label{sec:mp-determinants}
+
+By \cref{lem:kr-conditioned}, under $\Pp_{h,k,u}$ the matrix $-\nabla^2_{S_N}H_Q(u)$ has the law of $k\,\mathrm{Id}_{N-1}-W_{N-1,N}$, so that $\E_{h,k,u}D(u)=\mu_{N-1,N}(k)$; and by \cref{lem:mp-regression}(b), each bulk block $W^{(i)}$ has the law of $W_{n,N}$, $n=N-2$. For $k\ge2\sqrt{b_Q}+\kappa$, let
+\begin{equation}\label{eq:mp-msc}
+m_{\rm sc}(k)=\frac{k-\sqrt{k^2-4b_Q}}{2b_Q},\qquad w(k)=k-b_Qm_{\rm sc}(k)=\frac{k+\sqrt{k^2-4b_Q}}2.
+\end{equation}
+In the notation of \cref{sec:kr-border}, $m_{\rm sc}(k)=b_Q^{-1/2}g_{\rm sc}(k/\sqrt{b_Q})$ is the Stieltjes transform at $k$ of the semicircle law on $[-2\sqrt{b_Q},2\sqrt{b_Q}]$. The number $w(k)\ge k/2\ge\sqrt{b_Q}$ is the limit of the Schur complement below. For a real symmetric matrix $A$ with eigenvalues $\lambda_j(A)$, we define the truncated log-determinant and the truncated resolvent
+\begin{equation}\label{eq:mp-clipped}
+\Phi_k(A)=\sum_j\log\max\bigl\{\abs{k-\lambda_j(A)},\kappa/2\bigr\},\qquad \mathcal R_k(A)=\phi_k(A),
+\end{equation}
+where $\phi_k(\lambda)=1/\max\{k-\lambda,\kappa/2\}$ is applied to $A$ through its spectral decomposition. The function $\phi_k$ is bounded by $2/\kappa$ and is Lipschitz with constant $4/\kappa^2$. If $\norm A\le2\sqrt{b_Q}+\kappa/2$ and $k\ge2\sqrt{b_Q}+\kappa$, then every eigenvalue of $A$ satisfies $k-\lambda_j(A)\ge\kappa/2$, so that $e^{\Phi_k(A)}=\abs{\det(k-A)}$ and $\mathcal R_k(A)=(k-A)^{-1}$.
+
+We use two facts from \cref{sec:kacrice}. First, by \cref{lem:kr-gaussian}(2), if $A$ is a centered Gaussian symmetric $m\times m$ matrix, $m\le N$, such that $\Var\Tr(AB)\le(2b_Q/N)\Tr(B^2)$ for every symmetric $B$, then
+\begin{equation}\label{eq:mp-edge}
+\Pp\bigl(\norm A>2\sqrt{b_Q}+t\bigr)\le2e^{-Nt^2/(4b_Q)},\qquad t>0.
+\end{equation}
+Second, by \cref{prop:kr-determinant} with $g=\kappa$ and $C=0$, for $m\in\{N-2,N-1\}$, every fixed $q\ge1$, and all $k\in I$,
+\begin{equation}\label{eq:mp-det-moments}
+\E\Bigl(\frac{\abs{\det(k-W_{m,N})}}{\mu_{m,N}(k)}\Bigr)^q\le\E\Bigl(\frac{e^{\Phi_k(W_{m,N})}}{\mu_{m,N}(k)}\Bigr)^q\le C_q.
+\end{equation}
+
+\begin{lemma}[Trace of the truncated resolvent]\label{lem:mp-trace}
+For every fixed $q\ge1$, uniformly in $k\in I$,
+\begin{equation}\label{eq:mp-trace}
+\Bigl\|\frac1N\Tr\mathcal R_k(W_{n,N})-m_{\rm sc}(k)\Bigr\|_q\le\frac{C_q}N.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+We write $W=W_{n,N}$, $m=N^{-1}\Tr\mathcal R_k(W)$, $\bar m=\E m$, and $\mathcal E=\{\norm W\le2\sqrt{b_Q}+\kappa/2\}$, so that $\Pp(\mathcal E^c)\le2e^{-N\kappa^2/(16b_Q)}$ by \eqref{eq:mp-edge}. The proof has three steps: concentration of $m$, an approximate quadratic equation for $\bar m$, and the selection of the correct root. We first enlarge the range of $k$. Fix $k_*\ge K_0+1$ so large that $(k_*-2\sqrt{b_Q}-\kappa/2)^{-1}<k_*/(4b_Q)$, and let $I_*=[2\sqrt{b_Q}+\kappa,k_*]\supset I$. The first two steps hold uniformly in $k\in I_*$, with constants depending on $k_*$.
+
+\paragraph{Concentration.}
+In the standard Gaussian coordinates of $W$, one for each entry on and above the diagonal, the map to $W$ is Lipschitz into the Frobenius norm with constant $\sqrt{2b_Q/N}$. Using the Hoffman--Wielandt inequality (see the proof of \cref{prop:kr-determinant}), we find that $A\mapsto\Tr\phi_k(A)$ is Lipschitz in the Frobenius norm with constant $(4/\kappa^2)\sqrt n$. Then $m$ is a Lipschitz function of the Gaussian coordinates with constant at most $(4/\kappa^2)\sqrt{2b_Q}/N$, and the Gaussian concentration inequality of \cref{lem:kr-gaussian}(1) yields
+\begin{equation}\label{eq:mp-trace-conc}
+\norm{m-\bar m}_q\le\frac{C_q}N,\qquad \Var(m)\le\frac C{N^2}.
+\end{equation}
+
+\paragraph{The quadratic equation.}
+On $\mathcal E$, we have $(k-W)\mathcal R_k(W)=\mathrm{Id}_n$, so $k\Tr\mathcal R_k(W)-\Tr(W\mathcal R_k(W))=n$. On $\mathcal E^c$, the left side is at most $Cn(1+\norm W)$ in absolute value. By the Cauchy--Schwarz inequality and $\E\norm W^2\le C$, we have
+\begin{equation}\label{eq:mp-trace-step1}
+k\bar m=\frac nN+\frac1N\E\Tr\bigl(W\mathcal R_k(W)\bigr)+O(e^{-cN}).
+\end{equation}
+We evaluate the last expectation by Gaussian integration by parts, $\E[W_{ij}F(W)]=\Var(W_{ij})\,\E[\partial_{W_{ij}}F(W)]$, where $W_{ij}=W_{ji}$ is treated as one variable. A scalar function with Lipschitz constant $\ell$ induces a matrix function with Lipschitz constant $\ell$ in the Frobenius norm. In particular, the entries of $\mathcal R_k(A)$ are Lipschitz functions of $A$, their weak derivatives are bounded by a constant, and on $\mathcal E$ they agree with the derivatives of the resolvent, $\partial_{W_{ij}}\mathcal R_k=\mathcal R_k(E^{ij}+E^{ji})\mathcal R_k$ for $i\ne j$ and $\partial_{W_{ii}}\mathcal R_k=\mathcal R_kE^{ii}\mathcal R_k$, where $E^{ij}$ are the matrix units. For these resolvent formulas, we have the classical identity
+\[
+\sum_{i\ne j}\frac{b_Q}N\bigl[\mathcal R_k(E^{ij}+E^{ji})\mathcal R_k\bigr]_{ji}+\sum_i\frac{2b_Q}N\bigl[\mathcal R_kE^{ii}\mathcal R_k\bigr]_{ii}=\frac{b_Q}N\bigl[(\Tr\mathcal R_k)^2+\Tr\mathcal R_k^2\bigr],
+\]
+since $\mathcal R_k$ is symmetric. The $n^2$ differences between the true derivatives and these formulas are bounded and supported on $\mathcal E^c$, and each is multiplied by a variance at most $2b_Q/N$. We conclude that
+\[
+\E\Tr\bigl(W\mathcal R_k(W)\bigr)=\frac{b_Q}N\E\bigl[(\Tr\mathcal R_k)^2+\Tr\mathcal R_k^2\bigr]+O(Ne^{-cN}).
+\]
+Using $\Tr\mathcal R_k^2\le4n/\kappa^2$ and $\E[(\Tr\mathcal R_k)^2]/N^2=\bar m^2+\Var(m)$, and inserting this into \eqref{eq:mp-trace-step1} together with \eqref{eq:mp-trace-conc}, we obtain
+\begin{equation}\label{eq:mp-quadratic}
+b_Q\bar m^2-k\bar m+\frac nN=O\Bigl(\frac1N\Bigr),\qquad k\in I_*.
+\end{equation}
+
+\paragraph{The root.}
+The roots of $b_Qx^2-kx+n/N$ are $m_\pm(k)=(k\pm\sqrt{k^2-4b_Qn/N})/(2b_Q)$, and $m_+(k)-m_-(k)\ge\sigma_0=\sqrt{\kappa(4\sqrt{b_Q}+\kappa)}/b_Q$ for $k\in I_*$. Then \eqref{eq:mp-quadratic} implies that $b_Q\abs{\bar m-m_+}\abs{\bar m-m_-}\le C/N$. As the roots are separated by $\sigma_0$, for $N$ large $\bar m(k)$ lies within $C'/N$ of one of them, where $C'=4C/(b_Q\sigma_0)$. Let $A_\pm=\{k\in I_*:\abs{\bar m(k)-m_\pm(k)}\le C'/N\}$. These sets are closed, because $k\mapsto\bar m(k)$ is continuous by dominated convergence, and for $N$ large they are disjoint and cover $I_*$. By the connectedness of $I_*$, one of them is empty. At $k=k_*$, on $\mathcal E$ we have $\mathcal R_{k_*}(W)\le(k_*-2\sqrt{b_Q}-\kappa/2)^{-1}\mathrm{Id}$, which implies $\bar m(k_*)<k_*/(4b_Q)+Ce^{-cN}$. Together with $m_+(k_*)\ge k_*/(2b_Q)$, this shows that $k_*\in A_-$, and therefore $A_-=I_*$. Finally, since $n/N=1-2/N$ and $k^2-4b_Q\ge\kappa(4\sqrt{b_Q}+\kappa)$ on $I_*$, we have $\abs{m_-(k)-m_{\rm sc}(k)}\le C/N$. We conclude that $\abs{\bar m(k)-m_{\rm sc}(k)}\le C/N$ on $I$, and \eqref{eq:mp-trace-conc} gives \eqref{eq:mp-trace}.
+\end{proof}
+
+\begin{lemma}[Approximation of the Schur complement]\label{lem:mp-schur}
+Let $\xi$ be a non-pure mixture, $\abs r\le\delta_0$, and $(h_i,k_i)\in\mathcal K_0$, and consider the two-point conditioned law $\E_{\mathrm{pair}}$ with these marks. Let $D_i=\abs{\det\nabla^2_{S_N}H_Q(u_i)}$ and $\widetilde W_i=\abs{\det(k_i-W^{(i)})}/\mu_{n,N}(k_i)$. Then, for every fixed $q\ge1$,
+\begin{equation}\label{eq:mp-schur}
+\Bigl\|\frac{D_i}{w(k_i)\mu_{n,N}(k_i)}-\widetilde W_i\Bigr\|_q\le C_q\bigl(\abs r^{d-2}+N^{-1/2}\bigr).
+\end{equation}
+Moreover, uniformly in $k\in I$,
+\begin{equation}\label{eq:mp-one-point-schur}
+\mu_{N-1,N}(k)=w(k)\,\mu_{n,N}(k)\bigl(1+O(N^{-1/2})\bigr),
+\end{equation}
+and $\E_{\mathrm{pair}}(D_i/\mu_{N-1,N}(k_i))^q\le C_q$.
+\end{lemma}
+
+\begin{proof}
+We drop the index $i$. Let $W=W^{(i)}$, let $\mathcal E=\{\norm W\le2\sqrt{b_Q}+\kappa/2\}$, and define the Schur complement
+\[
+S=k-z-y^{\mathsf T}\mathcal R_k(W)y.
+\]
+We first show that
+\begin{equation}\label{eq:mp-schur-factor}
+\norm{S-w(k)}_q\le C_q\bigl(\abs r^{d-2}+N^{-1/2}\bigr).
+\end{equation}
+Recall from \cref{lem:mp-regression}(b) that, conditionally on $W$, the row $y$ is a centered Gaussian vector with covariance $\sigma^2\mathrm{Id}_n$, $\sigma^2=b_Q\theta(r)/N$. Diagonalizing $\mathcal R_k(W)=O\operatorname{diag}(\varrho_j)O^{\mathsf T}$, we can write $y^{\mathsf T}\mathcal R_k(W)y-\sigma^2\Tr\mathcal R_k(W)=\sigma^2\sum_j\varrho_j(\eta_j^2-1)$, where $\eta=\sigma^{-1}O^{\mathsf T}y$ is a standard Gaussian vector independent of $W$ and $\abs{\varrho_j}\le2/\kappa$. Let $s\ge1$ be an integer. In the expansion of the $2s$-th moment of $\sum_j\varrho_j(\eta_j^2-1)$, every term in which some index appears exactly once vanishes. The remaining terms involve at most $s$ distinct indices, and the moment is at most $C_sn^s$. Taking the $2s$-th root, we find that the centered quadratic form has $L^{2s}$ norm at most $C_s\sigma^2n^{1/2}\le C_sN^{-1/2}$, uniformly in $W$. Next, using $w(k)=k-b_Qm_{\rm sc}(k)$ and $\sigma^2\Tr\mathcal R_k=b_Q\theta(r)N^{-1}\Tr\mathcal R_k$, we write
+\[
+\begin{aligned}
+S-w(k)={}&-z-\bigl(y^{\mathsf T}\mathcal R_k(W)y-\sigma^2\Tr\mathcal R_k(W)\bigr)\\
+&-b_Q\theta(r)\Bigl(\frac1N\Tr\mathcal R_k(W)-m_{\rm sc}(k)\Bigr)-b_Q\bigl(\theta(r)-1\bigr)m_{\rm sc}(k).
+\end{aligned}
+\]
+We have $\norm z_q\le\abs{\E z}+\norm{z-\E z}_q\le C\abs r^{d-2}+C_qN^{-1/2}$ by \cref{lem:mp-regression}(b)(iii). The second term was bounded above, the third is at most $C_q/N$ by \cref{lem:mp-trace}, and the last is $O(\abs r^{2d-4})=O(\abs r^{d-2})$ by \eqref{eq:mp-orders}. This proves \eqref{eq:mp-schur-factor}.
+
+On $\mathcal E$, the matrix $k-W$ is invertible with inverse $\mathcal R_k(W)$, and the Schur complement formula applied to \eqref{eq:mp-hessian-blocks} gives $D=\abs{\det(k-W)}\abs S$. Hence, on $\mathcal E$,
+\[
+\frac D{w(k)\mu_{n,N}(k)}-\widetilde W=\widetilde W\,\frac{\abs S-w(k)}{w(k)},
+\]
+and $\bigl|\abs S-w(k)\bigr|\le\abs{S-w(k)}$. Using $w(k)\ge\sqrt{b_Q}$, H\"older's inequality, \eqref{eq:mp-det-moments} for $\widetilde W$, and \eqref{eq:mp-schur-factor}, we find that the $L^q$ norm of $\ind_{\mathcal E}$ times this difference is at most $C_q(\abs r^{d-2}+N^{-1/2})$.
+
+On $\mathcal E^c$, we use the bound of \cref{lem:kr-border}(1) with a border of size one and $g=\kappa$,
+\begin{equation}\label{eq:mp-cofactor}
+D\le e^{\Phi_k(W)}\Bigl(\abs{k-z}+\frac2\kappa\abs y^2\Bigr),
+\end{equation}
+which holds even when $k-W$ is singular. The variables $z$ and $\abs y^2$ have bounded moments of every fixed order, the normalized exponential $e^{\Phi_k(W)}/\mu_{n,N}(k)$ has bounded moments by \eqref{eq:mp-det-moments}, and $\Pp(\mathcal E^c)\le Ce^{-cN}$ by \eqref{eq:mp-edge}. By H\"older's inequality with three factors, we conclude that the $L^q$ norms of $\ind_{\mathcal E^c}D/(w(k)\mu_{n,N}(k))$ and of $\ind_{\mathcal E^c}\widetilde W$ are at most $C_qe^{-c_qN}$. This completes the proof of \eqref{eq:mp-schur}, and together with \eqref{eq:mp-det-moments} it shows that $D/(w(k)\mu_{n,N}(k))$ has bounded moments of every fixed order.
+
+For \eqref{eq:mp-one-point-schur}, consider $-\nabla^2_{S_N}H_Q(u)$ under $\Pp_{h,k,u}$, which has the law of $k\,\mathrm{Id}_{N-1}-W_{N-1,N}$. The upper left $n\times n$ block of $W_{N-1,N}$ has the law of $W_{n,N}$, the first $n$ entries of its last column form a centered Gaussian vector with covariance $(b_Q/N)\mathrm{Id}_n$, and its corner is centered with variance $2b_Q/N$; these three pieces are independent. The argument above applies with $\theta=1$ and a centered corner, and it shows that $\norm{D(u)/(w(k)\mu_{n,N}(k))-\widetilde W}_1\le CN^{-1/2}$ under $\Pp_{h,k,u}$. Taking expectations, we find $\abs{\mu_{N-1,N}(k)/(w(k)\mu_{n,N}(k))-1}\le CN^{-1/2}$, which is \eqref{eq:mp-one-point-schur}. Combined with the moment bound for $D_i/(w(k_i)\mu_{n,N}(k_i))$, this gives the last assertion.
+\end{proof}
+
+The comparison of the two bulk determinants uses the following classical inequality of Gebelein \cite{Gebelein1941}. We include the short proof to show that its constant does not depend on the dimension and that it holds for negative correlations.
+
+\begin{lemma}[Gaussian maximal correlation]\label{lem:mp-gebelein}
+Let $(X,Y)$ be a centered Gaussian vector in $\R^m\times\R^m$ with $\Cov(X)=\Cov(Y)=\mathrm{Id}_m$ and $\Cov(X,Y)=\rho\,\mathrm{Id}_m$, where $\abs\rho\le1$. Then, for all square integrable functions $F$ and $G$ on $\R^m$,
+\begin{equation}\label{eq:mp-gebelein}
+\abs{\Cov(F(X),G(Y))}\le\abs\rho\,\bigl(\Var F(X)\,\Var G(Y)\bigr)^{1/2}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Let $\mathrm{He}_j$ be the Hermite polynomials, defined by $e^{sx-s^2/2}=\sum_{j\ge0}s^j\mathrm{He}_j(x)/j!$, and for a multi-index $\lambda\in\N^m$ let $\mathsf h_\lambda(x)=\prod_i\mathrm{He}_{\lambda_i}(x_i)/\sqrt{\lambda_i!}$. These polynomials form an orthonormal basis of $L^2$ of the standard Gaussian measure on $\R^m$. For $s,t\in\R^m$, we have
+\[
+\E\bigl[e^{s\cdot X-\abs s^2/2}e^{t\cdot Y-\abs t^2/2}\bigr]=e^{\rho\,s\cdot t},
+\]
+and comparing the coefficients of $s^\lambda t^\mu$ on both sides, we find $\E[\mathsf h_\lambda(X)\mathsf h_\mu(Y)]=\ind_{\lambda=\mu}\rho^{\abs\lambda}$, where $\abs\lambda=\sum_i\lambda_i$. We expand $F=\sum_\lambda\hat F_\lambda\mathsf h_\lambda$ and $G=\sum_\lambda\hat G_\lambda\mathsf h_\lambda$ in this basis. Since $(F,G)\mapsto\E[F(X)G(Y)]$ is a bounded bilinear form on $L^2\times L^2$, the identity extends from polynomials and gives $\Cov(F(X),G(Y))=\sum_{\lambda\ne0}\hat F_\lambda\hat G_\lambda\rho^{\abs\lambda}$. Then \eqref{eq:mp-gebelein} follows from the Cauchy--Schwarz inequality and $\abs\rho^{\abs\lambda}\le\abs\rho$ for $\lambda\ne0$.
+\end{proof}
+
+\begin{lemma}[Ratio of the determinant moments]\label{lem:mp-bulk}
+Under the assumptions of \cref{lem:mp-schur},
+\begin{equation}\label{eq:mp-det-ratio}
+\begin{gathered}
+\Bigl|\frac{\E_{\mathrm{pair}}[D_1D_2]}{\mu_{N-1,N}(k_1)\mu_{N-1,N}(k_2)}-1\Bigr|\le C\bigl(\abs r^{d-2}+N^{-1/2}\bigr),\\
+\E_{\mathrm{pair}}\Bigl(\frac{D_1D_2}{\mu_{N-1,N}(k_1)\mu_{N-1,N}(k_2)}\Bigr)^2\le C.
+\end{gathered}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Let $X$ and $Y$ be the vectors of standardized entries on and above the diagonal of $W^{(1)}$ and $W^{(2)}$, of dimension $n(n+1)/2$. We see from \cref{lem:mp-regression}(b)(i) that they satisfy the assumptions of \cref{lem:mp-gebelein} with $\rho=\rho(r)$. The variables $\widetilde W_1$ and $\widetilde W_2$ are functions of $X$ and $Y$ with mean one and, by \eqref{eq:mp-det-moments}, bounded second moments. \Cref{lem:mp-gebelein} and \eqref{eq:mp-orders} imply that
+\[
+\abs{\E[\widetilde W_1\widetilde W_2]-1}\le C\abs{\rho(r)}\le C\abs r^{d-2}.
+\]
+Let $\widehat D_i=D_i/(w(k_i)\mu_{n,N}(k_i))$. Using the Cauchy--Schwarz inequality, \eqref{eq:mp-schur} with $q=2$, and the moment bounds of \cref{lem:mp-schur}, we find
+\[
+\abs{\E[\widehat D_1\widehat D_2]-\E[\widetilde W_1\widetilde W_2]}\le\norm{\widehat D_1-\widetilde W_1}_2\norm{\widehat D_2}_2+\norm{\widetilde W_1}_2\norm{\widehat D_2-\widetilde W_2}_2\le C\bigl(\abs r^{d-2}+N^{-1/2}\bigr).
+\]
+Finally, \eqref{eq:mp-one-point-schur} replaces $w(k_i)\mu_{n,N}(k_i)$ by $\mu_{N-1,N}(k_i)$ at the cost of a factor $1+O(N^{-1/2})$, which proves the first bound in \eqref{eq:mp-det-ratio}. The second follows from the Cauchy--Schwarz inequality and the fourth moments of $D_i/\mu_{N-1,N}(k_i)$ in \cref{lem:mp-schur}.
+\end{proof}
+
+\Cref{lem:mp-bulk} uses the correlation $\rho(r)$ of the bulk blocks only through \eqref{eq:mp-gebelein}, and its bound does not grow with the number $n(n+1)/2$ of entries. This is what allows $d=4$. For comparison, the relative entropy of the joint Gaussian law of the two vectors of standardized bulk entries with respect to the product of their marginal laws is
+\[
+-\frac{n(n+1)}4\log\bigl(1-\rho(r)^2\bigr)=O\bigl(N^2\rho(r)^2\bigr),\qquad\rho(r)\to0.
+\]
+This quantity tends to zero only if $\abs r\ll N^{-1/(d-2)}$, a range that is incompatible with $\alpha<1/2$ when $d=4$. The comparison concerns the bulk blocks only: the corners may remain correlated even at $r=0$, as noted after \cref{lem:mp-regression}. The determinant comparison instead uses the maximal correlation inequality for the bulk and the approximation of the Schur complement in \cref{lem:mp-schur} for the border.
+
+\begin{lemma}[Regularity under two-point conditioning]\label{lem:mp-regular}
+There exist $\lambda_*>0$, $C_*<\infty$, $\delta_1\in(0,\delta_0]$, and $C,c>0$ with the following property. Let $\abs r\le\delta_1$ and $(h_i,k_i)\in\mathcal K_0$, and consider either the two-point conditioned law $\E_{\mathrm{pair}}$ with these marks, or the one-point conditioned law $\E_{h,k,u}$ with $(h,k)\in\mathcal K_0$. Let $\mathrm{Reg}$ be the event that the Hessian at each conditioned point satisfies $\nabla^2_{S_N}H_Q(u_i)\le-\lambda_*\mathrm{Id}$, and that
+\begin{equation}\label{eq:mp-regularity}
+\sup_{\abs x\le2\sqrt N}\norm{\nabla^jH_Q(x)}\le C_*N^{1-j/2},\qquad 0\le j\le3.
+\end{equation}
+Then $\Pp(\mathrm{Reg}^c)\le Ce^{-cN}$ under either law. Moreover, for $N$ large, $\E_{\mathrm{pair}}[D_1D_2]\ge\frac12\mu_{N-1,N}(k_1)\mu_{N-1,N}(k_2)$, and
+\begin{equation}\label{eq:mp-regular-loss}
+\E_{\mathrm{pair}}\bigl[D_1D_2\ind_{\mathrm{Reg}^c}\bigr]\le Ce^{-cN}\,\E_{\mathrm{pair}}[D_1D_2],\qquad \E_{h,k,u}\bigl[D(u)\ind_{\mathrm{Reg}^c}\bigr]\le Ce^{-cN}\,\mu_{N-1,N}(k).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+We choose $\delta_1\le\delta_0$ so that the constant $C$ of \cref{lem:mp-regression}(b)(iii) satisfies $C\delta_1^{d-2}\le\kappa/4$, and so that the constant of \eqref{eq:mp-det-ratio} satisfies $C\delta_1^{d-2}\le1/4$. Then $\E_{\mathrm{pair}}[D_1D_2]\ge\frac12\mu_{N-1,N}(k_1)\mu_{N-1,N}(k_2)$ for $\abs r\le\delta_1$ and $N$ large.
+
+\paragraph{The Hessians.}
+Let $T_i$ be the compression of $\nabla^2H_Q(u_i)$ to $u_i^\perp$, so that $\nabla^2_{S_N}H_Q(u_i)=T_i-k_i\mathrm{Id}$ by \eqref{eq:kr-intrinsic}. Before conditioning, $T_i$ has the law of $W_{N-1,N}$, and Gaussian conditioning decreases the covariance of the centered part, as a quadratic form on symmetric matrices. Then $T_i-\E_{\mathrm{pair}}T_i$ satisfies the hypothesis of \eqref{eq:mp-edge}, and $\norm{T_i-\E_{\mathrm{pair}}T_i}\le2\sqrt{b_Q}+\kappa/4$ except on an event of probability at most $2e^{-N\kappa^2/(64b_Q)}$. By \cref{lem:mp-regression}(b), the conditional mean of $T_i$ vanishes except for its corner entry, which is at most $\kappa/4$ in absolute value. Since $k_i\ge2\sqrt{b_Q}+\kappa$, on this event we have $\nabla^2_{S_N}H_Q(u_i)\le(2\sqrt{b_Q}+\kappa/2-k_i)\mathrm{Id}\le-(\kappa/2)\mathrm{Id}$. We take $\lambda_*=\kappa/2$. Under the one-point law, the mean vanishes and the same argument applies.
+
+\paragraph{The derivatives.}
+Recall from \eqref{eq:kr-coefficients} that $H_Q(x)=\sum_p\sqrt{c_pQ^p}\,N^{-(p-1)/2}\langle Z_p,x^{\otimes p}\rangle$, where $Z_p$ is the tensor of coefficients of degree $p$. Under the conditioned law, we write $H_Q$ as the sum of its conditional mean $\mathfrak m(x)$ and a centered Gaussian polynomial whose coefficient vector has covariance at most the identity. For each degree $p$, let $\mathcal T_p$ be the symmetric $p$-linear form obtained by polarizing the degree-$p$ part of the centered polynomial. For unit vectors $x^1,\dots,x^p$, we have $\Var\mathcal T_p(x^1,\dots,x^p)\le c_pQ^pN^{1-p}$. Let $\mathcal N$ be a $1/(4p)$-net of the unit sphere of $\R^N$ with at most $(1+8p)^N$ points. Changing one argument at a time from a point of $\mathcal N$ to an arbitrary unit vector, we find that the norm of $\mathcal T_p$ is at most its maximum over $\mathcal N^p$ plus one quarter of itself, hence at most twice that maximum. By a union bound over the $(1+8p)^{pN}$ points of $\mathcal N^p$ and the Gaussian tail bound, we see that $\norm{\mathcal T_p}\le C_pN^{1-p/2}$ with probability at least $1-e^{-N}$, if $C_p$ is large enough. Evaluating $p-j$ arguments at $x$ with $\abs x\le2\sqrt N$, we obtain the bound $CN^{1-j/2}$ for the $j$-th derivative of the centered part.
+
+It remains to bound the conditional mean. The transverse gradients do not contribute to $\mathfrak m$, because they are uncorrelated with the other conditioning variables and are conditioned to vanish. The covariances of $H_Q(x)$ with $H_Q(u_i)/\sqrt N$, $K_Q(u_i)/\sqrt N$, and $g_i$ are
+\[
+\sqrt N\,\xi_Q\Bigl(\frac{x\cdot u_i}N\Bigr),\qquad \sqrt N\,\frac{x\cdot u_i}N\,\xi_Q'\Bigl(\frac{x\cdot u_i}N\Bigr),\qquad \sqrt N\,\frac{x\cdot t_i}{\sqrt N}\,\xi_Q'\Bigl(\frac{x\cdot u_i}N\Bigr).
+\]
+The covariance matrix of $(Z,g_1,g_2)$ has a uniformly bounded inverse for $\abs r\le\delta_0$, since its Schur complements are the covariance of $(g_1,g_2)$ and $M(r)$, and the prescribed value of $Z$ is $O(\sqrt N)$. Therefore $\mathfrak m(x)=N\mathcal P(x\cdot u_1/N,\,x\cdot u_2/N,\,x\cdot t_1/\sqrt N,\,x\cdot t_2/\sqrt N)$ for a polynomial $\mathcal P$ of bounded degree with uniformly bounded coefficients. For $\abs x\le2\sqrt N$, the four arguments are bounded by $2$, and their derivatives in a unit direction are at most $N^{-1/2}$, which implies that $\norm{\nabla^j\mathfrak m(x)}\le CN^{1-j/2}$. Together with the bound for the centered part, this proves \eqref{eq:mp-regularity}, for a suitable $C_*$, with probability at least $1-Ce^{-cN}$.
+
+\paragraph{The weighted loss.}
+By the Cauchy--Schwarz inequality and \eqref{eq:mp-det-ratio},
+\[
+\begin{aligned}
+\E_{\mathrm{pair}}\bigl[D_1D_2\ind_{\mathrm{Reg}^c}\bigr]&\le\bigl(\E_{\mathrm{pair}}[(D_1D_2)^2]\bigr)^{1/2}\Pp(\mathrm{Reg}^c)^{1/2}\\
+&\le Ce^{-cN/2}\mu_{N-1,N}(k_1)\mu_{N-1,N}(k_2)\le2Ce^{-cN/2}\,\E_{\mathrm{pair}}[D_1D_2],
+\end{aligned}
+\]
+where in the last step we used the lower bound on $\E_{\mathrm{pair}}[D_1D_2]$. The one-point bound follows in the same way from \eqref{eq:mp-det-moments}, or from \cref{cor:kr-bad-event}.
+\end{proof}
+
+
+\section{The local pair intensity}\label{sec:mp-pair}
+
+\begin{lemma}[Local two-point Kac--Rice formula]\label{lem:mp-pair-kr}
+Let $\mathcal O=\{(u_1,u_2)\in S_N\times S_N:\abs{R(u_1,u_2)}<\delta_0\}$. For every nonnegative Borel function $b$ of the field and of two points,
+\begin{equation}\label{eq:mp-pair-kr}
+\begin{aligned}
+&\E\sum_{\substack{(u_1,u_2)\in\mathcal O\\ \nabla_{S_N}H_Q(u_1)=\nabla_{S_N}H_Q(u_2)=0}}b(H_N,u_1,u_2)\\
+&\qquad=\int_{\mathcal O}p_{u_1,u_2}(0)\,\E^\nabla_{u_1,u_2}\bigl[D_1D_2\,b(H_N,u_1,u_2)\bigr]\,\mathrm{vol}(\dd u_1)\,\mathrm{vol}(\dd u_2),
+\end{aligned}
+\end{equation}
+where $p_{u_1,u_2}(0)$ is the density at zero of $(\nabla_{S_N}H_Q(u_1),\nabla_{S_N}H_Q(u_2))$ in orthonormal frames, $\E^\nabla_{u_1,u_2}$ is the conditioned law given that both gradients vanish (defined by the regression formula \eqref{eq:kr-regression}), $\mathrm{vol}$ is the surface measure on $S_N$, and both sides may be infinite.
+\end{lemma}
+
+\begin{proof}
+We consider the function $f(u_1,u_2)=H_Q(u_1)+H_Q(u_2)$ on the open subset $\mathcal O$ of the product manifold $S_N\times S_N$. It depends linearly on the Gaussian coefficients of \eqref{eq:kr-coefficients}. Its gradient at $(u_1,u_2)$ is the pair of spherical gradients, whose covariance is positive definite on $\mathcal O$ by \cref{lem:mp-regression}(a): its blocks have determinants $a_Q^2-\xi_Q'(r)^2$ and $a_Q^2-c(r)^2$, both at least $3a_Q^2/4$. Note that the critical points of $f$ in $\mathcal O$ are exactly the pairs of critical points of $H_Q$ with overlap in $(-\delta_0,\delta_0)$, and at such a pair the Hessian of $f$ is block diagonal, with absolute determinant $D_1D_2$.
+
+We now observe that the proof of the coefficient-space formula \cref{prop:kr-coefficient} is local. Consider a coordinate chart on which a fixed set of coefficient coordinates has an invertible submatrix in the gradient map. On such a chart, the critical points are the zeros of an affine function of the coefficients. The area formula of \cref{lem:kr-area} then expresses the expected sum of the mark over these zeros as an integral against the Riemannian volume, whose integrand is the gradient density at zero times the conditioned expectation of the absolute Hessian determinant times the mark. Compactness of the manifold enters that proof only through the finiteness of the atlas. The open set $\mathcal O$ is covered by countably many such charts. We take a countable partition of unity on $\mathcal O$ subordinate to this cover, apply the chart identity to the mark $b$ times each partition function, and sum. Since all terms are nonnegative, Tonelli's theorem and monotone convergence justify the summation, with both sides allowed to be infinite. This proves \eqref{eq:mp-pair-kr}.
+\end{proof}
+
+Under $\E^\nabla_{u_1,u_2}$, the vector $Z$ has the nondegenerate density $p_{M(r)}$ by \cref{lem:mp-regression}(a), and disintegrating with respect to $Z$ as in \cref{lem:kr-conditioned}(4) turns $\E^\nabla_{u_1,u_2}$ into an integral of $\E_{\mathrm{pair}}$ over the marks. In the normalized marks $(h_1,k_1,h_2,k_2)=Z/\sqrt N$, this introduces the Jacobian $N^2$. We define the one-point intensity
+\begin{equation}\label{eq:mp-one-point}
+j_N(h,k)=\abs{S_N}(2\pi a_Q)^{-(N-1)/2}\,p_N(h,k)\,\mu_{N-1,N}(k),
+\end{equation}
+which, by \cref{cor:kr-count}, is the density with respect to $\dd h\,\dd k$ of the expected number of critical points of $H_Q$ with normalized marks in $\dd h\,\dd k$. Two independent points with law $\nu_N$ have overlap with density
+\begin{equation}\label{eq:mp-overlap-density}
+f_N(r)=\frac{\Gamma(N/2)}{\sqrt\pi\,\Gamma((N-1)/2)}(1-r^2)^{(N-3)/2},\qquad -1<r<1.
+\end{equation}
+For $\abs r<\delta_0$, we define the pair intensity
+\begin{equation}\label{eq:mp-pair-intensity}
+J_N(r;h_1,k_1,h_2,k_2)=\abs{S_N}^2f_N(r)\,(2\pi a_Q)^{-(N-1)}g_N(r)\,N^2p_{M(r)}(\zeta)\,\E_{\mathrm{pair}}[D_1D_2],
+\end{equation}
+where $\zeta=\sqrt N(h_1,k_1,h_2,k_2)$ and $\E_{\mathrm{pair}}$ is taken at any pair $(u_1,u_2)$ with overlap $r$. Note that $(2\pi a_Q)^{-(N-1)}g_N(r)$ is the joint gradient density at zero, by \eqref{eq:mp-gradient-ratio}. By the rotation invariance of the law of $H_N$, the integrand of \eqref{eq:mp-pair-kr} with $b=\ind_A(R(u_1,u_2),H_Q(u_1)/N,K_Q(u_1)/N,H_Q(u_2)/N,K_Q(u_2)/N)$ depends on $(u_1,u_2)$ only through $r$, and the image of the product surface measure under $R$ is $\abs{S_N}^2f_N(r)\dd r$. Hence, for every Borel set $A\subset(-\delta_0,\delta_0)\times\R^4$, the expected number of ordered pairs of critical points $(u_1,u_2)$ with $(R(u_1,u_2),H_Q(u_1)/N,K_Q(u_1)/N,H_Q(u_2)/N,K_Q(u_2)/N)\in A$ equals $\int_AJ_N$. Recalling that $p_N(h,k)=Np_{\Sigma_Q}(\sqrt N(h,k))$ and comparing \eqref{eq:mp-pair-intensity} with \eqref{eq:mp-one-point}, we find the exact identity
+\begin{equation}\label{eq:mp-ratio-identity}
+\frac{J_N(r;h_1,k_1,h_2,k_2)}{f_N(r)\,j_N(h_1,k_1)\,j_N(h_2,k_2)}=g_N(r)\,v_N(r;\zeta)\,\frac{\E_{\mathrm{pair}}[D_1D_2]}{\mu_{N-1,N}(k_1)\mu_{N-1,N}(k_2)},
+\end{equation}
+with $g_N$ and $v_N$ as in \cref{lem:mp-densities}. We call this quotient the \emph{relative pair intensity}. It divides out the overlap density $f_N(r)$, which is not close to $f_N(0)$ on the whole range $\abs r\le N^{-\alpha}$ when $\alpha<1/2$.
+
+\paragraph{Pure models.}
+In a pure model of degree $p$, the marks lie on the graph $k=ph$, and we use the intensities in the energies alone,
+\begin{equation}\label{eq:mp-pure-intensities}
+\begin{aligned}
+j_N^{\rm pure}(h)&=\abs{S_N}(2\pi a_Q)^{-(N-1)/2}\,p^{\rm pure}_N(h)\,\mu_{N-1,N}(ph),\\
+J_N^{\rm pure}(r;h_1,h_2)&=\abs{S_N}^2f_N(r)\,(2\pi a_Q)^{-(N-1)}g_N(r)\,N\,p_{M(r)}\bigl(\sqrt N(h_1,h_2)\bigr)\,\E_{\mathrm{pair}}[D_1D_2],
+\end{aligned}
+\end{equation}
+where $p^{\rm pure}_N$ is the density of \eqref{eq:kr-disintegration}, $M(r)$ is the reduced $2\times2$ covariance of \cref{rem:mp-pure}, $k_i=ph_i$, and the factor $N$ is the Jacobian of $(h_1,h_2)\mapsto\sqrt N(h_1,h_2)$. By \cref{thm:kr-marked,cor:kr-count}, $j_N^{\rm pure}$ is the density with respect to $\dd h$ of the expected number of critical points with normalized energy in $\dd h$, and, as above, for every Borel set $A\subset(-\delta_0,\delta_0)\times\R^2$ the expected number of ordered pairs of critical points with $(R(u_1,u_2),H_Q(u_1)/N,H_Q(u_2)/N)\in A$ equals $\int_AJ_N^{\rm pure}\dd r\dd h_1\dd h_2$. A pure pair has no density in the four marks $(h_1,k_1,h_2,k_2)$; the corresponding measure on $(r,h_1,k_1,h_2,k_2)$ is the image of $J_N^{\rm pure}\dd r\dd h_1\dd h_2$ under $(r,h_1,h_2)\mapsto(r,h_1,ph_1,h_2,ph_2)$. Since $p^{\rm pure}_N(h)=\sqrt N\,p_{\xi(Q)}(\sqrt Nh)$, the two one-point factors supply exactly the Jacobian $N$, and \eqref{eq:mp-ratio-identity} holds with $J_N^{\rm pure}(r;h_1,h_2)/(f_N(r)j_N^{\rm pure}(h_1)j_N^{\rm pure}(h_2))$ on the left and the reduced $v_N$ on the right. In the pure case, all subsequent statements use these intensities and these integrals in place of their counterparts for non-pure mixtures. Keeping the factor $N^2$ of non-pure mixtures after reducing $M(r)$ would instead give a relative pair intensity $N(1+O(N^{-1/2}))$ at $r=0$.
+
+\begin{theorem}[Factorization of the pair intensity at small overlap]\label{thm:mp-local-pair}
+Let $\xi$ be a finite mixture with minimum degree $d\ge4$, of either parity, pure or not (for pure models, with the energy-only intensities \eqref{eq:mp-pure-intensities}, the reduced covariance of \cref{rem:mp-pure}, and marks $(h_i,ph_i)\in\mathcal K_0$), and let $1/4<\alpha<1/2$.
+\begin{enumerate}[label=(\alph*)]
+\item Uniformly in $\abs r\le N^{-\alpha}$ and $(h_i,k_i)\in\mathcal K_0$,
+\begin{equation}\label{eq:mp-factorization}
+\frac{J_N(r;h_1,k_1,h_2,k_2)}{f_N(r)\,j_N(h_1,k_1)\,j_N(h_2,k_2)}=1+O\bigl(N^{1-4\alpha}+N^{-1/2}\bigr).
+\end{equation}
+\item The same holds if each of the two points is required to satisfy the regularity conditions of \cref{lem:mp-regular}, with the thresholds $\lambda_*$ and $C_*$ selected there: that is, with $\E_{\mathrm{pair}}[D_1D_2]$ replaced by $\E_{\mathrm{pair}}[D_1D_2\ind_{\mathrm{Reg}}]$ in \eqref{eq:mp-pair-intensity}, and $\mu_{N-1,N}(k)$ replaced by $\E_{h,k,u}[D(u)\ind_{\mathrm{Reg}}]$ in \eqref{eq:mp-one-point}.
+\item There exist $\delta\in(0,\delta_0]$ and $C>0$ such that, for $N\ge12$, $\abs r<\delta$, and $(h_i,k_i)\in\mathcal K_0$,
+\begin{equation}\label{eq:mp-intermediate}
+J_N(r;h_1,k_1,h_2,k_2)\le C\sqrt N\,e^{-Nr^2/4}\,j_N(h_1,k_1)\,j_N(h_2,k_2).
+\end{equation}
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+We give the proof for a non-pure mixture; by \cref{rem:mp-pure}, the pure case is identical. For (a), we bound the three factors in \eqref{eq:mp-ratio-identity} for $\abs r\le N^{-\alpha}$. By \eqref{eq:mp-gradient-ratio} and $d\ge4$,
+\[
+\abs{\log g_N(r)}\le C\bigl(N^{1-\alpha(2d-2)}+N^{-\alpha(2d-4)}\bigr)\le C\bigl(N^{1-6\alpha}+N^{-4\alpha}\bigr).
+\]
+Next, \eqref{eq:mp-value-ratio} gives $\abs{\log v_N(r;\zeta)}\le CN^{1-\alpha d}\le CN^{1-4\alpha}$, and by \cref{lem:mp-bulk}, the determinant ratio is $1+O(N^{-\alpha(d-2)}+N^{-1/2})=1+O(N^{-2\alpha}+N^{-1/2})$. Since $\alpha>1/4$, we have $N^{1-6\alpha}\le N^{1-4\alpha}\to0$ and $N^{-4\alpha}\le N^{-2\alpha}\le N^{-1/2}$. Multiplying the three factors, we obtain \eqref{eq:mp-factorization}.
+
+For (b), \cref{lem:mp-regular} shows that inserting $\ind_{\mathrm{Reg}}$ changes $\E_{\mathrm{pair}}[D_1D_2]$ and each one-point mean $\mu_{N-1,N}(k_i)$ by a factor $1+O(e^{-cN})$, for $\abs r\le\delta_1$ and $N$ large. For $N$ large we have $N^{-\alpha}\le\delta_1$, and (b) follows from (a).
+
+For (c), the determinant ratio in \eqref{eq:mp-ratio-identity} is bounded for $\abs r\le\delta_0$ by \cref{lem:mp-bulk}, and \cref{lem:mp-densities} implies that $g_Nv_N\le\exp\{C+CNr^2(\abs r^{d-2}+\abs r^{2d-4})\}$. By the log-convexity of the Gamma function, we have $\Gamma(x+1/2)\le\Gamma(x)^{1/2}\Gamma(x+1)^{1/2}=\sqrt x\,\Gamma(x)$. The normalizing constant in \eqref{eq:mp-overlap-density} is therefore at most $\sqrt{N/(2\pi)}$, and since $\log(1-r^2)\le-r^2$, we have
+\[
+f_N(r)\le\sqrt N\,e^{-(N-3)r^2/2}.
+\]
+We choose $\delta\le\delta_0$ such that $C(\delta^{d-2}+\delta^{2d-4})\le1/8$. For $N\ge12$, we have $(N-3)/2\ge3N/8$, and the exponent is at most $-3Nr^2/8+Nr^2/8=-Nr^2/4$ for $\abs r<\delta$. This proves \eqref{eq:mp-intermediate}. The proof used only $\abs r$, and it applies to both signs of $r$.
+\end{proof}
+
+\begin{corollary}[Integrated pair bound for retained maxima]\label{cor:mp-filter-upper}
+Let $\eps\in(0,1-\eta)$, and let $U$, $w_\eps$, $G_\eps$, and $m_N$ be as in \ref{it:mp-M1}--\ref{it:mp-M2}, with $\mathcal K_\eps\subset\mathcal K_0$. Let $\delta$ be as in \cref{thm:mp-local-pair}(c), and fix $L>0$ and $1/4<\alpha<1/2$. Let $\cA_N(L)$ be the set of critical points $u\in S_N$ of $H_Q$ with $\abs{H_Q(u)-m_N}\le L$ and $K_Q(u)/N\in U$, and let
+\[
+C_N(L)=\sum_{u\in\cA_N(L)}G_\eps(H_N,u),\qquad a_N(L)=\E C_N(L),\qquad b_N(L)=\E\abs{\cA_N(L)}.
+\]
+There exists $N_0(L)$ such that, for $N\ge N_0(L)$,
+\begin{equation}\label{eq:mp-mean-comparison}
+\bigl(1-Ce^{-cN}\bigr)b_N(L)\le a_N(L)\le b_N(L),
+\end{equation}
+and the expected number of ordered pairs $(u,v)$ of distinct retained points of $\cA_N(L)$ with $\abs{R(u,v)}<\delta$ is at most $(1+\eta_N)a_N(L)^2$, where
+\begin{equation}\label{eq:mp-etaN}
+\eta_N=C\bigl(N^{1-4\alpha}+N^{-1/2}+e^{-N^{1-2\alpha}/4}\bigr).
+\end{equation}
+The constants $C$ and $c$ do not depend on $L$.
+\end{corollary}
+
+\begin{proof}
+Since $m_N/N\to E_0$, there exists $N_0(L)$ such that $\abs{h-E_0}\le w_\eps$ whenever $\abs{Nh-m_N}\le L$ and $N\ge N_0(L)$; then the marks of every point of $\cA_N(L)$ lie in $\mathcal K_\eps$. Then \cref{thm:kr-marked} with the bounded weight $G_\eps$ gives
+\[
+a_N(L)=\frac{\abs{S_N}}{(2\pi a_Q)^{(N-1)/2}}\int_{S_N}\int_{\abs{Nh-m_N}\le L}\int_Up_N(h,k)\,\E_{h,k,u}\bigl[D(u)G_\eps(H_N,u)\bigr]\dd k\dd h\,\nu_N(\dd u),
+\]
+and $b_N(L)$ is given by the same formula without $G_\eps$. The loss bound \eqref{eq:mp-filter-loss} is uniform in $u\in S_N$ and in the marks, and it therefore implies \eqref{eq:mp-mean-comparison}; no rotation invariance of $G_\eps$ is needed here. In a pure model, let $W_N(L)=\{h:\abs{Nh-m_N}\le L,\ ph\in U\}$. Then
+\[
+a_N(L)=\frac{\abs{S_N}}{(2\pi a_Q)^{(N-1)/2}}\int_{S_N}\int_{W_N(L)}p^{\rm pure}_N(h)\,\E_{h,u}\bigl[D(u)G_\eps(H_N,u)\bigr]\dd h\,\nu_N(\dd u),
+\]
+$b_N(L)$ is the same expression without $G_\eps$, and the same argument applies.
+
+For the pairs, we discard both selection indicators, which can only increase the nonnegative count. Pairs with $\abs{R(u,v)}<\delta<1$ are automatically distinct, and their expected number is at most
+\[
+\int_{\abs r<\delta}\int J_N(r;h_1,k_1,h_2,k_2)\,\dd h_1\dd k_1\dd h_2\dd k_2\dd r,
+\]
+where the inner integral is over $\abs{Nh_i-m_N}\le L$ and $k_i\in U$; in a pure model, it is $\int_{\abs r<\delta}\int_{W_N(L)^2}J_N^{\rm pure}(r;h_1,h_2)\dd h_1\dd h_2\dd r$, and the estimates below apply without change. On $\abs r\le N^{-\alpha}$, \eqref{eq:mp-factorization} and $\int f_N(r)\dd r\le1$ bound this by $(1+C(N^{1-4\alpha}+N^{-1/2}))b_N(L)^2$. On $N^{-\alpha}<\abs r<\delta$, \eqref{eq:mp-intermediate} and the substitution $y=\sqrt Nr$ bound it by
+\[
+Cb_N(L)^2\int_{\abs y>N^{1/2-\alpha}}e^{-y^2/4}\dd y\le4C\,b_N(L)^2e^{-N^{1-2\alpha}/4},
+\]
+where we used $\int_{\abs y>T}e^{-y^2/4}\dd y\le(4/T)e^{-T^2/4}$ with $T=N^{1/2-\alpha}\ge1$. Finally, \eqref{eq:mp-mean-comparison} implies that $b_N(L)\le(1+Ce^{-cN})a_N(L)$, which completes the proof.
+\end{proof}
+
+\Cref{cor:mp-filter-upper} is an upper bound only: the selection indicators were discarded in the pair integrand, and the second moment argument below needs no lower bound for the pair intensity of retained maxima.
+
+
+\section{Counts in fixed energy windows}\label{sec:mp-counts}
+
+The following bound, for a set of unit vectors with small pairwise inner products, on the number of vectors that have a strongly negative inner product with a given one is the classical simplex bound for spherical codes in a cap. It is the cap form of Rankin's simplex bound \cite[Theorem~1(ii) and Lemma~2]{Rankin1955}, and it also follows from the reduction from a cap to the equator and the simplex discussion in \cite[Theorem~5 and Section~5, item~3]{BargMusin2007}.
+Its use here replaces the symmetry of even models under $u\mapsto-u$.
+
+\begin{lemma}[Vectors at strongly negative inner product]\label{lem:mp-gram}
+Let $0<\delta\le1$ and $\eps<\delta^2$. Let $v_1,\dots,v_m$ be unit vectors in $\R^N$ with $v_i\cdot v_j\le\eps$ for all $i\ne j$. Then, for every $i$,
+\begin{equation}\label{eq:mp-gram}
+\#\{j\ne i:v_i\cdot v_j\le-\delta\}\le K_{\delta,\eps},\qquad K_{\delta,\eps}=\frac{1-\eps}{\delta^2-\eps}.
+\end{equation}
+In particular, the number of ordered pairs $(i,j)$ with $i\ne j$ and $v_i\cdot v_j\le-\delta$ is at most $K_{\delta,\eps}m$.
+\end{lemma}
+
+\begin{proof}
+Since $\eps<\delta^2\le1$, the constant $K_{\delta,\eps}$ is positive, and there is nothing to prove if no $j\ne i$ satisfies $v_i\cdot v_j\le-\delta$. Otherwise, let $J$ be the set of the $k\ge1$ indices $j\ne i$ with $v_i\cdot v_j\le-\delta$, and let $s=\sum_{j\in J}v_j$. Then $v_i\cdot s\le-k\delta$, and by the Cauchy--Schwarz inequality and the pairwise bound, we have
+\[
+k^2\delta^2\le\abs s^2=k+\sum_{\substack{j,l\in J\\ j\ne l}}v_j\cdot v_l\le k+k(k-1)\eps.
+\]
+Dividing by $k$ and rearranging, we find $k(\delta^2-\eps)\le1-\eps$, which is \eqref{eq:mp-gram}. Summing over $i$ gives the bound for ordered pairs.
+\end{proof}
+
+We note that the lemma assumes no lower bound on the pairwise inner products, and that exactly antipodal pairs are included in the count.
+
+\begin{theorem}[Second moment of the number of retained maxima]\label{thm:mp-count}
+Let $\xi$ and $\beta$ satisfy the standing assumptions of this section, with $\xi$ pure or not. Let $\delta$ be as in \cref{thm:mp-local-pair}(c), fix $\eps\in(0,\delta^2/2)$ with $\eps<1-\eta$, and let $U$, $w_\eps$, $G_\eps$, and $m_N$ be as in \ref{it:mp-M1}--\ref{it:mp-M2}, with $\mathcal K_\eps\subset\mathcal K_0$. Fix $1/4<\alpha<1/2$ and $L>0$, and let $C_N(L)$ and $a_N(L)$ be as in \cref{cor:mp-filter-upper}. Then
+\begin{equation}\label{eq:mp-filtered-mean}
+a_N(L)\longrightarrow e^{c_0L}-e^{-c_0L},
+\end{equation}
+and, for $N\ge N_0(L)$, with $\eta_N$ as in \eqref{eq:mp-etaN},
+\begin{align}
+\E C_N(L)^2&\le(1+\eta_N)a_N(L)^2+(1+K_{\delta,\eps})a_N(L),\label{eq:mp-second-moment}\\
+\Var C_N(L)&\le\eta_Na_N(L)^2+(1+K_{\delta,\eps})a_N(L).\label{eq:mp-variance}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+By \eqref{eq:mp-window-mean} with $[a,b]=[-L,L]$, we have $b_N(L)\to e^{c_0L}-e^{-c_0L}$, and \eqref{eq:mp-mean-comparison} gives \eqref{eq:mp-filtered-mean}.
+
+We have $C_N(L)^2=C_N(L)+P_N$, where $P_N$ is the number of ordered pairs $(u,v)$ of distinct retained points of $\cA_N(L)$. We split $P_N$ according to whether $R(u,v)\ge\delta$, $\abs{R(u,v)}<\delta$, or $R(u,v)\le-\delta$; these three cases are disjoint and exhaustive. Let $N\ge N_0(L)$, so that the marks of all points of $\cA_N(L)$ lie in $\mathcal K_\eps$. By \ref{it:mp-M1}(i), two distinct retained points of $\cA_N(L)$ have overlap less than $\eps<\delta$, and the first case does not occur. For the third case, we apply \cref{lem:mp-gram} to the unit vectors $u/\sqrt N$, for $u$ retained in $\cA_N(L)$, whose pairwise inner products are at most $\eps<\delta^2$; recall that $\delta\le\delta_0<1$. The number of such pairs is at most $K_{\delta,\eps}C_N(L)$, deterministically. Finally, \cref{cor:mp-filter-upper} bounds the expected number of pairs in the second case by $(1+\eta_N)a_N(L)^2$. Taking expectations, we have
+\[
+\E C_N(L)^2\le a_N(L)+K_{\delta,\eps}a_N(L)+(1+\eta_N)a_N(L)^2,
+\]
+which is \eqref{eq:mp-second-moment}. Subtracting $a_N(L)^2$ gives \eqref{eq:mp-variance}.
+\end{proof}
+
+Observe that no Kac--Rice estimate near the singular overlaps $r=\pm1$ was used: pairs with $r\ge\delta$ are excluded by the selection event, and pairs with $r\le-\delta$ are counted by \cref{lem:mp-gram}.
+
+We now state and prove the bound on counts in fixed energy windows under the 1RSB assumptions.
+
+\begin{theorem}[Critical-point counts in fixed energy windows]\label{thm:mc-counts}
+Let $\xi$ be a finite mixture with minimum degree $d\ge4$, of either parity, and let $\beta>0$ be such that $(\xi,\beta)$ is strictly 1RSB with a nondegenerate contact at $Q$ (\cref{def:th-certificate}), with 1RSB parameters $x,Q$. Let $\delta$, $\eps$, $U$, and $m_N=NE_0-\log N/(2c_0)+O(1)$ be as in \cref{thm:mp-count}, and for $M>0$ let
+\[
+\cC_{N,M}=\bigl\{u\in S_N:\nabla_{S_N}H_Q(u)=0,\ \abs{H_Q(u)-m_N}\le M,\ K_Q(u)/N\in U\bigr\},
+\]
+counted as an ordinary set of points; in an even model, both points of an antipodal pair belong to it. Then
+\begin{align}
+&\sup_N\E\abs{\cC_{N,M}}<\infty\qquad\text{for every fixed }M>0,\label{eq:mp-I3-count}\\
+&\lim_{M\to\infty}\liminf_{N\to\infty}\Pp\Bigl(\cC_{N,M}\ne\varnothing,\ \max_{S_N}H_Q\le m_N+M\Bigr)=1.\label{eq:mp-I3-ground}
+\end{align}
+More precisely, let $K=K_{\delta,\eps}$, and let $C_N(L)$ and $a_N(L)$ be as in \cref{thm:mp-count}. For every fixed $L>0$,
+\begin{align}
+\limsup_{N\to\infty}\Pp\bigl(C_N(L)=0\bigr)&\le\frac{1+K}{e^{c_0L}-e^{-c_0L}},\label{eq:mp-existence}\\
+\limsup_{N\to\infty}\Pp\bigl(C_N(L)<a_N(L)/2\bigr)&\le\frac{4(1+K)}{e^{c_0L}-e^{-c_0L}},\label{eq:mp-many}\\
+\limsup_{N\to\infty}\Pp\Bigl(\Bigl|\max_{S_N}H_Q-m_N\Bigr|>L\Bigr)&\le e^{-c_0L}+\frac{1+K}{e^{c_0L}-e^{-c_0L}}.\label{eq:mp-tight}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+For \eqref{eq:mp-I3-count}, fix $M$. Applying \eqref{eq:mp-window-mean} with $[a,b]=[-M,M]$, we see that the expectation $\E\abs{\cC_{N,M}}$ converges to $e^{c_0M}-e^{-c_0M}$; in particular, it is bounded for $N$ large. For each of the finitely many remaining $N$, the expected number of critical points of $H_Q$ on $S_N$ is finite by \cref{thm:kr-marked,cor:kr-count}.
+
+For \eqref{eq:mp-existence}, note that $a_N(L)>0$ for $N$ large by \eqref{eq:mp-filtered-mean}. By Chebyshev's inequality and \eqref{eq:mp-variance}, we have
+\[
+\Pp\bigl(C_N(L)=0\bigr)\le\frac{\Var C_N(L)}{a_N(L)^2}\le\eta_N+\frac{1+K}{a_N(L)},
+\]
+and \eqref{eq:mp-existence} follows by letting $N\to\infty$ with $L$ fixed, since $\eta_N\to0$ and $a_N(L)\to e^{c_0L}-e^{-c_0L}$. The same argument with the deviation $a_N(L)/2$ proves \eqref{eq:mp-many}. Note that if $\max_{S_N}H_Q<m_N-L$, then no critical point has energy in $[m_N-L,m_N+L]$, and $C_N(L)=0$. Together with \eqref{eq:mp-upper-tail} and \eqref{eq:mp-existence}, this proves \eqref{eq:mp-tight}.
+
+Finally, since every retained point of $\cA_N(M)$ belongs to $\cC_{N,M}$, we see that the event in \eqref{eq:mp-I3-ground} contains $\{C_N(M)\ge1\}\cap\{\max_{S_N}H_Q\le m_N+M\}$. Combining \eqref{eq:mp-existence} and \eqref{eq:mp-upper-tail}, we obtain
+\[
+\liminf_{N\to\infty}\Pp\Bigl(\cC_{N,M}\ne\varnothing,\ \max_{S_N}H_Q\le m_N+M\Bigr)\ge1-e^{-c_0M}-\frac{1+K}{e^{c_0M}-e^{-c_0M}}.
+\]
+The constant $K$ does not depend on $M$, and letting $M\to\infty$ proves \eqref{eq:mp-I3-ground}.
+\end{proof}
+
+The order of limits in \eqref{eq:mp-I3-ground} matters: the window half-width $M$ is fixed while $N\to\infty$, and only then sent to infinity. We obtain no estimate for windows whose half-width grows with $N$, and do not identify the limiting point process of the critical values.

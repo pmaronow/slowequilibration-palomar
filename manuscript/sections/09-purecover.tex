@@ -1,0 +1,806 @@
+\chapter{Pure models: critical-point counts and Gibbs concentration on bands}\label{sec:purecover}
+
+In this section, we prove the hypotheses of the reduction in \cref{sec:reduction} on critical-point counts and on the concentration of the Gibbs measure on bands, for the pure model $\xi(r)=r^p$. The degree $p\ge4$ may be odd or even, and $\beta>\bs(p)$ is fixed. \Cref{prop:pc-counts} states that the expected number of critical points of the center field $H_Q$ in a fixed window around $m_N=NE_0-(\log N)/(2c_0)$ is bounded. It also states that this window contains the global maximum with probability close to one. \Cref{thm:pc-capture} states that the bands around these critical points carry asymptotically all of the Gibbs measure, both for every small fixed width and for widths of order $N^{-1/2}$. Both results are used in \cref{sec:condproof}, in the proofs of \cref{thm:main-condensed} and \cref{cor:main-classes} for pure models.
+
+We use the following results from other sections. From \cref{sec:prelim}, we use the representation and regularity of the field (\cref{lem:pre-field}) and the concentration of free energies (\cref{lem:pre-concentration}). From \cref{sec:thermal}, we use that the pure model is strictly 1RSB with a nondegenerate contact at $Q$, with explicit parameters (\cref{prop:th-pure}), the ground-state parameters $E_0$ and $K_0$ of \cref{prop:th-structure}, and the bound on the residual coefficient of \cref{lem:th-pure-residual}. From \cref{sec:directing}, we use that every limiting directing measure is carried by the sphere of squared norm $Q$ (\cref{thm:dir-norm}). This is the only information about the overlap structure of the Gibbs measure that enters the proof. From \cref{sec:kacrice}, we use the conditioned laws and the law of the Hessian at a conditioned critical point (\cref{def:kr-conditioned,cor:kr-hessian}), and Gaussian concentration (\cref{lem:kr-gaussian}). We also use the moment bounds for conditioned determinants, the removal of exceptional events, and the bound on expected determinants by the logarithmic potential of the semicircle law (\cref{prop:kr-determinant,cor:kr-bad-event,prop:kr-prefactors}), as well as the marked Kac--Rice formula, the exact count formula, and the H\"older bound for determinant-weighted expectations (\cref{thm:kr-marked,cor:kr-count,lem:kr-holder}).
+
+The pure model has more explicit structure than a general mixture. We use several results of Subag and of Subag and Zeitouni about it. The parameters $Q$ and $x$ and the ground energy are given by Subag's computation of the pure free energy through the TAP approach \cite{Subag2023pure}. The critical values near the maximum were studied by Subag and Zeitouni \cite{SubagZeitouni2017}, who identified their extremal process; we use only the resulting tightness of the centered maximum. The law of the field conditioned on a critical point was computed by Subag \cite{Subag2017geometry}. In \cite[Theorem~1]{Subag2017geometry}, Subag proved that for sufficiently large $\beta$ the Gibbs measure concentrates on thin bands around the critical points of nearly maximal value. That theorem assumes that $\beta$ is large, and it is not used here. Instead, we derive the concentration of the Gibbs measure on bands at every $\beta>\bs(p)$ from \cref{thm:dir-norm}, together with Subag's fixed-parameter estimates for free energies of replicated bands \cite{Subag2024}. Since $\xi$ is pure, the radial derivative is a multiple of the value, $K_Q=pH_Q$. All conditioning at a critical point is therefore on the value and the spherical gradient alone, and no covariance matrix of the value and the radial derivative is inverted.
+
+The proof proceeds in stages. In \cref{sec:pc-density}, we bound the density of critical values by an exponential with a bounded prefactor on every window of sublinear width (\cref{lem:pc-envelope}). In \cref{sec:pc-localization}, we show that all critical points with energy close to the ground energy are nondegenerate maxima, and that every point with such energy is close to a critical maximum (\cref{prop:pc-relocation}); we also prove \cref{prop:pc-counts}. In \cref{sec:pc-replicas}, we show that the empirical mean of a fixed number of Gibbs samples with pairwise overlaps close to $Q$ has energy close to the ground energy (\cref{prop:pc-replica-means}). In \cref{sec:pc-coarse}, we combine these two facts with the directing measure and obtain a cover of the Gibbs measure by caps around critical points of near-ground energy (\cref{prop:pc-coarse}). In \cref{sec:pc-bands,sec:pc-laplace,sec:pc-capture}, we pass from this cover to critical points in a fixed window and to microscopic bands, of width of order $N^{-1/2}$. The tools are second moments and lower tails of band partition functions conditioned on a critical point, a Laplace computation over latitudes, a lower bound for the partition function, and a bound on the partition functions of the bands around critical points whose value lies at least $L$ below the centering, which decays exponentially in $L$.
+
+\paragraph{Notation.}
+Throughout this section, $p\ge4$ is an integer, $\xi(r)=r^p$, $\beta>\bs(p)$ is fixed, and $H_N$ is realized by \eqref{eq:pre-tensor}, so that it is a homogeneous polynomial of degree $p$ on $\R^N$. We write $\pi$ for the Gibbs measure, $Z_{N,\beta}=\int e^{\beta H_N}\dd\nu_N$ for the partition function, as in \cref{def:pre-model}, and $P_N=N^{-1}\log Z_{N,\beta}$. As in \cref{sec:prelim}, $\nabla$ and $\nabla^2$ denote Euclidean derivatives, and $\nabla_{S_N}$, $\nabla^2_{S_N}$, and $\nabla^3_{S_N}$ denote the spherical gradient, Hessian, and third covariant derivative. We write $d_{S_N}$ for the geodesic distance on $S_N$ and $|S_N|=2\pi^{N/2}N^{(N-1)/2}/\Gamma(N/2)$ for its surface area. Constants $C,c>0$ depend only on $p$ and $\beta$ unless we say otherwise. All parameters other than $N$ are fixed before $N\to\infty$, in the order stated in each proof, and \cref{tab:pc-parameters} summarizes this order.
+
+\section{Parameters and statements}\label{sec:pc-statements}
+
+\paragraph{Thermodynamic parameters.}
+By \cref{prop:th-pure}, the pair $(\xi,\beta)$ is strictly 1RSB with a nondegenerate contact at $Q$ (\cref{def:th-certificate}), and the parameters $x$ and $Q$ are explicit. Let $z_p>0$ be the unique solution of
+\begin{equation}\label{eq:pc-z}
+p\big[(1+z_p)\log(1+z_p)-z_p\big]=z_p^2,
+\end{equation}
+which is the equation $\upsilon(z_p)=1/p$ of \cref{prop:th-pure}, and let
+\begin{equation}\label{eq:pc-parameters}
+\begin{gathered}
+q_s=\frac{z_p}{1+z_p},\qquad e_p=\frac{p+z_p}{\sqrt{p(1+z_p)}},\qquad e_\infty=2\sqrt{\frac{p-1}p},\\
+c_p=\frac{z_p}{\sqrt{p(1+z_p)}},\qquad w_0=\sqrt{\frac{p-1}{1+z_p}}.
+\end{gathered}
+\end{equation}
+By \cref{prop:th-pure}, we have $z_p>2(p-2)$; the radius $Q$ is the unique solution in $(q_s,1)$ of
+\begin{equation}\label{eq:pc-Q}
+\beta^2p(1+z_p)Q^{p-2}(1-Q)^2=1;
+\end{equation}
+the other parameter is $x=z_ps/Q$, where $s=1-Q$; the ground energy of $H_N$ is $E(1)=\lim_NN^{-1}\E\max_{S_N}H_N=e_p$; the ground-state parameters of \cref{prop:th-structure} are $E_0=e_pQ^{p/2}$ and $K_0=pE_0$; and, with the residual covariance $\psi_Q(t)=(Q+st)^p-Q^p-pQ^{p-1}st$,
+\begin{equation}\label{eq:pc-pressure}
+F(\beta)=\beta e_pQ^{p/2}+\frac12\log s+\frac{\beta^2}2\psi_Q(1).
+\end{equation}
+These formulas were obtained by Subag \cite[Theorems~1 and~2]{Subag2023pure} from the generalized TAP representation; see \cref{rem:th-pure-subag} for the dictionary.
+
+We record some consequences. Since $z_p>p-2$, we have $0<w_0<1$ and $q_s>(p-2)/(p-1)\ge2/3$, and
+\begin{equation}\label{eq:pc-gap}
+e_p=\sqrt{\frac{p-1}p}\,\bigl(w_0+w_0^{-1}\bigr),\qquad e_p^2-e_\infty^2=\frac{(z_p-p+2)^2}{p(1+z_p)}>0.
+\end{equation}
+By \eqref{eq:pc-Q} and the definition of $x$,
+\begin{equation}\label{eq:pc-Q-range}
+Q>q_s>\frac23,\qquad 0<x<1,\qquad \beta sQ^{(p-2)/2}=\frac1{\sqrt{p(1+z_p)}},\qquad c_p=\beta xQ^{p/2}.
+\end{equation}
+From the last identity, we find that the slope $c_0=\beta x$ of \cref{prop:th-structure} is $c_0=c_pQ^{-p/2}$. The center covariance parameters are $\xi(Q)=Q^p$, $a_Q=pQ^p$, and $b_Q=p(p-1)Q^p$.
+
+\paragraph{Center field and windows.}
+The center field and its radial derivative are
+\[
+H_Q(u)=H_N(\sqrt Q\,u)=Q^{p/2}H_N(u),\qquad K_Q(u)=pH_Q(u),\qquad u\in S_N,
+\]
+where the second identity is Euler's identity for homogeneous polynomials. We have $K_0=pQ^{p/2}e_p>pQ^{p/2}e_\infty=2\sqrt{b_Q}$ by \eqref{eq:pc-gap}. We fix a compact interval $U$ that contains $K_0$ in its interior and satisfies $\min U>2\sqrt{b_Q}$. We set
+\begin{equation}\label{eq:pc-centering}
+M_N=Ne_p-\frac{\log N}{2c_p},\qquad m_N=Q^{p/2}M_N=NE_0-\frac{\log N}{2c_0},
+\end{equation}
+and we let $\cC_{N,M}$ and $B_{N,M}$ be as in \cref{def:red-centers}, with these $Q$, $U$, and $m_N$:
+\[
+\cC_{N,M}=\bigl\{u\in S_N:\ \nabla_{S_N}H_Q(u)=0,\ |H_Q(u)-m_N|\le M,\ K_Q(u)/N\in U\bigr\}.
+\]
+We also use the critical points of $H_N$ in windows around $M_N$,
+\[
+\mathcal D_{N,L}=\bigl\{u\in S_N:\ \nabla_{S_N}H_N(u)=0,\ |H_N(u)-M_N|\le L\bigr\}.
+\]
+The critical points of $H_Q$ and of $H_N$ coincide. For $u\in\mathcal D_{N,L}$, we have $K_Q(u)/N=pQ^{p/2}H_N(u)/N=K_0+O((L+\log N)/N)$. Since $K_0$ is an interior point of $U$, it follows that, for every fixed $L>0$,
+\begin{equation}\label{eq:pc-window}
+\cC_{N,Q^{p/2}L}\subset\mathcal D_{N,L}\quad\text{for every }N,\qquad \cC_{N,Q^{p/2}L}=\mathcal D_{N,L}\quad\text{for all sufficiently large }N.
+\end{equation}
+We count points of $S_N$; for even $p$, both $u$ and $-u$ are counted.
+
+We now state the two main results of this section.
+
+\begin{proposition}[Critical points in fixed windows]\label{prop:pc-counts}
+Let $p\ge4$, $\beta>\bs(p)$, and let $U$, $m_N$, and $\cC_{N,M}$ be as above. For every fixed $M>0$,
+\begin{equation}\label{eq:pc-count}
+\sup_{N\ge2}\E|\cC_{N,M}|<\infty.
+\end{equation}
+Further,
+\begin{equation}\label{eq:pc-ground}
+\lim_{M\to\infty}\liminf_{N\to\infty}\Pp\Bigl\{\cC_{N,M}\ne\varnothing\ \text{and}\ \max_{S_N}H_Q\le m_N+M\Bigr\}=1.
+\end{equation}
+Finally, for every fixed $M>0$, with probability tending to one, every $u\in\cC_{N,M}$ is a nondegenerate local maximum of $H_Q$.
+\end{proposition}
+
+For $b>0$ and $u\in S_N$, we write $B_u(b)=\{x\in S_N:|R(x,u)-\sqrt Q|\le b\}$ and $B_{N,M}(b)=\bigcup_{u\in\cC_{N,M}}B_u(b)$; for a fixed $b$, these are the bands of \cref{def:red-centers}.
+
+\begin{theorem}[Gibbs concentration on bands]\label{thm:pc-capture}
+Let $p\ge4$, $\beta>\bs(p)$, and let $U$, $m_N$, and $\cC_{N,M}$ be as above.
+\begin{enumerate}
+\item There exists $b_0=b_0(p,\beta)\in(0,\sqrt Q)$ such that for every fixed $b\in(0,b_0]$,
+\begin{equation}\label{eq:pc-capture}
+\lim_{M\to\infty}\limsup_{N\to\infty}\E\,\pi\bigl(B_{N,M}(b)^c\bigr)=0.
+\end{equation}
+\item For every $\eps>0$, there exist $M_0,w_*>0$ such that for all fixed $M\ge M_0$ and $w\ge w_*$,
+\begin{equation}\label{eq:pc-micro}
+\limsup_{N\to\infty}\E\,\pi\bigl(B_{N,M}(wN^{-1/2})^c\bigr)\le\eps.
+\end{equation}
+\end{enumerate}
+\end{theorem}
+
+Part (1) is the concentration property \eqref{eq:red-capture} for every band width $b\in(0,b_0]$. The proofs of \cref{prop:pc-counts} and \cref{thm:pc-capture} are completed in \cref{sec:pc-localization} and \cref{sec:pc-capture}, respectively. \Cref{tab:pc-parameters} lists the parameters that appear in these proofs, in the order in which they are fixed.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{4.6cm}>{\raggedright\arraybackslash}p{2.9cm}>{\raggedright\arraybackslash}p{3.2cm}@{}}
+\toprule
+Step & Parameter & Depends on & Where\\
+\midrule
+1 & $z_p,Q,s,x,e_p,c_p,E_0,K_0,c_0$ & $p,\beta$ & \cref{prop:th-pure}, \cref{sec:pc-statements}\\
+2 & interval $U\ni K_0$ & $p,\beta$ & \cref{sec:pc-statements}\\
+3 & cap latitude $a$; then $b_0$ and $b\in(0,b_0]$ & $p,\beta$ & \cref{lem:pc-saddle}, \cref{thm:pc-capture}\\
+4 & energy deficit $\tau$ per spin and tolerance $\eps$ of the coarse cover; then $a_1,r,\tau_1,n,\eta,T$ & $p,\beta,a,\tau,\eps$ & \cref{prop:pc-coarse}\\
+5 & tolerance $\eps$ in \cref{thm:pc-capture}(2); then $\eta$, the window $L$, the width $w$ & $p,\beta,a,\eps$ & \cref{sec:pc-capture}\\
+6 & $N\to\infty$ & all of the above & \\
+\bottomrule
+\end{tabular}
+\caption{Parameters in the proofs of \cref{prop:pc-counts,thm:pc-capture}, in the order in which they are fixed. The window $M$ of \cref{prop:pc-counts} and \cref{thm:pc-capture}(1) is fixed after the band width $b$ and the interval $U$, and before $N\to\infty$.}
+\label{tab:pc-parameters}
+\end{table}
+
+\section{The exponent of the latitude integral}\label{sec:pc-scalar}
+
+The bands around a critical point are weighed by a one-dimensional integral over latitudes. In this section, we choose the latitude $a$ of the caps used below and record the properties of the exponent of that integral. As in \cref{lem:th-pure-residual}, for $0\le q\le1$ we let
+\begin{equation}\label{eq:pc-Cbeta}
+C_\beta(q)=\beta^2\bigl[1-q^{2p}-pq^{2p-2}(1-q^2)\bigr],\qquad C_\beta'(q)=-2\beta^2p(p-1)q^{2p-3}(1-q^2)\le0.
+\end{equation}
+The quantity $NC_\beta(q)/\beta^2$ is the variance of the field on the latitude $q$ around a critical point, after the conditioning (see \cref{lem:pc-conditional} below). By \cref{lem:th-pure-residual}, we have
+\begin{equation}\label{eq:pc-residual}
+C_\beta(\sqrt Q)=\beta^2\psi_Q(1)<\frac{159}{320}<\frac12
+\end{equation}
+for every $p\ge4$ and every $\beta>\bs(p)$. This bound is what makes the second moments of band partition functions finite in \cref{prop:pc-bands}.
+
+\begin{lemma}[Choice of the cap latitude]\label{lem:pc-saddle}
+For $0<q<1$, let
+\[
+\Lambda(q)=\beta e_pq^p+\frac12\log(1-q^2)+\frac12C_\beta(q).
+\]
+There exists $a\in(1/\sqrt2,\sqrt Q)$ such that
+\begin{equation}\label{eq:pc-cap}
+C_\beta(a)<\frac12,\qquad \beta a^p>c_p,\qquad \Lambda(\sqrt Q)=F(\beta),\qquad \Lambda''(\sqrt Q)<0,
+\end{equation}
+$\Lambda$ is strictly increasing on $[a,\sqrt Q]$, and $\Lambda$ is strictly decreasing on $[\sqrt Q,1)$. In particular, $\sqrt Q$ is the unique maximizer of $\Lambda$ on $[a,1)$.
+\end{lemma}
+
+We fix such an $a$ for the rest of this section, and write $k_*=-\Lambda''(\sqrt Q)>0$.
+
+\begin{proof}
+Let $f(q)=\beta q^{p-2}(1-q^2)$. Differentiating $\Lambda$ and using \eqref{eq:pc-Cbeta}, we find
+\[
+\begin{aligned}
+\Lambda'(q)&=p\beta e_pq^{p-1}-\frac q{1-q^2}-\beta^2p(p-1)q^{2p-3}(1-q^2)\\
+&=\frac q{1-q^2}\Bigl(pe_pf(q)-1-p(p-1)f(q)^2\Bigr).
+\end{aligned}
+\]
+The quadratic $p(p-1)f^2-pe_pf+1$ has the roots
+\[
+a_\pm=\frac{e_p\pm\sqrt{e_p^2-e_\infty^2}}{2(p-1)},\qquad a_-=\frac1{\sqrt{p(1+z_p)}},\qquad a_+=\frac{\sqrt{1+z_p}}{\sqrt p\,(p-1)},
+\]
+where we used \eqref{eq:pc-gap} and $z_p>p-2$ to evaluate the square root as $(z_p-p+2)/\sqrt{p(1+z_p)}$. Also $a_+>a_-$, since $z_p>p-2$. Factoring the quadratic, we find
+\begin{equation}\label{eq:pc-saddle-factor}
+\Lambda'(q)=-\frac{p(p-1)q}{1-q^2}\bigl(f(q)-a_-\bigr)\bigl(f(q)-a_+\bigr).
+\end{equation}
+Note that $f(\sqrt Q)=a_-$ by \eqref{eq:pc-Q-range}. Further, $f'(q)=\beta q^{p-3}[(p-2)-pq^2]$ is negative for $q^2>(p-2)/p$, and $Q>(p-2)/p$. It follows that $f$ is strictly decreasing on an interval $(q_1,1)$ that contains $\sqrt Q$. For $q\in(\sqrt Q,1)$, we have $f(q)<a_-<a_+$, and \eqref{eq:pc-saddle-factor} implies that $\Lambda'(q)<0$. For $q\in(q_1,\sqrt Q)$ close to $\sqrt Q$, we have $a_-<f(q)<a_+$ and $\Lambda'(q)>0$. Differentiating \eqref{eq:pc-saddle-factor} at $\sqrt Q$, where the first factor in parentheses vanishes, we find
+\[
+\Lambda''(\sqrt Q)=-\frac{p(p-1)\sqrt Q}{1-Q}\,f'(\sqrt Q)\,(a_--a_+)<0,
+\]
+since $f'(\sqrt Q)<0$ and $a_--a_+<0$. The identity $\Lambda(\sqrt Q)=F(\beta)$ is \eqref{eq:pc-pressure}, because $C_\beta(\sqrt Q)=\beta^2\psi_Q(1)$.
+
+Recall from \eqref{eq:pc-residual} that $C_\beta(\sqrt Q)<1/2$. We also have $\beta Q^{p/2}=c_p/x>c_p$ and $\sqrt Q>\sqrt{2/3}>1/\sqrt2$ by \eqref{eq:pc-Q-range}. All of these strict inequalities persist on a short interval just below $\sqrt Q$. Let $q_2$ be the supremum of the set $\{0\}\cup\{q\in(0,\sqrt Q):\Lambda'(q)\le0\}$, which is smaller than $\sqrt Q$ by the sign of $\Lambda'$ established above. Choosing $a<\sqrt Q$ larger than $q_2$ and $1/\sqrt2$, and close enough to $\sqrt Q$, we obtain all the assertions.
+\end{proof}
+
+\section{The conditional field and the density of critical values}\label{sec:pc-density}
+
+\begin{lemma}[Regularity of the pure field]\label{lem:pc-regularity}
+There exist $C,c>0$ such that, for every $N\ge2$, with probability at least $1-e^{-cN}$,
+\begin{equation}\label{eq:pc-third}
+\sup_{x\in S_N}\bigl\|\nabla^3_{S_N}H_N(x)\bigr\|_{\rm op}\le\frac C{\sqrt N}.
+\end{equation}
+Moreover, $\E\sup_{|x|\le\sqrt N}|\nabla H_N(x)|\le C\sqrt N$ for all $N\ge2$, and for every fixed $r>0$ and all sufficiently large $N$,
+\begin{equation}\label{eq:pc-ground-conc}
+\Pp\Bigl\{\Bigl|\frac1N\max_{S_N}H_N-e_p\Bigr|>r\Bigr\}\le2e^{-Nr^2/8}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Let $K,c$ be the constants of \cref{lem:pre-field}(3), and work on the event of that lemma. Let $x\in S_N$, and let $z,v,w$ be unit tangent vectors at $x$. The spherical Hessian is the restriction to tangent vectors of the form $A=\nabla^2H_N-N^{-1}(x\cdot\nabla H_N)I=\nabla^2H_N-(p/N)H_NI$, where we used Euler's identity $x\cdot\nabla H_N=pH_N$. For tangent vector fields $V$, the covariant derivative on $S_N$ is $\nabla_zV+N^{-1}(z\cdot V)x$. Differentiating $A(V,W)$ along $z$ and subtracting the terms in which the covariant derivative falls on $V$ or $W$, we obtain
+\begin{multline*}
+\nabla^3_{S_N}H_N(x)[z,v,w]=\nabla^3H_N(x)[z,v,w]-\frac pN(\nabla H_N(x)\cdot z)(v\cdot w)\\
+-\frac{p-1}N\bigl[(z\cdot v)\,\nabla H_N(x)\cdot w+(z\cdot w)\,\nabla H_N(x)\cdot v\bigr].
+\end{multline*}
+Here we used $A(x,w)=\nabla^2H_N(x)[x,w]=(p-1)\nabla H_N(x)\cdot w$ for tangent $w$, which is Euler's identity for the homogeneous polynomial $\nabla H_N\cdot w$ of degree $p-1$. By \eqref{eq:pre-field-ball}, the right side is at most $K/\sqrt N+3pK/\sqrt N$, which proves \eqref{eq:pc-third}.
+
+For the second assertion, let $Y=\sup_{|x|\le\sqrt N,|v|\le1}\nabla H_N(x)\cdot v$. Writing $H_N(x)=g\cdot\Psi(x)$ as in the proof of \cref{lem:pre-concentration}, each $\nabla H_N(x)\cdot v$ is a linear function of $g$ whose coefficient vector has norm at most $p|x|^{p-1}|v|N^{-(p-1)/2}\le p$. Then $Y$ is a $p$-Lipschitz function of $g$, and the Gaussian concentration inequality of \cref{lem:kr-gaussian}(1) implies that $\Pp\{Y\le\E Y-t\}\le e^{-t^2/(2p^2)}$ for $t>0$. Recall from \cref{lem:pre-field}(3) that $\Pp\{Y>K\sqrt N\}\le e^{-cN}$. If $\E Y>K\sqrt N+2p\sqrt{cN}$, we would have $1-e^{-2cN}\le\Pp\{Y>K\sqrt N\}\le e^{-cN}$, which is impossible for large $N$. We conclude that $\E Y\le(K+2p\sqrt c)\sqrt N$ for all sufficiently large $N$; for each of the remaining $N$, $\E Y\le p\,\E|g|<\infty$.
+
+For \eqref{eq:pc-ground-conc}, note that $\max_{S_N}H_N$ is a $\sqrt N$-Lipschitz function of $g$, since it is a maximum of linear functions of $g$ whose coefficient vectors have norm $|\Psi(x)|=\sqrt N$. Using \cref{prop:th-pure}(3) and the definition of $E(1)$ in \cref{thm:th-ground}, we find that $|\E\max_{S_N}H_N/N-e_p|\le r/2$ for all sufficiently large $N$. For such $N$, \cref{lem:kr-gaussian}(1) with $s=Nr/2$, applied to the maximum and to its negative, implies \eqref{eq:pc-ground-conc}.
+\end{proof}
+
+\paragraph{Conditioned laws and the Kac--Rice formula.}
+We use the results of \cref{sec:kacrice} with the center radius equal to one, so that the center field is $H_N$ itself, with covariance parameters $\xi(1)=1$, $a_1=p$, and $b_1=p(p-1)$. For the pure model, the radial derivative is $pH_N$, and the conditioning is on the value and the spherical gradient alone. For $u\in S_N$ and $h\in\R$, we write $\Pp_{u;h}$ and $\E_{u;h}$ for the conditioned law of \cref{def:kr-conditioned} at $u$, with the normalized value $h/N$; under it, $H_N(u)=h$ and $\nabla_{S_N}H_N(u)=0$. Let $n=N-1$, let $G_n$ be a standard GOE matrix of dimension $n$ as in \cref{sec:kacrice}, and let
+\[
+\varsigma_N=\Bigl(\frac{p(p-1)(N-1)}N\Bigr)^{1/2},\qquad D(u)=\bigl|\det\nabla^2_{S_N}H_N(u)\bigr|.
+\]
+Recall from \cref{cor:kr-hessian} that, under $\Pp_{u;h}$, the matrix of $\nabla^2_{S_N}H_N(u)$ in an orthonormal basis of $u^\perp$ has the law of
+\begin{equation}\label{eq:pc-hessian-law}
+\varsigma_NG_n-\frac{ph}N\,\mathrm{Id}_n.
+\end{equation}
+It follows that $\mu_N(h)=\E_{u;h}D(u)=\mu_{n,N}(ph/N)$ does not depend on $u$. It is strictly positive, as noted in \cref{sec:kr-notation}, and it is continuous in $h$. Indeed, the absolute determinant $|\det(\varsigma_NG_n-(ph/N)\mathrm{Id}_n)|$ is continuous in $h$, and for $h$ in a compact interval it is bounded by $(\varsigma_N\norm{G_n}_{\rm op}+C)^n$, which is integrable; dominated convergence applies. By \cref{thm:kr-marked}, after the change of variables from the normalized value to $h$, we have, for every deterministic Borel set $J\subset\R$ and every Borel function $\varphi(H,u)\ge0$,
+\begin{equation}\label{eq:pc-kr}
+\E\sum_{\substack{u:\nabla_{S_N}H_N(u)=0\\H_N(u)\in J}}\varphi(H,u)=\int_J\rho_N(h)\int_{S_N}\frac{\E_{u;h}[D(u)\,\varphi(H,u)]}{\mu_N(h)}\,\nu_N(\dd u)\dd h,
+\end{equation}
+where
+\begin{equation}\label{eq:pc-rho}
+\rho_N(h)=|S_N|\,(2\pi p)^{-(N-1)/2}(2\pi N)^{-1/2}e^{-h^2/(2N)}\mu_N(h).
+\end{equation}
+With $\varphi=1$, \eqref{eq:pc-kr} is the count formula of \cref{cor:kr-count}: $\rho_N$ is the density of the intensity measure of the critical values $\{H_N(u):\nabla_{S_N}H_N(u)=0\}$, counted at points of $S_N$, and it is continuous.
+
+Let $\Delta=e_p-e_\infty>0$. By \cref{prop:kr-determinant}, applied with the radius equal to one, the shift $k=ph/N$, the gap $g=p\Delta/2$, and $k_+=p(e_p+\Delta/2)$, there exists $\mathsf K_2$, depending only on $p$, such that
+\begin{equation}\label{eq:pc-det}
+\E_{u;h}\bigl[D(u)^2\bigr]\le \mathsf K_2\,\mu_N(h)^2\qquad\text{for all }N\ge2,\ u\in S_N\text{ and }\Bigl|\frac hN-e_p\Bigr|\le\frac\Delta2.
+\end{equation}
+Indeed, for such $h$ we have $ph/N\ge pe_\infty+p\Delta/2=2\sqrt{b_1}+p\Delta/2$.
+
+The next lemma describes the whole field under $\Pp_{u;h}$, and not only its Hessian at $u$.
+
+\begin{lemma}[The field conditioned on a critical point]\label{lem:pc-conditional}
+Let $u\in S_N$ and $h\in\R$. We write each $x\in S_N\setminus\{\pm u\}$ as $x=qu+\sqrt{N(1-q^2)}\,\omega$, where $q=R(x,u)$ and $\omega$ is a unit vector orthogonal to $u$, and let
+\[
+\alpha_k(q)=\binom pk^{1/2}q^{p-k}(1-q^2)^{k/2},\qquad 0\le k\le p.
+\]
+Under $\Pp_{u;h}$, the field has the law of
+\begin{equation}\label{eq:pc-conditional}
+H_N\bigl(qu+\sqrt{N(1-q^2)}\,\omega\bigr)=hq^p+\sqrt N\sum_{k=2}^p\alpha_k(q)X_k(\omega),
+\end{equation}
+where $X_2,\dots,X_p$ are independent centered Gaussian fields on the unit sphere of $u^\perp$, with $\E X_k(\omega)X_k(\omega')=(\omega\cdot\omega')^k$. The Hessian $\nabla^2_{S_N}H_N(u)+(ph/N)\mathrm{Id}$ is a function of $X_2$; in particular, it is not independent of the field in \eqref{eq:pc-conditional}.
+\end{lemma}
+
+\begin{proof}
+This is \cite[Lemmas~14 and~15 and Corollary~17]{Subag2017geometry}, written in our notation: Subag's pure field of degree $k$ on the sphere of radius $\sqrt{N-1}$ in $u^\perp$, multiplied by $\sqrt{N/(N-1)}$ as in \cite[(4.11)]{Subag2017geometry}, is our $\sqrt NX_k(\omega)$. We indicate the computation. After a rotation, we may assume that $u=\sqrt Ne_N$. We group the monomials in \eqref{eq:pre-tensor} according to the number $k$ of indices different from $N$. The groups involve disjoint sets of the Gaussian variables and are independent. The group with $k$ such indices equals $\sqrt N\alpha_k(q)X_k(\omega)$ for a field $X_k$ that is a homogeneous polynomial of degree $k$ in $\omega$. Its covariance is identified by expanding $\E H_N(x)H_N(x')=N\bigl(qq'+\sqrt{(1-q^2)(1-q'^2)}\,\omega\cdot\omega'\bigr)^p$ by the binomial theorem. The group with $k=0$ is $q^pH_N(u)$. The group with $k=1$ is $\sqrt N\alpha_1(q)\,\zeta\cdot\omega$ for a standard Gaussian vector $\zeta$ in $u^\perp$, and $\nabla_{S_N}H_N(u)=\sqrt p\,\zeta$, since only this group contributes to the first derivatives at $u$. The conditioned law of \cref{def:kr-conditioned} is Gaussian regression on $(H_N(u),\nabla_{S_N}H_N(u))$. It replaces the first two groups by $hq^p$ and $0$ and leaves the others unchanged, which proves \eqref{eq:pc-conditional}. In the tangent coordinate $y=\sqrt{N(1-q^2)}\,\omega$ near $u$, the groups with $k\ge3$ are of order $|y|^3$, and $hq^p=h-(ph/2N)|y|^2+O(|y|^4)$. The Hessian at $u$ is therefore $-(ph/N)\mathrm{Id}$ plus the Hessian at $y=0$ of the group with $k=2$, which is a function of $X_2$.
+\end{proof}
+
+We now bound $\rho_N$. For $t>2$, let $w(t)=(t-\sqrt{t^2-4})/2$, which is the Stieltjes transform $g_{\rm sc}(t)$ of the semicircle law $\sigma_{\rm sc}$ of \cref{sec:kr-border}, let $\Omega(t)=\int\log(t-\lambda)\,\sigma_{\rm sc}(\dd\lambda)$, and let
+\[
+\gamma_p=\sqrt{\frac p{p-1}},\qquad\theta(e)=\frac12+\frac12\log(p-1)-\frac{e^2}2+\Omega(\gamma_pe),\qquad e>e_\infty.
+\]
+Note that $\gamma_pe>2$ if and only if $e>e_\infty$. The function $\theta(e)$ is $\Theta_p(-e)$ in the notation of \cite[(2.5)]{SubagZeitouni2017}, the exponential growth rate of the expected number of critical points with values above $Ne$, computed by Auffinger, Ben Arous, and \v{C}ern\'y \cite{AuffingerBenArousCerny2013}.
+
+\begin{lemma}[Density of critical values]\label{lem:pc-envelope}
+\begin{enumerate}
+\item The function $\theta$ is strictly concave on $(e_\infty,\infty)$, $\theta(e_p)=0$, and $\theta'(e_p)=-c_p$.
+\item Let $\mathcal J$ be a compact subinterval of $(e_\infty,\infty)$. There exists $C$, depending only on $p$ and $\mathcal J$, such that for all $N\ge2$ with $h/\sqrt{N(N-1)}\in\mathcal J$,
+\begin{equation}\label{eq:pc-rho-bound}
+\rho_N(h)\le CN^{-1/2}\exp\Bigl[(N-1)\,\theta\Bigl(\frac h{\sqrt{N(N-1)}}\Bigr)\Bigr].
+\end{equation}
+\item Let $a_N,a'_N\ge0$ be deterministic with $a_N+a'_N=o(N)$. There exists $C$, depending only on $p$, such that for all sufficiently large $N$ and all $h\in[M_N-a_N,M_N+a'_N]$,
+\begin{equation}\label{eq:pc-envelope}
+\rho_N(h)\le Ce^{c_p(M_N-h)}.
+\end{equation}
+\end{enumerate}
+\end{lemma}
+
+The bound \eqref{eq:pc-envelope} has a bounded prefactor on every window of sublinear width. This is what the summable bounds in \cref{sec:pc-capture}, on the bands around critical points far below the centering, require.
+
+\begin{proof}
+For (1), we have $\Omega'(t)=w(t)$ and $\Omega''(t)=w'(t)=(1-t/\sqrt{t^2-4})/2<0$ for $t>2$. This implies that $\theta''(e)=-1+\gamma_p^2\Omega''(\gamma_pe)<0$. For $v\in(0,1]$, we have $w(v+v^{-1})=v$, and $\Omega(2)=1/2$ by the closed form of $\Omega$ in \cite[(2.4)]{SubagZeitouni2017}. Integrating $\Omega'=w$ along $t=v'+1/v'$, $v'\in[v,1]$, we find
+\[
+\Omega(v+v^{-1})=\frac12+\int_1^v\Bigl(v'-\frac1{v'}\Bigr)\dd v'=\frac{v^2}2-\log v.
+\]
+By \eqref{eq:pc-gap}, $\gamma_pe_p=w_0+w_0^{-1}$, and the last display gives $\Omega(\gamma_pe_p)=w_0^2/2-\log w_0$; also $\Omega'(\gamma_pe_p)=w_0$. Substituting $w_0^2=(p-1)/(1+z_p)$ and $e_p^2=(p+z_p)^2/(p(1+z_p))$, we find
+\[
+\theta(e_p)=\frac{p(1+z_p)\log(1+z_p)-pz_p-z_p^2}{2p(1+z_p)}=0,\qquad \theta'(e_p)=-e_p+\gamma_pw_0=-c_p,
+\]
+where the first identity is \eqref{eq:pc-z}, and the second follows from $\gamma_pw_0=\sqrt{p/(1+z_p)}$ and \eqref{eq:pc-parameters}.
+
+For (2), let $e=h/\sqrt{N(N-1)}$ and $v=\gamma_pe$. Then $v=(ph/N)/\varsigma_N$, and by \eqref{eq:pc-hessian-law}, $\mu_N(h)=\varsigma_N^{N-1}\E|\det(v\,\mathrm{Id}_n-G_n)|$, where we used that $-G_n$ has the law of $G_n$. Since $e^2(N-1)=h^2/N$, \eqref{eq:pc-rho} becomes
+\begin{multline}\label{eq:pc-rho-exact}
+\rho_N(h)=|S_N|\,N^{-(N-1)/2}\Bigl(\frac{(p-1)(N-1)}{2\pi}\Bigr)^{(N-1)/2}(2\pi N)^{-1/2}\\
+\times e^{-(N-1)e^2/2}\,\E|\det(v\,\mathrm{Id}_n-G_n)|.
+\end{multline}
+The interval $\gamma_p\mathcal J$ is a compact subinterval of $(2,\infty)$, and \cref{prop:kr-prefactors} gives $\E|\det(v\,\mathrm{Id}_n-G_n)|\le Ce^{(N-1)\Omega(v)}$, with $C$ depending only on $p$ and $\mathcal J$. By Stirling's formula, $|S_N|N^{-(N-1)/2}((N-1)/(2\pi))^{(N-1)/2}(2\pi N)^{-1/2}e^{-(N-1)/2}=(1+o(1))(\pi N)^{-1/2}$. Inserting these bounds into \eqref{eq:pc-rho-exact} and using $(N-1)[\log(p-1)+1-e^2]/2+(N-1)\Omega(\gamma_pe)=(N-1)\theta(e)$, we obtain \eqref{eq:pc-rho-bound}.
+
+For (3), let $\mathcal J=[e_p-\Delta/2,e_p+\Delta/2]$ and let $C$ be as in (2). For $h\in[M_N-a_N,M_N+a'_N]$ and large $N$, we have $h/\sqrt{N(N-1)}\in\mathcal J$. Part (1) implies that $\theta(e)\le-c_p(e-e_p)$ for all $e>e_\infty$. Let $r_N=\sqrt{(N-1)/N}$ and $v=M_N-h$. Inserting the tangent bound into \eqref{eq:pc-rho-bound}, we find
+\begin{equation}\label{eq:pc-tangent}
+\begin{split}
+\log\rho_N(h)&\le\log C-\frac12\log N-c_pr_Nh+c_p(N-1)e_p\\
+&=\log C+c_pr_Nv+c_pe_p\bigl[(N-1)-Nr_N\bigr]+\frac{r_N-1}2\log N,
+\end{split}
+\end{equation}
+where we used $r_NM_N=r_NNe_p-r_N(\log N)/(2c_p)$. The last two terms are bounded, since $(N-1)-Nr_N\to-1/2$ and $(1-r_N)\log N\to0$. If $v\ge0$, then $r_Nv\le v$. If $v<0$, then $c_p(r_N-1)v\le c_p|v|/N=o(1)$, since $|v|\le a'_N=o(N)$. In both cases, we obtain \eqref{eq:pc-envelope}.
+\end{proof}
+
+The proof of (2) is the computation of \cite[Section~4]{SubagZeitouni2017}, with the Hermite asymptotics replaced by the upper bound of \cref{prop:kr-prefactors}; only an upper bound with a bounded prefactor is needed below.
+
+\begin{remark}[Windows of sublinear width]\label{rem:pc-window}
+For windows of fixed width, \eqref{eq:pc-envelope} also follows from the case of compact windows in \cite[Proposition~3]{SubagZeitouni2017}. On windows of width much larger than $\sqrt N$, the exponent in \eqref{eq:pc-rho-bound} differs from its linearization $-c_p(h-M_N)$ by a term of order $(h-Ne_p)^2/N$, because $\theta''(e_p)<0$. For this reason we use the upper bound \eqref{eq:pc-envelope}, which is what the arguments below need, and not a relative asymptotic for $\rho_N$ on such windows.
+\end{remark}
+
+\begin{lemma}[Tightness of the maximum]\label{lem:pc-tight}
+The sequence $\max_{S_N}H_N-M_N$ is tight. Moreover, there exists $C$ such that $\limsup_{N\to\infty}\Pp\{\max_{S_N}H_N>M_N+L\}\le Ce^{-c_pL/2}$ for every $L\ge0$.
+\end{lemma}
+
+\begin{proof}
+We begin with the upper tail. Let $L\ge0$ and $J=[M_N+L,N(e_p+\Delta/4)]$. On the event $\{M_N+L<\max H_N\le N(e_p+\Delta/4)\}$, the maximizer of $H_N$ is a critical point with value in $J$. By \eqref{eq:pc-kr} with $\varphi=1$, this event has probability at most $\int_J\rho_N(h)\dd h$. For $h\in J$ and large $N$, we have $h/\sqrt{N(N-1)}\in[e_p-\Delta/2,e_p+\Delta/2]$, and \eqref{eq:pc-tangent}, which uses only \eqref{eq:pc-rho-bound} and the tangent bound, implies that $\rho_N(h)\le C\exp(-c_pr_N(h-M_N))\le Ce^{-c_p(h-M_N)/2}$. Integrating, we find $\int_J\rho_N\le(2C/c_p)e^{-c_pL/2}$. The event $\{\max H_N>N(e_p+\Delta/4)\}$ has probability tending to zero by \eqref{eq:pc-ground-conc}, and the bound on the upper tail follows.
+
+The lower tail is the main content of the work of Subag and Zeitouni. They identified the extremal process of the critical values and the limiting law of the minimum of $H_N$ \cite[Theorem~1 and Corollary~2]{SubagZeitouni2017}, with the centering $-Ne_p+(\log N)/(2c_p)$ up to an additive constant depending only on $p$ \cite[(1.4) and (1.5)]{SubagZeitouni2017}. Their hypothesis is $p\ge3$, with no condition on the temperature. Their $E_0$, the unique zero of $\Theta_p(-\cdot)$ above $E_\infty$, is our $e_p$, and their $c_p=\Theta_p'(-E_0)$ is our $c_p$, by \cref{lem:pc-envelope}(1). Applied to the field $-H_N$, which has the same law as $H_N$, their results imply that $\max_{S_N}H_N-M_N$ is tight. We use only this tightness, which does not depend on the additive constant in the centering or on the normalization of the limiting intensity.
+\end{proof}
+
+\begin{lemma}[Marked first moments in windows of sublinear width]\label{lem:pc-palm}
+Let $a_N,a'_N\ge0$ be deterministic with $a_N+a'_N=o(N)$, and let $J_N\subset[M_N-a_N,M_N+a'_N]$ be deterministic Borel sets. Let $Y(H,u)\ge0$ be a Borel function of the field and the point, and let $y_N\colon J_N\to[0,\infty]$ be a Borel function such that $\E_{u;h}[Y(H,u)^2]\le y_N(h)^2$ for all $u\in S_N$ and $h\in J_N$. There exists $C$, depending only on $p$, such that for all sufficiently large $N$,
+\begin{equation}\label{eq:pc-palm}
+\E\sum_{\substack{u:\nabla_{S_N}H_N(u)=0\\H_N(u)\in J_N}}Y(H,u)\le C\int_{J_N}e^{c_p(M_N-h)}y_N(h)\dd h.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For large $N$, every $h\in J_N$ satisfies $|h/N-e_p|\le\Delta/2$. By the Cauchy--Schwarz inequality under $\Pp_{u;h}$ and \eqref{eq:pc-det}, we have $\E_{u;h}[D(u)Y(H,u)]\le \mathsf K_2^{1/2}\mu_N(h)\,y_N(h)$. Inserting this bound into \eqref{eq:pc-kr} and using \eqref{eq:pc-envelope}, we obtain \eqref{eq:pc-palm}.
+\end{proof}
+
+For an indicator $Y=\ind_A$, the bound in the proof is the H\"older bound of \cref{lem:kr-holder} for determinant-weighted expectations, with $r=2$. The proof keeps the determinant inside the conditional expectation; no independence between the Hessian and the weight $Y$ is used. For latitude intervals and weights that satisfy the tameness condition of \cite[Lemma~36]{Subag2017geometry}, bounds of this type are \cite[Lemmas~38 and~41]{Subag2017geometry}, already stated for windows of sublinear width. Here we prove the bounded-prefactor envelope of \cref{lem:pc-envelope}(3) directly and apply the estimates to arbitrary Borel weights, including indicators of bands with small partition function and partition functions of disconnected sets of latitudes.
+
+\section{Localization at critical maxima}\label{sec:pc-localization}
+
+In this section, we show that every point with energy close to the ground energy lies close to a critical maximum, and complete the proof of \cref{prop:pc-counts}. We write $\Delta=e_p-e_\infty$ as before.
+
+\begin{lemma}[A Hessian bound at all high critical points]\label{lem:pc-hessian}
+Let $\kappa=p\Delta/4$. There exist $\tau_0\in(0,\Delta/4]$ and $c>0$, depending only on $p$, such that for all sufficiently large $N$, with probability at least $1-e^{-cN}$, every critical point $u$ of $H_N$ with $H_N(u)\ge N(e_p-\tau_0)$ satisfies $\nabla^2_{S_N}H_N(u)\le-\kappa\,\mathrm{Id}$.
+\end{lemma}
+
+\begin{proof}
+Let $h\in[N(e_p-\Delta/4),N(e_p+\Delta/4)]$ and $u\in S_N$, and let $A$ be the set of pairs $(H,u)$ for which $\nabla^2_{S_N}H_N(u)$ has an eigenvalue larger than $-\kappa$. By \eqref{eq:pc-hessian-law}, under $\Pp_{u;h}$, the event $A$ occurs if and only if $\lambda_{\max}(\varsigma_NG_n)>ph/N-\kappa$, and $ph/N-\kappa\ge p(e_p-\Delta/2)=2\sqrt{b_1}+p\Delta/2$. The matrix $\varsigma_NG_n$ is the matrix $W_{n,N}$ of \cref{sec:kacrice} with $b_Q$ replaced by $b_1$, and it satisfies the hypothesis of \cref{lem:kr-gaussian}(2) with $b=b_1$. Using \eqref{eq:kr-edge} with $s=p\Delta/2$, we find that $\Pp_{u;h}(A)\le2e^{-c'N}$ with $c'=p^2\Delta^2/(16b_1)$. The shift $ph/N$ lies in $[2\sqrt{b_1}+3p\Delta/4,p(e_p+\Delta/4)]$, so \cref{cor:kr-bad-event} with $r=2$ gives
+\[
+\E_{u;h}\bigl[D(u)\ind_A(H,u)\bigr]\le\mathsf K_2^{1/2}(2e^{-c'N})^{1/2}\mu_N(h)\le e^{-c_1N}\mu_N(h)
+\]
+for large $N$, with $c_1=c'/3$, where $\mathsf K_2$ depends only on $p$. The constant $c_1$ does not change when the energy interval is shrunk below.
+
+Let $\tau_0\le\Delta/4$, to be chosen. By \eqref{eq:pc-kr} with $\varphi=\ind_A$, the expected number of critical points $u$ with $(H,u)\in A$ and $H_N(u)\in[N(e_p-\tau_0),N(e_p+\tau_0)]$ is at most $e^{-c_1N}$ times $\int\rho_N(h)\dd h$ over this interval. For such $h$, we have $h/\sqrt{N(N-1)}\ge e_p-\tau_0$. Using \cref{lem:pc-envelope}(2) with $\mathcal J=[e_p-\Delta/2,e_p+\Delta/2]$ and the tangent bound $\theta(e)\le-c_p(e-e_p)$, we find $\rho_N(h)\le CN^{-1/2}e^{(N-1)c_p\tau_0}$, and the integral is at most $2C\tau_0N^{1/2}e^{c_p\tau_0N}$. We choose $\tau_0$ so small that $c_p\tau_0\le c_1/2$. By Markov's inequality, the probability that there exists such a critical point is at most $2C\tau_0N^{1/2}e^{-c_1N/2}$. Finally, a critical point with value above $N(e_p+\tau_0)$ exists only if $\max H_N>N(e_p+\tau_0)$, which has probability at most $2e^{-N\tau_0^2/8}$ by \eqref{eq:pc-ground-conc}. This proves the lemma.
+\end{proof}
+
+The determinant weight enters through \cref{cor:kr-bad-event}. The probability of the event $A$ under the conditioned law alone would not control the critical points selected by the field, since critical points are counted with the weight $D(u)$.
+
+\begin{lemma}[Deterministic localization in superlevel sets]\label{lem:pc-superlevel}
+Let $f\in C^3(S_N)$ and $f_*=\max_{S_N}f$, and suppose that $\sup_{S_N}\|\nabla^3_{S_N}f\|_{\rm op}\le C_3/\sqrt N$. Let $\delta_0,\kappa>0$, and suppose that every critical point $c$ of $f$ with $f(c)>f_*-\delta_0N$ satisfies $\nabla^2_{S_N}f(c)\le-\kappa I$. Let $r_0=\min(1,\kappa/(2C_3))$, with $r_0=1$ if $C_3=0$, and let $0<\delta<\min(\delta_0,\kappa r_0^2/4)$. Then every connected component $\mathcal V$ of $\{f>f_*-\delta N\}$ contains exactly one critical point $c$ of $f$, which is the maximizer of $f$ on $\mathcal V$, and $\mathcal V$ is contained in the open geodesic ball of radius $r_0\sqrt N$ around $c$. Moreover, every $x\in\mathcal V$ satisfies
+\begin{equation}\label{eq:pc-localization}
+d_{S_N}(x,c)<2\sqrt{\delta/\kappa}\,\sqrt N,\qquad f(c)\ge f(x).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The function $f$ attains its maximum on the compact closure of $\mathcal V$ at some point $c$, and $f(c)>f_*-\delta N$ since $\mathcal V$ is nonempty. A small connected neighborhood of $c$ on which $f>f_*-\delta N$ meets $\mathcal V$, and hence is contained in $\mathcal V$. We conclude that $c\in\mathcal V$, $c$ is a local maximum of $f$, and $\nabla^2_{S_N}f(c)\le-\kappa I$ by hypothesis.
+
+Let $\gamma$ be a unit-speed geodesic starting at $c$. Along $\gamma$, the Hessian, transported in parallel, changes by at most $C_3t/\sqrt N$ in operator norm up to time $t$. For $t\le r_0\sqrt N$, it is therefore at most $-\kappa I+C_3r_0I\le-(\kappa/2)I$. Integrating twice along $\gamma$ and using $\nabla_{S_N}f(c)=0$, we obtain, for every $y$ in the closed geodesic ball of radius $r_0\sqrt N$ around $c$,
+\begin{equation}\label{eq:pc-concavity}
+f(y)\le f(c)-\frac\kappa4d_{S_N}(y,c)^2\le f_*-\frac\kappa4d_{S_N}(y,c)^2.
+\end{equation}
+The geodesics in this argument are unique, since the radius $r_0\sqrt N\le\sqrt N$ is smaller than the injectivity radius $\pi\sqrt N$ of $S_N$. On the boundary sphere of the ball, \eqref{eq:pc-concavity} implies that $f\le f_*-\kappa r_0^2N/4<f_*-\delta N$. The open set $\mathcal V$ is path connected, contains $c$, and does not meet this boundary sphere. It is therefore contained in the open ball. If $c'\ne c$ were another critical point in the ball, then along the geodesic from $c$ to $c'$, of length $t_1>0$, the derivative of $f$ at time $t_1$ would be at most $-\kappa t_1/2<0$, which contradicts $\nabla_{S_N}f(c')=0$. Finally, \eqref{eq:pc-concavity} and $f(x)>f_*-\delta N$ imply \eqref{eq:pc-localization}.
+\end{proof}
+
+\begin{proposition}[Proximity of high-energy points to local maxima]\label{prop:pc-relocation}
+For every fixed $r>0$, there exist $\eps_0,c>0$ such that, for all sufficiently large $N$, with probability at least $1-e^{-cN}$, every $y\in S_N$ with $H_N(y)\ge N(e_p-\eps_0)$ has a nondegenerate local maximum $u$ of $H_N$ with
+\begin{equation}\label{eq:pc-relocation}
+|u-y|\le r\sqrt N,\qquad H_N(u)\ge H_N(y).
+\end{equation}
+The same holds with $\eps_0$ replaced by any smaller positive number.
+\end{proposition}
+
+\begin{proof}
+Let $\tau_0,\kappa$ be as in \cref{lem:pc-hessian} and $C_3$ the constant in \eqref{eq:pc-third}, and let $r_0=\min(1,\kappa/(2C_3))$. We fix $\eps_0\in(0,\tau_0/6)$ so small that $3\eps_0<\kappa r_0^2/4$ and $2\sqrt{3\eps_0/\kappa}<r$; every smaller $\eps_0$ has the same properties. Let $\mathcal E$ be the intersection of the events of \cref{lem:pc-regularity,lem:pc-hessian} with $\{|\max H_N/N-e_p|\le\eps_0\}$. These lemmas and \eqref{eq:pc-ground-conc} imply that $\Pp(\mathcal E^c)\le e^{-cN}$ for some $c>0$.
+
+On $\mathcal E$, let $f=H_N$ and $f_*=\max H_N$. Every critical point $c$ with $f(c)>f_*-\tau_0N/2$ satisfies $f(c)>N(e_p-\eps_0-\tau_0/2)\ge N(e_p-\tau_0)$ and $\nabla^2_{S_N}f(c)\le-\kappa I$. We apply \cref{lem:pc-superlevel} with $\delta_0=\tau_0/2$ and $\delta=3\eps_0$; note that $3\eps_0<\tau_0/2$. If $H_N(y)\ge N(e_p-\eps_0)$, then $f_*-f(y)\le2\eps_0N<3\eps_0N$, and $y$ lies in a component of $\{f>f_*-3\eps_0N\}$. Let $u$ be its critical point. By \eqref{eq:pc-localization}, $H_N(u)\ge H_N(y)$ and $|u-y|\le d_{S_N}(u,y)<2\sqrt{3\eps_0/\kappa}\,\sqrt N<r\sqrt N$, and $u$ is a nondegenerate local maximum since $\nabla^2_{S_N}H_N(u)\le-\kappa I$.
+\end{proof}
+
+\begin{proof}[Proof of \cref{prop:pc-counts}]
+Let $M>0$ be fixed and $L=Q^{-p/2}M$. By \eqref{eq:pc-window}, $\cC_{N,M}\subset\mathcal D_{N,L}$ for every $N$. Using \eqref{eq:pc-kr} with $\varphi=1$ and \eqref{eq:pc-envelope} with $a_N=a'_N=L$, we obtain, for all $N\ge N_0$,
+\[
+\E|\mathcal D_{N,L}|=\int_{M_N-L}^{M_N+L}\rho_N(h)\dd h\le C\int_{-L}^Le^{-c_pt}\dd t\le2CLe^{c_pL}.
+\]
+For each of the finitely many $N<N_0$, the integral is finite because $\rho_N$ is continuous. This proves \eqref{eq:pc-count}.
+
+For \eqref{eq:pc-ground}, let $\eps>0$. By \cref{lem:pc-tight}, there exists $L$ such that $\liminf_N\Pp\{|\max H_N-M_N|\le L\}\ge1-\eps$. On this event, a maximizer $u_*$ of $H_N$ is a critical point with $|H_N(u_*)-M_N|\le L$. Then $u_*\in\mathcal D_{N,L}$, and $u_*\in\cC_{N,Q^{p/2}L}$ for all sufficiently large $N$ by \eqref{eq:pc-window}. Further, $\max H_Q=Q^{p/2}\max H_N\le m_N+Q^{p/2}L$. As the event in \eqref{eq:pc-ground} increases with $M$, its probability has $\liminf$ at least $1-\eps$ for every $M\ge Q^{p/2}L$. This proves \eqref{eq:pc-ground}.
+
+Finally, let $M$ be fixed. For all sufficiently large $N$, every $u\in\cC_{N,M}$ satisfies $H_N(u)\ge M_N-Q^{-p/2}M\ge N(e_p-\tau_0)$. By \cref{lem:pc-hessian}, with probability at least $1-e^{-cN}$, every such $u$ satisfies $\nabla^2_{S_N}H_Q(u)=Q^{p/2}\nabla^2_{S_N}H_N(u)\le-Q^{p/2}\kappa I$, and it is a nondegenerate local maximum of $H_Q$.
+\end{proof}
+
+\section{Empirical means of fixed replica groups}\label{sec:pc-replicas}
+
+In this section, we show that if $n$ samples from the Gibbs measure, with $n$ large but fixed, have pairwise overlaps close to $Q$, then their empirical mean, rescaled to squared norm $NQ$, has energy close to $NE_0$. The proof uses Subag's free energies of replicated bands. The same inputs are stated for general mixtures in \cref{sec:mb-coarse}.
+
+Let $m\in\R^N$ with $|m|^2=NQ$, so that $m=\sqrt Q\,u$ with $u\in S_N$, and let $n\ge1$ and $\rho,\delta>0$. We define
+\[
+\begin{split}
+\mathcal T_N(m,n,\rho,\delta)=\bigl\{(\sigma^1,\dots,\sigma^n)\in S_N^n:\ &|R(\sigma^i,m)-Q|\le\delta\sqrt Q\ \text{for all }i,\\
+&|R(\sigma^i,\sigma^j)-Q|<\rho\ \text{for all }i\ne j\bigr\},
+\end{split}
+\]
+and
+\begin{equation}\label{eq:pc-replicated}
+\widetilde P_N(m,n,\rho,\delta)=\frac1{Nn}\log\int_{\mathcal T_N(m,n,\rho,\delta)}\exp\Bigl(\beta\sum_{i=1}^n\bigl[H_N(\sigma^i)-H_N(m)\bigr]\Bigr)\nu_N^{\otimes n}(\dd\sigma).
+\end{equation}
+The condition on $R(\sigma^i,m)$ says that $\sigma^i\in B_u(\delta)$, as $R(\sigma,m)=\sqrt Q\,R(\sigma,u)$. This is Subag's free energy of the replicated band \cite[(1.10)]{Subag2024}, with the squared norm $q=Q$. For $N\ge n+1$, the set $\mathcal T_N(m,n,\rho,\delta)$ has nonempty interior: it contains the points $\sigma^i=m+\sqrt{Ns}\,\omega_i$ for orthonormal vectors $\omega_1,\dots,\omega_n$ orthogonal to $m$, for which $R(\sigma^i,m)=Q$ and $R(\sigma^i,\sigma^j)=Q$, so that all the constraints hold with strict slack at this tuple. Hence $\mathcal T_N(m,n,\rho,\delta)$ has positive measure, and $\widetilde P_N$ is finite. The expectation $\E\widetilde P_N(m,n,\rho,\delta)$ does not depend on $m$, by rotation invariance.
+
+\begin{proposition}[{Uniform concentration; \cite[Proposition~24]{Subag2024}}]\label{prop:pc-subag}
+Let $t,c>0$. There exist $\delta_0,\rho_0>0$ and an integer $n_0$ such that for all $\delta\in(0,\delta_0]$, $\rho\in(0,\rho_0]$, $n\ge n_0$, and $N\ge n+1$,
+\[
+\Pp\Bigl\{\sup_{|m|^2=NQ}\bigl[\widetilde P_N(m,n,\rho,\delta)-\E\widetilde P_N(m,n,\rho,\delta)\bigr]<t\Bigr\}>1-e^{-cN}.
+\]
+\end{proposition}
+
+This is \cite[Proposition~24, (3.1)]{Subag2024}, which holds for every mixture with exponentially decaying coefficients, in particular for the pure covariance of either parity, and for every $q\in[0,1)$ in place of $Q$. We restrict to $N\ge n+1$, where the replicated set has positive measure; for each fixed $n$, this excludes finitely many dimensions. The parameters $\delta,\rho,n$ in the proposition are fixed: they are chosen before $N\to\infty$. Subag also proved the estimates that relate $\widetilde P_N$ to the free energy of the residual field on the exact latitude \cite[Lemmas~17--19]{Subag2024}: a bound $L\sqrt N$ on the Lipschitz constant of $H_N$ on the ball of radius $\sqrt N$, with probability at least $1-e^{-c'N}$ for $L$ large \cite[Lemma~17]{Subag2024}; the projection of a band of width $\delta$ onto its exact latitude, which raises the pair tolerance from $\rho$ to $\rho+\sqrt{8\delta}$ and costs $N^{-1}\log\nu_N(B_u(\delta))+\beta L\sqrt{2\delta}$ \cite[Lemma~18, (2.2)]{Subag2024}; and the removal of the field of degree one, at a cost at most a universal constant times $\beta\gamma_1\sqrt{1/n+\rho}$, where $\gamma_1^2$ is its coefficient \cite[Lemma~19, (2.5)]{Subag2024}. The proof of the next lemma follows these arguments, with fixed $n$, $\rho$, and $\delta$, and it gives the upper bound we need directly.
+
+\begin{lemma}[Expected free energy of a replicated band]\label{lem:pc-replica-mean}
+Let $T_Q=(\log s)/2+\beta^2\psi_Q(1)/2$. There exists $C$ such that for all $\delta\in(0,\sqrt Q/2]$, $\rho>0$, and $n\ge1$,
+\begin{equation}\label{eq:pc-replica-mean}
+\limsup_{N\to\infty}\E\widetilde P_N(m,n,\rho,\delta)\le T_Q+C\sqrt\delta+C\Bigl(\frac1n+\frac{\rho+\sqrt{8\delta}}s\Bigr)^{1/2}.
+\end{equation}
+\end{lemma}
+
+Note that $F(\beta)=\beta E_0+T_Q$ by \eqref{eq:pc-pressure}, since $E_0=e_pQ^{p/2}$.
+
+\begin{proof}
+Let $u=m/\sqrt Q$. We bound the integral in \eqref{eq:pc-replicated} in three steps: we project the replicas to the exact latitude $R(\cdot,u)=\sqrt Q$, we separate the latitude from the direction orthogonal to $u$, and we bound the field on the exact latitude.
+
+\paragraph{Projection to the exact latitude.}
+We write $\sigma\in B_u(\delta)$ as $\sigma=r u+\sqrt{N(1-r^2)}\,\omega$, with $|r-\sqrt Q|\le\delta$ and $\omega$ a unit vector orthogonal to $u$, and let $\sigma'=\sqrt Q\,u+\sqrt{Ns}\,\omega$. If $r=\cos\phi$ and $\sqrt Q=\cos\phi'$ with $\phi,\phi'\in[0,\pi]$, then
+\[
+|\sigma-\sigma'|^2=4N\sin^2\frac{\phi-\phi'}2\le4N\Bigl|\sin\frac{\phi+\phi'}2\sin\frac{\phi-\phi'}2\Bigr|=2N|\cos\phi-\cos\phi'|\le2N\delta,
+\]
+where we used $|\phi-\phi'|/2\le(\phi+\phi')/2\le\pi-|\phi-\phi'|/2$. This is the bound $|\sigma-\sigma'|\le\sqrt{2N\delta}$ of \cite[Lemma~18]{Subag2024}, and for two such points $|R(\sigma'^i,\sigma'^j)-R(\sigma^i,\sigma^j)|\le2\sqrt{2\delta}=\sqrt{8\delta}$. Let $\mathrm{Lip}$ be the Lipschitz constant of $H_N$ on the ball of radius $\sqrt N$, which contains the segment between $\sigma$ and $\sigma'$. Then
+\[
+\sum_{i=1}^n\bigl[H_N(\sigma^i)-H_N(m)\bigr]\le\sum_{i=1}^n\bigl[H_N(\sigma'^i)-H_N(m)\bigr]+n\,\mathrm{Lip}\sqrt{2N\delta}.
+\]
+
+\paragraph{Latitude and direction.}
+Under $\nu_N$, the latitude $r=R(\sigma,u)$ has density $\ell_N(1-r^2)^{(N-3)/2}$ on $(-1,1)$, with
+\begin{equation}\label{eq:pc-latitude}
+\ell_N=\frac{\Gamma(N/2)}{\sqrt\pi\,\Gamma((N-1)/2)}\le\sqrt N,
+\end{equation}
+and, given $r$, the direction $\omega$ is uniform on the unit sphere of $u^\perp$. If $(\sigma^i)\in\mathcal T_N(m,n,\rho,\delta)$, then $|R(\sigma'^i,\sigma'^j)-Q|<\rho+\sqrt{8\delta}$, and since $R(\sigma'^i,\sigma'^j)=Q+s\,\omega_i\cdot\omega_j$, we have $|\omega_i\cdot\omega_j|<\rho'=(\rho+\sqrt{8\delta})/s$. The integrand after projection depends only on the directions, and it is nonnegative. Enlarging the domain of integration, we obtain
+\[
+\begin{split}
+\int_{\mathcal T_N}\exp\Bigl(\beta\sum_i\bigl[H_N(\sigma^i)-H_N(m)\bigr]\Bigr)\dd\nu_N^{\otimes n}&\le\nu_N\bigl(B_u(\delta)\bigr)^n\,e^{n\beta\,\mathrm{Lip}\sqrt{2N\delta}}\\
+&\quad\times\int_{\{|\omega_i\cdot\omega_j|<\rho'\}}e^{\beta\sum_iX(\omega_i)}\dd\omega,
+\end{split}
+\]
+where $X(\omega)=H_N(\sqrt Q\,u+\sqrt{Ns}\,\omega)-H_N(m)$ and $\dd\omega$ is the product of uniform probability measures on the unit sphere of $u^\perp$. Since $1-r^2\le1-(\sqrt Q-\delta)^2$ on the band and $\delta\le\sqrt Q/2$, we have
+\[
+\frac1N\log\nu_N\bigl(B_u(\delta)\bigr)\le\frac1N\log\bigl(2\delta\sqrt N\bigr)+\frac{N-3}{2N}\log\bigl(s+2\sqrt Q\delta\bigr)\le\frac12\log s+\frac{2\delta}{s}+o(1).
+\]
+
+\paragraph{The field on the exact latitude.}
+Since $R(\sqrt Q u+\sqrt{Ns}\,\omega,\sqrt Q u+\sqrt{Ns}\,\omega')=Q+s\,\omega\cdot\omega'$ and $R(\sqrt Qu+\sqrt{Ns}\,\omega,m)=Q$, the covariance of $X$ is
+\[
+\E X(\omega)X(\omega')=N\bigl[(Q+s\,\omega\cdot\omega')^p-Q^p\bigr]=N\bigl[pQ^{p-1}s\,\omega\cdot\omega'+\psi_Q(\omega\cdot\omega')\bigr].
+\]
+Since the polynomial $\psi_Q$ has nonnegative coefficients, we may write $X(\omega)=\sqrt N\gamma_1g\cdot\omega+Y(\omega)$, with $\gamma_1=(pQ^{p-1}s)^{1/2}$, $g$ a standard Gaussian vector in $u^\perp$, and $Y$ an independent centered Gaussian field with covariance $N\psi_Q(\omega\cdot\omega')$. On $\{|\omega_i\cdot\omega_j|<\rho'\}$, the Cauchy--Schwarz inequality gives
+\[
+\Bigl|g\cdot\sum_{i=1}^n\omega_i\Bigr|\le|g|\Bigl|\sum_{i=1}^n\omega_i\Bigr|\le|g|\bigl(n+n(n-1)\rho'\bigr)^{1/2}\le n|g|\Bigl(\frac1n+\rho'\Bigr)^{1/2}.
+\]
+After this bound, we drop the constraint on the directions, so that the remaining integral factorizes into $n$ identical factors. By Jensen's inequality,
+\[
+\frac1N\E\log\int e^{\beta Y(\omega)}\dd\omega\le\frac1N\log\int\E e^{\beta Y(\omega)}\dd\omega=\frac{\beta^2}2\psi_Q(1).
+\]
+
+\paragraph{Conclusion.}
+Combining the three steps, taking expectations, and using $\E|g|\le\sqrt N$ and $\E\,\mathrm{Lip}\le C\sqrt N$ (\cref{lem:pc-regularity}), we find
+\[
+\E\widetilde P_N(m,n,\rho,\delta)\le\frac12\log s+\frac{2\delta}s+o(1)+C\beta\sqrt{2\delta}+\beta\gamma_1\Bigl(\frac1n+\rho'\Bigr)^{1/2}+\frac{\beta^2}2\psi_Q(1).
+\]
+Since $\delta\le\sqrt\delta$, this implies \eqref{eq:pc-replica-mean}. The bound uses the expected Lipschitz constant; no contribution from the complement of a regularity event is lost.
+\end{proof}
+
+\begin{proposition}[Empirical means of Gibbs replica groups]\label{prop:pc-replica-means}
+Let $\eps>0$. There exist an integer $n_0$ and $\eta,c>0$ such that for every fixed integer $n\ge n_0$ and all sufficiently large $N$, depending on $n$,
+\begin{equation}\label{eq:pc-replica-means}
+\E\,\pi^{\otimes n}\Bigl\{|R(\sigma^i,\sigma^j)-Q|<\eta\ \text{for all }i\ne j,\ \ H_Q(\hat u)\le N(E_0-\eps)\Bigr\}\le e^{-cN},
+\end{equation}
+where $\bar\sigma=n^{-1}\sum_{i=1}^n\sigma^i$, $\bar q=|\bar\sigma|^2/N$, and $\hat u=\bar\sigma/\sqrt{\bar q}\in S_N$. On the event in \eqref{eq:pc-replica-means}, we have $\bar q>0$, and $\hat u$ is well defined.
+\end{proposition}
+
+The diagonal of the overlap matrix enters the mean: since $R(\sigma^i,\sigma^i)=1$, the squared norm of $\bar\sigma$ is close to $Q+(1-Q)/n$ and not to $Q$. For this reason the number $n$ of replicas is fixed and large, and it is chosen before $N\to\infty$.
+
+\begin{proof}
+We first relate $\hat u$ to the replicas, then choose the parameters, and finally bound the Gibbs probability by a union over a net.
+
+\paragraph{Geometry of the mean.}
+Let $q_n=Q+(1-Q)/n$, and suppose that $|R(\sigma^i,\sigma^j)-Q|<\eta$ for all $i\ne j$, with $\eta<Q/2$. Since $\bar q=n^{-2}\sum_{i,j}R(\sigma^i,\sigma^j)$ and $R(\sigma^i,\bar\sigma)=n^{-1}\sum_jR(\sigma^i,\sigma^j)$, with diagonal terms equal to one, we have
+\[
+|\bar q-q_n|\le\eta,\qquad|R(\sigma^i,\bar\sigma)-\bar q|\le2\eta.
+\]
+In particular, $\bar q\ge Q-\eta>Q/2$. Writing $R(\sigma^i,\sqrt Q\hat u)-Q=\sqrt{Q/\bar q}\,[R(\sigma^i,\bar\sigma)-\bar q]+\sqrt{Q\bar q}-Q$, and using $|\sqrt{Q\bar q}-Q|\le|\bar q-Q|\le\eta+1/n$ and $\sqrt{Q/\bar q}\le\sqrt2$, we obtain
+\begin{equation}\label{eq:pc-mean-projection}
+|R(\sigma^i,\sqrt Q\,\hat u)-Q|\le\frac1n+4\eta.
+\end{equation}
+
+\paragraph{Choice of the parameters.}
+Let $L$ be such that the event $\{\mathrm{Lip}\le L\sqrt N\}$, with $\mathrm{Lip}$ as in the proof of \cref{lem:pc-replica-mean}, has probability at least $1-e^{-c_2N}$ for some $c_2>0$; such an $L$ exists by \cref{lem:pre-field}(3). Let $\delta_0,\rho_0,n_0'$ be the parameters given by \cref{prop:pc-subag} with $t=\beta\eps/8$ and $c=1$. Fix $\delta\in(0,\min(\delta_0,\sqrt Q/2)]$, $\rho\in(0,\rho_0]$, and $n_1$ so that the error terms in \eqref{eq:pc-replica-mean} are at most $\beta\eps/16$ for every $n\ge n_1$. Then for every fixed $n\ge n_1$ and all sufficiently large $N$,
+\begin{equation}\label{eq:pc-mean-choice}
+\E\widetilde P_N(m,n,\rho,\delta)\le T_Q+\frac{\beta\eps}8.
+\end{equation}
+Let $\vartheta>0$ be a net radius with $\vartheta\le\delta\sqrt Q/4$ and $L\vartheta\le\eps/4$. The sphere $\{|m|^2=NQ\}$ has a $\vartheta\sqrt N$-net $\mathcal N$ with at most $e^{A_\vartheta N}$ points, where $A_\vartheta=\log(1+2\sqrt Q/\vartheta)$. Let $n_0\ge\max(n_0',n_1)$ satisfy $1/n_0\le\delta\sqrt Q/4$ and $n_0\beta\eps/4\ge2A_\vartheta$, and choose $\eta\in(0,\min(Q/2,\rho,\delta\sqrt Q/16))$. All these choices are made before $N\to\infty$, and they remain valid for every fixed $n\ge n_0$.
+
+\paragraph{A union over the net.}
+Let $n\ge n_0$, and let $\mathcal E$ be the intersection of the events $\{\mathrm{Lip}\le L\sqrt N\}$, $\{P_N\ge F(\beta)-\beta\eps/8\}$, and the event of \cref{prop:pc-subag}. By \cref{lem:pre-concentration} and $\E P_N\to F(\beta)$, the second event has probability at least $1-2e^{-cN}$ for large $N$. We conclude that $\Pp(\mathcal E^c)\le e^{-c_3N}$ for some $c_3>0$ and large $N$. Suppose that a tuple $(\sigma^i)$ belongs to the event in \eqref{eq:pc-replica-means}, and let $m_j\in\mathcal N$ satisfy $|m_j-\sqrt Q\hat u|\le\vartheta\sqrt N$. Then $|R(\sigma^i,m_j)-R(\sigma^i,\sqrt Q\hat u)|\le\vartheta$, and \eqref{eq:pc-mean-projection} and the choice of the parameters give $|R(\sigma^i,m_j)-Q|\le3\delta\sqrt Q/4$, and $|R(\sigma^i,\sigma^k)-Q|<\eta\le\rho$ for $i\ne k$. This means that $(\sigma^i)\in\mathcal T_N(m_j,n,\rho,\delta)$. On $\mathcal E$, we also have
+\[
+H_N(m_j)\le H_N(\sqrt Q\hat u)+L\vartheta N=H_Q(\hat u)+L\vartheta N\le N(E_0-3\eps/4),
+\]
+where we used $L\vartheta\le\eps/4$. On $\mathcal E$, for every such net point $m_j$,
+\[
+\pi^{\otimes n}\bigl(\mathcal T_N(m_j,n,\rho,\delta)\bigr)=\exp\Bigl\{Nn\Bigl[\frac\beta NH_N(m_j)+\widetilde P_N(m_j,n,\rho,\delta)-P_N\Bigr]\Bigr\}\le e^{-3Nn\beta\eps/8}.
+\]
+Indeed, on $\mathcal E$, the event of \cref{prop:pc-subag} and \eqref{eq:pc-mean-choice} give $\widetilde P_N(m_j,n,\rho,\delta)\le T_Q+\beta\eps/4$, and $P_N\ge F(\beta)-\beta\eps/8=\beta E_0+T_Q-\beta\eps/8$; the exponent is therefore at most $Nn[-3\beta\eps/4+3\beta\eps/8]$. Summing over the net, we find that on $\mathcal E$ the Gibbs probability of the event in \eqref{eq:pc-replica-means} is at most $e^{A_\vartheta N-3Nn\beta\eps/8}\le e^{-Nn\beta\eps/8}$, where we used $n\beta\eps/4\ge2A_\vartheta$. Taking expectations, we find that the left side of \eqref{eq:pc-replica-means} is at most $e^{-c_3N}+e^{-Nn\beta\eps/8}$, which is at most $e^{-cN}$ with $c=\min(c_3,\beta\eps/8)/2$ for all sufficiently large $N$.
+\end{proof}
+
+\section{A coarse cover from the directing measure}\label{sec:pc-coarse}
+
+For $\tau>0$, let
+\[
+\mathcal U_N(\tau)=\bigcup_{\substack{u:\nabla_{S_N}H_N(u)=0\\H_N(u)\ge N(e_p-\tau)}}\bigl\{x\in S_N:R(x,u)\ge a\bigr\},
+\]
+where $a$ is the cap latitude of \cref{lem:pc-saddle}. The set of pairs $(H,x)$ with $x\in\mathcal U_N(\tau)$ is closed, by the projection argument in the proof of \cref{lem:red-unions}, and $\pi(\mathcal U_N(\tau)^c)$ is a Borel function of the field. In this section, we show that the caps in $\mathcal U_N(\tau)$ carry asymptotically all of the Gibbs measure, for every fixed $\tau>0$.
+
+We use the notation of \cref{sec:dir-arrays}. Let $\sigma^1,\sigma^2,\dots$ be independent samples from $\pi$, conditionally on the field, let $\mathcal L_N$ be the annealed law of the overlap array $(R(\sigma^i,\sigma^j))_{i,j\ge1}$ on the compact space $\mathcal M=[-1,1]^{\N\times\N}$, and let $\mathfrak L$ be the set of limiting overlap laws, that is, of subsequential weak limits of $(\mathcal L_N)$. By \cref{prop:th-pure}, \cref{thm:dir-norm} applies, with the radius $Q$ of \cref{sec:pc-statements}. Together with \cref{thm:dir-DS}, it gives the following. Every $\mathcal L\in\mathfrak L$ has a directing measure $(G_\omega)_{\omega\in\Omega}$, so that an array with law $\mathcal L$ is obtained by drawing $\omega$, then independent vectors $v_1,v_2,\dots$ in the unit ball $\mathsf B$ of $\ell^2$ with law $G_\omega$, and setting $R_{ii}=1$ and $R_{ij}=v_i\cdot v_j$ for $i\ne j$; and for almost every $\omega$, $G_\omega\{v:\norm v^2=Q\}=1$. No other property of the directing measure is used.
+
+\begin{proposition}[A coarse cover]\label{prop:pc-coarse}
+For every fixed $\tau>0$,
+\begin{equation}\label{eq:pc-coarse}
+\lim_{N\to\infty}\E\,\pi\bigl(\mathcal U_N(\tau)^c\bigr)=0.
+\end{equation}
+\end{proposition}
+
+The idea is as follows. If many replicas are drawn, the directing measure guarantees that some $n$ of them, together with a fresh sample $\sigma^1$, have all pairwise overlaps close to $Q$. By \cref{prop:pc-replica-means}, the normalized mean of these $n$ replicas has near-ground energy, and by \cref{prop:pc-relocation}, it is close to a critical maximum. The fresh sample then lies in the cap of that critical point. Only finitely many replicas can be used at finite $N$, and their number must be chosen uniformly in $N$. This is where a compactness argument enters.
+
+\begin{proof}
+Let $\tau>0$ and $\eps>0$ be fixed. The proof has four steps: the choice of the parameters, a continuous score on the overlap array, a uniform bound on the score at finite $N$, and the transfer to $\mathcal U_N(\tau)$.
+
+\paragraph{Parameters.}
+Fix $a_1\in(a,\sqrt Q)$ and $r\in(0,a_1-a)$. Let $\eps_0$ be given by \cref{prop:pc-relocation} for this $r$, and let $\tau_1=\min(\tau,\eps_0)$. Let $n_0$, $\eta$, and $c$ be the constants of \cref{prop:pc-replica-means} with $Q^{p/2}\tau_1$ in place of $\eps$. Since $Q>a_1\sqrt Q$, we may fix an integer $n\ge n_0$ such that, with $q_n=Q+(1-Q)/n$,
+\begin{equation}\label{eq:pc-training}
+\kappa_1=\frac12\bigl(Q-a_1\sqrt{q_n}\bigr)>0.
+\end{equation}
+
+\paragraph{A continuous score.}
+For an array $R=(R_{ij})_{i,j\ge1}$ in $\mathcal M$ and a set $I\subset\{2,3,\dots\}$ with $|I|=n$, let
+\[
+b_I=\frac1n\sum_{i\in I}R_{i1},\qquad w_I=\frac1{n^2}\sum_{i,j\in I}R_{ij},\qquad e_I=\max_{i,j\in I,\,i\ne j}|R_{ij}-Q|.
+\]
+Let $\varphi_1,\varphi_2,\varphi_3\colon\R\to[0,1]$ be continuous, with $\varphi_1=1$ on $(-\infty,\eta/2]$ and $\varphi_1=0$ on $[\eta,\infty)$, $\varphi_2=0$ on $(-\infty,Q/4]$ and $\varphi_2=1$ on $[Q/2,\infty)$, and $\varphi_3=0$ on $(-\infty,0]$ and $\varphi_3=1$ on $[\kappa_1,\infty)$. We define the score
+\[
+S_I=\varphi_1(e_I)\,\varphi_2(w_I)\,\varphi_3\bigl(b_I-a_1\sqrt{\max(w_I,0)}\bigr)\in[0,1],
+\]
+a continuous function of finitely many entries of the array. If $S_I>0$, then $e_I<\eta$, $w_I>Q/4$, and $b_I>a_1\sqrt{w_I}$. For the overlaps of samples, $w_I=|\bar\sigma_I|^2/N$ and $b_I=R(\sigma^1,\bar\sigma_I)$, where $\bar\sigma_I=n^{-1}\sum_{i\in I}\sigma^i$. Thus, if $S_I>0$, the point $\hat w_I=\bar\sigma_I/\sqrt{w_I}\in S_N$ satisfies
+\begin{equation}\label{eq:pc-score}
+R(\sigma^1,\hat w_I)=\frac{b_I}{\sqrt{w_I}}>a_1,
+\end{equation}
+and the samples $\sigma^i$, $i\in I$, satisfy the pair condition of \cref{prop:pc-replica-means}, with $\hat w_I$ in the role of the point $\hat u$.
+
+\paragraph{A uniform number of replicas.}
+For $T\ge n$ and a probability measure $\mathcal L$ on $\mathcal M$, let
+\[
+f_T(\mathcal L)=\E_{\mathcal L}\Bigl[1-\max_{I\subset\{2,\dots,T+1\},\,|I|=n}S_I\Bigr].
+\]
+Since $f_T(\mathcal L)$ is the expectation of a bounded continuous function of finitely many coordinates, $f_T$ is continuous in $\mathcal L$. It decreases in $T$. Let $\mathcal L\in\mathfrak L$, with a directing measure as above, and fix $\omega$ outside a null set. Almost surely, $v_1$ lies in the support of $G_\omega$, since the support of a Borel probability measure on a separable metric space has full measure, and $\norm{v_1}^2=Q$. Let $r'>0$ be small. If $v_i,v_j$, for distinct indices $i,j\in I$, lie in the ball $B(v_1,r')$ and have squared norm $Q$, then $|v_i\cdot v_j-Q|\le2r'\sqrt Q$ and $|v_i\cdot v_1-Q|\le r'\sqrt Q$, so that $e_I\le2r'\sqrt Q$, $|b_I-Q|\le r'\sqrt Q$, and $|w_I-q_n|\le2r'\sqrt Q$; here we used $R_{ii}=1$. For $r'$ small enough, depending only on $Q$, $\eta$, $a_1$, and $\kappa_1$, these bounds and \eqref{eq:pc-training} imply that $S_I=1$. The ball $B(v_1,r')$ has positive $G_\omega$-mass, so, conditionally on $\omega$ and $v_1$, infinitely many of the vectors $v_2,v_3,\dots$ lie in it almost surely. The maximum of $S_I$ over $n$-subsets $I$ of $\{2,\dots,T+1\}$ is then equal to one for all large $T$, almost surely, and by dominated convergence, $f_T(\mathcal L)\to0$ as $T\to\infty$.
+
+The set $\mathfrak L$ is a closed subset of the compact space of Borel probability measures on $\mathcal M$, and it is compact. The functions $f_T$ are continuous, decrease in $T$, and converge to zero pointwise on $\mathfrak L$. By Dini's theorem, the convergence is uniform on $\mathfrak L$. We fix $T$ such that $f_T<\eps$ on $\mathfrak L$. Then $\limsup_Nf_T(\mathcal L_N)\le\eps$. Indeed, otherwise a subsequence would satisfy $f_T(\mathcal L_N)>\eps$, a further subsequence would converge to some $\mathcal L\in\mathfrak L$, and continuity would give $f_T(\mathcal L)\ge\eps$.
+
+\paragraph{Transfer to caps around critical points.}
+Let $\mathcal I$ be the set of $I\subset\{2,\dots,T+1\}$ with $|I|=n$ and $e_I<\eta$, and let $\mathcal W=\bigcup_{I\in\mathcal I}\{x\in S_N:R(x,\hat w_I)>a_1\}$. Conditionally on the field and on $\sigma^2,\dots,\sigma^{T+1}$, \eqref{eq:pc-score} shows that $\pi(\mathcal W^c)\le\E[1-\max_IS_I\mid H,\sigma^2,\dots,\sigma^{T+1}]$. Taking expectations, we find that the annealed probability of $\{\sigma^1\notin\mathcal W\}$ is at most $f_T(\mathcal L_N)$.
+
+Let $\mathcal G_1$ be the event that $H_Q(\hat w_I)>N(E_0-Q^{p/2}\tau_1)$ for every $I\in\mathcal I$. Applying \cref{prop:pc-replica-means} to each of the $\binom Tn$ subsets, we find that the annealed probability of $\mathcal G_1^c$ is at most $\binom Tne^{-cN}$ for large $N$. On $\mathcal G_1$, we have $H_N(\hat w_I)=Q^{-p/2}H_Q(\hat w_I)>N(e_p-\tau_1)$ for every $I\in\mathcal I$. Let $\mathcal G_2$ be the event of \cref{prop:pc-relocation} for $r$, with $\tau_1\le\eps_0$ in place of $\eps_0$; it depends only on the field and has probability at least $1-e^{-c'N}$. On $\mathcal G_1\cap\mathcal G_2$, every $\hat w_I$ with $I\in\mathcal I$ has a critical point $u_I$ with $|u_I-\hat w_I|\le r\sqrt N$ and $H_N(u_I)\ge H_N(\hat w_I)>N(e_p-\tau)$. For every $x\in S_N$, we have $|R(x,u_I)-R(x,\hat w_I)|\le|u_I-\hat w_I|/\sqrt N\le r$, and $R(x,\hat w_I)>a_1$ implies that $R(x,u_I)>a_1-r>a$. This shows that $\mathcal W\subset\mathcal U_N(\tau)$ on $\mathcal G_1\cap\mathcal G_2$. Bounding $\pi(\mathcal U_N(\tau)^c)$ by one on the complement, we obtain
+\[
+\E\,\pi\bigl(\mathcal U_N(\tau)^c\bigr)\le f_T(\mathcal L_N)+\binom Tne^{-cN}+e^{-c'N}.
+\]
+Taking $\limsup_N$, we find $\limsup_N\E\,\pi(\mathcal U_N(\tau)^c)\le\eps$. The set $\mathcal U_N(\tau)$ does not depend on $\eps$ or on the replicas, and letting $\eps\downarrow0$ proves \eqref{eq:pc-coarse}. The parameters $a_1,r,\tau_1,n,\eta,T$ are fixed before $N\to\infty$.
+\end{proof}
+
+The proof considers all subsets of a fixed number of replicas. It uses no decomposition of the Gibbs measure into pure states, no property of the atoms or weights of the directing measure, and no choice of signs. It applies to both parities.
+
+\section{Band partition functions}\label{sec:pc-bands}
+
+For $u\in S_N$ and a Borel set $I\subset[a,1)$, we define
+\[
+Z_u(I)=\int_{S_N}\ind\{R(x,u)\in I\}\,e^{\beta H_N(x)}\,\nu_N(\dd x),\qquad\overline Z_{N,h}(I)=\E_{u;h}Z_u(I).
+\]
+By Tonelli's theorem, $Z_u(I)$ is a Borel function of $(H,u)$. For $g\in O(N)$, the partition function of the field $H_N\circ g^{-1}$ around $gu$ equals $Z_u(I)$. By rotation invariance, the law of $Z_u(I)$ under $\Pp_{u;h}$ does not depend on $u$, and neither does $\overline Z_{N,h}(I)$. Under $\nu_N$, the latitude $q=R(x,u)$ has density $\ell_N(1-q^2)^{(N-3)/2}$, with $\ell_N$ as in \eqref{eq:pc-latitude}, and the direction $\omega$ in \cref{lem:pc-conditional} is uniform and independent of $q$. By \eqref{eq:pc-conditional} and Tonelli's theorem,
+\begin{equation}\label{eq:pc-band-mean}
+\overline Z_{N,h}(I)=\ell_N\int_I(1-q^2)^{(N-3)/2}\exp\Bigl\{\beta hq^p+\frac N2C_\beta(q)\Bigr\}\dd q,
+\end{equation}
+where we used $\E\exp(\beta\sqrt N\sum_{k\ge2}\alpha_k(q)X_k(\omega))=\exp(N\beta^2\sum_{k\ge2}\alpha_k(q)^2/2)$ and the binomial identity $\sum_{k=2}^p\alpha_k(q)^2=1-q^{2p}-pq^{2p-2}(1-q^2)$, so that $\beta^2\sum_{k\ge2}\alpha_k(q)^2=C_\beta(q)$. The formula \eqref{eq:pc-band-mean} is exact, and $\overline Z_{N,h}(I)>0$ if $I$ has positive Lebesgue measure.
+
+\begin{lemma}[Spherical moments]\label{lem:pc-spherical}
+Let $m\ge1$, let $\omega,\omega'$ be independent uniform unit vectors in $\R^m$, and let $r=\omega\cdot\omega'$. For every integer $k\ge0$,
+\[
+\E r^{2k}=\frac{(2k-1)!!}{m(m+2)\cdots(m+2k-2)},
+\]
+where the right side is one for $k=0$. For every real $\lambda<m/2$,
+\begin{equation}\label{eq:pc-spherical}
+\E e^{\lambda r^2}\le\Bigl(1-\frac{2\lambda}m\Bigr)^{-1/2}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+By rotation invariance, $r$ has the law of the first coordinate of $\omega'$. Let $g$ be a standard Gaussian vector in $\R^m$. Then $\omega'$ has the law of $g/|g|$, and $g/|g|$ is independent of $|g|^2$. For $m\ge2$, $r^2$ has the Beta$(1/2,(m-1)/2)$ law, whose $k$-th moment is $\prod_{j=0}^{k-1}(2j+1)/(m+2j)$, which is the displayed formula; for $m=1$, we have $r^2=1$, which agrees with it. For \eqref{eq:pc-spherical}, let $Y=g_1^2/|g|^2$, which has the law of $r^2$, and let $G=g_1^2/m=(|g|^2/m)\,Y$. Since $|g|^2$ is independent of $Y$ and $\E|g|^2=m$, we have $\E[G\mid Y]=Y$. Using the conditional Jensen inequality, we obtain $\E e^{\lambda Y}\le\E e^{\lambda G}=(1-2\lambda/m)^{-1/2}$.
+\end{proof}
+
+The next lemma turns a bound on an exponential moment of the covariance into a lower tail bound for a Gaussian partition function. Its proof adapts the two-replica coupling interpolation and decreasing coupling path of Guerra and Toninelli \cite[Section~3, (19)--(26)]{GuerraToninelli2002}. We give the argument for a general finite-dimensional Gaussian covariance, which may take negative values. A bounded second moment alone would not give such a bound uniformly.
+
+\begin{lemma}[Lower tail by interpolation]\label{lem:pc-wick}
+Let $X$ be a centered Gaussian field on a compact space $V$ that is a linear function of a finite-dimensional standard Gaussian vector, with continuous covariance $K(v,w)$, and let $\mu$ be a deterministic probability measure on $V$. Suppose that there exist $\lambda>1$ and $C\ge0$ with
+\begin{equation}\label{eq:pc-wick-hyp}
+\iint e^{\lambda K(v,w)}\,\mu(\dd v)\,\mu(\dd w)\le e^C.
+\end{equation}
+Let $W=\int e^{X(v)-K(v,v)/2}\mu(\dd v)$. Then
+\begin{equation}\label{eq:pc-wick}
+\E\log^-W\le1+\frac C{2(\lambda-1)},\qquad\Pp\{W<e^{-T}\}\le\frac1T\Bigl(1+\frac C{2(\lambda-1)}\Bigr)\quad(T>0).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For $0\le t\le1$, let $W_t=\int e^{\sqrt tX(v)-tK(v,v)/2}\mu(\dd v)$, let $\langle\cdot\rangle_t$ be the expectation under the random probability measure proportional to $e^{\sqrt tX-tK/2}\mu$ and its independent copies, and let $D(t)=-\E\log W_t$. Then $D(0)=0$. For $t>0$, Gaussian integration by parts gives
+\[
+D'(t)=\frac12\E\bigl\langle K(v_1,v_2)\bigr\rangle_t,
+\]
+and $D$ is continuous on $[0,1]$; all integrals are finite since $K$ is bounded. Writing $X(v)=g\cdot\Phi(v)$ with $g$ standard Gaussian, we have $\langle K(v_1,v_2)\rangle_t=|\langle\Phi(v)\rangle_t|^2\ge0$, and $D$ is nondecreasing.
+
+Let
+\[
+U_t=\iint\exp\Bigl\{\sqrt t\bigl[X(v)+X(v')\bigr]-\frac t2\bigl[K(v,v)+K(v',v')\bigr]+(\lambda-t)K(v,v')\Bigr\}\mu(\dd v)\,\mu(\dd v').
+\]
+Computing the Gaussian expectation inside the integral, we find that $\E U_t$ is the left side of \eqref{eq:pc-wick-hyp}. Since $U_t=W_t^2\langle e^{(\lambda-t)K(v_1,v_2)}\rangle_t$, Jensen's inequality gives $\log U_t\ge2\log W_t+(\lambda-t)\langle K(v_1,v_2)\rangle_t$. Taking expectations and using $\E\log U_t\le\log\E U_t\le C$, we obtain
+\[
+-2D(t)+2(\lambda-t)D'(t)\le C.
+\]
+This means that $t\mapsto(\lambda-t)(C+2D(t))$ is nonincreasing, which gives $C+2D(t)\le C\lambda/(\lambda-t)$, that is, $D(t)\le Ct/(2(\lambda-t))$. In particular, $D(1)\le C/(2(\lambda-1))$. Finally, since $\E W=1$ and $\log^+W\le W$, we have $\E\log^-W=D(1)+\E\log^+W\le D(1)+1$. The second bound in \eqref{eq:pc-wick} follows from Markov's inequality.
+\end{proof}
+
+The same conclusion holds when $\mu$ is carried by a Borel subset of $V$, since only integrals against $\mu$ enter the proof.
+
+\begin{proposition}[Band partition functions at a critical point]\label{prop:pc-bands}
+There exist $C_2,C_-$ and $N_0$, depending only on $p$, $\beta$, and $a$, such that for all $N\ge N_0$, $h\in\R$, $u\in S_N$, and every Borel set $I\subset[a,1)$ of positive Lebesgue measure,
+\begin{align}
+\E_{u;h}\bigl[Z_u(I)^2\bigr]&\le C_2\,\overline Z_{N,h}(I)^2,\label{eq:pc-band-second}\\
+\Pp_{u;h}\Bigl\{\frac{Z_u(I)}{\overline Z_{N,h}(I)}<e^{-T}\Bigr\}&\le\frac{C_-}T\qquad(T>0).\label{eq:pc-band-lower}
+\end{align}
+Moreover, if $|h/N-e_p|\le\Delta/2$, then
+\begin{equation}\label{eq:pc-band-tilted}
+\frac{\E_{u;h}\bigl[D(u)\,\ind\{Z_u(I)<e^{-T}\overline Z_{N,h}(I)\}\bigr]}{\mu_N(h)}\le\Bigl(\frac{\mathsf K_2C_-}T\Bigr)^{1/2}\qquad(T>0).
+\end{equation}
+\end{proposition}
+
+The bound \eqref{eq:pc-band-tilted} concerns the law weighted by the determinant, under which critical points are counted. It keeps the correlation between the Hessian and the residual field noted in \cref{lem:pc-conditional}.
+
+\begin{proof}
+Under $\Pp_{u;h}$, let $X(q,\omega)=\beta[H_N(qu+\sqrt{N(1-q^2)}\,\omega)-hq^p]$ for $q\in[a,1]$ and unit vectors $\omega\perp u$. By \eqref{eq:pc-conditional}, $X$ is a centered Gaussian field, linear in finitely many Gaussian variables, with covariance
+\[
+K\bigl((q,\omega),(q',\omega')\bigr)=N\beta^2\sum_{k=2}^p\alpha_k(q)\alpha_k(q')\,(\omega\cdot\omega')^k.
+\]
+Let $r=\omega\cdot\omega'$. Since $|r|^k\le r^2$ for $k\ge2$, the Cauchy--Schwarz inequality and the monotonicity of $C_\beta$ give, for $q,q'\ge a$,
+\begin{equation}\label{eq:pc-cov-major}
+\bigl|K\bigl((q,\omega),(q',\omega')\bigr)\bigr|\le N\bigl(C_\beta(q)C_\beta(q')\bigr)^{1/2}r^2\le NC_\beta(a)\,r^2.
+\end{equation}
+Let $\mu_{N,h,I}$ be the probability measure under which $q$ has density proportional to $\ind_I(q)(1-q^2)^{(N-3)/2}e^{\beta hq^p+NC_\beta(q)/2}$ and, independently, $\omega$ is uniform on the unit sphere of $u^\perp$. Since $K((q,\omega),(q,\omega))=NC_\beta(q)$, \eqref{eq:pc-band-mean} shows that
+\begin{equation}\label{eq:pc-band-wick}
+W_{N,h,I}=\frac{Z_u(I)}{\overline Z_{N,h}(I)}=\int e^{X(v)-K(v,v)/2}\,\mu_{N,h,I}(\dd v).
+\end{equation}
+This identity is exact, for every Borel set $I$.
+
+We have $C_\beta(a)<1/2$ by \eqref{eq:pc-cap}. Fix $\lambda>1$ with $2\lambda C_\beta(a)<1$, and let $\vartheta\in(2\lambda C_\beta(a),1)$. Let $N_0$ be such that $2\lambda NC_\beta(a)/(N-1)\le\vartheta$ for $N\ge N_0$. Using \eqref{eq:pc-cov-major} and \cref{lem:pc-spherical} in dimension $m=N-1$, we find, for $\lambda'\in\{1,\lambda\}$,
+\[
+\iint e^{\lambda'K(v,v')}\,\mu_{N,h,I}(\dd v)\,\mu_{N,h,I}(\dd v')\le\E e^{\lambda NC_\beta(a)r^2}\le(1-\vartheta)^{-1/2},
+\]
+uniformly in $h$, $u$, and $I$. With $\lambda'=1$, the left side is $\E_{u;h}W_{N,h,I}^2$, which proves \eqref{eq:pc-band-second} with $C_2=(1-\vartheta)^{-1/2}$. With $\lambda'=\lambda$, \cref{lem:pc-wick} with $C=-\log(1-\vartheta)/2$ implies \eqref{eq:pc-band-lower} with $C_-=1+C/(2(\lambda-1))$. Finally, by the Cauchy--Schwarz inequality and \eqref{eq:pc-det},
+\[
+\frac{\E_{u;h}\bigl[D(u)\ind\{W_{N,h,I}<e^{-T}\}\bigr]}{\mu_N(h)}\le\frac{(\E_{u;h}D(u)^2)^{1/2}}{\mu_N(h)}\,\Pp_{u;h}\{W_{N,h,I}<e^{-T}\}^{1/2}\le\Bigl(\frac{\mathsf K_2C_-}T\Bigr)^{1/2},
+\]
+which is \eqref{eq:pc-band-tilted}. The proof uses only $|r|^k\le r^2$ and does not require an even covariance.
+\end{proof}
+
+\section{The annealed scale and the partition function}\label{sec:pc-laplace}
+
+We define the annealed scale $\cA_N$, which is the conditional mean of the partition function of the latitudes $[a,1)$ around a critical point with value $M_N$, and the microscopic latitude intervals
+\[
+\cA_N=\overline Z_{N,M_N}([a,1)),\qquad I_{N,w}=\bigl[\sqrt Q-wN^{-1/2},\sqrt Q+wN^{-1/2}\bigr],\quad w>0.
+\]
+For fixed $w$ and large $N$, $I_{N,w}\subset[a,1)$. Let $\Gamma(w)$ be the probability of $[-w,w]$ under the centered normal law with variance $1/k_*$, and let $\overline\Gamma(w)=1-\Gamma(w)$.
+
+\begin{proposition}[Laplace estimates over latitudes]\label{prop:pc-laplace}
+We have
+\begin{equation}\label{eq:pc-scale}
+\cA_N=(1+o(1))\frac{s^{-3/2}}{\sqrt{k_*}}\,e^{NF(\beta)}N^{-1/(2x)}.
+\end{equation}
+For every fixed $L,w>0$, uniformly in $|t|\le L$,
+\begin{equation}\label{eq:pc-laplace}
+\begin{gathered}
+\frac{\overline Z_{N,M_N+t}([a,1))}{\cA_N}\to e^{\beta tQ^{p/2}},\qquad\frac{\overline Z_{N,M_N+t}(I_{N,w})}{\cA_N}\to e^{\beta tQ^{p/2}}\Gamma(w),\\
+\frac{\overline Z_{N,M_N+t}([a,1)\setminus I_{N,w})}{\cA_N}\to e^{\beta tQ^{p/2}}\,\overline\Gamma(w).
+\end{gathered}
+\end{equation}
+In particular, for every fixed $L$, there exists $r_L>0$ such that $\overline Z_{N,h}(I_{N,1})\ge r_L\cA_N$ for all $|h-M_N|\le L$ and all sufficiently large $N$. Finally, for every $N$ and every $v\ge0$,
+\begin{equation}\label{eq:pc-depth}
+\overline Z_{N,M_N-v}([a,1))\le e^{-\beta a^pv}\cA_N.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+By \eqref{eq:pc-band-mean} and \eqref{eq:pc-centering},
+\begin{equation}\label{eq:pc-laplace-integral}
+\overline Z_{N,M_N+t}([a,1))=\ell_N\int_a^1(1-q^2)^{-3/2}\exp\Bigl\{N\Lambda(q)+\beta\Bigl(t-\frac{\log N}{2c_p}\Bigr)q^p\Bigr\}\dd q.
+\end{equation}
+By Stirling's formula, $\ell_N=(N/(2\pi))^{1/2}(1+O(1/N))$. Fix a closed interval $\mathcal K\subset(a,1)$ that contains $\sqrt Q$ in its interior. Since $\Lambda''(\sqrt Q)=-k_*<0$ and $\Lambda(\sqrt Q)=F(\beta)$, there exist $c,C>0$ with $-C(q-\sqrt Q)^2\le\Lambda(q)-F(\beta)\le-c(q-\sqrt Q)^2$ on $\mathcal K$, after shrinking $\mathcal K$ if necessary.
+
+\paragraph{Away from $\sqrt Q$.}
+By \cref{lem:pc-saddle}, $\Lambda\le F(\beta)-c'$ on every compact subset of $[a,1)$ disjoint from the interior of $\mathcal K$, for some $c'>0$ depending on the subset. To handle the endpoint $q=1$, we return to \eqref{eq:pc-band-mean}. For $|t|\le L$ and large $N$, the exponent $\beta(M_N+t)q^p+NC_\beta(q)/2$ is at most $C_1N$, with $C_1=\beta e_p+\beta^2+1$, and on $[1-\epsilon,1)$ we have $(1-q^2)^{(N-3)/2}\le(2\epsilon)^{(N-3)/2}$. Choosing $\epsilon>0$ with $C_1+\log(2\epsilon)/2<F(\beta)-1$, we see that the integral over $[1-\epsilon,1)$ is at most $e^{N(F(\beta)-1/2)}$ for large $N$. The remaining part of $[a,1)$ outside $\mathcal K$ is compact, and there the integrand of \eqref{eq:pc-laplace-integral} is at most $e^{N(F(\beta)-c')+C\log N}$. Both contributions are exponentially small compared with $e^{NF(\beta)}N^{-1/(2x)}$.
+
+\paragraph{Near $\sqrt Q$.}
+On $\mathcal K$, set $y=\sqrt N(q-\sqrt Q)$, and divide the integrand of \eqref{eq:pc-laplace-integral}, multiplied by $\ell_N$ and by $\dd q=N^{-1/2}\dd y$, by $e^{NF(\beta)}N^{-\beta Q^{p/2}/(2c_p)}$. For bounded $y$, uniformly in $|t|\le L$, the result converges to
+\[
+(2\pi)^{-1/2}s^{-3/2}e^{\beta tQ^{p/2}}e^{-k_*y^2/2}.
+\]
+For domination, note that $|\beta(t-(\log N)/(2c_p))(q^p-Q^{p/2})|\le C\log N\,|y|/\sqrt N\le cy^2/2+C'(\log N)^2/N$, and the rescaled integrand is at most $C''e^{-cy^2/2}$ for large $N$. Dominated convergence gives the limits of the integrals over $\{|y|\le w\}$ and over all $y$ with $q\in\mathcal K$, uniformly in $|t|\le L$. Using $\int e^{-k_*y^2/2}\dd y=(2\pi/k_*)^{1/2}$ and the identity $\beta Q^{p/2}/(2c_p)=1/(2x)$, which follows from \eqref{eq:pc-Q-range}, we obtain \eqref{eq:pc-scale} with $t=0$, and the first two limits in \eqref{eq:pc-laplace}. The factor $N^{1/2}$ in $\ell_N$ cancels the width $N^{-1/2}$ of the peak at $\sqrt Q$. The third limit is the difference of the first two. The lower bound $r_L$ exists because the limit in the second statement is at least $e^{-\beta LQ^{p/2}}\Gamma(1)>0$.
+
+\paragraph{Energy deficit.}
+Replacing $M_N$ by $M_N-v$ in \eqref{eq:pc-band-mean} multiplies the integrand by $e^{-\beta vq^p}\le e^{-\beta va^p}$ for $q\ge a$, which gives \eqref{eq:pc-depth} at every $N$.
+\end{proof}
+
+\begin{proposition}[A lower bound for the partition function]\label{prop:pc-denominator}
+We have
+\begin{equation}\label{eq:pc-denominator}
+\lim_{\eta\downarrow0}\limsup_{N\to\infty}\Pp\{Z_{N,\beta}<\eta\cA_N\}=0.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Fix $\eps>0$. By \cref{lem:pc-tight}, there exists $L_0$ such that $\limsup_N\Pp\{|\max H_N-M_N|>L_0\}\le\eps/2$. Let $r_{L_0}$ be given by \cref{prop:pc-laplace}, and let $\eta\in(0,r_{L_0})$. For $u\in S_N$, let $A$ be the set of pairs $(H,u)$ with $Z_u(I_{N,1})<\eta\cA_N$. For $|h-M_N|\le L_0$ and large $N$, we have $\overline Z_{N,h}(I_{N,1})\ge r_{L_0}\cA_N$, so \eqref{eq:pc-band-lower} with $T=\log(r_{L_0}/\eta)$ gives
+\[
+\Pp_{u;h}(A)\le\Pp_{u;h}\bigl\{Z_u(I_{N,1})<(\eta/r_{L_0})\overline Z_{N,h}(I_{N,1})\bigr\}\le\frac{C_-}{\log(r_{L_0}/\eta)}.
+\]
+Using \cref{lem:pc-palm} with $J_N=[M_N-L_0,M_N+L_0]$ and $Y=\ind_A$, we find
+\begin{equation}\label{eq:pc-light-count}
+\E\#\bigl\{u\in\mathcal D_{N,L_0}:(H,u)\in A\bigr\}\le C\Bigl(\int_{-L_0}^{L_0}e^{-c_pt}\dd t\Bigr)\Bigl(\frac{C_-}{\log(r_{L_0}/\eta)}\Bigr)^{1/2}.
+\end{equation}
+We choose $\eta$ so small that the right side is at most $\eps/2$. By Markov's inequality, with probability at least $1-\eps/2$, no $u\in\mathcal D_{N,L_0}$ has $(H,u)\in A$. If, in addition, $|\max H_N-M_N|\le L_0$, then a maximizer $u_*$ of $H_N$ belongs to $\mathcal D_{N,L_0}$, and $Z_{N,\beta}\ge Z_{u_*}(I_{N,1})\ge\eta\cA_N$. We conclude that $\limsup_N\Pp\{Z_{N,\beta}<\eta\cA_N\}\le\eps$, also for every smaller $\eta$. The parameters are chosen in the order $\eps$, $L_0$, $\eta$, and then $N\to\infty$. The bound \eqref{eq:pc-light-count} counts every critical point in the window whose band has small partition function, and the maximizer is not selected in a way that depends on its Hessian or on its band.
+\end{proof}
+
+\section{Concentration on microscopic bands}\label{sec:pc-capture}
+
+In this section, we prove \cref{thm:pc-capture}. We call the bands $B_u(wN^{-1/2})$ with $w$ fixed \emph{microscopic bands}. We first replace the coarse cover of \cref{prop:pc-coarse}, which holds for every fixed energy deficit $\tau$ per spin, by a cover with a deficit $\tau_N$ that tends to zero.
+
+\begin{lemma}[A cover with vanishing energy deficit]\label{lem:pc-diagonal}
+There exists a deterministic sequence $\tau_N\to0$ with $N\tau_N/(\log N)^2\ge1$ such that $\E\,\pi(\mathcal U_N(\tau_N)^c)\to0$. Let $a_N=N\tau_N-(\log N)/(2c_p)$ and $J_N=[M_N-a_N,M_N+\sqrt N]$. Then $a_N>0$ for large $N$, $a_N=o(N)$, and with probability tending to one, every critical point $u$ with $H_N(u)\ge N(e_p-\tau_N)$ satisfies $H_N(u)\in J_N$.
+\end{lemma}
+
+\begin{proof}
+By \cref{prop:pc-coarse}, for each integer $j\ge1$ there exists $N_j$ such that $\E\,\pi(\mathcal U_N(1/j)^c)\le1/j$ for $N\ge N_j$, and we may take $N_1<N_2<\cdots$. Let $\tau^0_N=1/j$ for $N_j\le N<N_{j+1}$, and let $\tau_N=\max(\tau^0_N,(\log N)^2/N)$. Then $\tau_N\to0$. The set $\mathcal U_N(\tau)$ increases with $\tau$, and we have $\E\,\pi(\mathcal U_N(\tau_N)^c)\le\E\,\pi(\mathcal U_N(\tau^0_N)^c)\to0$. Further, $a_N\ge(\log N)^2-(\log N)/(2c_p)>0$ for large $N$, and $a_N\le N\tau_N=o(N)$. The lower end of $J_N$ is $M_N-a_N=N(e_p-\tau_N)$, and $\Pp\{\max H_N>M_N+\sqrt N\}\to0$ by \cref{lem:pc-tight}, which proves the last assertion.
+\end{proof}
+
+No rate of convergence in \cref{prop:pc-coarse} is needed: the sequence $\tau_N$ is chosen after the coarse cover, and it serves only to place the relevant critical points in a window of sublinear width, where \cref{lem:pc-palm} applies.
+
+\begin{proof}[Proof of \cref{thm:pc-capture}]
+We prove part (2) first, in the following form: for every $\eps>0$, there exist $L,w>0$ such that
+\begin{equation}\label{eq:pc-micro-D}
+\limsup_{N\to\infty}\E\,\pi\Bigl(\Bigl[\bigcup_{u\in\mathcal D_{N,L}}B_u(wN^{-1/2})\Bigr]^c\Bigr)\le\eps,
+\end{equation}
+and the same holds for all larger $L$ and $w$, since the union increases with both. Let $\tau_N$, $a_N$, and $J_N$ be as in \cref{lem:pc-diagonal}. The proof has three steps: we bound the bands around critical points with a large energy deficit $M_N-H_N(u)$, we compare $\mathcal U_N(\tau_N)$ with the caps of the critical points in $\mathcal D_{N,L}$, and we pass from these caps to microscopic bands. The argument has the structure of the proof of \cref{prop:red-capture}: a lower bound for the partition function from one band in a fixed window (\cref{prop:pc-denominator}), a coarse cover, and a summable bound on the bands around critical points with a large energy deficit. We give it directly because part (2) concerns bands of width $wN^{-1/2}$, which shrink as $N\to\infty$, while \cref{prop:red-capture} concerns bands of a fixed width.
+
+\paragraph{Critical points with a large energy deficit.}
+For $L>0$, let
+\[
+T_{N,L}=\sum_{\substack{u:\nabla_{S_N}H_N(u)=0\\H_N(u)\in J_N,\ H_N(u)<M_N-L}}Z_u([a,1)).
+\]
+Using \cref{lem:pc-palm} with $Y(H,u)=Z_u([a,1))$, \eqref{eq:pc-band-second}, and \eqref{eq:pc-depth}, we find that, for all sufficiently large $N$,
+\begin{equation}\label{eq:pc-deep}
+\E T_{N,L}\le C\int_L^{\max(L,a_N)}e^{c_pv}C_2^{1/2}\,\overline Z_{N,M_N-v}([a,1))\dd v\le C\cA_N\int_L^\infty e^{-\delta_*v}\dd v=\frac C{\delta_*}\cA_Ne^{-\delta_*L},
+\end{equation}
+where $\delta_*=\beta a^p-c_p>0$ by \eqref{eq:pc-cap}, and an empty interval of integration gives zero. The constant $C$ does not depend on $L$ or $N$. This is the summable bound on the bands around critical points with a large energy deficit; it relies on the bounded prefactor in \eqref{eq:pc-envelope}.
+
+\paragraph{Caps of the fixed window.}
+Let $\mathcal V_{N,L}=\bigcup_{u\in\mathcal D_{N,L}}\{x:R(x,u)\ge a\}$. Fix $L$, and let $N$ be so large that $L<\sqrt N$. Suppose that $\max H_N\le M_N+L$, and that every critical point $u$ with $H_N(u)\ge N(e_p-\tau_N)$ satisfies $H_N(u)\in J_N$. Then every $x\in\mathcal U_N(\tau_N)\setminus\mathcal V_{N,L}$ lies in the cap $\{R(\cdot,u)\ge a\}$ of a critical point $u$ with $M_N-a_N\le H_N(u)<M_N-L$, which is counted in $T_{N,L}$. On this event and on $\{Z_{N,\beta}\ge\eta\cA_N\}$, we have $\pi(\mathcal V_{N,L}^c)\le\pi(\mathcal U_N(\tau_N)^c)+T_{N,L}/(\eta\cA_N)$; a point covered by several caps only increases the last term. Bounding $\pi(\mathcal V_{N,L}^c)$ by one off this event, and using \cref{lem:pc-diagonal} and \eqref{eq:pc-deep}, we obtain, for every $\eta>0$,
+\begin{equation}\label{eq:pc-caps}
+\limsup_{N\to\infty}\E\,\pi(\mathcal V_{N,L}^c)\le\limsup_{N\to\infty}\Bigl[\Pp\{\max H_N>M_N+L\}+\Pp\{Z_{N,\beta}<\eta\cA_N\}\Bigr]+\frac C{\eta\delta_*}e^{-\delta_*L}.
+\end{equation}
+
+\paragraph{Microscopic bands.}
+Fix $L$ and $w$. We have $\sup_{|h-M_N|\le L}\overline Z_{N,h}([a,1)\setminus I_{N,w})\le\cA_N[e^{\beta LQ^{p/2}}\overline\Gamma(w)+o(1)]$ by \eqref{eq:pc-laplace}. Using \cref{lem:pc-palm} with $Y(H,u)=Z_u([a,1)\setminus I_{N,w})$ and \eqref{eq:pc-band-second}, we find
+\begin{equation}\label{eq:pc-angular}
+\E\sum_{u\in\mathcal D_{N,L}}Z_u\bigl([a,1)\setminus I_{N,w}\bigr)\le C_L\cA_N\bigl[\overline\Gamma(w)+o(1)\bigr],
+\end{equation}
+where $C_L$ depends only on $p,\beta,a$ and $L$. Here the latitude set has two components; this is allowed since \cref{lem:pc-palm} applies to Borel weights. For large $N$, we have $I_{N,w}\subset[a,1)$ and $B_u(wN^{-1/2})\subset\{R(\cdot,u)\ge a\}$. The complement of $\bigcup_{u\in\mathcal D_{N,L}}B_u(wN^{-1/2})$ is contained in $\mathcal V_{N,L}^c$ together with the sets $\{x:R(x,u)\in[a,1]\setminus I_{N,w}\}$, $u\in\mathcal D_{N,L}$; the point $R(x,u)=1$ has measure zero. On $\{Z_{N,\beta}\ge\eta\cA_N\}$, the Gibbs measure of the latter sets is at most the sum in \eqref{eq:pc-angular} divided by $\eta\cA_N$. Combining this with \eqref{eq:pc-caps}, we obtain
+\begin{equation}\label{eq:pc-final}
+\begin{split}
+&\limsup_{N\to\infty}\E\,\pi\Bigl(\Bigl[\bigcup_{u\in\mathcal D_{N,L}}B_u(wN^{-1/2})\Bigr]^c\Bigr)\\
+&\qquad\le\limsup_{N\to\infty}\Bigl[\Pp\{\max H_N>M_N+L\}+2\Pp\{Z_{N,\beta}<\eta\cA_N\}\Bigr]+\frac C{\eta\delta_*}e^{-\delta_*L}+\frac{C_L}\eta\overline\Gamma(w).
+\end{split}
+\end{equation}
+
+\paragraph{Order of the parameters.}
+Given $\eps>0$, we first use \cref{prop:pc-denominator} to fix $\eta>0$ with $\limsup_N\Pp\{Z_{N,\beta}<\eta\cA_N\}\le\eps/5$. Next, by \cref{lem:pc-tight}, we fix $L$ so large that $\limsup_N\Pp\{\max H_N>M_N+L\}\le\eps/5$ and $Ce^{-\delta_*L}/(\eta\delta_*)\le\eps/5$. Finally, we fix $w$ so large that $C_L\overline\Gamma(w)/\eta\le\eps/5$. With these choices, \eqref{eq:pc-final} implies \eqref{eq:pc-micro-D}. Since the union in \eqref{eq:pc-micro-D} increases with $L$ and $w$, \eqref{eq:pc-micro-D} also holds for all larger $L$ and $w$.
+
+\paragraph{Conclusion.}
+Let $L,w$ be as in \eqref{eq:pc-micro-D}, and let $M_0=Q^{p/2}L$ and $w_*=w$. For $M\ge M_0$ and $w'\ge w_*$, we have $\cC_{N,M}\supset\cC_{N,M_0}=\mathcal D_{N,L}$ for all sufficiently large $N$, by \eqref{eq:pc-window}, and $B_u(w'N^{-1/2})\supset B_u(wN^{-1/2})$. Then \eqref{eq:pc-micro-D} implies \eqref{eq:pc-micro}, which is part (2). For part (1), let $b_0=\min(\sqrt Q-a,1-\sqrt Q)/2$, and let $b\in(0,b_0]$ be fixed. For every fixed $w$, we have $wN^{-1/2}\le b$ and $B_{N,M}(b)\supset B_{N,M}(wN^{-1/2})$ for large $N$. By part (2), for every $\eps>0$ there exists $M_0$ with $\limsup_N\E\,\pi(B_{N,M}(b)^c)\le\eps$ for all $M\ge M_0$, which is \eqref{eq:pc-capture}. With this choice of $b_0$, every band $B_u(b)$ with $b\le b_0$ is contained in the cap $\{R(\cdot,u)\ge a\}$ and does not contain $u$.
+\end{proof}
+
+Part (1) holds for every band width in $(0,b_0]$, and the width and the interval $U$ do not depend on the window $M$. This is the order required in \cref{sec:condproof}: there, the interval $U$, the band width, and the time exponent are fixed before the window. In the form \eqref{eq:pc-micro-D}, the concentration is stated in the following sense: for every tolerance, there exist finite $L$ and $w$, fixed during the limit $N\to\infty$. We do not claim that, for a single pair $(L,w)$, the Gibbs mass outside the bands tends to zero with probability tending to one.
+
+For even $p$, the two points $u$ and $-u$ have the same energy and radial derivative. If critical points are counted once per antipodal pair, with the bands $\{x:||R(x,u)|-\sqrt Q|\le b\}$, the union of bands is unchanged and the counts in \cref{prop:pc-counts} are halved.
+
+\begin{remark}[The strict inequality $\beta>\bs(p)$]\label{rem:pc-boundary}
+The bound on the bands around critical points with a large energy deficit is not uniform as $\beta\downarrow\bs(p)$. As $\beta\downarrow\bs(p)$, we have $x\to1$, and the margin $\beta Q^{p/2}-c_p=c_p(1/x-1)$ tends to zero. The exponent $\delta_*=\beta a^p-c_p$ in the bound \eqref{eq:pc-deep} is smaller than this margin, so that bound degenerates at the static threshold.
+\end{remark}

@@ -1,0 +1,22 @@
+Spherical aging formalization
+
+The original project code and accompanying documentation are licensed under
+the root MIT LICENSE, using the authors' established repository license.
+That license does not replace licenses retained on third-party material.
+
+Retained stochastic foundations from pmaronow/codex, commit
+185b6771825ef8dd988aa7f31f10ee1452bbdee1, preserve their source provenance and
+Apache-2.0 license under vendor/hard-sphere-foundations/.
+
+Adapted OAI product-L2 and Gaussian comparison proof material from openai/math,
+commit fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb, preserves its Apache-2.0
+licenses and adaptation records under vendor/OAI-Tensor-Adaptation/ and
+vendor/OAI-Gaussian-Comparison/.
+
+Retained renewal proofs from Benny Avelin's AbsorptionCutoff, commit
+41c45c6d72e979419e46224bb7b4be5cee31f2b5, preserve their Apache-2.0 license,
+source attribution, and compatibility patch under vendor/AbsorptionCutoff/.
+
+Lean, Mathlib, and all external dependencies retain their respective licenses.
+Mathematical references are attributed in the manuscript's bibliography and
+source-audit records; no ownership of those references is asserted here.

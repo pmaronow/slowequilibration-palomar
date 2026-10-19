@@ -1,0 +1,161 @@
+schema_version: "0.4"
+project:
+  name: "Aging in Spherical Spin Glass Dynamics"
+  description: >-
+    A Lean formalization of the corrected manuscript Aging in Spherical Spin Glass Dynamics, for integer spin p at
+    least three and positive inverse temperature. The development constructs
+    the literal Gaussian-disorder, uniform-sphere, Brownian finite-dimensional
+    model and its deterministic positive-semidefinite CK limit. It establishes
+    the physical variational response, sphere entropy and Fisher estimates,
+    stationarity of translated clusters, general-spin selection and aging
+    bounds, and stationary relaxation results in their printed temperature
+    sectors. Theorem 11.4 has the general integer-spin scope; the cubic product
+    inequality includes the transition endpoint, while the positive Fisher-cost
+    conclusion uses the strict low-temperature sector. The Complete Challenge
+    jointly specifies all five principal theorem groups and the all-spin
+    forward theorem with the same CK solution, stationary profile, dimension
+    subsequence, actual density family and Fisher majorant. The independent
+    Stationarity Challenge specifies every late sequence and every raw
+    translated cluster on its original sequence. The narrower Main and Fisher
+    comparisons are also retained. Independently readable mathlib-only
+    Challenges are compared against separately proved Solutions; completed
+    comparisons are evidenced by their actual mechanical reports. A local
+    check is not a Palomar registration or editorial verdict.
+  authors:
+    - "P. M. Aronow"
+    - "Patrick Lopatto"
+  responsible_maintainers:
+    - "P. M. Aronow"
+  license: MIT
+classification:
+  arxiv:
+    - math.PR
+    - math.AP
+  msc2020:
+    - 60H10
+    - 82D30
+    - 60G15
+automation:
+  methods:
+    - method: autonomous
+      tool_setup: >-
+        OpenAI Codex based on GPT-6, with parallel collaborating agents,
+        Lean 4.35.0-rc2, pinned Mathlib, Lean's bundled Comparator, NanoDa,
+        and con-ron. Earlier retained development and review used Lean
+        4.34.1 and its matching Mathlib. Reused proof providers and their
+        exact revisions, retained licenses, compatibility patches, and
+        source fingerprints are documented under vendor/.
+      notes: >-
+        Autonomous agents implemented proofs, inspected source correspondence,
+        repaired manuscript assumptions and proof routes, and developed
+        reproducible build and receipt checks. Material automated work is
+        credited here rather than listed as a human author. The preserved
+        review and verification records describe the exact scope of completed
+        checks. No human peer-review or official registry outcome is implied.
+review:
+  status: agent-reviewed
+  reviewers:
+    - "OpenAI Codex parallel mathematical, correspondence, and trust-chain agents"
+  notes: >-
+    The 10 October 2026 careful review checked the actual model, theorem
+    sectors, statement quantifiers, and proof correspondence and freshly
+    rebuilt the previous 2,067-source snapshot. The present completion
+    repairs its response-definition scope and statement-receipt consistency,
+    adds the complete translated-cluster receipt, ports the retained
+    development to the supported module system and matching toolchain, and
+    presents all principal and Fisher conclusions with one shared set of
+    witnesses in the Complete certificate. Complete and Stationarity give
+    the strongest independent statement coverage, while Main and Fisher
+    retain narrower specifications. Four Challenge/Solution comparisons
+    are configured; only actual comparison reports establish successful
+    kernel runs. Fresh reports,
+    rather than historical counts or completion assertions, govern the
+    final checked snapshot. This is an automated agent review, not human
+    mathematical peer review or an official Palomar editorial assessment.
+    The 11 October 2026 title and citation revision preserves all Lean sources
+    and mathematical statements from the verified 10 October snapshot. Its new
+    PDF and source-bound citation/delta checks are separate from the preserved
+    native and Comparator execution evidence; no new kernel run is asserted.
+    The current manuscript removes the former standalone generic Euler and
+    waiting-state statements, printed as Lemma 10.8 and Corollary 10.9 in the
+    preceding version. Their actual finite-fork specialization appears locally
+    in the proof of the renumbered Proposition 10.8. Retained proof helpers
+    with historical declaration names are excluded from current generic
+    numbered-claim coverage. The source-bound correspondence record distinguishes
+    specialist type and scope review from compiler and receipt integrity checks.
+sources:
+  - title: "Aging in Spherical Spin Glass Dynamics"
+    type: paper
+    authors:
+      - "P. M. Aronow"
+      - "Patrick Lopatto"
+    relationship: formalizes
+    location: "manuscript/working-source/main.tex"
+    note: >-
+      The corrected manuscript and its full 122-work bibliography are retained
+      in the project. Principal numbered statements, supporting mathematical
+      remarks, and the example are indexed in reports/claim-coverage.json and
+      reports/numbered-inventory.json. The response is the genuine physical
+      variational matrix and terminal L2 derivative, with deterministic locally
+      square-integrable forces interpreted through the forced variational
+      equation. No simultaneous samplewise smooth flow in all initial points
+      or full nonlinear L2_loc forcing derivative is advertised.
+      The current inventory has 100 printed numbered objects: 84 arguments,
+      13 mathematical remarks, two interpretive cautions, and one example.
+      The Complete certificate retains the manuscript's single stationary
+      profile and the same dimension subsequence and Fisher majorant across
+      the principal response and passage-cost theorems. Earlier
+      citation-access limitations remain explicitly disclosed in the current
+      primary-source audit records.
+  - title: "Stochastic Flows and Stochastic Differential Equations"
+    type: book
+    authors:
+      - "Hiroshi Kunita"
+    relationship: background
+    id: "ISBN 9780521599252"
+    note: >-
+      Cited for the classical stochastic-flow interpretation. The principal
+      formal response construction uses the actual strong variational SDE
+      and terminal L2 derivative rather than assuming a samplewise smooth
+      diffeomorphism flow. This source retains a disclosed partial-original
+      access limitation in the source review.
+related_formalizations:
+  - id: "https://github.com/pmaronow/codex/tree/185b6771825ef8dd988aa7f31f10ee1452bbdee1"
+    relationship: "extends and ports retained stochastic foundations"
+    note: >-
+      The retained Brownian, product-measure, and stochastic-calculus provider
+      files are listed with source paths, original and adapted hashes,
+      licenses, and local extensions in vendor/hard-sphere-foundations/.
+      Provider material remains under its retained Apache-2.0 license.
+  - id: "https://github.com/openai/math/tree/fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb/lean/OAI"
+    relationship: "adapts product-L2 and Gaussian comparison proofs"
+    note: >-
+      Exact adaptations, source paths, hashes, and retained Apache-2.0
+      licenses are recorded in vendor/OAI-Tensor-Adaptation/ and
+      vendor/OAI-Gaussian-Comparison/.
+  - id: "https://github.com/BennyAvelin/AbsorptionCutoff/tree/41c45c6d72e979419e46224bb7b4be5cee31f2b5"
+    relationship: "ports and extends the renewal provider"
+    note: >-
+      The five retained proof files, compatibility patch, upstream and
+      adapted hashes, and Apache-2.0 license are recorded under
+      vendor/AbsorptionCutoff/. The measurable generic renewal formulation
+      and the stronger actual stationary-kernel specialization are
+      distinguished in the manuscript and proof ledger.
+limitations:
+  - >-
+    Mathematical assertions are the exact statements in each Challenge,
+    not a claim that independent kernels check all of the manuscript's
+    prose or that all proof-library sources appear in every selected
+    Comparator export. Full-source build and axiom audits are separate checks.
+  - >-
+    The response derivative is into terminal L2 of the actual projected
+    nonlinear restart. General L2_loc forcing denotes the forced physical
+    variational equation; the manuscript does not assert a full nonlinear
+    forced-solution Fréchet theorem in that domain.
+  - >-
+    Chronological slow fluctuation-dissipation ratio, a matching susceptibility
+    upper bound, and an identified aging clock remain declared open predictions
+    and are not included among the proved results.
+  - >-
+    Seven cited originals retain precisely disclosed partial-access limits.
+    No new full-primary-source verification is claimed from metadata checks.

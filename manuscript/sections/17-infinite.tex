@@ -1,0 +1,541 @@
+\chapter{Eigenvalues near the dynamical threshold}\label{sec:infinite}
+
+In this section, we prove \cref{thm:main-cusp}: as $\beta$ decreases to $\bd$, exponentially many eigenvalues remain below $\exp[-(1-\vartheta)C_d\eps^{1+1/(2m)}N]$, where $\eps=\beta^2/\bd^2-1$, the integer $m$ is determined by the order of contact of the function $A$ with its maximum, and $C_d$ is explicit. We end with two examples, \cref{ex:inf-cubic,ex:inf-degenerate}.
+
+The proof uses the constrained-pressure results of \cref{sec:pressure} and the counting lemma \cref{lem:sp-frame}. We first establish the inputs for infinite mixtures: the construction of the field and dynamics at $C^2$ regularity (\cref{lem:inf-field,lem:inf-dynamics}), pressure limits (\cref{lem:inf-pressure}), good reference points (\cref{lem:inf-good}), and replica concentration with an exponent uniform in the temperature (\cref{lem:inf-replica}).
+
+\paragraph{Notation.} Throughout this section, $\xi(r)=\sum_{p\ge2}c_pr^p$ with $c_p\ge0$ and $\xi\neq0$, but $\xi$ need not be a finite mixture. We write $\pi_\beta=\pi_{N,\beta}^{H}$, $L_\beta=L_{\beta,H_N}$, and $\lambda_j(\beta)=\lambda_j(-L_{\beta,H_N})$, since the inverse temperature varies. We recall that
+\begin{equation*}
+A(r)=\frac{(1-r)\xi'(r)}{r},\qquad \Phi_\beta(r)=\beta^2\xi(r)+r+\log(1-r),
+\end{equation*}
+and we write $F_\beta=\beta^2\xi(1)/2$ and $\Psi_\beta(r)=F_\beta+\Phi_\beta(r)/2$ for the annealed pressure and the trial pressure \eqref{eq:pr-Psi} at inverse temperature $\beta$. We write $D_\beta=\{r\in(0,1):\beta^2A(r)>1\}$ for the strict superlevel set, so that $q_*(\beta)=\sup D_\beta$ for $\bd<\beta<\bs$, and $J(\beta)=-\Phi_\beta(q_*(\beta))/2$ for the core exponent of \cref{def:pr-collar}. We also write $\ell(r)=-r-\log(1-r)$, so that $\bs^2=\inf_{0<r<1}\ell(r)/\xi(r)$. Finally, $B_N=\{x\in\R^N:|x|\le\sqrt N\}$, and $\nabla$ and $\nabla^2$ denote Euclidean derivatives. For an integer $P\ge2$, we set
+\begin{equation*}
+\xi_{\le P}(r)=\sum_{p\le P}c_pr^p,\qquad \xi_{>P}=\xi-\xi_{\le P},\qquad s_P=\xi_{>P}'(1),\qquad v_P=\xi_{>P}(1).
+\end{equation*}
+
+\section{Infinite mixtures}\label{sec:inf-mixtures}
+
+We consider covariance functions satisfying
+\begin{equation}\label{eq:inf-summability}
+\sum_{p\ge2}p^{5/2}\sqrt{c_p}<\infty,
+\end{equation}
+and we write $S_j=\sum_{p\ge2}p^j\sqrt{c_p}$ for $j\in\{1/2,3/2,5/2\}$; these sums are finite under \eqref{eq:inf-summability}. Since $\sum_pa_p^2\le(\sum_pa_p)^2$ for nonnegative numbers $a_p$, \eqref{eq:inf-summability} implies that $\sum_pp^5c_p\le S_{5/2}^2<\infty$, and the power series of $\xi$ and of its first five derivatives converge absolutely and uniformly on $[-1,1]$. In particular, $\xi$ is real analytic on $(-1,1)$, the numbers $\xi(1),\xi'(1),\dots,\xi^{(4)}(1)$ are finite, and $|\xi^{(k)}(v)|\le\xi^{(k)}(1)$ for $|v|\le1$ and $k\le4$. The function $A(r)=(1-r)\sum_ppc_pr^{p-2}$ is real analytic on $(-1,1)$ and continuous on $[0,1]$, with $A(0)=\xi''(0)=2c_2$ and $A(1)=0$. We define $\bd$, $\bs$, and strict replica symmetry by the formulas of \cref{def:pre-thresholds}. If $\beta<\bs$, then $\beta^2\xi(r)<\ell(r)$ for $r\in(0,1)$, that is, $\Phi_\beta<0$ on $(0,1)$.
+
+For an infinite mixture, the field $H_N$ is twice continuously differentiable but need not be smooth. We construct it in \cref{lem:inf-field} and show in \cref{lem:inf-dynamics} that the generator, the Dirichlet form, the spectrum, the semigroup, and the diffusion of \cref{def:pre-dynamics} are defined for every field of class $C^2$, with the properties used in \cref{sec:spectral,sec:memory}.
+
+\paragraph{Infinite-mixture inputs.} The pressure and spectral arguments needed for \cref{thm:main-cusp} use the following inputs:
+\begin{enumerate}
+\item[(I1)] the regularity of the field and the construction of the dynamics (\cref{lem:pre-field,lem:pre-dynamics});
+\item[(I2)] the limit $F_N(\beta)\to F_\beta$ of the quenched free energy and the Gaussian concentration of free energies (\cref{lem:pre-RS,lem:pre-concentration}), which enter through \cref{lem:pr-transfer,lem:pr-latitude,prop:pr-good};
+\item[(I3)] the convergence of the expected planted section pressure at each fixed latitude, in the proof of \cref{lem:pr-latitude}(c), which rests on the Parisi formula for finite auxiliary mixtures;
+\item[(I4)] the analytic properties of $\xi$, and the first-variation facts of \cref{lem:pre-support} for the auxiliary mixture $\eta_{q_*}$, used in \cref{prop:pr-certificate};
+\item[(I5)] replica concentration (\cref{prop:pr-replica}), which was deduced from \citet[Lemma~7.7]{HuangMontanariPham2024}.
+\end{enumerate}
+We establish (I1) in \cref{lem:inf-field,lem:inf-dynamics}, (I2) and (I3) in \cref{lem:inf-pressure}, and (I5) in \cref{lem:inf-replica}. \Cref{lem:inf-good} checks (I4) and assembles the constrained-pressure inputs. The inputs (I2) and (I3) are proved by truncating the mixture at a fixed degree $P$, applying the finite-mixture result to $\xi_{\le P}$, and letting $P\to\infty$ after $N\to\infty$; the tail $\xi_{>P}$ is controlled by a Gaussian comparison. We prove (I5) directly from the planted estimates, the trial bound of \cref{lem:pr-trial}, and likelihood transfer, without the result of Huang, Montanari, and Pham. We state \cref{lem:inf-replica} with an exponent that is uniform over a range of temperatures, which we need for the eigenvalue bounds near the dynamical threshold in \cref{sec:inf-cusp}.
+
+\subsection{Construction of the field}\label{sec:inf-field}
+
+We first record derivative bounds for homogeneous polynomials.
+
+\begin{lemma}[Derivatives of homogeneous polynomials]\label{lem:inf-tensor}
+Let $P$ be a homogeneous real polynomial of degree $p\ge2$ on $\R^N$, and set $M=\sup_{|x|=\sqrt N}|P(x)|$. Then
+\begin{equation}\label{eq:inf-tensor}
+\sup_{x\in B_N}|\nabla P(x)|\le\frac{2pM}{\sqrt N},\qquad\sup_{x\in B_N}\norm{\nabla^2P(x)}_{\mathrm{op}}\le\frac{4p^2M}{N}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Let $Q(y)=P(\sqrt Ny)$, so that $M=\sup_{|y|=1}|Q(y)|$, $\nabla P(x)=N^{-1/2}\nabla Q(x/\sqrt N)$, and $\nabla^2P(x)=N^{-1}\nabla^2Q(x/\sqrt N)$. It suffices to show that $|\nabla Q(y)|\le\sqrt2\,pM$ and $\norm{\nabla^2Q(y)}_{\mathrm{op}}\le2p^2M$ for $|y|\le1$.
+
+Fix a unit vector $x$ and a unit vector $v$ orthogonal to $x$, and let $f(\theta)=Q(x\cos\theta+v\sin\theta)$. Note that $f$ is a real trigonometric polynomial of degree at most $p$, since each monomial of degree $p$ in $\cos\theta$ and $\sin\theta$ is one, and that $|f|\le M$. Applying Bernstein's inequality \cite[Theorem~1.1]{QueffelecZarouf2019} to $f$ and then to $f'$, we obtain $\sup|f'|\le pM$ and $\sup|f''|\le p^2M$. Writing $\gamma(\theta)=x\cos\theta+v\sin\theta$ and using $\gamma''=-\gamma$, we find
+\begin{equation*}
+f'(0)=DQ(x)[v],\qquad f''(0)=D^2Q(x)[v,v]-DQ(x)[x].
+\end{equation*}
+We have $DQ(y)[y]=pQ(y)$ for all $y$ by Euler's identity. Differentiating this identity in a direction $w$, we find that $D^2Q(y)[y,w]=(p-1)DQ(y)[w]$. Taking $y=x$, we obtain
+\begin{equation}\label{eq:inf-euler}
+\begin{aligned}
+&|DQ(x)[v]|\le pM, && DQ(x)[x]=pQ(x),\\
+&D^2Q(x)[x,x]=p(p-1)Q(x), && D^2Q(x)[x,v]=(p-1)DQ(x)[v],
+\end{aligned}
+\end{equation}
+and $|D^2Q(x)[v,v]|\le|f''(0)|+p|Q(x)|\le(p^2+p)M$.
+
+The gradient $\nabla Q(x)$ splits into its component along $x$, which equals $pQ(x)$, and its tangential component, whose norm is $\sup_vDQ(x)[v]\le pM$. This implies that $|\nabla Q(x)|^2\le2p^2M^2$. For the Hessian, we write a unit vector as $z=\alpha x+\alpha'v$, with $v\perp x$ a unit vector and $\alpha^2+\alpha'^2=1$. By \eqref{eq:inf-euler},
+\begin{equation*}
+\begin{split}
+|D^2Q(x)[z,z]|&\le M\bigl[p(p-1)\alpha^2+2p(p-1)|\alpha\alpha'|+(p^2+p)\alpha'^2\bigr]\\
+&\le M\bigl[p(p-1)+p(p-1)\alpha^2+p(p+1)\alpha'^2\bigr]\le2p^2M,
+\end{split}
+\end{equation*}
+where we used $2|\alpha\alpha'|\le1$ in the second line. As the matrix $\nabla^2Q(x)$ is symmetric, its operator norm is at most $2p^2M$.
+
+Finally, for $0<\varrho\le1$ and $|x|=1$, we have $\nabla Q(\varrho x)=\varrho^{p-1}\nabla Q(x)$ and $\nabla^2Q(\varrho x)=\varrho^{p-2}\nabla^2Q(x)$ by homogeneity, and the bounds extend to $y=0$ by continuity. As $\sqrt2\,p\le2p$ and $2p^2\le4p^2$, this proves \eqref{eq:inf-tensor}.
+\end{proof}
+
+The proof gives the constants $\sqrt2\,p$ and $2p^2$ in place of $2p$ and $4p^2$. The tangential bound alone does not give the gradient bound $pM$, since the radial component $pQ(x)$ must also be controlled. Szeg\H{o}'s strengthening of Bernstein's inequality, $f'(\theta)^2+p^2f(\theta)^2\le p^2M^2$ \cite[Theorem~3.7]{QueffelecZarouf2019}, controls both components at once and gives $|\nabla Q|\le pM$ on the unit ball; see \cite[(32) and Theorem~4.3]{ChatzakouSarantopoulos2019}. We do not need these sharper constants.
+
+Let $(g^{(p)}_{i_1\cdots i_p})$, for $p\ge2$ and $i_1,\dots,i_p\in\{1,\dots,N\}$, be independent standard Gaussian variables, and define the homogeneous polynomials
+\begin{equation}\label{eq:inf-pure}
+H_{N,p}(x)=N^{-(p-1)/2}\sum_{i_1,\dots,i_p=1}^Ng^{(p)}_{i_1\cdots i_p}x_{i_1}\cdots x_{i_p},\qquad x\in\R^N.
+\end{equation}
+Then $\E H_{N,p}(x)H_{N,p}(y)=N^{-(p-1)}(x\cdot y)^p$, which equals $NR(x,y)^p$ for $x,y\in S_N$. Once $H_N$ is defined, we write $H_{N,\le P}=\sum_{p\le P}\sqrt{c_p}H_{N,p}$ and $H_{N,>P}=H_N-H_{N,\le P}$.
+
+\begin{lemma}[Construction and regularity of the field]\label{lem:inf-field}
+Let $\xi$ satisfy \eqref{eq:inf-summability}.
+\begin{enumerate}
+\item For every $N$ and $p$, we have $\E\sup_{S_N}|H_{N,p}|\le2N\sqrt p$. Almost surely, the series $H_N=\sum_{p\ge2}\sqrt{c_p}H_{N,p}$ converges in $C^2(B_N)$ for every $N$. The limit is a centered Gaussian field with $\E H_N(x)H_N(y)=N\xi(x\cdot y/N)$ for $x,y\in B_N$, and $H_N\circ g^{-1}$ has the same law as $H_N$ for every $g\in O(N)$.
+\item There exist $K,c_F>0$, depending only on $\xi$, such that for every $N\ge1$, with probability at least $1-4e^{-c_FN}$,
+\begin{equation}\label{eq:inf-field-event}
+\sup_{S_N}|H_N|\le KN,\qquad \sup_{B_N}|\nabla H_N|\le K\sqrt N,\qquad \sup_{B_N}\norm{\nabla^2H_N}_{\mathrm{op}}\le K.
+\end{equation}
+On this event, $\sup_{S_N}|\nabla_{S_N}H_N|\le K\sqrt N$ and $\sup_{S_N}\norm{\nabla^2_{S_N}H_N}_{\mathrm{op}}\le K$. Moreover, $\E(\sup_{S_N}|H_N|)^2\le CN^2$ for a constant $C$ depending only on $\xi$.
+\item For every $P\ge2$ and $N\ge1$, we have $\E\sup_{S_N}|H_{N,>P}|\le2N\sqrt{s_P}$. For every $h>0$, there exists $P_0$ such that for all $P\ge P_0$ and $N\ge1$,
+\begin{equation}\label{eq:inf-tail}
+\Pp\Bigl(\sup_{S_N}|H_{N,>P}|>hN\Bigr)\le2\exp\Bigl(-\frac{h^2N}{8v_P}\Bigr),
+\end{equation}
+where the right side is zero if $v_P=0$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+We use the Sudakov--Fernique inequality \cite[Theorem~2.2.3]{AdlerTaylor2007}: if $X$ and $Y$ are centered, almost surely bounded Gaussian processes on a set $T$ with $\E(X_s-X_t)^2\le\E(Y_s-Y_t)^2$ for all $s,t\in T$, then $\E\sup_TX\le\E\sup_TY$. We also use the Borell--TIS inequality \cite[Theorem~2.1.1]{AdlerTaylor2007}: $\Pp(\sup_TX>\E\sup_TX+t)\le e^{-t^2/(2\sigma_T^2)}$ for $t>0$, where $\sigma_T^2=\sup_{t\in T}\E X_t^2$.
+
+\paragraph{A comparison bound.} Let $X$ be a centered continuous Gaussian field on $S_N$ with covariance $N\theta(R(x,y))$, where $\theta(r)=\sum_pb_pr^p$ has nonnegative coefficients and $\theta'(1)<\infty$. Extend $X$ by $X(0)=0$. For $r\in[-1,1]$, we have $1-r^p=(1-r)\sum_{k<p}r^k\le p(1-r)$, which implies that $\theta(1)-\theta(r)\le\theta'(1)(1-r)$. For $x,y\in S_N$, we obtain
+\begin{equation*}
+\E(X(x)-X(y))^2=2N(\theta(1)-\theta(R(x,y)))\le2N\theta'(1)(1-R(x,y))=\theta'(1)|x-y|^2.
+\end{equation*}
+Further, $\E X(x)^2=N\theta(1)\le N\theta'(1)$. Let $Y(x)=\sqrt{\theta'(1)}\,g\cdot x$ with $g$ a standard Gaussian vector in $\R^N$. Then $\E(Y(x)-Y(y))^2=\theta'(1)|x-y|^2$ and $\E Y(x)^2=N\theta'(1)$. Thus the hypothesis of the Sudakov--Fernique inequality holds on $T=S_N\cup\{0\}$, and since $X(0)=Y(0)=0$, we have
+\begin{equation}\label{eq:inf-SF}
+\E\max\Bigl(0,\sup_{S_N}X\Bigr)\le\E\sup_{T}Y=\sqrt{\theta'(1)N}\,\E|g|\le N\sqrt{\theta'(1)}.
+\end{equation}
+The same bound holds for $-X$. Using $\sup|X|\le\max(0,\sup X)+\max(0,\sup(-X))$, we conclude that $\E\sup_{S_N}|X|\le2N\sqrt{\theta'(1)}$.
+
+\paragraph{Part (1).} The first claim is the comparison bound with $\theta(r)=r^p$. Let $M_p=\sup_{S_N}|H_{N,p}|$. By homogeneity, we have $\sup_{B_N}|H_{N,p}|=M_p$, and \cref{lem:inf-tensor} implies that $\sup_{B_N}|\nabla H_{N,p}|\le2pM_p/\sqrt N$ and $\sup_{B_N}\norm{\nabla^2H_{N,p}}_{\mathrm{op}}\le4p^2M_p/N$. Using $\E M_p\le2N\sqrt p$, we find
+\begin{equation*}
+\begin{split}
+&\sum_{p\ge2}\sqrt{c_p}\,\E\Bigl[\sup_{B_N}|H_{N,p}|+\sup_{B_N}|\nabla H_{N,p}|+\sup_{B_N}\norm{\nabla^2H_{N,p}}_{\mathrm{op}}\Bigr]\\
+&\qquad\le\sum_{p\ge2}\sqrt{c_p}\,2N\sqrt p\,(1+2p+4p^2)\le14NS_{5/2}.
+\end{split}
+\end{equation*}
+By Tonelli's theorem, the corresponding random series is finite almost surely, and the partial sums of $\sum_p\sqrt{c_p}H_{N,p}$ converge in $C^2(B_N)$. As there are countably many $N$, this holds for all $N$ simultaneously. The limit is a centered Gaussian field, and by independence its covariance is $\sum_pc_pN^{-(p-1)}(x\cdot y)^p=N\xi(x\cdot y/N)$. The covariance depends only on $x\cdot y$, and a continuous centered Gaussian field is determined in law by its covariance, which gives the invariance under $O(N)$.
+
+\paragraph{Part (2).} By the comparison bound with $\theta=\xi$, we have $\E\sup_{S_N}(\pm H_N)\le N\sqrt{\xi'(1)}$. The Borell--TIS inequality with $\sigma_T^2=N\xi(1)$ and $t=N\sqrt{\xi(1)}$ then gives
+\begin{equation*}
+\Pp\Bigl(\sup_{S_N}|H_N|>K_0N\Bigr)\le2e^{-N/2},\qquad K_0=\sqrt{\xi'(1)}+\sqrt{\xi(1)}.
+\end{equation*}
+Integrating the same inequality over $t$, we also obtain $\E(\sup_{S_N}|H_N|)^2\le CN^2$. For the gradient, consider the process $(x,v)\mapsto v\cdot\nabla H_N(x)$ on $B_N\times S^{N-1}$, whose supremum is $\sup_{B_N}|\nabla H_N|$. By Part (1), its expected supremum is at most $\sum_p\sqrt{c_p}(2p/\sqrt N)\,2N\sqrt p=4\sqrt NS_{3/2}$. Differentiating the covariance $N\xi(x\cdot y/N)$ once in $x$ and once in $y$, in the direction $v$, and setting $y=x$, we find
+\begin{equation*}
+\E(v\cdot\nabla H_N(x))^2=\xi''(|x|^2/N)\frac{(x\cdot v)^2}N+\xi'(|x|^2/N)\le\xi''(1)+\xi'(1),
+\end{equation*}
+where we used $(x\cdot v)^2\le|x|^2\le N$ and the monotonicity of $\xi'$ and $\xi''$ on $[0,1]$. The Borell--TIS inequality with $t=(N(\xi'(1)+\xi''(1)))^{1/2}$ gives
+\begin{equation*}
+\Pp\Bigl(\sup_{B_N}|\nabla H_N|>K_1\sqrt N\Bigr)\le e^{-N/2},\qquad K_1=4S_{3/2}+\sqrt{\xi'(1)+\xi''(1)}.
+\end{equation*}
+For the Hessian, consider the process $(x,v,w)\mapsto D^2H_N(x)[v,w]$ on $B_N\times S^{N-1}\times S^{N-1}$, whose supremum is $\sup_{B_N}\norm{\nabla^2H_N}_{\mathrm{op}}$. Its expected supremum is at most $\sum_p\sqrt{c_p}(4p^2/N)\,2N\sqrt p=8S_{5/2}$. To bound its variance, we differentiate $N^{-(p-1)}(x\cdot y)^p$ twice in $x$, in the directions $v$ and $w$, and twice in $y$, in the same directions, and set $y=x$. With $|x|^2=\varrho^2N\le N$, $a_1=x\cdot v$, $a_2=x\cdot w$, and $a_3=v\cdot w$, this gives
+\begin{equation*}
+\begin{split}
+\frac{p(p-1)}{N^{p-1}}\Bigl[&(p-2)(p-3)(\varrho^2N)^{p-4}a_1^2a_2^2\\
+&+(p-2)(\varrho^2N)^{p-3}(a_1^2+a_2^2+2a_1a_2a_3)+(\varrho^2N)^{p-2}(1+a_3^2)\Bigr],
+\end{split}
+\end{equation*}
+where terms with a vanishing coefficient are omitted. Using $|a_1|,|a_2|\le\varrho\sqrt N$, $|a_3|\le1$, and $\varrho\le1$, we bound this by $p(p-1)[(p-2)(p-3)+4(p-2)+2]/N$. Summing over $p$ with weights $c_p$, we find that the variance is at most $D_2/N$, where $D_2=\xi^{(4)}(1)+4\xi'''(1)+2\xi''(1)$. The Borell--TIS inequality with $t=1$ gives
+\begin{equation*}
+\Pp\Bigl(\sup_{B_N}\norm{\nabla^2H_N}_{\mathrm{op}}>K_2\Bigr)\le e^{-N/(2D_2)},\qquad K_2=8S_{5/2}+1.
+\end{equation*}
+We set $K=K_0+K_1+K_2$ and $c_F=\min\{1/2,1/(2D_2)\}$. On the intersection of the three events, \eqref{eq:inf-field-event} holds, and $|\nabla_{S_N}H_N|\le|\nabla H_N|$. For tangent vectors $v,w$ at $x\in S_N$, we have $\nabla^2_{S_N}H_N(x)[v,w]=\nabla^2H_N(x)[v,w]-N^{-1}(x\cdot\nabla H_N(x))\,v\cdot w$, as in the proof of \cref{lem:pre-field}. On the same event, this gives $\norm{\nabla^2_{S_N}H_N}_{\mathrm{op}}\le K_2+K_1\le K$.
+
+\paragraph{Part (3).} The field $H_{N,>P}$ has covariance $N\xi_{>P}(R(x,y))$ on $S_N$. The comparison bound with $\theta=\xi_{>P}$ gives $\E\max(0,\sup_{S_N}(\pm H_{N,>P}))\le N\sqrt{s_P}$ and $\E\sup_{S_N}|H_{N,>P}|\le2N\sqrt{s_P}$. Note that $s_P\to0$, because $\xi'(1)<\infty$, and let $P_0$ be such that $\sqrt{s_P}\le h/2$ for $P\ge P_0$. The Borell--TIS inequality with $\sigma_T^2=Nv_P$ and $t=hN/2$, applied to $H_{N,>P}$ and to $-H_{N,>P}$, gives \eqref{eq:inf-tail}.
+\end{proof}
+
+\Cref{lem:inf-field} implies that the bounds of \cref{lem:pre-field}(3) on $H_N$ and its first two derivatives hold for every $\xi$ satisfying \eqref{eq:inf-summability}, with $1-4e^{-c_FN}$ in place of $1-e^{-cN}$. The bound \eqref{eq:pr-fieldK} holds with $c_0=c_F$ and with the same constant $K$. Indeed, let $\sigma_1^2=\xi'(1)+\xi''(1)=\sum_pp^2c_p$. Then $\sqrt{\xi(1)}\le\sum_p\sqrt{c_p}\le S_{5/2}$ and $\sigma_1\le\sum_pp\sqrt{c_p}\le S_{5/2}$, so the definition of $K$ in the proof of \cref{lem:inf-field} gives
+\begin{equation*}
+K-\sqrt{\xi'(1)}\ge2\sqrt{\xi(1)},\qquad K-4S_{3/2}\ge2\sigma_1.
+\end{equation*}
+The Borell--TIS inequality at the thresholds $KN$ for $\pm H_N$ and $K\sqrt N$ for the gradient process, applied as in that proof, bounds the failure probability in \eqref{eq:pr-fieldK} by $3e^{-2N}$, which is at most $e^{-c_FN}$ for $N\ge1$, since $c_F\le1/2$. The bound on the third derivative in \cref{lem:pre-field}(3) is not used in \cref{sec:pressure,sec:spectral,sec:memory}.
+
+\begin{lemma}[Langevin dynamics for fields of class $C^2$]\label{lem:inf-dynamics}
+Let $\beta\ge0$ and let $H$ be a function of class $C^2$ on $S_N$. Then the generator, the Dirichlet form, the semigroup, and the diffusion of \cref{def:pre-dynamics} are defined, and the conclusions of \cref{lem:pre-dynamics,lem:pre-spectral} hold, with the following changes: the eigenfunctions are of class $C^2$ but need not be smooth, the operator $-L$ is essentially self-adjoint on $C^2(S_N)$ instead of on smooth functions, the transition density $p_t(x,y)$ is continuous on $(0,\infty)\times S_N\times S_N$ instead of smooth, and in the min--max principle of \cref{lem:pre-spectral}(5), the minimum is attained at a subspace of $C^2(S_N)$, so that $V$ may range over subspaces of $C^2(S_N)$ instead of subspaces of smooth functions. If $V$ ranges over subspaces of smooth functions, the formula of \cref{lem:pre-spectral}(5) holds with the minimum replaced by an infimum. In \cref{lem:pre-dynamics}(5), the drift is extended to a compactly supported vector field of class $C^1$ instead of a smooth one.
+\end{lemma}
+
+\begin{proof}
+By \cref{rem:pre-C2}, \cref{lem:pre-dynamics}(1)--(3) hold for $H$, except for the regularity of the eigenfunctions and the essential self-adjointness. Further, \cref{lem:pre-spectral}(1), (2), and (4) hold, and so does the min--max principle of \cref{lem:pre-spectral}(5), with $V$ ranging over the subspaces of the form domain $\mathcal D(\cE)=H^1(S_N)$. Integration by parts gives $Af=-Lf$ for $f\in C^2(S_N)$. In this proof, $\nabla$ and $\Delta$ are taken along $S_N$. We prove the remaining assertions in four steps. The classical inputs are those of the proof of \cref{lem:pre-dynamics}, together with the Kato--Rellich theorem, the Duhamel formula, and the Trotter product formula.
+
+\paragraph{A unitary transformation.} Let $\rho=\dd\pi/\dd\nu_N$, which is proportional to $e^{\beta H}$, and let $\omega=\rho^{1/2}$. Both are of class $C^2$ and bounded above and below by positive constants. The map $Uf=\omega f$ is unitary from $L^2(\pi)$ to $L^2(\nu_N)$, and it maps $C^2(S_N)$ onto itself. Since $L(g/\omega)=\omega^{-2}\operatorname{div}(\omega^2\nabla(g/\omega))=\omega^{-1}\Delta g-\omega^{-2}g\Delta\omega$ for $g\in C^2(S_N)$, we have
+\begin{equation*}
+U(-L)U^{-1}g=-\Delta g+Wg,\qquad W=\frac{\Delta\omega}\omega=\frac\beta2\Delta H+\frac{\beta^2}4|\nabla H|^2,
+\end{equation*}
+where we used $\nabla\omega=\frac\beta2\omega\nabla H$. The potential $W$ is continuous and bounded. The Laplace--Beltrami operator is essentially self-adjoint on $C^\infty(S_N)$, with domain $H^2(S_N)$, and the Kato--Rellich theorem shows that $-\Delta+W$ is self-adjoint on $H^2(S_N)$, with core $C^\infty(S_N)$. The operator $U^{-1}(-\Delta+W)U$ is therefore self-adjoint, with core $U^{-1}C^\infty(S_N)\subset C^2(S_N)$, and on this core it agrees with $-L$, hence with $A$. Since $A$ is closed, it extends the closure $U^{-1}(-\Delta+W)U$ of this restriction, and since a self-adjoint operator has no proper self-adjoint extension, we obtain $A=U^{-1}(-\Delta+W)U$. In particular, $C^2(S_N)$ is a core for $A$, which is the essential self-adjointness of $-L$ on $C^2(S_N)$.
+
+\paragraph{The transition kernel.} Let $k^0_t(x,y)$ be the heat kernel of $\Delta$ with respect to $\nu_N$. It is smooth, nonnegative, and symmetric, by \cref{lem:pre-dynamics}(4) with $H=0$. By the Duhamel formula, $e^{-t(-\Delta+W)}=\sum_{n\ge0}T^{(n)}_t$, where $T^{(n)}_t$ has the kernel
+\begin{equation*}
+\begin{split}
+k^{(n)}_t(x,y)=(-1)^n\int_{0<s_1<\cdots<s_n<t}\int&k^0_{s_1}(x,z_1)W(z_1)k^0_{s_2-s_1}(z_1,z_2)\cdots\\
+&\cdots W(z_n)k^0_{t-s_n}(z_n,y)\,\dd z\,\dd s,
+\end{split}
+\end{equation*}
+with $\dd z=\nu_N(\dd z_1)\cdots\nu_N(\dd z_n)$ and $\dd s=\dd s_1\cdots\dd s_n$. Since $k^0\ge0$, the Chapman--Kolmogorov equations for $k^0$ give
+\begin{equation}\label{eq:inf-duhamel}
+|k^{(n)}_t(x,y)|\le\frac{t^n\norm W_\infty^n}{n!}\,k^0_t(x,y).
+\end{equation}
+We claim that each $k^{(n)}_t(x,y)$ is continuous in $(t,x,y)$ for $t>0$. Indeed, the integral over the part of the simplex where all the increments $s_1,s_2-s_1,\dots,t-s_n$ exceed $\eta>0$ is continuous, by the smoothness of $k^0$ on $[\eta,\infty)\times S_N\times S_N$. By the argument that gives \eqref{eq:inf-duhamel}, the remaining part is at most $\norm W_\infty^n$ times the measure of the excluded part of the simplex times $k^0_t(x,y)$, which tends to zero as $\eta\downarrow0$, locally uniformly in $t>0$. The series $k_t=\sum_nk^{(n)}_t$ converges uniformly on $[t_0,t_1]\times S_N\times S_N$ for $0<t_0<t_1$ by \eqref{eq:inf-duhamel}, and $k_t$ is a continuous kernel for $e^{-t(-\Delta+W)}$. It is symmetric, because this operator is self-adjoint, and nonnegative, because by the Trotter product formula, $e^{-t(-\Delta+W)}$ is the strong limit of $(e^{t\Delta/m}e^{-tW/m})^m$, which preserves nonnegative functions. We set
+\begin{equation*}
+p_t(x,y)=\frac{k_t(x,y)}{\omega(x)\omega(y)}.
+\end{equation*}
+Since $e^{-tA}=U^{-1}e^{-t(-\Delta+W)}U$ and $\pi(\dd y)=\omega(y)^2\nu_N(\dd y)$, we have $e^{-tA}f(x)=\int p_t(x,y)f(y)\,\pi(\dd y)$ for $f\in L^2(\pi)$. The kernel $p_t$ is continuous, nonnegative, and symmetric, and $\int p_t(x,y)\,\pi(\dd y)=1$ because $A1=0$. The kernels $P_t(x,\dd y)=p_t(x,y)\,\pi(\dd y)$ therefore form a Markov semigroup that maps continuous functions to continuous functions, and $\pi$ is reversible and invariant. This proves \cref{lem:pre-dynamics}(4), with a continuous density. Further, \eqref{eq:inf-duhamel} implies that $|k_t-k^0_t|\le(e^{t\norm W_\infty}-1)k^0_t$, and $e^{t\Delta}g\to g$ uniformly for continuous $g$. It follows that $e^{-tA}f\to f$ uniformly as $t\downarrow0$, for every continuous $f$.
+
+\paragraph{Regularity of the eigenfunctions.} Let $\phi$ be an eigenfunction of $A$ with eigenvalue $\lambda$. Then $\phi\in H^1(S_N)$ satisfies $\Delta\phi=-\lambda\phi-\beta\nabla H\cdot\nabla\phi$ weakly, and the right side lies in $L^p$ whenever $\nabla\phi$ does. Iterating the $L^p$ estimates for the Laplace--Beltrami operator and the Sobolev embedding, we find that $\phi\in W^{2,p}(S_N)$ for every $p<\infty$, so $\nabla\phi$ is H\"older continuous. Since $\nabla H$ is of class $C^1$, the right side is then H\"older continuous, and the Schauder estimates give $\phi\in C^{2,\alpha}(S_N)$ for some $\alpha>0$. The eigenfunctions are of class $C^2$, and $L\phi=-\lambda\phi$ holds pointwise. In particular, for every $k\ge0$, the span of $\phi_0,\dots,\phi_k$, at which the minimum in \cref{lem:pre-spectral}(5) is attained, is a subspace of $C^2(S_N)$.
+
+It remains to show that the infimum of the maximal Rayleigh quotient over the $(k+1)$-dimensional subspaces of smooth functions equals $\lambda_k$. These subspaces lie in $\mathcal D(\cE)$, so the infimum is at least $\lambda_k$. Since smooth functions are dense in $H^1(S_N)$, there exist smooth functions $\psi^n_0,\dots,\psi^n_k$ such that $\psi^n_i\to\phi_i$ in $H^1(S_N)$ as $n\to\infty$, for each $i\le k$. Since the inner product of $L^2(\pi)$ and the form $\cE$ are continuous on $H^1(S_N)$, the matrices $G_n=(\ip{\psi^n_i}{\psi^n_l})_{i,l\le k}$ and $J_n=(\cE(\psi^n_i,\psi^n_l))_{i,l\le k}$ converge to the identity and to the diagonal matrix with entries $\lambda_0,\dots,\lambda_k$, respectively. For large $n$, the matrix $G_n$ is invertible, and the maximum of the Rayleigh quotient over the span of $\psi^n_0,\dots,\psi^n_k$ is the largest eigenvalue of $G_n^{-1/2}J_nG_n^{-1/2}$, which tends to $\lambda_k$. This proves the assertion on smooth subspaces.
+
+\paragraph{The diffusion.} We extend the tangent vector field $b=\beta\nabla H$ to $\R^N$ by $\tilde b(y)=\psi(y)b(\sqrt Ny/|y|)$, where $\psi$ is smooth, supported in $\{\sqrt N/2<|y|<2\sqrt N\}$, and equal to one near $S_N$. Then $\tilde b$ is $C^1$ with compact support, hence Lipschitz, and $y\cdot\tilde b(y)=0$ for all $y$. The proof of \cref{lem:pre-dynamics}(5) applies to \eqref{eq:pre-sde} with this drift. The equation has a unique strong solution for every $x\in S_N$. The term $2y\cdot\tilde b(y)$ in the drift of $|X_t|^2-N$ vanishes identically, the remaining terms are those treated in that proof, and the solution stays on $S_N$. Further, It\^o's formula \eqref{eq:pre-ito} holds for every $F$ of class $C^2$. Applying it to $e^{\lambda_js}\phi_j(X_s)$, we see that this process is a martingale, and therefore $\E_x\phi_j(X_t)=e^{-\lambda_jt}\phi_j(x)=\int p_t(x,y)\phi_j(y)\,\pi(\dd y)$ for every $x$. Finite linear combinations of eigenfunctions are uniformly dense in the continuous functions. Indeed, for continuous $f$ and $t>0$, we have $e^{-tA}f=e^{-tA/2}(e^{-tA/2}f)$; the operator $e^{-tA/2}$ maps $L^2(\pi)$ boundedly into the continuous functions, since $\sup_x\int p_{t/2}(x,y)^2\,\pi(\dd y)<\infty$; so the eigenfunction expansion of $e^{-tA}f$ converges uniformly, and $e^{-tA}f\to f$ uniformly as $t\downarrow0$. Hence the law of $X_t$ under $\Pp_x$ and $P_t(x,\cdot)$ agree on a uniformly dense set of continuous functions, and they coincide. This proves \cref{lem:pre-dynamics}(5). Finally, the proof of \cref{lem:pre-spectral}(3) uses only \cref{lem:pre-dynamics}(4) and (5).
+\end{proof}
+
+The proofs in \cref{sec:spectral,sec:memory} use the dynamics only through \cref{lem:pre-dynamics,lem:pre-spectral}, and they do not use the smoothness of eigenfunctions or of the transition density beyond the measurability of $x\mapsto P_t(x,E)$, which holds for continuous kernels. The same proofs apply to every field of class $C^2$.
+
+\subsection{Pressure inputs}\label{sec:inf-pressure}
+
+We use the planted law $\mathsf P_N$, the Gibbs-reference law $\mathsf Q_N$, and the likelihood ratio $L_N=Z_Ne^{-NF_\beta}$ of \cref{def:pr-planted}, the section partition function $\mathcal Z_N$ and the section pressure $f_N$ of \cref{sec:pr-cross}, and the auxiliary mixture $\eta_r$ of \eqref{eq:pr-etar}. They are defined by the same formulas for every $\xi$ satisfying \eqref{eq:inf-summability}. For $r\in(-1,1)$, the function $\eta_r$ is now a power series in $t$; its coefficients $(1-r^2)^k\xi^{(k)}(r^2)/k!$ are nonnegative, and $\eta_r(1)=\xi(1)-\xi(r^2)<\infty$. The coarea formula \eqref{eq:pr-coarea} holds for every field, and $C_N\le\sqrt N$, by the log-convexity of $\Gamma$, which gives $\Gamma(x+1/2)\le\sqrt x\,\Gamma(x)$.
+
+\paragraph{The Crisanti--Sommers functional for general covariances.} Let $\eta(t)=\sum_{k\ge1}a_kt^k$ with $a_k\ge0$ and $\eta(1)<\infty$. For $\zeta\in\mathscr M$, we define $\cP_\beta(\zeta;\eta)$ by the formula \eqref{eq:pre-CS}, and we set
+\begin{equation*}
+\cP_\beta(\eta)=\inf_{\zeta\in\mathscr M}\cP_\beta(\zeta;\eta).
+\end{equation*}
+For covariance polynomials, this is the definition in \cref{def:pre-CS}. For two such functions $\eta$ and $\theta$, the difference $\cP_\beta(\zeta;\eta)-\cP_\beta(\zeta;\theta)=\frac{\beta^2}2[(\eta-\theta)(1)-\int(\eta-\theta)\,\dd\zeta]$ is bounded in absolute value by $\beta^2\sup_{[0,1]}|\eta-\theta|$. If moreover $\eta-\theta$ has nonnegative coefficients, then $\eta-\theta$ is nonnegative and nondecreasing on $[0,1]$, and the difference lies in $[0,\frac{\beta^2}2(\eta-\theta)(1)]$. Taking infima over $\zeta$, we obtain
+\begin{equation}\label{eq:inf-CS-compare}
+|\cP_\beta(\eta)-\cP_\beta(\theta)|\le\beta^2\sup_{[0,1]}|\eta-\theta|,
+\end{equation}
+and, if $\eta-\theta$ has nonnegative coefficients,
+\begin{equation}\label{eq:inf-CS-monotone}
+0\le\cP_\beta(\eta)-\cP_\beta(\theta)\le\frac{\beta^2}2(\eta-\theta)(1).
+\end{equation}
+We define $f(r)$ by \eqref{eq:pr-f} with this $\cP_\beta$.
+
+\begin{lemma}[Pressure inputs for infinite mixtures]\label{lem:inf-pressure}
+Let $\xi$ satisfy \eqref{eq:inf-summability}, and let $\beta>0$.
+\begin{enumerate}
+\item Let $\mu$ be a finite measure on $S_N$ with $\mu(S_N)>0$, and let $h$ be a bounded Borel function on $S_N$, both deterministic. Then $Y=\log\int e^{\beta H_N+h}\,\dd\mu$ is integrable and, for every $s>0$,
+\begin{equation}\label{eq:inf-conc}
+\Pp\bigl(|Y-\E Y|\ge s\bigr)\le2\exp\Bigl(-\frac{s^2}{2\beta^2N\xi(1)}\Bigr).
+\end{equation}
+In particular, \cref{lem:pre-concentration} holds for $\xi$.
+\item If $\beta<\bs$, then $F_N(\beta)\to F_\beta$, the bound \eqref{eq:pre-RS-concentration} holds for every $\eps>0$ and all sufficiently large $N$, and \cref{lem:pr-planted,lem:pr-transfer} hold for $\xi$.
+\item For every $r\in(-1,1)$ and $u\in S_N$, we have $\E_{\mathsf P_N(\cdot\mid u)}f_N(r;H,u)\to f(r)$ as $N\to\infty$.
+\item \Cref{lem:pr-latitude}(b) and (c) hold for $\xi$, with the constants $K$ and $c_0$ of \eqref{eq:pr-fieldK} replaced by the constants $K$ and $c_F$ of \cref{lem:inf-field}.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Throughout, $P$ is at least the smallest degree $p$ with $c_p>0$, so that $\xi_{\le P}\neq0$. By \cref{lem:inf-field}(3), we have
+\begin{equation}\label{eq:inf-trunc}
+\E\sup_{S_N}|H_{N,>P}|\le2N\sqrt{s_P},\qquad s_P\to0\quad(P\to\infty).
+\end{equation}
+
+\paragraph{Part (1).} Let $Y_P$ be defined as $Y$ with $H_N$ replaced by the polynomial field $H_{N,\le P}$. The proof of \cref{lem:pre-concentration}, which applies to any nonzero finite measure $\mu$ (as noted at the beginning of \cref{sec:pressure}), shows that $Y_P$ is a Lipschitz function of the finitely many Gaussian coordinates of $H_{N,\le P}$ with constant $\beta(N\xi_{\le P}(1))^{1/2}\le\beta(N\xi(1))^{1/2}$, and \eqref{eq:inf-conc} holds for $Y_P$. We have $|Y-Y_P|\le\beta\sup_{S_N}|H_{N,>P}|$, which tends to zero in $L^1$ by \eqref{eq:inf-trunc} and almost surely by \cref{lem:inf-field}(1). For $0<s'<s$, we have $\Pp(|Y-\E Y|\ge s)\le\Pp(|Y_P-\E Y_P|\ge s')+\Pp(|Y-Y_P|+|\E Y-\E Y_P|\ge s-s')$, and letting $P\to\infty$ and then $s'\uparrow s$ gives \eqref{eq:inf-conc}. Integrability follows from $|Y-\log\mu(S_N)|\le\norm h_\infty+\beta\sup_{S_N}|H_N|$.
+
+\paragraph{Part (2).} Since $\xi_{\le P}\le\xi$ on $(0,1)$, the definition of $\bs$ gives $\bs(\xi_{\le P})\ge\bs(\xi)>\beta$. By \cref{lem:pre-RS}(1) and \cref{thm:pre-parisi}, applied to the finite mixture $\xi_{\le P}$, we have $N^{-1}\E\log Z_{N,\beta}(H_{N,\le P})\to\beta^2\xi_{\le P}(1)/2$, where $Z_{N,\beta}(H_{N,\le P})$ is the partition function of the truncated field. We also have $|F_N(\beta)-N^{-1}\E\log Z_{N,\beta}(H_{N,\le P})|\le2\beta\sqrt{s_P}$ by \eqref{eq:inf-trunc}, and $F_\beta-\beta^2\xi_{\le P}(1)/2=\beta^2v_P/2$. Combining these facts, we obtain
+\begin{equation*}
+\limsup_{N\to\infty}|F_N(\beta)-F_\beta|\le2\beta\sqrt{s_P}+\tfrac12\beta^2v_P,
+\end{equation*}
+and letting $P\to\infty$ gives $F_N(\beta)\to F_\beta$. This limit and Part (1), for $\mu=\nu_N$ and $h=0$, imply \eqref{eq:pre-RS-concentration}, as in the proof of \cref{lem:pre-RS}(3). For \cref{lem:pr-planted}, note that $\E e^{\beta H_N(u)}=e^{NF_\beta}$, and that under the probability measure with density $e^{\beta H_N(u)-NF_\beta}$, the field $H_N-\beta N\xi(R(\cdot,u))$ is a centered Gaussian field with the covariance of $H_N$; this follows from the finite-dimensional computation in the proof of \cref{lem:pr-planted}, applied to the Gaussian vector $(H_N(x_1),\dots,H_N(x_k),H_N(u))$ for arbitrary points $x_1,\dots,x_k$. The rest of the proof of \cref{lem:pr-planted} is unchanged. The proof of \cref{lem:pr-transfer} uses only \eqref{eq:pre-RS-concentration}.
+
+\paragraph{Part (3).} Fix $r\in(-1,1)$ and $u\in S_N$. Recall from \eqref{eq:pr-tilt} that under $\mathsf P_N(\cdot\mid u)$, the field is $H=\widetilde H+\beta N\xi(R(\cdot,u))$. We write $H=H^{(P)}+\widetilde H_{>P}+\beta N\xi_{>P}(R(\cdot,u))$, where $\widetilde H=\widetilde H_{\le P}+\widetilde H_{>P}$ is the decomposition of \cref{lem:inf-field} and
+\begin{equation*}
+H^{(P)}=\widetilde H_{\le P}+\beta N\xi_{\le P}(R(\cdot,u)).
+\end{equation*}
+By \eqref{eq:pr-tilt} for the finite mixture $\xi_{\le P}$, the field $H^{(P)}$ has the conditional law, given $u$, of the field under the planted law of $\xi_{\le P}$ at inverse temperature $\beta$. On the latitude $\{R(x,u)=r\}$, the difference $H-H^{(P)}$ equals $\widetilde H_{>P}+\beta N\xi_{>P}(r)$. Using $|\xi_{>P}(r)|\le v_P$, we find
+\begin{equation*}
+|f_N(r;H,u)-f_N(r;H^{(P)},u)|\le\frac\beta N\sup_{S_N}|\widetilde H_{>P}|+\beta^2v_P,
+\end{equation*}
+and taking expectations and using \eqref{eq:inf-trunc}, we obtain $|\E f_N(r;H,u)-\E f_N(r;H^{(P)},u)|\le2\beta\sqrt{s_P}+\beta^2v_P$. By the convergence of the means in the proof of \cref{lem:pr-latitude}(c), which holds for every finite mixture and every $\beta>0$ (see \cref{rem:pr-cross}), we have
+\begin{equation*}
+\E f_N(r;H^{(P)},u)\to f^{(P)}(r)=\beta^2\xi_{\le P}(r)+\tfrac12\log(1-r^2)+\cP_\beta(\eta^{(P)}_r),
+\end{equation*}
+where $\eta^{(P)}_r(t)=\xi_{\le P}(r^2+(1-r^2)t)-\xi_{\le P}(r^2)$. The difference $\eta_r-\eta_r^{(P)}$ is the Taylor series of $\xi_{>P}$ at $r^2\ge0$, evaluated at $(1-r^2)t$, minus its constant term. It has nonnegative coefficients, and its value at $t=1$ is at most $v_P$. We obtain $|f(r)-f^{(P)}(r)|\le\beta^2v_P+\frac12\beta^2v_P$ from \eqref{eq:inf-CS-monotone}. Combining these bounds, we find
+\begin{equation*}
+\limsup_{N\to\infty}|\E f_N(r;H,u)-f(r)|\le2\beta\sqrt{s_P}+3\beta^2v_P,
+\end{equation*}
+and letting $P\to\infty$ proves Part (3).
+
+\paragraph{Part (4).} The proof of \cref{lem:pr-latitude}(b) uses only the bound of \cref{lem:pr-latitude}(a) for $\cP_\beta$, which is \eqref{eq:inf-CS-compare} (with a supremum over $[0,1]$, which is at most the supremum over $[-1,1]$), and the bound $|\xi'(v)|\le\xi'(1)$ for $|v|\le1$. The proof of \cref{lem:pr-latitude}(c) uses four inputs: the field bounds \eqref{eq:pr-fieldK}, which hold with $c_0=c_F$ by \cref{lem:inf-field}; \cref{lem:pr-latitude}(b); the convergence of the means at each fixed latitude, which is Part (3); and the Lipschitz constant $(2F_\beta/N)^{1/2}$ of $f_N(r;H,u)$ in the Gaussian coordinates of $\widetilde H$, which gives the concentration bound used there by Part (1), with $\mu$ the image of $\nu_n$ under $x_r$ and $h$ the constant $\beta^2N\xi(r)$. With these inputs, the proof applies without change.
+\end{proof}
+
+\subsection{Replica concentration, uniformly in the temperature}\label{sec:inf-replica}
+
+The next lemma replaces \cref{prop:pr-replica} and \cref{cor:pr-cap} for infinite mixtures. It also holds for finite mixtures, where its new content is that the exponent can be chosen uniformly over the temperatures $\beta\le\bar\beta$ for a fixed $\bar\beta<\bs$. The proof uses the planted estimates of \cref{lem:pr-latitude}, the trial bound of \cref{lem:pr-trial}, and likelihood transfer.
+
+\begin{lemma}[Uniform replica concentration]\label{lem:inf-replica}
+Let $\xi$ satisfy \eqref{eq:inf-summability}. Fix $s\in(0,1)$ and $\bar\beta\in(0,\bs)$. There exists $a>0$, depending only on $\xi$, $s$, and $\bar\beta$, with the following property. For every $\beta\in(0,\bar\beta]$, there exist $C,N_0>0$ such that for all $N\ge N_0$, with probability at least $1-Ce^{-aN}$,
+\begin{equation}\label{eq:inf-replica}
+(\pi_\beta\otimes\pi_\beta)\bigl\{(x,y):|R(x,y)|>s\bigr\}\le e^{-aN}
+\end{equation}
+and
+\begin{equation}\label{eq:inf-cap}
+\sup_{v\in S_N}\pi_\beta\{x:R(x,v)\ge s\}\le e^{-aN}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+We first prove, for every fixed $t\in(0,1)$, that \eqref{eq:inf-replica} holds at the threshold $t$ with an exponent $a_1(t)>0$ depending only on $\xi$, $t$, and $\bar\beta$. Then \eqref{eq:inf-cap} follows from \cref{lem:pr-cap}, which gives the deterministic bound
+\begin{equation*}
+\sup_{v\in S_N}\pi_\beta\{R(x,v)\ge s\}\le\Bigl[\frac{2-s^2}{s^2}\,(\pi_\beta\otimes\pi_\beta)\{R>s^2/2\}\Bigr]^{1/2}
+\end{equation*}
+for every axis, applied with \eqref{eq:inf-replica} at the threshold $s^2/2$; for large $N$, the right side is at most $e^{-a_1(s^2/2)N/4}$. We may then take $a=\min\{a_1(s),a_1(s^2/2)/4\}$.
+
+Fix $t\in(0,1)$ and $\beta\in(0,\bar\beta]$, and write $\bar F=\bar\beta^2\xi(1)/2\ge F_\beta$. All bounds below are stated with $\bar F$ in place of $F_\beta$, which only decreases the exponents.
+
+\paragraph{Overlaps near one.} Let $K$ and $c_F$ be as in \cref{lem:inf-field}, and let $\Omega_1$ be the event \eqref{eq:inf-field-event}. Let $r_c\in(t,1)$ satisfy $\frac12\log(1-r_c^2)\le-2\bar\beta K-2$. On $\Omega_1$, we have $\osc H_N\le2KN$, which implies that $\pi_\beta(E)\le e^{2\bar\beta KN}\nu_N(E)$ for every Borel set $E$. By \eqref{eq:pr-coarea} with $H=0$, we have $\nu_N\{R(x,u)\ge r_c\}\le C_N(1-r_c^2)^{(N-3)/2}$, and the same bound holds for $\{R(x,u)\le-r_c\}$. Hence, on $\Omega_1$, for every $u\in S_N$,
+\begin{equation}\label{eq:inf-near-one}
+\pi_\beta\{|R(x,u)|\ge r_c\}\le2\sqrt N(1-r_c^2)^{-3/2}e^{-2N}\le e^{-N}
+\end{equation}
+for all $N\ge N_1$, where $N_1$ depends only on $\xi$, $t$, and $\bar\beta$.
+
+\paragraph{A uniform pressure gap.} Recall that $\Phi_{\bar\beta}<0$ on $(0,1)$, because $\bar\beta<\bs$. We define
+\begin{equation*}
+g=\min\Bigl\{1,\min_{t\le r\le r_c}\bigl(-\tfrac12\Phi_{\bar\beta}(r)\bigr)\Bigr\}>0.
+\end{equation*}
+We have $\Phi_\beta\le\Phi_{\bar\beta}$ on $[0,1)$, because $\xi\ge0$ there. For $r\in[0,1)$, we have $\cP_\beta(\eta_r)\le\cP_\beta(\delta_{r/(1+r)};\eta_r)$, and \eqref{eq:pr-trial-value}, whose proof is a computation valid for every $\xi$, shows as in the proof of \cref{lem:pr-trial} that $f(r)\le\Psi_\beta(r)$. We also have $f(-r)\le f(r)$ for $r\ge0$, because $\eta_{-r}=\eta_r$ and $\xi(-r)\le\xi(r)$. We conclude that
+\begin{equation}\label{eq:inf-gap}
+f(r)\le\Psi_\beta(|r|)\le F_\beta+\tfrac12\Phi_{\bar\beta}(|r|)\le F_\beta-g\qquad(t\le|r|\le r_c).
+\end{equation}
+
+\paragraph{The planted bound.} By \cref{lem:inf-pressure}(4), \cref{lem:pr-latitude}(c) holds with $\rho=r_c$ and $\eps=g/4$: for $N\ge N_2$ and every $u\in S_N$, the event $\Omega_N(r_c,g/4)$ of that lemma has conditional probability at least $1-e^{-c_1N}$ under $\mathsf P_N(\cdot\mid u)$, where
+\begin{equation*}
+c_1=\frac12\min\Bigl\{c_F,\frac{g^2}{1024\bar F}\Bigr\}.
+\end{equation*}
+On this event, we have $f_N(r;H,u)\le F_\beta-3g/4$ for $t\le|r|\le r_c$ by \eqref{eq:inf-gap}, and \eqref{eq:pr-coarea} implies that $Z_{N,\beta}(\{r:t\le|r|\le r_c\};H,u)\le2\sqrt Ne^{N(F_\beta-3g/4)}\le e^{N(F_\beta-g/2)}$ for large $N$. Let
+\begin{equation*}
+E_N=\Bigl\{(H,u):Z_{N,\beta}\bigl(\{r:t\le|r|\le r_c\};H,u\bigr)>e^{N(F_\beta-g/2)}\Bigr\}.
+\end{equation*}
+Integrating over $u\sim\nu_N$, we have shown that $\mathsf P_N(E_N)\le e^{-c_1N}$ for large $N$.
+
+\paragraph{Transfer and disintegration.} By \cref{lem:pr-transfer}, which holds for $\xi$ by \cref{lem:inf-pressure}(2), we have $\mathsf Q_N(E_N)\le3e^{-c_2N}$ for large $N$, where $c_2=\min\{c_1/2,c_1^2/(64\bar F)\}$. Let $b_N(H)=\pi_\beta^H\{u:(H,u)\in E_N\}$. We have $\E b_N=\mathsf Q_N(E_N)$ by the definition of $\mathsf Q_N$, and Markov's inequality gives $\Pp(b_N>e^{-c_2N/2})\le3e^{-c_2N/2}$. Finally, let $\Omega_2=\{|N^{-1}\log Z_{N,\beta}-F_\beta|\le g/4\}$. Then \eqref{eq:pre-RS-concentration}, which holds for $\xi$ by \cref{lem:inf-pressure}(2), gives $\Pp(\Omega_2^c)\le2e^{-g^2N/(256\bar F)}$ for large $N$.
+
+\paragraph{Conclusion.} On $\Omega_1\cap\Omega_2\cap\{b_N\le e^{-c_2N/2}\}$, every $u$ with $(H,u)\notin E_N$ satisfies
+\begin{equation*}
+\pi_\beta\{t\le|R(x,u)|\le r_c\}\le\frac{e^{N(F_\beta-g/2)}}{e^{N(F_\beta-g/4)}}=e^{-gN/4}.
+\end{equation*}
+Combining this with \eqref{eq:inf-near-one}, we find that $\pi_\beta\{|R(x,u)|\ge t\}\le2e^{-gN/4}$ for these $u$. Integrating over $u\sim\pi_\beta$, and bounding the contribution of the remaining reference points by their mass, we obtain
+\begin{equation*}
+(\pi_\beta\otimes\pi_\beta)\{|R|>t\}\le2e^{-gN/4}+e^{-c_2N/2}.
+\end{equation*}
+The failure probability of the three events is at most $4e^{-c_FN}+2e^{-g^2N/(256\bar F)}+3e^{-c_2N/2}$. We conclude that \eqref{eq:inf-replica} holds at the threshold $t$ for large $N$, with
+\begin{equation*}
+a_1(t)=\frac12\min\Bigl\{\frac g4,\frac{c_2}2,\frac{g^2}{256\bar F}\Bigr\},
+\end{equation*}
+where we used $c_2\le c_1/2\le c_F/4$. The numbers $r_c$, $g$, $c_1$, $c_2$, and $a_1(t)$ depend only on $\xi$, $t$, and $\bar\beta$. The thresholds for $N$ depend also on $\beta$, through the convergence of the means in \cref{lem:inf-pressure}(3) and of $F_N(\beta)$.
+\end{proof}
+
+\subsection{Good reference points for infinite mixtures}\label{sec:inf-good}
+
+\begin{lemma}[Constrained-pressure inputs for infinite mixtures]\label{lem:inf-good}
+Let $\xi$ satisfy \eqref{eq:inf-summability}, suppose $\bd<\bs$, and fix $\beta\in(\bd,\bs)$. Then \cref{prop:pr-certificate,prop:pr-good} hold for $\xi$, with the constrained pressure defined by the infinite-mixture cross-section formula.
+\end{lemma}
+
+\begin{proof}
+We check the field, pressure, and first-variation inputs.
+
+\paragraph{Step 1: the field and the dynamics.} By \cref{lem:inf-field}, almost surely the field $H_N$ is of class $C^2$ on $B_N$ for every $N$, and \eqref{eq:pr-fieldK} holds with $c_0=c_F$. \Cref{lem:inf-dynamics} implies that the dynamics is defined for every realization, with the properties in \cref{lem:pre-dynamics,lem:pre-spectral} that are used in \cref{sec:spectral,sec:memory}. This proves (I1).
+
+\paragraph{Step 2: the planted law and the cross-section formula.} By \cref{lem:inf-pressure}, the convergence $F_N(\beta)\to F_\beta$, the bound \eqref{eq:pre-RS-concentration}, \cref{lem:pre-concentration}, \cref{lem:pr-planted}, \cref{lem:pr-transfer}, and \cref{lem:pr-latitude}(b) and (c) hold for $\xi$, with $\cP_\beta$ defined as above. This proves (I2) and (I3). The proof of \cref{prop:pr-cross} uses these results, the coarea formula \eqref{eq:pr-coarea}, and, for the uniform integrability of $N^{-1}\log Z_{N,\beta}([r-w,r+w];H,u)$ under $\mathsf Q_N$, a bound on $\E(\sup_{S_N}|H|)^2$ that is polynomial in $N$, obtained there from the finite tensor representation. For an infinite mixture, we use instead the bound $\E(\sup_{S_N}|H_N|)^2\le CN^2$ of \cref{lem:inf-field}(2). The rest of the proof is unchanged, so \cref{prop:pr-cross} holds for $\xi$.
+
+\paragraph{Step 3: the equality at $q_*$.} The proof of \cref{lem:pr-trial} uses only \cref{prop:pr-cross}, the definition of $\cP_\beta(\eta_r)$ as an infimum, and the computation \eqref{eq:pr-trial-value}, all of which are available for $\xi$. The proof of \cref{prop:pr-certificate} applies \cref{lem:pre-support}(3) to the auxiliary series $\eta_{q_*}$, and it uses only the sufficient condition there: if $\zeta(S_\zeta)=1$, then $\zeta$ minimizes $\cP_\beta(\cdot\,;\eta_{q_*})$. The proof of this condition, through \cref{lem:pre-support}(1) and (2), uses only that $\eta$ is continuous on $[0,1]$ with $\eta(0)=0$: the energy term of \eqref{eq:pre-CS} is affine in $\zeta$ and finite, the entropy term does not involve $\eta$, and $f_\zeta(s)\to-\infty$ as $s\to1$ because $\eta$ is bounded on $[0,1]$. The uniqueness of the minimizer follows from the strict convexity of the entropy term, which also does not involve $\eta$. We conclude that these facts hold for $\eta_{q_*}$, which is continuously differentiable on $[0,1]$ with $\eta_{q_*}'(t)=(1-q_*^2)\xi'(q_*^2+(1-q_*^2)t)$. The proof of \cref{prop:pr-certificate} also uses the following properties of $\xi$, which hold under \eqref{eq:inf-summability}:
+\begin{enumerate}
+\item[(a)] $A$ is continuous on $[0,1]$ with $A(1)=0$, and real analytic on $(0,1)$. As $\beta^2A-1$ tends to $-1$ at $1$, it is not identically zero on $(0,1)$, and its zeros in $(0,1)$ are isolated. This replaces the observation that $\beta^2A-1$ is a polynomial.
+\item[(b)] The identity \eqref{eq:pr-elasticity} for the ratio $\chi(v)=v\xi''(v)/\xi'(v)$ holds on $(0,1)$. Indeed, the series $\sum_pp^kc_pv^p$ converge for $v<1$ and every $k$, which allows us to differentiate the weights $w_p(v)$ termwise on compact subsets of $(0,1)$.
+\item[(c)] The quantities $\xi(v)$, $\xi'(v)$, and $\xi''(v)$ that appear in the computation of $f_\zeta'$ for $\zeta=\delta_{r_0}$ are finite for $v\in[0,1)$.
+\end{enumerate}
+With these changes, the proof of \cref{prop:pr-certificate} applies, and so does the proof of \cref{prop:pr-good}, which uses \cref{lem:pr-latitude,prop:pr-cross,prop:pr-certificate,lem:pr-transfer} and \eqref{eq:pr-fieldK}. This proves (I4), and \cref{prop:pr-certificate,prop:pr-good} hold for $\xi$.
+
+\end{proof}
+
+\begin{remark}[The summability and threshold-gap hypotheses]\label{rem:inf-gap}
+For a finite mixture, the sum in \eqref{eq:inf-summability} is finite. If the power series of $\xi$ converges at some $\varrho>1$, then $c_p\le C\varrho^{-p}$ for some $C$, and \eqref{eq:inf-summability} holds. For the mixture with $c_2=0$ and $c_p=Cp^{-8}$ for $p\ge3$, we have $\sum_pp^{5/2}\sqrt{c_p}=\sqrt C\sum_{p\ge3}p^{-3/2}<\infty$, and the radius of convergence is one because $c_p^{1/p}\to1$.
+
+It remains to prove that $\bd<\bs$ for this mixture. We show more generally that $\bd<\bs$ whenever $c_2=0$. Let $A_{\max}=\sup_{(0,1)}A=\bd^{-2}$. We have $\xi'=A\ell'\le A_{\max}\ell'$ on $(0,1)$, where $\ell'(r)=r/(1-r)$. As $A(0)=2c_2=0<A_{\max}$ and $A$ is continuous, this inequality is strict near zero. Integrating from $0$, we obtain $\xi(r)<A_{\max}\ell(r)$ for $r\in(0,1)$. As $c_2=0$, we have $\xi(r)=O(r^3)$ and $\ell(r)\ge r^2/2$ as $r\downarrow0$, while $\ell(r)\to\infty$ and $\xi(r)\to\xi(1)$ as $r\uparrow1$. Then $\ell/\xi$ tends to infinity at both ends of $(0,1)$, its infimum is attained at some $r_0\in(0,1)$, and
+\begin{equation*}
+\bs^2=\frac{\ell(r_0)}{\xi(r_0)}>\frac1{A_{\max}}=\bd^2.
+\end{equation*}
+For $C=1$, a numerical evaluation gives $\bd^2\approx8126$ and $\bs^2\approx8892$.
+\end{remark}
+
+\section{Counting slow modes}
+
+The proof of \cref{thm:main-cusp} uses the following deterministic form of the argument with cap indicators in \cref{rem:mem-direct-frame}. The bound on the Gibbs mass of caps is a hypothesis, so that its exponent can be chosen independently of the temperature.
+
+\begin{lemma}[Counting slow modes with cap indicators]\label{lem:inf-frame}
+Let $N\ge2$ and $\beta\ge0$, let $H$ be a function of class $C^2$ on $S_N$, and write $\pi=\pi_{\beta,H}$ and $\lambda_j=\lambda_j(-L_{\beta,H})$. Let $0<q_1<q_2<1$ and $J,G,\delta,c>0$. Suppose that there exists a Borel set $\cG\subset S_N$ with $\pi(\cG)\ge1/2$ such that for every $u\in\cG$,
+\begin{equation}\label{eq:inf-frame-hyp}
+\begin{aligned}
+\pi\{x:R(x,u)\ge q_1\}&\le e^{-N(J-2\delta)},\qquad\pi\{x:R(x,u)\ge q_2\}\ge e^{-N(J+2\delta)},\\
+\pi\{x:q_1\le R(x,u)\le q_2\}&\le e^{-N(J+G-2\delta)},
+\end{aligned}
+\end{equation}
+and that $\sup_{x\in S_N}\pi\{u:R(x,u)\ge q_1\}\le e^{-cN}$. Let $r_N=4N^{-1}(q_2-q_1)^{-2}e^{-N(G-4\delta)}$. Then for every $\Lambda>r_N$,
+\begin{equation}\label{eq:inf-frame}
+\#\{j\ge0:\lambda_j\le\Lambda\}\ge\Bigl(1-\frac{r_N}\Lambda\Bigr)\frac12e^{N(c-4\delta)}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Let $\alpha(r)=\chi((r-q_1)/(q_2-q_1))$, with $\chi$ as in \cref{sec:sp-notation}, so that $\alpha=0$ on $(-\infty,q_1]$, $\alpha=1$ on $[q_2,\infty)$, and $|\alpha'|\le2/(q_2-q_1)$. We apply \cref{lem:sp-frame}, which holds for fields of class $C^2$ by \cref{lem:inf-dynamics}, with
+\begin{equation*}
+\mathcal V=S_N,\qquad\mu(\dd u)=\ind_\cG(u)\,\pi(\dd u),\qquad f_u(x)=\alpha(R(x,u)).
+\end{equation*}
+The function $(u,x)\mapsto f_u(x)$ is continuous and nonnegative, $f_u$ is smooth, and $\ind\{R(\cdot,u)\ge q_2\}\le f_u\le\ind\{R(\cdot,u)\ge q_1\}$. We have $\mathsf T\ge\pi(\cG)e^{-N(J+2\delta)}>0$ by the second bound in \eqref{eq:inf-frame-hyp}, and $\mathsf T\le1$ because $0\le f_u\le1$. The first bound gives $\pi(f_u)\le\mathsf R=e^{-N(J-2\delta)}$ for $u\in\cG$, and the hypothesis on caps gives $\int f_u(x)\,\mu(\dd u)\le\mathsf C=e^{-cN}$ for every $x$. Recall from \eqref{eq:sp-gradR} that $|\nabla_{S_N}R(\cdot,u)|^2\le1/N$. Then $|\nabla_{S_N}f_u|^2\le4N^{-1}(q_2-q_1)^{-2}\ind\{q_1\le R(\cdot,u)\le q_2\}$, and the third bound implies that
+\begin{equation*}
+\int\cE(f_u,f_u)\,\mu(\dd u)\le\pi(\cG)\frac4{N(q_2-q_1)^2}e^{-N(J+G-2\delta)}\le r_N\mathsf T.
+\end{equation*}
+By \cref{lem:sp-frame}, for every $\Lambda>r_N$,
+\begin{equation*}
+\#\{j\ge0:\lambda_j\le\Lambda\}\ge\Bigl(1-\frac{r_N}\Lambda\Bigr)\frac{\mathsf T}{\mathsf R\mathsf C}\ge\Bigl(1-\frac{r_N}\Lambda\Bigr)\frac{\pi(\cG)e^{-N(J+2\delta)}}{e^{-N(J-2\delta)}e^{-cN}},
+\end{equation*}
+Inserting $\pi(\cG)\ge1/2$, we obtain \eqref{eq:inf-frame}.
+\end{proof}
+
+The core exponent $J$ cancels in $\mathsf T/(\mathsf R\mathsf C)$, and the good-reference mass $\pi(\cG)$ cancels in the energy ratio $r_N$. The spectral exponent $G-4\delta$ and the mode-count exponent $c-4\delta$ can therefore be chosen independently. If $\xi$ satisfies \eqref{eq:inf-summability}, $\bd<\beta<\bs$, $(q_1,q_2)$ is an admissible collar, and $0<\delta<\min\{J,G\}/8$, then the hypotheses \eqref{eq:inf-frame-hyp} hold on an event of probability at least $1-5e^{-a_\cG N}$ by \cref{prop:pr-good}, with $J=J(\beta)$ and $G$ the collar gap of \cref{def:pr-collar}; the second bound follows from the core lower bound \eqref{eq:pr-good-core}, since the core band lies in $\{R>q_2\}$.
+
+\section{Eigenvalues near the dynamical threshold}\label{sec:inf-cusp}
+
+In this section, we prove \cref{thm:main-cusp}. We first recall its setting. Let $\xi$ satisfy \eqref{eq:inf-summability} with $\bd<\bs$. The function $A$ is continuous on $[0,1]$, and we write $A_{\max}=\sup_{(0,1)}A=\bd^{-2}$. Step~1 of the proof below shows that the set of global maximizers of $A$ on $[0,1]$ is a finite subset of $(0,1)$; let $q_d$ be its largest element. Step~1 also shows that there exist an integer $m\ge1$ and $a>0$ such that
+\begin{equation}\label{eq:inf-taylor}
+A(q_d+y)=A_{\max}\bigl[1-ay^{2m}+O(y^{2m+1})\bigr]\qquad(y\to0).
+\end{equation}
+For $\beta>\bd$, we set $\eps=\beta^2A_{\max}-1$, so that $\beta=\bd(1+\eps)^{1/2}$, and
+\begin{equation*}
+C_d=\frac{2mq_d}{(2m+1)(1-q_d)}\,a^{-1/(2m)},\qquad D_\eps=C_d\eps^{1+1/(2m)}.
+\end{equation*}
+\Cref{thm:main-cusp} states that there exists $\kappa_*>0$ such that for every $\vartheta\in(0,1)$, there exists $\eps_0(\vartheta)>0$ such that for every fixed $\eps\in(0,\eps_0(\vartheta))$, there exist $a',C>0$ with
+\begin{equation*}
+\lambda_{\lfloor e^{\kappa_*N}\rfloor}(\beta)\le e^{-(1-\vartheta)D_\eps N}
+\end{equation*}
+with probability at least $1-Ce^{-a'N}$, for all sufficiently large $N$. We write $a'$ for the exponent in the probability bound, to avoid a clash with the Taylor coefficient $a$. The constants $a'$ and $C$ and the threshold for $N$ may depend on $\eps$ and $\vartheta$; the exponent $\kappa_*$ does not.
+
+\begin{proof}[Proof of \cref{thm:main-cusp}]
+Steps 1--4 are deterministic. They locate the final component of the strict superlevel set $D_\beta$ near $q_d$, compute the barrier of the trial pressure $\Psi_\beta$, and place the collar. Step 5 fixes the mode-count exponent $\kappa_*$ with \cref{lem:inf-replica}, before $\vartheta$ and $\eps$ are chosen. Step 6 applies \cref{lem:inf-frame}. The parameters are fixed in the order of \cref{tab:inf-cusp}.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+Parameter & Choice & Depends on\\
+\midrule
+$q_d$, $m$, $a$, $\varphi$ & Step 1 & $\xi$\\
+$\rho_0$, $\eps_1$, $L_0$ & Step 2 & $\xi$\\
+$s$, $\bar\beta$ & $s=q_d/2$, $\bar\beta=(\bd+\bs)/2$ & $\xi$\\
+$a_s$, $\kappa_*$ & $a_s$ from \cref{lem:inf-replica}, $\kappa_*=a_s/4$ & $\xi$\\
+$\vartheta$ & given in $(0,1)$ & ---\\
+$\eps_0(\vartheta)$ & Steps 4 and 6 & $\xi,\vartheta$\\
+$\eps$, $\beta$ & given $\eps\in(0,\eps_0)$; $\beta=\bd(1+\eps)^{1/2}$ & ---\\
+$q_\pm$, $q_1$, $q_2$, $G$, $J$ & Steps 2--4 & $\xi,\eps$\\
+$\delta$ & $\frac1{64}\min\{a_s,\vartheta D_\eps,J,1\}$ & $\xi,\vartheta,\eps$\\
+$a'$, $C$, $N_0$ & from \cref{prop:pr-good,lem:inf-replica} & $\xi,\vartheta,\eps$\\
+\bottomrule
+\end{tabular}
+\caption{Parameters in the proof of \cref{thm:main-cusp}, in the order in which they are fixed. All are fixed before $N\to\infty$.}\label{tab:inf-cusp}
+\end{table}
+
+\paragraph{Step 1: the global maximizers of $A$.} If $c_2>0$, then $\ell(r)/\xi(r)\to1/(2c_2)$ as $r\downarrow0$, and the definition of $\bs$ gives $\bs^{-2}\ge2c_2=A(0)$; if $c_2=0$, then $A(0)=0$. As $\bd<\bs$, we have in both cases
+\begin{equation*}
+A_{\max}=\bd^{-2}>\max\{\bs^{-2},0\}\ge A(0),\qquad A(1)=0<A_{\max}.
+\end{equation*}
+By the continuity of $A$ on $[0,1]$, its supremum is attained, and the set of global maximizers is a compact subset of $(0,1)$. The function $A-A_{\max}$ is real analytic on $(0,1)$ and not identically zero, since it tends to $-A_{\max}$ at $1$. Its zeros in a compact subset of $(0,1)$, and in particular the global maximizers, are therefore finite in number. Let $q_d$ be the largest. The Taylor series of $A-A_{\max}$ at $q_d$ has a first nonzero coefficient, and since $A-A_{\max}\le0$ near $q_d$, its order is even, say $2m$, and the coefficient is negative. We can then write $A(q_d+y)=A_{\max}[1-ay^{2m}\varphi(y)]$, where $a=-A^{(2m)}(q_d)/((2m)!\,A_{\max})>0$ and $\varphi$ is real analytic near $0$ with $\varphi(0)=1$. This proves \eqref{eq:inf-taylor}. We have not assumed that $q_d$ is the only global maximizer, or that $m=1$.
+
+\paragraph{Step 2: the final component of $D_\beta$.} Differentiating, we have $A'(q_d+y)=-2maA_{\max}y^{2m-1}(1+O(y))$. Let $\rho_0>0$ be such that $[q_d-\rho_0,q_d+\rho_0]\subset(0,1)$ contains no other global maximizer, $A'>0$ on $[q_d-\rho_0,q_d)$, $A'<0$ on $(q_d,q_d+\rho_0]$, and $\varphi\ge1/2$ on $[-\rho_0,\rho_0]$. Since the compact set $[q_d+\rho_0,1]\cup\{q_d-\rho_0\}$ contains no global maximizer, we have
+\begin{equation*}
+g_1=A_{\max}-\max\Bigl\{\max_{[q_d+\rho_0,1]}A,\ A(q_d-\rho_0)\Bigr\}>0.
+\end{equation*}
+Let $\eps_1>0$ be such that $A_{\max}/(1+\eps)>A_{\max}-g_1$ for $\eps<\eps_1$, and fix $\eps\in(0,\eps_1)$. Then $r\in D_\beta$ if and only if $A(r)>A_{\max}/(1+\eps)$, and in particular $D_\beta\cap[q_d+\rho_0,1)=\emptyset$. On $[q_d-\rho_0,q_d+\rho_0]$, the function $A$ increases strictly up to $A(q_d)=A_{\max}$ and then decreases strictly, and its values at both endpoints are below $A_{\max}/(1+\eps)$. It follows that $D_\beta\cap(q_d-\rho_0,q_d+\rho_0)=(q_-,q_+)$, where $q_-<q_d<q_+$ are the two solutions of $A(r)=A_{\max}/(1+\eps)$ in this interval. We conclude that
+\begin{equation*}
+q_*(\beta)=\sup D_\beta=q_+,
+\end{equation*}
+and that $(q_-,q_+)$ is the connected component of $D_\beta$ that ends at $q_*$. Any other component of $D_\beta$ lies in $(0,q_d-\rho_0]$ and does not affect $q_*$.
+
+Let $h=(\eps/a)^{1/(2m)}$, and write $q_\pm=q_d+hz_\pm$. Using $ah^{2m}=\eps$, we can write the equation $A(q_\pm)=A_{\max}/(1+\eps)$ as $z_\pm^{2m}\varphi(hz_\pm)=(1+\eps)^{-1}$. As $|hz_\pm|<\rho_0$ and $\varphi\ge1/2$ there, we have $|z_\pm|\le2$. Further, $\varphi(hz)=1+O(h)$ uniformly for $|z|\le2$, and $(1+\eps)^{-1}=1+O(h^{2m})$. We obtain $z_\pm=\pm1+O(h)$, that is,
+\begin{equation}\label{eq:inf-roots}
+q_\pm=q_d\pm h+O(h^2).
+\end{equation}
+
+\paragraph{Step 3: the trial barrier.} By \eqref{eq:pr-Psi-prime} at inverse temperature $\beta$, we have
+\begin{equation}\label{eq:inf-Psi-prime}
+\Psi_\beta'(r)=\frac r{2(1-r)}\bigl(\beta^2A(r)-1\bigr).
+\end{equation}
+For $r=q_d+hz$ with $|z|\le2$, we find
+\begin{equation*}
+\begin{split}
+\beta^2A(r)-1&=(1+\eps)\bigl(1-\eps z^{2m}\varphi(hz)\bigr)-1\\
+&=\eps(1-z^{2m})-\eps z^{2m}\bigl(\varphi(hz)-1\bigr)-\eps^2z^{2m}\varphi(hz)=\eps(1-z^{2m})+O(\eps h),
+\end{split}
+\end{equation*}
+where we used $\varphi(hz)-1=O(h)$ and $\eps=O(h)$. Also $r/(2(1-r))=q_d/(2(1-q_d))+O(h)$. Changing variables $r=q_d+hz$ in the integral of \eqref{eq:inf-Psi-prime} over $[q_-,q_+]$, and using $z_\pm=\pm1+O(h)$ and that the integrand is $O(\eps)$, we obtain
+\begin{equation*}
+\Psi_\beta(q_+)-\Psi_\beta(q_-)=\frac{q_d}{2(1-q_d)}\,h\eps\int_{-1}^1(1-z^{2m})\,\dd z+O(\eps h^2).
+\end{equation*}
+Inserting $\int_{-1}^1(1-z^{2m})\,\dd z=4m/(2m+1)$ and $h\eps=a^{-1/(2m)}\eps^{1+1/(2m)}$, we find
+\begin{equation}\label{eq:inf-barrier}
+\Psi_\beta(q_+)-\Psi_\beta(q_-)=D_\eps\bigl(1+O(\eps^{1/(2m)})\bigr).
+\end{equation}
+
+\paragraph{Step 4: the collar.} Let $q_1=q_-+\eps/2$ and $q_2=q_-+\eps$. Since $\eps/h=a^{1/(2m)}\eps^{1-1/(2m)}\to0$ and $q_+-q_-=2h+O(h^2)$ by \eqref{eq:inf-roots}, there exists $\eps_2\in(0,\eps_1]$ such that $q_-<q_1<q_2<q_+$ for $\eps<\eps_2$. Then $(q_1,q_2)$ is an admissible collar at $\beta$, since $(q_1,q_*)\subset(q_-,q_+)\subset D_\beta$. On $(q_-,q_+)$, we have $0<\beta^2A-1\le\eps$, since $A\le A_{\max}$, and $r/(2(1-r))\le L_0=(q_d+\rho_0)/(2(1-q_d-\rho_0))$. Integrating \eqref{eq:inf-Psi-prime} over $[q_-,q_2]$, we find $0\le\Psi_\beta(q_2)-\Psi_\beta(q_-)\le L_0\eps^2$. As $\eps^2/D_\eps$ is a constant multiple of $\eps^{1-1/(2m)}$, we deduce from \eqref{eq:inf-barrier} that the collar gap of \cref{def:pr-collar} satisfies
+\begin{equation}\label{eq:inf-collar-gap}
+G=\Psi_\beta(q_*)-\Psi_\beta(q_2)=D_\eps\bigl(1+O(\eps^{1/(2m)}+\eps^{1-1/(2m)})\bigr).
+\end{equation}
+
+\paragraph{Step 5: a mode-count exponent independent of $\eps$.} Let $s=q_d/2$ and $\bar\beta=(\bd+\bs)/2$, and let $a_s>0$ be the exponent of \cref{lem:inf-replica} for these $s$ and $\bar\beta$; it depends only on $\xi$. For every $\beta\in(0,\bar\beta]$, there exist $C_2,N_2$ such that for $N\ge N_2$, with probability at least $1-C_2e^{-a_sN}$,
+\begin{equation}\label{eq:inf-cusp-column}
+\sup_{v\in S_N}\pi_\beta\{x:R(x,v)\ge s\}\le e^{-a_sN}.
+\end{equation}
+We set $\kappa_*=a_s/4$.
+
+\paragraph{Step 6: counting slow modes.} Fix $\vartheta\in(0,1)$. Let $\eps_0(\vartheta)\le\min\{\eps_2,(\bar\beta/\bd)^2-1\}$ be such that for all $\eps\in(0,\eps_0(\vartheta))$, we have $q_1\ge s$ and, by \eqref{eq:inf-collar-gap}, $G\ge(1-\vartheta/4)D_\eps$. Fix $\eps\in(0,\eps_0(\vartheta))$, so that $\beta=\bd(1+\eps)^{1/2}\in(\bd,\bar\beta]$. Let $J=J(\beta)>0$ and
+\begin{equation*}
+\delta=\tfrac1{64}\min\{a_s,\vartheta D_\eps,J,1\}.
+\end{equation*}
+Then $8\delta\le\vartheta D_\eps/8<G$ and $8\delta<J$, that is, $\delta<\min\{J,G\}/8$. By \cref{prop:pr-good} at $\beta$, with the collar $(q_1,q_2)$ and tolerance $\delta$, which holds for $\xi$ by \cref{lem:inf-good}, there exist $a_1>0$ and an event of probability at least $1-5e^{-a_1N}$ on which there is a Borel set $\cG$ with $\pi_\beta(\cG^c)\le e^{-a_1N}$ such that \eqref{eq:inf-frame-hyp} holds for every $u\in\cG$. We work on the intersection of this event with the event of \eqref{eq:inf-cusp-column}. As $q_1\ge s$ and $R$ is symmetric, \eqref{eq:inf-cusp-column} implies that
+\begin{equation*}
+\sup_{x\in S_N}\pi_\beta\{u:R(x,u)\ge q_1\}\le\sup_{v\in S_N}\pi_\beta\{R(\cdot,v)\ge s\}\le e^{-a_sN}.
+\end{equation*}
+For $N$ large enough that $\pi_\beta(\cG)\ge1/2$, we apply \cref{lem:inf-frame} with $c=a_s$ and $\Lambda=e^{-(1-\vartheta)D_\eps N}$. We have $r_N=16N^{-1}\eps^{-2}e^{-N(G-4\delta)}$, since $q_2-q_1=\eps/2$. Using $4\delta\le\vartheta D_\eps/16$, we find
+\begin{equation*}
+G-4\delta-(1-\vartheta)D_\eps\ge\Bigl(\vartheta-\frac\vartheta4-\frac\vartheta{16}\Bigr)D_\eps\ge\frac\vartheta2D_\eps,
+\end{equation*}
+which implies that $r_N/\Lambda\le16N^{-1}\eps^{-2}e^{-\vartheta D_\eps N/2}\le1/2$ for large $N$. As $4\delta\le a_s/16$, \eqref{eq:inf-frame} implies that at least $\frac14e^{15a_sN/16}$ eigenvalues, counted with multiplicity and including $\lambda_0=0$, lie in $[0,\Lambda]$. For large $N$, this number exceeds $\lfloor e^{\kappa_*N}\rfloor+1$, which gives $\lambda_{\lfloor e^{\kappa_*N}\rfloor}(\beta)\le\Lambda$. The probability of the event is at least $1-5e^{-a_1N}-C_2e^{-a_sN}$, which proves the theorem with $a'=\min\{a_1,a_s\}$.
+\end{proof}
+
+In \cref{lem:inf-frame}, the core exponent $J$ enters both $\mathsf T$ and $\mathsf R$ and cancels. This is why $\kappa_*$ does not depend on $\eps$, although the spectral exponent $(1-\vartheta)D_\eps$ tends to zero with $\eps$.
+
+\paragraph{The trial barrier.} By \cref{prop:pr-certificate}, the trial pressure $\Psi_\beta$ is an upper bound for the constrained pressure $F_{\mathrm{FP}}$, with equality at $q_*=q_+$. Thus the actual gap between the supremum of $F_{\mathrm{FP}}$ over the cap $[q_1,1)$ and its supremum over the collar $[q_1,q_2]$ is at least $G$. The quantity $D_\eps=C_d\eps^{1+1/(2m)}$ is the leading order of the barrier $\Psi_\beta(q_+)-\Psi_\beta(q_-)$ of the trial pressure, and \eqref{eq:inf-collar-gap} shows that it is also the leading order of $G$. It is therefore the leading order of a lower bound for the cap-to-collar gap of the constrained pressure. We do not identify the leading order of that gap itself, and the theorem bounds eigenvalues from above without identifying their asymptotics. For a nondegenerate maximum, $m=1$ and the exponent is $3/2$. In the physics literature, the Franz--Parisi potential near the dynamical transition has the cubic normal form of a spinodal \cite[Section~5.2.1]{Franz2005}; see also \cite{UngerKlein1984} for the classical spinodal. In this normal form, the difference in height between the local minimum and the saddle point scales as $|T-T_d|^{3/2}$. The case $m=1$ of \cref{thm:main-cusp} is consistent with this scaling, and the exponent $1+1/(2m)$ is the same computation for a maximum of order $2m$. The mode-count exponent $\kappa_*$ stays bounded below as $\eps\downarrow0$, while the spectral exponent tends to zero.
+
+\begin{example}[The pure cubic model]\label{ex:inf-cubic}
+Let $\xi(r)=r^3$. Then $A(r)=3r(1-r)$, $q_d=1/2$, $A_{\max}=3/4$, and $\bd^2=4/3$. We have $A(1/2+y)=\frac34(1-4y^2)$, which gives $m=1$, $a=4$, and $C_d=1/3$. Minimizing $\ell(r)/r^3$ numerically gives $\bs^2\approx1.456$, attained near $r\approx0.645$. Then $\bd<\bs$, and \cref{thm:main-cusp} applies.
+
+For this model, the trial barrier can be computed exactly. Let $u=(\eps/(1+\eps))^{1/2}$. Then $\beta^2=4/(3(1-u^2))$, the equation $\beta^2A(r)=1$ reads $(r-1/2)^2=u^2/4$, and $D_\beta=(q_-,q_+)$ with $q_\pm=(1\pm u)/2$. Using $q_+^3-q_-^3=(3u+u^3)/4$, $q_+-q_-=u$, and $\log((1-q_+)/(1-q_-))=\log((1-u)/(1+u))=-2\atanh u$, we find
+\begin{equation*}
+\begin{split}
+\Psi_\beta(q_+)-\Psi_\beta(q_-)&=\frac12\Bigl[\beta^2(q_+^3-q_-^3)+q_+-q_-+\log\frac{1-q_+}{1-q_-}\Bigr]\\
+&=\frac{u(3-u^2)}{3(1-u^2)}-\atanh u.
+\end{split}
+\end{equation*}
+Expanding $u(3-u^2)/(3(1-u^2))=u+\frac23\sum_{k\ge1}u^{2k+1}$ and $\atanh u=\sum_{k\ge0}u^{2k+1}/(2k+1)$, we obtain the convergent series
+\begin{equation*}
+\Psi_\beta(q_+)-\Psi_\beta(q_-)=\sum_{k\ge1}\frac{4k-1}{3(2k+1)}\,u^{2k+1}=\frac{u^3}3+\frac{7u^5}{15}+\frac{11u^7}{21}+O(u^9).
+\end{equation*}
+Substituting $u^2=\eps/(1+\eps)$ and expanding $(1+\eps)^{-3/2}$, $(1+\eps)^{-5/2}$, and $(1+\eps)^{-7/2}$ to the needed order gives
+\begin{equation*}
+\Psi_\beta(q_+)-\Psi_\beta(q_-)=\frac{\eps^{3/2}}3-\frac{\eps^{5/2}}{30}-\frac{\eps^{7/2}}{56}+O(\eps^{9/2}),
+\end{equation*}
+in agreement with $D_\eps=\eps^{3/2}/3$. Replacing $\xi$ by $c_3\xi$ with $c_3>0$ multiplies $A$ by $c_3$ and leaves $q_d$, $m$, $a$, $C_d$, and the barrier, as a function of $\eps$, unchanged. As explained above, this is the barrier of the trial pressure; it is not a formula for the barrier of the constrained pressure.
+\end{example}
+
+\begin{example}[Separated thresholds are needed]\label{ex:inf-degenerate}
+Let $\xi(r)=r^2/2+r^4$. Then
+\begin{equation*}
+A(r)=(1-r)(1+4r^2)=1-4r\bigl(r-\tfrac12\bigr)^2,
+\end{equation*}
+so $A\le1$ on $[0,1]$, with equality exactly at $r=0$ and $r=1/2$. Hence $\bd=1$, and $1/2$ is the unique global maximizer of $A$ in $(0,1)$. The function $\ell-\xi$ vanishes at $0$, and
+\begin{equation*}
+(\ell-\xi)'(r)=\frac r{1-r}-r-4r^3=\frac{r^2(2r-1)^2}{1-r}\ge0,
+\end{equation*}
+with equality only at $r\in\{0,1/2\}$. Hence $\ell(r)/\xi(r)>1$ for $r\in(0,1)$. Since $\ell(r)/\xi(r)\to1/(2c_2)=1$ as $r\downarrow0$, we obtain $\bs^2=\inf_{(0,1)}\ell/\xi=1$. Thus $\bd=\bs=1$, the interval $(\bd,\bs)$ between the dynamical and static thresholds is empty, and for every $\eps>0$ the inverse temperature $\bd(1+\eps)^{1/2}$ lies above $\bs$. Step~1 of the proof of \cref{thm:main-cusp} uses the hypothesis $\bd<\bs$ to exclude $0$ from the global maximizers of $A$; this example shows that the hypothesis does not follow from the uniqueness of an interior maximizer.
+\end{example}
+
+In \cref{thm:main-cusp}, $\eps$ is fixed before $N\to\infty$. The result bounds eigenvalues only; it does not give the conclusions (ii)--(v) of \cref{thm:main-memory} with time exponents of order $D_\eps$.
